@@ -10,8 +10,8 @@ public class BusyOrNotPredict {
 
         ArrayList<String> bon = new ArrayList();
 
-        SqlLiteDbHelper sqlLiteDbHelper = new SqlLiteDbHelper(context);
-        sqlLiteDbHelper.pra_BusyOrNotPredict_Get(activity,location);
+        Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(context);
+        praSqlLiteDbHelper.pra_BusyOrNotPredict_Get(activity,location);
 
         int busyCount = 0;
         int notbusyCount = 0;

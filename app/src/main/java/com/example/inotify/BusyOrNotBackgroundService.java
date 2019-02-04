@@ -35,8 +35,8 @@ public class BusyOrNotBackgroundService  extends JobService {
 
 
         // get activity from db
-        SqlLiteDbHelper sqlLiteDbHelper1 = new SqlLiteDbHelper(this);
-        String CurrentMaxActivity = sqlLiteDbHelper1.pra_activity_get();
+        Pra_SqlLiteDbHelper praSqlLiteDbHelper1 = new Pra_SqlLiteDbHelper(this);
+        String CurrentMaxActivity = praSqlLiteDbHelper1.pra_activity_get();
 
 
 
@@ -49,7 +49,7 @@ public class BusyOrNotBackgroundService  extends JobService {
         Double work_Lat = 6.914578;
         Double accuracy = .0001;
 
-         ArrayList<Double> loc= sqlLiteDbHelper1.pra_location_get();
+         ArrayList<Double> loc= praSqlLiteDbHelper1.pra_location_get();
          double log= loc.get(0);
          double lat = loc.get(1);
 
@@ -72,7 +72,7 @@ public class BusyOrNotBackgroundService  extends JobService {
         // get busy or not from notification remove table
 
         String CurrentBusyorNot="NotBusy";
-        int notificationRemovedCount = sqlLiteDbHelper1.pra_notificationRemove_get();
+        int notificationRemovedCount = praSqlLiteDbHelper1.pra_notificationRemove_get();
 
         Log.d("inotify","NNNNNNNNNNNNNRRRRRRRRRRREEEEEEE"+notificationRemovedCount);
 
@@ -80,8 +80,8 @@ public class BusyOrNotBackgroundService  extends JobService {
         else {CurrentBusyorNot="Busy";}
 
         //save to table
-        SqlLiteDbHelper sqlLiteDbHelper = new SqlLiteDbHelper(this);
-        sqlLiteDbHelper.pra_BusyOrNot_insert(time,dayofweek,CurrentMaxActivity,CurrentLocation,CurrentBusyorNot);
+        Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
+        praSqlLiteDbHelper.pra_BusyOrNot_insert(time,dayofweek,CurrentMaxActivity,CurrentLocation,CurrentBusyorNot);
 
         return false;
     }

@@ -1,6 +1,5 @@
 package com.example.inotify;
 
-import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -13,8 +12,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.location.ActivityRecognitionClient;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,9 +72,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getvalue(View view) {
-SqlLiteDbHelper sqlLiteDbHelper = new SqlLiteDbHelper(this);
-sqlLiteDbHelper.pra_location_get();
+    /*Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
+    praSqlLiteDbHelper.pra_location_get();*/
 
+
+    Cha_SqlLiteDbHelper cha_sqlLiteDbHelper = new Cha_SqlLiteDbHelper(this);
+    cha_sqlLiteDbHelper.NIRgetTotalvalue();
+
+    Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(cha_sqlLiteDbHelper.NIRgetTotalvalue()));
 
     }
 }

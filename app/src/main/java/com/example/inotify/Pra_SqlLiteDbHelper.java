@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class SqlLiteDbHelper extends SQLiteOpenHelper {
+public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "AppInotify.db";
 
@@ -43,9 +43,11 @@ public class SqlLiteDbHelper extends SQLiteOpenHelper {
     public static final String BUSYORNOT = "busyornot";
 
 
+    public static final String CHA_N_TABLE = "cha_N_TABLE";
+    public static final String CHA_NI_TABLE = "cha_NI_TABLE";
 
 
-    public SqlLiteDbHelper(Context context) {
+    public Pra_SqlLiteDbHelper(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
     }
@@ -57,6 +59,10 @@ public class SqlLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + PRA_LOCATION_TABLE + " (LOCATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT,LOG TEXT,LAT TEXT)");
         db.execSQL("create table " + PRA_NOTIFICATIONREMOVE_TABLE + " (NOTIFICATIONREMOVE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT)");
         db.execSQL("create table " + PRA_BUSYORNOT_TABLE + " (BUSYORNOT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,LOCATION TEXT,BUSYORNOT TEXT)");
+
+
+        db.execSQL("create table " + CHA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
+        db.execSQL("create table " + CHA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
 
     }
 
@@ -195,10 +201,19 @@ public class SqlLiteDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from pra_location_table", null);
-        if (res != null) {
+        if (res != null ) {
             res.moveToLast();
-            Al.add(Double.valueOf(res.getString(4)));
-            Al.add(Double.valueOf(res.getString(5)));
+            if(res.getCount()>1){
+                Al.add(Double.valueOf(res.getString(4)));
+                Al.add(Double.valueOf(res.getString(5)));
+            }
+
+
+            if (res.getCount()==0){
+                Al.add(0.0);
+                Al.add(0.1);
+            }
+
         }
         res.close();
 

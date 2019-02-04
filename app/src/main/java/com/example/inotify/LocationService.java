@@ -48,10 +48,10 @@ public class LocationService extends JobService implements MyLocationUpdatesComp
     public void onLocationUpdate(Location location) {
 
 
-        SqlLiteDbHelper sqlLiteDbHelper = new SqlLiteDbHelper(this);
+        Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
         String log = String.valueOf(location.getLongitude());
         String lat = String.valueOf(location.getLatitude());
-        sqlLiteDbHelper.pra_location_insert(log,lat);
+        praSqlLiteDbHelper.pra_location_insert(log,lat);
         //send intent
         //TODO - 2  future needed for situationist upload data
         Intent intent=new Intent();
