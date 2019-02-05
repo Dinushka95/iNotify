@@ -21,6 +21,7 @@ public class ActivityRecognitionService extends IntentService {
         Log.d("inotifyLog", "Activity recognition ==" + type + confidance);
         Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
         praSqlLiteDbHelper.pra_activity_insert(type,confidance);
+        praSqlLiteDbHelper.close();
 
 
     }

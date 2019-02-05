@@ -47,6 +47,15 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
     public static final String CHA_NI_TABLE = "cha_NI_TABLE";
 
 
+    public static final String MIT_CHARGE_TABLE = "mit_charge_table";
+    public static final String MIT_APPLISTCOUNT_TABLE = "mit_applistcount_table";
+    public static final String MIT_USAGECOUNT_TABLE = "mit_usagecount_table";
+    public static final String MIT_CONTACTCOUNT_TABLE = "mit_contactcount_table";
+    public static final String MIT_SCREENTIME_TABLE = "mit_screentime_table";
+    public static final String MIT_CALLDURATION_TABLE = "mit_callduration_table";
+    public static final String MIT_CALENDEREVENTCOUNT_TABLE = "mit_calendereventcount_table";
+
+
     public Pra_SqlLiteDbHelper(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
@@ -63,6 +72,17 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table " + CHA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
         db.execSQL("create table " + CHA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
+
+
+        db.execSQL("create table " + MIT_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
+        db.execSQL("create table " + MIT_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
+        db.execSQL("create table " + MIT_CALLDURATION_TABLE  + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
+        db.execSQL("create table " + MIT_CALENDEREVENTCOUNT_TABLE  + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+
+
 
     }
 

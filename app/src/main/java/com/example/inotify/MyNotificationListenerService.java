@@ -2,14 +2,10 @@ package com.example.inotify;
 
 import android.app.Notification;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
@@ -56,15 +52,19 @@ public class MyNotificationListenerService extends NotificationListenerService {
             PackageManager pm = this.getPackageManager();
             String apppack = pack;
 //==========================================================================================================================
-
-
             //////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
+            // prashan
+            // MainBusyOrNotPredict mainBusyOrNotPredict =new MainBusyOrNotPredict();
+            //String busyornot = mainBusyOrNotPredict.GetNewPrediction();
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            // chaya
+            // MainAttentiviness mainAttentiviness = new MainAttentiviness();
+            //String attentiviness = mainAttentiviness.getFinalAttentiviness(this,"appname");
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            // mitha
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            // dinu
+            //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

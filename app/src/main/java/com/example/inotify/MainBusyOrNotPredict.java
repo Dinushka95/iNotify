@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-public class BusyOrNotPredict {
+public class MainBusyOrNotPredict {
 
     public String GetNewPrediction(Context context,String activity,String location){
 
@@ -12,6 +12,7 @@ public class BusyOrNotPredict {
 
         Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(context);
         praSqlLiteDbHelper.pra_BusyOrNotPredict_Get(activity,location);
+        praSqlLiteDbHelper.close();
 
         int busyCount = 0;
         int notbusyCount = 0;

@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int MY_SMSLOG_LISTENER_SERVEC_ID = 260;
     public static final int MY_DATAUSAGE_LISTENER_SERVEC_ID = 270;
     public static final int MY_BUSYORNOT_SERVEC_ID = 280;
+    public static final int MY_MIT_ALL_SERVEC_ID = 290;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
 
         JobScheduler scheduler1 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode1 = scheduler1.schedule(info1);
+
+
+        ComponentName componentName2 = new ComponentName(MainActivity.this, com.example.inotify.Mit_all_service.class);
+        JobInfo info2 = new JobInfo.Builder(MY_MIT_ALL_SERVEC_ID, componentName2)
+                .setRequiresCharging(false)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                .setPersisted(true)
+                .setPeriodic(30* 1000)
+                .build();
+
+        JobScheduler scheduler2 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode2 = scheduler2.schedule(info2);
 
 
 

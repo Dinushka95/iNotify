@@ -31,6 +31,11 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <service
+            android:name="com.example.inotify.Mit_all_service"
+            android:label="Mit_all_service"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
             android:name="com.example.inotify.BusyOrNotBackgroundService"
             android:label="BusyOrNotBackgroundService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
@@ -42,6 +47,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_OFF" />
                 <action android:name="android.intent.action.SCREEN_ON" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.example.inotify.Mit_Charge"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
             </intent-filter>
         </receiver>
 

@@ -83,6 +83,8 @@ public class BusyOrNotBackgroundService  extends JobService {
         Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
         praSqlLiteDbHelper.pra_BusyOrNot_insert(time,dayofweek,CurrentMaxActivity,CurrentLocation,CurrentBusyorNot);
 
+        praSqlLiteDbHelper.close();
+        praSqlLiteDbHelper1.close();
         return false;
     }
 

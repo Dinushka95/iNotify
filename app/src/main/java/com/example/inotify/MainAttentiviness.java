@@ -33,9 +33,14 @@ public class MainAttentiviness {
 
         double currentp = AppINV/total_important_value;
 
-        if (currentp>.5){}
-// need to do stopped because the diagram does make sense
-        return "high";
+        double finalvalue = currentp*W_sl*W_r;
+
+        if (finalvalue>0 && finalvalue<.3){return "low";}
+        if (finalvalue>.3 && finalvalue<.6){return "medium";}
+        if (finalvalue>.6 && finalvalue<1){return "high";}
+
+
+        return "error";
 
     }
 
