@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,7 +56,8 @@ public class Mit_all_service extends JobService {
         int count = 0;
 
         /*for (ApplicationInfo packageInfo : packages) {
-            String tem = "null";//pm.getLaunchIntentForPackage(packageInfo.packageName).toString(); //TODO - should be uncommented later NOT NULL //BUG with pm object return null
+            String tem = "null";//pm.getLaunchIntentForPackage(packageInfo.packageName).toString();
+
 
         }*/
         count =packages.size();
@@ -77,12 +79,12 @@ public class Mit_all_service extends JobService {
         List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, start, end);
 
         long count =0;
-
+        Log.v("inotify","uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
         for (UsageStats stat : stats) {
             count = count +stat.getTotalTimeInForeground();
 
-        }
 
+        }
 
         Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
         mit_sqlLiteDbHelper.mit_appusagecount_insert(String.valueOf(count));
@@ -94,8 +96,7 @@ public class Mit_all_service extends JobService {
 
 
         ContentResolver cr = context.getContentResolver();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
-                null, null, null, null);
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 
         List<MyContact> myList = new ArrayList<>();
 
@@ -179,6 +180,24 @@ public class Mit_all_service extends JobService {
 
 
     public void  getSocialMediaApps(Context context){
+
+
+        final PackageManager pm = context.getPackageManager();
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+        int count =0;
+        Log.v("inotify","pppppppppppppppppppp");
+
+        for (ApplicationInfo applicationInfo : packages) {
+            String x = applicationInfo.packageName.toString();
+            if(x.equals("com.example.dinu.testd")){
+                count = count++ ;
+            }
+        }
+
+        Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
+        mit_sqlLiteDbHelper.mit_appusagecount_insert(String.valueOf(count));
+        mit_sqlLiteDbHelper.close();
 
     }
 

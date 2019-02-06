@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,11 +14,11 @@ import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class ScreenLock extends BroadcastReceiver {
+public class All_ScreenLock extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
+//        Log.v("xxxxxxxxxxxxxxxxx", intent.getDataString());
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF))
         {
             Log.v("Screen mode", "Screen is in off State");
@@ -28,23 +29,20 @@ public class ScreenLock extends BroadcastReceiver {
             editor.apply();
 
             //mitha part
-            String timenow = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
+            String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
             SharedPreferences prefs = context.getSharedPreferences("lockscreen", MODE_PRIVATE);
             String timeoff = prefs.getString("time", null);
 
 
-            SimpleDateFormat format = new SimpleDateFormat("HHmm");
-
+            SimpleDateFormat format = new SimpleDateFormat("HHmmss");
             Date date1 = null;
-
             try {
                 date1 = format.parse(timeoff);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             Date date2 = null;
-
             try {
                 date2 = format.parse(timenow);
             } catch (ParseException e) {
@@ -52,9 +50,12 @@ public class ScreenLock extends BroadcastReceiver {
             }
 
             long difference = date2.getTime() - date1.getTime();
+            System.out.println(difference/1000);
 
             Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(context);
             mit_sqlLiteDbHelper.mit_screentime_insert(String.valueOf(difference));
+
+
 
 
         }
@@ -65,7 +66,7 @@ public class ScreenLock extends BroadcastReceiver {
             Log.v("Screen mode","Screen is in on State" );
             SharedPreferences.Editor editor = context.getSharedPreferences("lockscreen", MODE_PRIVATE).edit();
             editor.putString("screen", "on");
-            String timenow = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
+            String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
             editor.putString("time",timenow );
             editor.apply();
         }

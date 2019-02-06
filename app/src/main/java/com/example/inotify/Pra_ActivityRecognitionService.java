@@ -6,10 +6,10 @@ import android.util.Log;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
 
-public class ActivityRecognitionService extends IntentService {
+public class Pra_ActivityRecognitionService extends IntentService {
 
-    public ActivityRecognitionService() {
-        super("ActivityRecognitionService");
+    public Pra_ActivityRecognitionService() {
+        super("Pra_ActivityRecognitionService");
     }
 
     @Override

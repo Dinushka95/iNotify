@@ -3,7 +3,7 @@ package com.example.inotify;
 import android.content.Context;
 import android.media.AudioManager;
 
-public class RingerMode {
+public class Cha_RingerMode {
 
     public String getRingerMode(Context context){
         String ringerMode = "";

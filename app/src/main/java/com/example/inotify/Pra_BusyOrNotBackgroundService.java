@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class BusyOrNotBackgroundService  extends JobService {
+public class Pra_BusyOrNotBackgroundService extends JobService {
 
     @Override
     public void onCreate() {
@@ -50,7 +50,7 @@ public class BusyOrNotBackgroundService  extends JobService {
         Double accuracy = .0001;
 
          ArrayList<Double> loc= praSqlLiteDbHelper1.pra_location_get();
-         double log= loc.get(0);
+         double log=loc.get(0);
          double lat = loc.get(1);
 
 

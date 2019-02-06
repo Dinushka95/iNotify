@@ -1,11 +1,14 @@
 package com.example.inotify;
 
+import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ComponentName componentName = new ComponentName(MainActivity.this, com.example.inotify.LocationService.class);
+        ComponentName componentName = new ComponentName(MainActivity.this, Pra_LocationService.class);
         JobInfo info = new JobInfo.Builder(MY_LOCATION_LISTENER_SERVEC_ID, componentName)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         int resultCode = scheduler.schedule(info);
 
 
-        ComponentName componentName1 = new ComponentName(MainActivity.this, com.example.inotify.BusyOrNotBackgroundService.class);
+        ComponentName componentName1 = new ComponentName(MainActivity.this, Pra_BusyOrNotBackgroundService.class);
         JobInfo info1 = new JobInfo.Builder(MY_BUSYORNOT_SERVEC_ID, componentName1)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -65,18 +68,23 @@ public class MainActivity extends AppCompatActivity {
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                 .setPersisted(true)
-                .setPeriodic(30* 1000)
+                .setPeriodic(24*60*60* 1000)
                 .build();
 
         JobScheduler scheduler2 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode2 = scheduler2.schedule(info2);
 
 
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        BroadcastReceiver mReceiver = new All_ScreenLock();
+        registerReceiver(mReceiver, intentFilter);
 
+       // registerScreenLockStateBroadcastReciver();
     }
 
     private PendingIntent getActivityDetectionPendingIntent() {
-        return PendingIntent.getService(this, 30, new Intent(this, ActivityRecognitionService.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getService(this, 30, new Intent(this, Pra_ActivityRecognitionService.class), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     public void cancelAllJobs(View view) {
@@ -89,10 +97,15 @@ public class MainActivity extends AppCompatActivity {
     praSqlLiteDbHelper.pra_location_get();*/
 
 
-    Cha_SqlLiteDbHelper cha_sqlLiteDbHelper = new Cha_SqlLiteDbHelper(this);
-    cha_sqlLiteDbHelper.NIRgetTotalvalue();
+/*    Cha_SqlLiteDbHelper cha_sqlLiteDbHelper = new Cha_SqlLiteDbHelper(this);
+    cha_sqlLiteDbHelper.NIRgetTotalvalue();*/
 
-    Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(cha_sqlLiteDbHelper.NIRgetTotalvalue()));
+    Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
+    mit_sqlLiteDbHelper.mit_appUsageAverage_get();
+
+    Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(mit_sqlLiteDbHelper.mit_appUsageAverage_get()));
 
     }
+
+
 }

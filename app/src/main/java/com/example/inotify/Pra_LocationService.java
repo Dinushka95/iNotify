@@ -7,7 +7,7 @@ import android.app.job.JobService;
 import android.content.Intent;
 import android.location.Location;
 
-public class LocationService extends JobService implements MyLocationUpdatesComponent.ILocationProvider{
+public class Pra_LocationService extends JobService implements MyLocationUpdatesComponent.ILocationProvider{
 
     private MyLocationUpdatesComponent myLocationUpdatesComponent;
 

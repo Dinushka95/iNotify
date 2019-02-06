@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class CalenderEvent {
+public class Pra_CalenderEvent {
 
 
     public boolean getcalanderEvent(Context context){

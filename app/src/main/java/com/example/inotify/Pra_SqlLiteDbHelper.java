@@ -54,6 +54,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
     public static final String MIT_SCREENTIME_TABLE = "mit_screentime_table";
     public static final String MIT_CALLDURATION_TABLE = "mit_callduration_table";
     public static final String MIT_CALENDEREVENTCOUNT_TABLE = "mit_calendereventcount_table";
+    public static final String MIT_APPLISTSOCIALMEDIACOUNT_TABLE = "mit_applistsocialmediacount_table";
 
 
     public Pra_SqlLiteDbHelper(Context context) {
@@ -81,6 +82,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + MIT_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
         db.execSQL("create table " + MIT_CALLDURATION_TABLE  + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
         db.execSQL("create table " + MIT_CALENDEREVENTCOUNT_TABLE  + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
 
 
 

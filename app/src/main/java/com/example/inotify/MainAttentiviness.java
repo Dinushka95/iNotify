@@ -9,7 +9,7 @@ public class MainAttentiviness {
 
     public String getFinalAttentiviness(Context context,String appName){
 
-        String ringerMode = new RingerMode().getRingerMode(context);
+        String ringerMode = new Cha_RingerMode().getRingerMode(context);
         SharedPreferences prefs = context.getSharedPreferences("lockscreen", MODE_PRIVATE);
         String isScreenOn = prefs.getString("screen", null);
 
@@ -28,8 +28,8 @@ public class MainAttentiviness {
         if (ringerMode.equals("silent")){W_r=1;}
 
 
-        if (ringerMode.equals("on")){W_sl=0.5;}
-        if (ringerMode.equals("off")){W_sl=0.5;}
+        if (isScreenOn.equals("on")){W_sl=0.5;}
+        if (isScreenOn.equals("off")){W_sl=0.5;}
 
         double currentp = AppINV/total_important_value;
 
