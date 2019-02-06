@@ -20,14 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int iNotify_SERVEC_ID = 555;
     public static final int MY_LOCATION_LISTENER_SERVEC_ID = 210;
-    public static final int MY_CONTACTS_LISTENER_SERVEC_ID = 220;
-    public static final int MY_APPUSAGE_LISTENER_SERVEC_ID = 230;
-    public static final int MY_APPINFORMATION_LISTENER_SERVEC_ID = 240;
-    public static final int MY_CALLLOG_LISTENER_SERVEC_ID = 250;
-    public static final int MY_SMSLOG_LISTENER_SERVEC_ID = 260;
-    public static final int MY_DATAUSAGE_LISTENER_SERVEC_ID = 270;
     public static final int MY_BUSYORNOT_SERVEC_ID = 280;
     public static final int MY_MIT_ALL_SERVEC_ID = 290;
+
+
+    public static Double home_Log = 79.9652678;
+    public static Double home_Lat = 6.8598528;
+    public static Double work_Log = 79.973109;
+    public static Double work_Lat = 6.914578;
+    public static Double accuracy = .0001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,10 +101,13 @@ public class MainActivity extends AppCompatActivity {
 /*    Cha_SqlLiteDbHelper cha_sqlLiteDbHelper = new Cha_SqlLiteDbHelper(this);
     cha_sqlLiteDbHelper.NIRgetTotalvalue();*/
 
-    Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
-    mit_sqlLiteDbHelper.mit_appUsageAverage_get();
+/*    Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
+    mit_sqlLiteDbHelper.mit_appUsageAverage_get();*/
 
-    Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(mit_sqlLiteDbHelper.mit_appUsageAverage_get()));
+        MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
+        mainUsercharacteristics.getUsercharacteristics(this);
+
+    Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(mainUsercharacteristics.getUsercharacteristics(this)));
 
     }
 

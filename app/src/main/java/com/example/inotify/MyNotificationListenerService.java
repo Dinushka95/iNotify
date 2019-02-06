@@ -3,6 +3,7 @@ package com.example.inotify;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -13,8 +14,15 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.example.inotify.MainActivity.accuracy;
+import static com.example.inotify.MainActivity.home_Lat;
+import static com.example.inotify.MainActivity.home_Log;
+import static com.example.inotify.MainActivity.work_Lat;
+import static com.example.inotify.MainActivity.work_Log;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
@@ -31,7 +39,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
         if (sbn.getNotification().tickerText != null) {
             ticker = sbn.getNotification().tickerText.toString();
         }
-        Log.d("cdap", " --MyNotificationListenerService--preLoop-Ticker--" + ticker);
+
+        Log.d("inotify", "Main-MyNotificationListenerService--preLoop-Ticker---"+ticker );
         if ((sbn.getPackageName().equals("com.example.dinu.testa") ||
                 sbn.getPackageName().equals("com.example.dinu.testb") ||
                 sbn.getPackageName().equals("com.example.dinu.testc") ||
@@ -54,17 +63,48 @@ public class MyNotificationListenerService extends NotificationListenerService {
 //==========================================================================================================================
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // prashan
-            // MainBusyOrNotPredict mainBusyOrNotPredict =new MainBusyOrNotPredict();
-            //String busyornot = mainBusyOrNotPredict.GetNewPrediction();
+
+
+            SharedPreferences prefs = this.getSharedPreferences("activityrecognition", MODE_PRIVATE);
+            String currentactivity=prefs.getString("activity", null);
+
+            Pra_SqlLiteDbHelper praSqlLiteDbHelper1 = new Pra_SqlLiteDbHelper(this);
+            ArrayList<Double> loc= praSqlLiteDbHelper1.pra_location_get();
+            double log=loc.get(0);
+            double lat = loc.get(1);
+            double distanceHome = Math.hypot(log - home_Log, lat-home_Lat);
+            double distanceWork = Math.hypot(log - work_Log, lat-work_Lat);
+
+            String currentlocation="unknown";
+
+            if(distanceHome<accuracy){
+                currentlocation="home";
+            }
+            if(distanceWork<accuracy){
+                currentlocation="work";
+            }
+
+            MainBusyOrNotPredict mainBusyOrNotPredict =new MainBusyOrNotPredict();
+            String busyornot = mainBusyOrNotPredict.GetNewPrediction(this,currentactivity,currentlocation);
+
+            Log.d("inotify", "Main-MyNotificationListenerService--currentactivity---"+currentactivity );
+            Log.d("inotify", "Main-MyNotificationListenerService--currentlocation---"+currentlocation );
+
             /////////////////////////////////////////////////////////////////////////////////////////////////
             // chaya
-            // MainAttentiviness mainAttentiviness = new MainAttentiviness();
-            //String attentiviness = mainAttentiviness.getFinalAttentiviness(this,"appname");
+            MainAttentiviness mainAttentiviness = new MainAttentiviness();
+            String attentiviness = mainAttentiviness.getFinalAttentiviness(this,apppack);
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // mitha
+            MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
+            String userCharacteistics = mainUsercharacteristics.getUsercharacteristics(this);
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // dinu
             //////////////////////////////////////////////////////////////////////////////////////////////////
+
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-BusyOrNotPredict---"+busyornot );
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-Attentiviness---"+attentiviness );
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-Usercharacteristics---"+userCharacteistics );
 
 
 
@@ -104,7 +144,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 chaSqlLiteDbHelper.Ninsert(Long.valueOf(dateTime) ,sbn.getPackageName(), Long.valueOf(dateTime));
 
             }
-            Log.d("cdap", " --MyNotificationListenerService--run smart notification--stop----");
+            Log.d("inotify", "Main-MyNotificationListenerService--un smart notification--stop----" );
+
         }
 
 
@@ -114,23 +155,24 @@ public class MyNotificationListenerService extends NotificationListenerService {
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
 
-        Log.d("cdap", " --onNotificationRemoved---start" );
+        Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---start" );
 
 
         //chaya
         if (sbn.getPackageName().equals("com.example.inotify")) {
-            Log.d("cdap", " --onNotificationRemoved---" + sbn.getPackageName());
+
+            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-"+ sbn.getPackageName() );
 
             int totalnotificationinlist = 0;
 
             StatusBarNotification[] notificationManager1 = getActiveNotifications();
             for (StatusBarNotification notification : notificationManager1) {
-                Log.d("cdap", " ---onNotificationRemoved--------"+notification.getPackageName());
+               // Log.d("cdap", " ---onNotificationRemoved--------"+notification.getPackageName());
                 if(notification.getPackageName().equals("com.example.inotify")){
                     totalnotificationinlist = totalnotificationinlist +1;
                 }
             }
-            Log.d("cdap", " ---onNotificationRemoved--------total notifications-----" + totalnotificationinlist);
+         //   Log.d("cdap", " ---onNotificationRemoved--------total notifications-----" + totalnotificationinlist);
             Cha_SqlLiteDbHelper chaSqlLiteDbHelper = new Cha_SqlLiteDbHelper(this);
             String packageName = chaSqlLiteDbHelper.NgetValue(sbn.getNotification().tickerText.toString());
             chaSqlLiteDbHelper.NIupdate(packageName, totalnotificationinlist);
@@ -141,5 +183,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
         // for prashan
         Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
         praSqlLiteDbHelper.pra_notificationRemove_insert();
+
+        Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop" );
     }
 }

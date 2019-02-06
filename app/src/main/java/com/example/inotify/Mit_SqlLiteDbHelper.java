@@ -382,10 +382,10 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
     public long mit_calldurationLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select TIME from mit_callduration_table", null);
+        Cursor res = db.rawQuery("select * from mit_callduration_table", null);
         if (res != null) {
             if ((res.moveToLast())){
-                return res.getLong(res.getColumnIndex("Time"));
+                return res.getLong(2);
             }
         }
         res.close();

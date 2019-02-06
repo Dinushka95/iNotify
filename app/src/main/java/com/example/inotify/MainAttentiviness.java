@@ -2,6 +2,7 @@ package com.example.inotify;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -17,7 +18,7 @@ public class MainAttentiviness {
 
         int total_important_value = cha_sqlLiteDbHelper.NIRgetTotalvalue();
 
-        int AppINV = cha_sqlLiteDbHelper.NIRgetValueNo(appName);
+        int AppINV = cha_sqlLiteDbHelper.NIgetValue(appName);
 
         double W_r=0;
         double W_sl=0;
@@ -31,10 +32,16 @@ public class MainAttentiviness {
         if (isScreenOn.equals("on")){W_sl=0.5;}
         if (isScreenOn.equals("off")){W_sl=0.5;}
 
-        double currentp = AppINV/total_important_value;
+        Log.d("inotify", "attentiviness-MainAttentiviness--ringerMode---"+ringerMode );
+        Log.d("inotify", "attentiviness-MainAttentiviness--isScreenOn---"+isScreenOn );
+        Log.d("inotify", "attentiviness-MainAttentiviness--total_important_value---"+total_important_value );
+        Log.d("inotify", "attentiviness-MainAttentiviness--AppINV---"+AppINV );
+
+        double currentp = (float)AppINV/(float)total_important_value;
+        Log.d("inotify", "attentiviness-MainAttentiviness--currentp---"+currentp );
 
         double finalvalue = currentp*W_sl*W_r;
-
+        Log.d("inotify", "attentiviness-MainAttentiviness--finalvalue---"+finalvalue );
         if (finalvalue>0 && finalvalue<.3){return "low";}
         if (finalvalue>.3 && finalvalue<.6){return "medium";}
         if (finalvalue>.6 && finalvalue<1){return "high";}

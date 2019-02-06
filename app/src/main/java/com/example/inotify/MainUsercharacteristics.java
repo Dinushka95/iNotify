@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class MainUsercharacteristics {
 
-    public ArrayList<Double> getUsercharacteristics(Context context){
+    public String getUsercharacteristics(Context context){
 
         Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(context);
 
@@ -98,10 +98,10 @@ public class MainUsercharacteristics {
         int extraversion_WL4=0;
         int extraversion_WL5=0;
 
-        if(appListDownloadStatue.equals("high")){extraversion_WL1=30;}else{extraversion_WL1=0;}
-        if(socialmediacAppCountStatue.equals("high")){extraversion_WL2=40;}else{extraversion_WL2=0;}
-        if(chargetimeStatue.equals("high")){extraversion_WL3=30;}else{extraversion_WL3=0;}
-        if(screenTimeCountStatue.equals("high")){extraversion_WL4=40;}else{extraversion_WL4=0;}
+        if(appListDownloadStatue.equals("high")){extraversion_WL1=10;}else{extraversion_WL1=0;}
+        if(socialmediacAppCountStatue.equals("high")){extraversion_WL2=30;}else{extraversion_WL2=0;}
+        if(chargetimeStatue.equals("high")){extraversion_WL3=10;}else{extraversion_WL3=0;}
+        if(screenTimeCountStatue.equals("high")){extraversion_WL4=20;}else{extraversion_WL4=0;}
         if(calldurationCountStatue.equals("high")){extraversion_WL5=30;}else{extraversion_WL5=0;}
 
         extraversionFinal=(extraversion_WL1+extraversion_WL2+extraversion_WL3+extraversion_WL4+extraversion_WL5)/100;
@@ -118,10 +118,29 @@ public class MainUsercharacteristics {
 
         if(calendarCountStatue.equals("high")){consientiousness_WL1=30;}else{consientiousness_WL1=0;}
         if(chargetimeStatue.equals("high")){consientiousness_WL2=30;}else{consientiousness_WL2=0;}
-        if(calldurationCountStatue.equals("high")){consientiousness_WL3=30;}else{consientiousness_WL3=0;}
-        if(screenTimeCountStatue.equals("high")){consientiousness_WL4=10;}else{consientiousness_WL4=0;}
+        if(calldurationCountStatue.equals("high")){consientiousness_WL3=20;}else{consientiousness_WL3=0;}
+        if(screenTimeCountStatue.equals("high")){consientiousness_WL4=20;}else{consientiousness_WL4=0;}
 
         consientiousnessFinal=(consientiousness_WL1+consientiousness_WL2+consientiousness_WL3+consientiousness_WL4)/100;
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        // areeableness
+
+        double areeablenessFinal=0.0;
+
+        int areeableness_WL1=0;
+        int areeableness_WL2=0;
+        int areeableness_WL3=0;
+        int areeableness_WL4=0;
+        int areeableness_WL5=0;
+
+        if(screenTimeCountStatue.equals("high")){consientiousness_WL1=10;}else{consientiousness_WL1=0;}
+        if(appListDownloadStatue.equals("high")){consientiousness_WL2=20;}else{consientiousness_WL2=0;}
+        if(appListCountStatue.equals("high")){consientiousness_WL3=10;}else{consientiousness_WL3=0;}
+        if(contactCountStatue.equals("high")){consientiousness_WL4=30;}else{consientiousness_WL4=0;}
+        if(calldurationCountStatue.equals("high")){consientiousness_WL4=30;}else{consientiousness_WL4=0;}
+
+        areeablenessFinal=(areeableness_WL1+areeableness_WL2+areeableness_WL3+areeableness_WL4+areeableness_WL5)/100;
 
         //save all sates to db
         ArrayList<Double> ad = new ArrayList<>();
@@ -129,8 +148,81 @@ public class MainUsercharacteristics {
         ad.add(neuroticismFinal);
         ad.add(extraversionFinal);
         ad.add(consientiousnessFinal);
+        ad.add(areeablenessFinal);
 
-        return ad;
+        String x = "error";
+
+        if(opennessFinal>neuroticismFinal){
+            if(opennessFinal>extraversionFinal){
+                if(opennessFinal>consientiousnessFinal){
+                    if(opennessFinal>areeablenessFinal){
+                        x="openness";//"openness";
+                    }else{
+                        x="oldtechnology";//"ageeableness";
+                    }
+                }else{
+                    if(consientiousnessFinal>areeablenessFinal){
+                        x="professional"; //"consientiousness";
+                    }else{
+                        x="oldtechnology";//"ageeableness";
+                    }
+                }
+            } else {
+                if(extraversionFinal>consientiousnessFinal){
+                    if(extraversionFinal>areeablenessFinal){
+                        x="social"; //"extraversion";
+                    }else{
+                        x="oldtechnology";//"ageeableness";
+                    }
+                }else{
+                    if(consientiousnessFinal>areeablenessFinal){
+                        x="professional"; //"consientiousness";
+                    }else{
+                        x="oldtechnology";//"ageeableness";
+                    }
+                }
+            }
+        }else {
+            if(neuroticismFinal>extraversionFinal){
+                if(neuroticismFinal>consientiousnessFinal){
+                    if(neuroticismFinal>areeablenessFinal){
+                        x="friendliness";//"neuroticism";
+                    }else{
+                        x="oldtechnology";//"ageeableness";
+                    }
+                }else{
+                    if(consientiousnessFinal>areeablenessFinal){
+                        x="professional"; //"consientiousness";
+                    }else{
+                        x="oldtechnology";//"ageeableness";
+                    }
+                }
+            } else {
+                if(extraversionFinal>consientiousnessFinal){
+                    if(extraversionFinal>areeablenessFinal){
+                        x="social"; //"extraversion";
+                    }else{
+                        x="oldtechnology";//"ageeableness";
+                    }
+                }else{
+                    if(consientiousnessFinal>areeablenessFinal){
+                        x="professional"; //"consientiousness";
+                    }else{
+                        x="oldtechnology";//"ageeableness";
+                    }
+                }
+            }
+
+
+        }
+        //Social-Extraversion
+        //Professional-Conscientiousness
+        //friendliness - 	Neuroticism
+        //gaming - openess
+        // oldtechnology - agreeableness
+
+
+        return x;
     }
 
 }

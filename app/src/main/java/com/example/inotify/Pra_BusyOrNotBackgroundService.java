@@ -10,6 +10,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.example.inotify.MainActivity.accuracy;
+import static com.example.inotify.MainActivity.home_Lat;
+import static com.example.inotify.MainActivity.home_Log;
+import static com.example.inotify.MainActivity.work_Lat;
+import static com.example.inotify.MainActivity.work_Log;
+
 public class Pra_BusyOrNotBackgroundService extends JobService {
 
     @Override
@@ -20,7 +26,7 @@ public class Pra_BusyOrNotBackgroundService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
 
-        Log.d("inotify","BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+       // Log.d("inotify","BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 
         // get time current working time block
         String time = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
@@ -39,15 +45,8 @@ public class Pra_BusyOrNotBackgroundService extends JobService {
         String CurrentMaxActivity = praSqlLiteDbHelper1.pra_activity_get();
 
 
-
-
         //double distance = Math.hypot(x1-x2, y1-y2);
         // get location from db and map to home work or unknown
-        Double home_Log = 79.9652678;
-        Double home_Lat = 6.8598528;
-        Double work_Log = 79.973109;
-        Double work_Lat = 6.914578;
-        Double accuracy = .0001;
 
          ArrayList<Double> loc= praSqlLiteDbHelper1.pra_location_get();
          double log=loc.get(0);
@@ -56,8 +55,8 @@ public class Pra_BusyOrNotBackgroundService extends JobService {
 
         double distanceHome = Math.hypot(log - home_Log, lat-home_Lat);
         double distanceWork = Math.hypot(log - work_Log, lat-work_Lat);
-        Log.d("inotify","AAAAAAAAAAAAAAAAAAAAAA"+distanceHome);
-        Log.d("inotify","AAAAAAAAAAAAAAAAAAAAAAA"+distanceWork);
+      //  Log.d("inotify","AAAAAAAAAAAAAAAAAAAAAA"+distanceHome);
+      //  Log.d("inotify","AAAAAAAAAAAAAAAAAAAAAAA"+distanceWork);
 
         String CurrentLocation="unknown";
 
@@ -74,7 +73,7 @@ public class Pra_BusyOrNotBackgroundService extends JobService {
         String CurrentBusyorNot="NotBusy";
         int notificationRemovedCount = praSqlLiteDbHelper1.pra_notificationRemove_get();
 
-        Log.d("inotify","NNNNNNNNNNNNNRRRRRRRRRRREEEEEEE"+notificationRemovedCount);
+     //   Log.d("inotify","NNNNNNNNNNNNNRRRRRRRRRRREEEEEEE"+notificationRemovedCount);
 
         if(notificationRemovedCount>0){}
         else {CurrentBusyorNot="Busy";}

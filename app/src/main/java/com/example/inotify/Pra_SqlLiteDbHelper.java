@@ -57,6 +57,9 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
     public static final String MIT_APPLISTSOCIALMEDIACOUNT_TABLE = "mit_applistsocialmediacount_table";
 
 
+    public static final String DIN_SNS_TABLE = "din_SNS_TABLE";
+
+
     public Pra_SqlLiteDbHelper(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
@@ -85,6 +88,8 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + MIT_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
 
 
+        db.execSQL("create table " + DIN_SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
+                "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
 
     }
 
@@ -349,7 +354,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from pra_busyornot_table WHERE TIME between \""+timeold+"\" AND \""+timenow+"\" DAY = \""+day+"\" AND ACTIVITY = \""+activity+"\" AND LOCATION = \""+location+"\"", null);
+        Cursor res = db.rawQuery("select * from pra_busyornot_table WHERE TIME between \""+timeold+"\" AND \""+timenow+"\"AND  DAY = \""+day+"\" AND ACTIVITY = \""+activity+"\" AND LOCATION = \""+location+"\"", null);
         if (res != null) {
 
             if (res.moveToFirst()){
