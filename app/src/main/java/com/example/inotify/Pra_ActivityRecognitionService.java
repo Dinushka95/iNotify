@@ -23,7 +23,7 @@ public class Pra_ActivityRecognitionService extends IntentService {
         ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
         String type = String.valueOf(result.getMostProbableActivity().getType());
         String confidance = String.valueOf(result.getMostProbableActivity().getConfidence());
-        Log.d("inotifyLog", "Activity recognition ==" + type + confidance);
+      //  Log.d("inotifyLog", "Activity recognition ==" + type + confidance);
         Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
         praSqlLiteDbHelper.pra_activity_insert(type,confidance);
         praSqlLiteDbHelper.close();

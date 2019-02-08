@@ -21,7 +21,7 @@ public class All_ScreenLock extends BroadcastReceiver {
 //        Log.v("xxxxxxxxxxxxxxxxx", intent.getDataString());
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF))
         {
-            Log.v("Screen mode", "Screen is in off State");
+           // Log.v("Screen mode", "Screen is in off State");
 
             //chaya
             SharedPreferences.Editor editor = context.getSharedPreferences("lockscreen", MODE_PRIVATE).edit();
@@ -63,7 +63,7 @@ public class All_ScreenLock extends BroadcastReceiver {
 
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON))
         {
-            Log.v("Screen mode","Screen is in on State" );
+          //  Log.v("Screen mode","Screen is in on State" );
             SharedPreferences.Editor editor = context.getSharedPreferences("lockscreen", MODE_PRIVATE).edit();
             editor.putString("screen", "on");
             String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());

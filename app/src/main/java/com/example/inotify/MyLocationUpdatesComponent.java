@@ -59,14 +59,14 @@ public class MyLocationUpdatesComponent {
      * @param context
      */
     public void onCreate(Context context) {
-        Log.i(TAG, "created...............");
+      //  Log.i(TAG, "created...............");
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
 
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                Log.i(TAG, "onCreate...onLocationResult...............loc " + locationResult.getLastLocation());
+               // Log.i(TAG, "onCreate...onLocationResult...............loc " + locationResult.getLastLocation());
 
                 onNewLocation(locationResult.getLastLocation());
             }
@@ -81,7 +81,7 @@ public class MyLocationUpdatesComponent {
      * start location updates
      */
     public void onStart() {
-        Log.i(TAG, "onStart ");
+      //  Log.i(TAG, "onStart ");
         //hey request for location updates
         requestLocationUpdates();
     }
@@ -90,7 +90,7 @@ public class MyLocationUpdatesComponent {
      * remove location updates
      */
     public void onStop() {
-        Log.i(TAG, "onStop....");
+      //  Log.i(TAG, "onStop....");
         removeLocationUpdates();
     }
 
@@ -99,12 +99,12 @@ public class MyLocationUpdatesComponent {
      * {@link SecurityException}.
      */
     public void requestLocationUpdates() {
-        Log.i(TAG, "Requesting location updates");
+      //  Log.i(TAG, "Requesting location updates");
         try {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest,
                     mLocationCallback, Looper.getMainLooper());
         } catch (SecurityException unlikely) {
-            Log.e(TAG, "Lost location permission. Could not request updates. " + unlikely);
+           // Log.e(TAG, "Lost location permission. Could not request updates. " + unlikely);
         }
     }
 
@@ -113,14 +113,14 @@ public class MyLocationUpdatesComponent {
      * {@link SecurityException}.
      */
     public void removeLocationUpdates() {
-        Log.i(TAG, "Removing location updates");
+       // Log.i(TAG, "Removing location updates");
         try {
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
 //            Utils.setRequestingLocationUpdates(this, false);
 //            stopSelf();
         } catch (SecurityException unlikely) {
 //            Utils.setRequestingLocationUpdates(this, true);
-            Log.e(TAG, "Lost location permission. Could not remove updates. " + unlikely);
+           // Log.e(TAG, "Lost location permission. Could not remove updates. " + unlikely);
         }
     }
 
@@ -135,21 +135,21 @@ public class MyLocationUpdatesComponent {
                         public void onComplete(@NonNull Task<Location> task) {
                             if (task.isSuccessful() && task.getResult() != null) {
                                 mLocation = task.getResult();
-                                Log.i(TAG, "getLastLocation " + mLocation);
+                               // Log.i(TAG, "getLastLocation " + mLocation);
 //                                Toast.makeText(getApplicationContext(), "" + mLocation, Toast.LENGTH_SHORT).show();
                                 onNewLocation(mLocation);
                             } else {
-                                Log.w(TAG, "Failed to get location.");
+                                //Log.w(TAG, "Failed to get location.");
                             }
                         }
                     });
         } catch (SecurityException unlikely) {
-            Log.e(TAG, "Lost location permission." + unlikely);
+           // Log.e(TAG, "Lost location permission." + unlikely);
         }
     }
 
     private void onNewLocation(Location location) {
-        Log.i(TAG, "New location: " + location);
+      //  Log.i(TAG, "New location: " + location);
 //        Toast.makeText(getApplicationContext(), "onNewLocation " + location, Toast.LENGTH_LONG).show();
 
         mLocation = location;

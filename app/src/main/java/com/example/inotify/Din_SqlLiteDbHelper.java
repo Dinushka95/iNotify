@@ -2,15 +2,16 @@ package com.example.inotify;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
 
 public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
 
@@ -25,7 +26,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
     public static final String SNS_TIME = "sns_time";
     public static final String SNS_BUSYORNOT = "sns_busyornot";
     public static final String SNS_ATTENTIVINESS = "sns_attentiviness";
-    public static final String SNS_USERCHAACTERISTICS = "sns_usercharacteristics";
+    public static final String SNS_USERCHAACTERISTICS = "sns_userchaacteristics";
     public static final String SNS_NOTIFICATIONTYPE = "sns_notificationtype";
     public static final String SNS_APPNAME = "sns_appname";
     public static final String SNS_VTIME = "sns_vtime";
@@ -47,9 +48,9 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean saveData(String busyornot, String attentiviness, String usercharacteristics,String notificationtype, String appname){
+    public boolean saveData(String id,String busyornot, String attentiviness, String usercharacteristics,String notificationtype, String appname){
 
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+        //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -96,9 +97,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
     public void getJSONDataALL(){
-
     }
-
 
 
 

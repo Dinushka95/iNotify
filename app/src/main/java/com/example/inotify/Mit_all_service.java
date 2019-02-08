@@ -79,7 +79,7 @@ public class Mit_all_service extends JobService {
         List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, start, end);
 
         long count =0;
-        Log.v("inotify","uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+      //  Log.v("inotify","uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
         for (UsageStats stat : stats) {
             count = count +stat.getTotalTimeInForeground();
 
@@ -186,7 +186,7 @@ public class Mit_all_service extends JobService {
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
         int count =0;
-        Log.v("inotify","pppppppppppppppppppp");
+      //  Log.v("inotify","pppppppppppppppppppp");
 
         for (ApplicationInfo applicationInfo : packages) {
             String x = applicationInfo.packageName.toString();

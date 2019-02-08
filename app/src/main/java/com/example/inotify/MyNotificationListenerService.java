@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +42,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
         }
 
         Log.d("inotify", "Main-MyNotificationListenerService--preLoop-Ticker---"+ticker );
+
         if ((sbn.getPackageName().equals("com.example.dinu.testa") ||
                 sbn.getPackageName().equals("com.example.dinu.testb") ||
                 sbn.getPackageName().equals("com.example.dinu.testc") ||
@@ -54,12 +56,19 @@ public class MyNotificationListenerService extends NotificationListenerService {
             title = extras.getString("android.title");
             text = extras.getCharSequence("android.text").toString();
 
+            Log.d("inotify", "Main-MyNotificationListenerService--package name---"+pack);
+            Log.d("inotify", "Main-MyNotificationListenerService--nid---"+nid);
+            Log.d("inotify", "Main-MyNotificationListenerService--title---"+title);
+            Log.d("inotify", "Main-MyNotificationListenerService--text---"+text);
+
             //remove notification
             cancelNotification(sbn.getKey());
+            Log.d("inotify", "Main-MyNotificationListenerService--Cancel original Notification---");
 
             Intent LaunchIntent = null;
             PackageManager pm = this.getPackageManager();
             String apppack = pack;
+
 //==========================================================================================================================
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // prashan
@@ -70,6 +79,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             Pra_SqlLiteDbHelper praSqlLiteDbHelper1 = new Pra_SqlLiteDbHelper(this);
             ArrayList<Double> loc= praSqlLiteDbHelper1.pra_location_get();
+            praSqlLiteDbHelper1.close();
+
             double log=loc.get(0);
             double lat = loc.get(1);
             double distanceHome = Math.hypot(log - home_Log, lat-home_Lat);
@@ -99,16 +110,43 @@ public class MyNotificationListenerService extends NotificationListenerService {
             MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
             String userCharacteistics = mainUsercharacteristics.getUsercharacteristics(this);
             //////////////////////////////////////////////////////////////////////////////////////////////////
-            // dinu
-            //////////////////////////////////////////////////////////////////////////////////////////////////
-
             Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-BusyOrNotPredict---"+busyornot );
             Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-Attentiviness---"+attentiviness );
             Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-Usercharacteristics---"+userCharacteistics );
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            // dinu
+            // run ML prediction function and get predicted notification view time
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+
+           // get the old data
+           // get current settting
+           // update the json
+            // api request
+            // read respone
+
+ /*           if(respone>acurracy){
+                not sent get delay;
+            }else {
+                semd notification
+            }
+*/
+
+
+
 
 
 
             if (true) {
+
+                //dave to db
+                Din_SqlLiteDbHelper din_sqlLiteDbHelper = new Din_SqlLiteDbHelper(this);
+                String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+                din_sqlLiteDbHelper.saveData(id,busyornot,attentiviness,userCharacteistics,"mobile",apppack);
+                din_sqlLiteDbHelper.close();
+
+
                 //send notification
                 String name = "";
                 try {
@@ -123,14 +161,14 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 Intent intent = LaunchIntent;
                 PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-                String dateTime = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
+               // String dateTime = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
 
                 NotificationCompat.Builder mBuilder = new NotificationCompat
                         .Builder(this, "inotifyapp")
                         .setSmallIcon(R.drawable.ic_launcher_background)
                         .setContentTitle(title + "-iNotify")
                         .setContentText(text)
-                        .setTicker(dateTime)
+                        .setTicker(id)
                         .setAutoCancel(true)
                         .setDefaults(Notification.DEFAULT_ALL)
                         .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -141,7 +179,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 notificationManager.notify(nid, mBuilder.build());
 
                 Cha_SqlLiteDbHelper chaSqlLiteDbHelper = new Cha_SqlLiteDbHelper(this);
-                chaSqlLiteDbHelper.Ninsert(Long.valueOf(dateTime) ,sbn.getPackageName(), Long.valueOf(dateTime));
+                chaSqlLiteDbHelper.Ninsert(Long.valueOf(id) ,sbn.getPackageName(), Long.valueOf(id));
+                chaSqlLiteDbHelper.close();
 
             }
             Log.d("inotify", "Main-MyNotificationListenerService--un smart notification--stop----" );
@@ -176,6 +215,32 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Cha_SqlLiteDbHelper chaSqlLiteDbHelper = new Cha_SqlLiteDbHelper(this);
             String packageName = chaSqlLiteDbHelper.NgetValue(sbn.getNotification().tickerText.toString());
             chaSqlLiteDbHelper.NIupdate(packageName, totalnotificationinlist);
+            chaSqlLiteDbHelper.close();
+
+
+            //dinu
+            String oldtime = sbn.getNotification().tickerText.toString();
+            String newtime = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date date1 = null;
+            try {
+                date1 = format.parse(oldtime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Date date2 = null;
+            try {
+                date2 = format.parse(newtime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            long difference = date2.getTime() - date1.getTime();
+
+            Din_SqlLiteDbHelper din_sqlLiteDbHelper = new Din_SqlLiteDbHelper(this);
+            din_sqlLiteDbHelper.updateData(oldtime,String.valueOf(difference));
+            din_sqlLiteDbHelper.close();
 
         }
 
@@ -183,6 +248,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
         // for prashan
         Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
         praSqlLiteDbHelper.pra_notificationRemove_insert();
+        praSqlLiteDbHelper.close();
+
+
+
 
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop" );
     }

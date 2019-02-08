@@ -50,7 +50,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
     public boolean Ninsert(Long id,String appName, Long value) {
-        Log.d("cdap", " ---Ninsert--");
+       // Log.d("cdap", " ---Ninsert--");
         if (value == 1) {
             return true;
         } else {
@@ -69,7 +69,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
     public String NgetValue(String id) {
-        Log.d("cdap", " ---NgetValue--");
+        //Log.d("cdap", " ---NgetValue--");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from CHA_N_TABLE where N_ID =\"" + id + "\"", null);
@@ -83,7 +83,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
     public boolean NIinsert(String appName, int value) {
-        Log.d("cdap", " ---NIinsert--");
+        //Log.d("cdap", " ---NIinsert--");
         if (value == 1) {
             return true;
         } else {
@@ -102,7 +102,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
     public boolean NIappExisCheck(String appName) {
-        Log.d("cdap", " ---NIappExisCheck--");
+       // Log.d("cdap", " ---NIappExisCheck--");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from CHA_NI_TABLE where NI_APPNAME=\"" + appName + "\"", null);
@@ -117,7 +117,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
     public int NIgetValue(String appName) {
-        Log.d("cdap", " ---NIgetValue--");
+       // Log.d("cdap", " ---NIgetValue--");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from CHA_NI_TABLE where NI_APPNAME=\"" + appName + "\"", null);
@@ -133,7 +133,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
     public boolean NIupdate(String appName, int value) {
-        Log.d("cdap", " ---NIupdate--");
+       // Log.d("cdap", " ---NIupdate--");
 
         if (NIappExisCheck(appName)) {
             //Log.d("cdap", " --------------sssss-----------" +value);
@@ -153,7 +153,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
     public boolean NIRappExisCheck(String appName) {
-        Log.d("cdap", " ---NIappExisCheck--");
+       // Log.d("cdap", " ---NIappExisCheck--");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from CHA_NIR_TABLE where NIR_APPNAME=\"" + appName + "\"", null);
@@ -168,7 +168,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
     public int NIRgetValueYes(String appName) {
-        Log.d("cdap", " ---NIRgetValue--Yes");
+       // Log.d("cdap", " ---NIRgetValue--Yes");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from CHA_NIR_TABLE where NIR_APPNAME=\"" + appName + "\"", null);
@@ -185,7 +185,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
     public int NIRgetValueNo(String appName) {
-        Log.d("cdap", " ---NIRgetValue--No");
+       // Log.d("cdap", " ---NIRgetValue--No");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from CHA_NIR_TABLE where NIR_APPNAME=\"" + appName + "\"", null);

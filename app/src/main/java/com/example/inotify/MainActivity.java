@@ -9,12 +9,31 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.android.volley.Response;
+import com.google.android.gms.common.util.IOUtils;
 import com.google.android.gms.location.ActivityRecognitionClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -104,12 +127,131 @@ public class MainActivity extends AppCompatActivity {
 /*    Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
     mit_sqlLiteDbHelper.mit_appUsageAverage_get();*/
 
-        MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
-        mainUsercharacteristics.getUsercharacteristics(this);
+      //  MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
+        //mainUsercharacteristics.getUsercharacteristics(this);
 
-    Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(mainUsercharacteristics.getUsercharacteristics(this)));
+    //Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(mainUsercharacteristics.getUsercharacteristics(this)));
+       // buidJsonObject();
+        String cc="";
+        try {
+             cc = HttpPost("https://us-central1-inotify23.cloudfunctions.net/hello_http");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.v("inotify","rrrrrrrrrrrrrr"+cc);
+    }
+
+    private String HttpPost(String myUrl) throws IOException, JSONException {
+        String result = "";
+
+        URL url = new URL(myUrl);
+
+        // 1. create HttpURLConnection
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+        // 2. build JSON object
+        JSONObject jsonObject = buidJsonObject();
+
+        // 3. add JSON content to POST request body
+        result=setPostRequestContent(conn, jsonObject);
+
+        // 4. make POST request to the given URL
+        conn.connect();
+
+        // 5. return response message
+        conn.getResponseMessage();
+
+
+        return result;
 
     }
+
+    private JSONObject buidJsonObject() {
+
+        JSONObject jsonData = new JSONObject();
+        try {
+            jsonData.accumulate("area", 3000);
+            jsonData.accumulate("bedrooms",  4.0);
+            jsonData.accumulate("age",  15);
+            jsonData.accumulate("price",  565000);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject jsonData1 = new JSONObject();
+        try {
+            jsonData1.accumulate("area", 2600);
+            jsonData1.accumulate("bedrooms",  3.0);
+            jsonData1.accumulate("age",  20);
+            jsonData1.accumulate("price",  550000);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JSONObject jsonPredict = new JSONObject();
+        try {
+            jsonPredict.accumulate("area", 2600);
+            jsonPredict.accumulate("bedrooms",  3.0);
+            jsonPredict.accumulate("age",  20);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JSONArray jsonArray1= new JSONArray();
+        jsonArray1.put(jsonData);
+        jsonArray1.put(jsonData1);
+
+        JSONArray jsonArray2= new JSONArray();
+        jsonArray2.put(jsonPredict);
+
+
+
+        JSONObject mainObj = new JSONObject();
+        try {
+            mainObj.put("data", jsonArray1);
+            mainObj.put("predict", jsonArray2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return mainObj;
+    }
+
+    private String setPostRequestContent(HttpURLConnection conn, JSONObject jsonObject) throws IOException {
+
+        OutputStream os = conn.getOutputStream();
+
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+        writer.write(jsonObject.toString());
+        Log.i(MainActivity.class.toString(), jsonObject.toString());
+        writer.flush();
+        writer.close();
+
+
+        InputStream in =conn.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        StringBuilder result = new StringBuilder();
+        String line;
+        while((line = reader.readLine()) != null) {
+            result.append(line);
+        }
+        //System.out.println(result.toString());
+
+       // Log.v("inotify","jjjjjjjjjjjjjjjjjjj"+ result.toString());
+        os.close();
+
+        return result.toString();
+    }
+
+
+
 
 
 }
