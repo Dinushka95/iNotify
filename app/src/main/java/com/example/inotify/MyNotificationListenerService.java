@@ -198,9 +198,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
             String notificationtype = "Mobile";
             String cnotificationtype = "";
             if (notificationtype.equals("Mobile")) {
-                cuserchaacteristics = "1";
+                cnotificationtype = "1";
             }
-            snsModel.setNotificationtype(notificationtype);
+            snsModel.setNotificationtype(cnotificationtype);
 
             String appname =apppack;
             String cappname = "";
@@ -220,8 +220,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
 
-            double vtime = Double.valueOf(mainSmartNotificationSystem.getPrediction());
-            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtime );
+            String vtimes = mainSmartNotificationSystem.getPrediction();
+            String tem1 =vtimes.replaceAll("[\\[\\](){}]","");
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+tem1 );
+            double vtimed = Double.valueOf(tem1);
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimed );
 
             //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -238,7 +241,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             }
 */
             boolean sendornotsend;
-            if (vtime<10){sendornotsend = true;}
+            if (vtimed<10){sendornotsend = true;}
             else {sendornotsend = false;
             // run delay function
             }

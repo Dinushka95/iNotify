@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 import java.text.SimpleDateFormat;
@@ -112,7 +113,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
 
                     Din_SNSModel snsModel = new Din_SNSModel();
 
-                    String day = res.getString(2);
+                    String day = res.getString(res.getColumnIndex("SNS_DAY"));
                     String cday = "";
                     if (day.equals("Monday")) {
                         cday = "1";
@@ -135,7 +136,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
                     if (day.equals("Sunday")) {
                         cday = "7";
                     }
-                    snsModel.setDay(cday);
+                    snsModel.setDay(day);
 
                     snsModel.setTime(res.getString(3));
 
@@ -147,7 +148,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
                     if (busyornot.equals("NotBusy")) {
                         cbusyornot = "1";
                     }
-                    snsModel.setBusyornot(cbusyornot);
+                    snsModel.setBusyornot(busyornot);
 
                     String attentiviness = res.getString(5);
                     String cattentiviness = "";
@@ -160,7 +161,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
                     if (attentiviness.equals("high")) {
                         cattentiviness = "3";
                     }
-                    snsModel.setAttentiviness(cattentiviness);
+                    snsModel.setAttentiviness(attentiviness);
 
                     String userchaacteristics = res.getString(6);
                     String cuserchaacteristics = "";
@@ -179,7 +180,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
                     if (userchaacteristics.equals("oldtechnology")) {
                         cuserchaacteristics = "5";
                     }
-                    snsModel.setUserchaacteristics(cuserchaacteristics);
+                    snsModel.setUserchaacteristics(userchaacteristics);
 
                     String notificationtype = res.getString(7);
                     String cnotificationtype = "";
@@ -202,10 +203,11 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
                     if (appname.equals("com.example.dinu.testd")) {
                         cappname = "4";
                     }
-                    snsModel.setAppname(cappname);
+                    snsModel.setAppname(appname);
+
 
                     String vtime = res.getString(9);
-                    snsModel.setAppname(vtime);
+                    snsModel.setVtime(vtime);
 
                     Al.add(snsModel);
 
@@ -213,6 +215,13 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
             }
             res.close();
         }
+
+
+        Log.d("inotify", "AAAAAAAAALLLLLLLLLLLLLLLLLLLLL"+Al.get(0).getDay());
+        Log.d("inotify", "AAAAAAAAALLLLLLLLLLLLLLLLLLLLL"+Al.get(1).getDay());
+
+        Log.d("inotify", "AAAAAAAAALLLLLLLLLLLLLLLLLLLLLlll"+Al.get(0).getTime());
+        Log.d("inotify", "AAAAAAAAALLLLLLLLLLLLLLLLLLLLLlll"+Al.get(1).getTime());
         return Al;
 
     }

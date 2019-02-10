@@ -133,6 +133,23 @@ public class MainActivity extends AppCompatActivity {
     //Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(mainUsercharacteristics.getUsercharacteristics(this)));
        // buidJsonObject();
 
+        //MainAttentiviness mainAttentiviness = new MainAttentiviness();
+        //String attentiviness = mainAttentiviness.getFinalAttentiviness(this,"com.example.dinu.testa");
+       // Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+attentiviness);
+
+        Din_SNSModel snsModel = new Din_SNSModel();
+        snsModel.setDay("1");
+        snsModel.setTime("1111");
+        snsModel.setBusyornot("1");
+        snsModel.setAttentiviness("1");
+        snsModel.setUserchaacteristics("1");
+        snsModel.setNotificationtype("1");
+        snsModel.setAppname("1");
+        MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
+
+        String pp = mainSmartNotificationSystem.getPrediction();
+        Log.v("inotify","pppppppppppppppppppppppppppppppppppppppppppp"+pp);
+
     }
 
 

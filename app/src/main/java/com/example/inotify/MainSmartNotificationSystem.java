@@ -79,10 +79,11 @@ public class MainSmartNotificationSystem {
         din_snsModels = din_sqlLiteDbHelper.getALL();
 
         int count =din_snsModels.size();
-
+        Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAccccccccccccccccccc"+count );
         for (Din_SNSModel x:din_snsModels){
             JSONObject jsonData1 = new JSONObject();
             try {
+                Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+x.getDay().toString());
                 jsonData1.accumulate("sns_day", Integer.valueOf(x.getDay()) );
                 jsonData1.accumulate("sns_time", Integer.valueOf(x.getTime()));
                 jsonData1.accumulate("sns_busyornot", Integer.valueOf(x.getBusyornot()));
@@ -91,6 +92,7 @@ public class MainSmartNotificationSystem {
                 jsonData1.accumulate("sns_notificationtype", Integer.valueOf(x.getNotificationtype()));
                 jsonData1.accumulate("sns_appname", Integer.valueOf(x.getAppname()));
                 jsonData1.accumulate("sns_vtime", Integer.valueOf(x.getVtime()));
+
 
 
             } catch (JSONException e) {
