@@ -46,7 +46,6 @@ public class MainAttentiviness {
         if (finalvalue>.3 && finalvalue<.6){return "medium";}
         if (finalvalue>.6 && finalvalue<1){return "high";}
 
-
         return "error";
 
     }

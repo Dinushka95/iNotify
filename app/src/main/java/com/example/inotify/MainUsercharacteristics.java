@@ -215,8 +215,8 @@ public class MainUsercharacteristics {
 
 
         }
-        //Social-Extraversion
-        //Professional-Conscientiousness
+        //social-Extraversion
+        //professional-Conscientiousness
         //friendliness - 	Neuroticism
         //gaming - openess
         // oldtechnology - agreeableness

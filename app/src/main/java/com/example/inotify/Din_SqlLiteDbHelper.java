@@ -3,11 +3,13 @@ package com.example.inotify;
 import android.content.ContentValues;
 import android.content.Context;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -48,7 +50,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean saveData(String id,String busyornot, String attentiviness, String usercharacteristics,String notificationtype, String appname){
+    public boolean saveData(String id, String busyornot, String attentiviness, String usercharacteristics, String notificationtype, String appname) {
 
         //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
@@ -84,7 +86,7 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void updateData(String id, String vtime){
+    public void updateData(String id, String vtime) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -92,13 +94,128 @@ public class Din_SqlLiteDbHelper extends SQLiteOpenHelper {
         ContentValues newValues = new ContentValues();
         newValues.put(SNS_VTIME, vtime);
 
-        db.update(DIN_SNS_TABLE, newValues, "sns_id="+id, null);
+        db.update(DIN_SNS_TABLE, newValues, "sns_id=" + id, null);
 
     }
 
-    public void getJSONDataALL(){
-    }
+    public ArrayList<Din_SNSModel> getALL() {
 
+        ArrayList<Din_SNSModel> Al = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from din_SNS_TABLE", null);
+
+        if (res != null) {
+
+            if (res.moveToFirst()) {
+                do {
+
+                    Din_SNSModel snsModel = new Din_SNSModel();
+
+                    String day = res.getString(2);
+                    String cday = "";
+                    if (day.equals("Monday")) {
+                        cday = "1";
+                    }
+                    if (day.equals("Tuesday")) {
+                        cday = "2";
+                    }
+                    if (day.equals("Wednesday")) {
+                        cday = "3";
+                    }
+                    if (day.equals("Thursday")) {
+                        cday = "4";
+                    }
+                    if (day.equals("Friday")) {
+                        cday = "5";
+                    }
+                    if (day.equals("Saturday")) {
+                        cday = "6";
+                    }
+                    if (day.equals("Sunday")) {
+                        cday = "7";
+                    }
+                    snsModel.setDay(cday);
+
+                    snsModel.setTime(res.getString(3));
+
+                    String busyornot = res.getString(4);
+                    String cbusyornot = "";
+                    if (busyornot.equals("Busy")) {
+                        cbusyornot = "1";
+                    }
+                    if (busyornot.equals("NotBusy")) {
+                        cbusyornot = "1";
+                    }
+                    snsModel.setBusyornot(cbusyornot);
+
+                    String attentiviness = res.getString(5);
+                    String cattentiviness = "";
+                    if (attentiviness.equals("low")) {
+                        cattentiviness = "1";
+                    }
+                    if (attentiviness.equals("medium")) {
+                        cattentiviness = "2";
+                    }
+                    if (attentiviness.equals("high")) {
+                        cattentiviness = "3";
+                    }
+                    snsModel.setAttentiviness(cattentiviness);
+
+                    String userchaacteristics = res.getString(6);
+                    String cuserchaacteristics = "";
+                    if (userchaacteristics.equals("social")) {
+                        cuserchaacteristics = "1";
+                    }
+                    if (userchaacteristics.equals("professional")) {
+                        cuserchaacteristics = "2";
+                    }
+                    if (userchaacteristics.equals("friendliness")) {
+                        cuserchaacteristics = "3";
+                    }
+                    if (userchaacteristics.equals("gaming")) {
+                        cuserchaacteristics = "4";
+                    }
+                    if (userchaacteristics.equals("oldtechnology")) {
+                        cuserchaacteristics = "5";
+                    }
+                    snsModel.setUserchaacteristics(cuserchaacteristics);
+
+                    String notificationtype = res.getString(7);
+                    String cnotificationtype = "";
+                    if (notificationtype.equals("Mobile")) {
+                        cuserchaacteristics = "1";
+                    }
+                    snsModel.setNotificationtype(notificationtype);
+
+                    String appname = res.getString(8);
+                    String cappname = "";
+                    if (appname.equals("com.example.dinu.testa")) {
+                        cappname = "1";
+                    }
+                    if (appname.equals("com.example.dinu.testb")) {
+                        cappname = "2";
+                    }
+                    if (appname.equals("com.example.dinu.testc")) {
+                        cappname = "3";
+                    }
+                    if (appname.equals("com.example.dinu.testd")) {
+                        cappname = "4";
+                    }
+                    snsModel.setAppname(cappname);
+
+                    String vtime = res.getString(9);
+                    snsModel.setAppname(vtime);
+
+                    Al.add(snsModel);
+
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return Al;
+
+    }
 
 
 }

@@ -16,6 +16,7 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -118,6 +119,110 @@ public class MyNotificationListenerService extends NotificationListenerService {
             /////////////////////////////////////////////////////////////////////////////////////////////////
             // dinu
             // run ML prediction function and get predicted notification view time
+            Din_SNSModel snsModel = new Din_SNSModel();
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(Integer.valueOf(new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date())),
+                    (Integer.valueOf(new SimpleDateFormat("MM", Locale.getDefault()).format(new Date())) - 1),
+                    Integer.valueOf(new SimpleDateFormat("dd", Locale.getDefault()).format(new Date())));
+            String day = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+
+            String cday = "";
+            if (day.equals("Monday")) {
+                cday = "1";
+            }
+            if (day.equals("Tuesday")) {
+                cday = "2";
+            }
+            if (day.equals("Wednesday")) {
+                cday = "3";
+            }
+            if (day.equals("Thursday")) {
+                cday = "4";
+            }
+            if (day.equals("Friday")) {
+                cday = "5";
+            }
+            if (day.equals("Saturday")) {
+                cday = "6";
+            }
+            if (day.equals("Sunday")) {
+                cday = "7";
+            }
+            snsModel.setDay(cday);
+
+            snsModel.setTime( new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date()));
+
+
+            String cbusyornot = "";
+            if (busyornot.equals("Busy")) {
+                cbusyornot = "1";
+            }
+            if (busyornot.equals("NotBusy")) {
+                cbusyornot = "1";
+            }
+            snsModel.setBusyornot(cbusyornot);
+
+
+            String cattentiviness = "";
+            if (attentiviness.equals("low")) {
+                cattentiviness = "1";
+            }
+            if (attentiviness.equals("medium")) {
+                cattentiviness = "2";
+            }
+            if (attentiviness.equals("high")) {
+                cattentiviness = "3";
+            }
+            snsModel.setAttentiviness(cattentiviness);
+
+            String userchaacteristics = userCharacteistics;
+            String cuserchaacteristics = "";
+            if (userchaacteristics.equals("social")) {
+                cuserchaacteristics = "1";
+            }
+            if (userchaacteristics.equals("professional")) {
+                cuserchaacteristics = "2";
+            }
+            if (userchaacteristics.equals("friendliness")) {
+                cuserchaacteristics = "3";
+            }
+            if (userchaacteristics.equals("gaming")) {
+                cuserchaacteristics = "4";
+            }
+            if (userchaacteristics.equals("oldtechnology")) {
+                cuserchaacteristics = "5";
+            }
+            snsModel.setUserchaacteristics(cuserchaacteristics);
+
+            String notificationtype = "Mobile";
+            String cnotificationtype = "";
+            if (notificationtype.equals("Mobile")) {
+                cuserchaacteristics = "1";
+            }
+            snsModel.setNotificationtype(notificationtype);
+
+            String appname =apppack;
+            String cappname = "";
+            if (appname.equals("com.example.dinu.testa")) {
+                cappname = "1";
+            }
+            if (appname.equals("com.example.dinu.testb")) {
+                cappname = "2";
+            }
+            if (appname.equals("com.example.dinu.testc")) {
+                cappname = "3";
+            }
+            if (appname.equals("com.example.dinu.testd")) {
+                cappname = "4";
+            }
+            snsModel.setAppname(cappname);
+
+            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
+
+            double vtime = Double.valueOf(mainSmartNotificationSystem.getPrediction());
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtime );
+
             //////////////////////////////////////////////////////////////////////////////////////////////////
 
            // get the old data
@@ -126,19 +231,22 @@ public class MyNotificationListenerService extends NotificationListenerService {
             // api request
             // read respone
 
- /*           if(respone>acurracy){
+ /*         if(respone>acurracy){
                 not sent get delay;
             }else {
                 semd notification
             }
 */
+            boolean sendornotsend;
+            if (vtime<10){sendornotsend = true;}
+            else {sendornotsend = false;
+            // run delay function
+            }
 
 
 
 
-
-
-            if (true) {
+            if (sendornotsend) {
 
                 //dave to db
                 Din_SqlLiteDbHelper din_sqlLiteDbHelper = new Din_SqlLiteDbHelper(this);
