@@ -1,16 +1,23 @@
 package com.example.inotify;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
+
+import static com.example.inotify.MainActivity.MainUsercharacteristics_DebuggerLogger;
 
 public class MainUsercharacteristics {
 
     public String getUsercharacteristics(Context context){
 
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--Started---");
+        }
+
         Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(context);
 
-        long appListCountFixedvalue =75;
+        long appListCountFixedvalue =75; // move it to main entr point and make it a static variable
 
         long appUsageCountAvg =mit_sqlLiteDbHelper.mit_appUsageAverage_get();
         long appListCountAvg =mit_sqlLiteDbHelper.mit_applistAverage_get();
@@ -31,6 +38,26 @@ public class MainUsercharacteristics {
         long chargetimeLast =mit_sqlLiteDbHelper.mit_chargeLast_get();
         long socialmediacAppCountLast =mit_sqlLiteDbHelper.mit_applistsocialmediaLast_get();
 
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--appUsageCountAvg---"+appUsageCountAvg);
+            Log.d("inotify", "Main-Usercharacteristics--appUsageCountLast---"+appUsageCountLast);
+            Log.d("inotify", "Main-Usercharacteristics--appListCountAvg---"+appListCountAvg);
+            Log.d("inotify", "Main-Usercharacteristics--appListCountLast---"+appListCountLast);
+            Log.d("inotify", "Main-Usercharacteristics--contactCountAvg---"+contactCountAvg);
+            Log.d("inotify", "Main-Usercharacteristics--contactCountLast---"+contactCountLast);
+            Log.d("inotify", "Main-Usercharacteristics--screenTimeCountAvg---"+screenTimeCountAvg);
+            Log.d("inotify", "Main-Usercharacteristics--screenTimeCountLast---"+screenTimeCountLast);
+            Log.d("inotify", "Main-Usercharacteristics--calldurationCountAvg---"+calldurationCountAvg);
+            Log.d("inotify", "Main-Usercharacteristics--calldurationCountLast---"+calldurationCountLast);
+            Log.d("inotify", "Main-Usercharacteristics--calendarCountAvg---"+calendarCountAvg);
+            Log.d("inotify", "Main-Usercharacteristics--calendarCountLast---"+calendarCountLast);
+            Log.d("inotify", "Main-Usercharacteristics--chargetimeAvg---"+chargetimeAvg);
+            Log.d("inotify", "Main-Usercharacteristics--chargetimeLast---"+chargetimeLast);
+            Log.d("inotify", "Main-Usercharacteristics--socialmediacAppCountAvg---"+socialmediacAppCountAvg);
+            Log.d("inotify", "Main-Usercharacteristics--socialmediacAppCountLast---"+socialmediacAppCountLast);
+
+
+        }
 
         String appUsageCountStatue ="error";
         String appListCountStatue ="error";
@@ -71,7 +98,9 @@ public class MainUsercharacteristics {
 
         opennessFinal=(openness_WL1+openness_WL2+openness_WL3)/100;
 
-
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--opennessFinal---"+opennessFinal);
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////
         // neuroticism
 
@@ -87,6 +116,9 @@ public class MainUsercharacteristics {
 
         neuroticismFinal=(neuroticism_WL1+neuroticism_WL2+neuroticism_WL3)/100;
 
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--neuroticismFinal---"+neuroticismFinal);
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////
         // extraversion
 
@@ -106,6 +138,9 @@ public class MainUsercharacteristics {
 
         extraversionFinal=(extraversion_WL1+extraversion_WL2+extraversion_WL3+extraversion_WL4+extraversion_WL5)/100;
 
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--extraversionFinal---"+extraversionFinal);
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////
         // consientiousness
 
@@ -123,6 +158,9 @@ public class MainUsercharacteristics {
 
         consientiousnessFinal=(consientiousness_WL1+consientiousness_WL2+consientiousness_WL3+consientiousness_WL4)/100;
 
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--consientiousnessFinal---"+consientiousnessFinal);
+        }
         //////////////////////////////////////////////////////////////////////////////////////////////
         // areeableness
 
@@ -141,6 +179,10 @@ public class MainUsercharacteristics {
         if(calldurationCountStatue.equals("high")){consientiousness_WL4=30;}else{consientiousness_WL4=0;}
 
         areeablenessFinal=(areeableness_WL1+areeableness_WL2+areeableness_WL3+areeableness_WL4+areeableness_WL5)/100;
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--areeablenessFinal---"+areeablenessFinal);
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //save all sates to db
         ArrayList<Double> ad = new ArrayList<>();
@@ -221,6 +263,13 @@ public class MainUsercharacteristics {
         //gaming - openess
         // oldtechnology - agreeableness
 
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--Final convertion from big 5 to app category---"+x);
+        }
+
+        if(MainUsercharacteristics_DebuggerLogger){
+            Log.d("inotify", "Main-Usercharacteristics--Stop---");
+        }
 
         return x;
     }

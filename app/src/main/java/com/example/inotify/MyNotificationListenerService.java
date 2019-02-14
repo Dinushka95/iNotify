@@ -44,10 +44,14 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
         Log.d("inotify", "Main-MyNotificationListenerService--preLoop-Ticker---"+ticker );
 
+        Log.d("inotify", "Main-MyNotificationListenerService--packageName---"+sbn.getPackageName());
+
         if ((sbn.getPackageName().equals("com.example.dinu.testa") ||
                 sbn.getPackageName().equals("com.example.dinu.testb") ||
                 sbn.getPackageName().equals("com.example.dinu.testc") ||
-                sbn.getPackageName().equals("com.example.dinu.testd"))) {
+                sbn.getPackageName().equals("com.example.dinu.testd") ||
+                sbn.getPackageName().equals("com.google.android.apps.messaging"))
+                ) {
 
 
             pack = sbn.getPackageName();
@@ -57,7 +61,6 @@ public class MyNotificationListenerService extends NotificationListenerService {
             title = extras.getString("android.title");
             text = extras.getCharSequence("android.text").toString();
 
-            Log.d("inotify", "Main-MyNotificationListenerService--package name---"+pack);
             Log.d("inotify", "Main-MyNotificationListenerService--nid---"+nid);
             Log.d("inotify", "Main-MyNotificationListenerService--title---"+title);
             Log.d("inotify", "Main-MyNotificationListenerService--text---"+text);
@@ -98,6 +101,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             MainBusyOrNotPredict mainBusyOrNotPredict =new MainBusyOrNotPredict();
             String busyornot = mainBusyOrNotPredict.GetNewPrediction(this,currentactivity,currentlocation);
+            Log.d("inotify", "Main-MyNotificationListenerService--busyornot---"+busyornot );
+
 
             Log.d("inotify", "Main-MyNotificationListenerService--currentactivity---"+currentactivity );
             Log.d("inotify", "Main-MyNotificationListenerService--currentlocation---"+currentlocation );
@@ -174,6 +179,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             if (attentiviness.equals("high")) {
                 cattentiviness = "3";
             }
+
             snsModel.setAttentiviness(cattentiviness);
 
             String userchaacteristics = userCharacteistics;
@@ -216,13 +222,18 @@ public class MyNotificationListenerService extends NotificationListenerService {
             if (appname.equals("com.example.dinu.testd")) {
                 cappname = "4";
             }
+            if (appname.equals("com.google.android.apps.messaging")) {
+                cappname = "5";
+            }
+
             snsModel.setAppname(cappname);
 
-            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
+/*            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
 
             String vtimes = mainSmartNotificationSystem.getPrediction();
+          //  Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimes );
             String tem1 =vtimes.replaceAll("[\\[\\](){}]","");
-            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+tem1 );
+          //  Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+tem1 );
             double vtimed = Double.valueOf(tem1);
             Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimed );
 
@@ -234,20 +245,24 @@ public class MyNotificationListenerService extends NotificationListenerService {
             // api request
             // read respone
 
- /*         if(respone>acurracy){
+*//*            if(respone>acurracy){
                 not sent get delay;
             }else {
-                semd notification
-            }
-*/
+                semd notification;
+            }*//*
+
             boolean sendornotsend;
-            if (vtimed<10){sendornotsend = true;}
+            if (vtimed<600000){sendornotsend = true;}
             else {sendornotsend = false;
             // run delay function
             }
 
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimed );
 
+            */
 
+            boolean sendornotsend;
+           sendornotsend = true;
 
             if (sendornotsend) {
 
@@ -276,9 +291,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 NotificationCompat.Builder mBuilder = new NotificationCompat
                         .Builder(this, "inotifyapp")
-                        .setSmallIcon(R.drawable.ic_launcher_background)
                         .setContentTitle(title + "-iNotify")
                         .setContentText(text)
+                        .setSmallIcon(android.R.drawable.ic_notification_clear_all)
                         .setTicker(id)
                         .setAutoCancel(true)
                         .setDefaults(Notification.DEFAULT_ALL)
@@ -295,10 +310,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             }
             Log.d("inotify", "Main-MyNotificationListenerService--un smart notification--stop----" );
-
         }
-
-
 
     }
 

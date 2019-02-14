@@ -37,6 +37,17 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    ////////////////////////////////////////////////////////
+    /////    Debugger Logger switch                 ////////
+    ////////////////////////////////////////////////////////
+
+    public static final boolean  MainUsercharacteristics_DebuggerLogger = true;
+    public static final boolean  MainAttentiviness_DebuggerLogger = true;
+
+
+    /////////////////////////////////////////////////////////
+
     public static final int iNotify_SERVEC_ID = 555;
     public static final int MY_LOCATION_LISTENER_SERVEC_ID = 210;
     public static final int MY_BUSYORNOT_SERVEC_ID = 280;
@@ -45,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static Double home_Log = 79.9652678;
     public static Double home_Lat = 6.8598528;
-    public static Double work_Log = 79.973109;
-    public static Double work_Lat = 6.914578;
+    public static Double work_Log = 79.973181;
+    public static Double work_Lat = 6.9148957;
     public static Double accuracy = .0001;
 
     @Override
@@ -151,11 +162,4 @@ public class MainActivity extends AppCompatActivity {
         Log.v("inotify","pppppppppppppppppppppppppppppppppppppppppppp"+pp);
 
     }
-
-
-
-
-
-
-
 }

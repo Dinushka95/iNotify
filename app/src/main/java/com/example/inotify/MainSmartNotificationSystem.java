@@ -38,7 +38,7 @@ public class MainSmartNotificationSystem {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.v("inotify","rrrrrrrrrrrrrr"+cc);
+        Log.d("inotify", "Main-MainSmartNotificationSystem--Predicted output from ML model-Raw value---"+cc);
 
         return cc;
     }
@@ -79,19 +79,19 @@ public class MainSmartNotificationSystem {
         din_snsModels = din_sqlLiteDbHelper.getALL();
 
         int count =din_snsModels.size();
-        Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAccccccccccccccccccc"+count );
+        Log.d("inotify", "Main-MainSmartNotificationSystem--SNS model data from DB row count---"+count);
         for (Din_SNSModel x:din_snsModels){
             JSONObject jsonData1 = new JSONObject();
             try {
-                Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+x.getDay().toString());
-                jsonData1.accumulate("sns_day", Integer.valueOf(x.getDay()) );
-                jsonData1.accumulate("sns_time", Integer.valueOf(x.getTime()));
-                jsonData1.accumulate("sns_busyornot", Integer.valueOf(x.getBusyornot()));
-                jsonData1.accumulate("sns_attentiviness", Integer.valueOf(x.getAttentiviness()));
-                jsonData1.accumulate("sns_userchaacteristics", Integer.valueOf(x.getUserchaacteristics()));
-                jsonData1.accumulate("sns_notificationtype", Integer.valueOf(x.getNotificationtype()));
-                jsonData1.accumulate("sns_appname", Integer.valueOf(x.getAppname()));
-                jsonData1.accumulate("sns_vtime", Integer.valueOf(x.getVtime()));
+               // Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+x.getDay().toString());
+                jsonData1.accumulate("sns_day", x.getDay());
+                jsonData1.accumulate("sns_time", x.getTime());
+                jsonData1.accumulate("sns_busyornot", x.getBusyornot());
+                jsonData1.accumulate("sns_attentiviness", x.getAttentiviness());
+                jsonData1.accumulate("sns_userchaacteristics", x.getUserchaacteristics());
+                jsonData1.accumulate("sns_notificationtype", x.getNotificationtype());
+                jsonData1.accumulate("sns_appname", x.getAppname());
+                jsonData1.accumulate("sns_vtime", x.getVtime());
 
 
 
@@ -117,8 +117,6 @@ public class MainSmartNotificationSystem {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
 
 
 
