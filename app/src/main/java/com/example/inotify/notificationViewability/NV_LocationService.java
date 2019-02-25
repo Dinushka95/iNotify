@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.notificationViewability;
 
 
 
@@ -7,7 +7,7 @@ import android.app.job.JobService;
 import android.content.Intent;
 import android.location.Location;
 
-public class Pra_LocationService extends JobService implements MyLocationUpdatesComponent.ILocationProvider{
+public class NV_LocationService extends JobService implements MyLocationUpdatesComponent.ILocationProvider {
 
     private MyLocationUpdatesComponent myLocationUpdatesComponent;
 
@@ -48,10 +48,10 @@ public class Pra_LocationService extends JobService implements MyLocationUpdates
     public void onLocationUpdate(Location location) {
 
 
-        Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
+        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
         String log = String.valueOf(location.getLongitude());
         String lat = String.valueOf(location.getLatitude());
-        praSqlLiteDbHelper.pra_location_insert(log,lat);
+        praSqlLiteDbHelper.location_insert(log,lat);
         praSqlLiteDbHelper.close();
         //send intent
         //TODO - 2  future needed for situationist upload data

@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import java.text.DateFormat;
+import com.example.inotify.userCharacteristics.UC_SqlLiteDbHelper;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,8 +52,8 @@ public class All_ScreenLock extends BroadcastReceiver {
             long difference = date2.getTime() - date1.getTime();
             System.out.println(difference/1000);
 
-            Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(context);
-            mit_sqlLiteDbHelper.mit_screentime_insert(String.valueOf(difference));
+            UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(context);
+            UC_sqlLiteDbHelper.screentime_insert(String.valueOf(difference));
 
 
 

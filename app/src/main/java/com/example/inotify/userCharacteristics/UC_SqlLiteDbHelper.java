@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.userCharacteristics;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,18 +6,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
+public class UC_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "AppInotify.db";
 
     public static final String DATE = "date";
+
     public static final String APPNAME = "appname";
+
     public static final String COUNT = "count";
 
     public static final String MIT_CHARGE_TABLE = "mit_charge_table";
@@ -42,17 +42,37 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
 
-    public Mit_SqlLiteDbHelper(Context context) {
+    public UC_SqlLiteDbHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        db.execSQL("create table " + MIT_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
+        db.execSQL("create table " + MIT_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
+        db.execSQL("create table " + MIT_CALLDURATION_TABLE  + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
+        db.execSQL("create table " + MIT_CALENDEREVENTCOUNT_TABLE  + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        db.execSQL("create table " + MIT_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
+        db.execSQL("create table " + MIT_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
+        db.execSQL("create table " + MIT_CALLDURATION_TABLE  + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
+        db.execSQL("create table " + MIT_CALENDEREVENTCOUNT_TABLE  + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + MIT_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+
 
     }
 
@@ -73,7 +93,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean mit_appListcount_insert(String count) {
+    public boolean appListcount_insert(String count) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -90,7 +110,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean mit_appusagecount_insert(String count) {
+    public boolean appusagecount_insert(String count) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -106,7 +126,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean mit_contactCount_insert(String count) {
+    public boolean contactCount_insert(String count) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -122,7 +142,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean mit_screentime_insert(String time) {
+    public boolean screentime_insert(String time) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -139,7 +159,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean mit_callduration_insert(String time) {
+    public boolean callduration_insert(String time) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -158,7 +178,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean mit_calenderEventCount_insert(String count) {
+    public boolean calenderEventCount_insert(String count) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -174,7 +194,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean mit_appListSocialMediacount_insert(String count) {
+    public boolean appListSocialMediacount_insert(String count) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -193,7 +213,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
 
-    public long mit_appUsageAverage_get() {
+    public long appUsageAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_usagecount_table", null);
@@ -208,7 +228,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_applistAverage_get() {
+    public long applistAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_applistcount_table", null);
@@ -223,7 +243,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_contactsAverage_get() {
+    public long contactsAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_contactcount_table", null);
@@ -238,7 +258,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_screentimeAverage_get() {
+    public long screentimeAverage_get() {
 
         //TODO - need to sumation of day and the get average of that for days
         SQLiteDatabase db = this.getReadableDatabase();
@@ -254,7 +274,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_calldurationAverage_get() {
+    public long calldurationAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select avg(TIME) as avg from mit_callduration_table", null);
@@ -269,7 +289,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_calendereventAverage_get() {
+    public long calendereventAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_calendereventcount_table", null);
@@ -284,7 +304,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_chargeAverage_get() {
+    public long chargeAverage_get() {
 
         //TODO - need to sumation of day and the get average of that for days
         //same for charging above need correction
@@ -301,7 +321,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_applistsocialmediaAverage_get() {
+    public long applistsocialmediaAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_applistsocialmediacount_table", null);
@@ -318,7 +338,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public long mit_appUsageLast_get() {
+    public long appUsageLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select COUNT from mit_usagecount_table", null);
@@ -333,7 +353,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_applistLast_get() {
+    public long applistLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select COUNT  from mit_applistcount_table", null);
@@ -348,7 +368,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_contactsLast_get() {
+    public long contactsLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select COUNT from mit_contactcount_table", null);
@@ -363,7 +383,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_screentimeLast_get() {
+    public long screentimeLast_get() {
 
         //TODO - need to sumation of day and the get average of that for days
         SQLiteDatabase db = this.getReadableDatabase();
@@ -379,7 +399,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_calldurationLast_get() {
+    public long calldurationLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from mit_callduration_table", null);
@@ -394,7 +414,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_calendereventLast_get() {
+    public long calendereventLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select COUNT from mit_calendereventcount_table", null);
@@ -409,7 +429,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_chargeLast_get() {
+    public long chargeLast_get() {
 
         //TODO - need to sumation of day and the get average of that for days
         //same for charging above need correction
@@ -426,7 +446,7 @@ public class Mit_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public long mit_applistsocialmediaLast_get() {
+    public long applistsocialmediaLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select COUNT from mit_applistsocialmediacount_table", null);

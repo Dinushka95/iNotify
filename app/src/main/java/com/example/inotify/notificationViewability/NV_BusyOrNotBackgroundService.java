@@ -1,8 +1,7 @@
-package com.example.inotify;
+package com.example.inotify.notificationViewability;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import static com.example.inotify.MainActivity.home_Log;
 import static com.example.inotify.MainActivity.work_Lat;
 import static com.example.inotify.MainActivity.work_Log;
 
-public class Pra_BusyOrNotBackgroundService extends JobService {
+public class NV_BusyOrNotBackgroundService extends JobService {
 
     @Override
     public void onCreate() {
@@ -41,14 +40,14 @@ public class Pra_BusyOrNotBackgroundService extends JobService {
 
 
         // get activity from db
-        Pra_SqlLiteDbHelper praSqlLiteDbHelper1 = new Pra_SqlLiteDbHelper(this);
-        String CurrentMaxActivity = praSqlLiteDbHelper1.pra_activity_get();
+        NV_SqlLiteDbHelper praSqlLiteDbHelper1 = new NV_SqlLiteDbHelper(this);
+        String CurrentMaxActivity = praSqlLiteDbHelper1.activity_get();
 
 
         //double distance = Math.hypot(x1-x2, y1-y2);
         // get location from db and map to home work or unknown
 
-         ArrayList<Double> loc= praSqlLiteDbHelper1.pra_location_get();
+         ArrayList<Double> loc= praSqlLiteDbHelper1.location_get();
          double log=loc.get(0);
          double lat = loc.get(1);
 
@@ -71,7 +70,7 @@ public class Pra_BusyOrNotBackgroundService extends JobService {
         // get busy or not from notification remove table
 
         String CurrentBusyorNot="NotBusy";
-        int notificationRemovedCount = praSqlLiteDbHelper1.pra_notificationRemove_get();
+        int notificationRemovedCount = praSqlLiteDbHelper1.notificationRemove_get();
 
      //   Log.d("inotify","NNNNNNNNNNNNNRRRRRRRRRRREEEEEEE"+notificationRemovedCount);
 
@@ -79,8 +78,8 @@ public class Pra_BusyOrNotBackgroundService extends JobService {
         else {CurrentBusyorNot="Busy";}
 
         //save to table
-        Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
-        praSqlLiteDbHelper.pra_BusyOrNot_insert(time,dayofweek,CurrentMaxActivity,CurrentLocation,CurrentBusyorNot);
+        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
+        praSqlLiteDbHelper.busyOrNot_insert(time,dayofweek,CurrentMaxActivity,CurrentLocation,CurrentBusyorNot);
 
         praSqlLiteDbHelper.close();
         praSqlLiteDbHelper1.close();

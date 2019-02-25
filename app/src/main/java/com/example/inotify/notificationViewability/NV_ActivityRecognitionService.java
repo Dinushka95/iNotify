@@ -1,20 +1,15 @@
-package com.example.inotify;
+package com.example.inotify.notificationViewability;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+public class NV_ActivityRecognitionService extends IntentService {
 
-public class Pra_ActivityRecognitionService extends IntentService {
-
-    public Pra_ActivityRecognitionService() {
-        super("Pra_ActivityRecognitionService");
+    public NV_ActivityRecognitionService() {
+        super("NV_ActivityRecognitionService");
     }
 
     @Override
@@ -24,8 +19,8 @@ public class Pra_ActivityRecognitionService extends IntentService {
         String type = String.valueOf(result.getMostProbableActivity().getType());
         String confidance = String.valueOf(result.getMostProbableActivity().getConfidence());
       //  Log.d("inotifyLog", "Activity recognition ==" + type + confidance);
-        Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
-        praSqlLiteDbHelper.pra_activity_insert(type,confidance);
+        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
+        praSqlLiteDbHelper.activity_insert(type,confidance);
         praSqlLiteDbHelper.close();
 
 

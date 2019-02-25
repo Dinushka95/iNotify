@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.notificationViewability;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class Pra_CalenderEvent {
+public class NV_CalenderEvent {
 
 
     public boolean getcalanderEvent(Context context){

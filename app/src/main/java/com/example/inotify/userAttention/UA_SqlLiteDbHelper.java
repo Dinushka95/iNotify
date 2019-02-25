@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.userAttention;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
+public class UA_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "AppInotify.db";
 
@@ -30,7 +30,7 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
 
-    public Cha_SqlLiteDbHelper(Context context) {
+    public UA_SqlLiteDbHelper(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
     }
@@ -38,14 +38,27 @@ public class Cha_SqlLiteDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-       // db.execSQL("create table " + CHA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
-       // db.execSQL("create table " + CHA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
+        db.execSQL("create table " + CHA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
+        db.execSQL("create table " + CHA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
 
-
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(1,'com.example.dinu.testa',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(2,'com.example.dinu.testb',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(3,'com.example.dinu.testc',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(4,'com.example.dinu.testd',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        db.execSQL("create table " + CHA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
+        db.execSQL("create table " + CHA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
+
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(1,'com.example.dinu.testa',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(2,'com.example.dinu.testb',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(3,'com.example.dinu.testc',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(4,'com.example.dinu.testd',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");
 
     }
 

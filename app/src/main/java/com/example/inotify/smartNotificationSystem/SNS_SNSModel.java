@@ -1,6 +1,6 @@
-package com.example.inotify;
+package com.example.inotify.smartNotificationSystem;
 
-public class Din_SNSModel {
+public class SNS_SNSModel {
 
     String day;
     String time;
@@ -11,10 +11,10 @@ public class Din_SNSModel {
     String appname;
     String vtime;
 
-    public Din_SNSModel() {
+    public SNS_SNSModel() {
     }
 
-    public Din_SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname) {
+    public SNS_SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname) {
         this.day = day;
         this.time = time;
         this.busyornot = busyornot;
@@ -24,7 +24,7 @@ public class Din_SNSModel {
         this.appname = appname;
     }
 
-    public Din_SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname, String vtime) {
+    public SNS_SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname, String vtime) {
         this.day = day;
         this.time = time;
         this.busyornot = busyornot;

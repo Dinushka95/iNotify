@@ -1,8 +1,11 @@
-package com.example.inotify;
+package com.example.inotify.userAttention;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+
+import com.example.inotify.userAttention.UA_SqlLiteDbHelper;
+import com.example.inotify.userAttention.UA_RingerMode;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.inotify.MainActivity.MainAttentiviness_DebuggerLogger;
@@ -15,15 +18,15 @@ public class MainAttentiviness {
             Log.d("inotify", "Main-Attentiviness--Started---");
         }
 
-        String ringerMode = new Cha_RingerMode().getRingerMode(context);
+        String ringerMode = new UA_RingerMode().getRingerMode(context);
         SharedPreferences prefs = context.getSharedPreferences("lockscreen", MODE_PRIVATE);
         String isScreenOn = prefs.getString("screen", null);
 
-        Cha_SqlLiteDbHelper cha_sqlLiteDbHelper = new Cha_SqlLiteDbHelper(context);
+        UA_SqlLiteDbHelper attention_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
 
-        int total_important_value = cha_sqlLiteDbHelper.NIRgetTotalvalue();
+        int total_important_value = attention_sqlLiteDbHelper.NIRgetTotalvalue();
 
-        int AppINV = cha_sqlLiteDbHelper.NIgetValue(appName);
+        int AppINV = attention_sqlLiteDbHelper.NIgetValue(appName);
 
         double W_r=0;
         double W_sl=0;

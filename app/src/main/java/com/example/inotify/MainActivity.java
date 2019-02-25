@@ -1,6 +1,5 @@
 package com.example.inotify;
 
-import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -13,32 +12,17 @@ import android.os.StrictMode;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
-import com.android.volley.Response;
-import com.google.android.gms.common.util.IOUtils;
+import com.example.inotify.notificationViewability.NV_ActivityRecognitionService;
+import com.example.inotify.notificationViewability.NV_BusyOrNotBackgroundService;
+import com.example.inotify.notificationViewability.NV_LocationService;
+import com.example.inotify.userCharacteristics.UC_all_service;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ComponentName componentName = new ComponentName(MainActivity.this, Pra_LocationService.class);
+        ComponentName componentName = new ComponentName(MainActivity.this, NV_LocationService.class);
         JobInfo info = new JobInfo.Builder(MY_LOCATION_LISTENER_SERVEC_ID, componentName)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -92,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         int resultCode = scheduler.schedule(info);
 
 
-        ComponentName componentName1 = new ComponentName(MainActivity.this, Pra_BusyOrNotBackgroundService.class);
+        ComponentName componentName1 = new ComponentName(MainActivity.this, NV_BusyOrNotBackgroundService.class);
         JobInfo info1 = new JobInfo.Builder(MY_BUSYORNOT_SERVEC_ID, componentName1)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -104,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         int resultCode1 = scheduler1.schedule(info1);
 
 
-        ComponentName componentName2 = new ComponentName(MainActivity.this, com.example.inotify.Mit_all_service.class);
+        ComponentName componentName2 = new ComponentName(MainActivity.this, UC_all_service.class);
         JobInfo info2 = new JobInfo.Builder(MY_MIT_ALL_SERVEC_ID, componentName2)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -128,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private PendingIntent getActivityDetectionPendingIntent() {
-        return PendingIntent.getService(this, 30, new Intent(this, Pra_ActivityRecognitionService.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getService(this, 30, new Intent(this, NV_ActivityRecognitionService.class), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     public void cancelAllJobs(View view) {
@@ -137,15 +121,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getvalue(View view) {
-    /*Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(this);
-    praSqlLiteDbHelper.pra_location_get();*/
+    /*NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
+    praSqlLiteDbHelper.location_get();*/
 
 
-/*    Cha_SqlLiteDbHelper cha_sqlLiteDbHelper = new Cha_SqlLiteDbHelper(this);
+/*    UA_SqlLiteDbHelper cha_sqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
     cha_sqlLiteDbHelper.NIRgetTotalvalue();*/
 
-/*    Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
-    mit_sqlLiteDbHelper.mit_appUsageAverage_get();*/
+/*    UC_SqlLiteDbHelper mit_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
+    mit_sqlLiteDbHelper.appUsageAverage_get();*/
 
       //  MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
         //mainUsercharacteristics.getUsercharacteristics(this);
@@ -157,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         //String attentiviness = mainAttentiviness.getFinalAttentiviness(this,"com.example.dinu.testa");
        // Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+attentiviness);
 /*
-        Din_SNSModel snsModel = new Din_SNSModel();
+        SNS_SNSModel snsModel = new SNS_SNSModel();
         snsModel.setDay("1");
         snsModel.setTime("1111");
         snsModel.setBusyornot("1");

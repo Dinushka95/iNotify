@@ -1,7 +1,6 @@
-package com.example.inotify;
+package com.example.inotify.notificationViewability;
 
 import android.location.Location;
-import android.util.Log;
 import android.content.Context;
 import android.os.Looper;
 import android.support.annotation.NonNull;

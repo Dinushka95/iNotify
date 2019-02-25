@@ -1,19 +1,16 @@
-package com.example.inotify;
+package com.example.inotify.userCharacteristics;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class Mit_all_service extends JobService {
+public class UC_all_service extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
@@ -62,9 +59,9 @@ public class Mit_all_service extends JobService {
         }*/
         count =packages.size();
 
-        Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
-        mit_sqlLiteDbHelper.mit_appListcount_insert(String.valueOf(count));
-        mit_sqlLiteDbHelper.close();
+        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
+        UC_sqlLiteDbHelper.appListcount_insert(String.valueOf(count));
+        UC_sqlLiteDbHelper.close();
 
     }
 
@@ -86,9 +83,9 @@ public class Mit_all_service extends JobService {
 
         }
 
-        Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
-        mit_sqlLiteDbHelper.mit_appusagecount_insert(String.valueOf(count));
-        mit_sqlLiteDbHelper.close();
+        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
+        UC_sqlLiteDbHelper.appusagecount_insert(String.valueOf(count));
+        UC_sqlLiteDbHelper.close();
     }
 
 
@@ -138,9 +135,9 @@ public class Mit_all_service extends JobService {
         }
 
         int count = myList.size();
-        Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
-        mit_sqlLiteDbHelper.mit_contactCount_insert(String.valueOf(count));
-        mit_sqlLiteDbHelper.close();
+        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
+        UC_sqlLiteDbHelper.contactCount_insert(String.valueOf(count));
+        UC_sqlLiteDbHelper.close();
 
     }
 
@@ -162,20 +159,20 @@ public class Mit_all_service extends JobService {
 
         }
 
-        Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
-        mit_sqlLiteDbHelper.mit_callduration_insert(String.valueOf(totalDuration));
-        mit_sqlLiteDbHelper.close();
+        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
+        UC_sqlLiteDbHelper.callduration_insert(String.valueOf(totalDuration));
+        UC_sqlLiteDbHelper.close();
     }
 
     public void getCalenderEvent(Context context){
 
-        Mit_CalenderEvent mit_calenderEvent = new Mit_CalenderEvent();
-        String x = mit_calenderEvent.getcalanderEventCount(context);
+        UC_CalenderEvent UC_calenderEvent = new UC_CalenderEvent();
+        String x = UC_calenderEvent.getcalanderEventCount(context);
 
 
-        Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(context);
-        mit_sqlLiteDbHelper.mit_calenderEventCount_insert(x);
-        mit_sqlLiteDbHelper.close();
+        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(context);
+        UC_sqlLiteDbHelper.calenderEventCount_insert(x);
+        UC_sqlLiteDbHelper.close();
     }
 
 
@@ -195,9 +192,9 @@ public class Mit_all_service extends JobService {
             }
         }
 
-        Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(this);
-        mit_sqlLiteDbHelper.mit_appusagecount_insert(String.valueOf(count));
-        mit_sqlLiteDbHelper.close();
+        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
+        UC_sqlLiteDbHelper.appusagecount_insert(String.valueOf(count));
+        UC_sqlLiteDbHelper.close();
 
     }
 

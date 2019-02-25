@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.notificationViewability;
 
 import android.content.Context;
 
@@ -10,8 +10,8 @@ public class MainBusyOrNotPredict {
 
         ArrayList<String> bon = new ArrayList();
 
-        Pra_SqlLiteDbHelper praSqlLiteDbHelper = new Pra_SqlLiteDbHelper(context);
-        praSqlLiteDbHelper.pra_BusyOrNotPredict_Get(activity,location);
+        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(context);
+        praSqlLiteDbHelper.busyOrNotPredict_Get(activity,location);
         praSqlLiteDbHelper.close();
 
         int busyCount = 0;

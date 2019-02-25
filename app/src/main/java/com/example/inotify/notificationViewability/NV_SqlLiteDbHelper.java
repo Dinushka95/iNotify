@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.notificationViewability;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
+public class NV_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "AppInotify.db";
 
@@ -45,7 +45,8 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
     public static final String LOCATION = "location";
     public static final String BUSYORNOT = "busyornot";
 
-
+/*
+to delete
     public static final String CHA_N_TABLE = "cha_N_TABLE";
     public static final String CHA_NI_TABLE = "cha_NI_TABLE";
 
@@ -60,11 +61,11 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
     public static final String MIT_APPLISTSOCIALMEDIACOUNT_TABLE = "mit_applistsocialmediacount_table";
 
 
-    public static final String DIN_SNS_TABLE = "din_SNS_TABLE";
+    public static final String DIN_SNS_TABLE = "din_SNS_TABLE";*/
 
     SharedPreferences.Editor editor009;
 
-    public Pra_SqlLiteDbHelper(Context context) {
+    public NV_SqlLiteDbHelper(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
          editor009 = context.getSharedPreferences("lockscreen", MODE_PRIVATE).edit();
@@ -79,11 +80,13 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + PRA_BUSYORNOT_TABLE + " (BUSYORNOT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,LOCATION TEXT,BUSYORNOT TEXT)");
 
 
-        db.execSQL("create table " + CHA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
-        db.execSQL("create table " + CHA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
+/*
+ to delete
+ db.execSQL("create table " + CHA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
+        db.execSQL("create table " + CHA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");*/
 
 
-        db.execSQL("create table " + MIT_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
+       /* db.execSQL("create table " + MIT_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
         db.execSQL("create table " + MIT_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + MIT_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + MIT_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
@@ -91,13 +94,14 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + MIT_CALLDURATION_TABLE  + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
         db.execSQL("create table " + MIT_CALENDEREVENTCOUNT_TABLE  + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + MIT_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+*/
+
+/*        db.execSQL("create table " + DIN_SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
+                "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");*/
 
 
-        db.execSQL("create table " + DIN_SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
-                "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
 
 
-        // init crash
         db.execSQL("insert into pra_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(1,20190216,'Saturday',2345,80.9,78.8);");
         db.execSQL("insert into pra_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(2,20190216,'Saturday',2345,80.9,78.8);");
 
@@ -110,18 +114,20 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(7,20190216,'Saturday',2345,7,100);");
         db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(8,20190216,'Saturday',2345,8,100);");
 
-        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(1,'com.example.dinu.testa',1);");
+ /*       db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(1,'com.example.dinu.testa',1);");
         db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(2,'com.example.dinu.testb',1);");
         db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(3,'com.example.dinu.testc',1);");
         db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(4,'com.example.dinu.testd',1);");
-        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");*/
 
 
+/*
         db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182419,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testa',8000);");
         db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182429,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testb',8000);");
         db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182439,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testc',8000);");
         db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182449,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testd',8000);");
         db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182459,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.google.android.apps.messaging',8000);");
+*/
 
 
         editor009.putString("screen", "off");
@@ -134,7 +140,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean pra_activity_insert(String type,String confidence) {
+    public boolean activity_insert(String type, String confidence) {
 
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
@@ -162,7 +168,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public String pra_activity_get() {
+    public String activity_get() {
 
         String v0="A";
         String v3="B";
@@ -231,7 +237,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean pra_location_insert(String log,String lat) {
+    public boolean location_insert(String log, String lat) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -258,7 +264,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public ArrayList<Double> pra_location_get() {
+    public ArrayList<Double> location_get() {
             ArrayList<Double> Al = new ArrayList();
 
 
@@ -284,7 +290,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean pra_notificationRemove_insert() {
+    public boolean notificationRemove_insert() {
 
        // String time = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
@@ -311,7 +317,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public Integer pra_notificationRemove_get() {
+    public Integer notificationRemove_get() {
 
         String timenow = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
 
@@ -341,7 +347,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public boolean pra_BusyOrNot_insert(String time,String day,String activity,String location,String busyornot) {
+    public boolean busyOrNot_insert(String time, String day, String activity, String location, String busyornot) {
 
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -359,7 +365,7 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public ArrayList<String> pra_BusyOrNotPredict_Get(String activity,String location) {
+    public ArrayList<String> busyOrNotPredict_Get(String activity, String location) {
 
 
         String timenow = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());

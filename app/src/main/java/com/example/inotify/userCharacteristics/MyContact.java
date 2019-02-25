@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.userCharacteristics;
 
 public class MyContact {
     private String name;

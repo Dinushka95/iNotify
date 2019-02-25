@@ -1,15 +1,14 @@
-package com.example.inotify;
+package com.example.inotify.userCharacteristics;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.CalendarContract;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Mit_CalenderEvent {
+public class UC_CalenderEvent {
 
     public String getcalanderEventCount(Context context){
 

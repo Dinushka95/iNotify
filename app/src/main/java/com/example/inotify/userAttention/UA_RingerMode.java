@@ -1,9 +1,9 @@
-package com.example.inotify;
+package com.example.inotify.userAttention;
 
 import android.content.Context;
 import android.media.AudioManager;
 
-public class Cha_RingerMode {
+public class UA_RingerMode {
 
     public String getRingerMode(Context context){
         String ringerMode = "";

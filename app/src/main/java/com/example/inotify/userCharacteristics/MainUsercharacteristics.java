@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.userCharacteristics;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,28 +15,28 @@ public class MainUsercharacteristics {
             Log.d("inotify", "Main-Usercharacteristics--Started---");
         }
 
-        Mit_SqlLiteDbHelper mit_sqlLiteDbHelper = new Mit_SqlLiteDbHelper(context);
+        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(context);
 
         long appListCountFixedvalue =75; // move it to main entr point and make it a static variable
 
-        long appUsageCountAvg =mit_sqlLiteDbHelper.mit_appUsageAverage_get();
-        long appListCountAvg =mit_sqlLiteDbHelper.mit_applistAverage_get();
-        long contactCountAvg =mit_sqlLiteDbHelper.mit_contactsAverage_get();
-        long screenTimeCountAvg =mit_sqlLiteDbHelper.mit_screentimeAverage_get();
-        long calldurationCountAvg =mit_sqlLiteDbHelper.mit_calldurationAverage_get();
-        long calendarCountAvg =mit_sqlLiteDbHelper.mit_calendereventAverage_get();
-        long chargetimeAvg =mit_sqlLiteDbHelper.mit_chargeAverage_get();
-        long socialmediacAppCountAvg =mit_sqlLiteDbHelper.mit_applistsocialmediaAverage_get();
+        long appUsageCountAvg = UC_sqlLiteDbHelper.appUsageAverage_get();
+        long appListCountAvg = UC_sqlLiteDbHelper.applistAverage_get();
+        long contactCountAvg = UC_sqlLiteDbHelper.contactsAverage_get();
+        long screenTimeCountAvg = UC_sqlLiteDbHelper.screentimeAverage_get();
+        long calldurationCountAvg = UC_sqlLiteDbHelper.calldurationAverage_get();
+        long calendarCountAvg = UC_sqlLiteDbHelper.calendereventAverage_get();
+        long chargetimeAvg = UC_sqlLiteDbHelper.chargeAverage_get();
+        long socialmediacAppCountAvg = UC_sqlLiteDbHelper.applistsocialmediaAverage_get();
 
 
-        long appUsageCountLast =mit_sqlLiteDbHelper.mit_appUsageLast_get();
-        long appListCountLast =mit_sqlLiteDbHelper.mit_applistLast_get();
-        long contactCountLast =mit_sqlLiteDbHelper.mit_contactsLast_get();
-        long screenTimeCountLast =mit_sqlLiteDbHelper.mit_screentimeLast_get();
-        long calldurationCountLast =mit_sqlLiteDbHelper.mit_calldurationLast_get();
-        long calendarCountLast =mit_sqlLiteDbHelper.mit_calendereventLast_get();
-        long chargetimeLast =mit_sqlLiteDbHelper.mit_chargeLast_get();
-        long socialmediacAppCountLast =mit_sqlLiteDbHelper.mit_applistsocialmediaLast_get();
+        long appUsageCountLast = UC_sqlLiteDbHelper.appUsageLast_get();
+        long appListCountLast = UC_sqlLiteDbHelper.applistLast_get();
+        long contactCountLast = UC_sqlLiteDbHelper.contactsLast_get();
+        long screenTimeCountLast = UC_sqlLiteDbHelper.screentimeLast_get();
+        long calldurationCountLast = UC_sqlLiteDbHelper.calldurationLast_get();
+        long calendarCountLast = UC_sqlLiteDbHelper.calendereventLast_get();
+        long chargetimeLast = UC_sqlLiteDbHelper.chargeLast_get();
+        long socialmediacAppCountLast = UC_sqlLiteDbHelper.applistsocialmediaLast_get();
 
         if(MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--appUsageCountAvg---"+appUsageCountAvg);

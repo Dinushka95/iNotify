@@ -1,7 +1,9 @@
-package com.example.inotify;
+package com.example.inotify.smartNotificationSystem;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.inotify.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,12 +22,12 @@ import java.util.ArrayList;
 
 public class MainSmartNotificationSystem {
 
-    Din_SqlLiteDbHelper din_sqlLiteDbHelper;
-    Din_SNSModel predict_snsModel;
+    SN_SqlLiteDbHelper SN_sqlLiteDbHelper;
+    SNS_SNSModel predict_snsModel;
 
-    public MainSmartNotificationSystem(Context context, Din_SNSModel din_snsModel) {
-        din_sqlLiteDbHelper = new Din_SqlLiteDbHelper(context);
-        predict_snsModel = din_snsModel;
+    public MainSmartNotificationSystem(Context context, SNS_SNSModel SNS_snsModel) {
+        SN_sqlLiteDbHelper = new SN_SqlLiteDbHelper(context);
+        predict_snsModel = SNS_snsModel;
     }
 
     public String getPrediction() {
@@ -72,15 +74,15 @@ public class MainSmartNotificationSystem {
 
     private JSONObject buidJsonObject() {
 
-        ArrayList<Din_SNSModel> din_snsModels = new ArrayList<>();
+        ArrayList<SNS_SNSModel> SNS_snsModels = new ArrayList<>();
 
         JSONArray jsonArray1 = new JSONArray();
         //all data
-        din_snsModels = din_sqlLiteDbHelper.getALL();
+        SNS_snsModels = SN_sqlLiteDbHelper.getALL();
 
-        int count = din_snsModels.size();
+        int count = SNS_snsModels.size();
         Log.d("inotify", "Main-MainSmartNotificationSystem--SNS model data from DB row count---" + count);
-        for (Din_SNSModel x : din_snsModels) {
+        for (SNS_SNSModel x : SNS_snsModels) {
             JSONObject jsonData1 = new JSONObject();
 
             if (x.getVtime() == null || x.getVtime() == "") {
