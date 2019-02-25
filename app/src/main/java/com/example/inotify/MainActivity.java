@@ -10,10 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.StrictMode;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.google.android.gms.common.util.IOUtils;
@@ -34,6 +37,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -115,7 +121,10 @@ public class MainActivity extends AppCompatActivity {
         BroadcastReceiver mReceiver = new All_ScreenLock();
         registerReceiver(mReceiver, intentFilter);
 
-       // registerScreenLockStateBroadcastReciver();
+
+
+
+
     }
 
     private PendingIntent getActivityDetectionPendingIntent() {
@@ -147,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         //MainAttentiviness mainAttentiviness = new MainAttentiviness();
         //String attentiviness = mainAttentiviness.getFinalAttentiviness(this,"com.example.dinu.testa");
        // Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+attentiviness);
-
+/*
         Din_SNSModel snsModel = new Din_SNSModel();
         snsModel.setDay("1");
         snsModel.setTime("1111");
@@ -159,7 +168,53 @@ public class MainActivity extends AppCompatActivity {
         MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
 
         String pp = mainSmartNotificationSystem.getPrediction();
-        Log.v("inotify","pppppppppppppppppppppppppppppppppppppppppppp"+pp);
+        Log.v("inotify","pppppppppppppppppppppppppppppppppppppppppppp"+pp);*/
 
+        NotificationManagerCompat.from(this).areNotificationsEnabled();
+
+/*        runOnUiThread(new Runnable() {
+            public void run() {
+
+                ttt();
+            }});*/
+
+
+    }
+
+    public void  ttt(){
+
+            try {
+                Process process = Runtime.getRuntime().exec("logcat ");
+                BufferedReader bufferedReader = new BufferedReader(
+                        new InputStreamReader(process.getInputStream()));
+
+                StringBuilder log=new StringBuilder();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    log.append(line);
+                  //  Log.v("inotify",line);
+                }
+               // TextView tv = (TextView)findViewById(R.id.textView);
+               // tv.append(log.toString());
+               // tv.setMovementMethod(new ScrollingMovementMethod());
+
+            } catch (IOException e) {
+                // Handle Exception
+            }
+
+
+    }
+
+    public void settings(View view) {
+        Intent intent = new Intent(MainActivity.this, settingsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+
+       // BroadcastReceiver mReceiver = new All_ScreenLock();
+       // unregisterReceiver(mReceiver);
+        super.onPause();
     }
 }

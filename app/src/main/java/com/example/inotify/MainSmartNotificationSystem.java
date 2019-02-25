@@ -21,16 +21,16 @@ import java.util.ArrayList;
 public class MainSmartNotificationSystem {
 
     Din_SqlLiteDbHelper din_sqlLiteDbHelper;
-    Din_SNSModel predict_snsModel ;
+    Din_SNSModel predict_snsModel;
 
-    public MainSmartNotificationSystem(Context context,Din_SNSModel din_snsModel) {
-        din_sqlLiteDbHelper=new Din_SqlLiteDbHelper(context);
+    public MainSmartNotificationSystem(Context context, Din_SNSModel din_snsModel) {
+        din_sqlLiteDbHelper = new Din_SqlLiteDbHelper(context);
         predict_snsModel = din_snsModel;
     }
 
-    public String  getPrediction(){
+    public String getPrediction() {
 
-        String cc="";
+        String cc = "";
         try {
             cc = HttpPost("https://us-central1-inotify23.cloudfunctions.net/hello_http");
         } catch (IOException e) {
@@ -38,7 +38,7 @@ public class MainSmartNotificationSystem {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("inotify", "Main-MainSmartNotificationSystem--Predicted output from ML model-Raw value---"+cc);
+        Log.d("inotify", "Main-MainSmartNotificationSystem--Predicted output from ML model-Raw value---" + cc);
 
         return cc;
     }
@@ -57,7 +57,7 @@ public class MainSmartNotificationSystem {
         JSONObject jsonObject = buidJsonObject();
 
         // 3. add JSON content to POST request body
-        result=setPostRequestContent(conn, jsonObject);
+        result = setPostRequestContent(conn, jsonObject);
 
         // 4. make POST request to the given URL
         conn.connect();
@@ -72,57 +72,59 @@ public class MainSmartNotificationSystem {
 
     private JSONObject buidJsonObject() {
 
-        ArrayList<Din_SNSModel>  din_snsModels = new ArrayList<>();
+        ArrayList<Din_SNSModel> din_snsModels = new ArrayList<>();
 
-        JSONArray jsonArray1= new JSONArray();
+        JSONArray jsonArray1 = new JSONArray();
         //all data
         din_snsModels = din_sqlLiteDbHelper.getALL();
 
-        int count =din_snsModels.size();
-        Log.d("inotify", "Main-MainSmartNotificationSystem--SNS model data from DB row count---"+count);
-        for (Din_SNSModel x:din_snsModels){
+        int count = din_snsModels.size();
+        Log.d("inotify", "Main-MainSmartNotificationSystem--SNS model data from DB row count---" + count);
+        for (Din_SNSModel x : din_snsModels) {
             JSONObject jsonData1 = new JSONObject();
-            try {
-               // Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+x.getDay().toString());
-                jsonData1.accumulate("sns_day", x.getDay());
-                jsonData1.accumulate("sns_time", x.getTime());
-                jsonData1.accumulate("sns_busyornot", x.getBusyornot());
-                jsonData1.accumulate("sns_attentiviness", x.getAttentiviness());
-                jsonData1.accumulate("sns_userchaacteristics", x.getUserchaacteristics());
-                jsonData1.accumulate("sns_notificationtype", x.getNotificationtype());
-                jsonData1.accumulate("sns_appname", x.getAppname());
-                jsonData1.accumulate("sns_vtime", x.getVtime());
+
+            if (x.getVtime() == null || x.getVtime() == "") {
+
+            } else {
+                try {
+                    // Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+x.getDay().toString());
+                    jsonData1.accumulate("sns_day", x.getDay());
+                    jsonData1.accumulate("sns_time", x.getTime());
+                    jsonData1.accumulate("sns_busyornot", x.getBusyornot());
+                    jsonData1.accumulate("sns_attentiviness", x.getAttentiviness());
+                    jsonData1.accumulate("sns_userchaacteristics", x.getUserchaacteristics());
+                    jsonData1.accumulate("sns_notificationtype", x.getNotificationtype());
+                    jsonData1.accumulate("sns_appname", x.getAppname());
+                    jsonData1.accumulate("sns_vtime", x.getVtime());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+                jsonArray1.put(jsonData1);
             }
-
-            jsonArray1.put(jsonData1);
         }
 
         JSONObject jsonPredict = new JSONObject();
 
         try {
 
-            jsonPredict.accumulate("sns_day",Integer.valueOf( predict_snsModel.getDay()));
+            jsonPredict.accumulate("sns_day", Integer.valueOf(predict_snsModel.getDay()));
             jsonPredict.accumulate("sns_time", Integer.valueOf(predict_snsModel.getTime()));
             jsonPredict.accumulate("sns_busyornot", Integer.valueOf(predict_snsModel.getBusyornot()));
             jsonPredict.accumulate("sns_attentiviness", Integer.valueOf(predict_snsModel.getAttentiviness()));
             jsonPredict.accumulate("sns_userchaacteristics", Integer.valueOf(predict_snsModel.getUserchaacteristics()));
             jsonPredict.accumulate("sns_notificationtype", Integer.valueOf(predict_snsModel.getNotificationtype()));
-            jsonPredict.accumulate("sns_appname",Integer.valueOf( predict_snsModel.getAppname()));
+            jsonPredict.accumulate("sns_appname", Integer.valueOf(predict_snsModel.getAppname()));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-
-        JSONArray jsonArray2= new JSONArray();
+        JSONArray jsonArray2 = new JSONArray();
         jsonArray2.put(jsonPredict);
-
 
 
         JSONObject mainObj = new JSONObject();
@@ -148,11 +150,11 @@ public class MainSmartNotificationSystem {
         writer.close();
 
 
-        InputStream in =conn.getInputStream();
+        InputStream in = conn.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         StringBuilder result = new StringBuilder();
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             result.append(line);
         }
         //System.out.println(result.toString());

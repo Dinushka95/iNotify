@@ -25,8 +25,8 @@ public class Mit_CalenderEvent {
         c_start.setTime(new Date());
         // c_start.set(year,month,day,hour,mintes);
 
-        Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(c_start.getTimeInMillis()));
-        Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(cal.getTimeInMillis()));
+        //Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(c_start.getTimeInMillis()));
+       // Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(cal.getTimeInMillis()));
 
         String[] proj = new String[]{
                 CalendarContract.Instances._ID,

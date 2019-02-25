@@ -228,7 +228,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             snsModel.setAppname(cappname);
 
-/*            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
+            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
 
             String vtimes = mainSmartNotificationSystem.getPrediction();
           //  Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimes );
@@ -239,17 +239,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             //////////////////////////////////////////////////////////////////////////////////////////////////
 
-           // get the old data
-           // get current settting
-           // update the json
-            // api request
-            // read respone
 
-*//*            if(respone>acurracy){
-                not sent get delay;
-            }else {
-                semd notification;
-            }*//*
 
             boolean sendornotsend;
             if (vtimed<600000){sendornotsend = true;}
@@ -259,9 +249,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimed );
 
-            */
 
-            boolean sendornotsend;
+
+          //  boolean sendornotsend;
            sendornotsend = true;
 
             if (sendornotsend) {

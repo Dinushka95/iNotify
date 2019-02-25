@@ -2,6 +2,7 @@ package com.example.inotify;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -17,6 +18,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
 
@@ -59,10 +62,12 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
 
     public static final String DIN_SNS_TABLE = "din_SNS_TABLE";
 
+    SharedPreferences.Editor editor009;
 
     public Pra_SqlLiteDbHelper(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
+         editor009 = context.getSharedPreferences("lockscreen", MODE_PRIVATE).edit();
     }
 
     @Override
@@ -90,6 +95,37 @@ public class Pra_SqlLiteDbHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table " + DIN_SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
                 "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
+
+
+        // init crash
+        db.execSQL("insert into pra_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(1,20190216,'Saturday',2345,80.9,78.8);");
+        db.execSQL("insert into pra_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(2,20190216,'Saturday',2345,80.9,78.8);");
+
+        db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(1,20190216,'Saturday',2345,1,100);");
+        db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(2,20190216,'Saturday',2345,2,100);");
+        db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(3,20190216,'Saturday',2345,3,100);");
+        db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(4,20190216,'Saturday',2345,4,100);");
+        db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(5,20190216,'Saturday',2345,5,100);");
+        db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(6,20190216,'Saturday',2345,6,100);");
+        db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(7,20190216,'Saturday',2345,7,100);");
+        db.execSQL("insert into pra_activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(8,20190216,'Saturday',2345,8,100);");
+
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(1,'com.example.dinu.testa',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(2,'com.example.dinu.testb',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(3,'com.example.dinu.testc',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(4,'com.example.dinu.testd',1);");
+        db.execSQL("insert into cha_NI_TABLE(NI_ID,NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");
+
+
+        db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182419,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testa',8000);");
+        db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182429,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testb',8000);");
+        db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182439,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testc',8000);");
+        db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182449,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testd',8000);");
+        db.execSQL("insert into din_SNS_TABLE(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182459,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.google.android.apps.messaging',8000);");
+
+
+        editor009.putString("screen", "off");
+        editor009.apply();
 
     }
 
