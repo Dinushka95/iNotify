@@ -201,4 +201,9 @@ public class MainActivity extends AppCompatActivity {
        // unregisterReceiver(mReceiver);
         super.onPause();
     }
+
+    public void buttonInotifyActiveApps(View view) {
+        Intent intent = new Intent(MainActivity.this, iNotificationActiviteAppsActivity.class);
+        startActivity(intent);
+    }
 }
