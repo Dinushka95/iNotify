@@ -26,7 +26,10 @@ public class SettingsSNActive_view {
             String x = applicationInfo.packageName.toString();
             packageList.add(x);
         }
+         // need to filter the apps to a the right apps because lot of unwanted stuff are  coming
+        // only display apps which are capable of sending notifications
 
+        // or only enable for apps which send notifications
         return packageList;
     }
 

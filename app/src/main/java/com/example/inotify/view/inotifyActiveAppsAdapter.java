@@ -1,12 +1,14 @@
 package com.example.inotify.view;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.inotify.R;
@@ -35,11 +37,12 @@ public class inotifyActiveAppsAdapter extends BaseAdapter implements ListAdapter
 
     @Override
     public long getItemId(int position) {
+
         return 0;
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -51,22 +54,14 @@ public class inotifyActiveAppsAdapter extends BaseAdapter implements ListAdapter
         listItemText.setText(list.get(position));
 
         //Handle buttons and add onClickListeners
-        Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
-        Button addBtn = (Button)view.findViewById(R.id.add_btn);
+        Switch switchBtn = (Switch) view.findViewById(R.id.switch2);
 
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
+        switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                //do something
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
-            }
-        });
-        addBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //do something
-                notifyDataSetChanged();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.d("inotify", "onCheckedChanged: "+ position);
+                Log.d("inotify", "app name of change"+list.get(position));
+
             }
         });
 

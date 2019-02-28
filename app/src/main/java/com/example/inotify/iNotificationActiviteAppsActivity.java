@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.example.inotify.settings.SettingsSNActive_view;
 import com.example.inotify.view.inotifyActiveAppsAdapter;
 
 import java.util.ArrayList;
@@ -16,10 +17,10 @@ public class iNotificationActiviteAppsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inotify_activite_apps);
 
         //generate list
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("item1");
-        list.add("item2");
+        SettingsSNActive_view activity_inotify_activite_apps =new SettingsSNActive_view(this);
 
+        ArrayList<String> list = new ArrayList<String>();
+    list =activity_inotify_activite_apps.getApplicationList();
         //instantiate custom adapter
         inotifyActiveAppsAdapter inotifyActiveAppsAdapter = new inotifyActiveAppsAdapter(list, this);
 

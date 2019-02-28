@@ -4,13 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.inotify.MainSqlliteOpenHelp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class UC_SqlLiteDbHelper extends SQLiteOpenHelper {
+public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
     public static final String DATABASE_NAME = "AppInotify.db";
 
@@ -40,39 +41,8 @@ public class UC_SqlLiteDbHelper extends SQLiteOpenHelper {
     public static final String MIT_APPLISTSOCIALMEDIACOUNT_TABLE = "mit_applistsocialmediacount_table";
 
 
-
-
     public UC_SqlLiteDbHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        db.execSQL("create table " + MIT_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
-        db.execSQL("create table " + MIT_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + MIT_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + MIT_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + MIT_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
-        db.execSQL("create table " + MIT_CALLDURATION_TABLE  + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
-        db.execSQL("create table " + MIT_CALENDEREVENTCOUNT_TABLE  + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + MIT_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-
-
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        db.execSQL("create table " + MIT_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
-        db.execSQL("create table " + MIT_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + MIT_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + MIT_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + MIT_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
-        db.execSQL("create table " + MIT_CALLDURATION_TABLE  + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
-        db.execSQL("create table " + MIT_CALENDEREVENTCOUNT_TABLE  + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + MIT_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-
+        super(context);
 
     }
 

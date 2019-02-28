@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.inotify.userAttention.UA_SqlLiteDbHelper;
-import com.example.inotify.userAttention.UA_RingerMode;
-
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.inotify.MainActivity.MainAttentiviness_DebuggerLogger;
 
