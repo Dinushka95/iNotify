@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.dbHelpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.example.inotify.view;
+package com.example.inotify.views.iNotifiyActiviteAppsActivity;
 
 import android.content.Context;
 import android.util.Log;

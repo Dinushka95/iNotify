@@ -73,8 +73,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.example.inotify.settingsActivity" />
-        <activity android:name="com.example.inotify.iNotificationActiviteAppsActivity" />
+        <activity android:name="com.example.inotify.views.settings.settingsActivity" />
+        <activity android:name="com.example.inotify.views.iNotifiyActiviteAppsActivity.iNotifiyActiviteAppsActivity" />
     </application>
 
 </manifest>

@@ -1,15 +1,14 @@
-package com.example.inotify;
+package com.example.inotify.views.iNotifiyActiviteAppsActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.example.inotify.settings.SettingsSNActive_view;
-import com.example.inotify.view.inotifyActiveAppsAdapter;
+import com.example.inotify.R;
 
 import java.util.ArrayList;
 
-public class iNotificationActiviteAppsActivity extends AppCompatActivity {
+public class iNotifiyActiviteAppsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +16,7 @@ public class iNotificationActiviteAppsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inotify_activite_apps);
 
         //generate list
-        SettingsSNActive_view activity_inotify_activite_apps =new SettingsSNActive_view(this);
+        inotifyActiveAppsLogic activity_inotify_activite_apps =new inotifyActiveAppsLogic(this);
 
         ArrayList<String> list = new ArrayList<String>();
     list =activity_inotify_activite_apps.getApplicationList();

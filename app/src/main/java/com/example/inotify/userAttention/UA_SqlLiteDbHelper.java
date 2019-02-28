@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.inotify.MainSqlliteOpenHelp;
+import com.example.inotify.dbHelpers.MainSqlliteOpenHelp;
 
 public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 

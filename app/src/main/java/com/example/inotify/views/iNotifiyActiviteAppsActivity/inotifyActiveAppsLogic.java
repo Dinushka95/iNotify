@@ -1,4 +1,4 @@
-package com.example.inotify.settings;
+package com.example.inotify.views.iNotifiyActiviteAppsActivity;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -7,11 +7,11 @@ import android.content.pm.PackageManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsSNActive_view {
+public class inotifyActiveAppsLogic {
 
     public Context context;
 
-    public SettingsSNActive_view(Context c1) {
+    public inotifyActiveAppsLogic(Context c1) {
         context=c1;
     }
 

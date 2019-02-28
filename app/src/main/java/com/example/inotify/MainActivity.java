@@ -18,6 +18,8 @@ import com.example.inotify.notificationViewability.NV_ActivityRecognitionService
 import com.example.inotify.notificationViewability.NV_BusyOrNotBackgroundService;
 import com.example.inotify.notificationViewability.NV_LocationService;
 import com.example.inotify.userCharacteristics.UC_all_service;
+import com.example.inotify.views.iNotifiyActiviteAppsActivity.iNotifiyActiviteAppsActivity;
+import com.example.inotify.views.settings.settingsActivity;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.io.BufferedReader;
@@ -203,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonInotifyActiveApps(View view) {
-        Intent intent = new Intent(MainActivity.this, iNotificationActiviteAppsActivity.class);
+        Intent intent = new Intent(MainActivity.this, iNotifiyActiviteAppsActivity.class);
         startActivity(intent);
     }
 }

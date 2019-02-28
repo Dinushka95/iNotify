@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.inotify.MainSqlliteOpenHelp;
+import com.example.inotify.dbHelpers.MainSqlliteOpenHelp;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
