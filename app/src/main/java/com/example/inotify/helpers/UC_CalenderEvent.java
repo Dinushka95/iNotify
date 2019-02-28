@@ -1,4 +1,4 @@
-package com.example.inotify.userCharacteristics;
+package com.example.inotify.helpers;
 
 import android.content.Context;
 import android.database.Cursor;

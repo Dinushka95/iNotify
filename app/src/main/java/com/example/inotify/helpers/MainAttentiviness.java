@@ -1,11 +1,14 @@
-package com.example.inotify.userAttention;
+package com.example.inotify.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
+import com.example.inotify.helpers.UA_RingerMode;
+
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.inotify.MainActivity.MainAttentiviness_DebuggerLogger;
+import static com.example.inotify.views.MainActivity.MainAttentiviness_DebuggerLogger;
 
 public class MainAttentiviness {
 

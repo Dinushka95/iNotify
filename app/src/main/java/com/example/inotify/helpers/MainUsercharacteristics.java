@@ -1,11 +1,13 @@
-package com.example.inotify.userCharacteristics;
+package com.example.inotify.helpers;
 
 import android.content.Context;
 import android.util.Log;
 
+import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
+
 import java.util.ArrayList;
 
-import static com.example.inotify.MainActivity.MainUsercharacteristics_DebuggerLogger;
+import static com.example.inotify.views.MainActivity.MainUsercharacteristics_DebuggerLogger;
 
 public class MainUsercharacteristics {
 

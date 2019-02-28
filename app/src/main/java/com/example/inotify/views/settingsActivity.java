@@ -1,4 +1,4 @@
-package com.example.inotify.views.settings;
+package com.example.inotify.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

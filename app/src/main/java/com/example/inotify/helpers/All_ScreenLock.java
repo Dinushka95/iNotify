@@ -1,11 +1,11 @@
-package com.example.inotify;
+package com.example.inotify.helpers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.example.inotify.userCharacteristics.UC_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

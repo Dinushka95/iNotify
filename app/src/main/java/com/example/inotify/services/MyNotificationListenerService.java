@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.services;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -13,14 +13,14 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
-import com.example.inotify.notificationViewability.NV_SqlLiteDbHelper;
-import com.example.inotify.notificationViewability.MainBusyOrNotPredict;
-import com.example.inotify.smartNotificationSystem.SNS_SNSModel;
-import com.example.inotify.smartNotificationSystem.MainSmartNotificationSystem;
-import com.example.inotify.userAttention.MainAttentiviness;
-import com.example.inotify.userAttention.UA_SqlLiteDbHelper;
-import com.example.inotify.smartNotificationSystem.SN_SqlLiteDbHelper;
-import com.example.inotify.userCharacteristics.MainUsercharacteristics;
+import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.helpers.MainNotificationViewability;
+import com.example.inotify.models.SNS_SNSModel;
+import com.example.inotify.helpers.MainSmartNotificationSystem;
+import com.example.inotify.helpers.MainAttentiviness;
+import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.SN_SqlLiteDbHelper;
+import com.example.inotify.helpers.MainUsercharacteristics;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,11 +29,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.MainActivity.accuracy;
-import static com.example.inotify.MainActivity.home_Lat;
-import static com.example.inotify.MainActivity.home_Log;
-import static com.example.inotify.MainActivity.work_Lat;
-import static com.example.inotify.MainActivity.work_Log;
+import static com.example.inotify.views.MainActivity.accuracy;
+import static com.example.inotify.views.MainActivity.home_Lat;
+import static com.example.inotify.views.MainActivity.home_Log;
+import static com.example.inotify.views.MainActivity.work_Lat;
+import static com.example.inotify.views.MainActivity.work_Log;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
@@ -108,8 +108,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 currentlocation="work";
             }
 
-            MainBusyOrNotPredict mainBusyOrNotPredict =new MainBusyOrNotPredict();
-            String busyornot = mainBusyOrNotPredict.GetNewPrediction(this,currentactivity,currentlocation);
+            MainNotificationViewability mainNotificationViewability =new MainNotificationViewability();
+            String busyornot = mainNotificationViewability.GetNewPrediction(this,currentactivity,currentlocation);
             Log.d("inotify", "Main-MyNotificationListenerService--busyornot---"+busyornot );
 
 

@@ -1,4 +1,4 @@
-package com.example.inotify.notificationViewability;
+package com.example.inotify.services;
 
 
 
@@ -6,6 +6,9 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Intent;
 import android.location.Location;
+
+import com.example.inotify.components.MyLocationUpdatesComponent;
+import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
 
 public class NV_LocationService extends JobService implements MyLocationUpdatesComponent.ILocationProvider {
 

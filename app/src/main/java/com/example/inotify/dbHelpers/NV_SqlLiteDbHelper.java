@@ -1,4 +1,4 @@
-package com.example.inotify.notificationViewability;
+package com.example.inotify.dbHelpers;
 
 import android.content.ContentValues;
 import android.content.Context;

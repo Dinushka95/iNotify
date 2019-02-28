@@ -1,4 +1,4 @@
-package com.example.inotify;
+package com.example.inotify.views;
 
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
@@ -14,12 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.inotify.notificationViewability.NV_ActivityRecognitionService;
-import com.example.inotify.notificationViewability.NV_BusyOrNotBackgroundService;
-import com.example.inotify.notificationViewability.NV_LocationService;
-import com.example.inotify.userCharacteristics.UC_all_service;
-import com.example.inotify.views.iNotifiyActiviteAppsActivity.iNotifiyActiviteAppsActivity;
-import com.example.inotify.views.settings.settingsActivity;
+import com.example.inotify.helpers.All_ScreenLock;
+import com.example.inotify.R;
+import com.example.inotify.services.NV_ActivityRecognitionService;
+import com.example.inotify.services.NV_NotificationViewabilityService;
+import com.example.inotify.services.NV_LocationService;
+import com.example.inotify.services.UC_all_service;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.io.BufferedReader;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         int resultCode = scheduler.schedule(info);
 
 
-        ComponentName componentName1 = new ComponentName(MainActivity.this, NV_BusyOrNotBackgroundService.class);
+        ComponentName componentName1 = new ComponentName(MainActivity.this, NV_NotificationViewabilityService.class);
         JobInfo info1 = new JobInfo.Builder(MY_BUSYORNOT_SERVEC_ID, componentName1)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)

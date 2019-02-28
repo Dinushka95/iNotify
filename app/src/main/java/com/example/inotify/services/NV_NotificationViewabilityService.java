@@ -1,7 +1,9 @@
-package com.example.inotify.notificationViewability;
+package com.example.inotify.services;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+
+import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,13 +11,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.MainActivity.accuracy;
-import static com.example.inotify.MainActivity.home_Lat;
-import static com.example.inotify.MainActivity.home_Log;
-import static com.example.inotify.MainActivity.work_Lat;
-import static com.example.inotify.MainActivity.work_Log;
+import static com.example.inotify.views.MainActivity.accuracy;
+import static com.example.inotify.views.MainActivity.home_Lat;
+import static com.example.inotify.views.MainActivity.home_Log;
+import static com.example.inotify.views.MainActivity.work_Lat;
+import static com.example.inotify.views.MainActivity.work_Log;
 
-public class NV_BusyOrNotBackgroundService extends JobService {
+public class NV_NotificationViewabilityService extends JobService {
 
     @Override
     public void onCreate() {

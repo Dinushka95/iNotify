@@ -1,15 +1,15 @@
-package com.example.inotify.smartNotificationSystem;
+package com.example.inotify.models;
 
 public class SNS_SNSModel {
 
-    String day;
-    String time;
-    String busyornot;
-    String attentiviness;
-    String userchaacteristics;
-    String notificationtype;
-    String appname;
-    String vtime;
+    private String day;
+    private String time;
+    private String busyornot;
+    private String attentiviness;
+    private String userchaacteristics;
+    private String notificationtype;
+    private String appname;
+    private String vtime;
 
     public SNS_SNSModel() {
     }

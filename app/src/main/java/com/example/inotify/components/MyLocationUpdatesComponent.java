@@ -1,4 +1,4 @@
-package com.example.inotify.notificationViewability;
+package com.example.inotify.components;
 
 import android.location.Location;
 import android.content.Context;

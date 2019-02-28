@@ -1,9 +1,11 @@
-package com.example.inotify.smartNotificationSystem;
+package com.example.inotify.helpers;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.example.inotify.MainActivity;
+import com.example.inotify.dbHelpers.SN_SqlLiteDbHelper;
+import com.example.inotify.models.SNS_SNSModel;
+import com.example.inotify.views.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

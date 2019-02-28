@@ -1,9 +1,11 @@
-package com.example.inotify.userCharacteristics;
+package com.example.inotify.helpers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
 
 public class UC_Charge extends BroadcastReceiver {
 

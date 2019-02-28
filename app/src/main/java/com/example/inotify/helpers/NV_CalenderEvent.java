@@ -1,4 +1,4 @@
-package com.example.inotify.notificationViewability;
+package com.example.inotify.helpers;
 
 import android.content.Context;
 import android.database.Cursor;

@@ -1,4 +1,4 @@
-package com.example.inotify.smartNotificationSystem;
+package com.example.inotify.dbHelpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 import com.example.inotify.dbHelpers.MainSqlliteOpenHelp;
+import com.example.inotify.models.SNS_SNSModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

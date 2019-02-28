@@ -1,9 +1,10 @@
-package com.example.inotify.notificationViewability;
+package com.example.inotify.services;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
 import com.google.android.gms.location.ActivityRecognitionResult;
 
 public class NV_ActivityRecognitionService extends IntentService {

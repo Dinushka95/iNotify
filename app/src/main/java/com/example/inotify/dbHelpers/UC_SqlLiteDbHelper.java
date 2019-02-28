@@ -1,4 +1,4 @@
-package com.example.inotify.userCharacteristics;
+package com.example.inotify.dbHelpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,35 +10,33 @@ import com.example.inotify.dbHelpers.MainSqlliteOpenHelp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
     public static final String DATABASE_NAME = "AppInotify.db";
-
-    public static final String DATE = "date";
-
     public static final String APPNAME = "appname";
+    private static final String DATE = "date";
+    private static final String COUNT = "count";
 
-    public static final String COUNT = "count";
-
-    public static final String MIT_CHARGE_TABLE = "mit_charge_table";
-
-
-    public static final String MIT_APPLISTCOUNT_TABLE = "mit_applistcount_table";
+    private static final String MIT_CHARGE_TABLE = "mit_charge_table";
 
 
-    public static final String MIT_USAGECOUNT_TABLE = "mit_usagecount_table";
+    private static final String MIT_APPLISTCOUNT_TABLE = "mit_applistcount_table";
 
-    public static final String MIT_CONTACTCOUNT_TABLE = "mit_contactcount_table";
 
-    public static final String MIT_SCREENTIME_TABLE = "mit_screentime_table";
-    public static final String TIME = "time";
+    private static final String MIT_USAGECOUNT_TABLE = "mit_usagecount_table";
 
-    public static final String MIT_CALLDURATION_TABLE = "mit_callduration_table";
+    private static final String MIT_CONTACTCOUNT_TABLE = "mit_contactcount_table";
 
-    public static final String MIT_CALENDEREVENTCOUNT_TABLE = "mit_calendereventcount_table";
+    private static final String MIT_SCREENTIME_TABLE = "mit_screentime_table";
+    private static final String TIME = "time";
 
-    public static final String MIT_APPLISTSOCIALMEDIACOUNT_TABLE = "mit_applistsocialmediacount_table";
+    private static final String MIT_CALLDURATION_TABLE = "mit_callduration_table";
+
+    private static final String MIT_CALENDEREVENTCOUNT_TABLE = "mit_calendereventcount_table";
+
+    private static final String MIT_APPLISTSOCIALMEDIACOUNT_TABLE = "mit_applistsocialmediacount_table";
 
 
     public UC_SqlLiteDbHelper(Context context) {
@@ -56,10 +54,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(DATE, date);
         long result = db.insert(MIT_CHARGE_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
 
@@ -73,10 +68,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(COUNT, count);
         long result = db.insert(MIT_APPLISTCOUNT_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
 
     }
 
@@ -90,10 +82,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(COUNT, count);
         long result = db.insert(MIT_USAGECOUNT_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public boolean contactCount_insert(String count) {
@@ -106,10 +95,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(COUNT, count);
         long result = db.insert(MIT_CONTACTCOUNT_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public boolean screentime_insert(String time) {
@@ -123,10 +109,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(TIME, time);
         long result = db.insert(MIT_SCREENTIME_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public boolean callduration_insert(String time) {
@@ -140,10 +123,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(TIME, time);
         long result = db.insert(MIT_CALLDURATION_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
 
@@ -158,10 +138,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(COUNT, count);
         long result = db.insert(MIT_CALENDEREVENTCOUNT_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public boolean appListSocialMediacount_insert(String count) {
@@ -174,10 +151,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(COUNT, count);
         long result = db.insert(MIT_APPLISTSOCIALMEDIACOUNT_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
 
     }
 
@@ -192,7 +166,9 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
-        res.close();
+        if (res != null) {
+            res.close();
+        }
         db.close();
 
         return 0;
@@ -207,7 +183,9 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
-        res.close();
+        if (res != null) {
+            res.close();
+        }
         db.close();
 
         return 0;
@@ -222,7 +200,9 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
-        res.close();
+        if (res != null) {
+            res.close();
+        }
         db.close();
 
         return 0;
@@ -238,7 +218,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -253,7 +233,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -268,7 +248,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -285,7 +265,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -300,7 +280,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -317,7 +297,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -332,7 +312,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -347,7 +327,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -363,7 +343,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("TIME"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -378,7 +358,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(2);
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -393,7 +373,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -410,7 +390,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("DATE"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;
@@ -425,7 +405,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
-        res.close();
+        Objects.requireNonNull(res).close();
         db.close();
 
         return 0;

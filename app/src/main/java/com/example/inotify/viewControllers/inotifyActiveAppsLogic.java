@@ -1,4 +1,4 @@
-package com.example.inotify.views.iNotifiyActiviteAppsActivity;
+package com.example.inotify.viewControllers;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

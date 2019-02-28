@@ -1,14 +1,16 @@
-package com.example.inotify.notificationViewability;
+package com.example.inotify.helpers;
 
 import android.content.Context;
 
+import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+
 import java.util.ArrayList;
 
-public class MainBusyOrNotPredict {
+public class MainNotificationViewability {
 
     public String GetNewPrediction(Context context,String activity,String location){
 
-        ArrayList<String> bon = new ArrayList();
+        ArrayList<java.lang.String> bon = new ArrayList();
 
         NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(context);
         praSqlLiteDbHelper.busyOrNotPredict_Get(activity,location);
@@ -16,7 +18,7 @@ public class MainBusyOrNotPredict {
 
         int busyCount = 0;
         int notbusyCount = 0;
-        int totalCount = bon.size();
+        //int totalCount = bon.size();
 
         for (String x:bon) {
             if (x.equals("BUSY")){

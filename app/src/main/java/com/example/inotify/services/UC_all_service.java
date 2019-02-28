@@ -1,4 +1,4 @@
-package com.example.inotify.userCharacteristics;
+package com.example.inotify.services;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
@@ -11,6 +11,10 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
+
+import com.example.inotify.helpers.MyContact;
+import com.example.inotify.helpers.UC_CalenderEvent;
+import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
