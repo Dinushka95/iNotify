@@ -12,38 +12,19 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+import static com.example.inotify.dbHelpers.NV_SqlLiteDbHelper.TIME;
+
 public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
-    public static final String DATABASE_NAME = "AppInotify.db";
+
     public static final String APPNAME = "appname";
     private static final String DATE = "date";
     private static final String COUNT = "count";
-
-    private static final String MIT_CHARGE_TABLE = "mit_charge_table";
-
-
-    private static final String MIT_APPLISTCOUNT_TABLE = "mit_applistcount_table";
-
-
-    private static final String MIT_USAGECOUNT_TABLE = "mit_usagecount_table";
-
-    private static final String MIT_CONTACTCOUNT_TABLE = "mit_contactcount_table";
-
-    private static final String MIT_SCREENTIME_TABLE = "mit_screentime_table";
-    private static final String TIME = "time";
-
-    private static final String MIT_CALLDURATION_TABLE = "mit_callduration_table";
-
-    private static final String MIT_CALENDEREVENTCOUNT_TABLE = "mit_calendereventcount_table";
-
-    private static final String MIT_APPLISTSOCIALMEDIACOUNT_TABLE = "mit_applistsocialmediacount_table";
-
 
     public UC_SqlLiteDbHelper(Context context) {
         super(context);
 
     }
-
 
     public boolean mit_charge_insert() {
 
@@ -52,11 +33,10 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
-        long result = db.insert(MIT_CHARGE_TABLE, null, contentValues);
+        long result = db.insert(UC_CHARGE_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }
-
 
     public boolean appListcount_insert(String count) {
 
@@ -66,7 +46,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put(COUNT, count);
-        long result = db.insert(MIT_APPLISTCOUNT_TABLE, null, contentValues);
+        long result = db.insert(UC_APPLISTCOUNT_TABLE, null, contentValues);
         db.close();
         return result != -1;
 
@@ -80,7 +60,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put(COUNT, count);
-        long result = db.insert(MIT_USAGECOUNT_TABLE, null, contentValues);
+        long result = db.insert(UC_CONTACTCOUNT_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }
@@ -93,7 +73,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put(COUNT, count);
-        long result = db.insert(MIT_CONTACTCOUNT_TABLE, null, contentValues);
+        long result = db.insert(UC_CONTACTCOUNT_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }
@@ -107,7 +87,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put(TIME, time);
-        long result = db.insert(MIT_SCREENTIME_TABLE, null, contentValues);
+        long result = db.insert(UC_SCREENTIME_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }
@@ -121,7 +101,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put(TIME, time);
-        long result = db.insert(MIT_CALLDURATION_TABLE, null, contentValues);
+        long result = db.insert(UC_CALLDURATION_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }
@@ -136,7 +116,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put(COUNT, count);
-        long result = db.insert(MIT_CALENDEREVENTCOUNT_TABLE, null, contentValues);
+        long result = db.insert(UC_CALENDEREVENTCOUNT_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }
@@ -149,7 +129,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put(COUNT, count);
-        long result = db.insert(MIT_APPLISTSOCIALMEDIACOUNT_TABLE, null, contentValues);
+        long result = db.insert(UC_APPLISTSOCIALMEDIACOUNT_TABLE, null, contentValues);
         db.close();
         return result != -1;
 
@@ -160,7 +140,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long appUsageAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_usagecount_table", null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_USAGECOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -177,7 +157,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long applistAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_applistcount_table", null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_APPLISTCOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -194,7 +174,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long contactsAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_contactcount_table", null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_CONTACTCOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -212,7 +192,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         //TODO - need to sumation of day and the get average of that for days
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(TIME) as avg from mit_screentime_table", null);
+        Cursor res = db.rawQuery("select avg(TIME) as avg from "+UC_SCREENTIME_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -227,7 +207,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long calldurationAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(TIME) as avg from mit_callduration_table", null);
+        Cursor res = db.rawQuery("select avg(TIME) as avg from "+UC_CALLDURATION_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -242,7 +222,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long calendereventAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_calendereventcount_table", null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_CALENDEREVENTCOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -259,7 +239,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         //TODO - need to sumation of day and the get average of that for days
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(DATE) as avg from mit_charge_table ", null);
+        Cursor res = db.rawQuery("select count(DATE) as avg from "+UC_CHARGE_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -274,7 +254,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long applistsocialmediaAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from mit_applistsocialmediacount_table", null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_APPLISTSOCIALMEDIACOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -291,7 +271,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long appUsageLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT from mit_usagecount_table", null);
+        Cursor res = db.rawQuery("select COUNT from "+UC_USAGECOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(res.getColumnIndex("COUNT"));
@@ -306,7 +286,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long applistLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT  from mit_applistcount_table", null);
+        Cursor res = db.rawQuery("select COUNT  from "+UC_APPLISTCOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(res.getColumnIndex("COUNT"));
@@ -321,7 +301,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long contactsLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT from mit_contactcount_table", null);
+        Cursor res = db.rawQuery("select COUNT from "+UC_CONTACTCOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(res.getColumnIndex("COUNT"));
@@ -337,7 +317,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         //TODO - need to sumation of day and the get average of that for days
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select TIME from mit_screentime_table", null);
+        Cursor res = db.rawQuery("select TIME from "+UC_SCREENTIME_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(res.getColumnIndex("TIME"));
@@ -352,7 +332,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long calldurationLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from mit_callduration_table", null);
+        Cursor res = db.rawQuery("select * from "+UC_CALLDURATION_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(2);
@@ -367,7 +347,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long calendereventLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT from mit_calendereventcount_table", null);
+        Cursor res = db.rawQuery("select COUNT from "+UC_CALENDEREVENTCOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(res.getColumnIndex("COUNT"));
@@ -384,7 +364,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         //TODO - need to sumation of day and the get average of that for days
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select DATE from mit_charge_table ", null);
+        Cursor res = db.rawQuery("select DATE from "+UC_CHARGE_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(res.getColumnIndex("DATE"));
@@ -399,7 +379,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public long applistsocialmediaLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT from mit_applistsocialmediacount_table", null);
+        Cursor res = db.rawQuery("select COUNT from "+UC_APPLISTSOCIALMEDIACOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(res.getColumnIndex("COUNT"));
@@ -410,7 +390,4 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         return 0;
     }
-
-
-
 }

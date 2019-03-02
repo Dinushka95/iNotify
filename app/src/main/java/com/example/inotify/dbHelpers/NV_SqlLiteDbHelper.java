@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.inotify.dbHelpers.MainSqlliteOpenHelp;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +18,15 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public static final String DATE = "date";
     public static final String DAY = "day";
     public static final String TIME = "time";
+
+
+    public static final String ACTIVITY = "activity";
+    public static final String LOCATION = "location";
+    public static final String BUSYORNOT = "busyornot";
+    public static final String TYPE = "type";
+    public static final String CONFIDENCE = "confidence";
+    public static final String LOG = "log";
+    public static final String LAT = "lat";
 
     public NV_SqlLiteDbHelper(Context context) {
         super(context);
@@ -44,7 +51,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(TIME, time);
         contentValues.put(TYPE, type);
         contentValues.put(CONFIDENCE, confidence);
-        long result = db.insert(PRA_ACTIVITY_TABLE, null, contentValues);
+        long result = db.insert(NV_ACTIVITY_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -85,27 +92,27 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         // select * from pra_activity_table where DATE = "20190202" AND TIME  between "1356" and "1514"
         //huge bug if it has same count for muliple activity this will fail so assume that it will not have fix later
         //get for 0
-        Cursor res0 = db.rawQuery("select * from pra_activity_table where DATE=\"" + datenow + "\" AND TYPE = \"0\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
+        Cursor res0 = db.rawQuery("select * from " + NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"0\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
         if (res0 != null) {AL.add(String.valueOf(res0.getCount())+"V");}
         res0.close();
 
         //get for 3
-        Cursor res3 = db.rawQuery("select * from pra_activity_table where DATE=\"" + datenow + "\" AND TYPE = \"3\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
+        Cursor res3 = db.rawQuery("select * from " + NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"3\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
         if (res3 != null)  {AL.add(String.valueOf(res3.getCount())+"S");}
         res3.close();
 
         //get for 5
-        Cursor res5 = db.rawQuery("select * from pra_activity_table where DATE=\"" + datenow + "\" AND TYPE = \"5\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
+        Cursor res5 = db.rawQuery("select * from " + NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"5\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
         if (res5 != null) {AL.add(String.valueOf(res5.getCount())+"T");}
         res5.close();
 
         //get for 7
-        Cursor res7 = db.rawQuery("select * from pra_activity_table where DATE=\"" + datenow + "\" AND TYPE = \"7\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
+        Cursor res7 = db.rawQuery("select * from " + NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"7\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
         if (res7 != null)  {AL.add(String.valueOf(res7.getCount())+"W");}
         res7.close();
 
         //get for 8
-        Cursor res8 = db.rawQuery("select * from pra_activity_table where DATE=\"" + datenow + "\" AND TYPE = \"8\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
+        Cursor res8 = db.rawQuery("select * from " + NV_ACTIVITY_TABLE +" where DATE=\"" + datenow + "\" AND TYPE = \"8\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
         if (res8 != null)  {AL.add(String.valueOf(res8.getCount())+"R");}
         res8.close();
 
@@ -139,7 +146,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(TIME, time);
         contentValues.put(LOG, log);
         contentValues.put(LAT, lat);
-        long result = db.insert(PRA_LOCATION_TABLE, null, contentValues);
+        long result = db.insert(NV_LOCATION_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -152,14 +159,13 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from pra_location_table", null);
+        Cursor res = db.rawQuery("select * from " +NV_LOCATION_TABLE, null);
         if (res != null ) {
             res.moveToLast();
             if(res.getCount()>1){
                 Al.add(Double.valueOf(res.getString(4)));
                 Al.add(Double.valueOf(res.getString(5)));
             }
-
 
             if (res.getCount()==0){
                 Al.add(0.0);
@@ -192,7 +198,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(DATE, date);
         contentValues.put(DAY, day);
         contentValues.put(TIME, time);
-        long result = db.insert(PRA_NOTIFICATIONREMOVE_TABLE, null, contentValues);
+        long result = db.insert(NV_NOTIFICATIONREMOVE_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -219,7 +225,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         String timeold = df.format(cal.getTime());
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from pra_location_table WHERE TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
+        Cursor res = db.rawQuery("select * from "+NV_LOCATION_TABLE+" WHERE TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getCount();
@@ -240,7 +246,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(ACTIVITY, activity);
         contentValues.put(LOCATION, location);
         contentValues.put(BUSYORNOT, busyornot);
-        long result = db.insert(PRA_BUSYORNOT_TABLE, null, contentValues);
+        long result = db.insert(NV_NOTIFICATIONVIEWABILITY_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -279,7 +285,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from pra_busyornot_table WHERE TIME between \""+timeold+"\" AND \""+timenow+"\"AND  DAY = \""+day+"\" AND ACTIVITY = \""+activity+"\" AND LOCATION = \""+location+"\"", null);
+        Cursor res = db.rawQuery("select * from "+NV_NOTIFICATIONVIEWABILITY_TABLE+" WHERE TIME between \""+timeold+"\" AND \""+timenow+"\"AND  DAY = \""+day+"\" AND ACTIVITY = \""+activity+"\" AND LOCATION = \""+location+"\"", null);
         if (res != null) {
 
             if (res.moveToFirst()){

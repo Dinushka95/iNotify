@@ -123,46 +123,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getvalue(View view) {
-    /*NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
-    praSqlLiteDbHelper.location_get();*/
-
-
-/*    UA_SqlLiteDbHelper cha_sqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
-    cha_sqlLiteDbHelper.NIRgetTotalvalue();*/
-
-/*    UC_SqlLiteDbHelper mit_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
-    mit_sqlLiteDbHelper.appUsageAverage_get();*/
-
-      //  MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
-        //mainUsercharacteristics.getUsercharacteristics(this);
-
-    //Log.v("inotify","bbbbbbbbbbbbbbbbbbbbb"+String.valueOf(mainUsercharacteristics.getUsercharacteristics(this)));
-       // buidJsonObject();
-
-        //MainAttentiviness mainAttentiviness = new MainAttentiviness();
-        //String attentiviness = mainAttentiviness.getFinalAttentiviness(this,"com.example.dinu.testa");
-       // Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+attentiviness);
-/*
-        SNS_SNSModel snsModel = new SNS_SNSModel();
-        snsModel.setDay("1");
-        snsModel.setTime("1111");
-        snsModel.setBusyornot("1");
-        snsModel.setAttentiviness("1");
-        snsModel.setUserchaacteristics("1");
-        snsModel.setNotificationtype("1");
-        snsModel.setAppname("1");
-        MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
-
-        String pp = mainSmartNotificationSystem.getPrediction();
-        Log.v("inotify","pppppppppppppppppppppppppppppppppppppppppppp"+pp);*/
-
-        NotificationManagerCompat.from(this).areNotificationsEnabled();
-
-/*        runOnUiThread(new Runnable() {
-            public void run() {
-
-                ttt();
-            }});*/
 
 
     }
@@ -204,8 +164,5 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    public void buttonInotifyActiveApps(View view) {
-        Intent intent = new Intent(MainActivity.this, iNotifiyActiviteAppsActivity.class);
-        startActivity(intent);
-    }
+
 }

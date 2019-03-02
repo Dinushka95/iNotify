@@ -57,14 +57,4 @@
         app:layout_constraintBottom_toTopOf="@+id/button8"
         tools:layout_editor_absoluteX="76dp" />
 
-    <Button
-        android:id="@+id/buttonInotifyActiveApps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:onClick="buttonInotifyActiveApps"
-        android:text="iNotify Active apps"
-        app:layout_constraintBottom_toTopOf="@+id/button9"
-        tools:layout_editor_absoluteX="76dp" />
-
 </android.support.constraint.ConstraintLayout>

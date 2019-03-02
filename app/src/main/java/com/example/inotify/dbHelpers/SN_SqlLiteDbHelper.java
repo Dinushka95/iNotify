@@ -19,11 +19,9 @@ import java.util.Locale;
 
 public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
-    public static final String DATABASE_NAME = "AppInotify.db";
 
 
     // notification all notifications
-    public static final String DIN_SNS_TABLE = "din_SNS_TABLE";
     public static final String SNS_ID = "sns_id";
     public static final String SNS_DATE = "sns_date";
     public static final String SNS_DAY = "sns_day";
@@ -68,7 +66,7 @@ public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(SNS_NOTIFICATIONTYPE, notificationtype);
         contentValues.put(SNS_APPNAME, appname);
 
-        long result = db.insert(DIN_SNS_TABLE, null, contentValues);
+        long result = db.insert(SNS_TABLE, null, contentValues);
         db.close();
 
         if (result == -1)
@@ -86,7 +84,7 @@ public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues newValues = new ContentValues();
         newValues.put(SNS_VTIME, vtime);
 
-        db.update(DIN_SNS_TABLE, newValues, "sns_id=" + id, null);
+        db.update(SNS_TABLE, newValues, "sns_id=" + id, null);
 
     }
 
@@ -95,7 +93,7 @@ public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ArrayList<SNS_SNSModel> Al = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from din_SNS_TABLE", null);
+        Cursor res = db.rawQuery("select * from "+SNS_TABLE, null);
 
         if (res != null) {
 

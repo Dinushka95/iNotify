@@ -13,18 +13,14 @@ import static com.example.inotify.dbHelpers.NV_SqlLiteDbHelper.DATE;
 
 public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
-    public static final String DATABASE_NAME = "AppInotify.db";
-
 
     // notification all notifications
-    public static final String CHA_N_TABLE = "cha_N_TABLE";
     public static final String N_ID = "N_ID";
     public static final String N_APPNAME = "N_APPNAME";
     public static final String N_DATETIME = "N_DATETIME";
 
 
     // notification importance value
-    public static final String CHA_NI_TABLE = "cha_NI_TABLE";
     public static final String NI_APPNAME = "NI_APPNAME";
     public static final String NI_VALUE = "NI_VALUE";
 
@@ -45,7 +41,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
             contentValues.put(N_ID, id);
             contentValues.put(N_APPNAME, appName);
             contentValues.put(N_DATETIME, value);
-            long result = db.insert(CHA_N_TABLE, null, contentValues);
+            long result = db.insert(UA_N_TABLE, null, contentValues);
             db.close();
             if (result == -1)
                 return false;
@@ -58,7 +54,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         //Log.d("cdap", " ---NValueGet--");
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from CHA_N_TABLE where N_ID =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + UA_N_TABLE +" where N_ID =\"" + id + "\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 return res.getString(1);
@@ -77,7 +73,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
             ContentValues contentValues = new ContentValues();
             contentValues.put(NI_APPNAME, appName);
             contentValues.put(NI_VALUE, value);
-            long result = db.insert(CHA_NI_TABLE, null, contentValues);
+            long result = db.insert(UA_NI_TABLE, null, contentValues);
             db.close();
             if (result == -1)
                 return false;
@@ -91,7 +87,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
        // Log.d("cdap", " ---NIappExisCheck--");
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from CHA_NI_TABLE where NI_APPNAME=\"" + appName + "\"", null);
+        Cursor cursor = db.rawQuery("select * from " + UA_NI_TABLE +" where NI_APPNAME=\"" + appName + "\"", null);
         if (cursor != null) {
             if (cursor.getCount() > 0) {
                 cursor.close();
@@ -106,7 +102,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
        // Log.d("cdap", " ---NIValueGet--");
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from CHA_NI_TABLE where NI_APPNAME=\"" + appName + "\"", null);
+        Cursor res = db.rawQuery("select * from UA_NI_TABLE where NI_APPNAME=\"" + appName + "\"", null);
 
         if (res != null) {
             if (res.moveToFirst()) {
@@ -130,7 +126,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
             contentValues.put(NI_VALUE, newValue);
-            db.update(CHA_NI_TABLE, contentValues, "NI_APPNAME = ? ", new String[]{appName});
+            db.update(UA_NI_TABLE, contentValues, "NI_APPNAME = ? ", new String[]{appName});
             return true;
         } else {
             return NIinsert(appName, value);
@@ -188,7 +184,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public int NIRgetTotalvalue() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT SUM(NI_VALUE) as Total FROM cha_NI_TABLE", null);
+        Cursor cursor = db.rawQuery("SELECT SUM(NI_VALUE) as Total FROM "+UA_NI_TABLE, null);
         int total=0;
         if (cursor.moveToFirst()) {
 
@@ -206,7 +202,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put("TIMEOFF", timenow);
-        long result = db.insert(CHA_NI_TABLE, null, contentValues);
+        long result = db.insert(UA_NI_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -222,7 +218,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DATE, date);
         contentValues.put("TIMEON", timenow);
-        long result = db.insert(CHA_NI_TABLE, null, contentValues);
+        long result = db.insert(UA_NI_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
