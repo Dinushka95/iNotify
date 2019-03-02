@@ -335,7 +335,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             }
          //   Log.d("cdap", " ---onNotificationRemoved--------total notifications-----" + totalnotificationinlist);
             UA_SqlLiteDbHelper chaSqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
-            String packageName = chaSqlLiteDbHelper.NgetValue(sbn.getNotification().tickerText.toString());
+            String packageName = chaSqlLiteDbHelper.NValueGet(sbn.getNotification().tickerText.toString());
             chaSqlLiteDbHelper.NIupdate(packageName, totalnotificationinlist);
             chaSqlLiteDbHelper.close();
 

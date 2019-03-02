@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
 import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
 
 import java.text.ParseException;
@@ -27,7 +28,9 @@ public class All_ScreenLock extends BroadcastReceiver {
             SharedPreferences.Editor editor = context.getSharedPreferences("lockscreen", MODE_PRIVATE).edit();
             editor.putString("screen", "off");
             editor.apply();
-
+            // add db entry to save data time of screen off
+            UA_SqlLiteDbHelper ua_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
+            ua_sqlLiteDbHelper.screenOffInsert();
             //mitha part
             String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
@@ -66,6 +69,9 @@ public class All_ScreenLock extends BroadcastReceiver {
           //  Log.v("Screen mode","Screen is in on State" );
             SharedPreferences.Editor editor = context.getSharedPreferences("lockscreen", MODE_PRIVATE).edit();
             editor.putString("screen", "on");
+            // add db entry to save data time of screen on
+            UA_SqlLiteDbHelper ua_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
+            ua_sqlLiteDbHelper.screenOnInsert();
             String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
             editor.putString("time",timenow );
             editor.apply();

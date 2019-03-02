@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
-import com.example.inotify.helpers.UA_RingerMode;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.inotify.views.MainActivity.MainAttentiviness_DebuggerLogger;
@@ -26,7 +25,7 @@ public class MainAttentiviness {
 
         int total_important_value = attention_sqlLiteDbHelper.NIRgetTotalvalue();
 
-        int AppINV = attention_sqlLiteDbHelper.NIgetValue(appName);
+        int AppINV = attention_sqlLiteDbHelper.NIValueGet(appName);
 
         double W_r=0;
         double W_sl=0;

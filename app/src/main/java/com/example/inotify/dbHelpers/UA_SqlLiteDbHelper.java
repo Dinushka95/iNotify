@@ -5,7 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.inotify.dbHelpers.MainSqlliteOpenHelp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import static com.example.inotify.dbHelpers.NV_SqlLiteDbHelper.DATE;
 
 public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
@@ -23,9 +27,6 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public static final String CHA_NI_TABLE = "cha_NI_TABLE";
     public static final String NI_APPNAME = "NI_APPNAME";
     public static final String NI_VALUE = "NI_VALUE";
-
-
-
 
 
     public UA_SqlLiteDbHelper(Context context) {
@@ -53,8 +54,8 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         }
     }
 
-    public String NgetValue(String id) {
-        //Log.d("cdap", " ---NgetValue--");
+    public String NValueGet(String id) {
+        //Log.d("cdap", " ---NValueGet--");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from CHA_N_TABLE where N_ID =\"" + id + "\"", null);
@@ -101,8 +102,8 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         return false;
     }
 
-    public int NIgetValue(String appName) {
-       // Log.d("cdap", " ---NIgetValue--");
+    public int NIValueGet(String appName) {
+       // Log.d("cdap", " ---NIValueGet--");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from CHA_NI_TABLE where NI_APPNAME=\"" + appName + "\"", null);
@@ -122,7 +123,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         if (NIappExisCheck(appName)) {
             //Log.d("cdap", " --------------sssss-----------" +value);
-            int currentValue = NIgetValue(appName);
+            int currentValue = NIValueGet(appName);
             //Log.d("cdap", " --------------sssss-----------" +currentValue);
             int newValue = currentValue + value;
             //Log.d("cdap", " --------------sssss-----------" +newValue);
@@ -195,6 +196,38 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         }
         return total;
 
+    }
+
+    public boolean screenOffInsert() {
+
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DATE, date);
+        contentValues.put("TIMEOFF", timenow);
+        long result = db.insert(CHA_NI_TABLE, null, contentValues);
+        db.close();
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean screenOnInsert() {
+
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DATE, date);
+        contentValues.put("TIMEON", timenow);
+        long result = db.insert(CHA_NI_TABLE, null, contentValues);
+        db.close();
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
 
 

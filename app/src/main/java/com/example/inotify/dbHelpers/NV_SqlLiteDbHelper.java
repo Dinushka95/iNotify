@@ -27,7 +27,6 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
     public boolean activity_insert(String type, String confidence) {
 
-
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
         Calendar cal = Calendar.getInstance();
@@ -84,7 +83,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         SQLiteDatabase db = this.getReadableDatabase();
         // select * from pra_activity_table where DATE = "20190202" AND TIME  between "1356" and "1514"
-//huge bug if it has same count for muliple activity this will fail so assume that it will not have fix later
+        //huge bug if it has same count for muliple activity this will fail so assume that it will not have fix later
         //get for 0
         Cursor res0 = db.rawQuery("select * from pra_activity_table where DATE=\"" + datenow + "\" AND TYPE = \"0\" AND TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
         if (res0 != null) {AL.add(String.valueOf(res0.getCount())+"V");}
@@ -119,7 +118,6 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         return String.valueOf(value.charAt(length-1));
     }
-
 
 
     public boolean location_insert(String log, String lat) {
