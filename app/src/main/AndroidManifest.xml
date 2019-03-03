@@ -55,6 +55,15 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".utils.FeedbackYesIntent"
+            android:exported="false"/>
+
+        <service
+            android:name=".utils.FeedbackNoIntent"
+            android:exported="false"/>
+
+
         <receiver
             android:name="com.example.inotify.helpers.All_ScreenLock"
             android:enabled="true"

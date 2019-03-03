@@ -58,9 +58,6 @@ public class All_ScreenLock extends BroadcastReceiver {
             UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(context);
             UC_sqlLiteDbHelper.screentime_insert(String.valueOf(difference));
 
-
-
-
         }
 
 
