@@ -12,10 +12,14 @@ import android.os.StrictMode;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.example.inotify.dbHelpers.RingerModeDbHelper;
+import com.example.inotify.dbHelpers.ScreenOnDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.R;
+import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_NotificationViewabilityService;
 import com.example.inotify.services.NV_LocationService;
@@ -25,6 +29,9 @@ import com.google.android.gms.location.ActivityRecognitionClient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -107,6 +114,41 @@ public class MainActivity extends AppCompatActivity {
         BroadcastReceiver mReceiver = new All_ScreenLock();
         registerReceiver(mReceiver, intentFilter);
 
+
+    //run isPhoneLockedOrNot method
+        All_ScreenLock screenLock = new All_ScreenLock();
+       Boolean screenstatus =  screenLock.isPhoneLockedOrNot(this);
+        Log.d("inotify " ,"ScreenStatus" + screenstatus);
+        if(screenstatus == false)
+        {
+            //Save to screen on table
+            ScreenOnDbHelper screenOnDbHelper = new ScreenOnDbHelper(this);
+            String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+            screenOnDbHelper.ScreenOnInsert();
+            screenOnDbHelper.close();
+            Log.d("iNotify" , "SCreen status Saved");
+
+
+
+        }
+        else
+        {
+            //Save to screen off table
+        }
+
+    // Call ringermode  method and save into UA_RINGERMODE_TABLE
+        RingerModeHelper ringermodeHelper = new RingerModeHelper();
+        String RingerMode = ringermodeHelper.getRingerMode(this);
+        Log.d("inotify " ,"RingerMode" + RingerMode);
+
+
+        RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
+        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+        Log.d("inotify " ,"RingerMode" + RingerMode + "," +id);
+
+        ringerModeDbHelper.RMinsert(id,RingerMode );
+        ringerModeDbHelper.close();
+        Log.d("inotify " ,"Record Saved");
 
 
 

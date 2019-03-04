@@ -17,7 +17,8 @@ public class MainAttentiviness {
             Log.d("inotify", "Main-Attentiviness--Started---");
         }
 
-        String ringerMode = new UA_RingerMode().getRingerMode(context);
+        String ringerMode = new RingerModeHelper().getRingerMode(context);
+
         SharedPreferences prefs = context.getSharedPreferences("lockscreen", MODE_PRIVATE);
         String isScreenOn = prefs.getString("screen", null);
 

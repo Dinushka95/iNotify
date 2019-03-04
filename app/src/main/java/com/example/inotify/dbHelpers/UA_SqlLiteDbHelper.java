@@ -25,6 +25,8 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
     public static final String NI_VALUE = "NI_VALUE";
 
 
+
+
     public UA_SqlLiteDbHelper(Context context) {
 
         super(context);

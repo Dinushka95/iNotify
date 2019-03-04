@@ -15,6 +15,7 @@ import android.util.Log;
 
 import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.MainNotificationViewability;
 import com.example.inotify.models.SNS_SNSModel;
 import com.example.inotify.helpers.MainSmartNotificationSystem;
@@ -123,6 +124,13 @@ public class MyNotificationListenerService extends NotificationListenerService {
             // chaya
             MainAttentiviness mainAttentiviness = new MainAttentiviness();
             String attentiviness = mainAttentiviness.getFinalAttentiviness(this,apppack);
+
+
+            //call the isPhoneLowckedOrNot method here
+            All_ScreenLock screenLockStatus = new All_ScreenLock();
+            Boolean ScreenLock = screenLockStatus.isPhoneLockedOrNot(this);
+            Log.d("inotify" , "ScreenLock + " +ScreenLock );
+           // String Screenlock = screenLockStatus.isPhoneLockedOrNot();
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // mitha
             MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
