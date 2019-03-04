@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.inotify.utils.TableNames.MYNOTIFICATION_TABLE;
 
 
 public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
@@ -34,6 +35,8 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
     public static final String UC_APPLISTSOCIALMEDIACOUNT_TABLE = "uc_applistsocialmediacount_table";
 
     public static final String SNS_TABLE = "sns_table";
+
+
 
     public static final String SETTINGS_SNAVCTIVEAPPS_TABLE = "settings_snactiveapps_table";
 
@@ -75,6 +78,8 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + UA_SCREENOFF_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEOFF TEXT)");
         db.execSQL("create table " + UA_SCREENON_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEON TEXT)");
+
+        db.execSQL("create table " + MYNOTIFICATION_TABLE + " (MYNOTIFICATION_ID INTEGER,DATE TEXT,TIMERECEVIED TEXT,TIMESENT TEXT,TIMEVIEW TEXT,APPNAME TEXT,PACKAGENAME TEXT)");
 
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(1,20190216,'Saturday',2345,80.9,78.8);");
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(2,20190216,'Saturday',2345,80.9,78.8);");
