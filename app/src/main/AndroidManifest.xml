@@ -22,8 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name="com.example.inotify.views.MainActivity">
+        <activity android:name=".views.NotificationHistoryActivity"></activity>
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,40 +32,37 @@
         </activity>
 
         <service
-            android:name="com.example.inotify.services.NV_ActivityRecognitionService"
+            android:name=".services.NV_ActivityRecognitionService"
             android:exported="false" />
         <service
-            android:name="com.example.inotify.services.NV_LocationService"
+            android:name=".services.NV_LocationService"
             android:label="LocationService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name="com.example.inotify.services.UC_all_service"
+            android:name=".services.UC_all_service"
             android:label="Mit_all_service"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name="com.example.inotify.services.NV_NotificationViewabilityService"
+            android:name=".services.NV_NotificationViewabilityService"
             android:label="BusyOrNotBackgroundService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name="com.example.inotify.services.MyNotificationListenerService"
+            android:name=".services.MyNotificationListenerService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
-
         <service
-            android:name=".utils.FeedbackYesIntent"
-            android:exported="false"/>
-
+            android:name=".helpers.FeedbackYesIntent"
+            android:exported="false" />
         <service
-            android:name=".utils.FeedbackNoIntent"
-            android:exported="false"/>
-
+            android:name=".helpers.FeedbackNoIntent"
+            android:exported="false" />
 
         <receiver
-            android:name="com.example.inotify.helpers.All_ScreenLock"
+            android:name=".helpers.All_ScreenLock"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -74,7 +71,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.example.inotify.helpers.UC_Charge"
+            android:name=".helpers.UC_Charge"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -82,8 +79,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.example.inotify.views.settingsActivity" />
-        <activity android:name="com.example.inotify.views.iNotifiyActiviteAppsActivity" />
+        <activity android:name=".views.SettingsActivity" />
+        <activity android:name=".views.INotifiyActiviteAppsActivity" />
     </application>
 
 </manifest>

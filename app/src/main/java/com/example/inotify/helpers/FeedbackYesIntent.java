@@ -1,4 +1,4 @@
-package com.example.inotify.utils;
+package com.example.inotify.helpers;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -14,5 +14,7 @@ public class FeedbackYesIntent extends IntentService {
     @Override
     protected void onHandleIntent( Intent intent) {
         Log.d("inotify", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
+        // TODO-- get user feedback. if this notification is important
+
     }
 }

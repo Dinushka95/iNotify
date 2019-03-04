@@ -15,12 +15,12 @@ import com.example.inotify.R;
 
 import java.util.ArrayList;
 
-public class inotifyActiveAppsAdapter extends BaseAdapter implements ListAdapter {
+public class INotifyActiveAppsAdapter extends BaseAdapter implements ListAdapter {
 
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
 
-    public inotifyActiveAppsAdapter(ArrayList<String> list, Context context) {
+    public INotifyActiveAppsAdapter(ArrayList<String> list, Context context) {
         this.list = list;
         this.context = context;
     }

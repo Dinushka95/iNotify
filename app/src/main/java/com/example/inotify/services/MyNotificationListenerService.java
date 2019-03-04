@@ -23,8 +23,8 @@ import com.example.inotify.helpers.MainAttentiviness;
 import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
 import com.example.inotify.dbHelpers.SN_SqlLiteDbHelper;
 import com.example.inotify.helpers.MainUsercharacteristics;
-import com.example.inotify.utils.FeedbackNoIntent;
-import com.example.inotify.utils.FeedbackYesIntent;
+import com.example.inotify.helpers.FeedbackNoIntent;
+import com.example.inotify.helpers.FeedbackYesIntent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -298,17 +298,12 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
                 // feedbackYes
-
-
                 Intent feedbackYes = new Intent(this, FeedbackYesIntent.class);
-                PendingIntent pfeedbackYes = PendingIntent.getService(this, 1, feedbackYes, PendingIntent.FLAG_ONE_SHOT);
+                PendingIntent pFeedbackYes = PendingIntent.getService(this, 1, feedbackYes, PendingIntent.FLAG_ONE_SHOT);
 
                 // feedbackNo
-/*                Intent feedbackNo = new Intent(this, FeedbackNoIntent.class);
-                feedbackNo.putExtra("Intent", "no");
-                //startService(feedbackNo);*/
-
-                PendingIntent feedbackNo = PendingIntent.getService(getApplicationContext(), 0, new Intent(this, FeedbackNoIntent.class),0);
+                Intent feedbackNo = new Intent(this, FeedbackYesIntent.class);
+                PendingIntent pFeedbackNo = PendingIntent.getService(this, 1, feedbackNo, PendingIntent.FLAG_ONE_SHOT);
 
 
                // String dateTime = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
@@ -319,8 +314,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
                         .setContentText(text)
                         .setSmallIcon(android.R.drawable.ic_notification_clear_all)
                         .setTicker(id)
-                        .addAction(R.drawable.common_google_signin_btn_icon_light,"Yes",pfeedbackYes)
-                        .addAction(R.drawable.common_google_signin_btn_icon_light,"No",feedbackNo)
+                        .addAction(R.drawable.common_google_signin_btn_icon_light,"Yes",pFeedbackYes)
+                        .addAction(R.drawable.common_google_signin_btn_icon_light,"No",pFeedbackNo)
                         .setAutoCancel(true)
                         .setDefaults(Notification.DEFAULT_ALL)
                         .setPriority(NotificationCompat.PRIORITY_MAX)

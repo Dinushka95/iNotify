@@ -7,11 +7,11 @@ import android.content.pm.PackageManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class inotifyActiveAppsLogic {
+public class INotifyActiveAppsLogic {
 
     public Context context;
 
-    public inotifyActiveAppsLogic(Context c1) {
+    public INotifyActiveAppsLogic(Context c1) {
         context=c1;
     }
 

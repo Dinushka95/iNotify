@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.inotify.R;
-import com.example.inotify.viewControllers.inotifyActiveAppsAdapter;
-import com.example.inotify.viewControllers.inotifyActiveAppsLogic;
+import com.example.inotify.viewControllers.INotifyActiveAppsAdapter;
+import com.example.inotify.viewControllers.INotifyActiveAppsLogic;
 
 import java.util.ArrayList;
 
-public class iNotifiyActiviteAppsActivity extends AppCompatActivity {
+public class INotifiyActiviteAppsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +18,12 @@ public class iNotifiyActiviteAppsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inotify_activite_apps);
 
         //generate list
-        inotifyActiveAppsLogic activity_inotify_activite_apps =new inotifyActiveAppsLogic(this);
+        INotifyActiveAppsLogic activity_inotify_activite_apps =new INotifyActiveAppsLogic(this);
 
         ArrayList<String> list = new ArrayList<String>();
         list =activity_inotify_activite_apps.getApplicationList();
         //instantiate custom adapter
-        inotifyActiveAppsAdapter inotifyActiveAppsAdapter = new inotifyActiveAppsAdapter(list, this);
+        INotifyActiveAppsAdapter inotifyActiveAppsAdapter = new INotifyActiveAppsAdapter(list, this);
 
         //handle listview and assign adapter
         ListView lView = (ListView) findViewById(R.id.listv);
