@@ -12,7 +12,7 @@ import com.example.inotify.R;
 
 import static com.example.inotify.dbHelpers.MainSqlliteOpenHelp.DATABASE_NAME;
 
-public class settingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class settingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
     }
 
-    public void resetDb(final View view) {
+    public void button_resetDb(final View view) {
 
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setMessage("Are You Sure To Reset Database");
@@ -47,8 +47,8 @@ public class settingsActivity extends AppCompatActivity {
 
     }
 
-    public void buttonInotifyActiveApps(View view) {
-        Intent intent = new Intent(settingsActivity.this, iNotifiyActiviteAppsActivity.class);
+    public void button_INotifyActiveApps(View view) {
+        Intent intent = new Intent(SettingsActivity.this, INotifiyActiviteAppsActivity.class);
         startActivity(intent);
     }
 

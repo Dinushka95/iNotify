@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.StrictMode;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -151,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void settings(View view) {
-        Intent intent = new Intent(MainActivity.this, settingsActivity.class);
+    public void button_settings(View view) {
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
 
@@ -165,4 +164,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void button_notificationHistory(View view) {
+        Intent intent = new Intent(MainActivity.this, NotificationHistoryActivity.class);
+        startActivity(intent);
+
+    }
 }

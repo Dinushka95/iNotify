@@ -1,4 +1,4 @@
-package com.example.inotify.utils;
+package com.example.inotify.helpers;
 
 import android.app.IntentService;
 import android.content.Intent;

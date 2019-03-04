@@ -5,9 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class iNotifiyActiviteAppsDbHelper extends MainSqlliteOpenHelp {
+public class INotifiyActiviteAppsDbHelper extends MainSqlliteOpenHelp {
 
-    public iNotifiyActiviteAppsDbHelper(Context context) {
+    public INotifiyActiviteAppsDbHelper(Context context) {
         super(context);
     }
 
