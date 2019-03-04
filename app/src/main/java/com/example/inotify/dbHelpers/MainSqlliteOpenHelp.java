@@ -35,6 +35,8 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
 
     public static final String SNS_TABLE = "sns_table";
 
+    public static final String TOPAPP_TABLE = "topapp_table";
+
     public static final String SETTINGS_SNAVCTIVEAPPS_TABLE = "settings_snactiveapps_table";
 
     public MainSqlliteOpenHelp(Context context) {
@@ -75,6 +77,9 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + UA_SCREENOFF_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEOFF TEXT)");
         db.execSQL("create table " + UA_SCREENON_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEON TEXT)");
+
+        db.execSQL("create table " + TOPAPP_TABLE + " (TOPAPP_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE)");
+
 
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(1,20190216,'Saturday',2345,80.9,78.8);");
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(2,20190216,'Saturday',2345,80.9,78.8);");

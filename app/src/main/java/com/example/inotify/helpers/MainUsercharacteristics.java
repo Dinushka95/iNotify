@@ -29,7 +29,7 @@ public class MainUsercharacteristics {
         long calendarCountAvg = UC_sqlLiteDbHelper.calendereventAverage_get();
         long chargetimeAvg = UC_sqlLiteDbHelper.chargeAverage_get();
         long socialmediacAppCountAvg = UC_sqlLiteDbHelper.applistsocialmediaAverage_get();
-
+        long appListAverageWithoutLast = UC_sqlLiteDbHelper.applistAverageWithoutLast_get();
 
         long appUsageCountLast = UC_sqlLiteDbHelper.appUsageLast_get();
         long appListCountLast = UC_sqlLiteDbHelper.applistLast_get();
@@ -57,6 +57,7 @@ public class MainUsercharacteristics {
             Log.d("inotify", "Main-Usercharacteristics--chargetimeLast---"+chargetimeLast);
             Log.d("inotify", "Main-Usercharacteristics--socialmediacAppCountAvg---"+socialmediacAppCountAvg);
             Log.d("inotify", "Main-Usercharacteristics--socialmediacAppCountLast---"+socialmediacAppCountLast);
+            Log.d("inotify","Main-Usercharacteristics--appListAverageWithoutLast---"+appListAverageWithoutLast);
 
 
         }
