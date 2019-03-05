@@ -1,9 +1,11 @@
 package com.example.inotify.helpers;
 
+import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
 import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
@@ -73,8 +75,23 @@ public class All_ScreenLock extends BroadcastReceiver {
             editor.putString("time",timenow );
             editor.apply();
         }
+        }
 
+        //Implement the function to check the screen status when a notification is delivered
+    public boolean isPhoneLockedOrNot(Context context){
+    boolean isPhoneLock =false;
+    if(context != null){
+        KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        if(myKM != null && myKM.isKeyguardLocked()){
+            isPhoneLock =true;
+            //Log.d("inotify" , "screen type " +isPhoneLock );
+        }
     }
+        return isPhoneLock;
+    }
+
+
+
 
 
 }

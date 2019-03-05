@@ -390,4 +390,21 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         return 0;
     }
+
+    public long applistAverageWithoutLast_get() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select avg(COUNT - 1) as avg from "+UC_APPLISTCOUNT_TABLE, null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getLong(res.getColumnIndex("avg - 1"));
+            }
+        }
+        if (res != null) {
+            res.close();
+        }
+        db.close();
+
+        return 0;
+    }
 }
