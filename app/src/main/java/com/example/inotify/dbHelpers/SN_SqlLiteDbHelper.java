@@ -16,22 +16,24 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.example.inotify.configs.TableColumnNames.SNS_APPNAME;
+import static com.example.inotify.configs.TableColumnNames.SNS_ATTENTIVINESS;
+import static com.example.inotify.configs.TableColumnNames.SNS_BUSYORNOT;
+import static com.example.inotify.configs.TableColumnNames.SNS_DATE;
+import static com.example.inotify.configs.TableColumnNames.SNS_DAY;
+import static com.example.inotify.configs.TableColumnNames.SNS_ID;
+import static com.example.inotify.configs.TableColumnNames.SNS_NOTIFICATIONTYPE;
+import static com.example.inotify.configs.TableColumnNames.SNS_TIME;
+import static com.example.inotify.configs.TableColumnNames.SNS_USERCHAACTERISTICS;
+import static com.example.inotify.configs.TableColumnNames.SNS_VTIME;
+import static com.example.inotify.configs.TableNames.SNS_TABLE;
+
 
 public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
 
 
-    // notification all notifications
-    public static final String SNS_ID = "sns_id";
-    public static final String SNS_DATE = "sns_date";
-    public static final String SNS_DAY = "sns_day";
-    public static final String SNS_TIME = "sns_time";
-    public static final String SNS_BUSYORNOT = "sns_busyornot";
-    public static final String SNS_ATTENTIVINESS = "sns_attentiviness";
-    public static final String SNS_USERCHAACTERISTICS = "sns_userchaacteristics";
-    public static final String SNS_NOTIFICATIONTYPE = "sns_notificationtype";
-    public static final String SNS_APPNAME = "sns_appname";
-    public static final String SNS_VTIME = "sns_vtime";
+
 
 
     public SN_SqlLiteDbHelper(Context context) {

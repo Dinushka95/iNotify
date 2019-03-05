@@ -4,14 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import static com.example.inotify.utils.TableColumnNames.APPNAME;
-import static com.example.inotify.utils.TableColumnNames.DATE;
-import static com.example.inotify.utils.TableColumnNames.MYNOTIFICATION_ID;
-import static com.example.inotify.utils.TableColumnNames.PACKAGENAME;
-import static com.example.inotify.utils.TableColumnNames.TIMERECEVIED;
-import static com.example.inotify.utils.TableColumnNames.TIMESENT;
-import static com.example.inotify.utils.TableColumnNames.TIMEVIEW;
-import static com.example.inotify.utils.TableNames.MYNOTIFICATION_TABLE;
+import static com.example.inotify.configs.TableColumnNames.DATE;
+import static com.example.inotify.configs.TableColumnNames.MYNOTIFICATION_ID;
+import static com.example.inotify.configs.TableColumnNames.PACKAGENAME;
+import static com.example.inotify.configs.TableColumnNames.TIMERECEVIED;
+import static com.example.inotify.configs.TableColumnNames.TIMESENT;
+import static com.example.inotify.configs.TableColumnNames.TIMEVIEW;
+import static com.example.inotify.configs.TableNames.NOTIFICATION_TABLE;
 
 public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
 
@@ -28,7 +27,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(PACKAGENAME, packageName);
         contentValues.put(TIMERECEVIED, timeRecevied);
 
-        long result = db.insert(MYNOTIFICATION_TABLE, null, contentValues);
+        long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -47,7 +46,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
             contentValues.put(TIMESENT, timeSent);
             contentValues.put(TIMEVIEW, timeViewed);
 
-            long result = db.insert(MYNOTIFICATION_TABLE, null, contentValues);
+            long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
             db.close();
             if (result == -1)
                 return false;

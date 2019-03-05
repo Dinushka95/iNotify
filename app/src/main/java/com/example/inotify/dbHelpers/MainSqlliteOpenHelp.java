@@ -6,7 +6,27 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.inotify.utils.TableNames.NOTIFICATION_TABLE;
+import static com.example.inotify.configs.TableNames.NOTIFICATION_TABLE;
+import static com.example.inotify.configs.TableNames.NV_ACTIVITY_TABLE;
+import static com.example.inotify.configs.TableNames.NV_LOCATION_TABLE;
+import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONREMOVE_TABLE;
+import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONVIEWABILITY_TABLE;
+import static com.example.inotify.configs.TableNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
+import static com.example.inotify.configs.TableNames.SNS_TABLE;
+import static com.example.inotify.configs.TableNames.TOPAPP_TABLE;
+import static com.example.inotify.configs.TableNames.UA_NI_TABLE;
+import static com.example.inotify.configs.TableNames.UA_N_TABLE;
+import static com.example.inotify.configs.TableNames.UA_RINGERMODE_TABLE;
+import static com.example.inotify.configs.TableNames.UA_SCREENOFF_TABLE;
+import static com.example.inotify.configs.TableNames.UA_SCREENON_TABLE;
+import static com.example.inotify.configs.TableNames.UC_APPLISTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CALENDEREVENTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CALLDURATION_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CHARGE_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CONTACTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_SCREENTIME_TABLE;
+import static com.example.inotify.configs.TableNames.UC_USAGECOUNT_TABLE;
 
 
 public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
@@ -15,32 +35,7 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
 
     SharedPreferences.Editor editor009;
 
-    public static final String NV_NOTIFICATIONREMOVE_TABLE = "nv_notificationRemove_table";
-    public static final String NV_NOTIFICATIONVIEWABILITY_TABLE = "nv_viewability_table";
-    public static final String NV_ACTIVITY_TABLE = "nv_activity_table";
-    public static final String NV_LOCATION_TABLE = "nv_location_table";
 
-    public static final String UA_N_TABLE = "ua_N_table";
-    public static final String UA_NI_TABLE = "ua_NI_table";
-    public static final String UA_SCREENOFF_TABLE = "ua_screenoff_table";
-    public static final String UA_SCREENON_TABLE = "ua_screenon_table";
-    public static final String UA_RINGERMODE_TABLE = "ua_ringermode_table";
-
-
-    public static final String UC_CHARGE_TABLE = "uc_charge_table";
-    public static final String UC_APPLISTCOUNT_TABLE = "uc_applistcount_table";
-    public static final String UC_USAGECOUNT_TABLE = "uc_usagecount_table";
-    public static final String UC_CONTACTCOUNT_TABLE = "uc_contactcount_table";
-    public static final String UC_SCREENTIME_TABLE = "uc_screentime_table";
-    public static final String UC_CALLDURATION_TABLE = "uc_callduration_table";
-    public static final String UC_CALENDEREVENTCOUNT_TABLE = "uc_calendereventcount_table";
-    public static final String UC_APPLISTSOCIALMEDIACOUNT_TABLE = "uc_applistsocialmediacount_table";
-
-    public static final String SNS_TABLE = "sns_table";
-
-    public static final String TOPAPP_TABLE = "topapp_table";
-
-    public static final String SETTINGS_SNAVCTIVEAPPS_TABLE = "settings_snactiveapps_table";
 
     public MainSqlliteOpenHelp(Context context) {
         super(context, DATABASE_NAME, null, 1);

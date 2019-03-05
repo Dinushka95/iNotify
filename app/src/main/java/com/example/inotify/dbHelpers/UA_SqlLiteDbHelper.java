@@ -9,28 +9,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.dbHelpers.NV_SqlLiteDbHelper.DATE;
+import static com.example.inotify.configs.TableColumnNames.DATE;
+import static com.example.inotify.configs.TableColumnNames.NI_APPNAME;
+import static com.example.inotify.configs.TableColumnNames.NI_VALUE;
+import static com.example.inotify.configs.TableColumnNames.N_APPNAME;
+import static com.example.inotify.configs.TableColumnNames.N_DATETIME;
+import static com.example.inotify.configs.TableColumnNames.N_ID;
+import static com.example.inotify.configs.TableNames.UA_NI_TABLE;
+import static com.example.inotify.configs.TableNames.UA_N_TABLE;
 
 public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
-
-    // notification all notifications
-    public static final String N_ID = "N_ID";
-    public static final String N_APPNAME = "N_APPNAME";
-    public static final String N_DATETIME = "N_DATETIME";
-
-
-    // notification importance value
-    public static final String NI_APPNAME = "NI_APPNAME";
-    public static final String NI_VALUE = "NI_VALUE";
-
-
-
-
     public UA_SqlLiteDbHelper(Context context) {
-
         super(context);
-
     }
 
     public boolean Ninsert(Long id,String appName, Long value) {

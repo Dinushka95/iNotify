@@ -13,20 +13,24 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
+import static android.icu.text.DateFormat.DAY;
+import static com.example.inotify.configs.TableColumnNames.ACTIVITY;
+import static com.example.inotify.configs.TableColumnNames.BUSYORNOT;
+import static com.example.inotify.configs.TableColumnNames.CONFIDENCE;
+import static com.example.inotify.configs.TableColumnNames.DATE;
+import static com.example.inotify.configs.TableColumnNames.LAT;
+import static com.example.inotify.configs.TableColumnNames.LOCATION;
+import static com.example.inotify.configs.TableColumnNames.LOG;
+import static com.example.inotify.configs.TableColumnNames.TIME;
+import static com.example.inotify.configs.TableColumnNames.TYPE;
+import static com.example.inotify.configs.TableNames.NV_ACTIVITY_TABLE;
+import static com.example.inotify.configs.TableNames.NV_LOCATION_TABLE;
+import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONREMOVE_TABLE;
+import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONVIEWABILITY_TABLE;
+
 public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
-    public static final String DATE = "date";
-    public static final String DAY = "day";
-    public static final String TIME = "time";
 
-
-    public static final String ACTIVITY = "activity";
-    public static final String LOCATION = "location";
-    public static final String BUSYORNOT = "busyornot";
-    public static final String TYPE = "type";
-    public static final String CONFIDENCE = "confidence";
-    public static final String LOG = "log";
-    public static final String LAT = "lat";
 
     public NV_SqlLiteDbHelper(Context context) {
         super(context);
