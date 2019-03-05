@@ -35,7 +35,10 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
 
     public static final String SNS_TABLE = "sns_table";
 
-    public static final String TOPAPP_TABLE = "topapp_table";
+    public static final String UC_TOPAPP_TABLE = "uc_topapp_table";
+
+    public static final String APPLICATIONS_TABLE = "applications_table";
+
 
     public static final String SETTINGS_SNAVCTIVEAPPS_TABLE = "settings_snactiveapps_table";
 
@@ -78,7 +81,9 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + UA_SCREENOFF_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEOFF TEXT)");
         db.execSQL("create table " + UA_SCREENON_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEON TEXT)");
 
-        db.execSQL("create table " + TOPAPP_TABLE + " (TOPAPP_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE)");
+        db.execSQL("create table " + UC_TOPAPP_TABLE + " (TOPAPP_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE Text)");
+
+        db.execSQL("create table " + APPLICATIONS_TABLE + " (APPLICATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE Text)");
 
 
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(1,20190216,'Saturday',2345,80.9,78.8);");
@@ -106,6 +111,27 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("insert into ua_NI_table(NI_ID,NI_APPNAME,NI_VALUE)values(3,'com.example.dinu.testc',1);");
         db.execSQL("insert into ua_NI_table(NI_ID,NI_APPNAME,NI_VALUE)values(4,'com.example.dinu.testd',1);");
         db.execSQL("insert into ua_NI_table(NI_ID,NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");
+
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('hungamamusic','musicvideo','com.google.android.apps.hungamamusic');");
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('tinder','dating','com.google.android.apps.tinder');");
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('badoo','dating','com.google.android.apps.badoo');");
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('netflix','entertainment','com.google.android.apps.netflix');");
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
+        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('hungamamusic','musicvideo','com.google.android.apps.hungamamusic');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('tinder','dating','com.google.android.apps.tinder');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('badoo','dating','com.google.android.apps.badoo');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('netflix','entertainment','com.google.android.apps.netflix');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+
     }
 
     @Override
