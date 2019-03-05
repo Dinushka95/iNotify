@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import com.example.inotify.configs.TableColumnNames;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,20 +16,30 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
+import static android.icu.text.DateFormat.DAY;
+import static android.icu.text.DateFormat.getDateInstance;
+import static com.example.inotify.configs.TableColumnNames.ACTIVITY;
+import static com.example.inotify.configs.TableColumnNames.BUSYORNOT;
+import static com.example.inotify.configs.TableColumnNames.CONFIDENCE;
+import static com.example.inotify.configs.TableColumnNames.DATE;
+import static com.example.inotify.configs.TableColumnNames.LAT;
+import static com.example.inotify.configs.TableColumnNames.LOCATION;
+import static com.example.inotify.configs.TableColumnNames.LOG;
+import static com.example.inotify.configs.TableColumnNames.NOTOR;
+import static com.example.inotify.configs.TableColumnNames.PROBABLITY;
+import static com.example.inotify.configs.TableColumnNames.TIME;
+import static com.example.inotify.configs.TableColumnNames.TYPE;
+import static com.example.inotify.configs.TableColumnNames.VIEWOR;
+import static com.example.inotify.configs.TableNames.NV_ACTIVITY_TABLE;
+import static com.example.inotify.configs.TableNames.NV_LOCATION_TABLE;
+import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONREMOVE_TABLE;
+import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONVIEWABILITY_TABLE;
+import static com.example.inotify.configs.TableNames.NV_PROBABILITY_TABLE;
+
+
 public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
-    public static final String DATE = "date";
-    public static final String DAY = "day";
-    public static final String TIME = "time";
 
-
-    public static final String ACTIVITY = "activity";
-    public static final String LOCATION = "location";
-    public static final String BUSYORNOT = "busyornot";
-    public static final String TYPE = "type";
-    public static final String CONFIDENCE = "confidence";
-    public static final String LOG = "log";
-    public static final String LAT = "lat";
 
     public NV_SqlLiteDbHelper(Context context) {
         super(context);
@@ -58,6 +71,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         else
             return true;
     }
+
 
     public String activity_get() {
 
@@ -248,6 +262,62 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(BUSYORNOT, busyornot);
         long result = db.insert(NV_NOTIFICATIONVIEWABILITY_TABLE, null, contentValues);
         db.close();
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    // test
+    public boolean probability_insert() {
+
+        Date currentTime = Calendar.getInstance().getTime();
+        Log.d("Debug", "NOW"+currentTime);
+        SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a");
+        String currentDateTimeString = sdf.format(currentTime);
+        SimpleDateFormat hour=new SimpleDateFormat("hh");
+        String currentHour = hour.format(currentTime);
+        Calendar cal = Calendar.getInstance();
+        String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        Log.d("Debug", "NOW"+currentHour);
+        SimpleDateFormat min=new SimpleDateFormat("mm");
+        String currentMin = min.format(currentTime);
+        Log.d("Debug", "NOW"+currentMin);
+        SimpleDateFormat AP=new SimpleDateFormat("a");
+        String currentAP = AP.format(currentTime);
+        Log.d("Debug", "NOW"+currentAP);
+
+        char MinOne = currentMin.charAt(0);
+        Log.d("Debug", "NOW"+MinOne);
+
+        int nextMin = java.lang.Character.getNumericValue(MinOne) +1;
+
+        String TimeSlot = currentHour+":"+ MinOne+"0 - "+currentHour+":"+nextMin+"0 "+ currentAP;
+        Log.d("Debug", "TimeSlot = "+TimeSlot);
+
+
+
+
+
+
+        String day = currentDay;
+        String time = TimeSlot;
+        String activity = "W";
+        int viewor = 1;
+        int notor = 0;
+        double probability = 100;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues2 = new ContentValues();
+        contentValues2.put(TableColumnNames.DAY, day);
+        contentValues2.put(TableColumnNames.TIME, time);
+        contentValues2.put(TableColumnNames.ACTIVITY, activity);
+        contentValues2.put(TableColumnNames.VIEWOR, viewor);
+        contentValues2.put(TableColumnNames.NOTOR, notor);
+        contentValues2.put(TableColumnNames.PROBABLITY, probability);
+        long result = db.insert(NV_PROBABILITY_TABLE, null, contentValues2);
+        db.close();
+        Log.d("hello", "probability_insert: correctly");
         if (result == -1)
             return false;
         else

@@ -9,12 +9,15 @@ import com.example.inotify.models.AppInfoModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.inotify.configs.TableNames.TOPAPP_TABLE;
+
 public class TopAppDbHelper extends MainSqlliteOpenHelp {
 
     public static final String TOPAPP_ID = "topapp_id";
     public static final String APPNAME = "appname";
     public static final String APPCATEGORY = "appcategory";
     public static final String APPPACKAGE = "apppackage";
+
 
     public TopAppDbHelper(Context context) {
         super(context);

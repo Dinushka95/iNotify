@@ -6,6 +6,28 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.inotify.configs.TableNames.NOTIFICATION_TABLE;
+import static com.example.inotify.configs.TableNames.NV_ACTIVITY_TABLE;
+import static com.example.inotify.configs.TableNames.NV_LOCATION_TABLE;
+import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONREMOVE_TABLE;
+import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONVIEWABILITY_TABLE;
+import static com.example.inotify.configs.TableNames.NV_PROBABILITY_TABLE;
+import static com.example.inotify.configs.TableNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
+import static com.example.inotify.configs.TableNames.SNS_TABLE;
+import static com.example.inotify.configs.TableNames.TOPAPP_TABLE;
+import static com.example.inotify.configs.TableNames.UA_NI_TABLE;
+import static com.example.inotify.configs.TableNames.UA_N_TABLE;
+import static com.example.inotify.configs.TableNames.UA_RINGERMODE_TABLE;
+import static com.example.inotify.configs.TableNames.UA_SCREENOFF_TABLE;
+import static com.example.inotify.configs.TableNames.UA_SCREENON_TABLE;
+import static com.example.inotify.configs.TableNames.UC_APPLISTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CALENDEREVENTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CALLDURATION_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CHARGE_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CONTACTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_SCREENTIME_TABLE;
+import static com.example.inotify.configs.TableNames.UC_USAGECOUNT_TABLE;
 
 
 public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
@@ -60,12 +82,14 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + NV_LOCATION_TABLE + " (LOCATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT,LOG TEXT,LAT TEXT)");
         db.execSQL("create table " + NV_NOTIFICATIONREMOVE_TABLE + " (NOTIFICATIONREMOVE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT)");
         db.execSQL("create table " + NV_NOTIFICATIONVIEWABILITY_TABLE + " (BUSYORNOT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,LOCATION TEXT,BUSYORNOT TEXT)");
+        db.execSQL("create table " + NV_PROBABILITY_TABLE + " (PROBABILITY_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,VIEWOR INTEGER,NOTOR INTEGER, PROBABILITY DOUBLE)");
 
         db.execSQL("create table " + SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
                 "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
 
         db.execSQL("create table " + UA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
         db.execSQL("create table " + UA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
+        db.execSQL("create table " + UA_RINGERMODE_TABLE + "(RM_ID INTEGER PRIMARY KEY AUTOINCREMENT,RM_NOTIFICATIONID TEXT,RM_DAY TEXT,RM_DATE TEXT , RM_TIME TEXT  ,RM_RINGERMODE TEXT)");
 
         db.execSQL("create table " + UC_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
         db.execSQL("create table " + UC_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
@@ -79,12 +103,14 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + SETTINGS_SNAVCTIVEAPPS_TABLE + " (SNAVCTIVEAPPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,STATUS TEXT)");
 
         db.execSQL("create table " + UA_SCREENOFF_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEOFF TEXT)");
-        db.execSQL("create table " + UA_SCREENON_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEON TEXT)");
+        db.execSQL("create table " + UA_SCREENON_TABLE + " (SCREENON_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEON TEXT)");
 
         db.execSQL("create table " + UC_TOPAPP_TABLE + " (TOPAPP_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE Text)");
 
         db.execSQL("create table " + APPLICATIONS_TABLE + " (APPLICATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE Text)");
 
+
+        db.execSQL("create table " + NOTIFICATION_TABLE + " (NOTIFICATION_ID INTEGER,DATE TEXT,TIMERECEVIED TEXT,TIMESENT TEXT,TIMEVIEW TEXT,APPNAME TEXT,PACKAGENAME TEXT)");
 
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(1,20190216,'Saturday',2345,80.9,78.8);");
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(2,20190216,'Saturday',2345,80.9,78.8);");
@@ -131,6 +157,11 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+
+
+
+
+        db.execSQL("insert into ua_ringermode_table(RM_ID ,RM_NOTIFICATIONID ,RM_DAY ,RM_DATE  , RM_TIME   ,RM_RINGERMODE )values(1 ,20190304155042 ,20190304 ,'Monday',1550 ,'normal'  );");
 
     }
 
