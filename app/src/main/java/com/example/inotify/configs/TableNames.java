@@ -6,6 +6,8 @@ public class TableNames {
     public static final String NV_NOTIFICATIONVIEWABILITY_TABLE = "nv_viewability_table";
     public static final String NV_ACTIVITY_TABLE = "nv_activity_table";
     public static final String NV_LOCATION_TABLE = "nv_location_table";
+    public static final String NV_PROBABILITY_TABLE = "nv_probability_table";
+
 
     public static final String UA_N_TABLE = "ua_N_table";
     public static final String UA_NI_TABLE = "ua_NI_table";

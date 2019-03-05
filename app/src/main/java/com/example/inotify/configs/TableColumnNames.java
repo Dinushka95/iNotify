@@ -23,6 +23,11 @@ public class TableColumnNames {
     public static final String CONFIDENCE = "confidence";
     public static final String LOG = "log";
     public static final String LAT = "lat";
+    public static final String VIEWOR = "viewor";
+    public static final String NOTOR = "notor";
+    public static final String DAY = "day";
+    public static final String PROBABLITY = "probability";
+    public static final String PROBABLITY_ID = "probability";
 
     // ringer mode
     public static final String RM_NOTIFICATIONID = "rm_notificationid";
