@@ -90,6 +90,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // prashan
 
+            //Test
+            NV_SqlLiteDbHelper pratest = new NV_SqlLiteDbHelper(this);
+            pratest.probability_insert();
+            pratest.close();
 
             SharedPreferences prefs = this.getSharedPreferences("activityrecognition", MODE_PRIVATE);
             String currentactivity=prefs.getString("activity", null);

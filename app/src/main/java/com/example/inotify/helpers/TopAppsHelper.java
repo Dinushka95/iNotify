@@ -26,6 +26,48 @@ public List<AppInfoModel> topAppSocial()
     return topAppDbHelper.topAppSocilGet();
 }
 
+    public List<AppInfoModel> topAppCommunication()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppCommunicationGet();
+    }
+
+    public List<AppInfoModel> topAppGaming()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppGamingGet();
+    }
+
+    public List<AppInfoModel> topAppBusiness()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppBusinessGet();
+    }
+
+    public List<AppInfoModel> topAppDating()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppDatingGet();
+    }
+
+    public List<AppInfoModel> topAppEntertainment()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppEntertainmentGet();
+    }
+
+    public List<AppInfoModel> topAppProductivity()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppProductivityGet();
+    }
+
+    public List<AppInfoModel> topAppTools()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppToolGet();
+    }
+
 
 
 }

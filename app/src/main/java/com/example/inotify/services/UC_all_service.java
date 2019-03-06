@@ -12,6 +12,8 @@ import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.MyContact;
 import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
@@ -61,11 +63,15 @@ public class UC_all_service extends JobService {
 
 
         }*/
+
+
         count =packages.size();
 
         UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
         UC_sqlLiteDbHelper.appListcount_insert(String.valueOf(count));
         UC_sqlLiteDbHelper.close();
+
+
 
     }
 

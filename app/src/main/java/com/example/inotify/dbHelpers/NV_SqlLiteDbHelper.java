@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
@@ -11,10 +14,8 @@ import com.example.inotify.configs.TbNames;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.util.Calendar;
 import java.util.Collections;
-
 import java.util.Date;
 import java.util.Locale;
 
@@ -244,6 +245,62 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(TbColNames.BUSYORNOT, busyornot);
         long result = db.insert(TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE, null, contentValues);
         db.close();
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    // test
+    public boolean probability_insert() {
+
+        Date currentTime = Calendar.getInstance().getTime();
+        Log.d("Debug", "NOW"+currentTime);
+        SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a");
+        String currentDateTimeString = sdf.format(currentTime);
+        SimpleDateFormat hour=new SimpleDateFormat("hh");
+        String currentHour = hour.format(currentTime);
+        Calendar cal = Calendar.getInstance();
+        String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        Log.d("Debug", "NOW"+currentHour);
+        SimpleDateFormat min=new SimpleDateFormat("mm");
+        String currentMin = min.format(currentTime);
+        Log.d("Debug", "NOW"+currentMin);
+        SimpleDateFormat AP=new SimpleDateFormat("a");
+        String currentAP = AP.format(currentTime);
+        Log.d("Debug", "NOW"+currentAP);
+
+        char MinOne = currentMin.charAt(0);
+        Log.d("Debug", "NOW"+MinOne);
+
+        int nextMin = java.lang.Character.getNumericValue(MinOne) +1;
+
+        String TimeSlot = currentHour+":"+ MinOne+"0 - "+currentHour+":"+nextMin+"0 "+ currentAP;
+        Log.d("Debug", "TimeSlot = "+TimeSlot);
+
+
+
+
+
+
+        String day = currentDay;
+        String time = TimeSlot;
+        String activity = "W";
+        int viewor = 1;
+        int notor = 0;
+        double probability = 100;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues2 = new ContentValues();
+        contentValues2.put(TbColNames.DAY, day);
+        contentValues2.put(TbColNames.TIME, time);
+        contentValues2.put(TbColNames.ACTIVITY, activity);
+        contentValues2.put(TbColNames.VIEWOR, viewor);
+        contentValues2.put(TbColNames.NOTOR, notor);
+        contentValues2.put(TbColNames.PROBABLITY, probability);
+        long result = db.insert(TbNames.NV_PROBABILITY_TABLE, null, contentValues2);
+        db.close();
+        Log.d("hello", "probability_insert: correctly");
         if (result == -1)
             return false;
         else
