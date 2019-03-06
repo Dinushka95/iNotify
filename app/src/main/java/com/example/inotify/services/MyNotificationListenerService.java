@@ -326,6 +326,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 notificationManager.notify(nid, mBuilder.build());
 
                 UA_SqlLiteDbHelper chaSqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
+                // depreciated method please remove this
                 chaSqlLiteDbHelper.Ninsert(Long.valueOf(id) ,sbn.getPackageName(), Long.valueOf(id));
                 chaSqlLiteDbHelper.close();
 

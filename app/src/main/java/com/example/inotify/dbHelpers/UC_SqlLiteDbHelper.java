@@ -12,14 +12,21 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-import static com.example.inotify.dbHelpers.NV_SqlLiteDbHelper.TIME;
+import static com.example.inotify.configs.TableColumnNames.COUNT;
+import static com.example.inotify.configs.TableColumnNames.DATE;
+import static com.example.inotify.configs.TableColumnNames.TIME;
+import static com.example.inotify.configs.TableNames.UC_APPLISTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CALENDEREVENTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CALLDURATION_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CHARGE_TABLE;
+import static com.example.inotify.configs.TableNames.UC_CONTACTCOUNT_TABLE;
+import static com.example.inotify.configs.TableNames.UC_SCREENTIME_TABLE;
+import static com.example.inotify.configs.TableNames.UC_USAGECOUNT_TABLE;
 
 public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
 
-    public static final String APPNAME = "appname";
-    private static final String DATE = "date";
-    private static final String COUNT = "count";
 
     public UC_SqlLiteDbHelper(Context context) {
         super(context);
