@@ -9,7 +9,7 @@ import com.example.inotify.models.AppInfoModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.inotify.configs.TableNames.TOPAPP_TABLE;
+import static com.example.inotify.configs.TbNames.TOPAPP_TABLE;
 
 public class TopAppDbHelper extends MainSqlliteOpenHelp {
 

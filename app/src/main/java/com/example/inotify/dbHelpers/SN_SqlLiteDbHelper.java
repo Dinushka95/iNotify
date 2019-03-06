@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
-import com.example.inotify.dbHelpers.MainSqlliteOpenHelp;
 import com.example.inotify.models.SNS_SNSModel;
 
 import java.text.SimpleDateFormat;
@@ -16,17 +15,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.configs.TableColumnNames.SNS_APPNAME;
-import static com.example.inotify.configs.TableColumnNames.SNS_ATTENTIVINESS;
-import static com.example.inotify.configs.TableColumnNames.SNS_BUSYORNOT;
-import static com.example.inotify.configs.TableColumnNames.SNS_DATE;
-import static com.example.inotify.configs.TableColumnNames.SNS_DAY;
-import static com.example.inotify.configs.TableColumnNames.SNS_ID;
-import static com.example.inotify.configs.TableColumnNames.SNS_NOTIFICATIONTYPE;
-import static com.example.inotify.configs.TableColumnNames.SNS_TIME;
-import static com.example.inotify.configs.TableColumnNames.SNS_USERCHAACTERISTICS;
-import static com.example.inotify.configs.TableColumnNames.SNS_VTIME;
-import static com.example.inotify.configs.TableNames.SNS_TABLE;
+import static com.example.inotify.configs.TbColNames.SNS_APPNAME;
+import static com.example.inotify.configs.TbColNames.SNS_ATTENTIVINESS;
+import static com.example.inotify.configs.TbColNames.SNS_BUSYORNOT;
+import static com.example.inotify.configs.TbColNames.SNS_DATE;
+import static com.example.inotify.configs.TbColNames.SNS_DAY;
+import static com.example.inotify.configs.TbColNames.SNS_ID;
+import static com.example.inotify.configs.TbColNames.SNS_NOTIFICATIONTYPE;
+import static com.example.inotify.configs.TbColNames.SNS_TIME;
+import static com.example.inotify.configs.TbColNames.SNS_USERCHAACTERISTICS;
+import static com.example.inotify.configs.TbColNames.SNS_VTIME;
+import static com.example.inotify.configs.TbNames.SNS_TABLE;
 
 
 public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {

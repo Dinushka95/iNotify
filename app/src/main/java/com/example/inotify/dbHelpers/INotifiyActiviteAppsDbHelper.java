@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import static com.example.inotify.configs.TableNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
+import static com.example.inotify.configs.TbNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
 
 public class INotifiyActiviteAppsDbHelper extends MainSqlliteOpenHelp {
 

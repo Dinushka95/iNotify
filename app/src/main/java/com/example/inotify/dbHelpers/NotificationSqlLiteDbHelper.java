@@ -3,14 +3,9 @@ package com.example.inotify.dbHelpers;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import com.example.inotify.configs.TbColNames;
+import com.example.inotify.configs.TbNames;
 
-import static com.example.inotify.configs.TableColumnNames.DATE;
-import static com.example.inotify.configs.TableColumnNames.MYNOTIFICATION_ID;
-import static com.example.inotify.configs.TableColumnNames.PACKAGENAME;
-import static com.example.inotify.configs.TableColumnNames.TIMERECEVIED;
-import static com.example.inotify.configs.TableColumnNames.TIMESENT;
-import static com.example.inotify.configs.TableColumnNames.TIMEVIEW;
-import static com.example.inotify.configs.TableNames.NOTIFICATION_TABLE;
 
 public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
 
@@ -22,12 +17,12 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MYNOTIFICATION_ID, myNotificationId);
-        contentValues.put(DATE, date);
-        contentValues.put(PACKAGENAME, packageName);
-        contentValues.put(TIMERECEVIED, timeRecevied);
+        contentValues.put(TbColNames.NOTIFICATION_ID, myNotificationId);
+        contentValues.put(TbColNames.DATE, date);
+        contentValues.put(TbColNames.PACKAGENAME, packageName);
+        contentValues.put(TbColNames.TIMERECEVIED, timeRecevied);
 
-        long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
+        long result = db.insert(TbNames.NOTIFICATION_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -39,14 +34,14 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
 
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
-            contentValues.put(MYNOTIFICATION_ID, myNotificationId);
-            contentValues.put(DATE, date);
-            contentValues.put(PACKAGENAME, packageName);
-            contentValues.put(TIMERECEVIED, timeRecevied);
-            contentValues.put(TIMESENT, timeSent);
-            contentValues.put(TIMEVIEW, timeViewed);
+            contentValues.put(TbColNames.NOTIFICATION_ID, myNotificationId);
+            contentValues.put(TbColNames.DATE, date);
+            contentValues.put(TbColNames.PACKAGENAME, packageName);
+            contentValues.put(TbColNames.TIMERECEVIED, timeRecevied);
+            contentValues.put(TbColNames.TIMESENT, timeSent);
+            contentValues.put(TbColNames.TIMEVIEW, timeViewed);
 
-            long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
+            long result = db.insert(TbNames.NOTIFICATION_TABLE, null, contentValues);
             db.close();
             if (result == -1)
                 return false;

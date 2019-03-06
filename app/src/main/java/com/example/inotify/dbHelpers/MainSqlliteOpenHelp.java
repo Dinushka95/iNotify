@@ -6,27 +6,28 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.inotify.configs.TableNames.NOTIFICATION_TABLE;
-import static com.example.inotify.configs.TableNames.NV_ACTIVITY_TABLE;
-import static com.example.inotify.configs.TableNames.NV_LOCATION_TABLE;
-import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONREMOVE_TABLE;
-import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONVIEWABILITY_TABLE;
-import static com.example.inotify.configs.TableNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
-import static com.example.inotify.configs.TableNames.SNS_TABLE;
-import static com.example.inotify.configs.TableNames.TOPAPP_TABLE;
-import static com.example.inotify.configs.TableNames.UA_NI_TABLE;
-import static com.example.inotify.configs.TableNames.UA_N_TABLE;
-import static com.example.inotify.configs.TableNames.UA_RINGERMODE_TABLE;
-import static com.example.inotify.configs.TableNames.UA_SCREENOFF_TABLE;
-import static com.example.inotify.configs.TableNames.UA_SCREENON_TABLE;
-import static com.example.inotify.configs.TableNames.UC_APPLISTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CALENDEREVENTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CALLDURATION_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CHARGE_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CONTACTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_SCREENTIME_TABLE;
-import static com.example.inotify.configs.TableNames.UC_USAGECOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.NOTIFICATION_TABLE;
+import static com.example.inotify.configs.TbNames.NV_ACTIVITY_TABLE;
+import static com.example.inotify.configs.TbNames.NV_LOCATION_TABLE;
+import static com.example.inotify.configs.TbNames.NV_NOTIFICATIONREMOVE_TABLE;
+import static com.example.inotify.configs.TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE;
+import static com.example.inotify.configs.TbNames.PROFILE_TABLE;
+import static com.example.inotify.configs.TbNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
+import static com.example.inotify.configs.TbNames.SNS_TABLE;
+import static com.example.inotify.configs.TbNames.TOPAPP_TABLE;
+import static com.example.inotify.configs.TbNames.UA_NI_TABLE;
+import static com.example.inotify.configs.TbNames.UA_N_TABLE;
+import static com.example.inotify.configs.TbNames.UA_RINGERMODE_TABLE;
+import static com.example.inotify.configs.TbNames.UA_SCREENOFF_TABLE;
+import static com.example.inotify.configs.TbNames.UA_SCREENON_TABLE;
+import static com.example.inotify.configs.TbNames.UC_APPLISTCOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.UC_CALENDEREVENTCOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.UC_CALLDURATION_TABLE;
+import static com.example.inotify.configs.TbNames.UC_CHARGE_TABLE;
+import static com.example.inotify.configs.TbNames.UC_CONTACTCOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.UC_SCREENTIME_TABLE;
+import static com.example.inotify.configs.TbNames.UC_USAGECOUNT_TABLE;
 
 
 public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
@@ -81,6 +82,9 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
 
 
         db.execSQL("create table " + NOTIFICATION_TABLE + " (NOTIFICATION_ID INTEGER,DATE TEXT,TIMERECEVIED TEXT,TIMESENT TEXT,TIMEVIEW TEXT,APPNAME TEXT,PACKAGENAME TEXT)");
+
+        db.execSQL("create table " + PROFILE_TABLE + " (PROFILE_ID INTEGER,DATE TEXT,NAME TEXT,AGE TEXT,GENDER TEXT,OCCUPATION TEXT,EMAIL TEXT,PHONE TEXT)");
+
 
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(1,20190216,'Saturday',2345,80.9,78.8);");
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(2,20190216,'Saturday',2345,80.9,78.8);");

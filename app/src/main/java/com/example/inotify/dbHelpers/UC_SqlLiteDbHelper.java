@@ -5,24 +5,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.inotify.dbHelpers.MainSqlliteOpenHelp;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-import static com.example.inotify.configs.TableColumnNames.COUNT;
-import static com.example.inotify.configs.TableColumnNames.DATE;
-import static com.example.inotify.configs.TableColumnNames.TIME;
-import static com.example.inotify.configs.TableNames.UC_APPLISTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CALENDEREVENTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CALLDURATION_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CHARGE_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CONTACTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_SCREENTIME_TABLE;
-import static com.example.inotify.configs.TableNames.UC_USAGECOUNT_TABLE;
+import static com.example.inotify.configs.TbColNames.COUNT;
+import static com.example.inotify.configs.TbColNames.DATE;
+import static com.example.inotify.configs.TbColNames.TIME;
+import static com.example.inotify.configs.TbNames.UC_APPLISTCOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.UC_CALENDEREVENTCOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.UC_CALLDURATION_TABLE;
+import static com.example.inotify.configs.TbNames.UC_CHARGE_TABLE;
+import static com.example.inotify.configs.TbNames.UC_CONTACTCOUNT_TABLE;
+import static com.example.inotify.configs.TbNames.UC_SCREENTIME_TABLE;
+import static com.example.inotify.configs.TbNames.UC_USAGECOUNT_TABLE;
 
 public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
@@ -404,7 +402,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         Cursor res = db.rawQuery("select avg(COUNT - 1) as avg from "+UC_APPLISTCOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
-                return res.getLong(res.getColumnIndex("avg - 1"));
+                return res.getLong(res.getColumnIndex("avg"));
             }
         }
         if (res != null) {

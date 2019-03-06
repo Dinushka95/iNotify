@@ -9,9 +9,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.configs.TableColumnNames.DATE;
-import static com.example.inotify.configs.TableColumnNames.TIMEON;
-import static com.example.inotify.configs.TableNames.UA_SCREENON_TABLE;
+import static com.example.inotify.configs.TbColNames.DATE;
+import static com.example.inotify.configs.TbColNames.TIMEON;
+import static com.example.inotify.configs.TbNames.UA_SCREENON_TABLE;
 
 public class ScreenOnDbHelper extends MainSqlliteOpenHelp{
 
