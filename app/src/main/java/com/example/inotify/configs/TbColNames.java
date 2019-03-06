@@ -25,7 +25,7 @@ public class TbColNames {
     public static final String LAT = "lat";
     public static final String VIEWOR = "viewor";
     public static final String NOTOR = "notor";
-    public static final String DAY = "day";
+    //public static final String DAY = "day";
     public static final String PROBABLITY = "probability";
     public static final String PROBABLITY_ID = "probability";
 
