@@ -34,4 +34,9 @@ public class TbNames {
     public static final String NOTIFICATION_TABLE = "notification_table";
 
     public static final String PROFILE_TABLE = "profile_table";
+
+    public static final String APPLICATIONS_TABLE = "apllications_table";
+
+    public static final String TOPAPPS_TABLE = "topapps_table";
+
 }

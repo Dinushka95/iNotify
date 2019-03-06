@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.AppInfoModel;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class ApplicationDbHelper extends MainSqlliteOpenHelp{
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE, null);
+        Cursor res = db.rawQuery("select * from " + TbNames.APPLICATIONS_TABLE, null);
         if (res != null) {
 
             if (res.moveToFirst()) {
@@ -66,7 +67,7 @@ public class ApplicationDbHelper extends MainSqlliteOpenHelp{
             contentValues.put(APPNAME, value.getAppName());
             contentValues.put(APPPACKAGE, value.getPakageName());
             contentValues.put(APPCATEGORY, value.getAppCategory());
-            db.insert(APPLICATIONS_TABLE, null, contentValues);
+            db.insert(TbNames.APPLICATIONS_TABLE, null, contentValues);
         }
 
 
