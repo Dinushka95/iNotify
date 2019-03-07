@@ -10,6 +10,7 @@ import com.example.inotify.models.AppInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ApplicationDbHelper extends MainSqlliteOpenHelp{
 
@@ -73,5 +74,21 @@ public class ApplicationDbHelper extends MainSqlliteOpenHelp{
         db.close();
         return true;
     }
+
+//    public long appCountGet() {
+//
+//        //same for charging above need correction
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE, null);
+//        if (res != null) {
+//            if ((res.moveToFirst())){
+//                return res.getLong(res.getColumnIndex("appCount"));
+//            }
+//        }
+//        Objects.requireNonNull(res).close();
+//        db.close();
+//
+//        return 0;
+//    }
 
 }
