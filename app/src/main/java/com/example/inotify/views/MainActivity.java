@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
+import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
@@ -98,54 +99,53 @@ public class MainActivity extends AppCompatActivity {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
-        }else {
-            PERMISSION_CONTACTS=true;
+        } else {
+            PERMISSION_CONTACTS = true;
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_READ_LOCATION);
 
-        }else {
-            PERMISSION_LOCATION=true;
+        } else {
+            PERMISSION_LOCATION = true;
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
 
-            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR}, MY_PERMISSIONS_REQUEST_READ_CALENDAR);
 
-        }else {
-            PERMISSION_CALENDER=true;
+        } else {
+            PERMISSION_CALENDER = true;
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
-            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG}, MY_PERMISSIONS_REQUEST_READ_CALL_LOG);
 
-        }else {
-            PERMISSION_PHONE=true;
+        } else {
+            PERMISSION_PHONE = true;
         }
 
-        if(PERMISSION_CONTACTS==true&&PERMISSION_LOCATION==true&&PERMISSION_CALENDER==true&&PERMISSION_PHONE==true){
+        if (PERMISSION_CONTACTS == true && PERMISSION_LOCATION == true && PERMISSION_CALENDER == true && PERMISSION_PHONE == true) {
             tt();
-        }else {
+        } else {
 
 
-           // Toast.makeText(getApplicationContext(),"You have not given full permission so app will not work properly - Please restart and give full permission",Toast.LENGTH_LONG).show();
+            // Toast.makeText(getApplicationContext(),"You have not given full permission so app will not work properly - Please restart and give full permission",Toast.LENGTH_LONG).show();
 
 
-            }
-
+        }
 
 
     }
 
 
-    public void tt(){
+    public void tt() {
 
         // check if your profile exises
         // if true load that profile
@@ -210,23 +210,21 @@ public class MainActivity extends AppCompatActivity {
             String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
             screenStatusDbHelper.ScreenOnInsert();
             screenStatusDbHelper.close();
-            Log.d("iNotify" , "SCreen on status Saved");
+            Log.d("iNotify", "SCreen on status Saved");
 
 
             //check ScrennOnStatusGet Method
             String screen = screenStatusDbHelper.ScreenOnStatusGet();
-            Log.d("iNotify" , "SCreen on status Saved(^__^) " +screen);
+            Log.d("iNotify", "SCreen on status Saved(^__^) " + screen);
 
 
-        }
-        else
-        {
+        } else {
             //Save to screen off table
             ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
             String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
             screenStatusDbHelper.ScreenOffInsert();
             screenStatusDbHelper.close();
-            Log.d("iNotify" , "SCreen off status Saved");
+            Log.d("iNotify", "SCreen off status Saved");
         }
 
         // Call ringermode  method and save into UA_RINGERMODE_TABLE
@@ -249,23 +247,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-
+        RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
         String rm = ringerModeDbHelper.RingerModeGet();
-        Log.d("inotify " ,"Ringer Mode status Saved(^__^" + rm);
+        Log.d("inotify ", "Ringer Mode status Saved(^__^" + rm);
 
 
         //Check Notification Viwed time
-        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper = new NotificationSqlLiteDbHelper(this);
         String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
-        Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
+        Log.d("iNotify", "Notification Viewed time =  " + viewedtime);
 
-       // NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        // NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
         String recivedtime = notificationSqlLiteDbHelper.recivedTimeGet();
-        Log.d("iNotify" , "Notification Recived time =  " +viewedtime);
-
-
-
-
+        Log.d("iNotify", "Notification Recived time =  " + viewedtime);
 
 
         // if only the user  does not exist
