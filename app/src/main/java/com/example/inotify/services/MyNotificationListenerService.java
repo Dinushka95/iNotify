@@ -19,6 +19,7 @@ import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.MainNotificationViewability;
 import com.example.inotify.helpers.RingerModeHelper;
+import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.models.SNS_SNSModel;
 import com.example.inotify.helpers.MainSmartNotificationSystem;
 import com.example.inotify.helpers.MainAttentiviness;
@@ -130,8 +131,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
             //
 
             //call the isPhoneLowckedOrNot method here
-            All_ScreenLock screenLock = new All_ScreenLock();
-            Boolean screenstatus =  screenLock.isPhoneLockedOrNot(this);
+            ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+            Boolean screenstatus =  screenStatusHelper.isPhoneLockedOrNot(this);
             Log.d("inotify " ,"ScreenStatus On Notification recive" + screenstatus);
 
             RingerModeHelper ringermodeHelper = new RingerModeHelper();

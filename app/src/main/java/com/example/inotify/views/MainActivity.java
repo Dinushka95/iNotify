@@ -34,6 +34,7 @@ import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.RingerModeHelper;
+import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
@@ -198,10 +199,10 @@ public class MainActivity extends AppCompatActivity {
         BroadcastReceiver mReceiver = new All_ScreenLock();
         registerReceiver(mReceiver, intentFilter);
 
-
+//cha Starts here  for testing --need to move to the notificationListnerService
         //run isPhoneLockedOrNot method
-        All_ScreenLock screenLock = new All_ScreenLock();
-        Boolean screenstatus = screenLock.isPhoneLockedOrNot(this);
+        ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+        Boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
         Log.d("inotify ", "ScreenStatus" + screenstatus);
 
         if (screenstatus == false) {
@@ -245,13 +246,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Cha ends here
+
     @Override
     protected void onStart() {
         super.onStart();
 
-
+        RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
         String rm = ringerModeDbHelper.RingerModeGet();
-        Log.d("inotify " ,"Ringer Mode status Saved(^__^" + rm);
+        Log.d("inotify " ,"Ringer Mode status Saved(^_0_^" + rm);
 
 
         //Check Notification Viwed time
@@ -262,11 +265,6 @@ public class MainActivity extends AppCompatActivity {
        // NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
         String recivedtime = notificationSqlLiteDbHelper.recivedTimeGet();
         Log.d("iNotify" , "Notification Recived time =  " +viewedtime);
-
-
-
-
-
 
         // if only the user  does not exist
         ProfileHelper profileHelper = new ProfileHelper(this);

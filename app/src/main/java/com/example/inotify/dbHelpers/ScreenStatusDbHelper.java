@@ -5,15 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.inotify.configs.TbColNames;
+import com.example.inotify.configs.TbNames;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.configs.TableColumnNames.DATE;
-import static com.example.inotify.configs.TableColumnNames.TIMEOFF;
-import static com.example.inotify.configs.TableColumnNames.TIMEON;
-import static com.example.inotify.configs.TableNames.UA_SCREENON_TABLE;
+
 
 public class ScreenStatusDbHelper extends MainSqlliteOpenHelp{
 
@@ -35,10 +35,10 @@ public class ScreenStatusDbHelper extends MainSqlliteOpenHelp{
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE , date);
-        contentValues.put(TIMEON , time);
+        contentValues.put(TbColNames.DATE , date);
+        contentValues.put(TbColNames.TIMEON , time);
 
-        long result = db.insert(UA_SCREENON_TABLE ,null,contentValues);
+        long result = db.insert(TbNames.UA_SCREENON_TABLE ,null,contentValues);
         db.close();
         if(result == -1){
             return false;
@@ -60,10 +60,10 @@ public class ScreenStatusDbHelper extends MainSqlliteOpenHelp{
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE , date);
-        contentValues.put(TIMEOFF,time);
+        contentValues.put(TbColNames.DATE , date);
+        contentValues.put(TbColNames.TIMEOFF,time);
 
-        long result = db.insert(UA_SCREENOFF_TABLE ,null,contentValues);
+        long result = db.insert(TbNames.UA_SCREENOFF_TABLE ,null,contentValues);
         db.close();
         if(result == -1){
             return false;
@@ -84,7 +84,7 @@ public class ScreenStatusDbHelper extends MainSqlliteOpenHelp{
 
 
 
-        Cursor res = db.rawQuery("select * from " + UA_SCREENON_TABLE +" where DATE =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.UA_SCREENON_TABLE +" where DATE =\"" + id + "\"", null);
         if(res != null)
         {
             if(res.moveToFirst()){
@@ -104,7 +104,7 @@ public class ScreenStatusDbHelper extends MainSqlliteOpenHelp{
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
 
-        Cursor res = db.rawQuery("select * from " + UA_SCREENOFF_TABLE +" where SCREENOFF_ID =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.UA_SCREENOFF_TABLE +" where SCREENOFF_ID =\"" + id + "\"", null);
         if(res != null)
         {
             if(res.moveToFirst()){

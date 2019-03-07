@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
 
@@ -59,7 +63,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         SQLiteDatabase db = this.getReadableDatabase();
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
-        Cursor res = db.rawQuery("select TIMERECEVIED from "+ NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
+        Cursor res = db.rawQuery("select TIMERECEVIED from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
                 return res.getString(1);
@@ -76,7 +80,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         SQLiteDatabase db = this.getReadableDatabase();
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
-        Cursor res = db.rawQuery(	"select TIMEVIEW from " + NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
+        Cursor res = db.rawQuery(	"select TIMEVIEW from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
                 return res.getString(1);
@@ -98,7 +102,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("update " +NOTIFICATION_TABLE+ "set TIMEVIEW = \"" +id+ "\"" ,null);
+        Cursor res = db.rawQuery("update " +TbNames.NOTIFICATION_TABLE+ "set TIMEVIEW = \"" +id+ "\"" ,null);
         if(res !=null)
         {
             if(res.moveToFirst()){
