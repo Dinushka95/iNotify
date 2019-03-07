@@ -15,8 +15,10 @@ import android.util.Log;
 
 import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.MainNotificationViewability;
+import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.models.SNS_SNSModel;
 import com.example.inotify.helpers.MainSmartNotificationSystem;
 import com.example.inotify.helpers.MainAttentiviness;
@@ -121,16 +123,28 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "Main-MyNotificationListenerService--currentlocation---"+currentlocation );
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
-            // chaya
+            //
+
+            //call the isPhoneLowckedOrNot method here
+            All_ScreenLock screenLock = new All_ScreenLock();
+            Boolean screenstatus =  screenLock.isPhoneLockedOrNot(this);
+            Log.d("inotify " ,"ScreenStatus On Notification recive" + screenstatus);
+
+            RingerModeHelper ringermodeHelper = new RingerModeHelper();
+            String RingerMode = ringermodeHelper.getRingerMode(this);
+            Log.d("inotify " ,"RingerMode On Notification recive" + RingerMode);
+
             MainAttentiviness mainAttentiviness = new MainAttentiviness();
             String attentiviness = mainAttentiviness.getFinalAttentiviness(this,apppack);
 
 
-            //call the isPhoneLowckedOrNot method here
-            All_ScreenLock screenLockStatus = new All_ScreenLock();
-            Boolean ScreenLock = screenLockStatus.isPhoneLockedOrNot(this);
-            Log.d("inotify" , "ScreenLock + " +ScreenLock );
-           // String Screenlock = screenLockStatus.isPhoneLockedOrNot();
+
+            //String Screenlock = screenLockStatus.isPhoneLockedOrNot();
+
+
+
+
+
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // mitha
             MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
@@ -399,5 +413,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop" );
+
+        //Chaya
+        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
+        Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
+
     }
 }

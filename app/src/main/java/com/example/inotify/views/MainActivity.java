@@ -14,8 +14,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
-import com.example.inotify.dbHelpers.ScreenOnDbHelper;
+import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.R;
 import com.example.inotify.helpers.RingerModeHelper;
@@ -121,18 +122,27 @@ public class MainActivity extends AppCompatActivity {
         if(screenstatus == false)
         {
             //Save to screen on table
-            ScreenOnDbHelper screenOnDbHelper = new ScreenOnDbHelper(this);
+            ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
             String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-            screenOnDbHelper.ScreenOnInsert();
-            screenOnDbHelper.close();
-            Log.d("iNotify" , "SCreen status Saved");
+            screenStatusDbHelper.ScreenOnInsert();
+            screenStatusDbHelper.close();
+            Log.d("iNotify" , "SCreen on status Saved");
 
+
+            //check ScrennOnStatusGet Method
+            String screen = screenStatusDbHelper.ScreenOnStatusGet();
+            Log.d("iNotify" , "SCreen on status Saved(^__^) " +screen);
 
 
         }
         else
         {
             //Save to screen off table
+            ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
+            String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+            screenStatusDbHelper.ScreenOffInsert();
+            screenStatusDbHelper.close();
+            Log.d("iNotify" , "SCreen off status Saved");
         }
 
     // Call ringermode  method and save into UA_RINGERMODE_TABLE
@@ -148,6 +158,23 @@ public class MainActivity extends AppCompatActivity {
         ringerModeDbHelper.RMinsert(id,RingerMode );
         ringerModeDbHelper.close();
         Log.d("inotify " ,"Record Saved");
+
+        String rm = ringerModeDbHelper.RingerModeGet();
+        Log.d("inotify " ,"Ringer Mode status Saved(^__^" + rm);
+
+
+        //Check Notification Viwed time
+        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
+        Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
+
+       // NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        String recivedtime = notificationSqlLiteDbHelper.recivedTimeGet();
+        Log.d("iNotify" , "Notification Recived time =  " +viewedtime);
+
+
+
+
 
 
 
