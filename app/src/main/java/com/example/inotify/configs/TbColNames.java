@@ -38,7 +38,9 @@ public class TbColNames {
 
     ////screenon
     public static final String TIMEON = "timeon";
-   // public static final String DATE = "date";
+
+    //ScrennOff
+    public static final String TIMEOFF = "timeoff";
 
     ////smart notification system
     // notification all notifications

@@ -7,11 +7,8 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,9 +26,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
-import com.example.inotify.dbHelpers.ScreenOnDbHelper;
-import com.example.inotify.dbHelpers.TopAppDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
@@ -210,14 +206,27 @@ public class MainActivity extends AppCompatActivity {
 
         if (screenstatus == false) {
             //Save to screen on table
-            ScreenOnDbHelper screenOnDbHelper = new ScreenOnDbHelper(this);
+            ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
             String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-            screenOnDbHelper.ScreenOnInsert();
-            screenOnDbHelper.close();
-            Log.d("iNotify", "SCreen status Saved");
+            screenStatusDbHelper.ScreenOnInsert();
+            screenStatusDbHelper.close();
+            Log.d("iNotify" , "SCreen on status Saved");
 
-        } else {
+
+            //check ScrennOnStatusGet Method
+            String screen = screenStatusDbHelper.ScreenOnStatusGet();
+            Log.d("iNotify" , "SCreen on status Saved(^__^) " +screen);
+
+
+        }
+        else
+        {
             //Save to screen off table
+            ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
+            String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+            screenStatusDbHelper.ScreenOffInsert();
+            screenStatusDbHelper.close();
+            Log.d("iNotify" , "SCreen off status Saved");
         }
 
         // Call ringermode  method and save into UA_RINGERMODE_TABLE
@@ -239,6 +248,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+
+        String rm = ringerModeDbHelper.RingerModeGet();
+        Log.d("inotify " ,"Ringer Mode status Saved(^__^" + rm);
+
+
+        //Check Notification Viwed time
+        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
+        Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
+
+       // NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        String recivedtime = notificationSqlLiteDbHelper.recivedTimeGet();
+        Log.d("iNotify" , "Notification Recived time =  " +viewedtime);
+
+
+
 
 
 
@@ -322,47 +348,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testmmm(View view) {
-       // Log.d("iNotify", "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-
-        ApplicationsHelper applicationsHelper =  new ApplicationsHelper(view.getContext());
-        long appCount =applicationsHelper.appCountGet();
-
-
-        Log.d("inotify","AppCount "+appCount);
-
-        TopAppDbHelper topAppDbHelper =  new TopAppDbHelper(view.getContext());
-        long socialAppCount =topAppDbHelper.SocialAppCountGet();
-
-
-        Log.d("inotify","Socil app count"+socialAppCount);
-
-        //ApplicationsHelper applicationsHelper = new ApplicationsHelper(view.getContext());
-        List<AppInfoModel> listOfApps = applicationsHelper.appAllGet();
-
-
-        final PackageManager pm = view.getContext().getPackageManager();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-
-
-
-        List<AppInfoModel> list = new ArrayList<>();
-
-
-        for (ApplicationInfo x : packages){
-            AppInfoModel amtem = new AppInfoModel();
-            Log.d("iNotify",pm.getApplicationLabel(x).toString());
-            amtem.setAppName(pm.getApplicationLabel(x).toString());
-            amtem.setPakageName(x.packageName);
-            amtem.setAppCategory(x.packageName);
-
-            list.add(amtem);
-        }
-
-        applicationsHelper.appInfoInsert(list);
-
-
-
-
+        Log.d("iNotify", "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
         // code to create a fragment
     }
 

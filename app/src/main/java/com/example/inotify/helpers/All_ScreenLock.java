@@ -33,6 +33,7 @@ public class All_ScreenLock extends BroadcastReceiver {
             // add db entry to save data time of screen off
             UA_SqlLiteDbHelper ua_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
             ua_sqlLiteDbHelper.screenOffInsert();
+
             //mitha part
             String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
@@ -76,6 +77,8 @@ public class All_ScreenLock extends BroadcastReceiver {
             editor.apply();
         }
         }
+
+
 
         //Implement the function to check the screen status when a notification is delivered
     public boolean isPhoneLockedOrNot(Context context){

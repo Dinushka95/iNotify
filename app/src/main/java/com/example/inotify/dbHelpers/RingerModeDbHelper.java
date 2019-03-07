@@ -2,6 +2,7 @@ package com.example.inotify.dbHelpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -46,18 +47,11 @@ public class RingerModeDbHelper extends MainSqlliteOpenHelp{
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        //contentValues.put(RM_ID ,1);
         contentValues.put(RM_NOTIFICATIONID, id);
         contentValues.put(RM_DAY ,day);
         contentValues.put(RM_DATE , date);
         contentValues.put(RM_TIME , time);
         contentValues.put(RM_RINGERMODE ,ringermode);
-
-        Log.d("inotify" ,"NotificationID ="+ id );
-        Log.d("inotify" ,"RM_DAY = "+ day );
-        Log.d("inotify" ,"RM_DATE = "   +date );
-        Log.d("inotify" ,"RM_TIME = "  +time );
-        Log.d("inotify" ,"RM_RINGERMODE = "  +ringermode );
 
         long result = db.insert(UA_RINGERMODE_TABLE , null,contentValues);
         Log.d("inotify" ,"RM_RINGERMODE = "  +ringermode );
@@ -68,6 +62,25 @@ public class RingerModeDbHelper extends MainSqlliteOpenHelp{
         else
             return true;
 
+
+    }
+
+    public String  RingerModeGet(){
+        String ringermode= new String();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+
+
+        Cursor res = db.rawQuery("select * from " + UA_RINGERMODE_TABLE +" where RM_NOTIFICATIONID =\"" + id + "\"", null);
+        if(res != null)
+        {
+            if(res.moveToFirst()){
+                return res.getString(1);
+            }
+            res.close();
+        }
+        return null;
 
     }
 
