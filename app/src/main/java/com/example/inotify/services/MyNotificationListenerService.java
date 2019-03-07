@@ -173,9 +173,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
             //call the isPhoneLowckedOrNot method here
-            All_ScreenLock screenLockStatus = new All_ScreenLock();
+/*            All_ScreenLock screenLockStatus = new All_ScreenLock();
             Boolean ScreenLock = screenLockStatus.isPhoneLockedOrNot(this);
-            Log.d("inotify" , "ScreenLock + " +ScreenLock );
+            Log.d("inotify" , "ScreenLock + " +ScreenLock );*/
            // String Screenlock = screenLockStatus.isPhoneLockedOrNot();
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // mitha
