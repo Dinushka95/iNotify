@@ -1,5 +1,9 @@
 package com.example.inotify.views;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.job.JobScheduler;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if(view.getContext().deleteDatabase(DATABASE_NAME)){
                             Toast.makeText(getApplicationContext(),"Database Successfully Reset",Toast.LENGTH_LONG).show();
+                            restartApp();
                         }else{
                             Toast.makeText(getApplicationContext(),"Database Failed Reset",Toast.LENGTH_LONG).show();
                         }
@@ -47,10 +52,23 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+    private void restartApp() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        int mPendingIntentId = 18945;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(getApplicationContext(), mPendingIntentId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+        System.exit(0);
+    }
+
     public void button_INotifyActiveApps(View view) {
         Intent intent = new Intent(SettingsActivity.this, INotifiyActiviteAppsActivity.class);
         startActivity(intent);
     }
 
 
+    public void cancelAllJobs(View view) {
+        JobScheduler jobScheduler = (JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        jobScheduler.cancelAll();
+    }
 }

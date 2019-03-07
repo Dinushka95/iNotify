@@ -1,6 +1,6 @@
 package com.example.inotify.configs;
 
-public class TableNames {
+public class TbNames {
 
     public static final String NV_NOTIFICATIONREMOVE_TABLE = "nv_notificationRemove_table";
     public static final String NV_NOTIFICATIONVIEWABILITY_TABLE = "nv_viewability_table";
@@ -32,4 +32,11 @@ public class TableNames {
     public static final String SETTINGS_SNAVCTIVEAPPS_TABLE = "settings_snactiveapps_table";
 
     public static final String NOTIFICATION_TABLE = "notification_table";
+
+    public static final String PROFILE_TABLE = "profile_table";
+
+    public static final String APPLICATIONS_TABLE = "applications_table";
+
+    public static final String TOPAPPS_TABLE = "topapps_table";
+
 }

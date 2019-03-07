@@ -11,12 +11,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.configs.TableColumnNames.RM_DATE;
-import static com.example.inotify.configs.TableColumnNames.RM_DAY;
-import static com.example.inotify.configs.TableColumnNames.RM_NOTIFICATIONID;
-import static com.example.inotify.configs.TableColumnNames.RM_RINGERMODE;
-import static com.example.inotify.configs.TableColumnNames.RM_TIME;
-import static com.example.inotify.configs.TableNames.UA_RINGERMODE_TABLE;
+import static com.example.inotify.configs.TbColNames.RM_DATE;
+import static com.example.inotify.configs.TbColNames.RM_DAY;
+import static com.example.inotify.configs.TbColNames.RM_NOTIFICATIONID;
+import static com.example.inotify.configs.TbColNames.RM_RINGERMODE;
+import static com.example.inotify.configs.TbColNames.RM_TIME;
+import static com.example.inotify.configs.TbNames.UA_RINGERMODE_TABLE;
 
 public class RingerModeDbHelper extends MainSqlliteOpenHelp{
 

@@ -4,12 +4,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.AppInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.inotify.configs.TableNames.TOPAPP_TABLE;
+import static com.example.inotify.configs.TbNames.TOPAPP_TABLE;
 
 public class TopAppDbHelper extends MainSqlliteOpenHelp {
 
@@ -37,7 +38,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"social\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPP_TABLE + " where APPCATEGORY = \"social\"", null);
         if (res != null) {
 
             if (res.moveToFirst()) {
@@ -65,7 +66,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"communication\"", null);
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"communication\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -90,7 +91,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"gaming\"", null);
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"gaming\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -115,7 +116,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"dating\"", null);
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"dating\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -140,7 +141,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"education\"", null);
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"education\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -164,7 +165,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"entertainment\"", null);
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"entertainment\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -189,7 +190,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"productivity\"", null);
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"productivity\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -213,7 +214,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"tool\"", null);
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"tool\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -237,7 +238,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UC_TOPAPP_TABLE + " where APPCATEGORY = \"business\"", null);
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"business\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
