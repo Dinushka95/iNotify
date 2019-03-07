@@ -2,6 +2,7 @@ package com.example.inotify.helpers;
 
 import android.content.Context;
 
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.TopAppDbHelper;
 import com.example.inotify.models.AppInfoModel;
 
@@ -66,6 +67,13 @@ public List<AppInfoModel> topAppSocial()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppToolGet();
+    }
+
+    public int appCountGet()
+    {
+
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return (int) topAppDbHelper.SocialAppCountGet();
     }
 
 

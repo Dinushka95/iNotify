@@ -11,6 +11,9 @@ import com.example.inotify.models.AppInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 
 public class ApplicationDbHelper extends MainSqlliteOpenHelp{
 
@@ -30,7 +33,7 @@ public class ApplicationDbHelper extends MainSqlliteOpenHelp{
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.APPLICATIONS_TABLE, null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE, null);
         if (res != null) {
 
             if (res.moveToFirst()) {
@@ -67,12 +70,28 @@ public class ApplicationDbHelper extends MainSqlliteOpenHelp{
             contentValues.put(APPNAME, value.getAppName());
             contentValues.put(APPPACKAGE, value.getPakageName());
             contentValues.put(APPCATEGORY, value.getAppCategory());
-            db.insert(TbNames.APPLICATIONS_TABLE, null, contentValues);
+            db.insert(APPLICATIONS_TABLE, null, contentValues);
         }
 
 
         db.close();
         return true;
+    }
+
+    public long appCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE, null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getLong(res.getColumnIndex("appCount"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
     }
 
 }

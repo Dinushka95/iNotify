@@ -17,8 +17,11 @@ import android.util.Log;
 
 import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.MainNotificationViewability;
+import com.example.inotify.helpers.RingerModeHelper;
+import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.models.NotificationModel;
 import com.example.inotify.models.SNS_SNSModel;
@@ -154,15 +157,25 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "Main-MyNotificationListenerService--currentlocation---"+currentlocation );
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
-            // chaya
+            //
+
+            //call the isPhoneLowckedOrNot method here
+            ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+            Boolean screenstatus =  screenStatusHelper.isPhoneLockedOrNot(this);
+            Log.d("inotify " ,"ScreenStatus On Notification recive" + screenstatus);
+
+            RingerModeHelper ringermodeHelper = new RingerModeHelper();
+            String RingerMode = ringermodeHelper.getRingerMode(this);
+            Log.d("inotify " ,"RingerMode On Notification recive" + RingerMode);
+
             MainAttentiviness mainAttentiviness = new MainAttentiviness();
             String attentiviness = mainAttentiviness.getFinalAttentiviness(this,apppack);
 
 
             //call the isPhoneLowckedOrNot method here
-           // All_ScreenLock screenLockStatus = new All_ScreenLock();
-            //Boolean ScreenLock = screenLockStatus.isPhoneLockedOrNot(this);
-         //   Log.d("inotify" , "ScreenLock + " +ScreenLock );
+            All_ScreenLock screenLockStatus = new All_ScreenLock();
+            Boolean ScreenLock = screenLockStatus.isPhoneLockedOrNot(this);
+            Log.d("inotify" , "ScreenLock + " +ScreenLock );
            // String Screenlock = screenLockStatus.isPhoneLockedOrNot();
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // mitha
@@ -281,24 +294,30 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             snsModel.setAppname(cappname);
 
-          // MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
+            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
 
-           String vtimes = "";// mainSmartNotificationSystem.getPrediction();
+            String vtimes = mainSmartNotificationSystem.getPrediction();
           //  Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimes );
             String tem1 =vtimes.replaceAll("[\\[\\](){}]","");
           //  Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+tem1 );
-           // double vtimed = Double.valueOf(tem1);
-          //  Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimed );
+            double vtimed = Double.valueOf(tem1);
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimed );
 
             //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-
-
-
-
             boolean sendornotsend;
+            if (vtimed<600000){sendornotsend = true;}
+            else {sendornotsend = false;
+            // run delay function
+            }
+
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+vtimed );
+
+
+
+          //  boolean sendornotsend;
            sendornotsend = true;
 
             if (true) {
@@ -335,26 +354,18 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                // String dateTime = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
 
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    NotificationChannel channel = new NotificationChannel("default",
-                            "YOUR_CHANNEL_NAME",
-                            NotificationManager.IMPORTANCE_HIGH);
-                    channel.setDescription("YOUR_NOTIFICATION_CHANNEL_DISCRIPTION");
-                    mNotificationManager.createNotificationChannel(channel);
-                }
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "default")
-                        .setSmallIcon(R.mipmap.ic_launcher) // notification icon
-                        .setContentTitle(title)
-                        .setTicker(id)// title for notification
-                        .setContentText("ffff")// message for notification
-                        //.setSound(alarmSound) // set alarm sound for notification
-                        .setAutoCancel(true); // clear notification after click
-                Intent intent1 = new Intent(getApplicationContext(), MyNotificationListenerService.class);
-                PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                mBuilder.setContentIntent(pi);
-                mNotificationManager.notify(0, mBuilder.build());
+                NotificationCompat.Builder mBuilder = new NotificationCompat
+                        .Builder(this, "inotifyapp")
+                        .setContentTitle(title + "-iNotify")
+                        .setContentText(text)
+                        .setSmallIcon(android.R.drawable.ic_notification_clear_all)
+                        .setTicker(id)
+                        .addAction(R.drawable.common_google_signin_btn_icon_light,"Yes",pFeedbackYes)
+                        .addAction(R.drawable.common_google_signin_btn_icon_light,"No",pFeedbackNo)
+                        .setAutoCancel(true)
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
+                        .setContentIntent(pIntent);
 
               //  UA_SqlLiteDbHelper chaSqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
                 // depreciated method please remove this
@@ -430,5 +441,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop" );
+
+        //Chaya
+        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
+        Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
+
     }
 }

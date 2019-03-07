@@ -28,11 +28,13 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
-import com.example.inotify.dbHelpers.ScreenOnDbHelper;
+import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.RingerModeHelper;
+import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
@@ -96,39 +98,39 @@ public class MainActivity extends AppCompatActivity {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
-        }else {
-            PERMISSION_CONTACTS=true;
+        } else {
+            PERMISSION_CONTACTS = true;
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_READ_LOCATION);
 
-        }else {
-            PERMISSION_LOCATION=true;
+        } else {
+            PERMISSION_LOCATION = true;
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
 
-            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR}, MY_PERMISSIONS_REQUEST_READ_CALENDAR);
 
-        }else {
-            PERMISSION_CALENDER=true;
+        } else {
+            PERMISSION_CALENDER = true;
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
 
-            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG}, MY_PERMISSIONS_REQUEST_READ_CALL_LOG);
 
-        }else {
-            PERMISSION_PHONE=true;
+        } else {
+            PERMISSION_PHONE = true;
         }
 
-        if(PERMISSION_CONTACTS==true&&PERMISSION_LOCATION==true&&PERMISSION_CALENDER==true&&PERMISSION_PHONE==true){
+        if (PERMISSION_CONTACTS == true && PERMISSION_LOCATION == true && PERMISSION_CALENDER == true && PERMISSION_PHONE == true) {
             tt();
         }else {
 
@@ -153,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityRecognitionClient mActivityRecognitionClient = new ActivityRecognitionClient(this);
         mActivityRecognitionClient.requestActivityUpdates(0, getActivityDetectionPendingIntent());
+
 
 
         ComponentName componentName = new ComponentName(MainActivity.this, NV_LocationService.class);
@@ -196,22 +199,33 @@ public class MainActivity extends AppCompatActivity {
         BroadcastReceiver mReceiver = new All_ScreenLock();
         registerReceiver(mReceiver, intentFilter);
 
-
+//cha Starts here  for testing --need to move to the notificationListnerService
         //run isPhoneLockedOrNot method
-        All_ScreenLock screenLock = new All_ScreenLock();
-        Boolean screenstatus = screenLock.isPhoneLockedOrNot(this);
+        ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+        Boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
         Log.d("inotify ", "ScreenStatus" + screenstatus);
 
         if (screenstatus == false) {
             //Save to screen on table
-            ScreenOnDbHelper screenOnDbHelper = new ScreenOnDbHelper(this);
+            ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
             String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-            screenOnDbHelper.ScreenOnInsert();
-            screenOnDbHelper.close();
-            Log.d("iNotify", "SCreen status Saved");
+            screenStatusDbHelper.ScreenOnInsert();
+            screenStatusDbHelper.close();
+            Log.d("iNotify", "SCreen on status Saved");
+
+
+            //check ScrennOnStatusGet Method
+            String screen = screenStatusDbHelper.ScreenOnStatusGet();
+            Log.d("iNotify", "SCreen on status Saved(^__^) " + screen);
+
 
         } else {
             //Save to screen off table
+            ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
+            String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+            screenStatusDbHelper.ScreenOffInsert();
+            screenStatusDbHelper.close();
+            Log.d("iNotify", "SCreen off status Saved");
         }
 
         // Call ringermode  method and save into UA_RINGERMODE_TABLE
@@ -230,9 +244,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Cha ends here
+
     @Override
     protected void onStart() {
         super.onStart();
+
+        RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
+        String rm = ringerModeDbHelper.RingerModeGet();
+        Log.d("inotify " ,"Ringer Mode status Saved(^__^" + rm);
+
+
+        //Check Notification Viwed time
+        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper = new NotificationSqlLiteDbHelper(this);
+        String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
+        Log.d("iNotify", "Notification Viewed time =  " + viewedtime);
+
+        // NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        String recivedtime = notificationSqlLiteDbHelper.recivedTimeGet();
+        Log.d("iNotify", "Notification Recived time =  " + viewedtime);
+
+
+
 
 
 
@@ -339,5 +372,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, UsercharacteristicsActivity.class);
         startActivity(intent);
     }
-
 }

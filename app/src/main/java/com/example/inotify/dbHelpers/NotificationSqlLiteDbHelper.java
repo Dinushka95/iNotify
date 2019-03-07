@@ -2,21 +2,14 @@ package com.example.inotify.dbHelpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
-
-import static com.example.inotify.configs.TbColNames.NOTIFICATION_ID;
-import static com.example.inotify.configs.TbColNames.DATE;
-import static com.example.inotify.configs.TbColNames.TIMERECEVIED;
-import static com.example.inotify.configs.TbColNames.TIMESENT;
-import static com.example.inotify.configs.TbColNames.TIMEVIEW;
-import static com.example.inotify.configs.TbColNames.APPNAME;
-import static com.example.inotify.configs.TbColNames.PACKAGENAME;
-import static com.example.inotify.configs.TbNames.NOTIFICATION_TABLE;
-
-
 import com.example.inotify.models.NotificationModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
@@ -29,15 +22,15 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(NOTIFICATION_ID, NotificationModel.getId());
-        contentValues.put(DATE, NotificationModel.getDatetime());
-        contentValues.put(TIMERECEVIED, NotificationModel.getTimeRecevied());
-        contentValues.put(TIMESENT, NotificationModel.getTimeSent());
-        contentValues.put(TIMEVIEW, NotificationModel.getTimeViewed());
-        contentValues.put(APPNAME, NotificationModel.getAppName());
-        contentValues.put(PACKAGENAME, NotificationModel.getPackageName());
+        contentValues.put(TbColNames.NOTIFICATION_ID, NotificationModel.getId());
+        contentValues.put(TbColNames.DATE, NotificationModel.getDatetime());
+        contentValues.put(TbColNames.TIMERECEVIED, NotificationModel.getTimeRecevied());
+        contentValues.put(TbColNames.TIMESENT, NotificationModel.getTimeSent());
+        contentValues.put(TbColNames.TIMEVIEW, NotificationModel.getTimeViewed());
+        contentValues.put(TbColNames.APPNAME, NotificationModel.getAppName());
+        contentValues.put(TbColNames.PACKAGENAME, NotificationModel.getPackageName());
 
-        long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
+        long result = db.insert(TbNames.NOTIFICATION_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -45,7 +38,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
             return true;
     }
 
-    /*public boolean insert(String myNotificationId,String date,String packageName,String timeRecevied,String timeSent,String timeViewed) {
+    public boolean insert(String myNotificationId,String date,String packageName,String timeRecevied,String timeSent,String timeViewed) {
 
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
@@ -62,5 +55,65 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
                 return false;
             else
                 return true;
-    }*/
+    }
+
+
+    //Get the notification recived time  -Cha
+
+    public String recivedTimeGet(){
+        String notificationRecivedTime = new String();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery("select TIMERECEVIED from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
+        if(res !=null){
+            if(res.moveToFirst()){
+                return res.getString(1);
+            }
+            res.close();
+        }
+        return null;
+    }
+
+// Get the time notification was viwed
+    public String viewTimeGet(){
+        String notificationViewTime = new String();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery(	"select TIMEVIEW from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
+        if(res !=null){
+            if(res.moveToFirst()){
+                return res.getString(1);
+            }
+            res.close();
+        }
+        return null;
+
+    }
+
+
+
+
+    //update method
+           // Get the time and update the notificationviwedtime
+
+    public String updateNotificationViwedTime(){
+        String notificationViwedtime = new String();
+        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("update " +TbNames.NOTIFICATION_TABLE+ "set TIMEVIEW = \"" +id+ "\"" ,null);
+        if(res !=null)
+        {
+            if(res.moveToFirst()){
+                return res.getString(1);
+            }
+            res.close();
+        }
+        return null;
+    }
+
 }
