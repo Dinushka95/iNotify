@@ -39,4 +39,6 @@ public class TbNames {
 
     public static final String TOPAPPS_TABLE = "topapps_table";
 
+    public static final String APPCOUNT_TABLE = "appcount_table";
+
 }
