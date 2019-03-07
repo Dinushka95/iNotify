@@ -5,29 +5,11 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.inotify.configs.TbColNames;
+import com.example.inotify.configs.TbNames;
+
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.inotify.configs.TableNames.NOTIFICATION_TABLE;
-import static com.example.inotify.configs.TableNames.NV_ACTIVITY_TABLE;
-import static com.example.inotify.configs.TableNames.NV_LOCATION_TABLE;
-import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONREMOVE_TABLE;
-import static com.example.inotify.configs.TableNames.NV_NOTIFICATIONVIEWABILITY_TABLE;
-import static com.example.inotify.configs.TableNames.NV_PROBABILITY_TABLE;
-import static com.example.inotify.configs.TableNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
-import static com.example.inotify.configs.TableNames.SNS_TABLE;
-import static com.example.inotify.configs.TableNames.TOPAPP_TABLE;
-import static com.example.inotify.configs.TableNames.UA_NI_TABLE;
-import static com.example.inotify.configs.TableNames.UA_N_TABLE;
-import static com.example.inotify.configs.TableNames.UA_RINGERMODE_TABLE;
-import static com.example.inotify.configs.TableNames.UA_SCREENOFF_TABLE;
-import static com.example.inotify.configs.TableNames.UA_SCREENON_TABLE;
-import static com.example.inotify.configs.TableNames.UC_APPLISTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CALENDEREVENTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CALLDURATION_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CHARGE_TABLE;
-import static com.example.inotify.configs.TableNames.UC_CONTACTCOUNT_TABLE;
-import static com.example.inotify.configs.TableNames.UC_SCREENTIME_TABLE;
-import static com.example.inotify.configs.TableNames.UC_USAGECOUNT_TABLE;
+
 
 
 public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
@@ -36,33 +18,7 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
 
     SharedPreferences.Editor editor009;
 
-    public static final String NV_NOTIFICATIONREMOVE_TABLE = "nv_notificationRemove_table";
-    public static final String NV_NOTIFICATIONVIEWABILITY_TABLE = "nv_viewability_table";
-    public static final String NV_ACTIVITY_TABLE = "nv_activity_table";
-    public static final String NV_LOCATION_TABLE = "nv_location_table";
 
-    public static final String UA_N_TABLE = "ua_N_table";
-    public static final String UA_NI_TABLE = "ua_NI_table";
-    public static final String UA_SCREENOFF_TABLE = "ua_screenoff_table";
-    public static final String UA_SCREENON_TABLE = "ua_screenon_table";
-
-    public static final String UC_CHARGE_TABLE = "uc_charge_table";
-    public static final String UC_APPLISTCOUNT_TABLE = "uc_applistcount_table";
-    public static final String UC_USAGECOUNT_TABLE = "uc_usagecount_table";
-    public static final String UC_CONTACTCOUNT_TABLE = "uc_contactcount_table";
-    public static final String UC_SCREENTIME_TABLE = "uc_screentime_table";
-    public static final String UC_CALLDURATION_TABLE = "uc_callduration_table";
-    public static final String UC_CALENDEREVENTCOUNT_TABLE = "uc_calendereventcount_table";
-    public static final String UC_APPLISTSOCIALMEDIACOUNT_TABLE = "uc_applistsocialmediacount_table";
-
-    public static final String SNS_TABLE = "sns_table";
-
-    public static final String UC_TOPAPP_TABLE = "uc_topapp_table";
-
-    public static final String APPLICATIONS_TABLE = "applications_table";
-
-
-    public static final String SETTINGS_SNAVCTIVEAPPS_TABLE = "settings_snactiveapps_table";
 
     public MainSqlliteOpenHelp(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -78,39 +34,42 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
 
         // put all the  create tables in one place
 
-        db.execSQL("create table " + NV_ACTIVITY_TABLE + " (ACTIVITY_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT,TYPE TEXT,CONFIDENCE TEXT)");
-        db.execSQL("create table " + NV_LOCATION_TABLE + " (LOCATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT,LOG TEXT,LAT TEXT)");
-        db.execSQL("create table " + NV_NOTIFICATIONREMOVE_TABLE + " (NOTIFICATIONREMOVE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT)");
-        db.execSQL("create table " + NV_NOTIFICATIONVIEWABILITY_TABLE + " (BUSYORNOT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,LOCATION TEXT,BUSYORNOT TEXT)");
-        db.execSQL("create table " + NV_PROBABILITY_TABLE + " (PROBABILITY_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,VIEWOR INTEGER,NOTOR INTEGER, PROBABILITY DOUBLE)");
+        db.execSQL("create table " + TbNames.NV_ACTIVITY_TABLE + " (ACTIVITY_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT,TYPE TEXT,CONFIDENCE TEXT)");
+        db.execSQL("create table " + TbNames.NV_LOCATION_TABLE + " (LOCATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT,LOG TEXT,LAT TEXT)");
+        db.execSQL("create table " + TbNames.NV_NOTIFICATIONREMOVE_TABLE + " (NOTIFICATIONREMOVE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT)");
+        db.execSQL("create table " + TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE + " (BUSYORNOT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,LOCATION TEXT,BUSYORNOT TEXT)");
+        db.execSQL("create table " + TbNames.NV_PROBABILITY_TABLE + " (PROBABILITY_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,VIEWOR INTEGER,NOTOR INTEGER, PROBABILITY DOUBLE)");
 
-        db.execSQL("create table " + SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
+        db.execSQL("create table " + TbNames.SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
                 "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
 
-        db.execSQL("create table " + UA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
-        db.execSQL("create table " + UA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
-        db.execSQL("create table " + UA_RINGERMODE_TABLE + "(RM_ID INTEGER PRIMARY KEY AUTOINCREMENT,RM_NOTIFICATIONID TEXT,RM_DAY TEXT,RM_DATE TEXT , RM_TIME TEXT  ,RM_RINGERMODE TEXT)");
+        db.execSQL("create table " + TbNames.UA_N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
+        db.execSQL("create table " + TbNames.UA_NI_TABLE + " (NI_ID INTEGER PRIMARY KEY AUTOINCREMENT,NI_APPNAME TEXT,NI_VALUE INTEGER)");
+        db.execSQL("create table " + TbNames.UA_RINGERMODE_TABLE + "(RM_ID INTEGER PRIMARY KEY AUTOINCREMENT,RM_NOTIFICATIONID TEXT,RM_DAY TEXT,RM_DATE TEXT , RM_TIME TEXT  ,RM_RINGERMODE TEXT)");
 
-        db.execSQL("create table " + UC_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
-        db.execSQL("create table " + UC_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + UC_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + UC_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + UC_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
-        db.execSQL("create table " + UC_CALLDURATION_TABLE + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
-        db.execSQL("create table " + UC_CALENDEREVENTCOUNT_TABLE + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + UC_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + TbNames.UC_CHARGE_TABLE + " (CHARGE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT)");
+        db.execSQL("create table " + TbNames.UC_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + TbNames.UC_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + TbNames.UC_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + TbNames.UC_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
+        db.execSQL("create table " + TbNames.UC_CALLDURATION_TABLE + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
+        db.execSQL("create table " + TbNames.UC_CALENDEREVENTCOUNT_TABLE + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + TbNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
 
-        db.execSQL("create table " + SETTINGS_SNAVCTIVEAPPS_TABLE + " (SNAVCTIVEAPPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,STATUS TEXT)");
+        db.execSQL("create table " + TbNames.SETTINGS_SNAVCTIVEAPPS_TABLE + " (SNAVCTIVEAPPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,STATUS TEXT)");
 
-        db.execSQL("create table " + UA_SCREENOFF_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEOFF TEXT)");
-        db.execSQL("create table " + UA_SCREENON_TABLE + " (SCREENON_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEON TEXT)");
+        db.execSQL("create table " + TbNames.UA_SCREENOFF_TABLE + " (SCREENOFF_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEOFF TEXT)");
+        db.execSQL("create table " + TbNames.UA_SCREENON_TABLE + " (SCREENON_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIMEON TEXT)");
 
-        db.execSQL("create table " + UC_TOPAPP_TABLE + " (TOPAPP_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE Text)");
+        db.execSQL("create table " + TbNames.TOPAPP_TABLE + " (TOPAPP_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE Text)");
 
-        db.execSQL("create table " + APPLICATIONS_TABLE + " (APPLICATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE Text)");
+        db.execSQL("create table " + TbNames.APPLICATIONS_TABLE + " (APPLICATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,APPCATEGORY TEXT,APPPACKAGE Text)");
 
 
-        db.execSQL("create table " + NOTIFICATION_TABLE + " (NOTIFICATION_ID INTEGER,DATE TEXT,TIMERECEVIED TEXT,TIMESENT TEXT,TIMEVIEW TEXT,APPNAME TEXT,PACKAGENAME TEXT)");
+        db.execSQL("create table " + TbNames.NOTIFICATION_TABLE + " (NOTIFICATION_ID INTEGER,DATE TEXT,TIMERECEVIED TEXT,TIMESENT TEXT,TIMEVIEW TEXT,APPNAME TEXT,PACKAGENAME TEXT)");
+
+        db.execSQL("create table " + TbNames.PROFILE_TABLE + " (PROFILE_ID INTEGER,DATE TEXT,NAME TEXT,AGE TEXT,GENDER TEXT,OCCUPATION TEXT,EMAIL TEXT,PHONE TEXT)");
+
 
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(1,20190216,'Saturday',2345,80.9,78.8);");
         db.execSQL("insert into nv_location_table(LOCATION_ID,DATE,DAY,TIME,LOG,LAT)values(2,20190216,'Saturday',2345,80.9,78.8);");
@@ -138,15 +97,15 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("insert into ua_NI_table(NI_ID,NI_APPNAME,NI_VALUE)values(4,'com.example.dinu.testd',1);");
         db.execSQL("insert into ua_NI_table(NI_ID,NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");
 
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('hungamamusic','musicvideo','com.google.android.apps.hungamamusic');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('tinder','dating','com.google.android.apps.tinder');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('badoo','dating','com.google.android.apps.badoo');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('netflix','entertainment','com.google.android.apps.netflix');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('hungamamusic','musicvideo','com.google.android.apps.hungamamusic');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('tinder','dating','com.google.android.apps.tinder');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('badoo','dating','com.google.android.apps.badoo');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('netflix','entertainment','com.google.android.apps.netflix');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" ( APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
 
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");

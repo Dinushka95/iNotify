@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".views.NotificationHistoryActivity"></activity>
+        <activity android:name=".views.NotificationViewabilityActivity"></activity>
+        <activity android:name=".views.UserAttentivenessActivity" />
+        <activity android:name=".views.UsercharacteristicsActivity" />
+        <activity android:name=".views.UserProfileActivity" />
+        <activity android:name=".views.NotificationHistoryActivity" />
         <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
