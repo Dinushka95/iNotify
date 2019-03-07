@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -96,15 +97,15 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("insert into ua_NI_table(NI_ID,NI_APPNAME,NI_VALUE)values(4,'com.example.dinu.testd',1);");
         db.execSQL("insert into ua_NI_table(NI_ID,NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");
 
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('hungamamusic','musicvideo','com.google.android.apps.hungamamusic');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('tinder','dating','com.google.android.apps.tinder');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('badoo','dating','com.google.android.apps.badoo');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('netflix','entertainment','com.google.android.apps.netflix');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
-        db.execSQL("insert into UC_TOPAPP_TABLE(APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('hungamamusic','musicvideo','com.google.android.apps.hungamamusic');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('tinder','dating','com.google.android.apps.tinder');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('badoo','dating','com.google.android.apps.badoo');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('netflix','entertainment','com.google.android.apps.netflix');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" ( APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
 
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");

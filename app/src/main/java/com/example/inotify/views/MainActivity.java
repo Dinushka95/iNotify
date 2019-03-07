@@ -1,6 +1,6 @@
 package com.example.inotify.views;
 
-import android.app.Activity;
+import android.Manifest;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
@@ -8,43 +8,43 @@ import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
-import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.inotify.R;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenOnDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
-import com.example.inotify.R;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
-import com.example.inotify.services.NV_NotificationViewabilityService;
 import com.example.inotify.services.NV_LocationService;
+import com.example.inotify.services.NV_NotificationViewabilityService;
 import com.example.inotify.services.UC_all_service;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.example.inotify.dbHelpers.MainSqlliteOpenHelp.DATABASE_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,22 +71,85 @@ public class MainActivity extends AppCompatActivity {
     public static Double work_Lat = 6.9148957;
     public static Double accuracy = .0001;
 
+    public static final int MY_PERMISSIONS_REQUEST_READ_LOCATION = 1045;
+    public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2045;
+    public static final int MY_PERMISSIONS_REQUEST_READ_CALENDAR = 3045;
+    public static final int MY_PERMISSIONS_REQUEST_READ_CALL_LOG = 4045;
 
+
+    public static boolean MAIN_RUN = false;
+    public boolean PERMISSION_MAIN = false;
+    public boolean PERMISSION_CONTACTS = false;
+    public boolean PERMISSION_LOCATION = false;
+    public boolean PERMISSION_CALENDER = false;
+    public boolean PERMISSION_PHONE = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-        // check if your profile exises
-        // if true load that profile
-        // else popup fragment to createa profile
-        // load that profile
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+
+        }else {
+            PERMISSION_CONTACTS=true;
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_READ_LOCATION);
+
+        }else {
+            PERMISSION_LOCATION=true;
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR}, MY_PERMISSIONS_REQUEST_READ_CALENDAR);
+
+        }else {
+            PERMISSION_CALENDER=true;
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+
+            Log.d("inotify ", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" );
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG}, MY_PERMISSIONS_REQUEST_READ_CALL_LOG);
+
+        }else {
+            PERMISSION_PHONE=true;
+        }
+
+        if(PERMISSION_CONTACTS==true&&PERMISSION_LOCATION==true&&PERMISSION_CALENDER==true&&PERMISSION_PHONE==true){
+            tt();
+        }else {
+
+
+           // Toast.makeText(getApplicationContext(),"You have not given full permission so app will not work properly - Please restart and give full permission",Toast.LENGTH_LONG).show();
+
+
+            }
+
+
+
+    }
+
+
+    public void tt(){
+
+        // check if your profile exises
+        // if true load that profile
+        // else popup fragment to createa profile
+        // load that profile
+
 
         ActivityRecognitionClient mActivityRecognitionClient = new ActivityRecognitionClient(this);
         mActivityRecognitionClient.requestActivityUpdates(0, getActivityDetectionPendingIntent());
@@ -171,12 +234,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
+
         // if only the user  does not exist
         ProfileHelper profileHelper = new ProfileHelper(this);
-        if(profileHelper.profileisExisCheck()) {
+        if (profileHelper.profileisExisCheck()) {
             //load settings
-        }
-        else{
+        } else {
             //show signup
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.signup);
@@ -194,22 +258,26 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     // save to db -- create a new profile
 
-                    String datenow  = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                    String datenow = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-                    EditText editText = (EditText)dialog.findViewById(R.id.editText);
-                    EditText editText2 = (EditText)dialog.findViewById(R.id.editText2);
+                    EditText editText = (EditText) dialog.findViewById(R.id.editText);
+                    EditText editText2 = (EditText) dialog.findViewById(R.id.editText2);
                     RadioButton radioButton = (RadioButton) dialog.findViewById(R.id.radioButton);
                     RadioButton radioButton2 = (RadioButton) dialog.findViewById(R.id.radioButton2);
-                    EditText editText3 = (EditText)dialog.findViewById(R.id.editText3);
-                    EditText editText4 = (EditText)dialog.findViewById(R.id.editText4);
-                    EditText editText5 = (EditText)dialog.findViewById(R.id.editText5);
+                    EditText editText3 = (EditText) dialog.findViewById(R.id.editText3);
+                    EditText editText4 = (EditText) dialog.findViewById(R.id.editText4);
+                    EditText editText5 = (EditText) dialog.findViewById(R.id.editText5);
 
                     String gender = "";
 
-                    if (radioButton.isSelected()){gender="Male";}
-                    if (radioButton.isSelected()){gender="Female";}
+                    if (radioButton.isSelected()) {
+                        gender = "Male";
+                    }
+                    if (radioButton.isSelected()) {
+                        gender = "Female";
+                    }
 
-                    if(profileHelper.insert(new ProfileModel(
+                    if (profileHelper.insert(new ProfileModel(
                             datenow,
                             editText.getText().toString(),
                             editText2.getText().toString(),
@@ -217,13 +285,13 @@ public class MainActivity extends AppCompatActivity {
                             editText3.getText().toString(),
                             editText4.getText().toString(),
                             editText5.getText().toString()
-                    ))){
+                    ))) {
                         //if sucessfull
-                        Toast.makeText(getApplicationContext(),"Successfully Saved User Details",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Successfully Saved User Details", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
-                    }else{
+                    } else {
                         //if failed
-                        Toast.makeText(getApplicationContext(),"Failed To Save User Details",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Failed To Save User Details", Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -251,4 +319,25 @@ public class MainActivity extends AppCompatActivity {
         Log.d("iNotify", "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
         // code to create a fragment
     }
+
+    public void button_userattentiveness(View view) {
+        Intent intent = new Intent(MainActivity.this, UserAttentivenessActivity.class);
+        startActivity(intent);
+    }
+
+    public void button_notificationviewability(View view) {
+        Intent intent = new Intent(MainActivity.this, NotificationViewabilityActivity.class);
+        startActivity(intent);
+    }
+
+    public void button_userprofile(View view) {
+        Intent intent = new Intent(MainActivity.this, UserProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void button_usercharacteristics(View view) {
+        Intent intent = new Intent(MainActivity.this, UsercharacteristicsActivity.class);
+        startActivity(intent);
+    }
+
 }
