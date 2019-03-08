@@ -10,6 +10,18 @@ public class NotificationModel {
     private String appName;
     private String packageName;
 
+    public NotificationModel(String id, String datetime, String timeRecevied, String timeSent, String timeVievwed, String appName, String packageName){
+        this.id = id;
+        this.datetime = datetime;
+        this.timeRecevied = timeRecevied;
+        this.timeSent = timeSent;
+        this.timeViewed = timeVievwed;
+        this.appName = appName;
+        this.packageName = packageName;
+
+
+    }
+
     public String getId() {
         return id;
     }

@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.models.NotificationModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,14 +24,17 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         super(context);
     }
 
-    public boolean insert(String myNotificationId,String date,String packageName,String timeRecevied) {
+    public boolean insert(NotificationModel NotificationModel) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TbColNames.NOTIFICATION_ID, myNotificationId);
-        contentValues.put(TbColNames.DATE, date);
-        contentValues.put(TbColNames.PACKAGENAME, packageName);
-        contentValues.put(TbColNames.TIMERECEVIED, timeRecevied);
+        contentValues.put(TbColNames.NOTIFICATION_ID, NotificationModel.getId());
+        contentValues.put(TbColNames.DATE, NotificationModel.getDatetime());
+        contentValues.put(TbColNames.TIMERECEVIED, NotificationModel.getTimeRecevied());
+        contentValues.put(TbColNames.TIMESENT, NotificationModel.getTimeSent());
+        contentValues.put(TbColNames.TIMEVIEW, NotificationModel.getTimeViewed());
+        contentValues.put(TbColNames.APPNAME, NotificationModel.getAppName());
+        contentValues.put(TbColNames.PACKAGENAME, NotificationModel.getPackageName());
 
         long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
         db.close();
@@ -65,7 +72,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         SQLiteDatabase db = this.getReadableDatabase();
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
-        Cursor res = db.rawQuery("select TIMERECEVIED from "+ NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
+        Cursor res = db.rawQuery("select TIMERECEVIED from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
                 return res.getString(1);
@@ -82,7 +89,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         SQLiteDatabase db = this.getReadableDatabase();
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
-        Cursor res = db.rawQuery(	"select TIMEVIEW from " + NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
+        Cursor res = db.rawQuery(	"select TIMEVIEW from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
                 return res.getString(1);
@@ -104,7 +111,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("update " +NOTIFICATION_TABLE+ "set TIMEVIEW = \"" +id+ "\"" ,null);
+        Cursor res = db.rawQuery("update " +TbNames.NOTIFICATION_TABLE+ "set TIMEVIEW = \"" +id+ "\"" ,null);
         if(res !=null)
         {
             if(res.moveToFirst()){
