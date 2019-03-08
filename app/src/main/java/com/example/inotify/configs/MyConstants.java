@@ -20,6 +20,6 @@ public class MyConstants {
     public static final int MY_PERMISSIONS_REQUEST_READ_LOCATION = 1045;
     public static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 2045;
     public static final int MY_PERMISSIONS_REQUEST_READ_CALENDAR = 3045;
-    public static final int MY_PERMISSIONS_REQUEST_READ_CALL_LOG = 4045;
+    public static final int MY_PERMISSIONS_REQUEST_READ_PHONE = 4045;
 
 }
