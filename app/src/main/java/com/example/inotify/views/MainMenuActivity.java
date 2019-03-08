@@ -26,7 +26,6 @@ import android.widget.Toast;
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
-import com.example.inotify.dbHelpers.ScreenOnDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.RingerModeHelper;
@@ -140,7 +139,7 @@ public class MainMenuActivity extends AppCompatActivity {
         registerReceiver(mReceiver, intentFilter);
 
 
-        //run isPhoneLockedOrNot method
+      /*  //run isPhoneLockedOrNot method
         All_ScreenLock screenLock = new All_ScreenLock();
         Boolean screenstatus = screenLock.isPhoneLockedOrNot(this);
         Log.d("inotify ", "ScreenStatus" + screenstatus);
@@ -155,7 +154,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         } else {
             //Save to screen off table
-        }
+        }*/
 
         // Call ringermode  method and save into UA_RINGERMODE_TABLE
         RingerModeHelper ringermodeHelper = new RingerModeHelper();
@@ -258,10 +257,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
-    public void testmmm(View view) {
-        Log.d("iNotify", "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
-        // code to create a fragment
-    }
 
     public void button_userattentiveness(View view) {
         Intent intent = new Intent(MainMenuActivity.this, UserAttentivenessActivity.class);
@@ -283,4 +278,15 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void testMihitha(View view) {
+    }
+
+    public void testChaya(View view) {
+    }
+
+    public void testPrashan(View view) {
+    }
+
+    public void testDinu(View view) {
+    }
 }

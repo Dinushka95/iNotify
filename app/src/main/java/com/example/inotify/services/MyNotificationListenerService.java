@@ -25,6 +25,7 @@ import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.MainNotificationViewability;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.helpers.NotificationHelper;
+import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.models.NotificationModel;
 import com.example.inotify.models.SNS_SNSModel;
 import com.example.inotify.helpers.MainSmartNotificationSystem;
@@ -170,13 +171,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
             //call the isPhoneLowckedOrNot method here
-            All_ScreenLock screenLockStatus = new All_ScreenLock();
-            Boolean ScreenLock = screenLockStatus.isPhoneLockedOrNot(this);
-            Log.d("inotify" , "ScreenLock + " +ScreenLock );
+
            // String Screenlock = screenLockStatus.isPhoneLockedOrNot();
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // mitha
-            MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
+          /*  MainUsercharacteristics mainUsercharacteristics = new MainUsercharacteristics();
             String userCharacteistics = mainUsercharacteristics.getUsercharacteristics(this);
             //////////////////////////////////////////////////////////////////////////////////////////////////
             Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-BusyOrNotPredict---"+busyornot );
