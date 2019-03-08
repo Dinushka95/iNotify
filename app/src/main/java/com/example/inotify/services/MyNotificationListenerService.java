@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
@@ -44,6 +47,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.example.inotify.configs.TbNames.UA_RINGERMODE_TABLE;
 
 
 public class MyNotificationListenerService extends NotificationListenerService {
@@ -101,32 +106,32 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             // Notification insert
 
-            String nid = new SimpleDateFormat("yyyyMMddHHmmsss", Locale.getDefault()).format(new Date());
-            Log.d("Notification_insert", "onNotificationPosted: Notification ID");
-
-            String datetime ="";
-            String timeRecevied = "";
-            String timeSent = "";
-            String timeViewed = "";
-            String appName = "";
-            String packageName = "";
-
-            NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-            notificationHelper.insert(new NotificationModel(
-                    nid,
-                    datetime,
-                    timeRecevied,
-                    timeSent,
-                    timeViewed,
-                    appName,
-                    packageName));
-
+//            String nid = new SimpleDateFormat("yyyyMMddHHmmsss", Locale.getDefault()).format(new Date());
+//            Log.d("Notification_insert", "onNotificationPosted: Notification ID");
+//
+//            String datetime ="";
+//            String timeRecevied = "";
+//            String timeSent = "";
+//            String timeViewed = "";
+//            String appName = "";
+//            String packageName = "";
+//
+//            NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
+//            notificationHelper.insert(new NotificationModel(
+//                    nid,
+//                    datetime,
+//                    timeRecevied,
+//                    timeSent,
+//                    timeViewed,
+//                    appName,
+//                    packageName));
+//
 
             //Test
-           /* NV_SqlLiteDbHelper pratest = new NV_SqlLiteDbHelper(this);
+            NV_SqlLiteDbHelper pratest = new NV_SqlLiteDbHelper(this);
             pratest.probability_insert();
             pratest.close();
-
+/*
             SharedPreferences prefs = this.getSharedPreferences("activityrecognition", MODE_PRIVATE);
             String currentactivity=prefs.getString("activity", null);
 
@@ -358,7 +363,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 //dave to db
                // SN_SqlLiteDbHelper SN_sqlLiteDbHelper = new SN_SqlLiteDbHelper(this);
-       //         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+                String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
                // SN_sqlLiteDbHelper.saveData(id,busyornot,attentiviness,userCharacteistics,"mobile",apppack);
                 //SN_sqlLiteDbHelper.close();
 
@@ -413,6 +418,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 PendingIntent pendingIntent;
                 NotificationCompat.Builder builder;
 
+                String Sendtime = "";
+
                 if (notifManager == null) {
                     notifManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
                 }
@@ -438,6 +445,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                             .setContentIntent(pIntent)
                             .setTicker(id)
                             .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                    Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 }
                 else {
                     builder = new NotificationCompat.Builder(this, id);
@@ -454,11 +462,43 @@ public class MyNotificationListenerService extends NotificationListenerService {
                             .setTicker(id)
                             .setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400})
                             .setPriority(Notification.PRIORITY_HIGH);
+                    Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 }
                 Notification notification = builder.build();
                 notifManager.notify(NOTIFY_ID, notification);
 
 
+                //PRASHAN
+                // Notification insert
+
+                String nid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+                Log.d("Notification_insert", "onNotificationPosted: Notification ID");
+
+                String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+                String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+
+
+
+                String datetime =Date;
+                String timeRecevied = TimeRecieved;
+                String timeSent = Sendtime;
+                String timeViewed = "";
+                String appName = "";
+                String packageName = "";
+
+                NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
+                notificationHelper.insert(new NotificationModel(
+                        nid,
+                        datetime,
+                        timeRecevied,
+                        timeSent,
+                        timeViewed,
+                        appName,
+                        packageName));
+
+
+                //PRASHAN end
 
                /* UA_SqlLiteDbHelper chaSqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
                 // depreciated method please remove this
@@ -477,10 +517,26 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---start" );
 
 
+
+
+
+        //if (ticker = )
+        //String Viewtime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
+
         //chaya
         if (sbn.getPackageName().equals("com.example.inotify")) {
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-"+ sbn.getPackageName() );
+
+            String ticker = sbn.getNotification().tickerText.toString();
+            Log.d("Notification ticker", "onNotificationRemoved: "+ticker);
+
+
+            //if (ticker = )
+
+            //String Viewtime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
 
 /*            int totalnotificationinlist = 0;
 
