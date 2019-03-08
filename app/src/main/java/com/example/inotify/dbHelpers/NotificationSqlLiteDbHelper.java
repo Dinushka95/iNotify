@@ -7,6 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import static com.example.inotify.configs.TbNames.NOTIFICATION_TABLE;
+
 
 public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
 
@@ -23,7 +29,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(TbColNames.PACKAGENAME, packageName);
         contentValues.put(TbColNames.TIMERECEVIED, timeRecevied);
 
-        long result = db.insert(TbNames.NOTIFICATION_TABLE, null, contentValues);
+        long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -42,7 +48,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
             contentValues.put(TbColNames.TIMESENT, timeSent);
             contentValues.put(TbColNames.TIMEVIEW, timeViewed);
 
-            long result = db.insert(TbNames.NOTIFICATION_TABLE, null, contentValues);
+            long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
             db.close();
             if (result == -1)
                 return false;

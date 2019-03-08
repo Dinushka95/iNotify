@@ -7,7 +7,9 @@ public class AppInfoModel {
     private String appCategory;
     private String pakageName;
 
+    public AppInfoModel() {
 
+    }
 
     public int getId() {
         return id;
@@ -24,6 +26,7 @@ public class AppInfoModel {
     public void setAppName(String appName) {
         this.appName = appName;
     }
+
 
     public String getAppCategory() {
         return appCategory;

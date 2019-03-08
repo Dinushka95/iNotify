@@ -29,10 +29,12 @@ import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
+import com.example.inotify.dbHelpers.TopAppDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.RingerModeHelper;
+import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
@@ -43,6 +45,7 @@ import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -344,7 +347,15 @@ public class MainActivity extends AppCompatActivity {
     public void testmmm(View view) {
         Log.d("iNotify", "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
         // code to create a fragment
+
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(view.getContext());
+        int count = applicationsHelper.commonSocialAppCount();
+        Log.d("inotify", "count - " + count);
+
     }
+
+
+
 
     public void button_userattentiveness(View view) {
         Intent intent = new Intent(MainActivity.this, UserAttentivenessActivity.class);
