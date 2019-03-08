@@ -20,8 +20,12 @@ import android.util.Log;
 import com.example.inotify.R;
 import com.example.inotify.configs.AppUserConfigs;
 import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.MainNotificationViewability;
+import com.example.inotify.helpers.RingerModeHelper;
+import com.example.inotify.helpers.NotificationHelper;
+import com.example.inotify.models.NotificationModel;
 import com.example.inotify.models.SNS_SNSModel;
 import com.example.inotify.helpers.MainSmartNotificationSystem;
 import com.example.inotify.helpers.MainAttentiviness;
@@ -63,6 +67,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 sbn.getPackageName().equals("com.example.dinu.testb") ||
                 sbn.getPackageName().equals("com.example.dinu.testc") ||
                 sbn.getPackageName().equals("com.example.dinu.testd") ||
+                sbn.getPackageName().equals("com.example.myapplication") ||
                 sbn.getPackageName().equals("com.google.android.apps.messaging"))
                 ) {
 
@@ -89,6 +94,30 @@ public class MyNotificationListenerService extends NotificationListenerService {
 //==========================================================================================================================
             //////////////////////////////////////////////////////////////////////////////////////////////////
             // prashan
+
+
+            // Notification insert
+
+            String nid = new SimpleDateFormat("yyyyMMddHHmmsss", Locale.getDefault()).format(new Date());
+            Log.d("Notification_insert", "onNotificationPosted: Notification ID");
+
+            String datetime ="";
+            String timeRecevied = "";
+            String timeSent = "";
+            String timeViewed = "";
+            String appName = "";
+            String packageName = "";
+
+            NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
+            notificationHelper.insert(new NotificationModel(
+                    nid,
+                    datetime,
+                    timeRecevied,
+                    timeSent,
+                    timeViewed,
+                    appName,
+                    packageName));
+
 
             //Test
            /* NV_SqlLiteDbHelper pratest = new NV_SqlLiteDbHelper(this);
@@ -125,8 +154,18 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "Main-MyNotificationListenerService--currentlocation---"+currentlocation );*/
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
-            // chaya
-            /*MainAttentiviness mainAttentiviness = new MainAttentiviness();
+            //
+
+            //call the isPhoneLowckedOrNot method here
+            ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+            Boolean screenstatus =  screenStatusHelper.isPhoneLockedOrNot(this);
+            Log.d("inotify " ,"ScreenStatus On Notification recive" + screenstatus);
+
+            RingerModeHelper ringermodeHelper = new RingerModeHelper();
+            String RingerMode = ringermodeHelper.getRingerMode(this);
+            Log.d("inotify " ,"RingerMode On Notification recive" + RingerMode);
+
+            MainAttentiviness mainAttentiviness = new MainAttentiviness();
             String attentiviness = mainAttentiviness.getFinalAttentiviness(this,apppack);
 
 
@@ -458,5 +497,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop" );
+
+        //Chaya
+        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+        String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
+        Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
+
     }
 }

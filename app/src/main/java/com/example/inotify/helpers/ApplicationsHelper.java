@@ -33,4 +33,11 @@ public class ApplicationsHelper {
             applicationDbHelper.close();
 
     }
+
+    public int appCountGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return (int) applicationdbHelper.appCountGet();
+    }
 }

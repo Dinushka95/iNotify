@@ -4,10 +4,10 @@ public class TbColNames {
 
 
     ////notification
-    public static final String NOTIFICATION_ID = "notificationId";
+    public static final String NOTIFICATION_ID = "notification_Id";
     public static final String DATE = "date";
     public static final String TIMERECEVIED = "timeRecevied";
-    public static final String TIMESENT = "timeSend";
+    public static final String TIMESENT = "timeSent";
     public static final String TIMEVIEW = "timeView";
     public static final String APPNAME = "appName";
     public static final String PACKAGENAME = "packageName";
@@ -38,7 +38,9 @@ public class TbColNames {
 
     ////screenon
     public static final String TIMEON = "timeon";
-   // public static final String DATE = "date";
+
+    //ScrennOff
+    public static final String TIMEOFF = "timeoff";
 
     ////smart notification system
     // notification all notifications

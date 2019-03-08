@@ -273,9 +273,20 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         char MinOne = currentMin.charAt(0);
         Log.d("Debug", "NOW"+MinOne);
 
-        int nextMin = java.lang.Character.getNumericValue(MinOne) +1;
+        int nextMin =0;
+        int nextHour = 0;
 
-        String TimeSlot = currentHour+":"+ MinOne+"0 - "+currentHour+":"+nextMin+"0 "+ currentAP;
+        if(java.lang.Character.getNumericValue(MinOne) != 5){
+            nextMin = java.lang.Character.getNumericValue(MinOne) +1;
+            nextHour = Integer.parseInt(currentHour);
+        }
+        else{
+            nextMin = 0;
+            nextHour = Integer.parseInt(currentHour)+1;
+        }
+
+
+        String TimeSlot = currentHour+":"+ MinOne+"0 - "+nextHour+":"+nextMin+"0 "+ currentAP;
         Log.d("Debug", "TimeSlot = "+TimeSlot);
 
 
