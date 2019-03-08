@@ -164,7 +164,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             /////////////////////////////////////////////////////////////////////////////////////////////////
             //
             //Chaya
-            String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+            String idCha = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
             //call the isPhoneLowckedOrNot method here
             ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
@@ -197,9 +197,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             //Save ringer Mode to the table
             RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
-            Log.d("inotify ", "RingerMode" + RingerMode + "," + id);
+            Log.d("inotify ", "RingerMode" + RingerMode + "," + idCha);
 
-            ringerModeDbHelper.RMinsert(id, RingerMode);
+            ringerModeDbHelper.RMinsert(idCha, RingerMode);
             ringerModeDbHelper.close();
             Log.d("inotify ", " ringer mode Record Saved");
 
