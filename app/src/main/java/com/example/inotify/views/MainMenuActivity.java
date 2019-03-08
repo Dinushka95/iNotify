@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -157,7 +158,7 @@ public class MainMenuActivity extends AppCompatActivity {
         }*/
 
         // Call ringermode  method and save into UA_RINGERMODE_TABLE
-        RingerModeHelper ringermodeHelper = new RingerModeHelper();
+       /* RingerModeHelper ringermodeHelper = new RingerModeHelper();
         String RingerMode = ringermodeHelper.getRingerMode(this);
         Log.d("inotify ", "RingerMode" + RingerMode);
 
@@ -168,7 +169,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         ringerModeDbHelper.RMinsert(id, RingerMode);
         ringerModeDbHelper.close();
-        Log.d("inotify ", "Record Saved");
+        Log.d("inotify ", "Record Saved");*/
 
     }
 
@@ -285,8 +286,10 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testPrashan(View view) {
+
     }
 
     public void testDinu(View view) {
+        startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
     }
 }

@@ -24,6 +24,8 @@ import com.example.inotify.R;
 import com.example.inotify.configs.AppUserConfigs;
 import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
 import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
+import com.example.inotify.dbHelpers.RingerModeDbHelper;
+import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.MainNotificationViewability;
 import com.example.inotify.helpers.RingerModeHelper;
@@ -102,7 +104,28 @@ public class MyNotificationListenerService extends NotificationListenerService {
             // prashan
 
 
+            // Notification insert
 
+//            String nid = new SimpleDateFormat("yyyyMMddHHmmsss", Locale.getDefault()).format(new Date());
+//            Log.d("Notification_insert", "onNotificationPosted: Notification ID");
+//
+//            String datetime ="";
+//            String timeRecevied = "";
+//            String timeSent = "";
+//            String timeViewed = "";
+//            String appName = "";
+//            String packageName = "";
+//
+//            NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
+//            notificationHelper.insert(new NotificationModel(
+//                    nid,
+//                    datetime,
+//                    timeRecevied,
+//                    timeSent,
+//                    timeViewed,
+//                    appName,
+//                    packageName));
+//
 
             //Test
             NV_SqlLiteDbHelper pratest = new NV_SqlLiteDbHelper(this);
@@ -140,15 +163,51 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
             //
+            //Chaya
+            String idCha = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
             //call the isPhoneLowckedOrNot method here
             ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
             Boolean screenstatus =  screenStatusHelper.isPhoneLockedOrNot(this);
             Log.d("inotify " ,"ScreenStatus On Notification recive" + screenstatus);
+            if(screenstatus == false)
+            {
+                //Save to screen on table
+                ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
+               // String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+                screenStatusDbHelper.ScreenOnInsert();
+                screenStatusDbHelper.close();
+                Log.d("iNotify", "SCreen status Saved");
+            }
+            else
+            {
+                //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+                ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
+                screenStatusDbHelper.ScreenOffInsert();
+                screenStatusDbHelper.close();
+                Log.d("iNotify", "SCreen off status Saved");
 
+
+            }
+
+            //Get the ringer Mode
             RingerModeHelper ringermodeHelper = new RingerModeHelper();
             String RingerMode = ringermodeHelper.getRingerMode(this);
             Log.d("inotify " ,"RingerMode On Notification recive" + RingerMode);
+
+            //Save ringer Mode to the table
+            RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
+            Log.d("inotify ", "RingerMode" + RingerMode + "," + idCha);
+
+            ringerModeDbHelper.RMinsert(idCha, RingerMode);
+            ringerModeDbHelper.close();
+            Log.d("inotify ", " ringer mode Record Saved");
+
+
+
+
+
+
 
             MainAttentiviness mainAttentiviness = new MainAttentiviness();
             String attentiviness = mainAttentiviness.getFinalAttentiviness(this,apppack);

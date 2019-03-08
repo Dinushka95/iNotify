@@ -11,6 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import static com.example.inotify.configs.TbNames.NOTIFICATION_TABLE;
+
 
 public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
 
@@ -30,7 +36,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
         contentValues.put(TbColNames.APPNAME, NotificationModel.getAppName());
         contentValues.put(TbColNames.PACKAGENAME, NotificationModel.getPackageName());
 
-        long result = db.insert(TbNames.NOTIFICATION_TABLE, null, contentValues);
+        long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -49,7 +55,7 @@ public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
             contentValues.put(TbColNames.TIMESENT, timeSent);
             contentValues.put(TbColNames.TIMEVIEW, timeViewed);
 
-            long result = db.insert(TbNames.NOTIFICATION_TABLE, null, contentValues);
+            long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
             db.close();
             if (result == -1)
                 return false;

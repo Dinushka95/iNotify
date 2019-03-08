@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
+import static com.example.inotify.configs.TbNames.TOPAPP_TABLE;
 
 public class ApplicationDbHelper extends MainSqlliteOpenHelp{
 
@@ -92,6 +93,30 @@ public class ApplicationDbHelper extends MainSqlliteOpenHelp{
         db.close();
 
         return 0;
+    }
+
+    public List<AppInfoModel> mySocialAppGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"social\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    AppInfoModel appInfoModel = new AppInfoModel();
+
+                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
+                    //appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listAppInfoModels.add(appInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listAppInfoModels;
     }
 
 }

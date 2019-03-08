@@ -11,12 +11,15 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.MyContact;
+import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
+import com.example.inotify.models.AppInfoModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -207,7 +210,45 @@ public class UC_all_service extends JobService {
         UC_sqlLiteDbHelper.close();
 
     }
-
-
+//
+//    public List<String> commonSocialApps()
+//    {
+//        ApplicationsHelper applicationsHelper = new ApplicationsHelper(view.getContext());
+//        List<AppInfoModel> mySocialApps= applicationsHelper.mySocialAppGet();
+//
+//        TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
+//        List<AppInfoModel> topSocialApps = topAppsHelper.topAppSocial();
+//
+//
+//
+//
+//        int correctCount=0, incorrectCount = 0;
+////        List<String> list1MysocialApps = new ArrayList<String>(mySocialApps);
+////
+////        List<String> list2topSocialApps = new ArrayList<String>();
+//
+//        for(AppInfoModel tmp1: topSocialApps) {
+//            for(AppInfoModel tmp2: mySocialApps) {
+//                if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
+//                    List<AppInfoModel> commonSocial =
+//                            Log.d("inotify","Social apps");
+//                    for (AppInfoModel value : commonSocial)
+//                    {
+//                        Log.d("inotify",value.getAppName());
+//                        Log.d("inotify","app info");
+//                    }
+//                    correctCount++;
+//                } else {
+//                    incorrectCount++;
+//                }
+//            }
+//        }
+//
+//
+//
+//        return List<String>social ;
+//    }
+//
+//
 
 }
