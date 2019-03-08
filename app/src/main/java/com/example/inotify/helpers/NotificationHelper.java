@@ -12,9 +12,9 @@ public class NotificationHelper {
         c1=context;
     }
 
-    public boolean insert(String myNotificationId,String date,String packageName,String timeRecevied){
+    public boolean insert(String NotificationId,String date,String packageName,String timeRecevied){
 
         NotificationSqlLiteDbHelper notificationSqlLiteDbHelper = new NotificationSqlLiteDbHelper(c1);
-        return notificationSqlLiteDbHelper.insert(myNotificationId,date,packageName,timeRecevied);
+        return notificationSqlLiteDbHelper.insert(NotificationId,date,packageName,timeRecevied);
     }
 }

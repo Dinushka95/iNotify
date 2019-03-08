@@ -3,6 +3,7 @@ package com.example.inotify.services;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 
+import com.example.inotify.configs.AppUserConfigs;
 import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
 
 import java.text.SimpleDateFormat;
@@ -11,11 +12,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.views.MainActivity.accuracy;
-import static com.example.inotify.views.MainActivity.home_Lat;
-import static com.example.inotify.views.MainActivity.home_Log;
-import static com.example.inotify.views.MainActivity.work_Lat;
-import static com.example.inotify.views.MainActivity.work_Log;
 
 public class NV_NotificationViewabilityService extends JobService {
 
@@ -54,17 +50,17 @@ public class NV_NotificationViewabilityService extends JobService {
          double lat = loc.get(1);
 
 
-        double distanceHome = Math.hypot(log - home_Log, lat-home_Lat);
-        double distanceWork = Math.hypot(log - work_Log, lat-work_Lat);
+        double distanceHome = Math.hypot(log - AppUserConfigs.home_Log, lat-AppUserConfigs.home_Lat);
+        double distanceWork = Math.hypot(log - AppUserConfigs.work_Log, lat-AppUserConfigs.work_Lat);
       //  Log.d("inotify","AAAAAAAAAAAAAAAAAAAAAA"+distanceHome);
       //  Log.d("inotify","AAAAAAAAAAAAAAAAAAAAAAA"+distanceWork);
 
         String CurrentLocation="unknown";
 
-        if(distanceHome<accuracy){
+        if(distanceHome<AppUserConfigs.accuracy){
          CurrentLocation="home";
              }
-        if(distanceWork<accuracy){
+        if(distanceWork<AppUserConfigs.accuracy){
             CurrentLocation="work";
         }
 

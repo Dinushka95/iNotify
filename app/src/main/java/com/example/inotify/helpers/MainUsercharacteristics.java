@@ -3,17 +3,17 @@ package com.example.inotify.helpers;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.inotify.configs.AppUserConfigs;
 import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
 
 import java.util.ArrayList;
 
-import static com.example.inotify.views.MainActivity.MainUsercharacteristics_DebuggerLogger;
 
 public class MainUsercharacteristics {
 
     public String getUsercharacteristics(Context context){
 
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--Started---");
         }
 
@@ -40,7 +40,7 @@ public class MainUsercharacteristics {
         long chargetimeLast = UC_sqlLiteDbHelper.chargeLast_get();
         long socialmediacAppCountLast = UC_sqlLiteDbHelper.applistsocialmediaLast_get();
 
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--appUsageCountAvg---"+appUsageCountAvg);
             Log.d("inotify", "Main-Usercharacteristics--appUsageCountLast---"+appUsageCountLast);
             Log.d("inotify", "Main-Usercharacteristics--appListCountAvg---"+appListCountAvg);
@@ -101,7 +101,7 @@ public class MainUsercharacteristics {
 
         opennessFinal=(openness_WL1+openness_WL2+openness_WL3)/100;
 
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--opennessFinal---"+opennessFinal);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +119,7 @@ public class MainUsercharacteristics {
 
         neuroticismFinal=(neuroticism_WL1+neuroticism_WL2+neuroticism_WL3)/100;
 
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--neuroticismFinal---"+neuroticismFinal);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +141,7 @@ public class MainUsercharacteristics {
 
         extraversionFinal=(extraversion_WL1+extraversion_WL2+extraversion_WL3+extraversion_WL4+extraversion_WL5)/100;
 
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--extraversionFinal---"+extraversionFinal);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,7 +161,7 @@ public class MainUsercharacteristics {
 
         consientiousnessFinal=(consientiousness_WL1+consientiousness_WL2+consientiousness_WL3+consientiousness_WL4)/100;
 
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--consientiousnessFinal---"+consientiousnessFinal);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -182,7 +182,7 @@ public class MainUsercharacteristics {
         if(calldurationCountStatue.equals("high")){consientiousness_WL4=30;}else{consientiousness_WL4=0;}
 
         areeablenessFinal=(areeableness_WL1+areeableness_WL2+areeableness_WL3+areeableness_WL4+areeableness_WL5)/100;
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--areeablenessFinal---"+areeablenessFinal);
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -266,11 +266,11 @@ public class MainUsercharacteristics {
         //gaming - openess
         // oldtechnology - agreeableness
 
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--Final convertion from big 5 to app category---"+x);
         }
 
-        if(MainUsercharacteristics_DebuggerLogger){
+        if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
             Log.d("inotify", "Main-Usercharacteristics--Stop---");
         }
 
