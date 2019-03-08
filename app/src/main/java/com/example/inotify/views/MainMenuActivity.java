@@ -158,7 +158,7 @@ public class MainMenuActivity extends AppCompatActivity {
         }*/
 
         // Call ringermode  method and save into UA_RINGERMODE_TABLE
-        RingerModeHelper ringermodeHelper = new RingerModeHelper();
+       /* RingerModeHelper ringermodeHelper = new RingerModeHelper();
         String RingerMode = ringermodeHelper.getRingerMode(this);
         Log.d("inotify ", "RingerMode" + RingerMode);
 
@@ -169,7 +169,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         ringerModeDbHelper.RMinsert(id, RingerMode);
         ringerModeDbHelper.close();
-        Log.d("inotify ", "Record Saved");
+        Log.d("inotify ", "Record Saved");*/
 
     }
 
