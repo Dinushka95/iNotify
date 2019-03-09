@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -27,8 +28,11 @@ import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
+import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.RingerModeHelper;
+import com.example.inotify.helpers.TopAppsHelper;
+import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
@@ -38,6 +42,7 @@ import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -279,14 +284,68 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testMihitha(View view) {
+        TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
+        List<AppInfoModel> topgamingapp = topAppsHelper.topAppGaming();
+
+        for (AppInfoModel value : topgamingapp)
+        {
+            Log.d("inotify","gaming top apps - " + value.getAppName());
+        }
+
+        //TopAppsHelper topAppsHelper2 = new TopAppsHelper(view.getContext());
+
+        List<AppInfoModel> topCommunicationApp = topAppsHelper.topAppCommunication();
+        for (AppInfoModel value : topCommunicationApp)
+        {
+            Log.d("inotify","communication top apps - " + value.getAppName());
+        }
+
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(view.getContext());
+        List<AppInfoModel> myGamingApp = applicationsHelper.myGamingAppGet();
+        for(AppInfoModel value : myGamingApp)
+        {
+            Log.d("inotify","my gaming apps - " + value.getAppName());
+        }
+
+        int gamingCount = applicationsHelper.commonGamingAppCount();
+        Log.d("inotify","gaming count - " + gamingCount);
+
+        List<AppInfoModel> myCommunicationApp = applicationsHelper.myCommunicationAppGet();
+
+        for(AppInfoModel value : myCommunicationApp)
+        {
+            Log.d("inotify","my Communication apps - " + value.getAppName());
+        }
+
+        int communicationCount = applicationsHelper.commonCommunicationAppCount();
+        Log.d("inotify","Communication count - " + communicationCount);
+
+        List<AppInfoModel> topMusicVideoApp = topAppsHelper.topAppMusicVideo();
+        for(AppInfoModel value : topMusicVideoApp)
+        {
+            Log.d("inotify","top music and video apps - " + value.getAppName());
+        }
+
+        List<AppInfoModel> myMusicVideoApp = applicationsHelper.myMusicVideoAppGet();
+        for(AppInfoModel value : myMusicVideoApp)
+        {
+            Log.d("inotify","my music apps - " +value.getAppName());
+        }
+
+        int MusicVideoCount = applicationsHelper.commonMusicVideoAppCount();
+        Log.d("inotify","MusicVideoCount count - " + MusicVideoCount);
+
+
     }
 
     public void testChaya(View view) {
     }
 
     public void testPrashan(View view) {
+
     }
 
     public void testDinu(View view) {
+        startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
     }
 }

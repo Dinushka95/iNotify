@@ -38,7 +38,7 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.NV_LOCATION_TABLE + " (LOCATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT,LOG TEXT,LAT TEXT)");
         db.execSQL("create table " + TbNames.NV_NOTIFICATIONREMOVE_TABLE + " (NOTIFICATIONREMOVE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT)");
         db.execSQL("create table " + TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE + " (BUSYORNOT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,LOCATION TEXT,BUSYORNOT TEXT)");
-        db.execSQL("create table " + TbNames.NV_PROBABILITY_TABLE + " (PROBABILITY_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,VIEWOR INTEGER,NOTOR INTEGER, PROBABILITY DOUBLE)");
+        db.execSQL("create table " + TbNames.NV_PROBABILITY_TABLE + " (PROBABILITY_ID INTEGER PRIMARY KEY,DAY TEXT,TIME TEXT,ACTIVITY TEXT,VIEWOR INTEGER,NOTOR INTEGER, PROBABILITY DOUBLE)");
 
         db.execSQL("create table " + TbNames.SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
                 "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
@@ -109,6 +109,9 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
         db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
         db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" ( APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('call','communication','com.google.android.apps.call');");
+
+
 
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
@@ -119,6 +122,11 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('clashofclans','gaming','com.google.android.apps.clashofclans');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('game2','gaming','com.google.android.apps.game2');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('Message','communication','com.google.android.apps.Message');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('chatMe','communication','com.google.android.apps.chatMe');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('call','communication','com.google.android.apps.call');");
 
 
 

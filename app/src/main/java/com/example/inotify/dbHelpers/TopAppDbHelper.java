@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.AppInfoModel;
@@ -69,8 +70,11 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
+        //Log.d("inotify","communication top apps -XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX1111 ");
+
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"communication\"", null);
         if (res != null) {
+           // Log.d("inotify","communication top apps -XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX2222222 ");
             if (res.moveToFirst()) {
                 do {
 
@@ -78,12 +82,13 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
 
                     appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
                     appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
+                    Log.d("inotify","communication top apps -XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ");
 
                     listAppInfoModels.add(appInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
+            db.close();
         }
         return listAppInfoModels;
     }
@@ -110,6 +115,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
             }
             res.close();
         }
+        db.close();
         return listAppInfoModels;
     }
 
@@ -259,6 +265,32 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
         }
         return listAppInfoModels;
     }
+
+
+    public List<AppInfoModel> topAppMusicVideoGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"musicvideo\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    AppInfoModel appInfoModel = new AppInfoModel();
+
+                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
+                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listAppInfoModels.add(appInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listAppInfoModels;
+    }
+
 
     public long SocialAppCountGet() {
 

@@ -12,8 +12,11 @@ public class TbColNames {
     public static final String APPNAME = "appName";
     public static final String PACKAGENAME = "packageName";
 
+
+    //PRASHAN
     ////nv sql lite db helper
    // public static final String DATE = "date";
+    public static final String PROID = "probability_id";
     public static final String DAY = "day";
     public static final String TIME = "time";
     public static final String ACTIVITY = "activity";
