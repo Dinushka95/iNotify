@@ -31,8 +31,8 @@ public class All_ScreenLock extends BroadcastReceiver {
             editor.putString("screen", "off");
             editor.apply();
             // add db entry to save data time of screen off
-            UA_SqlLiteDbHelper ua_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
-            ua_sqlLiteDbHelper.screenOffInsert();
+          //  UA_SqlLiteDbHelper ua_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
+           // ua_sqlLiteDbHelper.screenOffInsert();
 
             //mitha part
             String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());

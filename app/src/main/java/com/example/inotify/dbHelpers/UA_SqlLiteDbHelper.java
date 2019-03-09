@@ -187,7 +187,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
     }
 
-  public boolean screenOffInsert() {
+  /*public boolean screenOffInsert() {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
@@ -201,7 +201,7 @@ public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
             return false;
         else
             return true;
-    }
+    }*/
 
     public boolean screenOnInsert() {
 

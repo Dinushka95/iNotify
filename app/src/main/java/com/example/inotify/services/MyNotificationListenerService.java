@@ -23,11 +23,13 @@ import android.util.Log;
 import com.example.inotify.R;
 import com.example.inotify.configs.AppUserConfigs;
 import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.MainNotificationViewability;
+import com.example.inotify.helpers.NotificationImportnaceHelper;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
@@ -76,6 +78,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 sbn.getPackageName().equals("com.example.dinu.testc") ||
                 sbn.getPackageName().equals("com.example.dinu.testd") ||
                 sbn.getPackageName().equals("com.example.myapplication") ||
+                sbn.getPackageName().equals("com.whatsapp") ||
+                sbn.getPackageName().equals("com.facebook.orca") ||
                 sbn.getPackageName().equals("com.google.android.apps.messaging"))
                 ) {
 
@@ -525,33 +529,68 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
         //chaya
-        if (sbn.getPackageName().equals("com.example.inotify")) {
+       // if (sbn.getPackageName().equals("com.example.inotify")) {
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-"+ sbn.getPackageName() );
 
-            String ticker = sbn.getNotification().tickerText.toString();
-            Log.d("Notification ticker", "onNotificationRemoved: "+ticker);
+           String ticker = sbn.getNotification().tickerText.toString();
+           Log.d("Notification ticker", "onNotificationRemoved: "+ticker);
 
 
             //if (ticker = )
 
-            //String Viewtime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+            String Viewtime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
 
-/*            int totalnotificationinlist = 0;
+           int totalnotificationinlist = 0;
 
             StatusBarNotification[] notificationManager1 = getActiveNotifications();
+
+            ////////////////////////////////////////////////////////////////////////////////////////////
+           // NotificationImportnaceHelper notificationImportnaceHelper = new NotificationImportnaceHelper();
+            //notificationImportnaceHelper.AssignSequenceValue(getActiveNotifications(),sbn);
+            ////////////////////////////////////////////////////////////////////////////
+
+        Log.d("inotify" , "Total notifications initially " +totalnotificationinlist);
             for (StatusBarNotification notification : notificationManager1) {
+                // Log.d("cdap", " ---onNotificationRemoved--------"+notification.getPackageName());
+                //if(notification.getPackageName().equals("com.example.inotify")){
+                    Log.d("inotify" , "Total notifications initially " +totalnotificationinlist);
+                    totalnotificationinlist = totalnotificationinlist + 1;
+
+               // }
+            }
+        Log.d("inotify" , "totalnotificationinlist Importnace table "+totalnotificationinlist);
+
+//            NotificationSqlLiteDbHelper notificationSqlLiteDbHelper = new NotificationSqlLiteDbHelper(this);
+//            String PackageName = notificationSqlLiteDbHelper.AppnameGet(sbn.getNotification().tickerText.toString());
+//            Log.d("inotify" , "PackaheName Importnace table "+PackageName);
+
+            NotificationImportnaceDbHelper notificationImportnaceDbHelper = new NotificationImportnaceDbHelper(this);
+            notificationImportnaceDbHelper.NotificationImportnaceInsert("asd" , totalnotificationinlist);
+            notificationImportnaceDbHelper.close();
+           Log.d("inotify" , "Savedto notification Importnace table "+"asd" +","+totalnotificationinlist);
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+           /* for (StatusBarNotification notification : notificationManager1) {
                // Log.d("cdap", " ---onNotificationRemoved--------"+notification.getPackageName());
                 if(notification.getPackageName().equals("com.example.inotify")){
                     totalnotificationinlist = totalnotificationinlist +1;
                 }
             }
-         //   Log.d("cdap", " ---onNotificationRemoved--------total notifications-----" + totalnotificationinlist);
+            Log.d("cdap", " ---onNotificationRemoved--------total notifications-----" + totalnotificationinlist);
             UA_SqlLiteDbHelper chaSqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
             String packageName = chaSqlLiteDbHelper.NValueGet(sbn.getNotification().tickerText.toString());
-            chaSqlLiteDbHelper.NIupdate(packageName, totalnotificationinlist);
-            chaSqlLiteDbHelper.close();*/
+            //chaSqlLiteDbHelper.NIupdate(packageName, totalnotificationinlist);
+            NotificationImportnaceDbHelper notificationImportnaceDbHelper= new NotificationImportnaceDbHelper(this);
+            notificationImportnaceDbHelper.NotificationImportnaceInsert(packageName , totalnotificationinlist);
+            notificationImportnaceDbHelper.close();
+            //chaSqlLiteDbHelper.close();
+*/
+
 
 
            /* //dinu
@@ -578,7 +617,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             SN_sqlLiteDbHelper.updateData(oldtime,String.valueOf(difference));
             SN_sqlLiteDbHelper.close();*/
 
-        }
+      // For if clause }
 
 
 /*        // for prashan
@@ -592,9 +631,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop" );
 
         //Chaya
-        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
-        String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
-        Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
+     //   NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
+       // String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
+        //Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
 
     }
 }

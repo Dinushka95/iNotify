@@ -42,6 +42,11 @@ public class TbColNames {
     //ScrennOff
     public static final String TIMEOFF = "timeoff";
 
+    //NotificationImportnace
+    public static final String NOTIFICATIONIID = "notificationiid";
+    public static final String APPLICATIONNAME = "applicationname";
+    public static final String SEQUENCEVALUE ="sequencevalue";
+
     ////smart notification system
     // notification all notifications
     public static final String SNS_ID = "sns_id";
