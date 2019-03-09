@@ -119,4 +119,76 @@ public class ApplicationDbHelper extends MainSqlliteOpenHelp{
         return listAppInfoModels;
     }
 
+    public List<AppInfoModel> myGamingAppGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    AppInfoModel appInfoModel = new AppInfoModel();
+
+                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
+                    //appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listAppInfoModels.add(appInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listAppInfoModels;
+    }
+
+    public List<AppInfoModel> myMusicVideoAppGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"musicvideo\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    AppInfoModel appInfoModel = new AppInfoModel();
+
+                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
+                    //appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listAppInfoModels.add(appInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listAppInfoModels;
+    }
+
+    public List<AppInfoModel> myCommunicationAppGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    AppInfoModel appInfoModel = new AppInfoModel();
+
+                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
+                    //appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listAppInfoModels.add(appInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listAppInfoModels;
+    }
+
 }

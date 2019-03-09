@@ -108,6 +108,9 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
         db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
         db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" ( APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+        db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('call','communication','com.google.android.apps.call');");
+
+
 
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
@@ -118,6 +121,11 @@ public class MainSqlliteOpenHelp extends SQLiteOpenHelper {
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
         db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('clashofclans','gaming','com.google.android.apps.clashofclans');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('game2','gaming','com.google.android.apps.game2');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('Message','communication','com.google.android.apps.Message');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('chatMe','communication','com.google.android.apps.chatMe');");
+        db.execSQL("insert into applications_table(APPNAME,APPCATEGORY,APPPACKAGE)values('call','communication','com.google.android.apps.call');");
 
 
 
