@@ -15,7 +15,7 @@ import java.util.Objects;
 import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 import static com.example.inotify.configs.TbNames.TOPAPP_TABLE;
 
-public class TopAppDbHelper extends MainSqlliteOpenHelp {
+public class TopAppDbHelper extends MainDbHelp {
 
     public static final String TOPAPP_ID = "topapp_id";
     public static final String APPNAME = "appname";
@@ -47,7 +47,7 @@ public class TopAppDbHelper extends MainSqlliteOpenHelp {
             if (res.moveToFirst()) {
                 do {
 
-                    //SNS_SNSModel snsModel = new SNS_SNSModel();
+                    //SNSModel snsModel = new SNSModel();
                     AppInfoModel appInfoModel = new AppInfoModel();
 
                     appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));

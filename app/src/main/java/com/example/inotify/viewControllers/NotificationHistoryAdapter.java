@@ -45,7 +45,7 @@ public class NotificationHistoryAdapter extends BaseAdapter implements ListAdapt
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.notificationhistory, null);
+            view = inflater != null ? inflater.inflate(R.layout.notificationhistory, null) : null;
         }
 
         //Handle TextView and display string from your list

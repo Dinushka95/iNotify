@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.location.Location;
 
 import com.example.inotify.components.MyLocationUpdatesComponent;
-import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NV_DbHelper;
 
 public class NV_LocationService extends JobService implements MyLocationUpdatesComponent.ILocationProvider {
 
@@ -51,7 +51,7 @@ public class NV_LocationService extends JobService implements MyLocationUpdatesC
     public void onLocationUpdate(Location location) {
 
 
-        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
+        NV_DbHelper praSqlLiteDbHelper = new NV_DbHelper(this);
         String log = String.valueOf(location.getLongitude());
         String lat = String.valueOf(location.getLatitude());
         praSqlLiteDbHelper.location_insert(log,lat);

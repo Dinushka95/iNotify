@@ -1,13 +1,13 @@
-package com.example.inotify.helpers;
+package com.example.inotify.models;
 
-public class MyContact {
+public class ContactsModel {
     private String name;
     private String number;
 
-    public MyContact() {
+    public ContactsModel() {
     }
 
-    public MyContact(String name, String number) {
+    public ContactsModel(String name, String number) {
         this.name = name;
         this.number = number;
     }

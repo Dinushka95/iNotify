@@ -11,6 +11,7 @@ public class TbColNames {
     public static final String TIMEVIEW = "timeView";
     public static final String APPNAME = "appName";
     public static final String PACKAGENAME = "packageName";
+    public static final String SMARTNOTIFICATION = "smartNotifications";
 
     ////nv sql lite db helper
    // public static final String DATE = "date";
@@ -85,6 +86,17 @@ public class TbColNames {
     public static final String OCCUPATION = "occupation";
     public static final String EMAIL = "email";
     public static final String PHONE = "phone";
+
+
+    //charger
+    public static final String CHARGERID="chargeId";
+    public static final String POWERONDATE="powerOnDate";
+    public static final String POWERONTIME="powerOnTime";
+    public static final String POWEROFFDATE="powerOffDate";
+    public static final String POWEROFFTIME="powerOffTime";
+
+
+    //
 
 
 

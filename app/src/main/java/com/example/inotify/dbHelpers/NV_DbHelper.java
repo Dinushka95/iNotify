@@ -5,12 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-
-
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,11 +17,9 @@ import java.util.Locale;
 
 
 
-public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
+public class NV_DbHelper extends MainDbHelp {
 
-
-
-    public NV_SqlLiteDbHelper(Context context) {
+    public NV_DbHelper(Context context) {
         super(context);
     }
 
@@ -71,7 +65,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         String datenow  = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String timenow = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
 
-        SimpleDateFormat df = new SimpleDateFormat("HHmm");
+        SimpleDateFormat df = new SimpleDateFormat("HHmm",Locale.getDefault());
 
         Date d = null;
         try {
@@ -207,7 +201,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         String timenow = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
 
-        SimpleDateFormat df = new SimpleDateFormat("HHmm");
+        SimpleDateFormat df = new SimpleDateFormat("HHmm",Locale.getDefault());
 
         Date d = null;
         try {
@@ -256,17 +250,17 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
         Date currentTime = Calendar.getInstance().getTime();
         Log.d("Debug", "NOW"+currentTime);
-        SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a",Locale.getDefault());
         String currentDateTimeString = sdf.format(currentTime);
-        SimpleDateFormat hour=new SimpleDateFormat("hh");
+        SimpleDateFormat hour=new SimpleDateFormat("hh",Locale.getDefault());
         String currentHour = hour.format(currentTime);
         Calendar cal = Calendar.getInstance();
         String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
         Log.d("Debug", "NOW"+currentHour);
-        SimpleDateFormat min=new SimpleDateFormat("mm");
+        SimpleDateFormat min=new SimpleDateFormat("mm",Locale.getDefault());
         String currentMin = min.format(currentTime);
         Log.d("Debug", "NOW"+currentMin);
-        SimpleDateFormat AP=new SimpleDateFormat("a");
+        SimpleDateFormat AP=new SimpleDateFormat("a",Locale.getDefault());
         String currentAP = AP.format(currentTime);
         Log.d("Debug", "NOW"+currentAP);
 
@@ -330,7 +324,7 @@ public class NV_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         String day = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
 
-        SimpleDateFormat df = new SimpleDateFormat("HHmm");
+        SimpleDateFormat df = new SimpleDateFormat("HHmm",Locale.getDefault());
 
         Date d = null;
         try {

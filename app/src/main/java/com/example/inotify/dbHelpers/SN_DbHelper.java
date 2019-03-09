@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
-import com.example.inotify.models.SNS_SNSModel;
+import com.example.inotify.models.SNSModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,14 +28,10 @@ import static com.example.inotify.configs.TbColNames.SNS_VTIME;
 import static com.example.inotify.configs.TbNames.SNS_TABLE;
 
 
-public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {
+public class SN_DbHelper extends MainDbHelp {
 
 
-
-
-
-
-    public SN_SqlLiteDbHelper(Context context) {
+    public SN_DbHelper(Context context) {
 
         super(context);
     }
@@ -89,9 +85,9 @@ public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {
 
     }
 
-    public ArrayList<SNS_SNSModel> getALL() {
+    public ArrayList<SNSModel> getALL() {
 
-        ArrayList<SNS_SNSModel> Al = new ArrayList<>();
+        ArrayList<SNSModel> Al = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from "+SNS_TABLE, null);
@@ -101,7 +97,7 @@ public class SN_SqlLiteDbHelper extends MainSqlliteOpenHelp {
             if (res.moveToFirst()) {
                 do {
 
-                    SNS_SNSModel snsModel = new SNS_SNSModel();
+                    SNSModel snsModel = new SNSModel();
 
                     String day = res.getString(res.getColumnIndex("SNS_DAY"));
                     String cday = "";

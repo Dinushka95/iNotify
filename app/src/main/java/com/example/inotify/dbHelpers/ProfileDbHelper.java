@@ -17,9 +17,9 @@ import static com.example.inotify.configs.TbColNames.PHONE;
 import static com.example.inotify.configs.TbColNames.PROFILE_ID;
 import static com.example.inotify.configs.TbNames.PROFILE_TABLE;
 
-public class ProfileSqlLiteDbHelper extends MainSqlliteOpenHelp {
+public class ProfileDbHelper extends MainDbHelp {
 
-    public ProfileSqlLiteDbHelper(Context context) {
+    public ProfileDbHelper(Context context) {
         super(context);
     }
 

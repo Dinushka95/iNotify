@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NV_DbHelper;
 import com.google.android.gms.location.ActivityRecognitionResult;
 
 public class NV_ActivityRecognitionService extends IntentService {
@@ -20,7 +20,7 @@ public class NV_ActivityRecognitionService extends IntentService {
         String type = String.valueOf(result.getMostProbableActivity().getType());
         String confidance = String.valueOf(result.getMostProbableActivity().getConfidence());
       //  Log.d("inotifyLog", "Activity recognition ==" + type + confidance);
-        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
+        NV_DbHelper praSqlLiteDbHelper = new NV_DbHelper(this);
         praSqlLiteDbHelper.activity_insert(type,confidance);
         praSqlLiteDbHelper.close();
 

@@ -18,7 +18,7 @@ import static com.example.inotify.configs.TbColNames.RM_RINGERMODE;
 import static com.example.inotify.configs.TbColNames.RM_TIME;
 import static com.example.inotify.configs.TbNames.UA_RINGERMODE_TABLE;
 
-public class RingerModeDbHelper extends MainSqlliteOpenHelp{
+public class RingerModeDbHelper extends MainDbHelp {
 
 
 

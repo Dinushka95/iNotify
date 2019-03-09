@@ -3,9 +3,9 @@ package com.example.inotify.helpers;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.inotify.dbHelpers.SN_SqlLiteDbHelper;
-import com.example.inotify.models.SNS_SNSModel;
-import com.example.inotify.views.MainActivity;
+import com.example.inotify.dbHelpers.SN_DbHelper;
+import com.example.inotify.models.SNSModel;
+import com.example.inotify.views.MainStartPermissionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,12 +24,12 @@ import java.util.ArrayList;
 
 public class MainSmartNotificationSystem {
 
-    SN_SqlLiteDbHelper SN_sqlLiteDbHelper;
-    SNS_SNSModel predict_snsModel;
+    SN_DbHelper SN_DbHelper;
+    SNSModel predict_snsModel;
 
-    public MainSmartNotificationSystem(Context context, SNS_SNSModel SNS_snsModel) {
-        SN_sqlLiteDbHelper = new SN_SqlLiteDbHelper(context);
-        predict_snsModel = SNS_snsModel;
+    public MainSmartNotificationSystem(Context context, SNSModel _snsModel) {
+        SN_DbHelper = new SN_DbHelper(context);
+        predict_snsModel = _snsModel;
     }
 
     public String getPrediction() {
@@ -76,15 +76,15 @@ public class MainSmartNotificationSystem {
 
     private JSONObject buidJsonObject() {
 
-        ArrayList<SNS_SNSModel> SNS_snsModels = new ArrayList<>();
+        ArrayList<SNSModel> _snsModels = new ArrayList<>();
 
         JSONArray jsonArray1 = new JSONArray();
         //all data
-        SNS_snsModels = SN_sqlLiteDbHelper.getALL();
+        _snsModels = SN_DbHelper.getALL();
 
-        int count = SNS_snsModels.size();
+        int count = _snsModels.size();
         Log.d("inotify", "Main-MainSmartNotificationSystem--SNS model data from DB row count---" + count);
-        for (SNS_SNSModel x : SNS_snsModels) {
+        for (SNSModel x : _snsModels) {
             JSONObject jsonData1 = new JSONObject();
 
             if (x.getVtime() == null || x.getVtime() == "") {
@@ -149,7 +149,7 @@ public class MainSmartNotificationSystem {
 
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
         writer.write(jsonObject.toString());
-        Log.i(MainActivity.class.toString(), jsonObject.toString());
+        Log.i(MainStartPermissionActivity.class.toString(), jsonObject.toString());
         writer.flush();
         writer.close();
 

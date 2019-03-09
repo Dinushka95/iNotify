@@ -29,7 +29,7 @@
         <activity android:name=".views.UserProfileActivity" />
         <activity android:name=".views.NotificationHistoryActivity" />
         <activity
-            android:name=".views.MainActivity"
+            android:name=".views.MainStartPermissionActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -78,7 +78,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".helpers.UC_Charge"
+            android:name=".broadcastReceivers.ChargerBR"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

@@ -4,7 +4,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 
 import com.example.inotify.configs.AppUserConfigs;
-import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NV_DbHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class NV_NotificationViewabilityService extends JobService {
 
 
         // get activity from db
-        NV_SqlLiteDbHelper praSqlLiteDbHelper1 = new NV_SqlLiteDbHelper(this);
+        NV_DbHelper praSqlLiteDbHelper1 = new NV_DbHelper(this);
         String CurrentMaxActivity = praSqlLiteDbHelper1.activity_get();
 
 
@@ -76,7 +76,7 @@ public class NV_NotificationViewabilityService extends JobService {
         else {CurrentBusyorNot="Busy";}
 
         //save to table
-        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
+        NV_DbHelper praSqlLiteDbHelper = new NV_DbHelper(this);
         praSqlLiteDbHelper.busyOrNot_insert(time,dayofweek,CurrentMaxActivity,CurrentLocation,CurrentBusyorNot);
 
         praSqlLiteDbHelper.close();

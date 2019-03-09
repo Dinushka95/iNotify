@@ -16,7 +16,7 @@ public class TbNames {
     public static final String UA_RINGERMODE_TABLE = "ua_ringermode_table";
 
 
-    public static final String UC_CHARGE_TABLE = "uc_charge_table";
+
     public static final String UC_APPLISTCOUNT_TABLE = "uc_applistcount_table";
     public static final String UC_USAGECOUNT_TABLE = "uc_usagecount_table";
     public static final String UC_CONTACTCOUNT_TABLE = "uc_contactcount_table";
@@ -40,5 +40,7 @@ public class TbNames {
     public static final String TOPAPPS_TABLE = "topapps_table";
 
     public static final String APPCOUNT_TABLE = "appcount_table";
+
+    public static final String CHARGER_TABLE = "charger_table";
 
 }

@@ -1,6 +1,6 @@
 package com.example.inotify.models;
 
-public class SNS_SNSModel {
+public class SNSModel {
 
     private String day;
     private String time;
@@ -11,10 +11,10 @@ public class SNS_SNSModel {
     private String appname;
     private String vtime;
 
-    public SNS_SNSModel() {
+    public SNSModel() {
     }
 
-    public SNS_SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname) {
+    public SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname) {
         this.day = day;
         this.time = time;
         this.busyornot = busyornot;
@@ -24,7 +24,7 @@ public class SNS_SNSModel {
         this.appname = appname;
     }
 
-    public SNS_SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname, String vtime) {
+    public SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname, String vtime) {
         this.day = day;
         this.time = time;
         this.busyornot = busyornot;

@@ -46,11 +46,11 @@ public class INotifyActiveAppsAdapter extends BaseAdapter implements ListAdapter
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.inotifyactiveapps, null);
+            view = inflater != null ? inflater.inflate(R.layout.inotifyactiveapps, null) : null;
         }
 
         //Handle TextView and display string from your list
-        TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
+        TextView listItemText = (TextView) (view != null ? view.findViewById(R.id.list_item_string) : null);
         listItemText.setText(list.get(position));
 
         //Handle buttons and add onClickListeners

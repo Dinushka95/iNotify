@@ -2,7 +2,7 @@ package com.example.inotify.helpers;
 
 import android.content.Context;
 
-import com.example.inotify.dbHelpers.ProfileSqlLiteDbHelper;
+import com.example.inotify.dbHelpers.ProfileDbHelper;
 import com.example.inotify.models.ProfileModel;
 
 public class ProfileHelper {
@@ -14,18 +14,18 @@ public class ProfileHelper {
     }
 
     public boolean insert(ProfileModel profileModel){
-        ProfileSqlLiteDbHelper profileSqlLiteDbHelper = new ProfileSqlLiteDbHelper(c1);
-        return profileSqlLiteDbHelper.insert(profileModel);
+        ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
+        return profileDbHelper.insert(profileModel);
     }
 
     public ProfileModel get(){
 
-        ProfileSqlLiteDbHelper profileSqlLiteDbHelper = new ProfileSqlLiteDbHelper(c1);
-        return profileSqlLiteDbHelper.get();
+        ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
+        return profileDbHelper.get();
 
     }
     public boolean profileisExisCheck(){
-        ProfileSqlLiteDbHelper profileSqlLiteDbHelper = new ProfileSqlLiteDbHelper(c1);
-        return profileSqlLiteDbHelper.profileisExisCheck();
+        ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
+        return profileDbHelper.profileisExisCheck();
     }
 }

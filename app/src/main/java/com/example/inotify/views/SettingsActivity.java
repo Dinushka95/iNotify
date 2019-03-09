@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.inotify.R;
 
-import static com.example.inotify.dbHelpers.MainSqlliteOpenHelp.DATABASE_NAME;
+import static com.example.inotify.dbHelpers.MainDbHelp.DATABASE_NAME;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -53,7 +53,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void restartApp() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainStartPermissionActivity.class);
         int mPendingIntentId = 18945;
         PendingIntent mPendingIntent = PendingIntent.getActivity(getApplicationContext(), mPendingIntentId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);

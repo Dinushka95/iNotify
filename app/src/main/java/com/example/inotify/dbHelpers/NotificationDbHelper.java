@@ -11,16 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import static com.example.inotify.configs.TbNames.NOTIFICATION_TABLE;
 
 
-public class NotificationSqlLiteDbHelper extends MainSqlliteOpenHelp {
+public class NotificationDbHelper extends MainDbHelp {
 
-    public NotificationSqlLiteDbHelper(Context context) {
+    public NotificationDbHelper(Context context) {
         super(context);
     }
 

@@ -2,7 +2,7 @@ package com.example.inotify.helpers;
 
 import android.content.Context;
 
-import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NV_DbHelper;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class MainNotificationViewability {
 
         ArrayList<java.lang.String> bon = new ArrayList();
 
-        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(context);
+        NV_DbHelper praSqlLiteDbHelper = new NV_DbHelper(context);
         praSqlLiteDbHelper.busyOrNotPredict_Get(activity,location);
         praSqlLiteDbHelper.close();
 

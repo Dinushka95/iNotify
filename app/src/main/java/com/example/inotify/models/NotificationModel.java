@@ -9,8 +9,9 @@ public class NotificationModel {
     private String timeViewed;
     private String appName;
     private String packageName;
+    private String smartNotification;
 
-    public NotificationModel(String id, String datetime, String timeRecevied, String timeSent, String timeVievwed, String appName, String packageName){
+    public NotificationModel(String id, String datetime, String timeRecevied, String timeSent, String timeVievwed, String appName, String packageName, String smartNotification){
         this.id = id;
         this.datetime = datetime;
         this.timeRecevied = timeRecevied;
@@ -18,8 +19,7 @@ public class NotificationModel {
         this.timeViewed = timeVievwed;
         this.appName = appName;
         this.packageName = packageName;
-
-
+        this.smartNotification = smartNotification;
     }
 
     public String getId() {
@@ -77,4 +77,8 @@ public class NotificationModel {
     public void setPackageName(String packageName) {
         this.packageName = packageName;
     }
+
+    public String getSmartNotification() { return smartNotification; }
+
+    public void setSmartNotification(String smartNotification) {this.smartNotification = smartNotification; }
 }

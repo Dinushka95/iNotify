@@ -1,13 +1,8 @@
 package com.example.inotify.helpers;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.dbHelpers.TopAppDbHelper;
-import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
 import com.example.inotify.models.AppInfoModel;
 
 import java.util.ArrayList;

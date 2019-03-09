@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:foregroundGravity="right"
+        android:contentDescription="@string/close_button"
         android:background="@null"
         android:src="@drawable/baseline_clear_black_18dp" />
 
@@ -28,14 +29,14 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:padding="25sp"
-            android:text="Please enter your details" />
+            android:text="@string/please_enter_your_details" />
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Name"
+            android:hint="@string/name"
             android:inputType="textPersonName" />
 
         <EditText
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="AGE"
+            android:hint="@string/age"
             android:inputType="textPersonName" />
 
         <RadioGroup
@@ -56,14 +57,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Male" />
+                android:text="@string/male" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Female" />
+                android:text="@string/female" />
         </RadioGroup>
 
         <EditText
@@ -71,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Occupation"
+            android:hint="@string/occupation"
             android:inputType="textPersonName" />
 
         <EditText
@@ -79,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textPersonName" />
 
         <EditText
@@ -87,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Phone"
+            android:hint="@string/phone"
             android:inputType="textPersonName" />
 
 
@@ -96,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Save User Details"
+            android:text="@string/save_user_details"
             android:layout_marginBottom="20dp"/>
 
 

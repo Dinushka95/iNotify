@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.AppInfoModel;
 
 import java.util.ArrayList;
@@ -14,9 +13,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
-import static com.example.inotify.configs.TbNames.TOPAPP_TABLE;
 
-public class ApplicationDbHelper extends MainSqlliteOpenHelp{
+public class ApplicationDbHelper extends MainDbHelp {
 
 
     public static final String APPLICATION_ID = "applicationId";
@@ -40,7 +38,7 @@ public class ApplicationDbHelper extends MainSqlliteOpenHelp{
             if (res.moveToFirst()) {
                 do {
 
-                    //SNS_SNSModel snsModel = new SNS_SNSModel();
+                    //SNSModel snsModel = new SNSModel();
                     AppInfoModel appInfoModel = new AppInfoModel();
                     Log.d("inotify","mmmmmmmmmmmmmmmmmm");
                     appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));

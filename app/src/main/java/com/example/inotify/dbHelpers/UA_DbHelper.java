@@ -18,9 +18,9 @@ import static com.example.inotify.configs.TbColNames.N_ID;
 import static com.example.inotify.configs.TbNames.UA_NI_TABLE;
 import static com.example.inotify.configs.TbNames.UA_N_TABLE;
 
-public class UA_SqlLiteDbHelper extends MainSqlliteOpenHelp {
+public class UA_DbHelper extends MainDbHelp {
 
-    public UA_SqlLiteDbHelper(Context context) {
+    public UA_DbHelper(Context context) {
         super(context);
     }
 

@@ -2,7 +2,7 @@ package com.example.inotify.helpers;
 
 import android.content.Context;
 
-import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.models.NotificationModel;
 
 public class NotificationHelper {
@@ -15,7 +15,7 @@ public class NotificationHelper {
 
     public boolean insert(NotificationModel NotificationModel){
 
-        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper = new NotificationSqlLiteDbHelper(c1);
-        return notificationSqlLiteDbHelper.insert(NotificationModel);
+        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(c1);
+        return notificationDbHelper.insert(NotificationModel);
     }
 }

@@ -15,7 +15,7 @@ import java.util.Locale;
 
 
 
-public class ScreenStatusDbHelper extends MainSqlliteOpenHelp{
+public class ScreenStatusDbHelper extends MainDbHelp {
 
 
 

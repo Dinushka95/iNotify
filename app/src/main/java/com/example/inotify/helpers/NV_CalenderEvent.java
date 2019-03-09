@@ -7,6 +7,7 @@ import android.provider.CalendarContract;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class NV_CalenderEvent {
 
@@ -14,7 +15,7 @@ public class NV_CalenderEvent {
     public boolean getcalanderEvent(Context context){
 
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyymmddHHmm");
+        SimpleDateFormat df = new SimpleDateFormat("yyyymmddHHmm", Locale.getDefault());
         Date d = new Date();
 
         Calendar cal = Calendar.getInstance();

@@ -1,19 +1,18 @@
 package com.example.inotify.helpers;
 
-import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
-import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.UA_DbHelper;
+import com.example.inotify.dbHelpers.UC_DbHelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -22,7 +21,7 @@ public class All_ScreenLock extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 //        Log.v("xxxxxxxxxxxxxxxxx", intent.getDataString());
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF))
+        if (Objects.equals(intent.getAction(), Intent.ACTION_SCREEN_OFF))
         {
            // Log.v("Screen mode", "Screen is in off State");
 
@@ -31,8 +30,8 @@ public class All_ScreenLock extends BroadcastReceiver {
             editor.putString("screen", "off");
             editor.apply();
             // add db entry to save data time of screen off
-            UA_SqlLiteDbHelper ua_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
-            ua_sqlLiteDbHelper.screenOffInsert();
+            UA_DbHelper ua_DbHelper = new UA_DbHelper(context);
+            ua_DbHelper.screenOffInsert();
 
             //mitha part
             String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
@@ -41,7 +40,7 @@ public class All_ScreenLock extends BroadcastReceiver {
             String timeoff = prefs.getString("time", null);
 
 
-            SimpleDateFormat format = new SimpleDateFormat("HHmmss");
+            SimpleDateFormat format = new SimpleDateFormat("HHmmss",Locale.getDefault());
             Date date1 = null;
             try {
                 date1 = format.parse(timeoff);
@@ -55,35 +54,27 @@ public class All_ScreenLock extends BroadcastReceiver {
                 e.printStackTrace();
             }
 
-            long difference = date2.getTime() - date1.getTime();
+            long difference = (date2 != null ? date2.getTime() : 0) - (date1 != null ? date1.getTime() : 0);
             System.out.println(difference/1000);
 
-            UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(context);
-            UC_sqlLiteDbHelper.screentime_insert(String.valueOf(difference));
+            UC_DbHelper UC_DbHelper = new UC_DbHelper(context);
+            UC_DbHelper.screentime_insert(String.valueOf(difference));
 
         }
 
 
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON))
+        if (Objects.equals(intent.getAction(), Intent.ACTION_SCREEN_ON))
         {
           //  Log.v("Screen mode","Screen is in on State" );
             SharedPreferences.Editor editor = context.getSharedPreferences("lockscreen", MODE_PRIVATE).edit();
             editor.putString("screen", "on");
             // add db entry to save data time of screen on
-            UA_SqlLiteDbHelper ua_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
-            ua_sqlLiteDbHelper.screenOnInsert();
+            UA_DbHelper ua_DbHelper = new UA_DbHelper(context);
+            ua_DbHelper.screenOnInsert();
             String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
             editor.putString("time",timenow );
             editor.apply();
         }
         }
-
-
-
-
-
-
-
-
 
 }

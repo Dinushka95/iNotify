@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.inotify.configs.AppUserConfigs;
-import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
+import com.example.inotify.dbHelpers.UA_DbHelper;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -23,7 +23,7 @@ public class MainAttentiviness {
         SharedPreferences prefs = context.getSharedPreferences("lockscreen", MODE_PRIVATE);
         String isScreenOn = prefs.getString("screen", null);
 
-        UA_SqlLiteDbHelper attention_sqlLiteDbHelper = new UA_SqlLiteDbHelper(context);
+        UA_DbHelper attention_sqlLiteDbHelper = new UA_DbHelper(context);
 
         int total_important_value = attention_sqlLiteDbHelper.NIRgetTotalvalue();
 

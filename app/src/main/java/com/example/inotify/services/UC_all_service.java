@@ -1,5 +1,6 @@
 package com.example.inotify.services;
 
+import android.Manifest;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.app.usage.UsageStats;
@@ -11,15 +12,11 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
-import android.util.Log;
+import android.support.v4.app.ActivityCompat;
 
-import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.helpers.ApplicationsHelper;
-import com.example.inotify.helpers.MyContact;
-import com.example.inotify.helpers.TopAppsHelper;
+import com.example.inotify.models.ContactsModel;
 import com.example.inotify.helpers.UC_CalenderEvent;
-import com.example.inotify.dbHelpers.UC_SqlLiteDbHelper;
-import com.example.inotify.models.AppInfoModel;
+import com.example.inotify.dbHelpers.UC_DbHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +32,7 @@ public class UC_all_service extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
 
-        getAppsInformaion (this);
+        getAppsInformaion(this);
         getAppUsage(this);
         getContacts(this);
         getCallDuration(this);
@@ -52,7 +49,7 @@ public class UC_all_service extends JobService {
 
     String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-    public void getAppsInformaion (Context context){
+    public void getAppsInformaion(Context context) {
 
 
         //get a list of installed apps.
@@ -68,47 +65,46 @@ public class UC_all_service extends JobService {
         }*/
 
 
-        count =packages.size();
+        count = packages.size();
 
-        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
-        UC_sqlLiteDbHelper.appListcount_insert(String.valueOf(count));
-        UC_sqlLiteDbHelper.close();
-
+        UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
+        UC_DbHelper.appListcount_insert(String.valueOf(count));
+        UC_DbHelper.close();
 
 
     }
 
-    public void getAppUsage(Context context){
+    public void getAppUsage(Context context) {
 
         // need app usage permission
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         long start = calendar.getTimeInMillis();
         long end = System.currentTimeMillis();
-        UsageStatsManager usageStatsManager = (UsageStatsManager)context.getSystemService(Context.USAGE_STATS_SERVICE);
+        UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
         List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, start, end);
 
-        long count =0;
-      //  Log.v("inotify","uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+        long count = 0;
+        //  Log.v("inotify","uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
         for (UsageStats stat : stats) {
-            count = count +stat.getTotalTimeInForeground();
+            count = count + stat.getTotalTimeInForeground();
 
 
         }
 
-        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
-        UC_sqlLiteDbHelper.appusagecount_insert(String.valueOf(count));
-        UC_sqlLiteDbHelper.close();
+        UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
+        UC_DbHelper.appusagecount_insert(String.valueOf(count));
+        UC_DbHelper.close();
     }
 
 
-    public void getContacts(Context context){
+    public void getContacts(Context context) {
 
 
         ContentResolver cr = context.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 
-        List<MyContact> myList = new ArrayList<>();
+        List<ContactsModel> myList = new ArrayList<>();
 
         if ((cur != null ? cur.getCount() : 0) > 0) {
             while (cur != null && cur.moveToNext()) {
@@ -127,12 +123,12 @@ public class UC_all_service extends JobService {
 
                     while (pCur.moveToNext()) {
                         String phoneNo = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        myList.add(new MyContact(name,phoneNo));
+                        myList.add(new ContactsModel(name, phoneNo));
 
-                        Collections.sort(myList, new Comparator<MyContact>() {
+                        Collections.sort(myList, new Comparator<ContactsModel>() {
                             @Override
-                            public int compare(MyContact o1, MyContact o2) {
-                                return  o1.getName().compareTo(o2.getName());
+                            public int compare(ContactsModel o1, ContactsModel o2) {
+                                return o1.getName().compareTo(o2.getName());
                             }
                         });
 
@@ -143,71 +139,71 @@ public class UC_all_service extends JobService {
             }
         }
 
-        if(cur!=null){
+        if (cur != null) {
             cur.close();
         }
 
         int count = myList.size();
-        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
-        UC_sqlLiteDbHelper.contactCount_insert(String.valueOf(count));
-        UC_sqlLiteDbHelper.close();
+        UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
+        UC_DbHelper.contactCount_insert(String.valueOf(count));
+        UC_DbHelper.close();
 
     }
 
-    public void getCallDuration(Context context){
+    public void getCallDuration(Context context) {
 
-        Cursor cursor = context.getApplicationContext().getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
-        int totalDuration=0;
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+            Cursor cursor = context.getApplicationContext().getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
+            int totalDuration = 0;
+            if ((cursor != null ? cursor.getCount() : 0) > 0) {
+                while (cursor.moveToNext()) {
 
-                String dateTime = new SimpleDateFormat("yyyyMMddhhmmsss").format(new Date(Long.valueOf(cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)))));
-                String number = cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER));
-                String duration = cursor.getString(cursor.getColumnIndex(CallLog.Calls.DURATION));
+                    String dateTime = new SimpleDateFormat("yyyyMMddhhmmsss",Locale.getDefault()).format(new Date(Long.valueOf(cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)))));
+                    String number = cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER));
+                    String duration = cursor.getString(cursor.getColumnIndex(CallLog.Calls.DURATION));
 
 
-                //  Log.d("inotify", number+duration+type+dateTime );
-                totalDuration = totalDuration+Integer.valueOf(duration);
+                    //  Log.d("inotify", number+duration+type+dateTime );
+                    totalDuration = totalDuration + Integer.valueOf(duration);
+                }
             }
-
+            UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
+            UC_DbHelper.callduration_insert(String.valueOf(totalDuration));
+            UC_DbHelper.close();
         }
-
-        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
-        UC_sqlLiteDbHelper.callduration_insert(String.valueOf(totalDuration));
-        UC_sqlLiteDbHelper.close();
     }
 
-    public void getCalenderEvent(Context context){
+    public void getCalenderEvent(Context context) {
 
         UC_CalenderEvent UC_calenderEvent = new UC_CalenderEvent();
         String x = UC_calenderEvent.getcalanderEventCount(context);
 
 
-        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(context);
-        UC_sqlLiteDbHelper.calenderEventCount_insert(x);
-        UC_sqlLiteDbHelper.close();
+        UC_DbHelper UC_DbHelper = new UC_DbHelper(context);
+        UC_DbHelper.calenderEventCount_insert(x);
+        UC_DbHelper.close();
     }
 
 
-    public void  getSocialMediaApps(Context context){
+    public void getSocialMediaApps(Context context) {
 
 
         final PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
-        int count =0;
-      //  Log.v("inotify","pppppppppppppppppppp");
+        int count = 0;
+        //  Log.v("inotify","pppppppppppppppppppp");
 
         for (ApplicationInfo applicationInfo : packages) {
             String x = applicationInfo.packageName.toString();
-            if(x.equals("com.example.dinu.testd")){
-                count = count++ ;
+            if (x.equals("com.example.dinu.testd")) {
+                count++;
             }
         }
 
-        UC_SqlLiteDbHelper UC_sqlLiteDbHelper = new UC_SqlLiteDbHelper(this);
-        UC_sqlLiteDbHelper.appusagecount_insert(String.valueOf(count));
-        UC_sqlLiteDbHelper.close();
+        UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
+        UC_DbHelper.appusagecount_insert(String.valueOf(count));
+        UC_DbHelper.close();
 
     }
 //

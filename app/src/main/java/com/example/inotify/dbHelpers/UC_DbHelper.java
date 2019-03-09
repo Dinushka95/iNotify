@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.inotify.configs.TbColNames;
+import com.example.inotify.configs.TbNames;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -17,31 +20,21 @@ import static com.example.inotify.configs.TbNames.UC_APPLISTCOUNT_TABLE;
 import static com.example.inotify.configs.TbNames.UC_APPLISTSOCIALMEDIACOUNT_TABLE;
 import static com.example.inotify.configs.TbNames.UC_CALENDEREVENTCOUNT_TABLE;
 import static com.example.inotify.configs.TbNames.UC_CALLDURATION_TABLE;
-import static com.example.inotify.configs.TbNames.UC_CHARGE_TABLE;
+
 import static com.example.inotify.configs.TbNames.UC_CONTACTCOUNT_TABLE;
 import static com.example.inotify.configs.TbNames.UC_SCREENTIME_TABLE;
 import static com.example.inotify.configs.TbNames.UC_USAGECOUNT_TABLE;
 
-public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
+public class UC_DbHelper extends MainDbHelp {
 
 
 
-    public UC_SqlLiteDbHelper(Context context) {
+    public UC_DbHelper(Context context) {
         super(context);
 
     }
 
-    public boolean mit_charge_insert() {
 
-        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE, date);
-        long result = db.insert(UC_CHARGE_TABLE, null, contentValues);
-        db.close();
-        return result != -1;
-    }
 
     public boolean appListcount_insert(String count) {
 
@@ -244,7 +237,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         //TODO - need to sumation of day and the get average of that for days
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(DATE) as avg from "+UC_CHARGE_TABLE, null);
+        Cursor res = db.rawQuery("select count(DATE) as avg from "+TbNames.CHARGER_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -369,7 +362,7 @@ public class UC_SqlLiteDbHelper extends MainSqlliteOpenHelp {
         //TODO - need to sumation of day and the get average of that for days
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select DATE from "+UC_CHARGE_TABLE, null);
+        Cursor res = db.rawQuery("select DATE from "+ TbNames.CHARGER_TABLE, null);
         if (res != null) {
             if ((res.moveToLast())){
                 return res.getLong(res.getColumnIndex("DATE"));

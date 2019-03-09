@@ -25,7 +25,7 @@ import com.example.inotify.configs.MyConstants;
 import com.example.inotify.services.MyNotificationListenerService;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainStartPermissionActivity extends AppCompatActivity {
 
 // text view varriables
     TextView tvWarningMessage;
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!MyConstants.PERMISSION_CONTACTS) {
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_CONTACTS}, MyConstants.MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                    ActivityCompat.requestPermissions(MainStartPermissionActivity.this, new String[]{Manifest.permission.READ_CONTACTS}, MyConstants.MY_PERMISSIONS_REQUEST_READ_CONTACTS);
                     pauseCheckErrorFix=true;
                 }
             }
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!MyConstants.PERMISSION_LOCATION) {
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MyConstants.MY_PERMISSIONS_REQUEST_READ_LOCATION);
+                    ActivityCompat.requestPermissions(MainStartPermissionActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MyConstants.MY_PERMISSIONS_REQUEST_READ_LOCATION);
                     pauseCheckErrorFix=true;
                 }
             }
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!MyConstants.PERMISSION_CALENDER) {
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_CALENDAR}, MyConstants.MY_PERMISSIONS_REQUEST_READ_CALENDAR);
+                    ActivityCompat.requestPermissions(MainStartPermissionActivity.this, new String[]{Manifest.permission.READ_CALENDAR}, MyConstants.MY_PERMISSIONS_REQUEST_READ_CALENDAR);
                     pauseCheckErrorFix=true;
                 }
             }
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!MyConstants.PERMISSION_PHONE) {
-                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_CALL_LOG}, MyConstants.MY_PERMISSIONS_REQUEST_READ_PHONE);
+                    ActivityCompat.requestPermissions(MainStartPermissionActivity.this, new String[]{Manifest.permission.READ_CALL_LOG}, MyConstants.MY_PERMISSIONS_REQUEST_READ_PHONE);
                     pauseCheckErrorFix=true;
                 }
             }
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!MyConstants.PERMISSION_NOTIFICATIONACCESS) {
                     startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainStartPermissionActivity.class);
                     int mPendingIntentId = 18945;
                     PendingIntent mPendingIntent = PendingIntent.getActivity(getApplicationContext(), mPendingIntentId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
                     AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!MyConstants.PERMISSION_USEAGEACCESS) {
                     startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainStartPermissionActivity.class);
                     int mPendingIntentId = 18946;
                     PendingIntent mPendingIntent = PendingIntent.getActivity(getApplicationContext(), mPendingIntentId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
                     AlarmManager mgr = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
@@ -310,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
 // checks if all the permission are given before preceding to main menu
     public void checkPermissionTOProceed() {
         if (MyConstants.PERMISSION_CONTACTS == true && MyConstants.PERMISSION_LOCATION == true && MyConstants.PERMISSION_CALENDER == true && MyConstants.PERMISSION_PHONE == true && MyConstants.PERMISSION_NOTIFICATIONACCESS == true && MyConstants.PERMISSION_USEAGEACCESS == true) {
-            Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+            Intent intent = new Intent(MainStartPermissionActivity.this, MainMenuActivity.class);
             startActivity(intent);
             MyConstants.PERMISSION_MAIN = true;
             tvWarningMessage.setText("All User Permission Granted Successfully...! Please wait loading....");

@@ -6,49 +6,30 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.example.inotify.R;
-import com.example.inotify.configs.AppUserConfigs;
-import com.example.inotify.dbHelpers.NV_SqlLiteDbHelper;
-import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
+import com.example.inotify.dbHelpers.NV_DbHelper;
+import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
-import com.example.inotify.helpers.All_ScreenLock;
-import com.example.inotify.helpers.MainNotificationViewability;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.models.NotificationModel;
-import com.example.inotify.models.SNS_SNSModel;
-import com.example.inotify.helpers.MainSmartNotificationSystem;
 import com.example.inotify.helpers.MainAttentiviness;
-import com.example.inotify.dbHelpers.UA_SqlLiteDbHelper;
-import com.example.inotify.dbHelpers.SN_SqlLiteDbHelper;
-import com.example.inotify.helpers.MainUsercharacteristics;
 import com.example.inotify.helpers.FeedbackYesIntent;
-import com.example.inotify.views.MainActivity;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import static com.example.inotify.configs.TbNames.UA_RINGERMODE_TABLE;
 
 
 public class MyNotificationListenerService extends NotificationListenerService {
@@ -128,14 +109,14 @@ public class MyNotificationListenerService extends NotificationListenerService {
 //
 
             //Test
-            NV_SqlLiteDbHelper pratest = new NV_SqlLiteDbHelper(this);
+            NV_DbHelper pratest = new NV_DbHelper(this);
             pratest.probability_insert();
             pratest.close();
 /*
             SharedPreferences prefs = this.getSharedPreferences("activityrecognition", MODE_PRIVATE);
             String currentactivity=prefs.getString("activity", null);
 
-            NV_SqlLiteDbHelper praSqlLiteDbHelper1 = new NV_SqlLiteDbHelper(this);
+            NV_DbHelper praSqlLiteDbHelper1 = new NV_DbHelper(this);
             ArrayList<Double> loc= praSqlLiteDbHelper1.location_get();
             praSqlLiteDbHelper1.close();
 
@@ -209,8 +190,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
 
-            MainAttentiviness mainAttentiviness = new MainAttentiviness();
-            String attentiviness = mainAttentiviness.getFinalAttentiviness(this,apppack);
+         //   MainAttentiviness mainAttentiviness = new MainAttentiviness();
+         //   String attentiviness = mainAttentiviness.getFinalAttentiviness(this,apppack);
 
 
             //call the isPhoneLowckedOrNot method here
@@ -229,7 +210,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             /////////////////////////////////////////////////////////////////////////////////////////////////
             // dinu
             // run ML prediction function and get predicted notification view time
-            /*SNS_SNSModel snsModel = new SNS_SNSModel();
+            /*SNSModel snsModel = new SNSModel();
 
             Calendar cal = Calendar.getInstance();
             cal.set(Integer.valueOf(new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date())),
@@ -362,7 +343,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             if (sendornotsend) {
 
                 //dave to db
-               // SN_SqlLiteDbHelper SN_sqlLiteDbHelper = new SN_SqlLiteDbHelper(this);
+               // SN_DbHelper SN_sqlLiteDbHelper = new SN_DbHelper(this);
                 String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
                // SN_sqlLiteDbHelper.saveData(id,busyornot,attentiviness,userCharacteistics,"mobile",apppack);
                 //SN_sqlLiteDbHelper.close();
@@ -477,15 +458,21 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
                 String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
-
-
+                String appName1 = "null";
+                final String packageName1 = sbn.getPackageName();
+                PackageManager packageManager= getApplicationContext().getPackageManager();
+                try {
+                    appName1 = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(packageName1, PackageManager.GET_META_DATA));
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
 
                 String datetime =Date;
                 String timeRecevied = TimeRecieved;
                 String timeSent = Sendtime;
                 String timeViewed = "";
-                String appName = "";
-                String packageName = "";
+                String appName = appName1;
+                String packageName = sbn.getPackageName();
 
                 NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
                 notificationHelper.insert(new NotificationModel(
@@ -495,12 +482,12 @@ public class MyNotificationListenerService extends NotificationListenerService {
                         timeSent,
                         timeViewed,
                         appName,
-                        packageName));
+                        packageName,"1"));
 
 
                 //PRASHAN end
 
-               /* UA_SqlLiteDbHelper chaSqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
+               /* UA_DbHelper chaSqlLiteDbHelper = new UA_DbHelper(this);
                 // depreciated method please remove this
                 chaSqlLiteDbHelper.Ninsert(Long.valueOf(id) ,sbn.getPackageName(), Long.valueOf(id));
                 chaSqlLiteDbHelper.close();*/
@@ -548,7 +535,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 }
             }
          //   Log.d("cdap", " ---onNotificationRemoved--------total notifications-----" + totalnotificationinlist);
-            UA_SqlLiteDbHelper chaSqlLiteDbHelper = new UA_SqlLiteDbHelper(this);
+            UA_DbHelper chaSqlLiteDbHelper = new UA_DbHelper(this);
             String packageName = chaSqlLiteDbHelper.NValueGet(sbn.getNotification().tickerText.toString());
             chaSqlLiteDbHelper.NIupdate(packageName, totalnotificationinlist);
             chaSqlLiteDbHelper.close();*/
@@ -574,7 +561,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             long difference = date2.getTime() - date1.getTime();
 
-            SN_SqlLiteDbHelper SN_sqlLiteDbHelper = new SN_SqlLiteDbHelper(this);
+            SN_DbHelper SN_sqlLiteDbHelper = new SN_DbHelper(this);
             SN_sqlLiteDbHelper.updateData(oldtime,String.valueOf(difference));
             SN_sqlLiteDbHelper.close();*/
 
@@ -582,7 +569,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
 /*        // for prashan
-        NV_SqlLiteDbHelper praSqlLiteDbHelper = new NV_SqlLiteDbHelper(this);
+        NV_DbHelper praSqlLiteDbHelper = new NV_DbHelper(this);
         praSqlLiteDbHelper.notificationRemove_insert();
         praSqlLiteDbHelper.close();*/
 
@@ -592,8 +579,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop" );
 
         //Chaya
-        NotificationSqlLiteDbHelper notificationSqlLiteDbHelper= new NotificationSqlLiteDbHelper(this);
-        String viewedtime = notificationSqlLiteDbHelper.viewTimeGet();
+        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this);
+        String viewedtime = notificationDbHelper.viewTimeGet();
         Log.d("iNotify" , "Notification Viewed time =  " +viewedtime);
 
     }

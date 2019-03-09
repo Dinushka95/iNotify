@@ -1,6 +1,5 @@
 package com.example.inotify.views;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
@@ -9,12 +8,9 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,10 +22,8 @@ import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
-import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ProfileHelper;
-import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
@@ -44,17 +38,6 @@ import java.util.Locale;
 public class MainMenuActivity extends AppCompatActivity {
 
 
-    ////////////////////////////////////////////////////////
-    /////    Debugger Logger switch                 ////////
-    ////////////////////////////////////////////////////////
-
-
-
-
-    /////////////////////////////////////////////////////////
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -67,21 +50,16 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mainmenu);
 
 
-
-
-
-
-        if(MyConstants.PERMISSION_CONTACTS==true&&MyConstants.PERMISSION_LOCATION==true&&MyConstants.PERMISSION_CALENDER==true&&MyConstants.PERMISSION_PHONE==true){
+        if (MyConstants.PERMISSION_CONTACTS &&
+                MyConstants.PERMISSION_LOCATION &&
+                MyConstants.PERMISSION_CALENDER &&
+                MyConstants.PERMISSION_PHONE &&
+                MyConstants.PERMISSION_NOTIFICATIONACCESS &&
+                MyConstants.PERMISSION_USEAGEACCESS) {
             tt();
         }else {
-
-
-            // Toast.makeText(getApplicationContext(),"You have not given full permission so app will not work properly - Please restart and give full permission",Toast.LENGTH_LONG).show();
-
-
+            Toast.makeText(getApplicationContext(),"You Have Not Given Proper Access Permission.Please give Permission",Toast.LENGTH_LONG).show();
         }
-
-
 
     }
 
@@ -107,7 +85,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 .build();
 
         JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-        int resultCode = scheduler.schedule(info);
+        int resultCode = scheduler != null ? scheduler.schedule(info) : 0;
 
 
         ComponentName componentName1 = new ComponentName(MainMenuActivity.this, NV_NotificationViewabilityService.class);
@@ -119,7 +97,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 .build();
 
         JobScheduler scheduler1 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-        int resultCode1 = scheduler1.schedule(info1);
+        int resultCode1 = scheduler1 != null ? scheduler1.schedule(info1) : 0;
 
 
         ComponentName componentName2 = new ComponentName(MainMenuActivity.this, UC_all_service.class);
@@ -176,9 +154,6 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-
-
         // if only the user  does not exist
         ProfileHelper profileHelper = new ProfileHelper(this);
         if (profileHelper.profileisExisCheck()) {
@@ -187,55 +162,47 @@ public class MainMenuActivity extends AppCompatActivity {
             //show signup
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.signup);
-
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
             ImageButton imageButton = dialog.findViewById(R.id.ib_close);
-            imageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
+            imageButton.setOnClickListener(v -> System.exit(0));
+            Button button = dialog.findViewById(R.id.button11);
+            button.setOnClickListener(view -> {
+                // save to db -- create a new profile
+                String datenow = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+                EditText editText = dialog.findViewById(R.id.editText);
+                EditText editText2 = dialog.findViewById(R.id.editText2);
+                RadioButton radioButton = dialog.findViewById(R.id.radioButton);
+                RadioButton radioButton2 = dialog.findViewById(R.id.radioButton2);
+                EditText editText3 = dialog.findViewById(R.id.editText3);
+                EditText editText4 = dialog.findViewById(R.id.editText4);
+                EditText editText5 = dialog.findViewById(R.id.editText5);
+
+                String gender = "";
+
+                if (radioButton.isSelected()) {
+                    gender = "Male";
                 }
-            });
-            Button button = (Button) dialog.findViewById(R.id.button11);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // save to db -- create a new profile
+                if (radioButton2.isSelected()) {
+                    gender = "Female";
+                }
 
-                    String datenow = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-
-                    EditText editText = (EditText) dialog.findViewById(R.id.editText);
-                    EditText editText2 = (EditText) dialog.findViewById(R.id.editText2);
-                    RadioButton radioButton = (RadioButton) dialog.findViewById(R.id.radioButton);
-                    RadioButton radioButton2 = (RadioButton) dialog.findViewById(R.id.radioButton2);
-                    EditText editText3 = (EditText) dialog.findViewById(R.id.editText3);
-                    EditText editText4 = (EditText) dialog.findViewById(R.id.editText4);
-                    EditText editText5 = (EditText) dialog.findViewById(R.id.editText5);
-
-                    String gender = "";
-
-                    if (radioButton.isSelected()) {
-                        gender = "Male";
-                    }
-                    if (radioButton.isSelected()) {
-                        gender = "Female";
-                    }
-
-                    if (profileHelper.insert(new ProfileModel(
-                            datenow,
-                            editText.getText().toString(),
-                            editText2.getText().toString(),
-                            gender,
-                            editText3.getText().toString(),
-                            editText4.getText().toString(),
-                            editText5.getText().toString()
-                    ))) {
-                        //if sucessfull
-                        Toast.makeText(getApplicationContext(), "Successfully Saved User Details", Toast.LENGTH_LONG).show();
-                        dialog.dismiss();
-                    } else {
-                        //if failed
-                        Toast.makeText(getApplicationContext(), "Failed To Save User Details", Toast.LENGTH_LONG).show();
-                    }
+                if (profileHelper.insert(new ProfileModel(
+                        datenow,
+                        editText.getText().toString(),
+                        editText2.getText().toString(),
+                        gender,
+                        editText3.getText().toString(),
+                        editText4.getText().toString(),
+                        editText5.getText().toString()
+                ))) {
+                    //if sucessfull
+                    Toast.makeText(getApplicationContext(), "Successfully Saved User Details", Toast.LENGTH_LONG).show();
+                    dialog.dismiss();
+                } else {
+                    //if failed
+                    Toast.makeText(getApplicationContext(), "Failed To Save User Details", Toast.LENGTH_LONG).show();
                 }
             });
             dialog.show();
@@ -257,7 +224,6 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
 
     public void button_userattentiveness(View view) {
         Intent intent = new Intent(MainMenuActivity.this, UserAttentivenessActivity.class);

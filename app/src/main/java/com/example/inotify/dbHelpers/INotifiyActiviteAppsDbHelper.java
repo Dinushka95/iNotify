@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import static com.example.inotify.configs.TbNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
 
-public class INotifiyActiviteAppsDbHelper extends MainSqlliteOpenHelp {
+public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
 
     public INotifiyActiviteAppsDbHelper(Context context) {
         super(context);
