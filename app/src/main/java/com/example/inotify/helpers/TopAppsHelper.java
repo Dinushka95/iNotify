@@ -69,6 +69,12 @@ public List<AppInfoModel> topAppSocial()
         return topAppDbHelper.topAppToolGet();
     }
 
+    public List<AppInfoModel> topAppMusicVideo()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppMusicVideoGet();
+    }
+
     public int appCountGet()
     {
 

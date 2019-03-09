@@ -187,7 +187,7 @@ public class UA_DbHelper extends MainDbHelp {
 
     }
 
-  public boolean screenOffInsert() {
+  /*public boolean screenOffInsert() {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
@@ -201,7 +201,7 @@ public class UA_DbHelper extends MainDbHelp {
             return false;
         else
             return true;
-    }
+    }*/
 
     public boolean screenOnInsert() {
 

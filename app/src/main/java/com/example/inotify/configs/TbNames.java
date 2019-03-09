@@ -14,6 +14,7 @@ public class TbNames {
     public static final String UA_SCREENOFF_TABLE = "ua_screenoff_table";
     public static final String UA_SCREENON_TABLE = "ua_screenon_table";
     public static final String UA_RINGERMODE_TABLE = "ua_ringermode_table";
+    public static final String NOTIFICATIONIMPORTANCE_TABLE = "notification_importnace";
 
 
 

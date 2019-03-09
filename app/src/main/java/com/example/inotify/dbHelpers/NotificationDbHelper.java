@@ -107,7 +107,7 @@ public class NotificationDbHelper extends MainDbHelp {
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("update " +TbNames.NOTIFICATION_TABLE+ "set TIMEVIEW = \"" +id+ "\"" ,null);
+        Cursor res = db.rawQuery("update " +TbNames.NOTIFICATION_TABLE + "set TIMEVIEW = \"" +id+ "\"" ,null);
         if(res !=null)
         {
             if(res.moveToFirst()){
@@ -116,6 +116,25 @@ public class NotificationDbHelper extends MainDbHelp {
             res.close();
         }
         return null;
+    }
+
+
+    //get method for appname
+    public String AppnameGet(String id)
+    {
+        String appname = new String();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select APPNAME From" +TbNames.NOTIFICATION_TABLE +  " where NOTIFICATION_ID =\"" + id + "\"" , null );
+        if(res !=null)
+        {
+            if(res.moveToFirst()){
+                return res.getString(1);
+            }
+            res.close();
+        }
+        return null;
+
     }
 
 }

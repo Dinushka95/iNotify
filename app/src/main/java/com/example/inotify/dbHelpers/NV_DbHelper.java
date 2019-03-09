@@ -2,11 +2,14 @@ package com.example.inotify.dbHelpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.google.android.gms.location.ActivityRecognitionResult;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class NV_DbHelper extends MainDbHelp {
     }
 
     public boolean activity_insert(String type, String confidence) {
+
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -286,17 +290,17 @@ public class NV_DbHelper extends MainDbHelp {
 
 
 
-
-
+        String proId = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
         String day = currentDay;
         String time = TimeSlot;
-        String activity = "W";
+        String activity = activity_get();
         int viewor = 1;
         int notor = 0;
         double probability = 100;
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues2 = new ContentValues();
+        contentValues2.put(TbColNames.PROID, proId);
         contentValues2.put(TbColNames.DAY, day);
         contentValues2.put(TbColNames.TIME, time);
         contentValues2.put(TbColNames.ACTIVITY, activity);

@@ -13,8 +13,11 @@ public class TbColNames {
     public static final String PACKAGENAME = "packageName";
     public static final String SMARTNOTIFICATION = "smartNotifications";
 
+
+    //PRASHAN
     ////nv sql lite db helper
    // public static final String DATE = "date";
+    public static final String PROID = "probability_id";
     public static final String DAY = "day";
     public static final String TIME = "time";
     public static final String ACTIVITY = "activity";
@@ -42,6 +45,11 @@ public class TbColNames {
 
     //ScrennOff
     public static final String TIMEOFF = "timeoff";
+
+    //NotificationImportnace
+    public static final String NOTIFICATIONIID = "notificationiid";
+    public static final String APPLICATIONNAME = "applicationname";
+    public static final String SEQUENCEVALUE ="sequencevalue";
 
     ////smart notification system
     // notification all notifications
