@@ -3,9 +3,6 @@ package com.example.inotify.helpers;
 import android.content.Context;
 import android.service.notification.StatusBarNotification;
 
-import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
-import com.example.inotify.dbHelpers.NotificationSqlLiteDbHelper;
-import com.example.inotify.views.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

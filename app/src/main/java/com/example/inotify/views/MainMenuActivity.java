@@ -26,6 +26,8 @@ import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
 
+import com.example.inotify.helpers.TopAppsHelper;
+import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;

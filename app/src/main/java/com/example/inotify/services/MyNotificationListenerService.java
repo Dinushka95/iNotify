@@ -19,6 +19,7 @@ import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NV_DbHelper;
 import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.configs.AppUserConfigs;
+import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.helpers.RingerModeHelper;
@@ -554,7 +555,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             NotificationImportnaceDbHelper notificationImportnaceDbHelper = new NotificationImportnaceDbHelper(this);
             notificationImportnaceDbHelper.NotificationImportnaceInsert("asd" , totalnotificationinlist);
-            notificationImportnaceDbHelper.close();
+
            Log.d("inotify" , "Savedto notification Importnace table "+"asd" +","+totalnotificationinlist);
 
 

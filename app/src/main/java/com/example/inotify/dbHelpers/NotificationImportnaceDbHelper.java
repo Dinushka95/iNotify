@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class NotificationImportnaceDbHelper extends MainSqlliteOpenHelp{
+public class NotificationImportnaceDbHelper extends MainDbHelp{
 
     public NotificationImportnaceDbHelper(Context context) {
         super(context);
