@@ -19,8 +19,8 @@ public class NotificationImportnaceDbHelper extends MainDbHelp{
         super(context);
     }
 
-    public boolean NotificationImportnaceInsert(String applicationname , int sequencevalue ){
-            String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+    public boolean NotificationImportnaceInsert(String id , String applicationname  , int sequencevalue){
+          //  String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();

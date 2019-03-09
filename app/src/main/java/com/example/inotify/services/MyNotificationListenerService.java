@@ -549,18 +549,21 @@ public class MyNotificationListenerService extends NotificationListenerService {
             }
         Log.d("inotifyC" , "totalnotificationinlist Importnace table "+totalnotificationinlist);
 
-//            NotificationSqlLiteDbHelper notificationSqlLiteDbHelper = new NotificationSqlLiteDbHelper(this);
-//            String PackageName = notificationSqlLiteDbHelper.AppnameGet(sbn.getNotification().tickerText.toString());
-//            Log.d("inotify" , "PackaheName Importnace table "+PackageName);
+            NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this);
+            String PackageName = notificationDbHelper.AppnameGet(sbn.getNotification().tickerText.toString());
+            //String PackageName = notificationDbHelper.AppnameGet(ticker);
+            Log.d("inotifyC" , "PackaheName Importnace table "+PackageName);
 
             NotificationImportnaceDbHelper notificationImportnaceDbHelper = new NotificationImportnaceDbHelper(this);
-            notificationImportnaceDbHelper.NotificationImportnaceInsert("asd" , totalnotificationinlist);
+            notificationImportnaceDbHelper.NotificationImportnaceInsert(ticker , PackageName ,totalnotificationinlist);
 
-           Log.d("inotifyC" , "Savedto notification Importnace table "+"asd" +","+totalnotificationinlist);
+           Log.d("inotifyC" , "Savedto notification Importnace table "+PackageName +","+totalnotificationinlist);
+           Log.d("inotifyC" , "Savedto notification Importnace table ticker "+ticker );
+
+            notificationImportnaceDbHelper.close();
 
 
-
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
            /* for (StatusBarNotification notification : notificationManager1) {
                // Log.d("cdap", " ---onNotificationRemoved--------"+notification.getPackageName());
