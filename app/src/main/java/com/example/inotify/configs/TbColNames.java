@@ -42,9 +42,12 @@ public class TbColNames {
 
     ////screenon
     public static final String TIMEON = "timeon";
+    public static final String NOTIFICATIONID = "notificationid";
 
     //ScrennOff
     public static final String TIMEOFF = "timeoff";
+    //public static final String NOTIFICATIONID = "notificationid";
+
 
     //NotificationImportnace
     public static final String NOTIFICATIONIID = "notificationiid";
