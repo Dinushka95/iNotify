@@ -154,7 +154,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             //call the isPhoneLowckedOrNot method here
             ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
             Boolean screenstatus =  screenStatusHelper.isPhoneLockedOrNot(this);
-            Log.d("inotify " ,"ScreenStatus On Notification recive" + screenstatus);
+            Log.d("inotifyC " ,"ScreenStatus On Notification recive" + screenstatus);
             if(screenstatus == false)
             {
                 //Save to screen on table
@@ -162,7 +162,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                // String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
                 screenStatusDbHelper.ScreenOnInsert();
                 screenStatusDbHelper.close();
-                Log.d("iNotify", "SCreen status Saved");
+                Log.d("inotifyC", "SCreen status Saved");
             }
             else
             {
@@ -170,7 +170,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
                 screenStatusDbHelper.ScreenOffInsert();
                 screenStatusDbHelper.close();
-                Log.d("iNotify", "SCreen off status Saved");
+                Log.d("inotifyC", "SCreen off status Saved");
 
 
             }
@@ -178,15 +178,15 @@ public class MyNotificationListenerService extends NotificationListenerService {
             //Get the ringer Mode
             RingerModeHelper ringermodeHelper = new RingerModeHelper();
             String RingerMode = ringermodeHelper.getRingerMode(this);
-            Log.d("inotify " ,"RingerMode On Notification recive" + RingerMode);
+            Log.d("inotifyC " ,"RingerMode On Notification recive" + RingerMode);
 
             //Save ringer Mode to the table
             RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
-            Log.d("inotify ", "RingerMode" + RingerMode + "," + idCha);
+            Log.d("inotifyC ", "RingerMode" + RingerMode + "," + idCha);
 
             ringerModeDbHelper.RMinsert(idCha, RingerMode);
             ringerModeDbHelper.close();
-            Log.d("inotify ", " ringer mode Record Saved");
+            Log.d("inotifyC ", " ringer mode Record Saved");
 
 
 
@@ -547,7 +547,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                // }
             }
-        Log.d("inotify" , "totalnotificationinlist Importnace table "+totalnotificationinlist);
+        Log.d("inotifyC" , "totalnotificationinlist Importnace table "+totalnotificationinlist);
 
 //            NotificationSqlLiteDbHelper notificationSqlLiteDbHelper = new NotificationSqlLiteDbHelper(this);
 //            String PackageName = notificationSqlLiteDbHelper.AppnameGet(sbn.getNotification().tickerText.toString());
@@ -556,7 +556,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             NotificationImportnaceDbHelper notificationImportnaceDbHelper = new NotificationImportnaceDbHelper(this);
             notificationImportnaceDbHelper.NotificationImportnaceInsert("asd" , totalnotificationinlist);
 
-           Log.d("inotify" , "Savedto notification Importnace table "+"asd" +","+totalnotificationinlist);
+           Log.d("inotifyC" , "Savedto notification Importnace table "+"asd" +","+totalnotificationinlist);
 
 
 
