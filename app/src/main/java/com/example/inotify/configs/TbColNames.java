@@ -103,6 +103,18 @@ public class TbColNames {
     public static final String POWEROFFDATE="powerOffDate";
     public static final String POWEROFFTIME="powerOffTime";
 
+    //Application count
+
+    public static final String APPCOUNT_ID = "account_ID";
+    public static final String SOCIALAPPCOUNT = "socialappcount";
+    public static final String GAMINGAPPCOUNT = "gamingappcount";
+    public static final String EDUCATIONAPPCOUNT = "educationappcount";
+    public static final String DATINGAPPCOUNT = "datingappcount";
+    public static final String MUSICVIDEOAPPCOUNT = "musicvideoappcount";
+    public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
+
+
+
 
     //
 

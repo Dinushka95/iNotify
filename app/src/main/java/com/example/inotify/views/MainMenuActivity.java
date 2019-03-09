@@ -6,6 +6,7 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
@@ -302,6 +304,8 @@ public class MainMenuActivity extends AppCompatActivity {
         int MusicVideoCount = applicationsHelper.commonMusicVideoAppCount();
         Log.d("inotify","MusicVideoCount count - " + MusicVideoCount);
 
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+        applicationDbHelper.appCategoryCount();
 
     }
 

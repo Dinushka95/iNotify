@@ -1,12 +1,17 @@
 package com.example.inotify.helpers;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.example.inotify.configs.TbColNames;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.models.AppInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 
 public class ApplicationsHelper {
 
@@ -169,4 +174,6 @@ public class ApplicationsHelper {
         //Log.d("inotify","common social app count = " + myCommonAppCount);
         return myCommonAppCountGaming;
     }
+
+
 }

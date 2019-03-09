@@ -44,4 +44,5 @@ public class TbNames {
 
     public static final String CHARGER_TABLE = "charger_table";
 
+
 }
