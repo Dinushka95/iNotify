@@ -23,7 +23,7 @@ import static com.example.inotify.configs.TbNames.UC_CALLDURATION_TABLE;
 
 import static com.example.inotify.configs.TbNames.UC_CONTACTCOUNT_TABLE;
 import static com.example.inotify.configs.TbNames.UC_SCREENTIME_TABLE;
-import static com.example.inotify.configs.TbNames.UC_USAGECOUNT_TABLE;
+
 
 public class UC_DbHelper extends MainDbHelp {
 
@@ -50,18 +50,7 @@ public class UC_DbHelper extends MainDbHelp {
 
     }
 
-    public boolean appusagecount_insert(String count) {
 
-        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE, date);
-        contentValues.put(COUNT, count);
-        long result = db.insert(UC_CONTACTCOUNT_TABLE, null, contentValues);
-        db.close();
-        return result != -1;
-    }
 
     public boolean contactCount_insert(String count) {
 
@@ -135,10 +124,10 @@ public class UC_DbHelper extends MainDbHelp {
 
 
 
-    public long appUsageAverage_get() {
+    /*public long appUsageAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_USAGECOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+APPUSAGECOUNT_TABLE, null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("avg"));
@@ -150,7 +139,7 @@ public class UC_DbHelper extends MainDbHelp {
         db.close();
 
         return 0;
-    }
+    }*/
 
     public long applistAverage_get() {
 
@@ -266,7 +255,7 @@ public class UC_DbHelper extends MainDbHelp {
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public long appUsageLast_get() {
+   /* public long appUsageLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select COUNT from "+UC_USAGECOUNT_TABLE, null);
@@ -279,7 +268,7 @@ public class UC_DbHelper extends MainDbHelp {
         db.close();
 
         return 0;
-    }
+    }*/
 
     public long applistLast_get() {
 

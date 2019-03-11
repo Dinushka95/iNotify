@@ -49,7 +49,6 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.CHARGER_TABLE + " (CHARGERID INTEGER PRIMARY KEY AUTOINCREMENT, POWERONCOUNTDATE TEXT,POWERONCOUNTTIME TEXT,POWEROFFCOUNTDATE TEXT,POWEROFFCOUNTTIME TEXT)");
         db.execSQL("create table " + TbNames.UC_APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + TbNames.UC_USAGECOUNT_TABLE + " (USAGECOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.UC_CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.UC_SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
         db.execSQL("create table " + TbNames.UC_CALLDURATION_TABLE + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
@@ -71,6 +70,8 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.PROFILE_TABLE + " (PROFILE_ID INTEGER,DATE TEXT,NAME TEXT,AGE TEXT,GENDER TEXT,OCCUPATION TEXT,EMAIL TEXT,PHONE TEXT)");
 
         db.execSQL("create table " + TbNames.APPCOUNT_TABLE + " (APPCOUNT_ID INTEGER,DATE TEXT,SOCIALAPPCOUNT TEXT,GAMINGAPPCOUNT TEXT,EDUCATIONAPPCOUNT TEXT,DATINGAPPCOUNT TEXT,MUSICVIDEOAPPCOUNT TEXT,COMMUNICATIONAPPCOUNT TEXT)");
+
+        db.execSQL("create table " + TbNames.APPUSAGE_TABLE + " (APPUSAGEID INTEGER,DATE TEXT,TIME TEXT,PACKAGENAME TEXT,APPNAME TEXT,APPCATEGORY TEXT,USAGETIME TEXT)");
 
 
 
@@ -154,6 +155,22 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("insert into ua_ringermode_table(RM_ID ,RM_NOTIFICATIONID ,RM_DAY ,RM_DATE  , RM_TIME   ,RM_RINGERMODE )values(1 ,20190304155042 ,20190304 ,'Monday',1550 ,'normal'  );");
 
     }
+/*
+    important code
+    private void bulkInsertOneHundredRecords() {
+        String sql = "INSERT INTO "+ SAMPLE_TABLE_NAME +" VALUES (?,?,?);";
+        SQLiteStatement statement = sampleDB.compileStatement(sql);
+        sampleDB.beginTransaction();
+        for (int i = 0; i<100; i++) {
+            statement.clearBindings();
+            statement.bindLong(1, i);
+            statement.bindLong(2, i);
+            statement.bindLong(3, i*i);
+            statement.execute();
+        }
+        sampleDB.setTransactionSuccessful();
+        sampleDB.endTransaction();
+    }*/
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

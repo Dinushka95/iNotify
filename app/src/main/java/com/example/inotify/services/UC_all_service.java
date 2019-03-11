@@ -33,7 +33,7 @@ public class UC_all_service extends JobService {
     public boolean onStartJob(JobParameters params) {
 
         getAppsInformaion(this);
-        getAppUsage(this);
+      //  getAppUsage(this);
         getContacts(this);
         getCallDuration(this);
         getCalenderEvent(this);
@@ -74,8 +74,9 @@ public class UC_all_service extends JobService {
 
     }
 
-    public void getAppUsage(Context context) {
+   /* public void getAppUsage(Context context) {
 
+// delete old code and and app use
         // need app usage permission
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -1);
@@ -96,7 +97,7 @@ public class UC_all_service extends JobService {
         UC_DbHelper.appusagecount_insert(String.valueOf(count));
         UC_DbHelper.close();
     }
-
+*/
 
     public void getContacts(Context context) {
 
@@ -202,7 +203,7 @@ public class UC_all_service extends JobService {
         }
 
         UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
-        UC_DbHelper.appusagecount_insert(String.valueOf(count));
+        //UC_DbHelper.appusagecount_insert(String.valueOf(count));
         UC_DbHelper.close();
 
     }
