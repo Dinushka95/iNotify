@@ -299,7 +299,7 @@ public class TopAppDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select count(APPNAME) as socialAppCount from "+APPLICATIONS_TABLE+ " where APPCATEGORY = \"social\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
-                return res.getLong(res.getColumnIndex("socialAppCount"));
+                return res.getLong(res.getColumnIndex("socialappcount"));
             }
         }
         Objects.requireNonNull(res).close();

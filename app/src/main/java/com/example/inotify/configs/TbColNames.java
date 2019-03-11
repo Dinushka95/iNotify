@@ -44,9 +44,12 @@ public class TbColNames {
 
     ////screenon
     public static final String TIMEON = "timeon";
+    public static final String NOTIFICATIONID = "notificationid";
 
     //ScrennOff
     public static final String TIMEOFF = "timeoff";
+    //public static final String NOTIFICATIONID = "notificationid";
+
 
     //NotificationImportnace
     public static final String NOTIFICATIONIID = "notificationiid";
@@ -113,6 +116,20 @@ public class TbColNames {
     //public static final String APPNAME="appName";
     //public static final String APPCATEGORY="appCategory";
     public static final String USAGETIME="UsageTime";
+    //Application count
+
+    public static final String APPCOUNT_ID = "account_ID";
+    public static final String SOCIALAPPCOUNT = "socialappcount";
+    public static final String GAMINGAPPCOUNT = "gamingappcount";
+    public static final String EDUCATIONAPPCOUNT = "educationappcount";
+    public static final String DATINGAPPCOUNT = "datingappcount";
+    public static final String MUSICVIDEOAPPCOUNT = "musicvideoappcount";
+    public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
+
+
+
+
+    //
 
 
 

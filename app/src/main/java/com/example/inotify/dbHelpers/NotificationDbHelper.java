@@ -125,7 +125,7 @@ public class NotificationDbHelper extends MainDbHelp {
         String appname = new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select APPNAME From" +TbNames.NOTIFICATION_TABLE +  " where NOTIFICATION_ID =\"" + id + "\"" , null );
+        Cursor res = db.rawQuery("select APPNAME from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"", null);
         if(res !=null)
         {
             if(res.moveToFirst()){

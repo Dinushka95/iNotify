@@ -23,8 +23,10 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         super(context);
     }
     //Insert to screenOn table
+    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
     public boolean ScreenOnInsert(){
+
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String time = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
         Calendar cal = Calendar.getInstance();
@@ -35,6 +37,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(TbColNames.NOTIFICATIONID ,id);
         contentValues.put(TbColNames.DATE , date);
         contentValues.put(TbColNames.TIMEON , time);
 
@@ -60,6 +63,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(TbColNames.NOTIFICATIONID ,id);
         contentValues.put(TbColNames.DATE , date);
         contentValues.put(TbColNames.TIMEOFF,time);
 
