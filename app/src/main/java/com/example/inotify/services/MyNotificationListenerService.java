@@ -521,7 +521,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-"+ sbn.getPackageName() );
 
            String ticker = sbn.getNotification().tickerText.toString();
-           Log.d("Notification ticker", "onNotificationRemoved: "+ticker);
+          Log.d("Notification ticker", "onNotificationRemoved: "+ticker);
 
 
             //if (ticker = )
