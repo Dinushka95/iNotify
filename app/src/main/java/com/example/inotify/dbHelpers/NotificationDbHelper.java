@@ -70,10 +70,10 @@ public class NotificationDbHelper extends MainDbHelp {
         SQLiteDatabase db = this.getReadableDatabase();
       //  String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
-        Cursor res = db.rawQuery("select TIMERECEVIED from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
+        Cursor res = db.rawQuery("select * from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
-                return res.getString(1);
+                return res.getString(2);
             }
             res.close();
         }
@@ -87,10 +87,10 @@ public class NotificationDbHelper extends MainDbHelp {
         SQLiteDatabase db = this.getReadableDatabase();
         //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
-        Cursor res = db.rawQuery(	"select TIMEVIEW from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
+        Cursor res = db.rawQuery(	"select * from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
-                return res.getString(1);
+                return res.getString(3);
             }
             res.close();
         }
@@ -127,11 +127,11 @@ public class NotificationDbHelper extends MainDbHelp {
         String appname = new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select APPNAME from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"", null);
         if(res !=null)
         {
             if(res.moveToFirst()){
-                return res.getString(1);
+                return res.getString(5);
             }
             res.close();
         }

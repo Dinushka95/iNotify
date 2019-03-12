@@ -2,8 +2,11 @@ package com.example.inotify.helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
@@ -30,11 +33,40 @@ public class ApplicationsHelper {
         return applicationdbHelper.appInfoGet();
     }
 
-    public void appInfoInsert(List<AppInfoModel> appInfo) {
+    public boolean appInfoInsert(List<AppInfoModel> appInfo) {
 
             ApplicationDbHelper applicationDbHelper =new ApplicationDbHelper(c1);
-            applicationDbHelper.appInfoInsert(appInfo);
-            applicationDbHelper.close();
+            return applicationDbHelper.appInfoInsert(appInfo);
+
+
+    }
+
+    public void saveCurrentPhoneApps()
+    {
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(c1);
+        List<AppInfoModel> listOfApps = applicationsHelper.appAllGet();
+
+
+        final PackageManager pm = c1.getPackageManager();
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+
+        List<AppInfoModel> list = new ArrayList<>();
+
+
+        for (ApplicationInfo x : packages){
+            AppInfoModel amtem = new AppInfoModel();
+            Log.d("iNotify",pm.getApplicationLabel(x).toString());
+            amtem.setAppName(pm.getApplicationLabel(x).toString());
+            amtem.setPakageName(x.packageName);
+            amtem.setAppCategory(x.packageName);
+
+            list.add(amtem);
+        }
+
+        appInfoInsert(list);
+        Log.d("inotify","app name list............"+ list);
+
 
     }
 

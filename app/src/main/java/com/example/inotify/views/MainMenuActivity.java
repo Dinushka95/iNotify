@@ -11,6 +11,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.dbHelpers.MainDbHelp;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
@@ -318,6 +320,8 @@ public class MainMenuActivity extends AppCompatActivity {
         UC_CalenderEvent uc_calenderEvent = new UC_CalenderEvent();
         uc_calenderEvent.getcalanderEventCount(this);
 
+        //applicationsHelper.saveCurrentPhoneApps();
+        //for insert the apps to database
     }
 
     public void testChaya(View view) {
@@ -329,6 +333,12 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testDinu(View view) {
+
+    }
+
+    public void testCategory(View view) {
+      ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+      applicationDbHelper.updateCategory();
 
     }
 }

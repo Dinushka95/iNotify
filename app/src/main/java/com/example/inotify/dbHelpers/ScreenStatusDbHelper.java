@@ -124,7 +124,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
     {
         String TableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select exists(select 1  from  " + TbNames.UA_SCREENON_TABLE +  " where NOTIFICATIONID= \" " +id+ "\")" , null);
+        Cursor res = db.rawQuery("select *  from  " + TbNames.UA_SCREENON_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" , null);
         if(res != null)
         {
             if(res.moveToFirst()){
@@ -139,7 +139,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
     {
         String TableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select exists(select 1  from  " + TbNames.UA_SCREENOFF_TABLE +  " where NOTIFICATIONID= \" " +id+ "\")" , null);
+        Cursor res = db.rawQuery("select *  from  " + TbNames.UA_SCREENOFF_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" ,  null);
         if(res != null)
         {
             if(res.moveToFirst()){
@@ -156,6 +156,10 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         String screenoffavailability = this.checkScreenOffAvailablity(id);
 
         if(screenonavailability == "0")
+        {
+            tablename = "UA_SCREENOFF_TABLE";
+        }
+        else
         {
             tablename = "UA_SCREENON_TABLE";
         }
