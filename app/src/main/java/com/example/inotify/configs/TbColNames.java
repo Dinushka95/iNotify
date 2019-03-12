@@ -13,7 +13,7 @@ public class TbColNames {
     public static final String TIMEVIEW = "timeView";
     public static final String APPNAME = "appName";
     public static final String PACKAGENAME = "packageName";
-    public static final String SMARTNOTIFICATION = "smartNotifications";
+    public static final String SMARTNOTIFICATION = "smartNotification";
 
 
     //PRASHAN

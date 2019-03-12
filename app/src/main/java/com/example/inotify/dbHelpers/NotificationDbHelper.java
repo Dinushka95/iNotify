@@ -6,11 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.NotificationModel;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 import static com.example.inotify.configs.TbNames.NOTIFICATION_TABLE;
 
 
@@ -34,10 +38,7 @@ public class NotificationDbHelper extends MainDbHelp {
 
         long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public boolean insert(String myNotificationId,String date,String packageName,String timeRecevied,String timeSent,String timeViewed) {
@@ -53,17 +54,13 @@ public class NotificationDbHelper extends MainDbHelp {
 
             long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
             db.close();
-            if (result == -1)
-                return false;
-            else
-                return true;
+        return result != -1;
     }
 
 
     //Get the notification recived time  -Cha
 
     public String recivedTimeGet(){
-        String notificationRecivedTime = new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
@@ -80,7 +77,7 @@ public class NotificationDbHelper extends MainDbHelp {
 
 // Get the time notification was viwed
     public String viewTimeGet(){
-        String notificationViewTime = new String();
+
 
         SQLiteDatabase db = this.getReadableDatabase();
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
@@ -103,7 +100,7 @@ public class NotificationDbHelper extends MainDbHelp {
            // Get the time and update the notificationviwedtime
 
     public String updateNotificationViwedTime(){
-        String notificationViwedtime = new String();
+
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -122,7 +119,6 @@ public class NotificationDbHelper extends MainDbHelp {
     //get method for appname
     public String AppnameGet(String id)
     {
-        String appname = new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select APPNAME from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"", null);
@@ -134,6 +130,35 @@ public class NotificationDbHelper extends MainDbHelp {
             res.close();
         }
         return null;
+
+    }
+
+    public List<NotificationModel> allGet(){
+
+        List<NotificationModel> listNotificationModel = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATION_TABLE , null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    NotificationModel notificationModel = new NotificationModel();
+                    notificationModel.setId(res.getString(res.getColumnIndex(TbColNames.NOTIFICATION_ID)));
+                    notificationModel.setDatetime(res.getString(res.getColumnIndex(TbColNames.DATE)));
+                    notificationModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    notificationModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    notificationModel.setSmartNotification(res.getString(res.getColumnIndex(TbColNames.SMARTNOTIFICATION)));
+                    notificationModel.setTimeRecevied(res.getString(res.getColumnIndex(TbColNames.TIMERECEVIED)));
+                    notificationModel.setTimeSent(res.getString(res.getColumnIndex(TbColNames.TIMESENT)));
+                    notificationModel.setTimeViewed(res.getString(res.getColumnIndex(TbColNames.TIMEVIEW)));
+
+                    listNotificationModel.add(notificationModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listNotificationModel;
 
     }
 

@@ -11,6 +11,11 @@ public class NotificationModel {
     private String packageName;
     private String smartNotification;
 
+
+    public NotificationModel() {
+
+    }
+
     public NotificationModel(String id, String datetime, String timeRecevied, String timeSent, String timeVievwed, String appName, String packageName, String smartNotification){
         this.id = id;
         this.datetime = datetime;
