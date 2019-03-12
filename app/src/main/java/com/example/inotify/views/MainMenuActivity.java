@@ -11,6 +11,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
@@ -26,12 +27,14 @@ import android.widget.Toast;
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.dbHelpers.MainDbHelp;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
 
 import com.example.inotify.helpers.TopAppsHelper;
+import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.AppUsageModel;
 import com.example.inotify.models.ProfileModel;
@@ -259,6 +262,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testMihitha(View view) {
+       // Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
         TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
         List<AppInfoModel> topgamingapp = topAppsHelper.topAppGaming();
 
@@ -313,9 +317,15 @@ public class MainMenuActivity extends AppCompatActivity {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
         applicationDbHelper.appCategoryCount();
 
+        UC_CalenderEvent uc_calenderEvent = new UC_CalenderEvent();
+        uc_calenderEvent.getcalanderEventCount(this);
+
+        //applicationsHelper.saveCurrentPhoneApps();
+        //for insert the apps to database
     }
 
     public void testChaya(View view) {
+
     }
 
     public void testPrashan(View view) {
@@ -323,6 +333,12 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testDinu(View view) {
+
+    }
+
+    public void testCategory(View view) {
+      ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+      applicationDbHelper.updateCategory();
 
     }
 }

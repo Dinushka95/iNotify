@@ -3,10 +3,8 @@ package com.example.inotify.helpers;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
-import android.text.format.DateFormat;
-import android.util.Log;
 
-import com.example.inotify.configs.AppcategoriesConstants;
+import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
 import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.AppUsageModel;
@@ -68,12 +66,12 @@ public class AppUsageHelper {
     }
 
 
-    public int appsUsageTodayGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageTodayGet(AppCategoriesConstants appcategoriesConstants) {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
         return appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants);
     }
 
-    public int appsUsageAvgGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageAvgGet(AppCategoriesConstants appcategoriesConstants) {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
         return appUsageDbHelper.appsUsageAvgGet(appcategoriesConstants);
     }

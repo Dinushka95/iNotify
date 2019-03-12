@@ -1,36 +1,52 @@
 package com.example.inotify.views;
 
+import android.net.Uri;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ListView;
 
 import com.example.inotify.R;
-import com.example.inotify.viewControllers.INotifyActiveAppsAdapter;
-import com.example.inotify.viewControllers.INotifyActiveAppsLogic;
-import com.example.inotify.viewControllers.NotificationHistoryAdapter;
-import com.example.inotify.viewControllers.NotificationHistoryLogic;
+import com.example.inotify.viewControllers.NotificationHistoryPagerAdapter;
 
-import java.util.ArrayList;
-
-public class NotificationHistoryActivity extends AppCompatActivity {
+public class NotificationHistoryActivity extends AppCompatActivity  implements NotificationHistorySNSFragment.OnFragmentInteractionListener, NotificationHistoryALLFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_history);
 
-        //generate list
-        NotificationHistoryLogic notificationHistoryLogic = new NotificationHistoryLogic(this);
 
-        ArrayList<String> list = new ArrayList<String>();
-        list =notificationHistoryLogic.getNotificationList();
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        //instantiate custom adapter
-        NotificationHistoryAdapter notificationHistoryAdapter = new NotificationHistoryAdapter(list,this);
+        final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
+        final NotificationHistoryPagerAdapter adapter = new NotificationHistoryPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        //handle listview and assign adapter
-        ListView lView = (ListView) findViewById(R.id.listview);
-        lView.setAdapter(notificationHistoryAdapter);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
