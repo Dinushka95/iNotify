@@ -1,32 +1,92 @@
 package com.example.inotify.helpers;
 
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
+import android.text.format.DateFormat;
+import android.util.Log;
 
+import com.example.inotify.configs.AppcategoriesConstants;
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
+import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.AppUsageModel;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AppUsageHelper {
 
     private Context c1;
 
     public AppUsageHelper(Context context) {
-        this.c1=context;
+        this.c1 = context;
     }
 
     public boolean insert(List<AppUsageModel> appUsageModelList) {
 
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+
         return appUsageDbHelper.insert(appUsageModelList);
     }
 
+    public boolean saveTodaysAppUsage() {
 
-   // public getsocialappsusage();
-   // public gettotalsocialaAvG();
-   // public getappusage();
-   // public getAppUage();
+        AppUsageHelper appUsageHelper = new AppUsageHelper(c1);
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        long start = calendar.getTimeInMillis();
+        long end = System.currentTimeMillis();
+        UsageStatsManager usageStatsManager = (UsageStatsManager) c1.getSystemService(Context.USAGE_STATS_SERVICE);
+        List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, start, end);
+
+        List<AppUsageModel> appUsageModelList = new ArrayList<>();
+
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        String time = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
+
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(c1);
+
+        for (UsageStats stat : stats) {
+            AppUsageModel appUsageModel = new AppUsageModel();
+
+            AppInfoModel appInfoModel = applicationsHelper.appGet(stat.getPackageName());
+            appUsageModel.setDate(date);
+            appUsageModel.setTime(time);
+            appUsageModel.setPackageName(stat.getPackageName());
+            appUsageModel.setAppCategory(appInfoModel.getAppCategory());
+            appUsageModel.setAppName(appInfoModel.getAppName());
+            appUsageModel.setUsageTime(String.valueOf((stat.getTotalTimeInForeground() / 1000)));
+
+            appUsageModelList.add(appUsageModel);
+        }
+        return appUsageHelper.insert(appUsageModelList);
+    }
+
+
+    public int appsUsageTodayGet(AppcategoriesConstants appcategoriesConstants) {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants);
+    }
+
+    public int appsUsageAvgGet(AppcategoriesConstants appcategoriesConstants) {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.appsUsageAvgGet(appcategoriesConstants);
+    }
+
+    public int appAllUsageTodayGet() {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.appAllUsageTodayGet();
+    }
+
+    public int appAllUsageAvgGet() {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.appAllUsageAvgGet();
+    }
 
 
 }

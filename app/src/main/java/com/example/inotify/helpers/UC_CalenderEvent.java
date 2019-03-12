@@ -3,6 +3,7 @@ package com.example.inotify.helpers;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.CalendarContract;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,8 +26,8 @@ public class UC_CalenderEvent {
         c_start.setTime(new Date());
         // c_start.set(year,month,day,hour,mintes);
 
-        //Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(c_start.getTimeInMillis()));
-       // Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(cal.getTimeInMillis()));
+        Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(c_start.getTimeInMillis()));
+       //Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(cal.getTimeInMillis()));
 
         String[] proj = new String[]{
                 CalendarContract.Instances._ID,
@@ -37,8 +38,11 @@ public class UC_CalenderEvent {
         String x ="";
         if (cursor.getCount() > 0) {
             x= String.valueOf(cursor.getCount());
+            Log.d("inotify","Calender details"+ x);
         }
+        Log.d("inotify","Calender details"+ x);
        return x;
+
 
     }
 }

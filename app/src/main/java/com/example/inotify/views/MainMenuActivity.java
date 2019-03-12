@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -25,11 +27,14 @@ import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
+import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
 
 import com.example.inotify.helpers.TopAppsHelper;
+import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.AppInfoModel;
+import com.example.inotify.models.AppUsageModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
@@ -38,6 +43,8 @@ import com.example.inotify.services.UC_all_service;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -253,6 +260,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testMihitha(View view) {
+       // Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
         TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
         List<AppInfoModel> topgamingapp = topAppsHelper.topAppGaming();
 
@@ -307,9 +315,13 @@ public class MainMenuActivity extends AppCompatActivity {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
         applicationDbHelper.appCategoryCount();
 
+        UC_CalenderEvent uc_calenderEvent = new UC_CalenderEvent();
+        uc_calenderEvent.getcalanderEventCount(this);
+
     }
 
     public void testChaya(View view) {
+
     }
 
     public void testPrashan(View view) {
@@ -317,6 +329,6 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testDinu(View view) {
-        startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+
     }
 }
