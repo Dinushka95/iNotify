@@ -21,8 +21,7 @@ public class MainUsercharacteristics {
 
         long appListCountFixedvalue =75; // move it to main entr point and make it a static variable
 
-        long appUsageCountAvg = UC_DbHelper.appUsageAverage_get();
-        Log.d("inotify","bbb");
+       // long appUsageCountAvg = UC_DbHelper.appUsageAverage_get();
         long appListCountAvg = UC_DbHelper.applistAverage_get();
         long contactCountAvg = UC_DbHelper.contactsAverage_get();
         long screenTimeCountAvg = UC_DbHelper.screentimeAverage_get();
@@ -32,8 +31,7 @@ public class MainUsercharacteristics {
         long socialmediacAppCountAvg = UC_DbHelper.applistsocialmediaAverage_get();
         long appListAverageWithoutLast = UC_DbHelper.applistAverageWithoutLast_get();
 
-        long appUsageCountLast = UC_DbHelper.appUsageLast_get();
-        long appListCountLast = UC_DbHelper.applistLast_get();
+//        long appListCountLast = UC_DbHelper.applistLast_get();
         long contactCountLast = UC_DbHelper.contactsLast_get();
         long screenTimeCountLast = UC_DbHelper.screentimeLast_get();
         long calldurationCountLast = UC_DbHelper.calldurationLast_get();
@@ -42,10 +40,10 @@ public class MainUsercharacteristics {
         long socialmediacAppCountLast = UC_DbHelper.applistsocialmediaLast_get();
 
         if(AppUserConfigs.MainUsercharacteristics_DebuggerLogger){
-            Log.d("inotify", "Main-Usercharacteristics--appUsageCountAvg---"+appUsageCountAvg);
-            Log.d("inotify", "Main-Usercharacteristics--appUsageCountLast---"+appUsageCountLast);
+           // Log.d("inotify", "Main-Usercharacteristics--appUsageCountAvg---"+appUsageCountAvg);
+           // Log.d("inotify", "Main-Usercharacteristics--appUsageCountLast---"+appUsageCountLast);
             Log.d("inotify", "Main-Usercharacteristics--appListCountAvg---"+appListCountAvg);
-            Log.d("inotify", "Main-Usercharacteristics--appListCountLast---"+appListCountLast);
+           // Log.d("inotify", "Main-Usercharacteristics--appListCountLast---"+appListCountLast);
             Log.d("inotify", "Main-Usercharacteristics--contactCountAvg---"+contactCountAvg);
             Log.d("inotify", "Main-Usercharacteristics--contactCountLast---"+contactCountLast);
             Log.d("inotify", "Main-Usercharacteristics--screenTimeCountAvg---"+screenTimeCountAvg);
@@ -74,9 +72,9 @@ public class MainUsercharacteristics {
         String socialmediacAppCountStatue ="error";
 
 
-        if(appUsageCountLast>appUsageCountAvg){appUsageCountStatue="high";}else{appUsageCountStatue="low";}
-        if(appListCountLast>appListCountFixedvalue){appListCountStatue="high";}else{appListCountStatue="low";}
-        if(appListCountLast>appListCountAvg){appListDownloadStatue="high";}else{appListDownloadStatue="low";}
+      //  if(appUsageCountLast>appUsageCountAvg){appUsageCountStatue="high";}else{appUsageCountStatue="low";}
+      //  if(appListCountLast>appListCountFixedvalue){appListCountStatue="high";}else{appListCountStatue="low";}
+      //  if(appListCountLast>appListCountAvg){appListDownloadStatue="high";}else{appListDownloadStatue="low";}
         if(contactCountLast>contactCountAvg){contactCountStatue="high";}else{contactCountStatue="low";}
         if(screenTimeCountLast>screenTimeCountAvg){screenTimeCountStatue="high";}else{screenTimeCountStatue="low";}
         if(calldurationCountLast>calldurationCountAvg){calldurationCountStatue="high";}else{calldurationCountStatue="low";}

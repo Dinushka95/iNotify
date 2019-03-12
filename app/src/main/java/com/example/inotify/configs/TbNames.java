@@ -19,7 +19,6 @@ public class TbNames {
 
 
     public static final String UC_APPLISTCOUNT_TABLE = "uc_applistcount_table";
-    public static final String UC_USAGECOUNT_TABLE = "uc_usagecount_table";
     public static final String UC_CONTACTCOUNT_TABLE = "uc_contactcount_table";
     public static final String UC_SCREENTIME_TABLE = "uc_screentime_table";
     public static final String UC_CALLDURATION_TABLE = "uc_callduration_table";
@@ -44,5 +43,6 @@ public class TbNames {
 
     public static final String CHARGER_TABLE = "charger_table";
 
+    public static final String APPUSAGE_TABLE = "appUsage_table";
 
 }

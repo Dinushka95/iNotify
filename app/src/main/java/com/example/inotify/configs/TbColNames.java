@@ -2,6 +2,8 @@ package com.example.inotify.configs;
 
 public class TbColNames {
 
+    // if there is duplicate entries please don't delete them
+    // under each table you should incrase all the table columns and comment for duplicates
 
     ////notification
     public static final String NOTIFICATION_ID = "notification_Id";
@@ -16,7 +18,7 @@ public class TbColNames {
 
     //PRASHAN
     ////nv sql lite db helper
-   // public static final String DATE = "date";
+    // public static final String DATE = "date";
     public static final String PROID = "probability_id";
     public static final String DAY = "day";
     public static final String TIME = "time";
@@ -69,7 +71,7 @@ public class TbColNames {
 
     ////topApps
     public static final String TOPAPP_ID = "topapp_id";
-   // public static final String APPNAME = "appname";
+    // public static final String APPNAME = "appname";
     public static final String APPCATEGORY = "appcategory";
 
 
@@ -84,8 +86,8 @@ public class TbColNames {
     public static final String NI_VALUE = "NI_VALUE";
 
     //// uc sql lite db helper
-   // public static final String APPNAME = "appname";
-   // private static final String DATE = "date";
+    // public static final String APPNAME = "appname";
+    // private static final String DATE = "date";
     public static final String COUNT = "count";
 
     //// profile  user
@@ -99,12 +101,21 @@ public class TbColNames {
     public static final String PHONE = "phone";
 
 
-    //charger
+    ////charger table
     public static final String CHARGERID="chargeId";
     public static final String POWERONDATE="powerOnDate";
     public static final String POWERONTIME="powerOnTime";
     public static final String POWEROFFDATE="powerOffDate";
     public static final String POWEROFFTIME="powerOffTime";
+
+    ////appusage table
+    public static final String APPUSAGEID="appUsageId";
+    //public static final String DATE="date";
+    //public static final String TIME="time";
+    //public static final String PACKAGENAME="packageName";
+    //public static final String APPNAME="appName";
+    //public static final String APPCATEGORY="appCategory";
+    public static final String USAGETIME="UsageTime";
 
     //Application count
 
@@ -116,10 +127,12 @@ public class TbColNames {
     public static final String MUSICVIDEOAPPCOUNT = "musicvideoappcount";
     public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
 
+    //Application  table
 
-
-
-    //
+    public static final String APPLICATION_ID = "applicationId";
+    //public static final String APPNAME = "appname";
+    //public static final String APPCATEGORY = "appcategory";
+    public static final String APPPACKAGE = "apppackage";
 
 
 
