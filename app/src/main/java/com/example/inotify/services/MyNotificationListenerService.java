@@ -38,6 +38,8 @@ import java.util.Locale;
 public class MyNotificationListenerService extends NotificationListenerService {
 
     String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+    String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+
 
     String pack = "";
     int nid;
@@ -437,7 +439,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-                String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+ //               String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 String appName1 = "null";
                 final String packageName1 = sbn.getPackageName();
                 PackageManager packageManager = getApplicationContext().getPackageManager();
@@ -455,7 +457,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 String packageName = sbn.getPackageName();
 
                 NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-                notificationHelper.insert(new NotificationModel(nid, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
+                notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
 
 
                 //PRASHAN end
@@ -529,24 +531,21 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
         notificationImportnaceDbHelper.close();
 
+       // String timerecived  = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+        Log.d("inotify" ,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +id);
+        Log.d("inotify " , "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +TimeRecieved);
+
+
         int notificationTotal =totalnotificationinlist ;
         String notificationRecivedTime = notificationDbHelper.recivedTimeGet(id);
         String notificationViwedTime = notificationDbHelper.viewTimeGet(id);
-        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime  );
 
         NotificationImportnaceDbHelper notificationImportnaceDbHelper1 = new NotificationImportnaceDbHelper(this);
         String Seqence = notificationImportnaceDbHelper.NotificationImportnaceGet(id);
-        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+Seqence+ "," +notificationTotal  );
 
 
         RingerModeDbHelper ringerModeDbHelperHelper = new RingerModeDbHelper(this);
         String RingerMode = ringerModeDbHelperHelper.RingerModeGet(id);
-        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode );
-
-
-//        NotificationImportnaceDbHelper notificationImportnaceDbHelper1 = new NotificationImportnaceDbHelper(this);
-//        String Seqence = notificationImportnaceDbHelper.NotificationImportnaceGet(id);
-//        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode +","+Seqence+ "," +notificationTotal  );
 
         ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
         String tablename = screenStatusDbHelper.checkAvaulability(id);
@@ -560,7 +559,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             String ScreenOffStstus = screenStatusDbHelper.ScreenOffStatusGet();
             screenStatus ="off";
         }
-        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode +","+screenStatus+ "," +notificationTotal  );
+        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode +","+screenStatus+ "," +Seqence+ "," +notificationTotal  );
 
         UserAttentivness userAttentivness = new UserAttentivness();
        // String attentivness = userAttentivness.calculateAttentivness(id ,screenStatus,RingerMode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
