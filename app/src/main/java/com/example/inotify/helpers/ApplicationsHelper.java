@@ -2,6 +2,7 @@ package com.example.inotify.helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.inotify.configs.TbColNames;
@@ -16,6 +17,7 @@ import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 public class ApplicationsHelper {
 
     private Context c1;
+
     public ApplicationsHelper(Context context)
     {
         c1=context;
@@ -176,4 +178,14 @@ public class ApplicationsHelper {
     }
 
 
+    public AppInfoModel appGet(String packageName)
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        return applicationDbHelper.appGet(packageName);
+
+    }
+
+
+    //packagename to application name
+    // package to catergory
 }

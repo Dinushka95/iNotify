@@ -116,6 +116,7 @@ public class TbColNames {
     //public static final String APPNAME="appName";
     //public static final String APPCATEGORY="appCategory";
     public static final String USAGETIME="UsageTime";
+
     //Application count
 
     public static final String APPCOUNT_ID = "account_ID";
@@ -126,10 +127,12 @@ public class TbColNames {
     public static final String MUSICVIDEOAPPCOUNT = "musicvideoappcount";
     public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
 
+    //Application  table
 
-
-
-    //
+    public static final String APPLICATION_ID = "applicationId";
+    //public static final String APPNAME = "appname";
+    //public static final String APPCATEGORY = "appcategory";
+    public static final String APPPACKAGE = "apppackage";
 
 
 

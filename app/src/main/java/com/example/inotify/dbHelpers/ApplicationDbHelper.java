@@ -24,11 +24,6 @@ import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 public class ApplicationDbHelper extends MainDbHelp {
 
 
-    public static final String APPLICATION_ID = "applicationId";
-    public static final String APPNAME = "appname";
-    public static final String APPCATEGORY = "appcategory";
-    public static final String APPPACKAGE = "APPPACKAGE";
-
 
     private  Context c1;
     public ApplicationDbHelper(Context context) {
@@ -65,6 +60,30 @@ public class ApplicationDbHelper extends MainDbHelp {
         //Log.d("list of apps", listAppInfoModels)
 
     }
+
+    public AppInfoModel appGet(String packageName)
+    {
+        AppInfoModel appInfoModel = new AppInfoModel();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " WHERE "+TbColNames.APPPACKAGE +" = \""+packageName+"\"", null);
+        if (res != null) {
+
+            if (res.moveToFirst()) {
+
+                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
+                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+                    appInfoModel.setAppCategory( res.getString(res.getColumnIndex("APPCATEGORY")));
+
+            }
+            res.close();
+        }
+
+        return appInfoModel;
+
+
+    }
+
     public boolean appInfoInsert(List<AppInfoModel> appInfo) {
 
 
@@ -75,9 +94,9 @@ public class ApplicationDbHelper extends MainDbHelp {
         ContentValues contentValues = new ContentValues();
         for (AppInfoModel value : appInfo)
         {
-            contentValues.put(APPNAME, value.getAppName());
-            contentValues.put(APPPACKAGE, value.getPakageName());
-            contentValues.put(APPCATEGORY, value.getAppCategory());
+            contentValues.put(TbColNames.APPNAME, value.getAppName());
+            contentValues.put(TbColNames.APPPACKAGE, value.getPakageName());
+            contentValues.put(TbColNames.APPCATEGORY, value.getAppCategory());
             db.insert(APPLICATIONS_TABLE, null, contentValues);
         }
 
@@ -179,7 +198,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<AppInfoModel> listAppInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -219,8 +238,6 @@ public class ApplicationDbHelper extends MainDbHelp {
         contentValues.put(TbColNames.EDUCATIONAPPCOUNT,"");
 
         db.insert(TbNames.APPCOUNT_TABLE, null, contentValues);
-
-
 
         db.close();
         return true;
