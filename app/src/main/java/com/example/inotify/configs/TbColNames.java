@@ -6,7 +6,7 @@ public class TbColNames {
     // under each table you should incrase all the table columns and comment for duplicates
 
     ////notification
-    public static final String NOTIFICATION_ID = "notification_Id";
+    public static final String NOTIFICATIONID = "notificationid";
     public static final String DATE = "date";
     public static final String TIMERECEVIED = "timeRecevied";
     public static final String TIMESENT = "timeSent";
@@ -44,7 +44,7 @@ public class TbColNames {
 
     ////screenon
     public static final String TIMEON = "timeon";
-    public static final String NOTIFICATIONID = "notificationid";
+    //public static final String NOTIFICATIONID = "notificationid";
 
     //ScrennOff
     public static final String TIMEOFF = "timeoff";
@@ -74,11 +74,6 @@ public class TbColNames {
     // public static final String APPNAME = "appname";
     public static final String APPCATEGORY = "appcategory";
 
-
-    //// notification all notifications
-    public static final String N_ID = "N_ID";
-    public static final String N_APPNAME = "N_APPNAME";
-    public static final String N_DATETIME = "N_DATETIME";
 
 
     //// notification importance value
