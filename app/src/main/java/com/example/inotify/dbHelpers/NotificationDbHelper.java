@@ -62,11 +62,11 @@ public class NotificationDbHelper extends MainDbHelp {
 
     //Get the notification recived time  -Cha
 
-    public String recivedTimeGet(){
+    public String recivedTimeGet(String id){
         String notificationRecivedTime = new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+      //  String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         Cursor res = db.rawQuery("select TIMERECEVIED from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
         if(res !=null){
@@ -79,11 +79,11 @@ public class NotificationDbHelper extends MainDbHelp {
     }
 
 // Get the time notification was viwed
-    public String viewTimeGet(){
+    public String viewTimeGet(String id){
         String notificationViewTime = new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+        //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         Cursor res = db.rawQuery(	"select TIMEVIEW from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
         if(res !=null){
