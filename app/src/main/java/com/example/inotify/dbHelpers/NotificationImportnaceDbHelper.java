@@ -41,16 +41,18 @@ public class NotificationImportnaceDbHelper extends MainDbHelp{
 
         }
 
-        public String NotificationImportnaceGet(){
+        public String NotificationImportnaceGet(String id){
             String importanceValue = new String();
             SQLiteDatabase db = this.getReadableDatabase();
-            String id = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+           // String id = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-            Cursor res = db.rawQuery("Select * from "+ TbNames.NOTIFICATIONIMPORTANCE_TABLE + "where NOTIFICATIONID =\"" + id + "\"", null );
+            Cursor res = db.rawQuery("Select *,SEQUENCEVALUE from "+ TbNames.NOTIFICATIONIMPORTANCE_TABLE + "  where NOTIFICATIONIID =\"" + id + "\"", null );
             if(res != null)
             {
                 if(res.moveToFirst()){
-                    return res.getString(1);
+                    return res.getString(3);
+                    //return res.getString(res.getColumnIndex(TbColNames.SEQUENCEVALUE));
+
                 }
                 res.close();
             }
