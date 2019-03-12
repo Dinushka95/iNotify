@@ -22,6 +22,7 @@ public class MainUsercharacteristics {
         long appListCountFixedvalue =75; // move it to main entr point and make it a static variable
 
         long appUsageCountAvg = UC_DbHelper.appUsageAverage_get();
+        Log.d("inotify","bbb");
         long appListCountAvg = UC_DbHelper.applistAverage_get();
         long contactCountAvg = UC_DbHelper.contactsAverage_get();
         long screenTimeCountAvg = UC_DbHelper.screentimeAverage_get();

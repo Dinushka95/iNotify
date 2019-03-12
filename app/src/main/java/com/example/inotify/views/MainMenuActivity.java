@@ -29,6 +29,7 @@ import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
 
 import com.example.inotify.helpers.TopAppsHelper;
+import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
@@ -253,6 +254,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testMihitha(View view) {
+       // Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
         TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
         List<AppInfoModel> topgamingapp = topAppsHelper.topAppGaming();
 
@@ -307,9 +309,13 @@ public class MainMenuActivity extends AppCompatActivity {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
         applicationDbHelper.appCategoryCount();
 
+        UC_CalenderEvent uc_calenderEvent = new UC_CalenderEvent();
+        uc_calenderEvent.getcalanderEventCount(this);
+
     }
 
     public void testChaya(View view) {
+
     }
 
     public void testPrashan(View view) {
