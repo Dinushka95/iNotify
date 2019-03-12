@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-import com.example.inotify.configs.AppcategoriesConstants;
+import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.AppUsageModel;
 
@@ -70,7 +70,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     }
 
 
-    public int appsUsageTodayGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageTodayGet(AppCategoriesConstants appcategoriesConstants) {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \""+appcategoriesConstants+"\"", null);
@@ -85,7 +85,7 @@ public class AppUsageDbHelper extends MainDbHelp {
         return 0;
     }
 
-    public int appsUsageAvgGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageAvgGet(AppCategoriesConstants appcategoriesConstants) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " APPCATEGORY = \""+appcategoriesConstants+"\"", null);
         int total = 0;
