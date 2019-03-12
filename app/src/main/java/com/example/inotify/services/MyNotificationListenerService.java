@@ -562,9 +562,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode +","+screenStatus+ "," +Seqence+ "," +notificationTotal  );
 
         UserAttentivness userAttentivness = new UserAttentivness();
-       // String attentivness = userAttentivness.calculateAttentivness(id ,screenStatus,RingerMode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
-       // String attentivness = userAttentivness.calculateAttentivness(id ,screenStatus,RingerMode ,notificationViwedTime ,notificationRecivedTime ,Seqence ,notificationTotal);
-
+        double attentivnessValue = userAttentivness.calculateAttentivness(id , screenStatus ,RingerMode,notificationViwedTime ,notificationRecivedTime ,Seqence ,notificationTotal);
+       Log.d("inotify" ,"attentivness per notification" + attentivnessValue);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
            /* for (StatusBarNotification notification : notificationManager1) {
