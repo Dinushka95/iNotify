@@ -8,16 +8,18 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +27,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.inotify.R;
@@ -34,7 +35,6 @@ import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
-
 import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.AppInfoModel;
@@ -43,6 +43,7 @@ import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
 import com.example.inotify.services.NV_NotificationViewabilityService;
 import com.example.inotify.services.UC_all_service;
+import com.example.inotify.viewControllers.MainMenuPagerAdapter;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
@@ -50,7 +51,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity implements
+        TabAllNotificationsFragment.OnFragmentInteractionListener,
+        TabApplicationFragment.OnFragmentInteractionListener,
+        TabDashBoardFragment.OnFragmentInteractionListener,
+        TabSmartNotificationFragment.OnFragmentInteractionListener,
+        TabUserCharacteristicsFragment.OnFragmentInteractionListener{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -141,13 +147,45 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+     //   Toolbar toolbar = findViewById(R.id.toolbar);
+      //  setSupportActionBar(toolbar);
+
+
+
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Dashboard"));
+        tabLayout.addTab(tabLayout.newTab().setText("Smart Notification"));
+        tabLayout.addTab(tabLayout.newTab().setText("All Notification"));
+        tabLayout.addTab(tabLayout.newTab().setText("Applications"));
+        tabLayout.addTab(tabLayout.newTab().setText("UC"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
+
+        final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
+        final MainMenuPagerAdapter adapter = new MainMenuPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         if (MyConstants.PERMISSION_CONTACTS &&
                 MyConstants.PERMISSION_LOCATION &&
@@ -326,11 +364,6 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
 
-    public void button_notificationHistory(View view) {
-        Intent intent = new Intent(MainMenuActivity.this, NotificationHistoryActivity.class);
-        startActivity(intent);
-
-    }
 
 
     public void button_userprofile(View view) {
@@ -413,6 +446,11 @@ public class MainMenuActivity extends AppCompatActivity {
     public void testCategory(View view) {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
         applicationDbHelper.updateCategory();
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

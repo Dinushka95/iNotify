@@ -28,7 +28,6 @@
         <activity android:name=".views.UserAttentivenessActivity" />
         <activity android:name=".views.UsercharacteristicsActivity" />
         <activity android:name=".views.UserProfileActivity" />
-        <activity android:name=".views.NotificationHistoryActivity" />
         <activity
             android:name=".views.MainStartPermissionActivity"
             android:theme="@style/AppTheme.Launcher">
