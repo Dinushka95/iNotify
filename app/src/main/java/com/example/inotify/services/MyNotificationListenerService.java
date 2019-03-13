@@ -456,7 +456,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 String packageName = sbn.getPackageName();
 
                 NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-                notificationHelper.insert(new NotificationModel(nid, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
+                notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
 
 
                 //PRASHAN end

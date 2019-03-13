@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.UserAttentivenessActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TableLayout
+        android:layout_margin="15dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="#f1f1f1"
+        >
+
+        <TableRow
+            android:background="#f1f1f1">
+
+            <!--<TextView android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="NID"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"/>-->
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AppName"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attentivness"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+
+        </TableRow>
+        <TableRow>
+            <!--<TextView android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#ffffff"-->
+            <!--android:text="Notification id"-->
+            <!--android:id="@+id/nid"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center"/>-->
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:text="Appname"
+                android:id="@+id/application"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:text="Attentivness"
+                android:id="@+id/attentivness"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
