@@ -1,10 +1,6 @@
 package com.example.inotify.helpers;
 
 import android.util.Log;
-
-import com.example.inotify.dbHelpers.NotificationDbHelper;
-import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
-import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.services.MyNotificationListenerService;
 
 public class UserAttentivness extends MyNotificationListenerService {

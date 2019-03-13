@@ -21,7 +21,6 @@ import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
-import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.helpers.FeedbackYesIntent;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
@@ -574,8 +573,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
         String application = notificationDbHelper2.AppnameGet(id);
         Log.d("inotifyC " ,"Attentivness appname"  + application);
 
-        UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-        userAttentivnessDbHelper.UserAttentivnessInsert(id,application,attentivnessvalue);
+        //UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+        //userAttentivnessDbHelper.UserAttentivnessInsert(id,application,attentivnessvalue);
         Log.d("inotifyC " ,"Attentivness successfully inserted"  +id + ","+application+  ", " + attentivnessvalue);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
