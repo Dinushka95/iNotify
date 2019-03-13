@@ -4,17 +4,10 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
-import android.app.usage.UsageStats;
-import android.app.usage.UsageStatsManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -25,18 +18,15 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.dbHelpers.MainDbHelp;
-import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
-
 import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.AppInfoModel;
-import com.example.inotify.models.AppUsageModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
@@ -45,8 +35,6 @@ import com.example.inotify.services.UC_all_service;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -128,10 +116,10 @@ public class MainMenuActivity extends AppCompatActivity {
         int resultCode2 = scheduler2.schedule(info2);
 
 
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver mReceiver = new All_ScreenLock();
-        registerReceiver(mReceiver, intentFilter);
+       /// IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+       // intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+       // BroadcastReceiver mReceiver = new All_ScreenLock();
+      //  registerReceiver(mReceiver, intentFilter);
 
 
       /*  //run isPhoneLockedOrNot method
@@ -322,6 +310,10 @@ public class MainMenuActivity extends AppCompatActivity {
 
         //applicationsHelper.saveCurrentPhoneApps();
         //for insert the apps to database
+
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        appUsageHelper.saveTodaysAppUsage();
+
     }
 
     public void testChaya(View view) {
@@ -337,8 +329,16 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testCategory(View view) {
-      ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-      applicationDbHelper.updateCategory();
+      //ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+      //applicationDbHelper.updateCategory();
+
+      AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+      appUsageHelper.appAllUsageAvgGet();
+      appUsageHelper.appAllUsageTodayGet();
+      appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
+      appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
+
+
 
     }
 }

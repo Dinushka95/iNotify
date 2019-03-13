@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
+import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.services.MyNotificationListenerService;
 
 public class UserAttentivness extends MyNotificationListenerService {
@@ -17,8 +18,10 @@ public class UserAttentivness extends MyNotificationListenerService {
     public double calculateAttentivness(String id, String screenstatus ,String RingerMode , String Viewtime , String RecivedTime , String Sequence,int notificationTotal )
     {
         double attentiivness = 0;
-//        get the total number of notifications in the notification bar
-//        devide by two and categorise
+        Log.d("inotifyC " ,"Attentivness id"  + id);
+        String  Id = id;
+
+        double Attentivnes = 0.0;
         int seqenceAvg  = (notificationTotal)/2;
         int notificationSequence =   Integer.parseInt(Sequence);
         int timeViewed = Integer.parseInt(Viewtime);
@@ -29,6 +32,17 @@ public class UserAttentivness extends MyNotificationListenerService {
         double delayWeight = 0;
         double seqenceWeight =  Double.parseDouble(Sequence);
         double seqencemp =0;
+
+
+        Log.d("inotifyx" , "RingerMode " +RingerMode);
+        Log.d("inotifyx" , "RecivedTime " +RecivedTime);
+        Log.d("inotifyx" , "Viewtime " +Viewtime);
+        Log.d("inotifyx" , "screenstatus " +screenstatus);
+        Log.d("inotifyx" , "Sequence " +Sequence);
+        Log.d("inotifyx" , "notificationTotal " +notificationTotal);
+
+        // if(notificationSequence <= seqenceAvg )
+        if(RingerMode.equals("normal") )
 
 
         Log.d("inotifyx" , "RingerMode" +RingerMode);
@@ -58,11 +72,13 @@ public class UserAttentivness extends MyNotificationListenerService {
 
 
 
+
                     }
                     else
                     {
                         STweight =0;
                         Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
+
 
                     }
                 }
@@ -136,12 +152,7 @@ public class UserAttentivness extends MyNotificationListenerService {
                 {
                     delayWeight=1;
                     if(screenstatus =="off")
-                    {
                         STweight =1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
-                    }
-
                     else
                     {
                         STweight =0;
@@ -281,24 +292,18 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         //locked
                         STweight = 0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         //unlocked
                         STweight =0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                 }
 
             }
-            Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
         }
 
-        double Attentivnes = (0.113* RMWeight*0.5) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+         Attentivnes = (0.113* RMWeight*0.5) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
         Log.d("notify " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
         Log.d("inotifyC" ,"Attentiivness final value = " +Attentivnes );
 
