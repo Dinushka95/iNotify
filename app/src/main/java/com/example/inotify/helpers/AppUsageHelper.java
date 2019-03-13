@@ -65,7 +65,6 @@ public class AppUsageHelper {
         return appUsageHelper.insert(appUsageModelList);
     }
 
-
     public int appsUsageTodayGet(AppCategoriesConstants appcategoriesConstants) {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
         return appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants);
