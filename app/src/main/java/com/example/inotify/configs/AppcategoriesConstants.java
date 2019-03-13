@@ -1,6 +1,5 @@
 package com.example.inotify.configs;
-
-public class AppcategoriesConstants {
+public class AppCategoriesConstants {
 
     public static String SOCIAL = "social";
     public static String MUSICVIDEO = "musicvideo";

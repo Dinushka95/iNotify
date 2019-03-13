@@ -21,6 +21,7 @@ import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
+import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.helpers.FeedbackYesIntent;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
@@ -36,6 +37,8 @@ import java.util.Locale;
 public class MyNotificationListenerService extends NotificationListenerService {
 
     String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+    String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+
 
     String pack = "";
     int nid;
@@ -435,7 +438,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-                String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+ //               String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 String appName1 = "null";
                 final String packageName1 = sbn.getPackageName();
                 PackageManager packageManager = getApplicationContext().getPackageManager();
@@ -453,7 +456,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 String packageName = sbn.getPackageName();
 
                 NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-                notificationHelper.insert(new NotificationModel(nid, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
+                notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
 
 
                 //PRASHAN end
@@ -527,24 +530,25 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
         notificationImportnaceDbHelper.close();
 
+       // String timerecived  = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+        Log.d("inotify" ,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +id);
+        Log.d("inotify " , "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +TimeRecieved);
+
+
         int notificationTotal =totalnotificationinlist ;
         String notificationRecivedTime = notificationDbHelper.recivedTimeGet(id);
         String notificationViwedTime = notificationDbHelper.viewTimeGet(id);
-        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime  );
+        Log.d("inotifyC" , "Viwed Time " +notificationViwedTime );
+        Log.d("inotifyC" , "Viwed Time " +id );
 
         NotificationImportnaceDbHelper notificationImportnaceDbHelper1 = new NotificationImportnaceDbHelper(this);
         String Seqence = notificationImportnaceDbHelper.NotificationImportnaceGet(id);
-        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+Seqence+ "," +notificationTotal  );
+        Log.d("inotifyC" , "Seqence Time " +Seqence );
 
 
         RingerModeDbHelper ringerModeDbHelperHelper = new RingerModeDbHelper(this);
         String RingerMode = ringerModeDbHelperHelper.RingerModeGet(id);
-        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode );
-
-
-//        NotificationImportnaceDbHelper notificationImportnaceDbHelper1 = new NotificationImportnaceDbHelper(this);
-//        String Seqence = notificationImportnaceDbHelper.NotificationImportnaceGet(id);
-//        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode +","+Seqence+ "," +notificationTotal  );
+        Log.d("inotifyC" , "RingerMode " +RingerMode );
 
         ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
         String tablename = screenStatusDbHelper.checkAvaulability(id);
@@ -558,12 +562,21 @@ public class MyNotificationListenerService extends NotificationListenerService {
             String ScreenOffStstus = screenStatusDbHelper.ScreenOffStatusGet();
             screenStatus ="off";
         }
-        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode +","+screenStatus+ "," +notificationTotal  );
+        Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode +","+screenStatus+ "," +Seqence+ "," +notificationTotal  );
 
         UserAttentivness userAttentivness = new UserAttentivness();
-       // String attentivness = userAttentivness.calculateAttentivness(id ,screenStatus,RingerMode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
-       // String attentivness = userAttentivness.calculateAttentivness(id ,screenStatus,RingerMode ,notificationViwedTime ,notificationRecivedTime ,Seqence ,notificationTotal);
+        double attentivnessvalue = 0.0;
+        attentivnessvalue = userAttentivness.calculateAttentivness(id , screenStatus ,RingerMode,notificationViwedTime ,notificationRecivedTime ,Seqence ,notificationTotal);
+       Log.d("inotifyC" ,"attentivness per notification" + attentivnessvalue);
 
+
+        NotificationDbHelper notificationDbHelper2 = new NotificationDbHelper(this);
+        String application = notificationDbHelper2.AppnameGet(id);
+        Log.d("inotifyC " ,"Attentivness appname"  + application);
+
+        UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+        userAttentivnessDbHelper.UserAttentivnessInsert(id,application,attentivnessvalue);
+        Log.d("inotifyC " ,"Attentivness successfully inserted"  +id + ","+application+  ", " + attentivnessvalue);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
            /* for (StatusBarNotification notification : notificationManager1) {

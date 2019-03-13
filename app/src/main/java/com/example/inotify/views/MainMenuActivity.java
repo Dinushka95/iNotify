@@ -18,13 +18,12 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.inotify.R;
-import com.example.inotify.configs.AppcategoriesConstants;
+import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
-
 import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.AppInfoModel;
@@ -336,12 +335,10 @@ public class MainMenuActivity extends AppCompatActivity {
       AppUsageHelper appUsageHelper = new AppUsageHelper(this);
       appUsageHelper.appAllUsageAvgGet();
       appUsageHelper.appAllUsageTodayGet();
-      appUsageHelper.appsUsageAvgGet(AppcategoriesConstants.SOCIAL);
-      appUsageHelper.appsUsageTodayGet(AppcategoriesConstants.SOCIAL);
+      appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
+      appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
 
 
 
     }
-
-
 }
