@@ -43,16 +43,6 @@ public class UserAttentivness extends MyNotificationListenerService {
 
         // if(notificationSequence <= seqenceAvg )
         if(RingerMode.equals("normal") )
-
-
-        Log.d("inotifyx" , "RingerMode" +RingerMode);
-        Log.d("inotifyx" , "Viewtime" +Viewtime);
-        Log.d("inotifyx" , "screenstatus" +screenstatus);
-        Log.d("inotifyx" , "Sequence" +Sequence);
-        Log.d("inotifyx" , "notificationTotal" +notificationTotal);
-
-        // if(notificationSequence <= seqenceAvg )
-        if(RingerMode.equals("normal") )
         {
             RMWeight =0.3333;
             Log.d("inotifyx" , "RingerMode" +RMWeight);
@@ -67,18 +57,10 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         STweight =1;
 
-                        Log.d("notify" , "hjkhjkkhjkh");
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
-
-
-
                     }
                     else
                     {
                         STweight =0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
 
                     }
                 }
@@ -89,15 +71,11 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         //locked , importnace not given , seqebncy High
                         STweight =1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
 
                     }
                     else
                     {
                         STweight =0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                         //unlocked , importnace not given , seqebncy High
                     }
                 }
@@ -111,14 +89,10 @@ public class UserAttentivness extends MyNotificationListenerService {
                     if(screenstatus =="off")
                     {
                         STweight = 1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         STweight = 0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                 }
                 else
@@ -127,14 +101,10 @@ public class UserAttentivness extends MyNotificationListenerService {
                     if(screenstatus =="locked")
                     {
                         STweight = 1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         STweight = 0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
 
                     }
                 }
@@ -152,12 +122,13 @@ public class UserAttentivness extends MyNotificationListenerService {
                 {
                     delayWeight=1;
                     if(screenstatus =="off")
+                    {
                         STweight =1;
+                    }
+
                     else
                     {
                         STweight =0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                 }
                 else
@@ -167,15 +138,11 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         //locked , importnace not given , seqebncy High
                         STweight =1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         //unlocked , importnace not given , seqebncy High
                         STweight =0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
 
                     }
                 }
@@ -189,15 +156,11 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         //locked
                         STweight = 1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         //unlocked
                         STweight=0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                 }
                 else
@@ -207,15 +170,11 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         //locked
                         STweight= 1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         //unlocked
                         STweight =0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                 }
 
@@ -235,15 +194,11 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         //locked , importnace given , seqebncy low
                         STweight =1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         //unlocked
                         STweight =0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                 }
                 else
@@ -253,14 +208,10 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         //locked , importnace not given , seqebncy High
                         STweight =0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         //unlocked , importnace not given , seqebncy High
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                         STweight =0;
                     }
                 }
@@ -274,15 +225,11 @@ public class UserAttentivness extends MyNotificationListenerService {
                     {
                         //locked
                         STweight = 1;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                     else
                     {
                         //unlocked
                         STweight = 0;
-                        Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-
                     }
                 }
                 else
@@ -301,15 +248,16 @@ public class UserAttentivness extends MyNotificationListenerService {
                 }
 
             }
+            Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
+
         }
 
-         Attentivnes = (0.113* RMWeight*0.5) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+         Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
         Log.d("notify " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
         Log.d("inotifyC" ,"Attentiivness final value = " +Attentivnes );
 
 
-
-        return attentiivness;
+        return Attentivnes  ;
     }
 }
 

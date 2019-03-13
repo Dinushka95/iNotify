@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.helpers.ApplicationsHelper;

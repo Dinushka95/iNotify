@@ -88,7 +88,6 @@ public class NotificationDbHelper extends MainDbHelp {
         //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         Cursor res = db.rawQuery(	"select * from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATIONID =\"" + id + "\"",null);
-        Cursor res = db.rawQuery(	"select * from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
                 return res.getString(3);
