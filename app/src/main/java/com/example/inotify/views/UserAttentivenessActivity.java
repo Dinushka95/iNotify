@@ -1,5 +1,6 @@
 package com.example.inotify.views;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,4 +13,9 @@ public class UserAttentivenessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_attentiveness);
     }
+
+//    public void ViewData(){
+//        SQLiteDatabase db = this.getReadableDataBase();
+//
+//    }
 }

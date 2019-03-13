@@ -24,6 +24,8 @@
 
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".views.MainMenuActivity" />
+        <activity android:name=".UserAttentivness"></activity>
+        <activity android:name=".views.MainMenuActivity" />
         <activity android:name=".views.NotificationViewabilityActivity" />
         <activity android:name=".views.UserAttentivenessActivity" />
         <activity android:name=".views.UsercharacteristicsActivity" />

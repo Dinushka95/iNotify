@@ -21,6 +21,7 @@ import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
+import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.helpers.FeedbackYesIntent;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
@@ -537,13 +538,17 @@ public class MyNotificationListenerService extends NotificationListenerService {
         int notificationTotal =totalnotificationinlist ;
         String notificationRecivedTime = notificationDbHelper.recivedTimeGet(id);
         String notificationViwedTime = notificationDbHelper.viewTimeGet(id);
+        Log.d("inotifyC" , "Viwed Time " +notificationViwedTime );
+        Log.d("inotifyC" , "Viwed Time " +id );
 
         NotificationImportnaceDbHelper notificationImportnaceDbHelper1 = new NotificationImportnaceDbHelper(this);
         String Seqence = notificationImportnaceDbHelper.NotificationImportnaceGet(id);
+        Log.d("inotifyC" , "Seqence Time " +Seqence );
 
 
         RingerModeDbHelper ringerModeDbHelperHelper = new RingerModeDbHelper(this);
         String RingerMode = ringerModeDbHelperHelper.RingerModeGet(id);
+        Log.d("inotifyC" , "RingerMode " +RingerMode );
 
         ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
         String tablename = screenStatusDbHelper.checkAvaulability(id);
@@ -560,8 +565,18 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("attentiv" , notificationRecivedTime + " ," +notificationViwedTime+","+RingerMode +","+screenStatus+ "," +Seqence+ "," +notificationTotal  );
 
         UserAttentivness userAttentivness = new UserAttentivness();
-        double attentivnessValue = userAttentivness.calculateAttentivness(id , screenStatus ,RingerMode,notificationViwedTime ,notificationRecivedTime ,Seqence ,notificationTotal);
-       Log.d("inotify" ,"attentivness per notification" + attentivnessValue);
+        double attentivnessvalue = 0.0;
+        attentivnessvalue = userAttentivness.calculateAttentivness(id , screenStatus ,RingerMode,notificationViwedTime ,notificationRecivedTime ,Seqence ,notificationTotal);
+       Log.d("inotifyC" ,"attentivness per notification" + attentivnessvalue);
+
+
+        NotificationDbHelper notificationDbHelper2 = new NotificationDbHelper(this);
+        String application = notificationDbHelper2.AppnameGet(id);
+        Log.d("inotifyC " ,"Attentivness appname"  + application);
+
+        UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+        userAttentivnessDbHelper.UserAttentivnessInsert(id,application,attentivnessvalue);
+        Log.d("inotifyC " ,"Attentivness successfully inserted"  +id + ","+application+  ", " + attentivnessvalue);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
            /* for (StatusBarNotification notification : notificationManager1) {
