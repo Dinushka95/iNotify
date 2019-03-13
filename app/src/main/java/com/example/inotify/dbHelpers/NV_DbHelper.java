@@ -128,29 +128,55 @@ public class NV_DbHelper extends MainDbHelp {
 
         return String.valueOf(value.charAt(length - 1));
     }
-
-    String[] ans = new String[30];
     //PRASHAN
-public String[] display_prob() {
+    String[] ans = new String[200];
+    //PRASHAN
+    public String[] display_prob() {
 
-    SQLiteDatabase db = this.getReadableDatabase();
-    Cursor cursor = db.rawQuery("select probability_id,time,day,probability from " + NV_PROBABILITY_TABLE, null);
-    if (cursor != null) {
-        while (cursor.moveToNext()) {
-            ans[1] = cursor.getString(0);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select probability_id,time,day,probability from " + NV_PROBABILITY_TABLE, null);
+        if (cursor != null) {
+            int count2 =1;
+            while (cursor.moveToNext()) {
+
+                for(int count =0; count<4 ; count++){
+                    ans[count2] = cursor.getString(count);
+
+                    count2 = count2 +1;
+                }
+            /*ans[1] = cursor.getString(0);
             ans[2] = cursor.getString(1);
             ans[3] = cursor.getString(2);
-            ans[4] = cursor.getString(3);
+            ans[4] = cursor.getString(3);*/
 
-            Log.d("cursor", "display_prob: " +cursor.getString(1));
+                Log.d("cursor", "display_prob: " +cursor.getString(1));
 
+
+            }
+            ans[0] = Integer.toString(count2);
 
         }
-
+        return ans;
     }
-    return ans;
-}
 
+    public boolean probability_Update(int ticker){
+
+        Log.d("ticker", "probability_Update: "+ ticker);
+        int count2 = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor count = db.rawQuery("select probability_id, viewor from " + NV_PROBABILITY_TABLE+ "where probability_id =\""+ticker+"\"",  null);
+        if (count != null) {
+            if (count.moveToFirst()) {
+                count2= count.getInt(1) +1;
+            }
+            count.close();
+        }
+
+        Log.d("Count", "probability_Update: "+count2);
+
+        Cursor cursor2 = db.rawQuery("update " + NV_PROBABILITY_TABLE + "set viewor =\"" + count2 +"\" where probability_id =" + ticker + "\"", null);
+        return true;
+    }
    /* private void getRecords() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + NV_PROBABILITY_TABLE , null);

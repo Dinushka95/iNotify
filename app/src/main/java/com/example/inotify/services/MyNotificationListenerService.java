@@ -485,6 +485,21 @@ public class MyNotificationListenerService extends NotificationListenerService {
         //chaya
         // if (sbn.getPackageName().equals("com.example.inotify")) {
 
+        //PRASHAN
+
+
+
+/*        String pack = sbn.getPackageName();
+        if(pack =="com.example.inotify") {
+            Bundle extrasremoved = sbn.getNotification().extras;
+            String removedId = extrasremoved.getString("myid");
+            Log.d("Notification ticker", "onNotificationRemoved: " + removedId);
+            NV_DbHelper proUP = new NV_DbHelper(this);
+            proUP.probability_Update(Integer.parseInt(removedId));
+
+        }*/
+
+
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-" + sbn.getPackageName());
 
         String ticker = sbn.getNotification().tickerText.toString();
