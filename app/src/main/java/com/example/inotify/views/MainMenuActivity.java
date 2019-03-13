@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;

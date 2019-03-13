@@ -3,6 +3,8 @@ package com.example.inotify.helpers;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.inotify.configs.AppCategoriesConstants;
+
 public class EquationHelper {
     private Context c1;
 
