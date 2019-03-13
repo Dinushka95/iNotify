@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
@@ -247,6 +248,36 @@ public class MainMenuActivity extends AppCompatActivity {
     public void button_usercharacteristics(View view) {
         Intent intent = new Intent(MainMenuActivity.this, UsercharacteristicsActivity.class);
         startActivity(intent);
+
+
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        appUsageHelper.appAllUsageAvgGet();
+        appUsageHelper.appAllUsageTodayGet();
+        appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
+        appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
+
+        int allAppsUsage = ( appUsageHelper.appAllUsageTodayGet() - appUsageHelper.appAllUsageAvgGet());
+        Log.d("inotify","allAppUsage------------" + allAppsUsage);
+
+        int socialAppUsage = (appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL) - appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL));
+        Log.d("inotify","socialAppUsage------------" + socialAppUsage);
+
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+        int NoofApps = applicationsHelper.appCountGet();
+        Log.d("inotify","AppCount---" + NoofApps);
+
+        int Openness = ((allAppsUsage + socialAppUsage + NoofApps)/300);
+        Log.d("inotify","Openness------" + Openness);
+
+        final TextView textViewToChange = (TextView) findViewById(R.id.allAppUsageText);
+        final TextView textViewToChange2 = (TextView) findViewById(R.id.socialAppusageText);
+        final TextView textViewToChange3 = (TextView) findViewById(R.id.NoOfAPpsText);
+        final TextView textViewToChange4 = (TextView) findViewById(R.id.openness);
+
+        textViewToChange.setText(allAppsUsage);
+        textViewToChange2.setText(socialAppUsage);
+        textViewToChange3.setText(NoofApps);
+        textViewToChange4.setText(Openness);
     }
 
     public void testMihitha(View view) {
