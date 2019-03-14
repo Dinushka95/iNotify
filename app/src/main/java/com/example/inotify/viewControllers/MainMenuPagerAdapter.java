@@ -3,6 +3,7 @@ package com.example.inotify.viewControllers;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +34,9 @@ public class MainMenuPagerAdapter extends FragmentStatePagerAdapter {
         {
 
             case 0:
-                TabAllNotificationsFragment tabAllNotificationsFragment = new TabAllNotificationsFragment();
-                return tabAllNotificationsFragment;
+                TabSmartNotificationFragment tabSmartNotificationFragment = new TabSmartNotificationFragment();
+                return tabSmartNotificationFragment;
+
             case 1:
                 TabApplicationFragment tabApplicationFragment= new TabApplicationFragment();
                 return tabApplicationFragment;
@@ -42,13 +44,23 @@ public class MainMenuPagerAdapter extends FragmentStatePagerAdapter {
                 TabDashBoardFragment tabDashBoardFragment = new TabDashBoardFragment();
                 return tabDashBoardFragment;
             case 3:
-               TabSmartNotificationFragment tabSmartNotificationFragment = new TabSmartNotificationFragment();
-                return tabSmartNotificationFragment;
+                TabAllNotificationsFragment tabAllNotificationsFragment = new TabAllNotificationsFragment();
+                return tabAllNotificationsFragment;
             case 4:
                 TabUserCharacteristicsFragment tabUserCharacteristicsFragment = new TabUserCharacteristicsFragment();
                 return tabUserCharacteristicsFragment;
             default:
                 return null;
+        }
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        if (position >= getCount()) {
+            FragmentManager manager = ((Fragment) object).getFragmentManager();
+            FragmentTransaction trans = manager.beginTransaction();
+            trans.remove((Fragment) object);
+            trans.commit();
         }
     }
 
