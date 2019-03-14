@@ -3,10 +3,8 @@ package com.example.inotify.helpers;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
-import android.text.format.DateFormat;
 import android.util.Log;
 
-import com.example.inotify.configs.AppcategoriesConstants;
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
 import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.AppUsageModel;
@@ -68,23 +66,30 @@ public class AppUsageHelper {
     }
 
 
-    public int appsUsageTodayGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageTodayGet(String appcategoriesConstants) {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        Log.d("inotify","appsUsageTodayGet......." + appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants));
         return appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants);
     }
 
-    public int appsUsageAvgGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageAvgGet(String appcategoriesConstants) {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        Log.d("inotify","appsUsageAvgGet......." + appUsageDbHelper.appsUsageAvgGet(appcategoriesConstants));
+
         return appUsageDbHelper.appsUsageAvgGet(appcategoriesConstants);
     }
 
     public int appAllUsageTodayGet() {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        Log.d("inotify","appAllUsageTodayGet......." + appUsageDbHelper.appAllUsageTodayGet());
+
         return appUsageDbHelper.appAllUsageTodayGet();
     }
 
     public int appAllUsageAvgGet() {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        Log.d("inotify","appAllUsageAvgGet......." + appUsageDbHelper.appAllUsageAvgGet());
+
         return appUsageDbHelper.appAllUsageAvgGet();
     }
 

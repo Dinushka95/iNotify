@@ -1,4 +1,4 @@
-package com.example.inotify.viewControllers;
+package com.example.inotify.viewControllers.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -50,11 +50,10 @@ public class INotifyActiveAppsAdapter extends BaseAdapter implements ListAdapter
         }
 
         //Handle TextView and display string from your list
-        TextView listItemText = (TextView) (view != null ? view.findViewById(R.id.list_item_string) : null);
+        TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position));
-
         //Handle buttons and add onClickListeners
-        Switch switchBtn = (Switch) view.findViewById(R.id.switch2);
+/*        Switch switchBtn = (Switch) view.findViewById(R.id.switch2);
 
         switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -63,8 +62,12 @@ public class INotifyActiveAppsAdapter extends BaseAdapter implements ListAdapter
                 Log.d("inotify", "app name of change"+list.get(position));
 
             }
-        });
+        });*/
 
         return view;
     }
 }
+
+
+
+

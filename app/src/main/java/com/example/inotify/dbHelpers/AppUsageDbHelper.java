@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-import com.example.inotify.configs.AppcategoriesConstants;
+import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.AppUsageModel;
 
@@ -70,13 +70,13 @@ public class AppUsageDbHelper extends MainDbHelp {
     }
 
 
-    public int appsUsageTodayGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageTodayGet(String appcategoriesConstants) {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \""+appcategoriesConstants+"\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
-                res.close();
+
                 db.close();
                 return res.getInt(res.getColumnIndex("USAGETIME"));
             }
@@ -85,9 +85,9 @@ public class AppUsageDbHelper extends MainDbHelp {
         return 0;
     }
 
-    public int appsUsageAvgGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageAvgGet(String appcategoriesConstants) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " APPCATEGORY = \""+appcategoriesConstants+"\"", null);
+        Cursor res = db.rawQuery("select SUM("+ TbColNames.USAGETIME +") as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \""+appcategoriesConstants+"\"", null);
         int total = 0;
         int count = 0;
         int avg;
@@ -117,7 +117,7 @@ public class AppUsageDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
-                res.close();
+
                 db.close();
                 return res.getInt(res.getColumnIndex("USAGETIME"));
             }

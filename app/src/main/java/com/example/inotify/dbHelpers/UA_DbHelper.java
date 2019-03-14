@@ -12,9 +12,6 @@ import java.util.Locale;
 import static com.example.inotify.configs.TbColNames.DATE;
 import static com.example.inotify.configs.TbColNames.NI_APPNAME;
 import static com.example.inotify.configs.TbColNames.NI_VALUE;
-import static com.example.inotify.configs.TbColNames.N_APPNAME;
-import static com.example.inotify.configs.TbColNames.N_DATETIME;
-import static com.example.inotify.configs.TbColNames.N_ID;
 import static com.example.inotify.configs.TbNames.UA_NI_TABLE;
 import static com.example.inotify.configs.TbNames.UA_N_TABLE;
 
@@ -24,6 +21,8 @@ public class UA_DbHelper extends MainDbHelp {
         super(context);
     }
 
+    /*
+    to be deleted
     public boolean Ninsert(Long id,String appName, Long value) {
        // Log.d("cdap", " ---Ninsert--");
         if (value == 1) {
@@ -41,7 +40,7 @@ public class UA_DbHelper extends MainDbHelp {
             else
                 return true;
         }
-    }
+    }*/
 
     public String NValueGet(String id) {
         //Log.d("cdap", " ---NValueGet--");

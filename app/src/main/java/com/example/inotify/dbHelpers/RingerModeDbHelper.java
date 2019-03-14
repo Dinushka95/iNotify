@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.inotify.configs.TbColNames;
+import com.example.inotify.configs.TbNames;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +39,7 @@ public class RingerModeDbHelper extends MainDbHelp {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-        String time = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
+        String time = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
 
         Calendar cal = Calendar.getInstance();
         cal.set(Integer.valueOf(new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date())),
@@ -65,18 +68,20 @@ public class RingerModeDbHelper extends MainDbHelp {
 
     }
 
-    public String  RingerModeGet(){
+    public String  RingerModeGet(String id){
         String ringermode= new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+      //  String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
 
-        Cursor res = db.rawQuery("select * from " + UA_RINGERMODE_TABLE +" where RM_NOTIFICATIONID =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.UA_RINGERMODE_TABLE+" where RM_NOTIFICATIONID =\"" + id + "\"", null);
         if(res != null)
         {
             if(res.moveToFirst()){
-                return res.getString(1);
+                Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"+String.valueOf(res.getColumnIndex(TbColNames.RM_RINGERMODE)));
+                return res.getString(5);
+                //return res.getString(res.getColumnIndex(TbColNames.RM_RINGERMODE));
             }
             res.close();
         }

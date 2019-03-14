@@ -1,14 +1,11 @@
-package com.example.inotify.viewControllers;
+package com.example.inotify.viewControllers.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
 import android.widget.ListAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.inotify.R;
