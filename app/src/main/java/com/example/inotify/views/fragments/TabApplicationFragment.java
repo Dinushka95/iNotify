@@ -7,11 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
+
 
 import com.example.inotify.R;
 import com.example.inotify.viewControllers.INotifyActiveAppsLogic;
 import com.example.inotify.viewControllers.adapters.INotifyActiveAppsAdapter;
+
+
 
 import java.util.ArrayList;
 
@@ -24,6 +29,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class TabApplicationFragment extends Fragment {
+
+    private CheckedChangeCallback callback = null;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,6 +72,9 @@ public class TabApplicationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
@@ -83,6 +94,15 @@ public class TabApplicationFragment extends Fragment {
         //handle listview and assign adapter
         ListView listView = (ListView) rootView.findViewById(R.id.listv);
         listView.setAdapter(inotifyActiveAppsAdapter);
+
+        Switch switch2 =(Switch) getView().findViewById(R.id.switch2);
+        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                callback.onCheckedChanged(isChecked);
+            }
+        });
        return  rootView;
     }
 
@@ -102,12 +122,17 @@ public class TabApplicationFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+        if (context instanceof CheckedChangeCallback) {
+            this.callback = (CheckedChangeCallback) context;
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        callback=null;
+
     }
 
     /**
@@ -124,4 +149,10 @@ public class TabApplicationFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    public interface CheckedChangeCallback {
+        void onCheckedChanged(boolean isChecked);
+    }
+
+
+
 }

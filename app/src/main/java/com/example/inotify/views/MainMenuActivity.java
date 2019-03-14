@@ -56,7 +56,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MainMenuActivity extends AppCompatActivity implements
+public class MainMenuActivity extends AppCompatActivity implements TabApplicationFragment.CheckedChangeCallback,
         TabAllNotificationsFragment.OnFragmentInteractionListener,
         TabApplicationFragment.OnFragmentInteractionListener,
         TabDashBoardFragment.OnFragmentInteractionListener,
@@ -65,6 +65,7 @@ public class MainMenuActivity extends AppCompatActivity implements
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+
 
 
     @Override
@@ -462,5 +463,9 @@ public class MainMenuActivity extends AppCompatActivity implements
 
     }
 
+    @Override
+    public void onCheckedChanged(boolean isChecked) {
+        Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx");
+    }
 }
 
