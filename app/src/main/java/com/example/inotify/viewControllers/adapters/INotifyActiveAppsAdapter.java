@@ -1,4 +1,4 @@
-package com.example.inotify.viewControllers;
+package com.example.inotify.viewControllers.adapters;
 
 import android.content.Context;
 import android.util.Log;

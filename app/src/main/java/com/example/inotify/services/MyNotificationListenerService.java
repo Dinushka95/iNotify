@@ -21,7 +21,6 @@ import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
-import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.helpers.FeedbackYesIntent;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
@@ -438,7 +437,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-                String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+ //               String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 String appName1 = "null";
                 final String packageName1 = sbn.getPackageName();
                 PackageManager packageManager = getApplicationContext().getPackageManager();
@@ -545,6 +544,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
         notificationImportnaceDbHelper.close();
 
+       // String timerecived  = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+        Log.d("inotify" ,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +id);
+        Log.d("inotify " , "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +TimeRecieved);
+
+
         int notificationTotal =totalnotificationinlist ;
         String notificationRecivedTime = notificationDbHelper.recivedTimeGet(id);
         String notificationViwedTime = notificationDbHelper.viewTimeGet(id);
@@ -584,8 +588,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
         String application = notificationDbHelper2.AppnameGet(id);
         Log.d("inotifyC " ,"Attentivness appname"  + application);
 
-        UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-        userAttentivnessDbHelper.UserAttentivnessInsert(id,application,attentivnessvalue);
+        //UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+        //userAttentivnessDbHelper.UserAttentivnessInsert(id,application,attentivnessvalue);
         Log.d("inotifyC " ,"Attentivness successfully inserted"  +id + ","+application+  ", " + attentivnessvalue);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

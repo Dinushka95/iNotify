@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.views.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,24 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.example.inotify.R;
-import com.example.inotify.viewControllers.NotificationHistoryAdapter;
-import com.example.inotify.viewControllers.NotificationHistoryLogic;
-
-import java.util.ArrayList;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link NotificationHistorySNSFragment.OnFragmentInteractionListener} interface
+ * {@link TabAllNotificationsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link NotificationHistorySNSFragment#newInstance} factory method to
+ * Use the {@link TabAllNotificationsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotificationHistorySNSFragment extends Fragment {
+public class TabAllNotificationsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,7 +30,7 @@ public class NotificationHistorySNSFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public NotificationHistorySNSFragment() {
+    public TabAllNotificationsFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +40,11 @@ public class NotificationHistorySNSFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NotificationHistorySNSFragment.
+     * @return A new instance of fragment TabAllNotificationsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NotificationHistorySNSFragment newInstance(String param1, String param2) {
-        NotificationHistorySNSFragment fragment = new NotificationHistorySNSFragment();
+    public static TabAllNotificationsFragment newInstance(String param1, String param2) {
+        TabAllNotificationsFragment fragment = new TabAllNotificationsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,14 +52,13 @@ public class NotificationHistorySNSFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
-
         }
     }
 
@@ -73,22 +66,7 @@ public class NotificationHistorySNSFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //generate list
-        NotificationHistoryLogic notificationHistoryLogic = new NotificationHistoryLogic(getContext());
-
-        ArrayList<String> list = new ArrayList<String>();
-        list =notificationHistoryLogic.getNotificationList();
-
-        //instantiate custom adapter
-        NotificationHistoryAdapter notificationHistoryAdapter = new NotificationHistoryAdapter(list,getContext());
-
-        View rootView = inflater.inflate(R.layout.fragment_notificationhistorysns, container, false);
-
-        //handle listview and assign adapter
-        ListView lView = (ListView) rootView.findViewById(R.id.listview);
-        lView.setAdapter(notificationHistoryAdapter);
-
-        return lView;
+        return inflater.inflate(R.layout.fragment_tab_all_notifications, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

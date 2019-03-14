@@ -4,25 +4,35 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
-import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.helpers.AppUsageHelper;
+import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.TopAppsHelper;
@@ -33,6 +43,12 @@ import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
 import com.example.inotify.services.NV_NotificationViewabilityService;
 import com.example.inotify.services.UC_all_service;
+import com.example.inotify.viewControllers.adapters.MainMenuPagerAdapter;
+import com.example.inotify.views.fragments.TabAllNotificationsFragment;
+import com.example.inotify.views.fragments.TabApplicationFragment;
+import com.example.inotify.views.fragments.TabDashBoardFragment;
+import com.example.inotify.views.fragments.TabSmartNotificationFragment;
+import com.example.inotify.views.fragments.TabUserCharacteristicsFragment;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
@@ -40,7 +56,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity implements
+        TabAllNotificationsFragment.OnFragmentInteractionListener,
+        TabApplicationFragment.OnFragmentInteractionListener,
+        TabDashBoardFragment.OnFragmentInteractionListener,
+        TabSmartNotificationFragment.OnFragmentInteractionListener,
+        TabUserCharacteristicsFragment.OnFragmentInteractionListener{
+
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
 
     @Override
@@ -54,6 +78,121 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
+        drawerLayout = findViewById(R.id.main_layout);
+ /*        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            // set item as selected to persist highlight
+
+            switch (menuItem.getItemId()){
+                case R.id.nav_b_pendingnotifications:
+                    Toast.makeText(MainMenuActivity.this,"clicked ac1",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.nav_b_smart_notifications:
+                    Toast.makeText(MainMenuActivity.this,"clicked ac2",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.nav_b_userattention:
+                    Intent intent = new Intent(MainMenuActivity.this, UserAttentivenessActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.nav_b_usercharacteristics:
+                    Intent intent2 = new Intent(MainMenuActivity.this, UsercharacteristicsActivity.class);
+                    startActivity(intent2);
+                    break;
+                case R.id.nav_b_notificationviewability:
+                    Intent intent4 = new Intent(MainMenuActivity.this, NotificationViewabilityActivity.class);
+                    startActivity(intent4);
+                    break;
+                case R.id.nav_b_settings:
+                    Intent intent1 = new Intent(MainMenuActivity.this, SettingsActivity.class);
+                    startActivity(intent1);
+                    break;
+                case R.id.nav_b_exit:
+                    Toast.makeText(MainMenuActivity.this,"clicked ac7",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+
+
+            menuItem.setChecked(true);
+
+            // close drawer when item is tapped
+            drawerLayout.closeDrawers();
+
+            // Add code here to update the UI based on the item selected
+            // For example, swap UI fragments here
+
+            return true;
+        });
+
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View view, float v) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View view) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View view) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int i) {
+
+            }
+        });
+
+     //   Toolbar toolbar = findViewById(R.id.toolbar);
+      //  setSupportActionBar(toolbar);
+
+
+
+        TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Dashboard"));
+        tabLayout.addTab(tabLayout.newTab().setText("Smart Notification"));
+        tabLayout.addTab(tabLayout.newTab().setText("All Notification"));
+        tabLayout.addTab(tabLayout.newTab().setText("Applications"));
+        tabLayout.addTab(tabLayout.newTab().setText("UserCharacteristics"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+
+
+        final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
+        final MainMenuPagerAdapter adapter = new MainMenuPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         if (MyConstants.PERMISSION_CONTACTS &&
                 MyConstants.PERMISSION_LOCATION &&
@@ -62,14 +201,27 @@ public class MainMenuActivity extends AppCompatActivity {
                 MyConstants.PERMISSION_NOTIFICATIONACCESS &&
                 MyConstants.PERMISSION_USEAGEACCESS) {
             tt();
-        }else {
-            Toast.makeText(getApplicationContext(),"You Have Not Given Proper Access Permission.Please give Permission",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
         }
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-    public void tt(){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+
+
+    public void tt() {
 
         // check if your profile exises
         // if true load that profile
@@ -117,10 +269,10 @@ public class MainMenuActivity extends AppCompatActivity {
         int resultCode2 = scheduler2.schedule(info2);
 
 
-       /// IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-       // intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-       // BroadcastReceiver mReceiver = new All_ScreenLock();
-      //  registerReceiver(mReceiver, intentFilter);
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        BroadcastReceiver mReceiver = new All_ScreenLock();
+        registerReceiver(mReceiver, intentFilter);
 
 
       /*  //run isPhoneLockedOrNot method
@@ -219,119 +371,61 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
 
-    public void button_settings(View view) {
-        Intent intent = new Intent(MainMenuActivity.this, SettingsActivity.class);
-        startActivity(intent);
-    }
 
-    public void button_notificationHistory(View view) {
-        Intent intent = new Intent(MainMenuActivity.this, NotificationHistoryActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void button_userattentiveness(View view) {
-        Intent intent = new Intent(MainMenuActivity.this, UserAttentivenessActivity.class);
-        startActivity(intent);
-    }
-
-    public void button_notificationviewability(View view) {
-        Intent intent = new Intent(MainMenuActivity.this, NotificationViewabilityActivity.class);
-        startActivity(intent);
-    }
 
     public void button_userprofile(View view) {
         Intent intent = new Intent(MainMenuActivity.this, UserProfileActivity.class);
         startActivity(intent);
     }
 
-    public void button_usercharacteristics(View view) {
-        Intent intent = new Intent(MainMenuActivity.this, UsercharacteristicsActivity.class);
-        startActivity(intent);
 
-
-        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-        appUsageHelper.appAllUsageAvgGet();
-        appUsageHelper.appAllUsageTodayGet();
-        appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
-        appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
-
-        int allAppsUsage = ( appUsageHelper.appAllUsageTodayGet() - appUsageHelper.appAllUsageAvgGet());
-        Log.d("inotify","allAppUsage------------" + allAppsUsage);
-
-        int socialAppUsage = (appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL) - appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL));
-        Log.d("inotify","socialAppUsage------------" + socialAppUsage);
-
-        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-        int NoofApps = applicationsHelper.appCountGet();
-        Log.d("inotify","AppCount---" + NoofApps);
-
-        int Openness = ((allAppsUsage + socialAppUsage + NoofApps)/300);
-        Log.d("inotify","Openness------" + Openness);
-
-        final TextView textViewToChange = (TextView) findViewById(R.id.allAppUsageText);
-        final TextView textViewToChange2 = (TextView) findViewById(R.id.socialAppusageText);
-        final TextView textViewToChange3 = (TextView) findViewById(R.id.NoOfAPpsText);
-        final TextView textViewToChange4 = (TextView) findViewById(R.id.openness);
-
-        textViewToChange.setText(allAppsUsage);
-        textViewToChange2.setText(socialAppUsage);
-        textViewToChange3.setText(NoofApps);
-        textViewToChange4.setText(Openness);
-    }
 
     public void testMihitha(View view) {
-       // Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
+        // Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
         TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
         List<AppInfoModel> topgamingapp = topAppsHelper.topAppGaming();
 
-        for (AppInfoModel value : topgamingapp)
-        {
-            Log.d("inotify","gaming top apps - " + value.getAppName());
+        for (AppInfoModel value : topgamingapp) {
+            Log.d("inotify", "gaming top apps - " + value.getAppName());
         }
 
         //TopAppsHelper topAppsHelper2 = new TopAppsHelper(view.getContext());
 
         List<AppInfoModel> topCommunicationApp = topAppsHelper.topAppCommunication();
-        for (AppInfoModel value : topCommunicationApp)
-        {
-            Log.d("inotify","communication top apps - " + value.getAppName());
+        for (AppInfoModel value : topCommunicationApp) {
+            Log.d("inotify", "communication top apps - " + value.getAppName());
         }
 
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(view.getContext());
         List<AppInfoModel> myGamingApp = applicationsHelper.myGamingAppGet();
-        for(AppInfoModel value : myGamingApp)
-        {
-            Log.d("inotify","my gaming apps - " + value.getAppName());
+        for (AppInfoModel value : myGamingApp) {
+            Log.d("inotify", "my gaming apps - " + value.getAppName());
         }
 
         int gamingCount = applicationsHelper.commonGamingAppCount();
-        Log.d("inotify","gaming count - " + gamingCount);
+        Log.d("inotify", "gaming count - " + gamingCount);
 
         List<AppInfoModel> myCommunicationApp = applicationsHelper.myCommunicationAppGet();
 
-        for(AppInfoModel value : myCommunicationApp)
-        {
-            Log.d("inotify","my Communication apps - " + value.getAppName());
+        for (AppInfoModel value : myCommunicationApp) {
+            Log.d("inotify", "my Communication apps - " + value.getAppName());
         }
 
         int communicationCount = applicationsHelper.commonCommunicationAppCount();
-        Log.d("inotify","Communication count - " + communicationCount);
+        Log.d("inotify", "Communication count - " + communicationCount);
 
         List<AppInfoModel> topMusicVideoApp = topAppsHelper.topAppMusicVideo();
-        for(AppInfoModel value : topMusicVideoApp)
-        {
-            Log.d("inotify","top music and video apps - " + value.getAppName());
+        for (AppInfoModel value : topMusicVideoApp) {
+            Log.d("inotify", "top music and video apps - " + value.getAppName());
         }
 
         List<AppInfoModel> myMusicVideoApp = applicationsHelper.myMusicVideoAppGet();
-        for(AppInfoModel value : myMusicVideoApp)
-        {
-            Log.d("inotify","my music apps - " +value.getAppName());
+        for (AppInfoModel value : myMusicVideoApp) {
+            Log.d("inotify", "my music apps - " + value.getAppName());
         }
 
         int MusicVideoCount = applicationsHelper.commonMusicVideoAppCount();
-        Log.d("inotify","MusicVideoCount count - " + MusicVideoCount);
+        Log.d("inotify", "MusicVideoCount count - " + MusicVideoCount);
 
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
         applicationDbHelper.appCategoryCount();
@@ -341,10 +435,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
         //applicationsHelper.saveCurrentPhoneApps();
         //for insert the apps to database
-
-        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-        appUsageHelper.saveTodaysAppUsage();
-
     }
 
     public void testChaya(View view) {
@@ -356,20 +446,20 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void testDinu(View view) {
-
+        Intent intent = new Intent(MainMenuActivity.this, MainMenuActivity.class);
+        startActivity(intent);
     }
 
     public void testCategory(View view) {
-      //ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-      //applicationDbHelper.updateCategory();
-
-      AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-      appUsageHelper.appAllUsageAvgGet();
-      appUsageHelper.appAllUsageTodayGet();
-      appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
-      appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
-
-
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+        applicationDbHelper.updateCategory();
 
     }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
 }
+

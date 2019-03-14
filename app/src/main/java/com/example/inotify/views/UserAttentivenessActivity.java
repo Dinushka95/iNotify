@@ -31,8 +31,6 @@ public class UserAttentivenessActivity extends AppCompatActivity {
         textViewToChange3.setText(list[3]);
     }
 
-
-
 //    public void ViewData(){
 //        SQLiteDatabase db = this.getReadableDataBase();
 //
