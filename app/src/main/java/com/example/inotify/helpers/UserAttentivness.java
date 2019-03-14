@@ -302,7 +302,8 @@ public class UserAttentivness extends MyNotificationListenerService {
         Log.d("inotifyC" ,"Attentiivness final value = " +Attentivnes );
 
 
-        return Attentivnes  ;
+
     }
-}
+        return Attentivnes  ;
+    }}
 
