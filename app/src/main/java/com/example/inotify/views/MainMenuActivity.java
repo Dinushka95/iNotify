@@ -87,6 +87,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // set item as selected to persist highlight
 
@@ -114,7 +115,7 @@ public class MainMenuActivity extends AppCompatActivity implements
                     startActivity(intent1);
                     break;
                 case R.id.nav_b_exit:
-                    Toast.makeText(MainMenuActivity.this,"clicked ac7",Toast.LENGTH_SHORT).show();
+                    System.exit(0);
                     break;
             }
 

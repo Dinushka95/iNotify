@@ -7,8 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.inotify.R;
+import com.example.inotify.viewControllers.INotifyActiveAppsLogic;
+import com.example.inotify.viewControllers.adapters.INotifyActiveAppsAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,10 +67,25 @@ public class TabApplicationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //generate list
+        INotifyActiveAppsLogic activity_inotify_activite_apps =new INotifyActiveAppsLogic(getContext());
+
+        ArrayList<String> list = new ArrayList<String>();
+        list =activity_inotify_activite_apps.getApplicationList();
+
+
+        //instantiate custom adapter
+        INotifyActiveAppsAdapter inotifyActiveAppsAdapter = new INotifyActiveAppsAdapter(list, getContext());
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab_application, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tab_application, container, false);
+        //handle listview and assign adapter
+        ListView lView = (ListView) rootView.findViewById(R.id.listv);
+        lView.setAdapter(inotifyActiveAppsAdapter);
+        return lView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

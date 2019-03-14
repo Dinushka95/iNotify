@@ -89,7 +89,6 @@
         </receiver>
 
         <activity android:name=".views.SettingsActivity" />
-        <activity android:name=".views.INotifiyActiviteAppsActivity" />
     </application>
 
 </manifest>
