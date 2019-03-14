@@ -27,4 +27,8 @@ public class NotificationHelper {
         return notificationDbHelper.allAppInfoGet();
 
     }
+    public List<NotificationModel> allGet(){
+        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(c1);
+        return notificationDbHelper.allGet();
+    }
 }

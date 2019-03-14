@@ -84,9 +84,9 @@ public class TabSmartNotificationFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_tab_smart_notification, container, false);
 
         //handle listview and assign adapter
-        ListView lView = (ListView) rootView.findViewById(R.id.listview);
-        lView.setAdapter(notificationHistoryAdapter);
-        return lView;
+        ListView listView = (ListView) rootView.findViewById(R.id.listview);
+        listView.setAdapter(notificationHistoryAdapter);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

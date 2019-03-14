@@ -62,8 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void button_INotifyActiveApps(View view) {
-        Intent intent = new Intent(SettingsActivity.this, INotifiyActiviteAppsActivity.class);
-        startActivity(intent);
+
     }
 
 
