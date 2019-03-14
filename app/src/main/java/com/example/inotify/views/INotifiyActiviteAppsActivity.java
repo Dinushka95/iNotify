@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.inotify.R;
-import com.example.inotify.viewControllers.INotifyActiveAppsAdapter;
 import com.example.inotify.viewControllers.INotifyActiveAppsLogic;
+import com.example.inotify.viewControllers.adapters.INotifyActiveAppsAdapter;
 
 import java.util.ArrayList;
 

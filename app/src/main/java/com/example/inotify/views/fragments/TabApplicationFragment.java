@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.views.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,23 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.example.inotify.R;
-import com.example.inotify.viewControllers.NotificationHistoryAdapter;
-import com.example.inotify.viewControllers.NotificationHistoryLogic;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TabSmartNotificationFragment.OnFragmentInteractionListener} interface
+ * {@link TabApplicationFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TabSmartNotificationFragment#newInstance} factory method to
+ * Use the {@link TabApplicationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TabSmartNotificationFragment extends Fragment {
+public class TabApplicationFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,7 +30,7 @@ public class TabSmartNotificationFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TabSmartNotificationFragment() {
+    public TabApplicationFragment() {
         // Required empty public constructor
     }
 
@@ -45,11 +40,11 @@ public class TabSmartNotificationFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TabSmartNotificationFragment.
+     * @return A new instance of fragment TabApplicationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TabSmartNotificationFragment newInstance(String param1, String param2) {
-        TabSmartNotificationFragment fragment = new TabSmartNotificationFragment();
+    public static TabApplicationFragment newInstance(String param1, String param2) {
+        TabApplicationFragment fragment = new TabApplicationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -70,23 +65,7 @@ public class TabSmartNotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        // Inflate the layout for this fragment
-        //generate list
-        NotificationHistoryLogic notificationHistoryLogic = new NotificationHistoryLogic(getContext());
-
-        ArrayList<String> list = new ArrayList<String>();
-        list =notificationHistoryLogic.getNotificationList();
-
-        //instantiate custom adapter
-        NotificationHistoryAdapter notificationHistoryAdapter = new NotificationHistoryAdapter(list,getContext());
-
-        View rootView = inflater.inflate(R.layout.fragment_tab_smart_notification, container, false);
-
-        //handle listview and assign adapter
-        ListView lView = (ListView) rootView.findViewById(R.id.listview);
-        lView.setAdapter(notificationHistoryAdapter);
-        return lView;
+        return inflater.inflate(R.layout.fragment_tab_application, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

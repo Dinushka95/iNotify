@@ -43,7 +43,12 @@ import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
 import com.example.inotify.services.NV_NotificationViewabilityService;
 import com.example.inotify.services.UC_all_service;
-import com.example.inotify.viewControllers.MainMenuPagerAdapter;
+import com.example.inotify.viewControllers.adapters.MainMenuPagerAdapter;
+import com.example.inotify.views.fragments.TabAllNotificationsFragment;
+import com.example.inotify.views.fragments.TabApplicationFragment;
+import com.example.inotify.views.fragments.TabDashBoardFragment;
+import com.example.inotify.views.fragments.TabSmartNotificationFragment;
+import com.example.inotify.views.fragments.TabUserCharacteristicsFragment;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
@@ -157,7 +162,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         tabLayout.addTab(tabLayout.newTab().setText("Smart Notification"));
         tabLayout.addTab(tabLayout.newTab().setText("All Notification"));
         tabLayout.addTab(tabLayout.newTab().setText("Applications"));
-        tabLayout.addTab(tabLayout.newTab().setText("UC"));
+        tabLayout.addTab(tabLayout.newTab().setText("UserCharacteristics"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         ActionBar actionbar = getSupportActionBar();
@@ -174,6 +179,8 @@ public class MainMenuActivity extends AppCompatActivity implements
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+
+
             }
 
             @Override
@@ -453,4 +460,6 @@ public class MainMenuActivity extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 }
+
