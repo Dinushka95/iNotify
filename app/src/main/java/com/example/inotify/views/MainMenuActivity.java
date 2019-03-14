@@ -87,6 +87,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // set item as selected to persist highlight
 

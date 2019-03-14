@@ -8,8 +8,13 @@ import android.widget.TextView;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.models.AppInfoModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsercharacteristicsActivity extends AppCompatActivity {
 
@@ -19,6 +24,7 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_characteristics);
     }
 
+
     public void displayOpenness()
     {
         AppUsageHelper appUsageHelper = new AppUsageHelper(this);
@@ -26,6 +32,8 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
         appUsageHelper.appAllUsageTodayGet();
         appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
         appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
+
+        appUsageHelper.saveTodaysAppUsage();
 
         int allAppsUsage = ( appUsageHelper.appAllUsageTodayGet() - appUsageHelper.appAllUsageAvgGet());
         Log.d("inotify","allAppUsage------------" + allAppsUsage);
@@ -51,8 +59,35 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
         textViewToChange4.setText(""+Openness);
     }
 
+
     public void DisplayOpenness(View view) {
         this.displayOpenness();
 
+
     }
+
+    public void test1(View view) {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+//        appUsageHelper.saveTodaysAppUsage();
+
+
+
+    }
+
+    public void test2(View view) {
+
+          ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+         // applicationsHelper.saveCurrentPhoneApps();
+
+        applicationsHelper.appCountGet();
+
+//        List<AppInfoModel> apps  =  new ArrayList<AppInfoModel>();
+//        applicationsHelper.appInfoInsert(apps);
+
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+       // applicationDbHelper.updateCategory();
+
+
+    }
+
 }
