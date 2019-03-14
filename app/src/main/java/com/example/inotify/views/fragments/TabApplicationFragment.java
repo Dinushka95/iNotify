@@ -68,24 +68,22 @@ public class TabApplicationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_tab_application, container, false);
+
 
         //generate list
         INotifyActiveAppsLogic activity_inotify_activite_apps =new INotifyActiveAppsLogic(getContext());
 
         ArrayList<String> list = new ArrayList<String>();
         list =activity_inotify_activite_apps.getApplicationList();
-
-
         //instantiate custom adapter
         INotifyActiveAppsAdapter inotifyActiveAppsAdapter = new INotifyActiveAppsAdapter(list, getContext());
 
-
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_tab_application, container, false);
         //handle listview and assign adapter
-        ListView lView = (ListView) rootView.findViewById(R.id.listv);
-        lView.setAdapter(inotifyActiveAppsAdapter);
-        return lView;
+        ListView listView = (ListView) rootView.findViewById(R.id.listv);
+        listView.setAdapter(inotifyActiveAppsAdapter);
+       return  rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

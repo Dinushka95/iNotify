@@ -36,7 +36,6 @@ public class MainMenuPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 TabSmartNotificationFragment tabSmartNotificationFragment = new TabSmartNotificationFragment();
                 return tabSmartNotificationFragment;
-
             case 2:
                 TabAllNotificationsFragment tabAllNotificationsFragment = new TabAllNotificationsFragment();
                 return tabAllNotificationsFragment;
