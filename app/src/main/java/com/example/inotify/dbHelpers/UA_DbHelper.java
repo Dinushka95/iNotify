@@ -164,21 +164,7 @@ public class UA_DbHelper extends MainDbHelp {
 
     }
 
-    public boolean screenOnInsert() {
 
-        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE, date);
-        contentValues.put("TIMEON", timenow);
-        long result = db.insert(UA_NI_TABLE, null, contentValues);
-        db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
-    }
 
 
 }
