@@ -240,14 +240,18 @@ public class UserAttentivness  {
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "21" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
 
-                    } else {
+                    }
+                    else
+                    {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "22" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
 
                     }
-                } else {
+                }
+                else
+                {
                     delayWeight = 0;
                     Log.d("inotifyx", "delayWeight is " + delayWeight);
                     if (screenstatus.equals("off")) {
@@ -256,7 +260,9 @@ public class UserAttentivness  {
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "23" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
 
-                    } else {
+                    }
+                    else
+                    {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
@@ -266,31 +272,15 @@ public class UserAttentivness  {
                 }
 
             }
-         //   Log.d("notify12 ", "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+            Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
+
+         Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+        Log.d("notify " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
+        Log.d("inotifyC" ,"Attentiivness final value = " +Attentivnes );
 
 
-
-//            double rm = 0.1133;
-//            double st = 0.1190;
-//            double dw = 0.3539;
-//            double seq = 0.1936;
-//
-//
-//            Log.d("inotifyC", " RM " + rm);
-//            Log.d("inotifyC", " RM " + st);
-//            Log.d("inotifyC", " RM " + dw);
-//            Log.d("inotifyC", " RM " + seq);
-
-            Log.d("notify ", "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-
-
-
-        }
-         Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
-        Log.d("inotifyC", "Attentiivness final value = " + Attentivnes);
-
-        return Attentivnes;
 
     }
-}
+        return Attentivnes  ;
+    }}
 

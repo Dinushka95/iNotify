@@ -27,7 +27,6 @@ public class MainMenuPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        Log.d("inotify", "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD" + String.valueOf(position));
         switch (position) {
 
             case 0:
@@ -36,7 +35,6 @@ public class MainMenuPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 TabSmartNotificationFragment tabSmartNotificationFragment = new TabSmartNotificationFragment();
                 return tabSmartNotificationFragment;
-
             case 2:
                 TabAllNotificationsFragment tabAllNotificationsFragment = new TabAllNotificationsFragment();
                 return tabAllNotificationsFragment;

@@ -1,8 +1,10 @@
-package com.example.inotify.viewControllers;
+package com.example.inotify.viewControllers.logic;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+
+import com.example.inotify.models.ApplicationInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,40 +14,42 @@ public class INotifyActiveAppsLogic {
     public Context context;
 
     public INotifyActiveAppsLogic(Context c1) {
-        context=c1;
+        context = c1;
     }
 
-    public ArrayList<String> getApplicationList(){
+    public List<ApplicationInfoModel> getApplicationList() {
 
-        ArrayList<String> packageList = new ArrayList<>();
+        List<ApplicationInfoModel> packageList = new ArrayList<>();
         //get a list of installed apps.
         final PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
         for (ApplicationInfo applicationInfo : packages) {
+            ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
             String x = applicationInfo.packageName.toString();
-            packageList.add(x);
+            applicationInfoModel.setPakageName(x);
+            packageList.add(applicationInfoModel);
         }
-         // need to filter the apps to a the right apps because lot of unwanted stuff are  coming
+        // need to filter the apps to a the right apps because lot of unwanted stuff are  coming
         // only display apps which are capable of sending notifications
 
         // or only enable for apps which send notifications
         return packageList;
     }
 
-    public void createTable(){
+    public void createTable() {
 
     }
 
-    public ArrayList<String> getVales(){
+    public ArrayList<String> getVales() {
         return null;
     }
 
-    public boolean nullcheck(){
+    public boolean nullcheck() {
         return false;
     }
 
-    public void updateValue(String key, String value){
+    public void updateValue(String key, String value) {
 
     }
 

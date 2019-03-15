@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/liner"
-    tools:context=".views.NotificationViewabilityActivity">
+    tools:context=".views.views.NotificationViewabilityActivity">
 
 
    <TableLayout

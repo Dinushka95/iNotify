@@ -1,14 +1,13 @@
 package com.example.inotify.models;
 
-public class AppInfoModel {
+public class ApplicationInfoModel {
 
     private int id;
     private String appName;
     private String appCategory;
     private String pakageName;
 
-    public AppInfoModel() {
-
+    public ApplicationInfoModel() {
     }
 
     public int getId() {
@@ -26,7 +25,6 @@ public class AppInfoModel {
     public void setAppName(String appName) {
         this.appName = appName;
     }
-
 
     public String getAppCategory() {
         return appCategory;

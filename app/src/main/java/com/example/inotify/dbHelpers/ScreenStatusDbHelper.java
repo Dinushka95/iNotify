@@ -22,8 +22,8 @@ public class ScreenStatusDbHelper extends MainDbHelp {
     public ScreenStatusDbHelper(Context context) {
         super(context);
     }
-    //Insert to screenOn table
-   // String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+
+    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
     public boolean ScreenOnInsert(String id){
 
@@ -166,7 +166,6 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         return tablename;
 
     }
-
 
 
 }
