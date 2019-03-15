@@ -13,49 +13,44 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class NotificationImportnaceDbHelper extends MainDbHelp{
+public class NotificationImportnaceDbHelper extends MainDbHelp {
 
     public NotificationImportnaceDbHelper(Context context) {
         super(context);
     }
 
-    public boolean NotificationImportnaceInsert(String id , String applicationname  , int sequencevalue){
-          //  String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+    public boolean NotificationImportnaceInsert(String id, String applicationname, int sequencevalue) {
 
-            SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(TbColNames.NOTIFICATIONIID , id);
-            contentValues.put(TbColNames.APPLICATIONNAME , applicationname);
-            contentValues.put(TbColNames.SEQUENCEVALUE ,sequencevalue);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TbColNames.NOTIFICATIONIID, id);
+        contentValues.put(TbColNames.APPLICATIONNAME, applicationname);
+        contentValues.put(TbColNames.SEQUENCEVALUE, sequencevalue);
 
-        Log.d("iNotify" , "SEQUENCEVALUE " + sequencevalue );
+        Log.d("iNotify", "SEQUENCEVALUE " + sequencevalue);
 
-            long result = db.insert(TbNames.NOTIFICATIONIMPORTANCE_TABLE ,null , contentValues);
-            db.close();
-            if(result == -1)
-            {
-                return true;
+        long result = db.insert(TbNames.NOTIFICATIONIMPORTANCE_TABLE, null, contentValues);
+        db.close();
+        return result == -1;
+
+    }
+
+    public String NotificationImportnaceGet(String id) {
+
+        String importanceValue = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        // String id = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery("Select *,SEQUENCEVALUE from " + TbNames.NOTIFICATIONIMPORTANCE_TABLE + "  where NOTIFICATIONIID =\"" + id + "\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                return res.getString(3);
+
             }
-            else
-                return false;
-
+            res.close();
         }
-
-        public String NotificationImportnaceGet(){
-            String importanceValue = new String();
-            SQLiteDatabase db = this.getReadableDatabase();
-            String id = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-
-            Cursor res = db.rawQuery("Select * from "+ TbNames.NOTIFICATIONIMPORTANCE_TABLE + "where NOTIFICATIONID =\"" + id + "\"", null );
-            if(res != null)
-            {
-                if(res.moveToFirst()){
-                    return res.getString(1);
-                }
-                res.close();
-            }
-            return null;
-        }
+        return null;
+    }
 
 
 }

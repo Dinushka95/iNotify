@@ -10,9 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:foregroundGravity="right"
-        android:contentDescription="@string/close_button"
         android:background="@null"
+        android:contentDescription="@string/close_button"
+        android:foregroundGravity="right"
         android:src="@drawable/baseline_clear_black_18dp" />
 
     <android.support.v7.widget.LinearLayoutCompat
@@ -96,9 +96,9 @@
             android:id="@+id/button11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="@string/save_user_details"
-            android:layout_marginBottom="20dp"/>
+            android:text="@string/save_user_details" />
 
 
     </android.support.v7.widget.LinearLayoutCompat>

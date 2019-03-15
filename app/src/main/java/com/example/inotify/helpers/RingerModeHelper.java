@@ -5,7 +5,7 @@ import android.media.AudioManager;
 
 public class RingerModeHelper {
 
-    public String getRingerMode(Context context){
+    public String getRingerMode(Context context) {
         String ringerMode = "";
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 

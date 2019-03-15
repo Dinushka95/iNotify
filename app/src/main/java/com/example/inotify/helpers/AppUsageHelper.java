@@ -3,12 +3,10 @@ package com.example.inotify.helpers;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
-import android.text.format.DateFormat;
 import android.util.Log;
 
-import com.example.inotify.configs.AppcategoriesConstants;
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
-import com.example.inotify.models.AppInfoModel;
+import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.AppUsageModel;
 
 import java.text.SimpleDateFormat;
@@ -54,12 +52,12 @@ public class AppUsageHelper {
         for (UsageStats stat : stats) {
             AppUsageModel appUsageModel = new AppUsageModel();
 
-            AppInfoModel appInfoModel = applicationsHelper.appGet(stat.getPackageName());
+            ApplicationInfoModel applicationInfoModel = applicationsHelper.appGet(stat.getPackageName());
             appUsageModel.setDate(date);
             appUsageModel.setTime(time);
             appUsageModel.setPackageName(stat.getPackageName());
-            appUsageModel.setAppCategory(appInfoModel.getAppCategory());
-            appUsageModel.setAppName(appInfoModel.getAppName());
+            appUsageModel.setAppCategory(applicationInfoModel.getAppCategory());
+            appUsageModel.setAppName(applicationInfoModel.getAppName());
             appUsageModel.setUsageTime(String.valueOf((stat.getTotalTimeInForeground() / 1000)));
 
             appUsageModelList.add(appUsageModel);
@@ -68,23 +66,30 @@ public class AppUsageHelper {
     }
 
 
-    public int appsUsageTodayGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageTodayGet(String appcategoriesConstants) {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        Log.d("inotify","appsUsageTodayGet......." + appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants));
         return appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants);
     }
 
-    public int appsUsageAvgGet(AppcategoriesConstants appcategoriesConstants) {
+    public int appsUsageAvgGet(String appcategoriesConstants) {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        Log.d("inotify","appsUsageAvgGet......." + appUsageDbHelper.appsUsageAvgGet(appcategoriesConstants));
+
         return appUsageDbHelper.appsUsageAvgGet(appcategoriesConstants);
     }
 
     public int appAllUsageTodayGet() {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        Log.d("inotify","appAllUsageTodayGet......." + appUsageDbHelper.appAllUsageTodayGet());
+
         return appUsageDbHelper.appAllUsageTodayGet();
     }
 
     public int appAllUsageAvgGet() {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        Log.d("inotify","appAllUsageAvgGet......." + appUsageDbHelper.appAllUsageAvgGet());
+
         return appUsageDbHelper.appAllUsageAvgGet();
     }
 

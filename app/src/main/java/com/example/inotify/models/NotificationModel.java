@@ -3,7 +3,7 @@ package com.example.inotify.models;
 public class NotificationModel {
 
     private String id;
-    private String datetime;
+    private String date;
     private String timeRecevied;
     private String timeSent;
     private String timeViewed;
@@ -11,14 +11,13 @@ public class NotificationModel {
     private String packageName;
     private String smartNotification;
 
-
     public NotificationModel() {
 
     }
 
-    public NotificationModel(String id, String datetime, String timeRecevied, String timeSent, String timeVievwed, String appName, String packageName, String smartNotification){
+    public NotificationModel(String id, String date, String timeRecevied, String timeSent, String timeVievwed, String appName, String packageName, String smartNotification){
         this.id = id;
-        this.datetime = datetime;
+        this.date = date;
         this.timeRecevied = timeRecevied;
         this.timeSent = timeSent;
         this.timeViewed = timeVievwed;
@@ -35,12 +34,12 @@ public class NotificationModel {
         this.id = id;
     }
 
-    public String getDatetime() {
-        return datetime;
+    public String getDate() {
+        return date;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getTimeRecevied() {
@@ -83,7 +82,11 @@ public class NotificationModel {
         this.packageName = packageName;
     }
 
-    public String getSmartNotification() { return smartNotification; }
+    public String getSmartNotification() {
+        return smartNotification;
+    }
 
-    public void setSmartNotification(String smartNotification) {this.smartNotification = smartNotification; }
+    public void setSmartNotification(String smartNotification) {
+        this.smartNotification = smartNotification;
+    }
 }
