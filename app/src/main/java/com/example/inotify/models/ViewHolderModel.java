@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.models;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,21 +11,23 @@ import com.example.inotify.R;
 
 
 //The adapters View Holder
-public class View_Holder extends RecyclerView.ViewHolder {
+public class ViewHolderModel extends RecyclerView.ViewHolder {
 
-    CardView cv;
-    TextView title;
-    TextView description;
-    ImageView imageView;
-    Switch aSwitch;
+    public CardView cv;
+    public TextView title;
+    public TextView appid;
+    public TextView description;
+    public ImageView imageView;
+    public Switch aSwitch;
 
-    View_Holder(View itemView) {
+    public ViewHolderModel(View itemView) {
         super(itemView);
         cv = (CardView) itemView.findViewById(R.id.cardView);
         title = (TextView) itemView.findViewById(R.id.title);
+        appid = (TextView) itemView.findViewById(R.id.list_item_string);
         description = (TextView) itemView.findViewById(R.id.description);
         imageView = (ImageView) itemView.findViewById(R.id.imageView);
-        aSwitch =  (Switch) itemView.findViewById(R.id.switch1);
+        //aSwitch =  (Switch) itemView.findViewById(R.id.switch1);
     }
 
 }

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
-import com.example.inotify.models.AppInfoModel;
+import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.AppUsageModel;
 
 import java.text.SimpleDateFormat;
@@ -52,12 +52,12 @@ public class AppUsageHelper {
         for (UsageStats stat : stats) {
             AppUsageModel appUsageModel = new AppUsageModel();
 
-            AppInfoModel appInfoModel = applicationsHelper.appGet(stat.getPackageName());
+            ApplicationInfoModel applicationInfoModel = applicationsHelper.appGet(stat.getPackageName());
             appUsageModel.setDate(date);
             appUsageModel.setTime(time);
             appUsageModel.setPackageName(stat.getPackageName());
-            appUsageModel.setAppCategory(appInfoModel.getAppCategory());
-            appUsageModel.setAppName(appInfoModel.getAppName());
+            appUsageModel.setAppCategory(applicationInfoModel.getAppCategory());
+            appUsageModel.setAppName(applicationInfoModel.getAppName());
             appUsageModel.setUsageTime(String.valueOf((stat.getTotalTimeInForeground() / 1000)));
 
             appUsageModelList.add(appUsageModel);

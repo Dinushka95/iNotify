@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="192dp"
     android:background="?attr/colorPrimaryDark"
-    android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="horizontal"
     android:gravity="bottom"
-    >
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
     <ImageView
@@ -22,7 +19,7 @@
         android:scaleType="fitXY"
         android:scaleX="1.5"
         android:scaleY="1.5"
-        android:src="@drawable/baseline_album_black_18dp"/>
+        android:src="@drawable/baseline_album_black_18dp" />
 
     <TextView
         android:layout_width="125dp"

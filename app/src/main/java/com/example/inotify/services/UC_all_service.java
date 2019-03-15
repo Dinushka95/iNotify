@@ -33,7 +33,7 @@ public class UC_all_service extends JobService {
     public boolean onStartJob(JobParameters params) {
 
         getAppsInformaion(this);
-      //  getAppUsage(this);
+        //  getAppUsage(this);
         getContacts(this);
         getCallDuration(this);
         getCalenderEvent(this);
@@ -46,24 +46,13 @@ public class UC_all_service extends JobService {
         return false;
     }
 
-
     String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
     public void getAppsInformaion(Context context) {
-
-
         //get a list of installed apps.
         final PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-
         int count = 0;
-
-        /*for (ApplicationInfo packageInfo : packages) {
-            String tem = "null";//pm.getLaunchIntentForPackage(packageInfo.packageName).toString();
-
-
-        }*/
-
 
         count = packages.size();
 
@@ -71,33 +60,7 @@ public class UC_all_service extends JobService {
         UC_DbHelper.appListcount_insert(String.valueOf(count));
         UC_DbHelper.close();
 
-
     }
-
-   /* public void getAppUsage(Context context) {
-
-// delete old code and and app use
-        // need app usage permission
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        long start = calendar.getTimeInMillis();
-        long end = System.currentTimeMillis();
-        UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-        List<UsageStats> stats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, start, end);
-
-        long count = 0;
-        //  Log.v("inotify","uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
-        for (UsageStats stat : stats) {
-            count = count + stat.getTotalTimeInForeground();
-
-
-        }
-
-        UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
-        UC_DbHelper.appusagecount_insert(String.valueOf(count));
-        UC_DbHelper.close();
-    }
-*/
 
     public void getContacts(Context context) {
 
@@ -159,7 +122,7 @@ public class UC_all_service extends JobService {
             if ((cursor != null ? cursor.getCount() : 0) > 0) {
                 while (cursor.moveToNext()) {
 
-                    String dateTime = new SimpleDateFormat("yyyyMMddhhmmsss",Locale.getDefault()).format(new Date(Long.valueOf(cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)))));
+                    String dateTime = new SimpleDateFormat("yyyyMMddhhmmsss", Locale.getDefault()).format(new Date(Long.valueOf(cursor.getString(cursor.getColumnIndex(CallLog.Calls.DATE)))));
                     String number = cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER));
                     String duration = cursor.getString(cursor.getColumnIndex(CallLog.Calls.DURATION));
 
@@ -193,7 +156,6 @@ public class UC_all_service extends JobService {
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
         int count = 0;
-        //  Log.v("inotify","pppppppppppppppppppp");
 
         for (ApplicationInfo applicationInfo : packages) {
             String x = applicationInfo.packageName.toString();
@@ -205,47 +167,6 @@ public class UC_all_service extends JobService {
         UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
         //UC_DbHelper.appusagecount_insert(String.valueOf(count));
         UC_DbHelper.close();
-
     }
-//
-//    public List<String> commonSocialApps()
-//    {
-//        ApplicationsHelper applicationsHelper = new ApplicationsHelper(view.getContext());
-//        List<AppInfoModel> mySocialApps= applicationsHelper.mySocialAppGet();
-//
-//        TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
-//        List<AppInfoModel> topSocialApps = topAppsHelper.topAppSocial();
-//
-//
-//
-//
-//        int correctCount=0, incorrectCount = 0;
-////        List<String> list1MysocialApps = new ArrayList<String>(mySocialApps);
-////
-////        List<String> list2topSocialApps = new ArrayList<String>();
-//
-//        for(AppInfoModel tmp1: topSocialApps) {
-//            for(AppInfoModel tmp2: mySocialApps) {
-//                if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
-//                    List<AppInfoModel> commonSocial =
-//                            Log.d("inotify","Social apps");
-//                    for (AppInfoModel value : commonSocial)
-//                    {
-//                        Log.d("inotify",value.getAppName());
-//                        Log.d("inotify","app info");
-//                    }
-//                    correctCount++;
-//                } else {
-//                    incorrectCount++;
-//                }
-//            }
-//        }
-//
-//
-//
-//        return List<String>social ;
-//    }
-//
-//
 
 }

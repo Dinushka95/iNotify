@@ -23,19 +23,15 @@ import static com.example.inotify.configs.TbNames.UA_RINGERMODE_TABLE;
 
 public class RingerModeDbHelper extends MainDbHelp {
 
-
-
     public RingerModeDbHelper(Context context) {
         super(context);
     }
-
 
     // RingerMode table insert
     public boolean RMinsert(String id , String ringermode)
     {
         Log.d("inotify" ,"ringermode Save Started");
         Log.d("inotify " ,"RingerMode(^_^)" + ringermode + "," +id);
-
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -60,26 +56,18 @@ public class RingerModeDbHelper extends MainDbHelp {
         Log.d("inotify" ,"RM_RINGERMODE = "  +ringermode );
 
         db.close();
-        if(result == -1)
-            return false;
-        else
-            return true;
-
+        return result != -1;
 
     }
 
     public String  RingerModeGet(String id){
         String ringermode= new String();
-
         SQLiteDatabase db = this.getReadableDatabase();
-      //  String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-
 
         Cursor res = db.rawQuery("select * from " + TbNames.UA_RINGERMODE_TABLE+" where RM_NOTIFICATIONID =\"" + id + "\"", null);
         if(res != null)
         {
             if(res.moveToFirst()){
-                Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"+String.valueOf(res.getColumnIndex(TbColNames.RM_RINGERMODE)));
                 return res.getString(5);
                 //return res.getString(res.getColumnIndex(TbColNames.RM_RINGERMODE));
             }

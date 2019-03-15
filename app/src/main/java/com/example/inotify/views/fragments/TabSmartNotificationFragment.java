@@ -4,16 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.inotify.R;
-import com.example.inotify.viewControllers.NotificationHistoryLogic;
-import com.example.inotify.viewControllers.adapters.NotificationHistoryAdapter;
+import com.example.inotify.models.NotificationModel;
+import com.example.inotify.viewControllers.logic.SmartNotificationLogic;
+import com.example.inotify.listners.CustomRVItemTouchListener;
+import com.example.inotify.interfaces.RecyclerViewItemClickListener;
+import com.example.inotify.viewControllers.adapters.SmartNotificationRecyclerViewAdapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +29,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class TabSmartNotificationFragment extends Fragment {
+
+    RecyclerView recyclerView;
+    private SmartNotificationRecyclerViewAdapter adapter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,23 +77,46 @@ public class TabSmartNotificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        // Inflate the layout for this fragment
-        //generate list
-        NotificationHistoryLogic notificationHistoryLogic = new NotificationHistoryLogic(getContext());
-
-        ArrayList<String> list = new ArrayList<String>();
-        list =notificationHistoryLogic.getNotificationList();
-
-        //instantiate custom adapter
-        NotificationHistoryAdapter notificationHistoryAdapter = new NotificationHistoryAdapter(list,getContext());
 
         View rootView = inflater.inflate(R.layout.fragment_tab_smart_notification, container, false);
 
-        //handle listview and assign adapter
-        ListView listView = (ListView) rootView.findViewById(R.id.listview);
-        listView.setAdapter(notificationHistoryAdapter);
+      /*  FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.insert(0, new NotificationModel("New Movie", "Movie description","hhh","gggg","ffff","ddd","ssss","aaaa"));
+
+            }
+        });*/
+
+        SmartNotificationLogic smartNotificationLogic = new SmartNotificationLogic(getContext());
+        List<NotificationModel> data = smartNotificationLogic.getNotificationList();             //fill_with_data();
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+        adapter = new SmartNotificationRecyclerViewAdapter(data, getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        //Switch aSwitch = view.findViewById(R.id.switch2);
+
+
+        recyclerView.addOnItemTouchListener(new CustomRVItemTouchListener(this.getContext(), recyclerView, new RecyclerViewItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(getContext(), "Clicked at " + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(getContext(), "LongClicked at " + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onChangeSw(Boolean checked) {
+                Toast.makeText(getContext(), "SSSSSSSSSSSSSSSSSSS" + checked.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }));
+
         return rootView;
     }
 
@@ -127,4 +158,6 @@ public class TabSmartNotificationFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

@@ -1,7 +1,6 @@
 package com.example.inotify.services;
 
 
-
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Intent;
@@ -46,7 +45,6 @@ public class NV_LocationService extends JobService implements MyLocationUpdatesC
     }
 
 
-
     @Override
     public void onLocationUpdate(Location location) {
 
@@ -54,11 +52,11 @@ public class NV_LocationService extends JobService implements MyLocationUpdatesC
         NV_DbHelper praSqlLiteDbHelper = new NV_DbHelper(this);
         String log = String.valueOf(location.getLongitude());
         String lat = String.valueOf(location.getLatitude());
-        praSqlLiteDbHelper.location_insert(log,lat);
+        praSqlLiteDbHelper.location_insert(log, lat);
         praSqlLiteDbHelper.close();
         //send intent
         //TODO - 2  future needed for situationist upload data
-        Intent intent=new Intent();
+        Intent intent = new Intent();
         intent.setAction("xxxxxxxxxx");
         sendBroadcast(intent);
 

@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.views.views;
 
 import android.app.Dialog;
 import android.app.PendingIntent;
@@ -37,7 +37,7 @@ import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.helpers.UC_CalenderEvent;
-import com.example.inotify.models.AppInfoModel;
+import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
 import com.example.inotify.services.NV_LocationService;
@@ -52,7 +52,6 @@ import com.example.inotify.views.fragments.TabUserCharacteristicsFragment;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -62,11 +61,10 @@ public class MainMenuActivity extends AppCompatActivity implements
         TabApplicationFragment.OnFragmentInteractionListener,
         TabDashBoardFragment.OnFragmentInteractionListener,
         TabSmartNotificationFragment.OnFragmentInteractionListener,
-        TabUserCharacteristicsFragment.OnFragmentInteractionListener{
+        TabUserCharacteristicsFragment.OnFragmentInteractionListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-
 
 
     @Override
@@ -93,12 +91,12 @@ public class MainMenuActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // set item as selected to persist highlight
 
-            switch (menuItem.getItemId()){
+            switch (menuItem.getItemId()) {
                 case R.id.nav_b_pendingnotifications:
-                    Toast.makeText(MainMenuActivity.this,"clicked ac1",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainMenuActivity.this, "clicked ac1", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_b_smart_notifications:
-                    Toast.makeText(MainMenuActivity.this,"clicked ac2",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainMenuActivity.this, "clicked ac2", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_b_userattention:
                     Intent intent = new Intent(MainMenuActivity.this, UserAttentivenessActivity.class);
@@ -155,12 +153,11 @@ public class MainMenuActivity extends AppCompatActivity implements
             }
         });
 
-     //   Toolbar toolbar = findViewById(R.id.toolbar);
-      //  setSupportActionBar(toolbar);
+        //   Toolbar toolbar = findViewById(R.id.toolbar);
+        //  setSupportActionBar(toolbar);
 
 
-
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText("Dashboard"));
         tabLayout.addTab(tabLayout.newTab().setText("Smart Notification"));
         tabLayout.addTab(tabLayout.newTab().setText("All Notification"));
@@ -173,8 +170,8 @@ public class MainMenuActivity extends AppCompatActivity implements
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
 
-        final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
-        final MainMenuPagerAdapter adapter = new MainMenuPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final MainMenuPagerAdapter adapter = new MainMenuPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -223,14 +220,7 @@ public class MainMenuActivity extends AppCompatActivity implements
     }
 
 
-
     public void tt() {
-
-        // check if your profile exises
-        // if true load that profile
-        // else popup fragment to createa profile
-        // load that profile
-
 
         ActivityRecognitionClient mActivityRecognitionClient = new ActivityRecognitionClient(this);
         mActivityRecognitionClient.requestActivityUpdates(0, getActivityDetectionPendingIntent());
@@ -276,38 +266,6 @@ public class MainMenuActivity extends AppCompatActivity implements
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         BroadcastReceiver mReceiver = new All_ScreenLock();
         registerReceiver(mReceiver, intentFilter);
-
-
-      /*  //run isPhoneLockedOrNot method
-        All_ScreenLock screenLock = new All_ScreenLock();
-        Boolean screenstatus = screenLock.isPhoneLockedOrNot(this);
-        Log.d("inotify ", "ScreenStatus" + screenstatus);
-
-        if (screenstatus == false) {
-            //Save to screen on table
-            ScreenOnDbHelper screenOnDbHelper = new ScreenOnDbHelper(this);
-            String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-            screenOnDbHelper.ScreenOnInsert();
-            screenOnDbHelper.close();
-            Log.d("iNotify", "SCreen status Saved");
-
-        } else {
-            //Save to screen off table
-        }*/
-
-        // Call ringermode  method and save into UA_RINGERMODE_TABLE
-       /* RingerModeHelper ringermodeHelper = new RingerModeHelper();
-        String RingerMode = ringermodeHelper.getRingerMode(this);
-        Log.d("inotify ", "RingerMode" + RingerMode);
-
-
-        RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-        Log.d("inotify ", "RingerMode" + RingerMode + "," + id);
-
-        ringerModeDbHelper.RMinsert(id, RingerMode);
-        ringerModeDbHelper.close();
-        Log.d("inotify ", "Record Saved");*/
 
     }
 
@@ -374,56 +332,53 @@ public class MainMenuActivity extends AppCompatActivity implements
     }
 
 
-
-
     public void button_userprofile(View view) {
         Intent intent = new Intent(MainMenuActivity.this, UserProfileActivity.class);
         startActivity(intent);
     }
 
 
-
     public void testMihitha(View view) {
-        // Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
-        TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
-        List<AppInfoModel> topgamingapp = topAppsHelper.topAppGaming();
 
-        for (AppInfoModel value : topgamingapp) {
+        TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
+        List<ApplicationInfoModel> topgamingapp = topAppsHelper.topAppGaming();
+
+        for (ApplicationInfoModel value : topgamingapp) {
             Log.d("inotify", "gaming top apps - " + value.getAppName());
         }
 
         //TopAppsHelper topAppsHelper2 = new TopAppsHelper(view.getContext());
 
-        List<AppInfoModel> topCommunicationApp = topAppsHelper.topAppCommunication();
-        for (AppInfoModel value : topCommunicationApp) {
+        List<ApplicationInfoModel> topCommunicationApp = topAppsHelper.topAppCommunication();
+        for (ApplicationInfoModel value : topCommunicationApp) {
             Log.d("inotify", "communication top apps - " + value.getAppName());
         }
 
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(view.getContext());
-        List<AppInfoModel> myGamingApp = applicationsHelper.myGamingAppGet();
-        for (AppInfoModel value : myGamingApp) {
+        List<ApplicationInfoModel> myGamingApp = applicationsHelper.myGamingAppGet();
+        for (ApplicationInfoModel value : myGamingApp) {
             Log.d("inotify", "my gaming apps - " + value.getAppName());
         }
 
         int gamingCount = applicationsHelper.commonGamingAppCount();
         Log.d("inotify", "gaming count - " + gamingCount);
 
-        List<AppInfoModel> myCommunicationApp = applicationsHelper.myCommunicationAppGet();
+        List<ApplicationInfoModel> myCommunicationApp = applicationsHelper.myCommunicationAppGet();
 
-        for (AppInfoModel value : myCommunicationApp) {
+        for (ApplicationInfoModel value : myCommunicationApp) {
             Log.d("inotify", "my Communication apps - " + value.getAppName());
         }
 
         int communicationCount = applicationsHelper.commonCommunicationAppCount();
         Log.d("inotify", "Communication count - " + communicationCount);
 
-        List<AppInfoModel> topMusicVideoApp = topAppsHelper.topAppMusicVideo();
-        for (AppInfoModel value : topMusicVideoApp) {
+        List<ApplicationInfoModel> topMusicVideoApp = topAppsHelper.topAppMusicVideo();
+        for (ApplicationInfoModel value : topMusicVideoApp) {
             Log.d("inotify", "top music and video apps - " + value.getAppName());
         }
 
-        List<AppInfoModel> myMusicVideoApp = applicationsHelper.myMusicVideoAppGet();
-        for (AppInfoModel value : myMusicVideoApp) {
+        List<ApplicationInfoModel> myMusicVideoApp = applicationsHelper.myMusicVideoAppGet();
+        for (ApplicationInfoModel value : myMusicVideoApp) {
             Log.d("inotify", "my music apps - " + value.getAppName());
         }
 
@@ -463,9 +418,6 @@ public class MainMenuActivity extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-
-
 
 
 }

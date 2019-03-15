@@ -22,15 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UserAttentivness"></activity>
-        <activity android:name=".views.MainMenuActivity" />
-        <activity android:name=".views.NotificationViewabilityActivity" />
-        <activity android:name=".views.UserAttentivenessActivity" />
-        <activity android:name=".views.UsercharacteristicsActivity" />
-        <activity android:name=".views.UserProfileActivity" />
-        <activity android:name=".views.NotificationHistoryActivity" />
+        <activity android:name=".views.views.MainMenuActivity" />
+        <activity android:name=".views.views.NotificationViewabilityActivity" />
+        <activity android:name=".views.views.UserAttentivenessActivity" />
+        <activity android:name=".views.views.UsercharacteristicsActivity" />
+        <activity android:name=".views.views.UserProfileActivity" />
         <activity
-            android:name=".views.MainStartPermissionActivity"
+            android:name=".views.views.MainStartPermissionActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -87,7 +85,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".views.SettingsActivity" />
+        <activity android:name=".views.views.SettingsActivity" />
     </application>
 
 </manifest>

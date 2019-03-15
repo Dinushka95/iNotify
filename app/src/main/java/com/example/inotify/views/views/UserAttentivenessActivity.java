@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.views.views;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
@@ -19,8 +19,6 @@ import java.util.List;
 public class UserAttentivenessActivity extends AppCompatActivity {
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,31 +26,20 @@ public class UserAttentivenessActivity extends AppCompatActivity {
 
 
         UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-        String[] list  = new String[30];
+        String[] list = new String[30];
 
 
         list = userAttentivnessDbHelper.View_Attentivness();
 
         //final TextView textViewToChange = (TextView) findViewById(R.id.nid);
         final TextView textViewToChange2 = (TextView) findViewById(R.id.application);
-        final TextView textViewToChange3 = (TextView)  findViewById(R.id.attentivness);
+        final TextView textViewToChange3 = (TextView) findViewById(R.id.attentivness);
 
-       // textViewToChange.setText(list[1]);
+        // textViewToChange.setText(list[1]);
         textViewToChange2.setText(list[2]);
         textViewToChange3.setText(list[3]);
 
 
-
-
     }
-
-/*    public void ViewData(){
-        SQLiteDatabase db = this.getReadableDataBase();
-
-
-
-
-    }*/
-
 
 }

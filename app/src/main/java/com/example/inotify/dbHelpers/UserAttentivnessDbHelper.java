@@ -30,26 +30,6 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         } else return true;
     }
 
-//public String UserAttentivnessGet(){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//       // Cursor res = db.rawQuery("select ")
-//}
-
-
-
-
-
-
-
-//    public Cursor ViewData()
-//    {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String query ="select * from " + TbNames.USERATTENTIVNESS_TABLE;
-//        Cursor cursor = db.rawQuery(query,null);
-//
-//    return cursor;
-//    }
-
     String[] ans = new String[30];
 
     public String[] View_Attentivness() {
@@ -61,9 +41,8 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                 //ans[1] = cursor.getString(0);
                 ans[2] = cursor.getString(2);
                 ans[3] = cursor.getString(3);
-//                ans[4] = cursor.getString(3);
 
-                Log.d("cursor", "View_Attentivness " + cursor.getString(1));
+                //  Log.d("cursor", "View_Attentivness " + cursor.getString(1));
 
             }
 

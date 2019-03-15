@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.listners;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.inotify.interfaces.RecyclerViewItemClickListener;
 
 
 public class CustomRVItemTouchListener implements RecyclerView.OnItemTouchListener {

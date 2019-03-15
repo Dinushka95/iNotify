@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.views.views;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -31,15 +31,6 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
         ans2 = pra.display_prob();
 
-        /*final TextView textViewToChange = (TextView) findViewById(R.id.proid);
-        final TextView textViewToChange2 = (TextView) findViewById(R.id.times);
-        final TextView textViewToChange3 = (TextView) findViewById(R.id.days);
-        final TextView textViewToChange4 = (TextView) findViewById(R.id.prob);
-
-        textViewToChange.setText(ans2[1]);
-        textViewToChange2.setText(ans2[2]);
-        textViewToChange3.setText(ans2[3]);
-        textViewToChange4.setText(ans2[4]);*/
 
         display_table(ans2);
     }

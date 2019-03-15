@@ -5,16 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".views.fragments.TabApplicationFragment">
 
-    <ListView
-        android:id="@+id/listv"
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        android:divider="@null"
-        android:dividerHeight="0dp">
-    </ListView>
+        android:fitsSystemWindows="true"
+        tools:context=".views.views.MainMenuActivity">
+
+        <include layout="@layout/content_inotifyactiveapps" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </FrameLayout>
-
-
 

@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.views.views;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -26,27 +26,27 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void button_resetDb(final View view) {
 
-        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("Are You Sure To Reset Database");
         dialog.setTitle("Warning");
         dialog.setPositiveButton("YES",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        if(view.getContext().deleteDatabase(DATABASE_NAME)){
-                            Toast.makeText(getApplicationContext(),"Database Successfully Reset",Toast.LENGTH_LONG).show();
+                        if (view.getContext().deleteDatabase(DATABASE_NAME)) {
+                            Toast.makeText(getApplicationContext(), "Database Successfully Reset", Toast.LENGTH_LONG).show();
                             restartApp();
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Database Failed Reset",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Database Failed Reset", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-        dialog.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-              //  Toast.makeText(getApplicationContext(),"cancel is clicked", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(getApplicationContext(),"cancel is clicked", Toast.LENGTH_LONG).show();
             }
         });
-        AlertDialog alertDialog=dialog.create();
+        AlertDialog alertDialog = dialog.create();
         alertDialog.show();
 
 

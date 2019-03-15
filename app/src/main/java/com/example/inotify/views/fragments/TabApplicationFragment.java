@@ -3,24 +3,26 @@ package com.example.inotify.views.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 
 
 import com.example.inotify.R;
-import com.example.inotify.viewControllers.INotifyActiveAppsLogic;
-import com.example.inotify.viewControllers.adapters.INotifyActiveAppsAdapter;
+import com.example.inotify.models.ApplicationInfoModel;
+import com.example.inotify.models.NotificationModel;
+import com.example.inotify.viewControllers.adapters.INotifyActiveAppsRecyclerViewAdapter;
+import com.example.inotify.viewControllers.adapters.SmartNotificationRecyclerViewAdapter;
+import com.example.inotify.viewControllers.logic.INotifyActiveAppsLogic;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +34,8 @@ import java.util.ArrayList;
  */
 public class TabApplicationFragment extends Fragment {
 
+    RecyclerView recyclerView;
+    private INotifyActiveAppsRecyclerViewAdapter adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,17 +91,14 @@ public class TabApplicationFragment extends Fragment {
 
         //generate list
         INotifyActiveAppsLogic activity_inotify_activite_apps = new INotifyActiveAppsLogic(getContext());
-
-        ArrayList<String> list = new ArrayList<String>();
-        list = activity_inotify_activite_apps.getApplicationList();
         //instantiate custom adapter
-        INotifyActiveAppsAdapter inotifyActiveAppsAdapter = new INotifyActiveAppsAdapter(list, getContext());
 
-        //handle listview and assign adapter
-        ListView listView = (ListView) rootView.findViewById(R.id.listv);
-        listView.setAdapter(inotifyActiveAppsAdapter);
+        List<ApplicationInfoModel> data = activity_inotify_activite_apps.getApplicationList();
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview2);
+        adapter = new INotifyActiveAppsRecyclerViewAdapter(data, getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        switch2 = (Switch) rootView.findViewById(R.id.switch2);
 
         return rootView;
     }

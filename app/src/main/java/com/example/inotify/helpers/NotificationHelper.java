@@ -12,22 +12,22 @@ public class NotificationHelper {
     private Context c1;
 
     public NotificationHelper(Context context) {
-        c1=context;
+        c1 = context;
     }
 
-    public boolean insert(NotificationModel NotificationModel){
+    public boolean insert(NotificationModel NotificationModel) {
 
         NotificationDbHelper notificationDbHelper = new NotificationDbHelper(c1);
         return notificationDbHelper.insert(NotificationModel);
     }
 
-    public List<NotificationModel> allAppInfoGet()
-    {
-       NotificationDbHelper notificationDbHelper = new NotificationDbHelper(c1);
+    public List<NotificationModel> allAppInfoGet() {
+        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(c1);
         return notificationDbHelper.allAppInfoGet();
 
     }
-    public List<NotificationModel> allGet(){
+
+    public List<NotificationModel> allGet() {
         NotificationDbHelper notificationDbHelper = new NotificationDbHelper(c1);
         return notificationDbHelper.allGet();
     }
