@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.example.inotify.dbHelpers.SN_DbHelper;
 import com.example.inotify.models.SNSModel;
-import com.example.inotify.views.MainStartPermissionActivity;
+import com.example.inotify.views.views.MainStartPermissionActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -28,12 +28,10 @@ import static com.example.inotify.configs.TbNames.UC_SCREENTIME_TABLE;
 public class UC_DbHelper extends MainDbHelp {
 
 
-
     public UC_DbHelper(Context context) {
         super(context);
 
     }
-
 
 
     public boolean appListcount_insert(String count) {
@@ -49,7 +47,6 @@ public class UC_DbHelper extends MainDbHelp {
         return result != -1;
 
     }
-
 
 
     public boolean contactCount_insert(String count) {
@@ -94,7 +91,6 @@ public class UC_DbHelper extends MainDbHelp {
     }
 
 
-
     public boolean calenderEventCount_insert(String count) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
@@ -122,31 +118,12 @@ public class UC_DbHelper extends MainDbHelp {
 
     }
 
-
-
-    /*public long appUsageAverage_get() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+APPUSAGECOUNT_TABLE, null);
-        if (res != null) {
-            if ((res.moveToFirst())){
-                return res.getLong(res.getColumnIndex("avg"));
-            }
-        }
-        if (res != null) {
-            res.close();
-        }
-        db.close();
-
-        return 0;
-    }*/
-
     public long applistAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_APPLISTCOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from " + UC_APPLISTCOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
@@ -161,9 +138,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long contactsAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_CONTACTCOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from " + UC_CONTACTCOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
@@ -179,9 +156,9 @@ public class UC_DbHelper extends MainDbHelp {
 
         //TODO - need to sumation of day and the get average of that for days
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(TIME) as avg from "+UC_SCREENTIME_TABLE, null);
+        Cursor res = db.rawQuery("select avg(TIME) as avg from " + UC_SCREENTIME_TABLE, null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
@@ -194,9 +171,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long calldurationAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(TIME) as avg from "+UC_CALLDURATION_TABLE, null);
+        Cursor res = db.rawQuery("select avg(TIME) as avg from " + UC_CALLDURATION_TABLE, null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
@@ -209,9 +186,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long calendereventAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_CALENDEREVENTCOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from " + UC_CALENDEREVENTCOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
@@ -226,9 +203,9 @@ public class UC_DbHelper extends MainDbHelp {
         //TODO - need to sumation of day and the get average of that for days
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(DATE) as avg from "+TbNames.CHARGER_TABLE, null);
+        Cursor res = db.rawQuery("select count(DATE) as avg from " + TbNames.CHARGER_TABLE, null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
@@ -241,9 +218,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long applistsocialmediaAverage_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT) as avg from "+UC_APPLISTSOCIALMEDIACOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select avg(COUNT) as avg from " + UC_APPLISTSOCIALMEDIACOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }
@@ -253,29 +230,13 @@ public class UC_DbHelper extends MainDbHelp {
         return 0;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////
-
-   /* public long appUsageLast_get() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT from "+UC_USAGECOUNT_TABLE, null);
-        if (res != null) {
-            if ((res.moveToLast())){
-                return res.getLong(res.getColumnIndex("COUNT"));
-            }
-        }
-        Objects.requireNonNull(res).close();
-        db.close();
-
-        return 0;
-    }*/
 
     public long applistLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT  from "+UC_APPLISTCOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select COUNT  from " + UC_APPLISTCOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToLast())){
+            if ((res.moveToLast())) {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
@@ -288,9 +249,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long contactsLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT from "+UC_CONTACTCOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select COUNT from " + UC_CONTACTCOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToLast())){
+            if ((res.moveToLast())) {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
@@ -304,9 +265,9 @@ public class UC_DbHelper extends MainDbHelp {
 
         //TODO - need to sumation of day and the get average of that for days
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select TIME from "+UC_SCREENTIME_TABLE, null);
+        Cursor res = db.rawQuery("select TIME from " + UC_SCREENTIME_TABLE, null);
         if (res != null) {
-            if ((res.moveToLast())){
+            if ((res.moveToLast())) {
                 return res.getLong(res.getColumnIndex("TIME"));
             }
         }
@@ -319,9 +280,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long calldurationLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from "+UC_CALLDURATION_TABLE, null);
+        Cursor res = db.rawQuery("select * from " + UC_CALLDURATION_TABLE, null);
         if (res != null) {
-            if ((res.moveToLast())){
+            if ((res.moveToLast())) {
                 return res.getLong(2);
             }
         }
@@ -334,9 +295,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long calendereventLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT from "+UC_CALENDEREVENTCOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select COUNT from " + UC_CALENDEREVENTCOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToLast())){
+            if ((res.moveToLast())) {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
@@ -351,9 +312,9 @@ public class UC_DbHelper extends MainDbHelp {
         //TODO - need to sumation of day and the get average of that for days
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select DATE from "+ TbNames.CHARGER_TABLE, null);
+        Cursor res = db.rawQuery("select DATE from " + TbNames.CHARGER_TABLE, null);
         if (res != null) {
-            if ((res.moveToLast())){
+            if ((res.moveToLast())) {
                 return res.getLong(res.getColumnIndex("DATE"));
             }
         }
@@ -366,9 +327,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long applistsocialmediaLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select COUNT from "+UC_APPLISTSOCIALMEDIACOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select COUNT from " + UC_APPLISTSOCIALMEDIACOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToLast())){
+            if ((res.moveToLast())) {
                 return res.getLong(res.getColumnIndex("COUNT"));
             }
         }
@@ -381,9 +342,9 @@ public class UC_DbHelper extends MainDbHelp {
     public long applistAverageWithoutLast_get() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select avg(COUNT - 1) as avg from "+UC_APPLISTCOUNT_TABLE, null);
+        Cursor res = db.rawQuery("select avg(COUNT - 1) as avg from " + UC_APPLISTCOUNT_TABLE, null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("avg"));
             }
         }

@@ -28,7 +28,6 @@ public class NV_DbHelper extends MainDbHelp {
 
     public boolean activity_insert(String type, String confidence) {
 
-
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
         Calendar cal = Calendar.getInstance();
@@ -48,10 +47,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.CONFIDENCE, confidence);
         long result = db.insert(TbNames.NV_ACTIVITY_TABLE, null, contentValues);
         db.close();
-        if (result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public String activity_get() {
@@ -128,8 +124,10 @@ public class NV_DbHelper extends MainDbHelp {
 
         return String.valueOf(value.charAt(length - 1));
     }
+
     //PRASHAN
     String[] ans = new String[200];
+
     //PRASHAN
     public String[] display_prob() {
 
@@ -142,12 +140,8 @@ public class NV_DbHelper extends MainDbHelp {
                 for(int count =0; count<6 ; count++){
                     ans[count2] = cursor.getString(count);
 
-                    count2 = count2 +1;
+                    count2 = count2 + 1;
                 }
-            /*ans[1] = cursor.getString(0);
-            ans[2] = cursor.getString(1);
-            ans[3] = cursor.getString(2);
-            ans[4] = cursor.getString(3);*/
 
               //  Log.d("cursor", "display_prob: " +cursor.getString(1));
 
@@ -273,19 +267,19 @@ public class NV_DbHelper extends MainDbHelp {
     }
 
     public ArrayList<Double> location_get() {
-            ArrayList<Double> Al = new ArrayList();
+        ArrayList<Double> Al = new ArrayList();
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " +TbNames.NV_LOCATION_TABLE, null);
-        if (res != null ) {
+        Cursor res = db.rawQuery("select * from " + TbNames.NV_LOCATION_TABLE, null);
+        if (res != null) {
             res.moveToLast();
-            if(res.getCount()>1){
+            if (res.getCount() > 1) {
                 Al.add(Double.valueOf(res.getString(4)));
                 Al.add(Double.valueOf(res.getString(5)));
             }
 
-            if (res.getCount()==0){
+            if (res.getCount() == 0) {
                 Al.add(0.0);
                 Al.add(0.1);
             }
@@ -299,7 +293,7 @@ public class NV_DbHelper extends MainDbHelp {
 
     public boolean notificationRemove_insert() {
 
-       // String time = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+        // String time = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -328,7 +322,7 @@ public class NV_DbHelper extends MainDbHelp {
 
         String timenow = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
 
-        SimpleDateFormat df = new SimpleDateFormat("HHmm",Locale.getDefault());
+        SimpleDateFormat df = new SimpleDateFormat("HHmm", Locale.getDefault());
 
         Date d = null;
         try {
@@ -343,9 +337,9 @@ public class NV_DbHelper extends MainDbHelp {
         String timeold = df.format(cal.getTime());
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from "+TbNames.NV_LOCATION_TABLE+" WHERE TIME between \""+timeold+"\" AND \""+timenow+"\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.NV_LOCATION_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getCount();
             }
         }
@@ -376,39 +370,37 @@ public class NV_DbHelper extends MainDbHelp {
     public boolean probability_insert(String Proid,int viewOR) {
 
         Date currentTime = Calendar.getInstance().getTime();
-        Log.d("Debug", "NOW"+currentTime);
-        SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a",Locale.getDefault());
+        Log.d("Debug", "NOW" + currentTime);
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
         String currentDateTimeString = sdf.format(currentTime);
-        SimpleDateFormat hour=new SimpleDateFormat("hh",Locale.getDefault());
+        SimpleDateFormat hour = new SimpleDateFormat("hh", Locale.getDefault());
         String currentHour = hour.format(currentTime);
         Calendar cal = Calendar.getInstance();
         String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-        Log.d("Debug", "NOW"+currentHour);
-        SimpleDateFormat min=new SimpleDateFormat("mm",Locale.getDefault());
+        Log.d("Debug", "NOW" + currentHour);
+        SimpleDateFormat min = new SimpleDateFormat("mm", Locale.getDefault());
         String currentMin = min.format(currentTime);
-        Log.d("Debug", "NOW"+currentMin);
-        SimpleDateFormat AP=new SimpleDateFormat("a",Locale.getDefault());
+        Log.d("Debug", "NOW" + currentMin);
+        SimpleDateFormat AP = new SimpleDateFormat("a", Locale.getDefault());
         String currentAP = AP.format(currentTime);
-        Log.d("Debug", "NOW"+currentAP);
+        Log.d("Debug", "NOW" + currentAP);
 
         char MinOne = currentMin.charAt(0);
-        Log.d("Debug", "NOW"+MinOne);
+        Log.d("Debug", "NOW" + MinOne);
 
-        int nextMin =0;
+        int nextMin = 0;
         int nextHour = 0;
 
-        if(java.lang.Character.getNumericValue(MinOne) != 5){
-            nextMin = java.lang.Character.getNumericValue(MinOne) +1;
+        if (java.lang.Character.getNumericValue(MinOne) != 5) {
+            nextMin = java.lang.Character.getNumericValue(MinOne) + 1;
             nextHour = Integer.parseInt(currentHour);
-        }
-        else{
+        } else {
             nextMin = 0;
-            nextHour = Integer.parseInt(currentHour)+1;
+            nextHour = Integer.parseInt(currentHour) + 1;
         }
 
-
-        String TimeSlot = currentHour+":"+ MinOne+"0 - "+nextHour+":"+nextMin+"0 "+ currentAP;
-        Log.d("Debug", "TimeSlot = "+TimeSlot);
+        String TimeSlot = currentHour + ":" + MinOne + "0 - " + nextHour + ":" + nextMin + "0 " + currentAP;
+        Log.d("Debug", "TimeSlot = " + TimeSlot);
 
 
 
@@ -489,7 +481,7 @@ public class NV_DbHelper extends MainDbHelp {
         String day = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
 
-        SimpleDateFormat df = new SimpleDateFormat("HHmm",Locale.getDefault());
+        SimpleDateFormat df = new SimpleDateFormat("HHmm", Locale.getDefault());
 
         Date d = null;
         try {
@@ -508,14 +500,14 @@ public class NV_DbHelper extends MainDbHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from "+TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE+" WHERE TIME between \""+timeold+"\" AND \""+timenow+"\"AND  DAY = \""+day+"\" AND ACTIVITY = \""+activity+"\" AND LOCATION = \""+location+"\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"AND  DAY = \"" + day + "\" AND ACTIVITY = \"" + activity + "\" AND LOCATION = \"" + location + "\"", null);
         if (res != null) {
 
-            if (res.moveToFirst()){
-                do{
+            if (res.moveToFirst()) {
+                do {
                     String data = res.getString(res.getColumnIndex("BUSYORNOT"));
                     bon.add(data);
-                }while(res.moveToNext());
+                } while (res.moveToNext());
             }
             res.close();
 
@@ -525,4 +517,4 @@ public class NV_DbHelper extends MainDbHelp {
         return bon;
     }
 
-    }
+}

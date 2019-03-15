@@ -12,7 +12,7 @@ import java.util.Locale;
 
 public class UC_CalenderEvent {
 
-    public String getcalanderEventCount(Context context){
+    public String getcalanderEventCount(Context context) {
 
 
         SimpleDateFormat df = new SimpleDateFormat("yyyymmddHHmm", Locale.getDefault());
@@ -22,12 +22,8 @@ public class UC_CalenderEvent {
         cal.setTime(d);
         cal.add(Calendar.DAY_OF_MONTH, -1);
 
-        Calendar c_start= Calendar.getInstance();
+        Calendar c_start = Calendar.getInstance();
         c_start.setTime(new Date());
-        // c_start.set(year,month,day,hour,mintes);
-
-        Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(c_start.getTimeInMillis()));
-       //Log.d("inotify","DDDDDDDDDDDDDDDDDDDDddddd"+String.valueOf(cal.getTimeInMillis()));
 
         String[] proj = new String[]{
                 CalendarContract.Instances._ID,
@@ -35,13 +31,13 @@ public class UC_CalenderEvent {
                 CalendarContract.Instances.END,
                 CalendarContract.Instances.EVENT_ID};
         Cursor cursor = CalendarContract.Instances.query(context.getContentResolver(), proj, cal.getTimeInMillis(), c_start.getTimeInMillis());
-        String x ="";
+        String x = "";
         if (cursor.getCount() > 0) {
-            x= String.valueOf(cursor.getCount());
-            Log.d("inotify","Calender details"+ x);
+            x = String.valueOf(cursor.getCount());
+            Log.d("inotify", "Calender details" + x);
         }
-        Log.d("inotify","Calender details"+ x);
-       return x;
+        Log.d("inotify", "Calender details" + x);
+        return x;
 
 
     }

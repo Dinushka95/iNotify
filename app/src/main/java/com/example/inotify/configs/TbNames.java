@@ -19,7 +19,6 @@ public class TbNames {
     public static final String USERATTENTIVNESS_TABLE = "userattentivness_table";
 
 
-
     public static final String UC_APPLISTCOUNT_TABLE = "uc_applistcount_table";
     public static final String UC_CONTACTCOUNT_TABLE = "uc_contactcount_table";
     public static final String UC_SCREENTIME_TABLE = "uc_screentime_table";
