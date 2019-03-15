@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
-import com.example.inotify.models.AppInfoModel;
 import com.example.inotify.models.NotificationModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 import static com.example.inotify.configs.TbNames.NOTIFICATION_TABLE;
 
 
@@ -28,8 +26,8 @@ public class NotificationDbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TbColNames.NOTIFICATION_ID, NotificationModel.getId());
-        contentValues.put(TbColNames.DATE, NotificationModel.getDatetime());
+        contentValues.put(TbColNames.NOTIFICATIONID, NotificationModel.getId());
+        contentValues.put(TbColNames.DATE, NotificationModel.getDate());
         contentValues.put(TbColNames.TIMERECEVIED, NotificationModel.getTimeRecevied());
         contentValues.put(TbColNames.TIMESENT, NotificationModel.getTimeSent());
         contentValues.put(TbColNames.TIMEVIEW, NotificationModel.getTimeViewed());
@@ -45,7 +43,7 @@ public class NotificationDbHelper extends MainDbHelp {
 
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
-            contentValues.put(TbColNames.NOTIFICATION_ID, myNotificationId);
+            contentValues.put(TbColNames.NOTIFICATIONID, myNotificationId);
             contentValues.put(TbColNames.DATE, date);
             contentValues.put(TbColNames.PACKAGENAME, packageName);
             contentValues.put(TbColNames.TIMERECEVIED, timeRecevied);
@@ -60,10 +58,10 @@ public class NotificationDbHelper extends MainDbHelp {
 
     //Get the notification recived time  -Cha
 
-    public String recivedTimeGet(){
+    public String recivedTimeGet(String id){
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+        id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         Cursor res = db.rawQuery("select TIMERECEVIED from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
         if(res !=null){
@@ -76,11 +74,11 @@ public class NotificationDbHelper extends MainDbHelp {
     }
 
 // Get the time notification was viwed
-    public String viewTimeGet(){
+    public String viewTimeGet(String id){
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+        id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         Cursor res = db.rawQuery(	"select TIMEVIEW from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
         if(res !=null){
@@ -144,8 +142,8 @@ public class NotificationDbHelper extends MainDbHelp {
                 do {
 
                     NotificationModel notificationModel = new NotificationModel();
-                    notificationModel.setId(res.getString(res.getColumnIndex(TbColNames.NOTIFICATION_ID)));
-                    notificationModel.setDatetime(res.getString(res.getColumnIndex(TbColNames.DATE)));
+                    notificationModel.setId(res.getString(res.getColumnIndex(TbColNames.NOTIFICATIONID)));
+                    notificationModel.setDate(res.getString(res.getColumnIndex(TbColNames.DATE)));
                     notificationModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     notificationModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                     notificationModel.setSmartNotification(res.getString(res.getColumnIndex(TbColNames.SMARTNOTIFICATION)));
