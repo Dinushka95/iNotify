@@ -49,7 +49,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
 
-
+        String pid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
         String ticker = "";
         if (sbn.getNotification().tickerText != null) {
             ticker = sbn.getNotification().tickerText.toString();
@@ -63,6 +63,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
             pack = sbn.getPackageName();
+            //String pid = sbn.getNotification().tickerText.toString();
             nid = sbn.getId();
 
             Bundle extras = sbn.getNotification().extras;
@@ -111,7 +112,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             //Test
             NV_DbHelper pratest = new NV_DbHelper(this);
-            pratest.probability_insert();
+            pratest.probability_insert(pid,0);
             pratest.close();
 /*
             SharedPreferences prefs = this.getSharedPreferences("activityrecognition", MODE_PRIVATE);
@@ -485,25 +486,24 @@ public class MyNotificationListenerService extends NotificationListenerService {
         //chaya
         // if (sbn.getPackageName().equals("com.example.inotify")) {
 
+
+
         //PRASHAN
 
-
-
-/*        String pack = sbn.getPackageName();
-        if(pack =="com.example.inotify") {
-            Bundle extrasremoved = sbn.getNotification().extras;
-            String removedId = extrasremoved.getString("myid");
-            Log.d("Notification ticker", "onNotificationRemoved: " + removedId);
+        if (sbn.getPackageName().equals("com.example.inotify")){
+            String tickert = sbn.getNotification().tickerText.toString();
+            //String removedId = extrasremoved.getString("myid");
+            Log.d("Notification ticker", "onNotificationRemoved: " + tickert);
             NV_DbHelper proUP = new NV_DbHelper(this);
-            proUP.probability_Update(Integer.parseInt(removedId));
+            proUP.probability_Update(tickert);
 
-        }*/
+        }
 
 
         Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-" + sbn.getPackageName());
 
-        String ticker = sbn.getNotification().tickerText.toString();
-        Log.d("Notification ticker", "onNotificationRemoved: " + ticker);
+      //  String ticker = sbn.getNotification().tickerText.toString();
+      //  Log.d("Notification ticker", "onNotificationRemoved: " + ticker);
 
 
         //if (ticker = )
@@ -540,7 +540,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
         NotificationImportnaceDbHelper notificationImportnaceDbHelper = new NotificationImportnaceDbHelper(this);
         notificationImportnaceDbHelper.NotificationImportnaceInsert(id, PackageName, totalnotificationinlist);
 
-        Log.d("inotifyC", "Savedto notification Importnace table pname, totnotif ,ticker " + PackageName + "," + totalnotificationinlist + "," + ticker);
+        //Log.d("inotifyC", "Savedto notification Importnace table pname, totnotif ,ticker " + PackageName + "," + totalnotificationinlist + "," + ticker);
         //  Log.d("inotifyC" , "Savedto notification Importnace table ticker "+ticker );
 
         notificationImportnaceDbHelper.close();
@@ -576,7 +576,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
         UserAttentivness userAttentivness = new UserAttentivness();
         double attentivnessvalue = 0.0;
-        attentivnessvalue = userAttentivness.calculateAttentivness(id , screenStatus ,RingerMode,notificationViwedTime ,notificationRecivedTime ,Seqence ,notificationTotal);
+      //  attentivnessvalue = userAttentivness.calculateAttentivness(id , screenStatus ,RingerMode,notificationViwedTime ,notificationRecivedTime ,Seqence ,notificationTotal);
        Log.d("inotifyC" ,"attentivness per notification" + attentivnessvalue);
 
 
