@@ -52,11 +52,12 @@ import com.example.inotify.views.fragments.TabUserCharacteristicsFragment;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MainMenuActivity extends AppCompatActivity implements TabApplicationFragment.CheckedChangeCallback,
+public class MainMenuActivity extends AppCompatActivity implements
         TabAllNotificationsFragment.OnFragmentInteractionListener,
         TabApplicationFragment.OnFragmentInteractionListener,
         TabDashBoardFragment.OnFragmentInteractionListener,
@@ -463,9 +464,9 @@ public class MainMenuActivity extends AppCompatActivity implements TabApplicatio
 
     }
 
-    @Override
-    public void onCheckedChanged(boolean isChecked) {
-        Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx");
-    }
+
+
+
+
 }
 

@@ -3,7 +3,10 @@ package com.example.inotify.views.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,6 @@ import android.widget.Switch;
 import com.example.inotify.R;
 import com.example.inotify.viewControllers.INotifyActiveAppsLogic;
 import com.example.inotify.viewControllers.adapters.INotifyActiveAppsAdapter;
-
 
 
 import java.util.ArrayList;
@@ -30,7 +32,6 @@ import java.util.ArrayList;
  */
 public class TabApplicationFragment extends Fragment {
 
-    private CheckedChangeCallback callback = null;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,6 +43,8 @@ public class TabApplicationFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    Switch switch2;
 
     public TabApplicationFragment() {
         // Required empty public constructor
@@ -74,7 +77,6 @@ public class TabApplicationFragment extends Fragment {
         }
 
 
-
     }
 
     @Override
@@ -84,10 +86,10 @@ public class TabApplicationFragment extends Fragment {
 
 
         //generate list
-        INotifyActiveAppsLogic activity_inotify_activite_apps =new INotifyActiveAppsLogic(getContext());
+        INotifyActiveAppsLogic activity_inotify_activite_apps = new INotifyActiveAppsLogic(getContext());
 
         ArrayList<String> list = new ArrayList<String>();
-        list =activity_inotify_activite_apps.getApplicationList();
+        list = activity_inotify_activite_apps.getApplicationList();
         //instantiate custom adapter
         INotifyActiveAppsAdapter inotifyActiveAppsAdapter = new INotifyActiveAppsAdapter(list, getContext());
 
@@ -95,16 +97,11 @@ public class TabApplicationFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.listv);
         listView.setAdapter(inotifyActiveAppsAdapter);
 
-        Switch switch2 =(Switch) getView().findViewById(R.id.switch2);
-        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switch2 = (Switch) rootView.findViewById(R.id.switch2);
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                callback.onCheckedChanged(isChecked);
-            }
-        });
-       return  rootView;
+        return rootView;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -122,16 +119,12 @@ public class TabApplicationFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        if (context instanceof CheckedChangeCallback) {
-            this.callback = (CheckedChangeCallback) context;
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        callback=null;
 
     }
 
@@ -149,10 +142,5 @@ public class TabApplicationFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public interface CheckedChangeCallback {
-        void onCheckedChanged(boolean isChecked);
-    }
-
-
 
 }
