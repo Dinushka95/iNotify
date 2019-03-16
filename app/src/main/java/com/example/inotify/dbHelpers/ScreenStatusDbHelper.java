@@ -22,10 +22,10 @@ public class ScreenStatusDbHelper extends MainDbHelp {
     public ScreenStatusDbHelper(Context context) {
         super(context);
     }
-    //Insert to screenOn table
+
     String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
-    public boolean ScreenOnInsert(){
+    public boolean ScreenOnInsert(String id){
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String time = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
@@ -52,7 +52,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
 
     }
 
-    public boolean ScreenOffInsert(){
+    public boolean ScreenOffInsert(String id){
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String time = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
         Calendar cal = Calendar.getInstance();
@@ -166,7 +166,6 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         return tablename;
 
     }
-
 
 
 }

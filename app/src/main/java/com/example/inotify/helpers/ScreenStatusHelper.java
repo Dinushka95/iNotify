@@ -7,21 +7,17 @@ import android.content.Intent;
 
 public class ScreenStatusHelper extends BroadcastReceiver {
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
-
-
     }
 
     //Implement the function to check the screen status when a notification is delivered
-    public boolean isPhoneLockedOrNot(Context context){
-        boolean isPhoneLock =false;
-        if(context != null){
+    public boolean isPhoneLockedOrNot(Context context) {
+        boolean isPhoneLock = false;
+        if (context != null) {
             KeyguardManager myKM = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-            if(myKM != null && myKM.isKeyguardLocked()){
-                isPhoneLock =true;
-                //Log.d("inotify" , "screen type " +isPhoneLock );
+            if (myKM != null && myKM.isKeyguardLocked()) {
+                isPhoneLock = true;
             }
         }
         return isPhoneLock;

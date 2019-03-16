@@ -39,7 +39,6 @@ public class SN_DbHelper extends MainDbHelp {
 
     public boolean saveData(String id, String busyornot, String attentiviness, String usercharacteristics, String notificationtype, String appname) {
 
-        //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -90,7 +89,7 @@ public class SN_DbHelper extends MainDbHelp {
         ArrayList<SNSModel> Al = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from "+SNS_TABLE, null);
+        Cursor res = db.rawQuery("select * from " + SNS_TABLE, null);
 
         if (res != null) {
 
@@ -210,13 +209,6 @@ public class SN_DbHelper extends MainDbHelp {
             }
             res.close();
         }
-
-
-        //Log.d("inotify", "AAAAAAAAALLLLLLLLLLLLLLLLLLLLL"+Al.get(0).getDay());
-        //Log.d("inotify", "AAAAAAAAALLLLLLLLLLLLLLLLLLLLL"+Al.get(1).getDay());
-
-       // Log.d("inotify", "AAAAAAAAALLLLLLLLLLLLLLLLLLLLLlll"+Al.get(0).getTime());
-        //Log.d("inotify", "AAAAAAAAALLLLLLLLLLLLLLLLLLLLLlll"+Al.get(1).getTime());
         return Al;
 
     }

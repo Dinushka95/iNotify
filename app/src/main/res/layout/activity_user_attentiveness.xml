@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.UserAttentivenessActivity">
+    tools:context=".views.views.UserAttentivenessActivity">
 
     <TableLayout
         android:layout_margin="15dp"
@@ -64,3 +64,4 @@
     </TableLayout>
 
 </LinearLayout>
+

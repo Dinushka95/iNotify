@@ -12,7 +12,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MainAttentiviness {
 
-    public String getFinalAttentiviness(Context context,String appName){
+  /*  public String getFinalAttentiviness(Context context,String appName){
 
         if(AppUserConfigs.MainAttentiviness_DebuggerLogger) {
             Log.d("inotify", "Main-Attentiviness--Started---");
@@ -70,5 +70,5 @@ public class MainAttentiviness {
         return finalTemValue;
 
     }
-
+*/
 }

@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.views.views;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -31,15 +31,9 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
         ans2 = pra.display_prob();
 
-        /*final TextView textViewToChange = (TextView) findViewById(R.id.proid);
-        final TextView textViewToChange2 = (TextView) findViewById(R.id.times);
-        final TextView textViewToChange3 = (TextView) findViewById(R.id.days);
-        final TextView textViewToChange4 = (TextView) findViewById(R.id.prob);
+        pra.probability_query();
 
-        textViewToChange.setText(ans2[1]);
-        textViewToChange2.setText(ans2[2]);
-        textViewToChange3.setText(ans2[3]);
-        textViewToChange4.setText(ans2[4]);*/
+
 
         display_table(ans2);
     }
@@ -52,7 +46,7 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
         int count3 = 1;
 
-        for (int count = 0; count < Integer.parseInt(ansin[0]) / 4; count++) {
+        for (int count = 0; count < Integer.parseInt(ansin[0]) / 6; count++) {
             TableLayout.LayoutParams lp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
                     TableLayout.LayoutParams.WRAP_CONTENT);
             lp.setMargins(50, 10, 10, 10);
@@ -60,7 +54,7 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
             //row.setLayoutParams(lp);
             row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             row.setLayoutParams(lp);
-            for (int count2 = 0; count2 < 4; count2++) {
+            for (int count2 = 0; count2 < 6; count2++) {
                 TextView valueTV = new TextView(this);
                 valueTV.setBackgroundColor(0xdddddddd);
                 valueTV.setPadding(10, 10, 10, 10);

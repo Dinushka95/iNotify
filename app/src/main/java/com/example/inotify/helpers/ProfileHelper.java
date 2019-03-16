@@ -10,21 +10,22 @@ public class ProfileHelper {
     private Context c1;
 
     public ProfileHelper(Context context) {
-        c1=context;
+        c1 = context;
     }
 
-    public boolean insert(ProfileModel profileModel){
+    public boolean insert(ProfileModel profileModel) {
         ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
         return profileDbHelper.insert(profileModel);
     }
 
-    public ProfileModel get(){
+    public ProfileModel get() {
 
         ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
         return profileDbHelper.get();
 
     }
-    public boolean profileisExisCheck(){
+
+    public boolean profileisExisCheck() {
         ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
         return profileDbHelper.profileisExisCheck();
     }

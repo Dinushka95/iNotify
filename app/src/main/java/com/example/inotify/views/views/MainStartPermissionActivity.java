@@ -1,4 +1,4 @@
-package com.example.inotify.views;
+package com.example.inotify.views.views;
 
 import android.Manifest;
 import android.app.AlarmManager;

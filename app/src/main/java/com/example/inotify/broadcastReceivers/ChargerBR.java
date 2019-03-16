@@ -13,8 +13,7 @@ public class ChargerBR extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals(Intent.ACTION_POWER_CONNECTED))
-        {
+        if (intent.getAction().equals(Intent.ACTION_POWER_CONNECTED)) {
             ChargerHelper chargerHelper = new ChargerHelper(context);
             chargerHelper.powerOninsert();
         }

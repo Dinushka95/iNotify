@@ -1,21 +1,15 @@
 package com.example.inotify.helpers;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.inotify.configs.TbColNames;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.models.AppInfoModel;
+import com.example.inotify.models.ApplicationInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 
 public class ApplicationsHelper {
 
@@ -26,14 +20,14 @@ public class ApplicationsHelper {
         c1=context;
     }
 
-    public List<AppInfoModel> appAllGet()
+    public List<ApplicationInfoModel> appAllGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
         return applicationdbHelper.appInfoGet();
     }
 
-    public boolean appInfoInsert(List<AppInfoModel> appInfo) {
+    public boolean appInfoInsert(List<ApplicationInfoModel> appInfo) {
 
             ApplicationDbHelper applicationDbHelper =new ApplicationDbHelper(c1);
             return applicationDbHelper.appInfoInsert(appInfo);
@@ -44,18 +38,18 @@ public class ApplicationsHelper {
     public void saveCurrentPhoneApps()
     {
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(c1);
-        List<AppInfoModel> listOfApps = applicationsHelper.appAllGet();
+        List<ApplicationInfoModel> listOfApps = applicationsHelper.appAllGet();
 
 
         final PackageManager pm = c1.getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
 
-        List<AppInfoModel> list = new ArrayList<>();
+        List<ApplicationInfoModel> list = new ArrayList<>();
 
 
         for (ApplicationInfo x : packages){
-            AppInfoModel amtem = new AppInfoModel();
+            ApplicationInfoModel amtem = new ApplicationInfoModel();
             Log.d("iNotify",pm.getApplicationLabel(x).toString());
             amtem.setAppName(pm.getApplicationLabel(x).toString());
             amtem.setPakageName(x.packageName);
@@ -78,28 +72,28 @@ public class ApplicationsHelper {
         return (int) applicationdbHelper.appCountGet();
     }
 
-    public List<AppInfoModel> mySocialAppGet()
+    public List<ApplicationInfoModel> mySocialAppGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
         return applicationdbHelper.mySocialAppGet();
     }
 
-    public List<AppInfoModel> myGamingAppGet()
+    public List<ApplicationInfoModel> myGamingAppGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
         return applicationdbHelper.myGamingAppGet();
     }
 
-    public List<AppInfoModel> myCommunicationAppGet()
+    public List<ApplicationInfoModel> myCommunicationAppGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
         return applicationdbHelper.myCommunicationAppGet();
     }
 
-    public List<AppInfoModel> myMusicVideoAppGet()
+    public List<ApplicationInfoModel> myMusicVideoAppGet()
     {
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
         return applicationdbHelper.myMusicVideoAppGet();
@@ -109,23 +103,23 @@ public class ApplicationsHelper {
     public int commonSocialAppCount()
     {
 
-        List<AppInfoModel> mySocialApps= this.mySocialAppGet();
+        List<ApplicationInfoModel> mySocialApps= this.mySocialAppGet();
 
        TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
-        List<AppInfoModel> topSocialApps = topAppsHelper.topAppSocial();
+        List<ApplicationInfoModel> topSocialApps = topAppsHelper.topAppSocial();
 
 
-        List<AppInfoModel> commonSocialApps = new ArrayList<>();
-        for(AppInfoModel tmp1: topSocialApps) {
-            for(AppInfoModel tmp2: mySocialApps) {
+        List<ApplicationInfoModel> commonSocialApps = new ArrayList<>();
+        for(ApplicationInfoModel tmp1: topSocialApps) {
+            for(ApplicationInfoModel tmp2: mySocialApps) {
                 if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
-                    AppInfoModel appInfoModelT = new AppInfoModel();
-                    appInfoModelT.setAppName(tmp1.getAppName());
-                    commonSocialApps.add(appInfoModelT);}
+                    ApplicationInfoModel applicationInfoModelT = new ApplicationInfoModel();
+                    applicationInfoModelT.setAppName(tmp1.getAppName());
+                    commonSocialApps.add(applicationInfoModelT);}
             }
         }
 
-//        for (AppInfoModel xx :commonSocialApps){
+//        for (ApplicationInfoModel xx :commonSocialApps){
 //
 //            Log.d("inotify","CCCCCCCCCCCCCCCCCCCCCCCCCCCCC"+xx.getAppName());
 //        }
@@ -138,19 +132,19 @@ public class ApplicationsHelper {
     public int commonGamingAppCount()
     {
 
-        List<AppInfoModel> myGamingApps= this.mySocialAppGet();
+        List<ApplicationInfoModel> myGamingApps= this.mySocialAppGet();
 
         TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
-        List<AppInfoModel> topGamingApps = topAppsHelper.topAppSocial();
+        List<ApplicationInfoModel> topGamingApps = topAppsHelper.topAppSocial();
 
 
-        List<AppInfoModel> commonGamingApps = new ArrayList<>();
-        for(AppInfoModel tmp1: topGamingApps) {
-            for(AppInfoModel tmp2: myGamingApps) {
+        List<ApplicationInfoModel> commonGamingApps = new ArrayList<>();
+        for(ApplicationInfoModel tmp1: topGamingApps) {
+            for(ApplicationInfoModel tmp2: myGamingApps) {
                 if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
-                    AppInfoModel appInfoModelT = new AppInfoModel();
-                    appInfoModelT.setAppName(tmp1.getAppName());
-                    commonGamingApps.add(appInfoModelT);}
+                    ApplicationInfoModel applicationInfoModelT = new ApplicationInfoModel();
+                    applicationInfoModelT.setAppName(tmp1.getAppName());
+                    commonGamingApps.add(applicationInfoModelT);}
             }
         }
 
@@ -163,19 +157,19 @@ public class ApplicationsHelper {
     public int commonMusicVideoAppCount()
     {
 
-        List<AppInfoModel> myMusicVideoApps= this.myMusicVideoAppGet();
+        List<ApplicationInfoModel> myMusicVideoApps= this.myMusicVideoAppGet();
 
         TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
-        List<AppInfoModel> topMusicVideoApps = topAppsHelper.topAppMusicVideo();
+        List<ApplicationInfoModel> topMusicVideoApps = topAppsHelper.topAppMusicVideo();
 
 
-        List<AppInfoModel> commonMusicVideoApps = new ArrayList<>();
-        for(AppInfoModel tmp1: topMusicVideoApps) {
-            for(AppInfoModel tmp2: myMusicVideoApps) {
+        List<ApplicationInfoModel> commonMusicVideoApps = new ArrayList<>();
+        for(ApplicationInfoModel tmp1: topMusicVideoApps) {
+            for(ApplicationInfoModel tmp2: myMusicVideoApps) {
                 if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
-                    AppInfoModel appInfoModelT = new AppInfoModel();
-                    appInfoModelT.setAppName(tmp1.getAppName());
-                    commonMusicVideoApps.add(appInfoModelT);}
+                    ApplicationInfoModel applicationInfoModelT = new ApplicationInfoModel();
+                    applicationInfoModelT.setAppName(tmp1.getAppName());
+                    commonMusicVideoApps.add(applicationInfoModelT);}
             }
         }
 
@@ -188,19 +182,19 @@ public class ApplicationsHelper {
     public int commonCommunicationAppCount()
     {
 
-        List<AppInfoModel> myCommunicationApps= this.myCommunicationAppGet();
+        List<ApplicationInfoModel> myCommunicationApps= this.myCommunicationAppGet();
 
         TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
-        List<AppInfoModel> topCommunicationApps = topAppsHelper.topAppCommunication();
+        List<ApplicationInfoModel> topCommunicationApps = topAppsHelper.topAppCommunication();
 
 
-        List<AppInfoModel> commonCommunicationApps = new ArrayList<>();
-        for(AppInfoModel tmp1: topCommunicationApps) {
-            for(AppInfoModel tmp2: myCommunicationApps) {
+        List<ApplicationInfoModel> commonCommunicationApps = new ArrayList<>();
+        for(ApplicationInfoModel tmp1: topCommunicationApps) {
+            for(ApplicationInfoModel tmp2: myCommunicationApps) {
                 if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
-                    AppInfoModel appInfoModelT = new AppInfoModel();
-                    appInfoModelT.setAppName(tmp1.getAppName());
-                    commonCommunicationApps.add(appInfoModelT);}
+                    ApplicationInfoModel applicationInfoModelT = new ApplicationInfoModel();
+                    applicationInfoModelT.setAppName(tmp1.getAppName());
+                    commonCommunicationApps.add(applicationInfoModelT);}
             }
         }
 
@@ -211,7 +205,7 @@ public class ApplicationsHelper {
     }
 
 
-    public AppInfoModel appGet(String packageName)
+    public ApplicationInfoModel appGet(String packageName)
     {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
         return applicationDbHelper.appGet(packageName);

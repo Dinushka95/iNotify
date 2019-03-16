@@ -2,9 +2,8 @@ package com.example.inotify.helpers;
 
 import android.content.Context;
 
-import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.TopAppDbHelper;
-import com.example.inotify.models.AppInfoModel;
+import com.example.inotify.models.ApplicationInfoModel;
 
 import java.util.List;
 
@@ -21,55 +20,55 @@ public class TopAppsHelper {
     //check with pre define top apps
 
 
-public List<AppInfoModel> topAppSocial()
+public List<ApplicationInfoModel> topAppSocial()
 {
     TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
     return topAppDbHelper.topAppSocilGet();
 }
 
-    public List<AppInfoModel> topAppCommunication()
+    public List<ApplicationInfoModel> topAppCommunication()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppCommunicationGet();
     }
 
-    public List<AppInfoModel> topAppGaming()
+    public List<ApplicationInfoModel> topAppGaming()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppGamingGet();
     }
 
-    public List<AppInfoModel> topAppBusiness()
+    public List<ApplicationInfoModel> topAppBusiness()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppBusinessGet();
     }
 
-    public List<AppInfoModel> topAppDating()
+    public List<ApplicationInfoModel> topAppDating()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppDatingGet();
     }
 
-    public List<AppInfoModel> topAppEntertainment()
+    public List<ApplicationInfoModel> topAppEntertainment()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppEntertainmentGet();
     }
 
-    public List<AppInfoModel> topAppProductivity()
+    public List<ApplicationInfoModel> topAppProductivity()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppProductivityGet();
     }
 
-    public List<AppInfoModel> topAppTools()
+    public List<ApplicationInfoModel> topAppTools()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppToolGet();
     }
 
-    public List<AppInfoModel> topAppMusicVideo()
+    public List<ApplicationInfoModel> topAppMusicVideo()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
         return topAppDbHelper.topAppMusicVideoGet();

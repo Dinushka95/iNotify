@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.inotify.configs.TbNames;
-import com.example.inotify.models.AppInfoModel;
+import com.example.inotify.models.ApplicationInfoModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,28 +18,15 @@ import static com.example.inotify.configs.TbNames.TOPAPP_TABLE;
 
 public class TopAppDbHelper extends MainDbHelp {
 
-    public static final String TOPAPP_ID = "topapp_id";
-    public static final String APPNAME = "appname";
-    public static final String APPCATEGORY = "appcategory";
-    public static final String APPPACKAGE = "apppackage";
-
-
     public TopAppDbHelper(Context context) {
         super(context);
     }
 
-    //No of social media apps -- If available top apps or not
-    //No of gaming apps -- If available top apps or not
-    //No of music and video apps -- If available top apps or not
-    //No of chatting apps -- If available top apps or not
-    //check with pre define top apps
 
-//app categories - social/Messaging/
-
-    public List<AppInfoModel> topAppSocilGet() {
+    public List<ApplicationInfoModel> topAppSocilGet() {
         //Log.d("cdap", " ---NValueGet--");
 
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TbNames.TOPAPP_TABLE + " where APPCATEGORY = \"social\"", null);
@@ -49,246 +36,202 @@ public class TopAppDbHelper extends MainDbHelp {
                 do {
 
                     //SNSModel snsModel = new SNSModel();
-                    AppInfoModel appInfoModel = new AppInfoModel();
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
 
 
-                    listAppInfoModels.add(appInfoModel);
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
 
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
-    public List<AppInfoModel> topAppCommunicationGet() {
-        //Log.d("cdap", " ---NValueGet--");
+    public List<ApplicationInfoModel> topAppCommunicationGet() {
 
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
-
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        //Log.d("inotify","communication top apps -XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX1111 ");
-
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"communication\"", null);
         if (res != null) {
-           // Log.d("inotify","communication top apps -XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX2222222 ");
             if (res.moveToFirst()) {
                 do {
 
-                    AppInfoModel appInfoModel = new AppInfoModel();
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-                    Log.d("inotify","communication top apps -XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ");
-
-                    listAppInfoModels.add(appInfoModel);
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
             db.close();
         }
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
-    public List<AppInfoModel> topAppGamingGet() {
+    public List<ApplicationInfoModel> topAppGamingGet() {
         //Log.d("cdap", " ---NValueGet--");
 
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"gaming\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
-                    AppInfoModel appInfoModel = new AppInfoModel();
-
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
-                    listAppInfoModels.add(appInfoModel);
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
         db.close();
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
-    public List<AppInfoModel> topAppDatingGet() {
-        //Log.d("cdap", " ---NValueGet--");
+    public List<ApplicationInfoModel> topAppDatingGet() {
 
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"dating\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
-                    AppInfoModel appInfoModel = new AppInfoModel();
-
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
-                    listAppInfoModels.add(appInfoModel);
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
-    public List<AppInfoModel> topAppEducationGet() {
+    public List<ApplicationInfoModel> topAppEducationGet() {
         //Log.d("cdap", " ---NValueGet--");
 
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"education\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
-                    AppInfoModel appInfoModel = new AppInfoModel();
-
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
-                    listAppInfoModels.add(appInfoModel);
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
-    public List<AppInfoModel> topAppEntertainmentGet() {
+    public List<ApplicationInfoModel> topAppEntertainmentGet() {
         //Log.d("cdap", " ---NValueGet--");
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"entertainment\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
-                    AppInfoModel appInfoModel = new AppInfoModel();
-
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
-                    listAppInfoModels.add(appInfoModel);
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
-    public List<AppInfoModel> topAppProductivityGet() {
-        //Log.d("cdap", " ---NValueGet--");
+    public List<ApplicationInfoModel> topAppProductivityGet() {
 
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
-
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"productivity\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
-                    AppInfoModel appInfoModel = new AppInfoModel();
-
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
-                    listAppInfoModels.add(appInfoModel);
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
-    public List<AppInfoModel> topAppToolGet() {
+    public List<ApplicationInfoModel> topAppToolGet() {
         //Log.d("cdap", " ---NValueGet--");
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"tool\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
-                    AppInfoModel appInfoModel = new AppInfoModel();
-
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
-                    listAppInfoModels.add(appInfoModel);
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
-    public List<AppInfoModel> topAppBusinessGet() {
-        //Log.d("cdap", " ---NValueGet--");
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
-
+    public List<ApplicationInfoModel> topAppBusinessGet() {
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"business\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
-                    AppInfoModel appInfoModel = new AppInfoModel();
-
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
-                    listAppInfoModels.add(appInfoModel);
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
 
-    public List<AppInfoModel> topAppMusicVideoGet() {
-        //Log.d("cdap", " ---NValueGet--");
-        List<AppInfoModel> listAppInfoModels = new ArrayList<>();
+    public List<ApplicationInfoModel> topAppMusicVideoGet() {
 
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"musicvideo\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
-                    AppInfoModel appInfoModel = new AppInfoModel();
-
-                    appInfoModel.setAppName( res.getString(res.getColumnIndex("APPNAME")));
-                    appInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
-                    listAppInfoModels.add(appInfoModel);
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex("APPNAME")));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex("APPPACKAGE")));
+                    listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
-        return listAppInfoModels;
+        return listApplicationInfoModels;
     }
 
 
@@ -296,15 +239,14 @@ public class TopAppDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as socialAppCount from "+APPLICATIONS_TABLE+ " where APPCATEGORY = \"social\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as socialAppCount from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"social\"", null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 return res.getLong(res.getColumnIndex("socialappcount"));
             }
         }
         Objects.requireNonNull(res).close();
         db.close();
-
         return 0;
     }
 

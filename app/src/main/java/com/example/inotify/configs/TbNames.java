@@ -7,6 +7,7 @@ public class TbNames {
     public static final String NV_ACTIVITY_TABLE = "nv_activity_table";
     public static final String NV_LOCATION_TABLE = "nv_location_table";
     public static final String NV_PROBABILITY_TABLE = "nv_probability_table";
+    public static final String NV_PROBABILITYQUERY_TABLE = "nv_probabilityquery_table";
 
 
     public static final String UA_N_TABLE = "ua_N_table";
@@ -16,7 +17,6 @@ public class TbNames {
     public static final String UA_RINGERMODE_TABLE = "ua_ringermode_table";
     public static final String NOTIFICATIONIMPORTANCE_TABLE = "notification_importnace";
     public static final String USERATTENTIVNESS_TABLE = "userattentivness_table";
-
 
 
     public static final String UC_APPLISTCOUNT_TABLE = "uc_applistcount_table";
@@ -45,5 +45,7 @@ public class TbNames {
     public static final String CHARGER_TABLE = "charger_table";
 
     public static final String APPUSAGE_TABLE = "appUsage_table";
+
+
 
 }

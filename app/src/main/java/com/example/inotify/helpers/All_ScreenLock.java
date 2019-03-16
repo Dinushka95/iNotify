@@ -70,7 +70,7 @@ public class All_ScreenLock extends BroadcastReceiver {
             editor.putString("screen", "on");
             // add db entry to save data time of screen on
             UA_DbHelper ua_DbHelper = new UA_DbHelper(context);
-            ua_DbHelper.screenOnInsert();
+           // ua_DbHelper.screenOnInsert();
             String timenow = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
             editor.putString("time",timenow );
             editor.apply();

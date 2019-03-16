@@ -4,11 +4,25 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Switch;
+
 
 import com.example.inotify.R;
+import com.example.inotify.models.ApplicationInfoModel;
+import com.example.inotify.models.NotificationModel;
+import com.example.inotify.viewControllers.adapters.INotifyActiveAppsRecyclerViewAdapter;
+import com.example.inotify.viewControllers.adapters.SmartNotificationRecyclerViewAdapter;
+import com.example.inotify.viewControllers.logic.INotifyActiveAppsLogic;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +33,10 @@ import com.example.inotify.R;
  * create an instance of this fragment.
  */
 public class TabApplicationFragment extends Fragment {
+
+    RecyclerView recyclerView;
+    private INotifyActiveAppsRecyclerViewAdapter adapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +47,8 @@ public class TabApplicationFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    Switch switch2;
 
     public TabApplicationFragment() {
         // Required empty public constructor
@@ -59,14 +79,30 @@ public class TabApplicationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab_application, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tab_application, container, false);
+
+
+        //generate list
+        INotifyActiveAppsLogic activity_inotify_activite_apps = new INotifyActiveAppsLogic(getContext());
+        //instantiate custom adapter
+
+        List<ApplicationInfoModel> data = activity_inotify_activite_apps.getApplicationList();
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview2);
+        adapter = new INotifyActiveAppsRecyclerViewAdapter(data, getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        return rootView;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -90,6 +126,7 @@ public class TabApplicationFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
     }
 
     /**
@@ -106,4 +143,5 @@ public class TabApplicationFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

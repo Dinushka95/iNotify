@@ -23,7 +23,6 @@ public class NV_NotificationViewabilityService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
 
-       // Log.d("inotify","BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 
         // get time current working time block
         String time = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
@@ -45,39 +44,39 @@ public class NV_NotificationViewabilityService extends JobService {
         //double distance = Math.hypot(x1-x2, y1-y2);
         // get location from db and map to home work or unknown
 
-         ArrayList<Double> loc= praSqlLiteDbHelper1.location_get();
-         double log=loc.get(0);
-         double lat = loc.get(1);
+        ArrayList<Double> loc = praSqlLiteDbHelper1.location_get();
+        double log = loc.get(0);
+        double lat = loc.get(1);
 
 
-        double distanceHome = Math.hypot(log - AppUserConfigs.home_Log, lat-AppUserConfigs.home_Lat);
-        double distanceWork = Math.hypot(log - AppUserConfigs.work_Log, lat-AppUserConfigs.work_Lat);
-      //  Log.d("inotify","AAAAAAAAAAAAAAAAAAAAAA"+distanceHome);
-      //  Log.d("inotify","AAAAAAAAAAAAAAAAAAAAAAA"+distanceWork);
+        double distanceHome = Math.hypot(log - AppUserConfigs.home_Log, lat - AppUserConfigs.home_Lat);
+        double distanceWork = Math.hypot(log - AppUserConfigs.work_Log, lat - AppUserConfigs.work_Lat);
 
-        String CurrentLocation="unknown";
 
-        if(distanceHome<AppUserConfigs.accuracy){
-         CurrentLocation="home";
-             }
-        if(distanceWork<AppUserConfigs.accuracy){
-            CurrentLocation="work";
+        String CurrentLocation = "unknown";
+
+        if (distanceHome < AppUserConfigs.accuracy) {
+            CurrentLocation = "home";
+        }
+        if (distanceWork < AppUserConfigs.accuracy) {
+            CurrentLocation = "work";
         }
 
 
         // get busy or not from notification remove table
 
-        String CurrentBusyorNot="NotBusy";
+        String CurrentBusyorNot = "NotBusy";
         int notificationRemovedCount = praSqlLiteDbHelper1.notificationRemove_get();
 
-     //   Log.d("inotify","NNNNNNNNNNNNNRRRRRRRRRRREEEEEEE"+notificationRemovedCount);
 
-        if(notificationRemovedCount>0){}
-        else {CurrentBusyorNot="Busy";}
+        if (notificationRemovedCount > 0) {
+        } else {
+            CurrentBusyorNot = "Busy";
+        }
 
         //save to table
         NV_DbHelper praSqlLiteDbHelper = new NV_DbHelper(this);
-        praSqlLiteDbHelper.busyOrNot_insert(time,dayofweek,CurrentMaxActivity,CurrentLocation,CurrentBusyorNot);
+        praSqlLiteDbHelper.busyOrNot_insert(time, dayofweek, CurrentMaxActivity, CurrentLocation, CurrentBusyorNot);
 
         praSqlLiteDbHelper.close();
         praSqlLiteDbHelper1.close();
