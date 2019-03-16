@@ -36,8 +36,7 @@ import java.util.Locale;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
-    String id ;
-    //String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
     String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
 
@@ -50,9 +49,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
 
-        id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
-        Log.d("inotifyX" , "ticcker ==============" +id);
-
+        String pid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
         String apppack = null;
         Intent LaunchIntent = null;
         PackageManager pm=null;
@@ -91,7 +88,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             //Test
             NV_DbHelper pratest = new NV_DbHelper(this);
-            pratest.probability_insert();
+            //pratest.probability_insert(pid,0);
             pratest.close();
 
             //call the isPhoneLowckedOrNot method here
@@ -318,8 +315,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
         }
 
-    }
-}
+
+    }}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
