@@ -11,10 +11,8 @@ import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
-import com.example.inotify.models.AppInfoModel;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class UsercharacteristicsActivity extends AppCompatActivity {
 
