@@ -35,6 +35,12 @@ public class TbColNames {
     public static final String PROBABLITY = "probability";
     public static final String PROBABLITY_ID = "probability";
 
+    //PROBABILITYQUERY_TABLE
+    public static final String TIME_SLOT = "time_slot";
+    public static final String VIEWORSUM = "vieworsum";
+    public static final String NOTORSUM = "notorsum";
+    public static final String PROBABILITYFINAL = "probability_final";
+
     //// ringer mode
     public static final String RM_NOTIFICATIONID = "rm_notificationid";
     public static final String RM_DAY = "rm_day";

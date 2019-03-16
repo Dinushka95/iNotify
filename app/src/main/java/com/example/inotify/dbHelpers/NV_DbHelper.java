@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.configs.TbNames.NV_PROBABILITY_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITY_TABLE;
 
 
 public class NV_DbHelper extends MainDbHelp {
@@ -45,7 +45,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.TIME, time);
         contentValues.put(TbColNames.TYPE, type);
         contentValues.put(TbColNames.CONFIDENCE, confidence);
-        long result = db.insert(TbNames.NV_ACTIVITY_TABLE, null, contentValues);
+        long result = db.insert(TbNames.ACTIVITY_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }
@@ -82,35 +82,35 @@ public class NV_DbHelper extends MainDbHelp {
         // select * from pra_activity_table where DATE = "20190202" AND TIME  between "1356" and "1514"
         //huge bug if it has same count for muliple activity this will fail so assume that it will not have fix later
         //get for 0
-        Cursor res0 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"0\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res0 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"0\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res0 != null) {
             AL.add(String.valueOf(res0.getCount()) + "V");
         }
         res0.close();
 
         //get for 3
-        Cursor res3 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"3\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res3 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"3\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res3 != null) {
             AL.add(String.valueOf(res3.getCount()) + "S");
         }
         res3.close();
 
         //get for 5
-        Cursor res5 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"5\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res5 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"5\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res5 != null) {
             AL.add(String.valueOf(res5.getCount()) + "T");
         }
         res5.close();
 
         //get for 7
-        Cursor res7 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"7\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res7 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"7\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res7 != null) {
             AL.add(String.valueOf(res7.getCount()) + "W");
         }
         res7.close();
 
         //get for 8
-        Cursor res8 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"8\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res8 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"8\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res8 != null) {
             AL.add(String.valueOf(res8.getCount()) + "R");
         }
@@ -132,18 +132,18 @@ public class NV_DbHelper extends MainDbHelp {
     public String[] display_prob() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select probability_id,time,day,probability from " + NV_PROBABILITY_TABLE, null);
+        Cursor cursor = db.rawQuery("select probability_id,time,day,viewor,notor,probability from " + PROBABILITY_TABLE, null);
         if (cursor != null) {
-            int count2 = 1;
+            int count2 =1;
             while (cursor.moveToNext()) {
 
-                for (int count = 0; count < 4; count++) {
+                for(int count =0; count<6 ; count++){
                     ans[count2] = cursor.getString(count);
 
                     count2 = count2 + 1;
                 }
 
-                Log.d("cursor", "display_prob: " + cursor.getString(1));
+              //  Log.d("cursor", "display_prob: " +cursor.getString(1));
 
 
             }
@@ -153,25 +153,91 @@ public class NV_DbHelper extends MainDbHelp {
         return ans;
     }
 
-    public boolean probability_Update(int ticker) {
+    public boolean probability_Update(String ticker){
 
-        Log.d("ticker", "probability_Update: " + ticker);
+        Log.d("ticker", "probability_Update: "+ ticker);
         int count2 = 0;
+        int notor = 0;
+        //int Proid = 0;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor count = db.rawQuery("select probability_id, viewor from " + NV_PROBABILITY_TABLE + "where probability_id =\"" + ticker + "\"", null);
+        Cursor count = db.rawQuery("select probability_id, time, viewor, notor from " + PROBABILITY_TABLE + " where probability_id = '"+ticker+"'",  null);
         if (count != null) {
             if (count.moveToFirst()) {
-                count2 = count.getInt(1) + 1;
+
+                String timeSlot = count.getString(1);
+                notor = count.getInt(3);
+                String timeSlotNow = timeSlotNow();
+                Log.d("Timeslot", "probability_Update: "+timeSlot);
+                Log.d("TimeslotNow", "probability_Update: "+timeSlotNow);
+                if (timeSlotNow.equals(timeSlot)){
+                    count2= count.getInt(2)+1;
+                }
+                else{
+                    //Proid= count.getInt(1);
+                    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+                    int viewOR = 1;
+                    probability_insert(id,viewOR);
+                    notor = notor+1;
+                }
+
             }
+
+            db.close();
+
+            //Log.d("Notification_id", "probability_Update: "+count2);
             count.close();
         }
 
-        Log.d("Count", "probability_Update: " + count2);
-
-        Cursor cursor2 = db.rawQuery("update " + NV_PROBABILITY_TABLE + "set viewor =\"" + count2 + "\" where probability_id =" + ticker + "\"", null);
+        Log.d("Count", "probability_Update: "+count2);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("viewor", count2);
+        contentValues.put("notor", notor);
+        SQLiteDatabase db2 = this.getWritableDatabase();
+        db2.update(PROBABILITY_TABLE, contentValues, "probability_id = "+ticker,null );
+        db2.close();
         return true;
     }
 
+    public boolean probability_query() {
+
+        String timeSlotNow = timeSlotNow();
+        SQLiteDatabase dbq = this.getReadableDatabase();
+        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where time = '" + timeSlotNow + "'group by time " , null);
+        if (proq != null) {
+            if (proq.moveToFirst()) {
+
+                String timeSlot = proq.getString(1);
+                int vieworSum = proq.getInt(2);
+                int notorSum = proq.getInt(3);
+                Log.d("Timeslot", "probability_Query: " + timeSlot);
+                Log.d("viewOR", "probability_Query: " + vieworSum);
+                Log.d("TimeslotNow", "probability_Query: " + notorSum);
+
+            }
+        }
+        return true;
+    }
+    //PRASHAN end
+
+   /* private void getRecords() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + PROBABILITY_TABLE , null);
+        if (cursor.moveToFirst()) {
+            do {
+                TableRow row = new TableRow();
+                for (int i = 0; i < cursor.getColumnCount(); i++) {
+                    TextView textView = new TextView(getContext());
+                    TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(350, TableRow.LayoutParams.WRAP_CONTENT);
+                    textViewParams.setMargins(25, 25, 25, 25);
+                    textView.setLayoutParams(textViewParams);
+                    textView.setText(cursor.getString(i));
+                    row.addView(textView);
+                }
+                table.addView(row);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+    }*/
 
     public boolean location_insert(String log, String lat) {
 
@@ -192,7 +258,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.TIME, time);
         contentValues.put(TbColNames.LOG, log);
         contentValues.put(TbColNames.LAT, lat);
-        long result = db.insert(TbNames.NV_LOCATION_TABLE, null, contentValues);
+        long result = db.insert(TbNames.LOCATION_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -205,7 +271,7 @@ public class NV_DbHelper extends MainDbHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.NV_LOCATION_TABLE, null);
+        Cursor res = db.rawQuery("select * from " + TbNames.LOCATION_TABLE, null);
         if (res != null) {
             res.moveToLast();
             if (res.getCount() > 1) {
@@ -244,7 +310,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.DATE, date);
         contentValues.put(TbColNames.DAY, day);
         contentValues.put(TbColNames.TIME, time);
-        long result = db.insert(TbNames.NV_NOTIFICATIONREMOVE_TABLE, null, contentValues);
+        long result = db.insert(TbNames.NOTIFICATIONREMOVE_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -271,7 +337,7 @@ public class NV_DbHelper extends MainDbHelp {
         String timeold = df.format(cal.getTime());
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.NV_LOCATION_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.LOCATION_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res != null) {
             if ((res.moveToFirst())) {
                 return res.getCount();
@@ -292,7 +358,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.ACTIVITY, activity);
         contentValues.put(TbColNames.LOCATION, location);
         contentValues.put(TbColNames.BUSYORNOT, busyornot);
-        long result = db.insert(TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE, null, contentValues);
+        long result = db.insert(TbNames.NOTIFICATIONVIEWABILITY_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -301,7 +367,7 @@ public class NV_DbHelper extends MainDbHelp {
     }
 
     // test
-    public boolean probability_insert() {
+    public boolean probability_insert(String Proid,int viewOR) {
 
         Date currentTime = Calendar.getInstance().getTime();
         Log.d("Debug", "NOW" + currentTime);
@@ -336,13 +402,17 @@ public class NV_DbHelper extends MainDbHelp {
         String TimeSlot = currentHour + ":" + MinOne + "0 - " + nextHour + ":" + nextMin + "0 " + currentAP;
         Log.d("Debug", "TimeSlot = " + TimeSlot);
 
-        String proId = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+
+
+
+        String proId = Proid;
         String day = currentDay;
         String time = TimeSlot;
         String activity = activity_get();
-        int viewor = 1;
+        int viewor = viewOR;
         int notor = 0;
         double probability = 100;
+        Log.d("proid", "probability_insert: "+ proId);
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues2 = new ContentValues();
@@ -353,13 +423,50 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues2.put(TbColNames.VIEWOR, viewor);
         contentValues2.put(TbColNames.NOTOR, notor);
         contentValues2.put(TbColNames.PROBABLITY, probability);
-        long result = db.insert(NV_PROBABILITY_TABLE, null, contentValues2);
+        long result = db.insert(PROBABILITY_TABLE, null, contentValues2);
         db.close();
         Log.d("hello", "probability_insert: correctly");
         if (result == -1)
             return false;
         else
             return true;
+    }
+
+    public String timeSlotNow(){
+        Date currentTime = Calendar.getInstance().getTime();
+        Log.d("Debug", "NOW"+currentTime);
+        SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a",Locale.getDefault());
+        String currentDateTimeString = sdf.format(currentTime);
+        SimpleDateFormat hour=new SimpleDateFormat("hh",Locale.getDefault());
+        String currentHour = hour.format(currentTime);
+        Calendar cal = Calendar.getInstance();
+        String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+        Log.d("Debug", "NOW"+currentHour);
+        SimpleDateFormat min=new SimpleDateFormat("mm",Locale.getDefault());
+        String currentMin = min.format(currentTime);
+        Log.d("Debug", "NOW"+currentMin);
+        SimpleDateFormat AP=new SimpleDateFormat("a",Locale.getDefault());
+        String currentAP = AP.format(currentTime);
+        Log.d("Debug", "NOW"+currentAP);
+
+        char MinOne = currentMin.charAt(0);
+        Log.d("Debug", "NOW"+MinOne);
+
+        int nextMin =0;
+        int nextHour = 0;
+
+        if(java.lang.Character.getNumericValue(MinOne) != 5){
+            nextMin = java.lang.Character.getNumericValue(MinOne) +1;
+            nextHour = Integer.parseInt(currentHour);
+        }
+        else{
+            nextMin = 0;
+            nextHour = Integer.parseInt(currentHour)+1;
+        }
+
+
+        return currentHour+":"+ MinOne+"0 - "+nextHour+":"+nextMin+"0 "+ currentAP;
+
     }
 
     public ArrayList<String> busyOrNotPredict_Get(String activity, String location) {
@@ -393,7 +500,7 @@ public class NV_DbHelper extends MainDbHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"AND  DAY = \"" + day + "\" AND ACTIVITY = \"" + activity + "\" AND LOCATION = \"" + location + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATIONVIEWABILITY_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"AND  DAY = \"" + day + "\" AND ACTIVITY = \"" + activity + "\" AND LOCATION = \"" + location + "\"", null);
         if (res != null) {
 
             if (res.moveToFirst()) {
