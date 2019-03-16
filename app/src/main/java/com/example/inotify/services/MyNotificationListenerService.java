@@ -37,6 +37,7 @@ import java.util.Locale;
 public class MyNotificationListenerService extends NotificationListenerService {
 
     String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+
     String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
 
@@ -49,7 +50,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
 
-        String pid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+        String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+        Log.d("inotifyC" , "pid ============" +id);
         String apppack = null;
         Intent LaunchIntent = null;
         PackageManager pm=null;
@@ -90,7 +92,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             NV_DbHelper pratest = new NV_DbHelper(this);
             //pratest.probability_insert(pid,0);
             pratest.close();
-
+//Chaya
             //call the isPhoneLowckedOrNot method here
             ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
             Boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
@@ -98,12 +100,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
             if (screenstatus == false) {
                 //Save to screen on table
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
-                // String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
                 screenStatusDbHelper.ScreenOnInsert(id);
                 screenStatusDbHelper.close();
                 Log.d("inotifyC", "SCreen status Saved");
             } else {
-                //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
                 screenStatusDbHelper.ScreenOffInsert(id);
                 screenStatusDbHelper.close();
@@ -295,7 +295,6 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 // double attentivnessvalue = 0.0;
                 UserAttentivness userAttentivness = new UserAttentivness();
                 double attentivnessvalue = userAttentivness.calculateAttentivness(ticker, screenStatus, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
-                //attentivnessvalue = userAttentivness.calculateAttentivness(id,screenStatus,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
                 Log.d("inotify(^_^)", "attentivness for  " + ticker + " notification is = " + attentivnessvalue);
 
                 UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
