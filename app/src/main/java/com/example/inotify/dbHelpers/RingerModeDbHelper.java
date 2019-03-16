@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
 import java.text.SimpleDateFormat;
@@ -19,7 +18,7 @@ import static com.example.inotify.configs.TbColNames.RM_DAY;
 import static com.example.inotify.configs.TbColNames.RM_NOTIFICATIONID;
 import static com.example.inotify.configs.TbColNames.RM_RINGERMODE;
 import static com.example.inotify.configs.TbColNames.RM_TIME;
-import static com.example.inotify.configs.TbNames.UA_RINGERMODE_TABLE;
+import static com.example.inotify.configs.TbNames.RINGERMODE_TABLE;
 
 public class RingerModeDbHelper extends MainDbHelp {
 
@@ -52,7 +51,7 @@ public class RingerModeDbHelper extends MainDbHelp {
         contentValues.put(RM_TIME , time);
         contentValues.put(RM_RINGERMODE ,ringermode);
 
-        long result = db.insert(UA_RINGERMODE_TABLE , null,contentValues);
+        long result = db.insert(RINGERMODE_TABLE, null,contentValues);
         Log.d("inotify" ,"RM_RINGERMODE = "  +ringermode );
 
         db.close();
@@ -64,7 +63,7 @@ public class RingerModeDbHelper extends MainDbHelp {
         String ringermode= new String();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery("select * from " + TbNames.UA_RINGERMODE_TABLE+" where RM_NOTIFICATIONID =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.RINGERMODE_TABLE +" where RM_NOTIFICATIONID =\"" + id + "\"", null);
         if(res != null)
         {
             if(res.moveToFirst()){

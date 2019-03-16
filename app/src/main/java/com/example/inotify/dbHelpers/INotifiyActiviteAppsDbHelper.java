@@ -5,7 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import static com.example.inotify.configs.TbNames.SETTINGS_SNAVCTIVEAPPS_TABLE;
+import com.example.inotify.configs.TbNames;
+
 
 public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
 
@@ -30,7 +31,7 @@ public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
                         SQLiteDatabase db1 = this.getWritableDatabase();
                         ContentValues contentValues = new ContentValues();
                         contentValues.put("STATUS", "false");
-                        db1.update(SETTINGS_SNAVCTIVEAPPS_TABLE, contentValues, "APPNAME = ? ", new String[]{appName});
+                        db1.update(TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE, contentValues, "APPNAME = ? ", new String[]{appName});
                         db1.close();
                         return true;
                     } else if (results.equals("true")) {
@@ -38,7 +39,7 @@ public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
                         SQLiteDatabase db2 = this.getWritableDatabase();
                         ContentValues contentValues = new ContentValues();
                         contentValues.put("STATUS", "true");
-                        db2.update(SETTINGS_SNAVCTIVEAPPS_TABLE, contentValues, "APPNAME = ? ", new String[]{appName});
+                        db2.update(TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE, contentValues, "APPNAME = ? ", new String[]{appName});
                         db2.close();
                         return true;
                     } else {
@@ -51,7 +52,7 @@ public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("APPNAME", appName);
                     contentValues.put("STATUS", "true");
-                    long result1 = db3.insert(SETTINGS_SNAVCTIVEAPPS_TABLE, null, contentValues);
+                    long result1 = db3.insert(TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE, null, contentValues);
                     db3.close();
 
                     res0.close();

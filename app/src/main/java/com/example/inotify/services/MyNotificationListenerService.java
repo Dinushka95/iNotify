@@ -283,7 +283,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
                 String tablename = screenStatusDbHelper.checkAvaulability(ticker);
                 String screenStatus = new String(" ");
-                if (tablename == "UA_SCREENON_TABLE") {
+                if (tablename == "SCREENON_TABLE") {
                     String ScreenOnStatus = screenStatusDbHelper.ScreenOnStatusGet();
                     screenStatus = "on";
                 } else {

@@ -41,7 +41,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         contentValues.put(TbColNames.DATE , date);
         contentValues.put(TbColNames.TIMEON , time);
 
-        long result = db.insert(TbNames.UA_SCREENON_TABLE ,null,contentValues);
+        long result = db.insert(TbNames.SCREENON_TABLE,null,contentValues);
         db.close();
         if(result == -1){
             return false;
@@ -67,7 +67,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         contentValues.put(TbColNames.DATE , date);
         contentValues.put(TbColNames.TIMEOFF,time);
 
-        long result = db.insert(TbNames.UA_SCREENOFF_TABLE ,null,contentValues);
+        long result = db.insert(TbNames.SCREENOFF_TABLE,null,contentValues);
         db.close();
         if(result == -1){
             return false;
@@ -88,7 +88,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
 
 
 
-        Cursor res = db.rawQuery("select * from " + TbNames.UA_SCREENON_TABLE +" where DATE =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.SCREENON_TABLE +" where DATE =\"" + id + "\"", null);
         if(res != null)
         {
             if(res.moveToFirst()){
@@ -108,7 +108,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
 
-        Cursor res = db.rawQuery("select * from " + TbNames.UA_SCREENOFF_TABLE +" where SCREENOFF_ID =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.SCREENOFF_TABLE +" where SCREENOFF_ID =\"" + id + "\"", null);
         if(res != null)
         {
             if(res.moveToFirst()){
@@ -124,7 +124,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
     {
         String TableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select *  from  " + TbNames.UA_SCREENON_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" , null);
+        Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENON_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" , null);
         if(res != null)
         {
             if(res.moveToFirst()){
@@ -139,7 +139,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
     {
         String TableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select *  from  " + TbNames.UA_SCREENOFF_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" ,  null);
+        Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENOFF_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" ,  null);
         if(res != null)
         {
             if(res.moveToFirst()){
@@ -157,11 +157,11 @@ public class ScreenStatusDbHelper extends MainDbHelp {
 
         if(screenonavailability == "0")
         {
-            tablename = "UA_SCREENOFF_TABLE";
+            tablename = "SCREENOFF_TABLE";
         }
         else
         {
-            tablename = "UA_SCREENON_TABLE";
+            tablename = "SCREENON_TABLE";
         }
         return tablename;
 

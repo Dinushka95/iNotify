@@ -35,7 +35,7 @@ public class TbColNames {
     public static final String PROBABLITY = "probability";
     public static final String PROBABLITY_ID = "probability";
 
-    //NV_PROBABILITYQUERY_TABLE
+    //PROBABILITYQUERY_TABLE
     public static final String TIME_SLOT = "time_slot";
     public static final String VIEWORSUM = "vieworsum";
     public static final String NOTORSUM = "notorsum";
