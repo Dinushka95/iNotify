@@ -115,12 +115,6 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182449,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testd',8000);");
         db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182459,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.google.android.apps.messaging',8000);");
 
-/*
-        db.execSQL("insert into "+TbNames.NOTIFICATIONIMPORTANCE_TABLE+"("+TbColNames.NOTIFICATIONIID+",NI_APPNAME,NI_VALUE)values(1,'com.example.dinu.testa',1);");
-        db.execSQL("insert into "+TbNames.NOTIFICATIONIMPORTANCE_TABLE+"("+TbColNames.NOTIFICATIONIID+",NI_APPNAME,NI_VALUE)values(2,'com.example.dinu.testb',1);");
-        db.execSQL("insert into "+TbNames.NOTIFICATIONIMPORTANCE_TABLE+"("+TbColNames.NOTIFICATIONIID+",NI_APPNAME,NI_VALUE)values(3,'com.example.dinu.testc',1);");
-        db.execSQL("insert into "+TbNames.NOTIFICATIONIMPORTANCE_TABLE+"("+TbColNames.NOTIFICATIONIID+",NI_APPNAME,NI_VALUE)values(4,'com.example.dinu.testd',1);");
-        db.execSQL("insert into "+TbNames.NOTIFICATIONIMPORTANCE_TABLE+"("+TbColNames.NOTIFICATIONIID+",NI_APPNAME,NI_VALUE)values(5,'com.google.android.apps.messaging',1);");*/
 
         db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
         db.execSQL("insert into "+ TbNames.TOPAPP_TABLE+" (APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
