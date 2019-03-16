@@ -78,4 +78,19 @@
         android:onClick="DisplayOpenness"
         android:text="Button" />
 
+    <Button
+        android:id="@+id/button14test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="test1"
+        android:text="Test!" />
+
+
+    <Button
+        android:id="@+id/button15test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="test2"
+        android:text="Test2" />
+
 </LinearLayout>

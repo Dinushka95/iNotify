@@ -68,6 +68,7 @@ public class ApplicationsHelper {
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        Log.d("inotify","app count------" + (int) applicationdbHelper.appCountGet());
         return (int) applicationdbHelper.appCountGet();
     }
 
@@ -124,7 +125,7 @@ public class ApplicationsHelper {
 //        }
         int myCommonAppCount=commonSocialApps.size();
 
-        //Log.d("inotify","common social app count = " + myCommonAppCount);
+        Log.d("inotify","common social app count = " + myCommonAppCount);
         return myCommonAppCount;
     }
 
@@ -149,7 +150,7 @@ public class ApplicationsHelper {
 
         int myCommonAppCountGaming=commonGamingApps.size();
 
-        //Log.d("inotify","common social app count = " + myCommonAppCount);
+        Log.d("inotify","common social app count = " + myCommonAppCountGaming);
         return myCommonAppCountGaming;
     }
 
@@ -174,7 +175,7 @@ public class ApplicationsHelper {
 
         int myCommonAppCountMusicVideo=commonMusicVideoApps.size();
 
-        //Log.d("inotify","common social app count = " + myCommonAppCount);
+        Log.d("inotify","common social app count = " + myCommonAppCountMusicVideo);
         return myCommonAppCountMusicVideo;
     }
 

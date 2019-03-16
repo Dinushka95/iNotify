@@ -5,15 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import com.example.inotify.configs.TbColNames;
+import com.example.inotify.configs.TbNames;
 
-import static com.example.inotify.configs.TbColNames.DATE;
 import static com.example.inotify.configs.TbColNames.NI_APPNAME;
 import static com.example.inotify.configs.TbColNames.NI_VALUE;
-import static com.example.inotify.configs.TbNames.UA_NI_TABLE;
-import static com.example.inotify.configs.TbNames.UA_N_TABLE;
+import static com.example.inotify.configs.TbNames.N_TABLE;
 
 public class UA_DbHelper extends MainDbHelp {
 
@@ -25,7 +22,7 @@ public class UA_DbHelper extends MainDbHelp {
         //Log.d("cdap", " ---NValueGet--");
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + UA_N_TABLE + " where N_ID =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + N_TABLE + " where N_ID =\"" + id + "\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 return res.getString(1);
@@ -44,7 +41,7 @@ public class UA_DbHelper extends MainDbHelp {
             ContentValues contentValues = new ContentValues();
             contentValues.put(NI_APPNAME, appName);
             contentValues.put(NI_VALUE, value);
-            long result = db.insert(UA_NI_TABLE, null, contentValues);
+            long result = db.insert(TbNames.NOTIFICATIONIMPORTANCE_TABLE, null, contentValues);
             db.close();
             if (result == -1)
                 return false;
@@ -58,7 +55,7 @@ public class UA_DbHelper extends MainDbHelp {
         // Log.d("cdap", " ---NIappExisCheck--");
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + UA_NI_TABLE + " where NI_APPNAME=\"" + appName + "\"", null);
+        Cursor cursor = db.rawQuery("select * from " + TbNames.NOTIFICATIONIMPORTANCE_TABLE + " where NI_APPNAME=\"" + appName + "\"", null);
         if (cursor != null) {
             if (cursor.getCount() > 0) {
                 cursor.close();
@@ -97,7 +94,7 @@ public class UA_DbHelper extends MainDbHelp {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
             contentValues.put(NI_VALUE, newValue);
-            db.update(UA_NI_TABLE, contentValues, "NI_APPNAME = ? ", new String[]{appName});
+            db.update(TbNames.NOTIFICATIONIMPORTANCE_TABLE, contentValues, "NI_APPNAME = ? ", new String[]{appName});
             return true;
         } else {
             return NIinsert(appName, value);
@@ -154,7 +151,7 @@ public class UA_DbHelper extends MainDbHelp {
     public int NIRgetTotalvalue() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT SUM(NI_VALUE) as Total FROM " + UA_NI_TABLE, null);
+        Cursor cursor = db.rawQuery("SELECT SUM(NI_VALUE) as Total FROM " + TbNames.NOTIFICATIONIMPORTANCE_TABLE, null);
         int total = 0;
         if (cursor.moveToFirst()) {
 
