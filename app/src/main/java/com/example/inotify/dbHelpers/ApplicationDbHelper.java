@@ -105,20 +105,56 @@ public class ApplicationDbHelper extends MainDbHelp {
         return true;
     }
 
-    public long appCountGet() {
+    public int appCountGet() {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE, null);
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+TbNames.APPLICATIONS_TABLE + " where DATE = \"+date+\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
-                return res.getLong(res.getColumnIndex("appCount"));
+                return res.getInt(res.getColumnIndex("appCount"));
             }
         }
         Objects.requireNonNull(res).close();
         db.close();
 
+        Log.d("inotify","appsCountAvgGet........." + res);
+
         return 0;
+    }
+
+    public int appsCountAvgGet() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select SUM("+ TbColNames.APPNAME +") as APPCOUNTAVG from " + TbNames.APPLICATIONS_TABLE + " where DATE = \"+date+\"", null);
+        int total = 0;
+        int count = 0;
+        int avg;
+        if (res != null) {
+            if ((res.moveToFirst())){
+                do {
+                    total=total+ res.getInt(res.getColumnIndex("APPCOUNTAVG"));
+                    count++;
+                } while (res.moveToNext());
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        try {
+            avg=total/count;
+        }catch (Exception e){
+            return 0;
+        }
+            Log.d("inotify","appsCountAvgGet........." + avg);
+        return avg;
+    }
+
+    public int  appCountBeforeToday(){
+        int appAvg = this.appsCountAvgGet() - this.appCountGet();
+        Log.d("inotify","appCountBeforeToday------------" + appAvg);
+        return appAvg;
     }
 
     public List<AppInfoModel> mySocialAppGet() {
