@@ -95,17 +95,17 @@ public class MyNotificationListenerService extends NotificationListenerService {
 //Chaya
             //call the isPhoneLowckedOrNot method here
             ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
-            Boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
+            boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
             Log.d("inotifyC ", "ScreenStatus On Notification recive" + screenstatus);
-            if (screenstatus == false) {
+            if (!screenstatus) {
                 //Save to screen on table
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
-                screenStatusDbHelper.ScreenOnInsert(id);
+                screenStatusDbHelper.screenOnWithNotificationInsert(id);
                 screenStatusDbHelper.close();
                 Log.d("inotifyC", "SCreen status Saved");
             } else {
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
-                screenStatusDbHelper.ScreenOffInsert(id);
+                screenStatusDbHelper.screenOffWithNotificationInsert(id);
                 screenStatusDbHelper.close();
                 Log.d("inotifyC", "SCreen off status Saved");
 
@@ -280,27 +280,29 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 // ringerModeDbHelper.close();
 
+/*
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
                 String tablename = screenStatusDbHelper.checkAvaulability(ticker);
                 String screenStatus = new String(" ");
                 if (tablename == "SCREENON_TABLE") {
-                    String ScreenOnStatus = screenStatusDbHelper.ScreenOnStatusGet();
+                    String ScreenOnStatus = screenStatusDbHelper.screenOnStatusGet();
                     screenStatus = "on";
                 } else {
-                    String ScreenOffStstus = screenStatusDbHelper.ScreenOffStatusGet();
+                    String ScreenOffStstus = screenStatusDbHelper.screenOffStatusGet();
                     screenStatus = "off";
                 }
+*/
 
-                Log.d("inotify(^_^)", "Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
+              //  Log.d("inotify(^_^)", "Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
                 // double attentivnessvalue = 0.0;
                 UserAttentivness userAttentivness = new UserAttentivness();
-                double attentivnessvalue = userAttentivness.calculateAttentivness(ticker, screenStatus, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
-                Log.d("inotify(^_^)", "attentivness for  " + ticker + " notification is = " + attentivnessvalue);
+             //   double attentivnessvalue = userAttentivness.calculateAttentivness(ticker, screenStatus, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
+           //     Log.d("inotify(^_^)", "attentivness for  " + ticker + " notification is = " + attentivnessvalue);
 
                 UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-                userAttentivnessDbHelper.UserAttentivnessInsert(ticker, Appname, attentivnessvalue);
-                userAttentivnessDbHelper.close();
-                Log.d("inotify(^_^ )", "Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
+           //     userAttentivnessDbHelper.UserAttentivnessInsert(ticker, Appname, attentivnessvalue);
+            //   userAttentivnessDbHelper.close();
+           //     Log.d("inotify(^_^ )", "Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
 
                 //}
 

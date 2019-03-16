@@ -48,16 +48,15 @@ public class TbColNames {
     public static final String RM_TIME = "rm_time";
     public static final String RM_RINGERMODE ="rm_ringermode";
 
-    ////screenon
+    ////screenStatus
+    public static final String SCREENSTATUS_ID = "screenstatusid";
+    //public static final String DATE = "date";
+    //public static final String NOTIFICATIONID = "notificationid";
     public static final String TIMEON = "timeon";
-    //public static final String NOTIFICATIONID = "notificationid";
-
-    //ScrennOff
     public static final String TIMEOFF = "timeoff";
-    //public static final String NOTIFICATIONID = "notificationid";
 
 
-    //NotificationImportnace
+    //NotificationImportance
     public static final String NOTIFICATIONIID = "notificationiid";
     public static final String APPLICATIONNAME = "applicationname";
     public static final String SEQUENCEVALUE ="sequencevalue";

@@ -11,8 +11,7 @@ public class TbNames {
 
 
     public static final String N_TABLE = "N_table";
-    public static final String SCREENOFF_TABLE = "screenoff_table";
-    public static final String SCREENON_TABLE = "screenon_table";
+    public static final String SCREENSTATUS_TABLE = "screenstatus_table";
     public static final String RINGERMODE_TABLE = "ringermode_table";
     public static final String NOTIFICATIONIMPORTANCE_TABLE = "notificationimportance_table";
     public static final String USERATTENTIVNESS_TABLE = "userattentivness_table";

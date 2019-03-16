@@ -22,6 +22,7 @@ public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<V
     public SmartNotificationRecyclerViewAdapter(List<NotificationModel> list, Context context) {
         this.list = list;
         this.context = context;
+        this.notifyDataSetChanged();
     }
 
     @Override

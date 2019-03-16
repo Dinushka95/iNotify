@@ -32,9 +32,9 @@ import android.widget.Toast;
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ProfileHelper;
+import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.ApplicationInfoModel;
@@ -261,10 +261,10 @@ public class MainMenuActivity extends AppCompatActivity implements
         JobScheduler scheduler2 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode2 = scheduler2.schedule(info2);
 
-
+        // has to test because screen off  doen't work proprly with manifest file. need to do it in code
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver mReceiver = new All_ScreenLock();
+        BroadcastReceiver mReceiver = new ScreenStatusHelper();
         registerReceiver(mReceiver, intentFilter);
 
     }
@@ -407,6 +407,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         Intent intent = new Intent(MainMenuActivity.this, MainMenuActivity.class);
         startActivity(intent);
     }
+
 
     public void testCategory(View view) {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
