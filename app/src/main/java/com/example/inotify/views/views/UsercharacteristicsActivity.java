@@ -9,9 +9,10 @@ import android.widget.TextView;
 import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.dbHelpers.CalenderEventDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
-
+import com.example.inotify.helpers.UC_CalenderEvent;
 
 
 public class UsercharacteristicsActivity extends AppCompatActivity {
@@ -70,6 +71,7 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
 
 
+
     }
 
     public void test2(View view) {
@@ -84,6 +86,14 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
        // applicationDbHelper.updateCategory();
+
+        UC_CalenderEvent uc_calenderEvent = new UC_CalenderEvent();
+        uc_calenderEvent.getcalanderEventCount(this);
+        Log.d("inotify","aaaaaaaaaaaaaaaa");
+
+        CalenderEventDbHelper calenderEventDbHelper = new CalenderEventDbHelper(this);
+        calenderEventDbHelper.checkIfExist();
+
 
 
     }
