@@ -2,9 +2,10 @@ package com.example.inotify.helpers;
 
 import android.util.Log;
 
+import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.services.MyNotificationListenerService;
 
-public class UserAttentivness  {
+public class MainUserAttentivness {
 
 
     //write a method to check in which table does the record exisits (screen on tabele or screen off table)
@@ -34,6 +35,7 @@ public class UserAttentivness  {
         Log.d("inotifyx", "Sequence " + Sequence);
         Log.d("inotifyx", "notificationTotal " + notificationTotal);
 
+
         // if(notificationSequence <= seqenceAvg )
         if (RingerMode.equals("normal")) {
             RMWeight = 0.3333;
@@ -51,12 +53,14 @@ public class UserAttentivness  {
                         Log.d("notify", "hjkhjkkhjkh");
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "1" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "2" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                 } else {
@@ -67,12 +71,14 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "3" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "4" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                         //unlocked , importnace not given , seqebncy High
                     }
@@ -87,11 +93,13 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "5" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "6" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                 } else {
@@ -101,11 +109,13 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "7" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "8" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
 
                     }
@@ -126,11 +136,13 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "9" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "10" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                 } else {
@@ -141,12 +153,14 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "11" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     } else {
                         //unlocked , importnace not given , seqebncy High
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "12" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
 
                     }
@@ -162,12 +176,14 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "13" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     } else {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "14" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                 } else {
@@ -178,12 +194,14 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "15" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     } else {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "16" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                 }
@@ -203,12 +221,14 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "17" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     } else {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "18" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                 } else {
@@ -219,6 +239,7 @@ public class UserAttentivness  {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "19" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     } else {
                         //unlocked , importnace not given , seqebncy High
@@ -226,6 +247,8 @@ public class UserAttentivness  {
 
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+
                     }
                 }
             } else {
@@ -239,6 +262,7 @@ public class UserAttentivness  {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "21" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                     else
@@ -247,6 +271,7 @@ public class UserAttentivness  {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "22" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                 }
@@ -259,6 +284,7 @@ public class UserAttentivness  {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "23" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                     else
@@ -267,6 +293,7 @@ public class UserAttentivness  {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "24" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
 
                     }
                 }
@@ -274,7 +301,7 @@ public class UserAttentivness  {
             }
             Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
 
-         Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+        // Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
         Log.d("notify " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
         Log.d("inotifyC" ,"Attentiivness final value = " +Attentivnes );
 
@@ -282,5 +309,13 @@ public class UserAttentivness  {
 
     }
         return Attentivnes  ;
-    }}
+    }
+
+
+
+
+
+
+}
+
 

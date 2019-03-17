@@ -35,7 +35,7 @@ public class TbColNames {
     public static final String PROBABLITY = "probability";
     public static final String PROBABLITY_ID = "probability";
 
-    //NV_PROBABILITYQUERY_TABLE
+    //PROBABILITYQUERY_TABLE
     public static final String TIME_SLOT = "time_slot";
     public static final String VIEWORSUM = "vieworsum";
     public static final String NOTORSUM = "notorsum";
@@ -48,25 +48,29 @@ public class TbColNames {
     public static final String RM_TIME = "rm_time";
     public static final String RM_RINGERMODE ="rm_ringermode";
 
-    ////screenon
+    ////screenStatus
+    public static final String SCREENSTATUS_ID = "screenstatusid";
+    //public static final String DATE = "date";
+    //public static final String NOTIFICATIONID = "notificationid";
     public static final String TIMEON = "timeon";
-    //public static final String NOTIFICATIONID = "notificationid";
-
-    //ScrennOff
     public static final String TIMEOFF = "timeoff";
-    //public static final String NOTIFICATIONID = "notificationid";
 
 
-    //NotificationImportnace
+    //NotificationImportance
     public static final String NOTIFICATIONIID = "notificationiid";
     public static final String APPLICATIONNAME = "applicationname";
     public static final String SEQUENCEVALUE ="sequencevalue";
 
 
-    //UserAttentivness
+    //MainUserAttentivness
     public static final String NID ="nid";
     public static final String APPLICATION ="application";
     public static final String ATTENTIVNESSVALUE = "attentivnessvalue";
+
+    //AttentivnesssperApp
+   // public static final String APPNAME ="appname";
+    public static final String TOTALATTENTIVNESS = "totalattentivness";
+
 
     ////smart notification system
     // notification all notifications

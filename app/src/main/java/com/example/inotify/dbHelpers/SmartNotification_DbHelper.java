@@ -28,10 +28,10 @@ import static com.example.inotify.configs.TbColNames.SNS_VTIME;
 import static com.example.inotify.configs.TbNames.SNS_TABLE;
 
 
-public class SN_DbHelper extends MainDbHelp {
+public class SmartNotification_DbHelper extends MainDbHelp {
 
 
-    public SN_DbHelper(Context context) {
+    public SmartNotification_DbHelper(Context context) {
 
         super(context);
     }

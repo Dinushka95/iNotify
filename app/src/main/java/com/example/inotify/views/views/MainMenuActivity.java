@@ -32,17 +32,17 @@ import android.widget.Toast;
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.ProfileHelper;
+import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.TopAppsHelper;
-import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.ProfileModel;
-import com.example.inotify.services.NV_ActivityRecognitionService;
-import com.example.inotify.services.NV_LocationService;
-import com.example.inotify.services.NV_NotificationViewabilityService;
-import com.example.inotify.services.UC_all_service;
+import com.example.inotify.services.ActivityRecognitionService;
+import com.example.inotify.services.LocationService;
+import com.example.inotify.services.NotificationViewabilityService;
+import com.example.inotify.services.UserCharacteristics_service;
 import com.example.inotify.viewControllers.adapters.MainMenuPagerAdapter;
 import com.example.inotify.views.fragments.TabAllNotificationsFragment;
 import com.example.inotify.views.fragments.TabApplicationFragment;
@@ -205,6 +205,9 @@ public class MainMenuActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
         }
 
+
+
+
     }
 
     @Override
@@ -226,7 +229,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         mActivityRecognitionClient.requestActivityUpdates(0, getActivityDetectionPendingIntent());
 
 
-        ComponentName componentName = new ComponentName(MainMenuActivity.this, NV_LocationService.class);
+        ComponentName componentName = new ComponentName(MainMenuActivity.this, LocationService.class);
         JobInfo info = new JobInfo.Builder(MyConstants.MY_LOCATION_LISTENER_SERVEC_ID, componentName)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -238,7 +241,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         int resultCode = scheduler != null ? scheduler.schedule(info) : 0;
 
 
-        ComponentName componentName1 = new ComponentName(MainMenuActivity.this, NV_NotificationViewabilityService.class);
+        ComponentName componentName1 = new ComponentName(MainMenuActivity.this, NotificationViewabilityService.class);
         JobInfo info1 = new JobInfo.Builder(MyConstants.MY_BUSYORNOT_SERVEC_ID, componentName1)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -250,7 +253,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         int resultCode1 = scheduler1 != null ? scheduler1.schedule(info1) : 0;
 
 
-        ComponentName componentName2 = new ComponentName(MainMenuActivity.this, UC_all_service.class);
+        ComponentName componentName2 = new ComponentName(MainMenuActivity.this, UserCharacteristics_service.class);
         JobInfo info2 = new JobInfo.Builder(MyConstants.MY_MIT_ALL_SERVEC_ID, componentName2)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -261,10 +264,10 @@ public class MainMenuActivity extends AppCompatActivity implements
         JobScheduler scheduler2 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode2 = scheduler2.schedule(info2);
 
-
+        // has to test because screen off  doen't work proprly with manifest file. need to do it in code
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver mReceiver = new All_ScreenLock();
+        BroadcastReceiver mReceiver = new ScreenStatusHelper();
         registerReceiver(mReceiver, intentFilter);
 
     }
@@ -328,7 +331,7 @@ public class MainMenuActivity extends AppCompatActivity implements
     }
 
     private PendingIntent getActivityDetectionPendingIntent() {
-        return PendingIntent.getService(this, 30, new Intent(this, NV_ActivityRecognitionService.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getService(this, 30, new Intent(this, ActivityRecognitionService.class), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
 
@@ -388,8 +391,8 @@ public class MainMenuActivity extends AppCompatActivity implements
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
         applicationDbHelper.appCategoryCount();
 
-        UC_CalenderEvent uc_calenderEvent = new UC_CalenderEvent();
-        uc_calenderEvent.getcalanderEventCount(this);
+        CalenderEventHelper calenderEvent = new CalenderEventHelper();
+        calenderEvent.getcalanderEventCount(this);
 
         //applicationsHelper.saveCurrentPhoneApps();
         //for insert the apps to database
@@ -407,6 +410,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         Intent intent = new Intent(MainMenuActivity.this, MainMenuActivity.class);
         startActivity(intent);
     }
+
 
     public void testCategory(View view) {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);

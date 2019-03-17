@@ -13,15 +13,32 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.logger.Log;
+import com.example.inotify.logger.LogFragment;
+import com.example.inotify.logger.LogWrapper;
+import com.example.inotify.logger.MessageOnlyLogFilter;
 
 import static com.example.inotify.dbHelpers.MainDbHelp.DATABASE_NAME;
 
 public class SettingsActivity extends AppCompatActivity {
+    private boolean mLogShown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+                LogWrapper logWrapper = new LogWrapper();
+                com.example.inotify.logger.Log.setLogNode(logWrapper);
+
+                MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
+                logWrapper.setNext(msgFilter);
+
+                LogFragment logFragment = (LogFragment) getSupportFragmentManager().findFragmentById(R.id.log_fragment);
+                msgFilter.setNext(logFragment.getLogView());
+
+
+
     }
 
     public void button_resetDb(final View view) {
@@ -70,4 +87,10 @@ public class SettingsActivity extends AppCompatActivity {
         JobScheduler jobScheduler = (JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         jobScheduler.cancelAll();
     }
+
+    public void test(View view) {
+        Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXX");
+    }
+
+
 }

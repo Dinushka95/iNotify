@@ -16,7 +16,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.inotify.R;
-import com.example.inotify.dbHelpers.NV_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
 import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
@@ -26,7 +26,7 @@ import com.example.inotify.helpers.FeedbackYesIntent;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
-import com.example.inotify.helpers.UserAttentivness;
+import com.example.inotify.helpers.MainUserAttentivness;
 import com.example.inotify.models.NotificationModel;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +37,7 @@ import java.util.Locale;
 public class MyNotificationListenerService extends NotificationListenerService {
 
     String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+
     String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
 
@@ -49,7 +50,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
 
-        String pid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+        String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+        Log.d("inotifyC" , "pid ============" +id);
         String apppack = null;
         Intent LaunchIntent = null;
         PackageManager pm=null;
@@ -62,11 +64,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
         Log.d("inotify", "Main-MyNotificationListenerService--packageName---" + sbn.getPackageName());
 
-        if ((sbn.getPackageName().equals("com.example.dinu.testa") || sbn.getPackageName().equals("com.example.dinu.testb") || sbn.getPackageName().equals("com.example.dinu.testc") || sbn.getPackageName().equals("com.example.dinu.testd") || sbn.getPackageName().equals("com.example.myapplication") || sbn.getPackageName().equals("com.whatsapp") || sbn.getPackageName().equals("com.facebook.orca") || sbn.getPackageName().equals("com.google.android.apps.messaging"))) {
+        if ((sbn.getPackageName().equals("com.example.dinu.testa") || sbn.getPackageName().equals("com.example.dinu.testb") || sbn.getPackageName().equals("com.example.dinu.testc") || sbn.getPackageName().equals("com.example.dinu.testd") || sbn.getPackageName().equals("com.example.myapplication") || sbn.getPackageName().equals("com.whatsapp") || sbn.getPackageName().equals("com.facebook.orca") || sbn.getPackageName().equals("com.google.android.apps.messaging")
+        || sbn.getPackageName().equals("com.android.mms"))) {
 
 
             pack = sbn.getPackageName();
-            //String pid = sbn.getNotification().tickerText.toString();
             nid = sbn.getId();
 
             Bundle extras = sbn.getNotification().extras;
@@ -81,31 +83,29 @@ public class MyNotificationListenerService extends NotificationListenerService {
             cancelNotification(sbn.getKey());
             Log.d("inotify", "Main-MyNotificationListenerService--Cancel original Notification---");
 
-
+            
             pm = this.getPackageManager();
              apppack = pack;
 
 
             //Test
-            NV_DbHelper pratest = new NV_DbHelper(this);
-            pratest.probability_insert(pid,0);
+            NotificationViewability_DbHelper pratest = new NotificationViewability_DbHelper(this);
+            //pratest.probability_insert(pid,0);
             pratest.close();
-
+//Chaya
             //call the isPhoneLowckedOrNot method here
             ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
-            Boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
+            boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
             Log.d("inotifyC ", "ScreenStatus On Notification recive" + screenstatus);
-            if (screenstatus == false) {
+            if (!screenstatus) {
                 //Save to screen on table
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
-                // String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-                screenStatusDbHelper.ScreenOnInsert(id);
+                screenStatusDbHelper.screenOnWithNotificationInsert(id);
                 screenStatusDbHelper.close();
                 Log.d("inotifyC", "SCreen status Saved");
             } else {
-                //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
-                screenStatusDbHelper.ScreenOffInsert(id);
+                screenStatusDbHelper.screenOffWithNotificationInsert(id);
                 screenStatusDbHelper.close();
                 Log.d("inotifyC", "SCreen off status Saved");
 
@@ -233,106 +233,95 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
-
+        if (sbn.getPackageName().equals("com.example.inotify")) {
+            String ticker = sbn.getNotification().tickerText.toString();
+            Log.d("inotifyC", "ticcker ==============" + ticker);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////PUT YOUR CODE IN BETWEEN THESE LINES////////////////////////////////////
+            /////////////////////////PUT YOUR CODE IN BETWEEN THESE LINES////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---start");
+            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---start");
 
 
-        //if (ticker = )
-        // String Viewtime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-
-
-        //chaya
-        // if (sbn.getPackageName().equals("com.example.inotify")) {
-
-
-
-        //PRASHAN
-
-        if (sbn.getPackageName().equals("com.example.inotify")){
-            String tickert = sbn.getNotification().tickerText.toString();
-            //String removedId = extrasremoved.getString("myid");
-            Log.d("Notification ticker", "onNotificationRemoved: " + tickert);
-            NV_DbHelper proUP = new NV_DbHelper(this);
-            proUP.probability_Update(tickert);
-
-        }
-
-
-        Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-" + sbn.getPackageName());
-        if (sbn.getPackageName().equals("com.example.inotify")) {
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-" + sbn.getPackageName());
+            if (sbn.getPackageName().equals("com.example.inotify")) {
+                Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-" + sbn.getPackageName());
 
-            //*******************************************
-            /// start from here//
-            //*******************************************
-            int totalnotificationinlist = 0;
-            StatusBarNotification[] notificationManager1 = getActiveNotifications();
+                //*******************************************
+                /// start from here//
+                //*******************************************
+                int totalnotificationinlist = 0;
+                StatusBarNotification[] notificationManager1 = getActiveNotifications();
 
-            for (StatusBarNotification notification : notificationManager1) {
-                if (sbn.getPackageName().equals("com.example.inotify")) {
-                    totalnotificationinlist = totalnotificationinlist + 1;
+
+                for (StatusBarNotification notification : notificationManager1) {
+                    if (sbn.getPackageName().equals("com.example.inotify")) {
+                        totalnotificationinlist = totalnotificationinlist + 1;
+
+                    }
                 }
+                int notificationTotal = totalnotificationinlist;
+
+
+                NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this);
+                String Appname = notificationDbHelper.AppnameGet(ticker);
+                String notificationRecivedTime = notificationDbHelper.recivedTimeGet(ticker);
+                String notificationViwedTime = notificationDbHelper.viewTimeGet(ticker);
+                // notificationDbHelper.close();
+
+                NotificationImportnaceDbHelper notificationImportnaceDbHelper = new NotificationImportnaceDbHelper(this);
+                notificationImportnaceDbHelper.NotificationImportnaceInsert(ticker, Appname, totalnotificationinlist);
+                Log.d("inotify(^_^)", "Notification importnace table saved");
+                String Seqence = notificationImportnaceDbHelper.NotificationImportnaceGet(ticker);
+                // notificationImportnaceDbHelper.close();
+
+                RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
+                String Ringermode = ringerModeDbHelper.RingerModeGet(ticker);
+
+                // ringerModeDbHelper.close();
+
+/*
+                ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
+                String tablename = screenStatusDbHelper.checkAvaulability(ticker);
+                String screenStatus = new String(" ");
+                if (tablename == "SCREENON_TABLE") {
+                    String ScreenOnStatus = screenStatusDbHelper.screenOnStatusGet();
+                    screenStatus = "on";
+                } else {
+                    String ScreenOffStstus = screenStatusDbHelper.screenOffStatusGet();
+                    screenStatus = "off";
+                }
+*/
+
+              //  Log.d("inotify(^_^)", "Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
+                // double attentivnessvalue = 0.0;
+                MainUserAttentivness mainUserAttentivness = new MainUserAttentivness();
+             //   double attentivnessvalue = mainUserAttentivness.calculateAttentivness(ticker, screenStatus, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
+           //     Log.d("inotify(^_^)", "attentivness for  " + ticker + " notification is = " + attentivnessvalue);
+
+                UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+           //     userAttentivnessDbHelper.UserAttentivnessInsert(ticker, Appname, attentivnessvalue);
+            //   userAttentivnessDbHelper.close();
+           //     Log.d("inotify(^_^ )", "Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
+
+                String resList[] = userAttentivnessDbHelper.TotalAttentivness(Appname);
+                Log.d("inotify(^_^ )" , "result list " +resList[1] +" " + resList[2] +" "+ resList[3] +" " +resList[4]);
+                userAttentivnessDbHelper.calculateTotalAttentivness(ticker,Appname);
+                Log.d("inotify(^_^ )" , "Total Attentivness succcessfully added");
+                //}
+
+                //*******************************************
+                /// stop from here//
+                //  for(StatusBarNotification notification :notificationManager1) {
+                //*******************************************
+
+                Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");
             }
-            int notificationTotal = totalnotificationinlist;
 
-            NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this);
-            String Appname = notificationDbHelper.AppnameGet(id);
-            String notificationRecivedTime = notificationDbHelper.recivedTimeGet(id);
-            String notificationViwedTime = notificationDbHelper.viewTimeGet(id);
-            // notificationDbHelper.close();
-
-            NotificationImportnaceDbHelper notificationImportnaceDbHelper = new NotificationImportnaceDbHelper(this);
-            notificationImportnaceDbHelper.NotificationImportnaceInsert(id, Appname, totalnotificationinlist);
-            Log.d("inotify(^_^)", "Notification importnace table saved");
-            String Seqence = notificationImportnaceDbHelper.NotificationImportnaceGet(id);
-            // notificationImportnaceDbHelper.close();
-
-            RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
-            String Ringermode = ringerModeDbHelper.RingerModeGet(id);
-
-            // ringerModeDbHelper.close();
-
-            ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
-            String tablename = screenStatusDbHelper.checkAvaulability(id);
-            String screenStatus = new String(" ");
-            if (tablename == "UA_SCREENON_TABLE") {
-                String ScreenOnStatus = screenStatusDbHelper.ScreenOnStatusGet();
-                screenStatus = "on";
-            } else {
-                String ScreenOffStstus = screenStatusDbHelper.ScreenOffStatusGet();
-                screenStatus = "off";
-            }
-
-            Log.d("inotify(^_^)", "Data to clculate attentivness = " + id + " " + Ringermode + " " + screenStatus + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
-            // double attentivnessvalue = 0.0;
-            UserAttentivness userAttentivness = new UserAttentivness();
-            double attentivnessvalue = userAttentivness.calculateAttentivness(id, screenStatus, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
-            //attentivnessvalue = userAttentivness.calculateAttentivness(id,screenStatus,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
-            Log.d("inotify(^_^)", "attentivness for  " + id + " notification is = " + attentivnessvalue);
-
-            UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-            userAttentivnessDbHelper.UserAttentivnessInsert(id, Appname, attentivnessvalue);
-            userAttentivnessDbHelper.close();
-            Log.d("inotify(^_^ )", "Attentivness inserted successfully  " + id + "  " + Appname + "  " + attentivnessvalue);
-
-            //}
-
-            //*******************************************
-            /// stop from here//
-            //  for(StatusBarNotification notification :notificationManager1) {
-            //*******************************************
-
-            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");
         }
 
-    }
 
-
-}
+    }}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////

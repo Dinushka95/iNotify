@@ -3,8 +3,6 @@ package com.example.inotify.services;
 import android.Manifest;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.app.usage.UsageStats;
-import android.app.usage.UsageStatsManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -14,20 +12,19 @@ import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 
+import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
+import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.models.ContactsModel;
-import com.example.inotify.helpers.UC_CalenderEvent;
-import com.example.inotify.dbHelpers.UC_DbHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class UC_all_service extends JobService {
+public class UserCharacteristics_service extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
@@ -56,9 +53,9 @@ public class UC_all_service extends JobService {
 
         count = packages.size();
 
-        UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
-        UC_DbHelper.appListcount_insert(String.valueOf(count));
-        UC_DbHelper.close();
+        UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(this);
+        UserCharacteristics_DbHelper.appListcount_insert(String.valueOf(count));
+        UserCharacteristics_DbHelper.close();
 
     }
 
@@ -108,9 +105,9 @@ public class UC_all_service extends JobService {
         }
 
         int count = myList.size();
-        UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
-        UC_DbHelper.contactCount_insert(String.valueOf(count));
-        UC_DbHelper.close();
+        UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(this);
+        UserCharacteristics_DbHelper.contactCount_insert(String.valueOf(count));
+        UserCharacteristics_DbHelper.close();
 
     }
 
@@ -131,21 +128,21 @@ public class UC_all_service extends JobService {
                     totalDuration = totalDuration + Integer.valueOf(duration);
                 }
             }
-            UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
-            UC_DbHelper.callduration_insert(String.valueOf(totalDuration));
-            UC_DbHelper.close();
+            UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(this);
+            UserCharacteristics_DbHelper.callduration_insert(String.valueOf(totalDuration));
+            UserCharacteristics_DbHelper.close();
         }
     }
 
     public void getCalenderEvent(Context context) {
 
-        UC_CalenderEvent UC_calenderEvent = new UC_CalenderEvent();
-        String x = UC_calenderEvent.getcalanderEventCount(context);
+        CalenderEventHelper calenderEvent = new CalenderEventHelper();
+        String x = calenderEvent.getcalanderEventCount(context);
 
 
-        UC_DbHelper UC_DbHelper = new UC_DbHelper(context);
-        UC_DbHelper.calenderEventCount_insert(x);
-        UC_DbHelper.close();
+        UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(context);
+        UserCharacteristics_DbHelper.calenderEventCount_insert(x);
+        UserCharacteristics_DbHelper.close();
     }
 
 
@@ -164,9 +161,9 @@ public class UC_all_service extends JobService {
             }
         }
 
-        UC_DbHelper UC_DbHelper = new UC_DbHelper(this);
-        //UC_DbHelper.appusagecount_insert(String.valueOf(count));
-        UC_DbHelper.close();
+        UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(this);
+        //UserCharacteristics_DbHelper.appusagecount_insert(String.valueOf(count));
+        UserCharacteristics_DbHelper.close();
     }
 
 }
