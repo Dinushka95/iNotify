@@ -9,6 +9,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -37,6 +38,9 @@ import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.helpers.UC_CalenderEvent;
+import com.example.inotify.logger.LogFragment;
+import com.example.inotify.logger.LogWrapper;
+import com.example.inotify.logger.MessageOnlyLogFilter;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.NV_ActivityRecognitionService;
@@ -204,6 +208,9 @@ public class MainMenuActivity extends AppCompatActivity implements
         } else {
             Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
         }
+
+
+
 
     }
 

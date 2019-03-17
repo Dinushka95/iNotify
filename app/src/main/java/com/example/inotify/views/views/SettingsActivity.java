@@ -1,7 +1,6 @@
 package com.example.inotify.views.views;
 
 import android.app.AlarmManager;
-import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.app.job.JobScheduler;
 import android.content.Context;
@@ -10,20 +9,36 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.logger.Log;
+import com.example.inotify.logger.LogFragment;
+import com.example.inotify.logger.LogWrapper;
+import com.example.inotify.logger.MessageOnlyLogFilter;
 
 import static com.example.inotify.dbHelpers.MainDbHelp.DATABASE_NAME;
 
 public class SettingsActivity extends AppCompatActivity {
+    private boolean mLogShown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+                LogWrapper logWrapper = new LogWrapper();
+                com.example.inotify.logger.Log.setLogNode(logWrapper);
+
+                MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
+                logWrapper.setNext(msgFilter);
+
+                LogFragment logFragment = (LogFragment) getSupportFragmentManager().findFragmentById(R.id.log_fragment);
+                msgFilter.setNext(logFragment.getLogView());
+
+
+
     }
 
     public void button_resetDb(final View view) {
