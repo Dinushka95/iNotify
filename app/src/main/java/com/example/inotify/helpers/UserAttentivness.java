@@ -2,6 +2,7 @@ package com.example.inotify.helpers;
 
 import android.util.Log;
 
+import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.services.MyNotificationListenerService;
 
 public class UserAttentivness  {
@@ -33,45 +34,6 @@ public class UserAttentivness  {
         Log.d("inotifyx", "screenstatus " + screenstatus);
         Log.d("inotifyx", "Sequence " + Sequence);
         Log.d("inotifyx", "notificationTotal " + notificationTotal);
-
-
-//        switch (RingerMode){
-//            case "normal":
-//                System.out.print("normal");
-//                break;
-//            case "vibrate":
-//                System.out.print("vibrate");
-//                break;
-//            case "silent":
-//                System.out.print("vibrate");
-//                break;
-//            default:
-//                System.out.print("error");
-//
-//
-//        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         // if(notificationSequence <= seqenceAvg )
@@ -347,5 +309,13 @@ public class UserAttentivness  {
 
     }
         return Attentivnes  ;
-    }}
+    }
+
+
+
+
+
+
+}
+
 
