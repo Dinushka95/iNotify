@@ -42,6 +42,7 @@ public class TabSmartNotificationFragment extends Fragment {
 
     RecyclerView recyclerView;
     private SmartNotificationRecyclerViewAdapter adapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -85,8 +86,7 @@ public class TabSmartNotificationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
         View rootView = inflater.inflate(R.layout.fragment_tab_smart_notification, container, false);
@@ -102,7 +102,7 @@ public class TabSmartNotificationFragment extends Fragment {
 
         SmartNotificationLogic smartNotificationLogic = new SmartNotificationLogic(getContext());
         List<NotificationModel> data = smartNotificationLogic.getNotificationList();             //fill_with_data();
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerviewsmartnotification);
         adapter = new SmartNotificationRecyclerViewAdapter(data, getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
