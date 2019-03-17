@@ -1,18 +1,16 @@
 package com.example.inotify.views.views;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
-import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
-
-
+import com.example.inotify.helpers.CalenderEventHelper;
 
 public class UsercharacteristicsActivity extends AppCompatActivity {
 
@@ -70,20 +68,30 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
 
 
+
     }
 
     public void test2(View view) {
 
-          ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+       //   ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
          // applicationsHelper.saveCurrentPhoneApps();
 
-        applicationsHelper.appCountGet();
+       // applicationsHelper.appCountGet();
 
 //        List<AppInfoModel> apps  =  new ArrayList<AppInfoModel>();
 //        applicationsHelper.appInfoInsert(apps);
 
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+       // ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
        // applicationDbHelper.updateCategory();
+        CalenderEventHelper calenderEvent = new CalenderEventHelper(this);
+        calenderEvent.updateTodayCalendar();
+
+       // Log.d("inotify","aaaaaaaaaaaaaaaa");
+
+        //CalenderEventDbHelper calenderEventDbHelper = new CalenderEventDbHelper(this);
+        //calenderEventDbHelper.checkIfExist();
+
+
 
 
     }

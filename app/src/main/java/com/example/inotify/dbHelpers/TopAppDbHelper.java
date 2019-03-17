@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.ApplicationInfoModel;
 
@@ -14,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
-import static com.example.inotify.configs.TbNames.TOPAPP_TABLE;
+
 
 public class TopAppDbHelper extends MainDbHelp {
 
@@ -29,7 +27,7 @@ public class TopAppDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPP_TABLE + " where APPCATEGORY = \"social\"", null);
+        Cursor res = db.rawQuery("select * from " +TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"social\"", null);
         if (res != null) {
 
             if (res.moveToFirst()) {
@@ -55,7 +53,7 @@ public class TopAppDbHelper extends MainDbHelp {
 
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"communication\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"communication\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -79,7 +77,7 @@ public class TopAppDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"gaming\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"gaming\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -101,7 +99,7 @@ public class TopAppDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"dating\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"dating\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -122,7 +120,7 @@ public class TopAppDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"education\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"education\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -142,7 +140,7 @@ public class TopAppDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"entertainment\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"entertainment\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -161,7 +159,7 @@ public class TopAppDbHelper extends MainDbHelp {
 
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"productivity\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"productivity\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -181,7 +179,7 @@ public class TopAppDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"tool\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"tool\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -199,7 +197,7 @@ public class TopAppDbHelper extends MainDbHelp {
     public List<ApplicationInfoModel> topAppBusinessGet() {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"business\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"business\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -219,7 +217,7 @@ public class TopAppDbHelper extends MainDbHelp {
 
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TOPAPP_TABLE + " where APPCATEGORY = \"musicvideo\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"musicvideo\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {

@@ -1,5 +1,6 @@
 package com.example.inotify.views.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,16 +10,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.models.NotificationModel;
+import com.example.inotify.models.ProfileModel;
 import com.example.inotify.viewControllers.logic.SmartNotificationLogic;
 import com.example.inotify.listners.CustomRVItemTouchListener;
 import com.example.inotify.interfaces.RecyclerViewItemClickListener;
 import com.example.inotify.viewControllers.adapters.SmartNotificationRecyclerViewAdapter;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +42,7 @@ public class TabSmartNotificationFragment extends Fragment {
 
     RecyclerView recyclerView;
     private SmartNotificationRecyclerViewAdapter adapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -75,8 +86,7 @@ public class TabSmartNotificationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
         View rootView = inflater.inflate(R.layout.fragment_tab_smart_notification, container, false);
@@ -92,7 +102,7 @@ public class TabSmartNotificationFragment extends Fragment {
 
         SmartNotificationLogic smartNotificationLogic = new SmartNotificationLogic(getContext());
         List<NotificationModel> data = smartNotificationLogic.getNotificationList();             //fill_with_data();
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerviewsmartnotification);
         adapter = new SmartNotificationRecyclerViewAdapter(data, getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -102,8 +112,21 @@ public class TabSmartNotificationFragment extends Fragment {
 
         recyclerView.addOnItemTouchListener(new CustomRVItemTouchListener(this.getContext(), recyclerView, new RecyclerViewItemClickListener() {
             @Override
-            public void onClick(View view, int position) {
-                Toast.makeText(getContext(), "Clicked at " + position, Toast.LENGTH_SHORT).show();
+            public void onClick(View view1, int position) {
+
+
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.popup_smart_notification);
+                //dialog.setCancelable(false);
+               // dialog.setCanceledOnTouchOutside(false);
+               /* Button button = dialog.findViewById(R.id.button11);
+                button.setOnClickListener(view -> {
+                    // save to db -- create a new profile
+                    Toast.makeText(getContext(), "Clicked at " + position, Toast.LENGTH_SHORT).show();
+                });*/
+                TextView textView = dialog.findViewById(R.id.showdetails_snp);
+                textView.setText("Show Details "+position);
+                dialog.show();
             }
 
             @Override

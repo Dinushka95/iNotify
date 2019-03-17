@@ -27,22 +27,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.helpers.All_ScreenLock;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.ProfileHelper;
+import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.TopAppsHelper;
-import com.example.inotify.helpers.UC_CalenderEvent;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.ProfileModel;
-import com.example.inotify.services.NV_ActivityRecognitionService;
-import com.example.inotify.services.NV_LocationService;
-import com.example.inotify.services.NV_NotificationViewabilityService;
-import com.example.inotify.services.UC_all_service;
+import com.example.inotify.services.ActivityRecognitionService;
+import com.example.inotify.services.LocationService;
+import com.example.inotify.services.NotificationViewabilityService;
+import com.example.inotify.services.UserCharacteristics_service;
 import com.example.inotify.viewControllers.adapters.MainMenuPagerAdapter;
 import com.example.inotify.views.fragments.TabAllNotificationsFragment;
 import com.example.inotify.views.fragments.TabApplicationFragment;
@@ -65,6 +66,7 @@ public class MainMenuActivity extends AppCompatActivity implements
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    TextView textViewProfile;
 
 
     @Override
@@ -88,6 +90,11 @@ public class MainMenuActivity extends AppCompatActivity implements
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.bringToFront();
+
+        View headerView = navigationView.getHeaderView(0);
+        textViewProfile = (TextView) headerView.findViewById(R.id.profilename);
+
+
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // set item as selected to persist highlight
 
@@ -199,7 +206,8 @@ public class MainMenuActivity extends AppCompatActivity implements
                 MyConstants.PERMISSION_CALENDER &&
                 MyConstants.PERMISSION_PHONE &&
                 MyConstants.PERMISSION_NOTIFICATIONACCESS &&
-                MyConstants.PERMISSION_USEAGEACCESS) {
+                MyConstants.PERMISSION_USEAGEACCESS)
+        {
             tt();
         } else {
             Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
@@ -226,7 +234,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         mActivityRecognitionClient.requestActivityUpdates(0, getActivityDetectionPendingIntent());
 
 
-        ComponentName componentName = new ComponentName(MainMenuActivity.this, NV_LocationService.class);
+        ComponentName componentName = new ComponentName(MainMenuActivity.this, LocationService.class);
         JobInfo info = new JobInfo.Builder(MyConstants.MY_LOCATION_LISTENER_SERVEC_ID, componentName)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -238,7 +246,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         int resultCode = scheduler != null ? scheduler.schedule(info) : 0;
 
 
-        ComponentName componentName1 = new ComponentName(MainMenuActivity.this, NV_NotificationViewabilityService.class);
+        ComponentName componentName1 = new ComponentName(MainMenuActivity.this, NotificationViewabilityService.class);
         JobInfo info1 = new JobInfo.Builder(MyConstants.MY_BUSYORNOT_SERVEC_ID, componentName1)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -250,7 +258,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         int resultCode1 = scheduler1 != null ? scheduler1.schedule(info1) : 0;
 
 
-        ComponentName componentName2 = new ComponentName(MainMenuActivity.this, UC_all_service.class);
+        ComponentName componentName2 = new ComponentName(MainMenuActivity.this, UserCharacteristics_service.class);
         JobInfo info2 = new JobInfo.Builder(MyConstants.MY_MIT_ALL_SERVEC_ID, componentName2)
                 .setRequiresCharging(false)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -261,10 +269,10 @@ public class MainMenuActivity extends AppCompatActivity implements
         JobScheduler scheduler2 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode2 = scheduler2.schedule(info2);
 
-
+        // has to test because screen off  doen't work proprly with manifest file. need to do it in code
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver mReceiver = new All_ScreenLock();
+        BroadcastReceiver mReceiver = new ScreenStatusHelper();
         registerReceiver(mReceiver, intentFilter);
 
     }
@@ -276,6 +284,10 @@ public class MainMenuActivity extends AppCompatActivity implements
         ProfileHelper profileHelper = new ProfileHelper(this);
         if (profileHelper.profileisExisCheck()) {
             //load settings
+            if(profileHelper.profileisExisCheck()) {
+                ProfileModel profileModel = profileHelper.get();
+                textViewProfile.setText(profileModel.getName());
+            }
         } else {
             //show signup
             final Dialog dialog = new Dialog(this);
@@ -318,6 +330,11 @@ public class MainMenuActivity extends AppCompatActivity implements
                     //if sucessfull
                     Toast.makeText(getApplicationContext(), "Successfully Saved User Details", Toast.LENGTH_LONG).show();
                     dialog.dismiss();
+                    if(profileHelper.profileisExisCheck()) {
+                        ProfileModel profileModel = profileHelper.get();
+                        textViewProfile.setText(profileModel.getName());
+                    }
+
                 } else {
                     //if failed
                     Toast.makeText(getApplicationContext(), "Failed To Save User Details", Toast.LENGTH_LONG).show();
@@ -328,7 +345,7 @@ public class MainMenuActivity extends AppCompatActivity implements
     }
 
     private PendingIntent getActivityDetectionPendingIntent() {
-        return PendingIntent.getService(this, 30, new Intent(this, NV_ActivityRecognitionService.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getService(this, 30, new Intent(this, ActivityRecognitionService.class), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
 
@@ -337,82 +354,6 @@ public class MainMenuActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
-
-    public void testMihitha(View view) {
-
-        TopAppsHelper topAppsHelper = new TopAppsHelper(view.getContext());
-        List<ApplicationInfoModel> topgamingapp = topAppsHelper.topAppGaming();
-
-        for (ApplicationInfoModel value : topgamingapp) {
-            Log.d("inotify", "gaming top apps - " + value.getAppName());
-        }
-
-        //TopAppsHelper topAppsHelper2 = new TopAppsHelper(view.getContext());
-
-        List<ApplicationInfoModel> topCommunicationApp = topAppsHelper.topAppCommunication();
-        for (ApplicationInfoModel value : topCommunicationApp) {
-            Log.d("inotify", "communication top apps - " + value.getAppName());
-        }
-
-        ApplicationsHelper applicationsHelper = new ApplicationsHelper(view.getContext());
-        List<ApplicationInfoModel> myGamingApp = applicationsHelper.myGamingAppGet();
-        for (ApplicationInfoModel value : myGamingApp) {
-            Log.d("inotify", "my gaming apps - " + value.getAppName());
-        }
-
-        int gamingCount = applicationsHelper.commonGamingAppCount();
-        Log.d("inotify", "gaming count - " + gamingCount);
-
-        List<ApplicationInfoModel> myCommunicationApp = applicationsHelper.myCommunicationAppGet();
-
-        for (ApplicationInfoModel value : myCommunicationApp) {
-            Log.d("inotify", "my Communication apps - " + value.getAppName());
-        }
-
-        int communicationCount = applicationsHelper.commonCommunicationAppCount();
-        Log.d("inotify", "Communication count - " + communicationCount);
-
-        List<ApplicationInfoModel> topMusicVideoApp = topAppsHelper.topAppMusicVideo();
-        for (ApplicationInfoModel value : topMusicVideoApp) {
-            Log.d("inotify", "top music and video apps - " + value.getAppName());
-        }
-
-        List<ApplicationInfoModel> myMusicVideoApp = applicationsHelper.myMusicVideoAppGet();
-        for (ApplicationInfoModel value : myMusicVideoApp) {
-            Log.d("inotify", "my music apps - " + value.getAppName());
-        }
-
-        int MusicVideoCount = applicationsHelper.commonMusicVideoAppCount();
-        Log.d("inotify", "MusicVideoCount count - " + MusicVideoCount);
-
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-        applicationDbHelper.appCategoryCount();
-
-        UC_CalenderEvent uc_calenderEvent = new UC_CalenderEvent();
-        uc_calenderEvent.getcalanderEventCount(this);
-
-        //applicationsHelper.saveCurrentPhoneApps();
-        //for insert the apps to database
-    }
-
-    public void testChaya(View view) {
-
-    }
-
-    public void testPrashan(View view) {
-
-    }
-
-    public void testDinu(View view) {
-        Intent intent = new Intent(MainMenuActivity.this, MainMenuActivity.class);
-        startActivity(intent);
-    }
-
-    public void testCategory(View view) {
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-        applicationDbHelper.updateCategory();
-
-    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {

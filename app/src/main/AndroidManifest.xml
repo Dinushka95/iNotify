@@ -38,18 +38,18 @@
         </activity>
 
         <service
-            android:name=".services.NV_ActivityRecognitionService"
+            android:name=".services.ActivityRecognitionService"
             android:exported="false" />
         <service
-            android:name=".services.NV_LocationService"
+            android:name=".services.LocationService"
             android:label="LocationService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".services.UC_all_service"
+            android:name=".services.UserCharacteristics_service"
             android:label="Mit_all_service"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name=".services.NV_NotificationViewabilityService"
+            android:name=".services.NotificationViewabilityService"
             android:label="BusyOrNotBackgroundService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
@@ -68,7 +68,7 @@
             android:exported="false" />
 
         <receiver
-            android:name=".helpers.All_ScreenLock"
+            android:name=".helpers.ScreenStatusHelper"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -76,6 +76,7 @@
                 <action android:name="android.intent.action.SCREEN_ON" />
             </intent-filter>
         </receiver>
+
         <receiver
             android:name=".broadcastReceivers.ChargerBR"
             android:enabled="true"

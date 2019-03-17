@@ -1,6 +1,7 @@
 package com.example.inotify.viewControllers.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,41 +14,27 @@ import com.example.inotify.models.ViewHolderModel;
 import java.util.Collections;
 import java.util.List;
 
-
-public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolderModel> {
+public class AllNotificationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolderModel>  {
 
     List<NotificationModel> list = Collections.emptyList();
     Context context;
 
-    public SmartNotificationRecyclerViewAdapter(List<NotificationModel> list, Context context) {
+    public AllNotificationRecyclerViewAdapter(List<NotificationModel> list, Context context) {
         this.list = list;
         this.context = context;
-        this.notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ViewHolderModel onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_smart_notification, viewGroup, false);
+    public ViewHolderModel onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_all_notification, viewGroup, false);
         ViewHolderModel viewHolderModel = new ViewHolderModel(v);
         return viewHolderModel;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderModel holder, int position) {
-        holder.title.setText(list.get(position).getId());
-        //holder.description.setText(list.get(position).description);
-        // holder.imageView.setImageResource(list.get(position).imageId);
-      /*  holder.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXDDDDDDDDDDDDD");
-                Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXDDDDDDDDDDDDD");
-
-            }
-        });*/
-
-        //animate(holder);
+    public void onBindViewHolder(@NonNull ViewHolderModel viewHolderModel, int i) {
+        viewHolderModel.title.setText(list.get(i).getId());
     }
 
     @Override
@@ -72,6 +59,4 @@ public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<V
         list.remove(position);
         notifyItemRemoved(position);
     }
-
-
 }

@@ -48,25 +48,29 @@ public class TbColNames {
     public static final String RM_TIME = "rm_time";
     public static final String RM_RINGERMODE ="rm_ringermode";
 
-    ////screenon
+    ////screenStatus
+    public static final String SCREENSTATUS_ID = "screenstatusid";
+    //public static final String DATE = "date";
+    //public static final String NOTIFICATIONID = "notificationid";
     public static final String TIMEON = "timeon";
-    //public static final String NOTIFICATIONID = "notificationid";
-
-    //ScrennOff
     public static final String TIMEOFF = "timeoff";
-    //public static final String NOTIFICATIONID = "notificationid";
 
 
-    //NotificationImportnace
+    //NotificationImportance
     public static final String NOTIFICATIONIID = "notificationiid";
     public static final String APPLICATIONNAME = "applicationname";
     public static final String SEQUENCEVALUE ="sequencevalue";
 
 
-    //UserAttentivness
+    //MainUserAttentivness
     public static final String NID ="nid";
     public static final String APPLICATION ="application";
     public static final String ATTENTIVNESSVALUE = "attentivnessvalue";
+
+    //AttentivnesssperApp
+   // public static final String APPNAME ="appname";
+    public static final String TOTALATTENTIVNESS = "totalattentivness";
+
 
     ////smart notification system
     // notification all notifications
@@ -125,14 +129,23 @@ public class TbColNames {
     public static final String USAGETIME="UsageTime";
 
     //Application count
-
-    public static final String APPCOUNT_ID = "account_ID";
+    public static final String TOPAPPCOUNT_ID = "topappcount_ID";
     public static final String SOCIALAPPCOUNT = "socialappcount";
     public static final String GAMINGAPPCOUNT = "gamingappcount";
     public static final String EDUCATIONAPPCOUNT = "educationappcount";
     public static final String DATINGAPPCOUNT = "datingappcount";
     public static final String MUSICVIDEOAPPCOUNT = "musicvideoappcount";
     public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
+
+
+    //Application count
+    public static final String APPCOUNT_ID = "account_ID";
+    //public static final String SOCIALAPPCOUNT = "socialappcount";
+    //public static final String GAMINGAPPCOUNT = "gamingappcount";
+    //public static final String EDUCATIONAPPCOUNT = "educationappcount";
+   // public static final String DATINGAPPCOUNT = "datingappcount";
+    //public static final String MUSICVIDEOAPPCOUNT = "musicvideoappcount";
+    //public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
 
     //Application  table
 

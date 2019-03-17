@@ -14,7 +14,7 @@
         tools:context=".views.views.UserAttentivenessActivity">
 
 
-        <include layout="@layout/content_notification" />
+        <include layout="@layout/content_smart_notification" />
 
 
     </android.support.design.widget.CoordinatorLayout>
