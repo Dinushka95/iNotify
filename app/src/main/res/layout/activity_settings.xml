@@ -11,6 +11,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <fragment
+            android:name="com.example.inotify.logger.LogFragment"
+            android:id="@+id/log_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
@@ -74,6 +81,14 @@
             android:layout_marginTop="8dp"
             android:text="Cancel All Jobs"
             android:onClick="cancelAllJobs" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="test"
+            android:text="Button" />
+
 
     </android.support.v7.widget.LinearLayoutCompat>
 

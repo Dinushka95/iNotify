@@ -1,5 +1,6 @@
 package com.example.inotify.views.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,9 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.inotify.R;
+import com.example.inotify.interfaces.RecyclerViewItemClickListener;
+import com.example.inotify.listners.CustomRVItemTouchListener;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.NotificationModel;
 import com.example.inotify.viewControllers.adapters.INotifyActiveAppsRecyclerViewAdapter;
@@ -99,6 +104,35 @@ public class TabApplicationFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        recyclerView.addOnItemTouchListener(new CustomRVItemTouchListener(this.getContext(), recyclerView, new RecyclerViewItemClickListener() {
+            @Override
+            public void onClick(View view1, int position) {
+
+
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.popup_active_application);
+                //dialog.setCancelable(false);
+                // dialog.setCanceledOnTouchOutside(false);
+               /* Button button = dialog.findViewById(R.id.button11);
+                button.setOnClickListener(view -> {
+                    // save to db -- create a new profile
+                    Toast.makeText(getContext(), "Clicked at " + position, Toast.LENGTH_SHORT).show();
+                });*/
+                TextView textView = dialog.findViewById(R.id.showdetails_aap);
+                textView.setText("Show Details "+position);
+                dialog.show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(getContext(), "LongClicked at " + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onChangeSw(Boolean checked) {
+                Toast.makeText(getContext(), "SSSSSSSSSSSSSSSSSSS" + checked.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }));
 
         return rootView;
     }

@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
+import java.util.Objects;
 
 
 public class ScreenStatusDbHelper extends MainDbHelp {
@@ -23,17 +23,44 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         super(context);
     }
 
-    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
-    public boolean ScreenOnInsert(String id){
+    public boolean screenOnInsert(){
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String time = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
-        Calendar cal = Calendar.getInstance();
-        cal.set(Integer.valueOf(new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date())),
-        (Integer.valueOf(new SimpleDateFormat("MM", Locale.getDefault()).format(new Date())) - 1),
-        Integer.valueOf(new SimpleDateFormat("dd", Locale.getDefault()).format(new Date())));
-        String day = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TbColNames.DATE , date);
+        contentValues.put(TbColNames.TIMEON , time);
+
+        long result = db.insert(TbNames.SCREENSTATUS_TABLE,null,contentValues);
+        db.close();
+        return result != -1;
+
+
+    }
+
+    public boolean screenOffInsert(){
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        String time = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TbColNames.DATE , date);
+        contentValues.put(TbColNames.TIMEOFF,time);
+
+        long result = db.insert(TbNames.SCREENSTATUS_TABLE,null,contentValues);
+        db.close();
+        return result != -1;
+
+
+    }
+
+    public boolean screenOnWithNotificationInsert(String id){
+
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        String time = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -41,25 +68,16 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         contentValues.put(TbColNames.DATE , date);
         contentValues.put(TbColNames.TIMEON , time);
 
-        long result = db.insert(TbNames.UA_SCREENON_TABLE ,null,contentValues);
+        long result = db.insert(TbNames.SCREENSTATUS_TABLE,null,contentValues);
         db.close();
-        if(result == -1){
-            return false;
-        }
-        else
-            return true;
+        return result != -1;
 
 
     }
 
-    public boolean ScreenOffInsert(String id){
+    public boolean screenOffWithNotificationInsert(String id){
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String time = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
-        Calendar cal = Calendar.getInstance();
-        cal.set(Integer.valueOf(new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date())),
-                (Integer.valueOf(new SimpleDateFormat("MM", Locale.getDefault()).format(new Date())) - 1),
-                Integer.valueOf(new SimpleDateFormat("dd", Locale.getDefault()).format(new Date())));
-        String day = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -67,79 +85,33 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         contentValues.put(TbColNames.DATE , date);
         contentValues.put(TbColNames.TIMEOFF,time);
 
-        long result = db.insert(TbNames.UA_SCREENOFF_TABLE ,null,contentValues);
+        long result = db.insert(TbNames.SCREENSTATUS_TABLE,null,contentValues);
         db.close();
-        if(result == -1){
-            return false;
-        }
-        else
-            return true;
+        return result != -1;
 
 
     }
 
 
-    public String  ScreenOnStatusGet(){
-        String ringermode= new String();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        String id = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        String time = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
-
-
-
-        Cursor res = db.rawQuery("select * from " + TbNames.UA_SCREENON_TABLE +" where DATE =\"" + id + "\"", null);
-        if(res != null)
-        {
-            if(res.moveToFirst()){
-                return res.getString(1);
-            }
-            res.close();
-        }
-        return null;
-
-    }
-
-
-    public String  ScreenOffStatusGet(){
-        String ringermode= new String();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-
-
-        Cursor res = db.rawQuery("select * from " + TbNames.UA_SCREENOFF_TABLE +" where SCREENOFF_ID =\"" + id + "\"", null);
-        if(res != null)
-        {
-            if(res.moveToFirst()){
-                return res.getString(1);
-            }
-            res.close();
-        }
-        return null;
-
-    }
-
-    public String checkScreenOnAvailablity (String id)
+    public String checkScreenOnAdaptability(String id)
     {
         String TableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select *  from  " + TbNames.UA_SCREENON_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" , null);
+        Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENSTATUS_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" , null);
         if(res != null)
         {
             if(res.moveToFirst()){
-                //return res.getString(res.getColumnIndex(TbColNames.RM_RINGERMODE));
                 return res.getString(1);
             }
             res.close();
         }
         return null;
     }
-    public String checkScreenOffAvailablity(String id)
+    public String checkScreenOffAdaptability(String id)
     {
         String TableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select *  from  " + TbNames.UA_SCREENOFF_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" ,  null);
+        Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENSTATUS_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" ,  null);
         if(res != null)
         {
             if(res.moveToFirst()){
@@ -151,17 +123,17 @@ public class ScreenStatusDbHelper extends MainDbHelp {
     }
 
     public String checkAvaulability(String id){
-        String tablename = new String();
-        String screenonavailability = this.checkScreenOnAvailablity(id);
-        String screenoffavailability = this.checkScreenOffAvailablity(id);
+        String tablename = "";
+        String screenonavailability = this.checkScreenOnAdaptability(id);
+        String screenoffavailability = this.checkScreenOffAdaptability(id);
 
-        if(screenonavailability == "0")
+        if(Objects.equals(screenonavailability, "0"))
         {
-            tablename = "UA_SCREENOFF_TABLE";
+            tablename = "SCREENOFF_TABLE";
         }
         else
         {
-            tablename = "UA_SCREENON_TABLE";
+            tablename = "SCREENON_TABLE";
         }
         return tablename;
 

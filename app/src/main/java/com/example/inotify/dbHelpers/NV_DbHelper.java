@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.configs.TbNames.NV_PROBABILITY_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITY_TABLE;
 
 
 public class NV_DbHelper extends MainDbHelp {
@@ -45,7 +45,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.TIME, time);
         contentValues.put(TbColNames.TYPE, type);
         contentValues.put(TbColNames.CONFIDENCE, confidence);
-        long result = db.insert(TbNames.NV_ACTIVITY_TABLE, null, contentValues);
+        long result = db.insert(TbNames.ACTIVITY_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }
@@ -82,35 +82,35 @@ public class NV_DbHelper extends MainDbHelp {
         // select * from pra_activity_table where DATE = "20190202" AND TIME  between "1356" and "1514"
         //huge bug if it has same count for muliple activity this will fail so assume that it will not have fix later
         //get for 0
-        Cursor res0 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"0\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res0 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"0\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res0 != null) {
             AL.add(String.valueOf(res0.getCount()) + "V");
         }
         res0.close();
 
         //get for 3
-        Cursor res3 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"3\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res3 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"3\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res3 != null) {
             AL.add(String.valueOf(res3.getCount()) + "S");
         }
         res3.close();
 
         //get for 5
-        Cursor res5 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"5\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res5 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"5\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res5 != null) {
             AL.add(String.valueOf(res5.getCount()) + "T");
         }
         res5.close();
 
         //get for 7
-        Cursor res7 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"7\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res7 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"7\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res7 != null) {
             AL.add(String.valueOf(res7.getCount()) + "W");
         }
         res7.close();
 
         //get for 8
-        Cursor res8 = db.rawQuery("select * from " + TbNames.NV_ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"8\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res8 = db.rawQuery("select * from " + TbNames.ACTIVITY_TABLE + " where DATE=\"" + datenow + "\" AND TYPE = \"8\" AND TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res8 != null) {
             AL.add(String.valueOf(res8.getCount()) + "R");
         }
@@ -132,7 +132,7 @@ public class NV_DbHelper extends MainDbHelp {
     public String[] display_prob() {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select probability_id,time,day,viewor,notor,probability from " + NV_PROBABILITY_TABLE, null);
+        Cursor cursor = db.rawQuery("select probability_id,time,day,viewor,notor,probability from " + PROBABILITY_TABLE, null);
         if (cursor != null) {
             int count2 =1;
             while (cursor.moveToNext()) {
@@ -160,7 +160,7 @@ public class NV_DbHelper extends MainDbHelp {
         int notor = 0;
         //int Proid = 0;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor count = db.rawQuery("select probability_id, time, viewor, notor from " + NV_PROBABILITY_TABLE + " where probability_id = '"+ticker+"'",  null);
+        Cursor count = db.rawQuery("select probability_id, time, viewor, notor from " + PROBABILITY_TABLE + " where probability_id = '"+ticker+"'",  null);
         if (count != null) {
             if (count.moveToFirst()) {
 
@@ -193,7 +193,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put("viewor", count2);
         contentValues.put("notor", notor);
         SQLiteDatabase db2 = this.getWritableDatabase();
-        db2.update(NV_PROBABILITY_TABLE, contentValues, "probability_id = "+ticker,null );
+        db2.update(PROBABILITY_TABLE, contentValues, "probability_id = "+ticker,null );
         db2.close();
         return true;
     }
@@ -202,7 +202,7 @@ public class NV_DbHelper extends MainDbHelp {
 
         String timeSlotNow = timeSlotNow();
         SQLiteDatabase dbq = this.getReadableDatabase();
-        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + NV_PROBABILITY_TABLE + " where time = '" + timeSlotNow + "'group by time " , null);
+        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where time = '" + timeSlotNow + "'group by time " , null);
         if (proq != null) {
             if (proq.moveToFirst()) {
 
@@ -221,7 +221,7 @@ public class NV_DbHelper extends MainDbHelp {
 
    /* private void getRecords() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + NV_PROBABILITY_TABLE , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + PROBABILITY_TABLE , null);
         if (cursor.moveToFirst()) {
             do {
                 TableRow row = new TableRow();
@@ -258,7 +258,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.TIME, time);
         contentValues.put(TbColNames.LOG, log);
         contentValues.put(TbColNames.LAT, lat);
-        long result = db.insert(TbNames.NV_LOCATION_TABLE, null, contentValues);
+        long result = db.insert(TbNames.LOCATION_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -271,7 +271,7 @@ public class NV_DbHelper extends MainDbHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.NV_LOCATION_TABLE, null);
+        Cursor res = db.rawQuery("select * from " + TbNames.LOCATION_TABLE, null);
         if (res != null) {
             res.moveToLast();
             if (res.getCount() > 1) {
@@ -310,7 +310,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.DATE, date);
         contentValues.put(TbColNames.DAY, day);
         contentValues.put(TbColNames.TIME, time);
-        long result = db.insert(TbNames.NV_NOTIFICATIONREMOVE_TABLE, null, contentValues);
+        long result = db.insert(TbNames.NOTIFICATIONREMOVE_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -337,7 +337,7 @@ public class NV_DbHelper extends MainDbHelp {
         String timeold = df.format(cal.getTime());
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.NV_LOCATION_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.LOCATION_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"", null);
         if (res != null) {
             if ((res.moveToFirst())) {
                 return res.getCount();
@@ -358,7 +358,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues.put(TbColNames.ACTIVITY, activity);
         contentValues.put(TbColNames.LOCATION, location);
         contentValues.put(TbColNames.BUSYORNOT, busyornot);
-        long result = db.insert(TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE, null, contentValues);
+        long result = db.insert(TbNames.NOTIFICATIONVIEWABILITY_TABLE, null, contentValues);
         db.close();
         if (result == -1)
             return false;
@@ -423,7 +423,7 @@ public class NV_DbHelper extends MainDbHelp {
         contentValues2.put(TbColNames.VIEWOR, viewor);
         contentValues2.put(TbColNames.NOTOR, notor);
         contentValues2.put(TbColNames.PROBABLITY, probability);
-        long result = db.insert(NV_PROBABILITY_TABLE, null, contentValues2);
+        long result = db.insert(PROBABILITY_TABLE, null, contentValues2);
         db.close();
         Log.d("hello", "probability_insert: correctly");
         if (result == -1)
@@ -500,7 +500,7 @@ public class NV_DbHelper extends MainDbHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.NV_NOTIFICATIONVIEWABILITY_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"AND  DAY = \"" + day + "\" AND ACTIVITY = \"" + activity + "\" AND LOCATION = \"" + location + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATIONVIEWABILITY_TABLE + " WHERE TIME between \"" + timeold + "\" AND \"" + timenow + "\"AND  DAY = \"" + day + "\" AND ACTIVITY = \"" + activity + "\" AND LOCATION = \"" + location + "\"", null);
         if (res != null) {
 
             if (res.moveToFirst()) {

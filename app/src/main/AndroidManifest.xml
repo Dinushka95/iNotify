@@ -68,7 +68,7 @@
             android:exported="false" />
 
         <receiver
-            android:name=".helpers.All_ScreenLock"
+            android:name=".helpers.ScreenStatusHelper"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -76,6 +76,7 @@
                 <action android:name="android.intent.action.SCREEN_ON" />
             </intent-filter>
         </receiver>
+
         <receiver
             android:name=".broadcastReceivers.ChargerBR"
             android:enabled="true"
