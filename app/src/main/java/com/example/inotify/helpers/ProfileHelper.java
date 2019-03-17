@@ -19,7 +19,6 @@ public class ProfileHelper {
     }
 
     public ProfileModel get() {
-
         ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
         return profileDbHelper.get();
 

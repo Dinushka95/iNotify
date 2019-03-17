@@ -27,8 +27,6 @@ public class TbNames {
 
     public static final String SNS_TABLE = "sns_table";
 
-    public static final String TOPAPP_TABLE = "topapp_table";
-
     public static final String SMARTNOTIFICATIONAVCTIVEAPPS_TABLE = "smartnotificationactiveapps_table";
 
     public static final String NOTIFICATION_TABLE = "notification_table";
@@ -38,6 +36,9 @@ public class TbNames {
     public static final String APPLICATIONS_TABLE = "applications_table";
 
     public static final String TOPAPPS_TABLE = "topapps_table";
+
+    public static final String TOPAPPSCOUNT_TABLE = "topappscount_table";
+
 
     public static final String APPCOUNT_TABLE = "appcount_table";
 

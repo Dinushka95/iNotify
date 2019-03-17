@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
@@ -18,11 +19,13 @@ import com.example.inotify.logger.LogFragment;
 import com.example.inotify.logger.LogWrapper;
 import com.example.inotify.logger.MessageOnlyLogFilter;
 
+import java.io.File;
+
 import static com.example.inotify.dbHelpers.MainDbHelp.DATABASE_NAME;
 
 public class SettingsActivity extends AppCompatActivity {
     private boolean mLogShown;
-
+    long dbSize;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +39,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                 LogFragment logFragment = (LogFragment) getSupportFragmentManager().findFragmentById(R.id.log_fragment);
                 msgFilter.setNext(logFragment.getLogView());
-
+                File f = this.getDatabasePath(DATABASE_NAME);
+                dbSize = f.length()/1024;
+                TextView textViewDbSize = findViewById(R.id.textViewdbsize);
+                textViewDbSize.setText("Database Size is = "+String.valueOf(dbSize) + "KB");
 
 
     }

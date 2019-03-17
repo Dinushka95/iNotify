@@ -99,7 +99,7 @@ public class TabApplicationFragment extends Fragment {
         //instantiate custom adapter
 
         List<ApplicationInfoModel> data = activity_inotify_activite_apps.getApplicationList();
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview2);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerviewactiveapps);
         adapter = new INotifyActiveAppsRecyclerViewAdapter(data, getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -1,14 +1,28 @@
 package com.example.inotify.views.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.interfaces.RecyclerViewItemClickListener;
+import com.example.inotify.listners.CustomRVItemTouchListener;
+import com.example.inotify.models.NotificationModel;
+import com.example.inotify.viewControllers.adapters.AllNotificationRecyclerViewAdapter;
+import com.example.inotify.viewControllers.adapters.SmartNotificationRecyclerViewAdapter;
+import com.example.inotify.viewControllers.logic.AllNotificationLogic;
+import com.example.inotify.viewControllers.logic.SmartNotificationLogic;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +33,10 @@ import com.example.inotify.R;
  * create an instance of this fragment.
  */
 public class TabAllNotificationsFragment extends Fragment {
+
+    RecyclerView recyclerView;
+    private AllNotificationRecyclerViewAdapter adapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,10 +81,58 @@ public class TabAllNotificationsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab_all_notifications, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tab_all_notifications, container, false);
+
+      /*  FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.insert(0, new NotificationModel("New Movie", "Movie description","hhh","gggg","ffff","ddd","ssss","aaaa"));
+
+            }
+        });*/
+
+        AllNotificationLogic allNotificationLogic = new AllNotificationLogic(getContext());
+        List<NotificationModel> data = allNotificationLogic.getNotificationList();             //fill_with_data();
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerviewallnotification);
+        adapter = new AllNotificationRecyclerViewAdapter(data, getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        recyclerView.addOnItemTouchListener(new CustomRVItemTouchListener(this.getContext(), recyclerView, new RecyclerViewItemClickListener() {
+            @Override
+            public void onClick(View view1, int position) {
+
+
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.popup_all_notification);
+                //dialog.setCancelable(false);
+                // dialog.setCanceledOnTouchOutside(false);
+               /* Button button = dialog.findViewById(R.id.button11);
+                button.setOnClickListener(view -> {
+                    // save to db -- create a new profile
+                    Toast.makeText(getContext(), "Clicked at " + position, Toast.LENGTH_SHORT).show();
+                });*/
+                TextView textView = dialog.findViewById(R.id.showdetails_anp);
+                textView.setText("Show Details "+position);
+                dialog.show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(getContext(), "LongClicked at " + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onChangeSw(Boolean checked) {
+                Toast.makeText(getContext(), "SSSSSSSSSSSSSSSSSSS" + checked.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -2,100 +2,100 @@ package com.example.inotify.models;
 
 public class ProfileModel {
 
-    private String PROFILE_ID;
-    private String DATE;
-    private String NAME;
-    private String AGE;
-    private String GENDER;
-    private String OCCUPATION;
-    private String EMAIL;
-    private String PHONE;
+    private String profile_id;
+    private String date;
+    private String name;
+    private String age;
+    private String gender;
+    private String occupation;
+    private String email;
+    private String phone;
 
     public ProfileModel() {
     }
 
-    public ProfileModel(String DATE, String NAME, String AGE, String GENDER, String OCCUPATION, String EMAIL, String PHONE) {
-        this.DATE = DATE;
-        this.NAME = NAME;
-        this.AGE = AGE;
-        this.GENDER = GENDER;
-        this.OCCUPATION = OCCUPATION;
-        this.EMAIL = EMAIL;
-        this.PHONE = PHONE;
+    public ProfileModel(String date, String name, String age, String gender, String occupation, String email, String phone) {
+        this.date = date;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.occupation = occupation;
+        this.email = email;
+        this.phone = phone;
     }
 
-    public ProfileModel(String PROFILE_ID, String DATE, String NAME, String AGE, String GENDER, String OCCUPATION, String EMAIL, String PHONE) {
-        this.PROFILE_ID = PROFILE_ID;
-        this.DATE = DATE;
-        this.NAME = NAME;
-        this.AGE = AGE;
-        this.GENDER = GENDER;
-        this.OCCUPATION = OCCUPATION;
-        this.EMAIL = EMAIL;
-        this.PHONE = PHONE;
+    public ProfileModel(String profile_id, String date, String name, String age, String gender, String occupation, String email, String phone) {
+        this.profile_id = profile_id;
+        this.date = date;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.occupation = occupation;
+        this.email = email;
+        this.phone = phone;
     }
 
-    public String getPROFILE_ID() {
-        return PROFILE_ID;
+    public String getProfile_id() {
+        return profile_id;
     }
 
-    public void setPROFILE_ID(String PROFILE_ID) {
-        this.PROFILE_ID = PROFILE_ID;
+    public void setProfile_id(String profile_id) {
+        this.profile_id = profile_id;
     }
 
-    public String getDATE() {
-        return DATE;
+    public String getDate() {
+        return date;
     }
 
-    public void setDATE(String DATE) {
-        this.DATE = DATE;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getNAME() {
-        return NAME;
+    public String getName() {
+        return name;
     }
 
-    public void setNAME(String NAME) {
-        this.NAME = NAME;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAGE() {
-        return AGE;
+    public String getAge() {
+        return age;
     }
 
-    public void setAGE(String AGE) {
-        this.AGE = AGE;
+    public void setAge(String age) {
+        this.age = age;
     }
 
-    public String getGENDER() {
-        return GENDER;
+    public String getGender() {
+        return gender;
     }
 
-    public void setGENDER(String GENDER) {
-        this.GENDER = GENDER;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getOCCUPATION() {
-        return OCCUPATION;
+    public String getOccupation() {
+        return occupation;
     }
 
-    public void setOCCUPATION(String OCCUPATION) {
-        this.OCCUPATION = OCCUPATION;
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
-    public String getEMAIL() {
-        return EMAIL;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEMAIL(String EMAIL) {
-        this.EMAIL = EMAIL;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPHONE() {
-        return PHONE;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPHONE(String PHONE) {
-        this.PHONE = PHONE;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

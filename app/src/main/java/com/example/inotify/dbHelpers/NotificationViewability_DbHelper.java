@@ -20,9 +20,9 @@ import java.util.Locale;
 import static com.example.inotify.configs.TbNames.PROBABILITY_TABLE;
 
 
-public class NV_DbHelper extends MainDbHelp {
+public class NotificationViewability_DbHelper extends MainDbHelp {
 
-    public NV_DbHelper(Context context) {
+    public NotificationViewability_DbHelper(Context context) {
         super(context);
     }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.inotify.configs.TbColNames;
 import com.example.inotify.models.ProfileModel;
 
 import static com.example.inotify.configs.TbColNames.AGE;
@@ -27,13 +28,13 @@ public class ProfileDbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE, profileModel.getDATE());
-        contentValues.put(NAME, profileModel.getNAME());
-        contentValues.put(AGE, profileModel.getAGE());
-        contentValues.put(GENDER, profileModel.getGENDER());
-        contentValues.put(OCCUPATION, profileModel.getOCCUPATION());
-        contentValues.put(EMAIL, profileModel.getEMAIL());
-        contentValues.put(PHONE, profileModel.getPHONE());
+        contentValues.put(DATE, profileModel.getDate());
+        contentValues.put(NAME, profileModel.getName());
+        contentValues.put(AGE, profileModel.getAge());
+        contentValues.put(GENDER, profileModel.getGender());
+        contentValues.put(OCCUPATION, profileModel.getOccupation());
+        contentValues.put(EMAIL, profileModel.getEmail());
+        contentValues.put(PHONE, profileModel.getPhone());
 
         long result = db.insert(PROFILE_TABLE, null, contentValues);
         db.close();
@@ -63,24 +64,25 @@ public class ProfileDbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + PROFILE_TABLE , null);
-        db.close();
 
         ProfileModel profileModel = new ProfileModel();
 
         if (res != null) {
             if (res.moveToFirst()) {
-                profileModel.setPROFILE_ID(res.getString(res.getColumnIndex(PROFILE_ID)));
-                profileModel.setDATE(res.getString(res.getColumnIndex(DATE)));
-                profileModel.setNAME(res.getString(res.getColumnIndex(NAME)));
-                profileModel.setAGE(res.getString(res.getColumnIndex(AGE)));
-                profileModel.setGENDER(res.getString(res.getColumnIndex(GENDER)));
-                profileModel.setOCCUPATION(res.getString(res.getColumnIndex(OCCUPATION)));
-                profileModel.setEMAIL(res.getString(res.getColumnIndex(EMAIL)));
-                profileModel.setPHONE(res.getString(res.getColumnIndex(PHONE)));
+                profileModel.setProfile_id(res.getString(res.getColumnIndex(TbColNames.PROFILE_ID)));
+                profileModel.setDate(res.getString(res.getColumnIndex(TbColNames.DATE)));
+                profileModel.setName(res.getString(res.getColumnIndex(TbColNames.NAME)));
+                profileModel.setAge(res.getString(res.getColumnIndex(TbColNames.AGE)));
+                profileModel.setGender(res.getString(res.getColumnIndex(TbColNames.GENDER)));
+                profileModel.setOccupation(res.getString(res.getColumnIndex(TbColNames.OCCUPATION)));
+                profileModel.setEmail(res.getString(res.getColumnIndex(TbColNames.EMAIL)));
+                profileModel.setPhone(res.getString(res.getColumnIndex(TbColNames.PHONE)));
                 return profileModel;
             }
             res.close();
         }
+
+        db.close();
         return null;
     }
 }
