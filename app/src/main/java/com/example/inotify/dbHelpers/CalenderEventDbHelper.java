@@ -27,7 +27,7 @@ public class CalenderEventDbHelper extends MainDbHelp  {
     {
         SQLiteDatabase db = this.getReadableDatabase();
         //avgappp
-        Cursor res = db.rawQuery("select SUM("+ TbColNames.COUNT +") as COUNT from " + TbNames.UC_CALENDEREVENTCOUNT_TABLE , null);
+        Cursor res = db.rawQuery("select SUM("+ TbColNames.COUNT +") as COUNT from " + TbNames.CALENDEREVENTCOUNT_TABLE , null);
         int total = 0;
         int count = 0;
         int avg;
@@ -57,7 +57,7 @@ public class CalenderEventDbHelper extends MainDbHelp  {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmddHHmm", Locale.getDefault());
         Date currentDate = new Date();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.UC_CALENDEREVENTCOUNT_TABLE + " WHERE "+TbColNames.DATE +" = \""+currentDate+"\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.CALENDEREVENTCOUNT_TABLE + " WHERE "+TbColNames.DATE +" = \""+currentDate+"\"", null);
         if(res == null)
         {
             Log.d("inotify","checkIfExist........."+res );
