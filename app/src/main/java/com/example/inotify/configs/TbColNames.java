@@ -67,6 +67,11 @@ public class TbColNames {
     public static final String APPLICATION ="application";
     public static final String ATTENTIVNESSVALUE = "attentivnessvalue";
 
+    //AttentivnesssperApp
+   // public static final String APPNAME ="appname";
+    public static final String TOTALATTENTIVNESS = "totalattentivness";
+
+
     ////smart notification system
     // notification all notifications
     public static final String SNS_ID = "sns_id";

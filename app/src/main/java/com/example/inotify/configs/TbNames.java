@@ -15,6 +15,7 @@ public class TbNames {
     public static final String RINGERMODE_TABLE = "ringermode_table";
     public static final String NOTIFICATIONIMPORTANCE_TABLE = "notificationimportance_table";
     public static final String USERATTENTIVNESS_TABLE = "userattentivness_table";
+    public static final String ATTENTIVNESSPERAPP_TABLE = "attentivnessperapp_table";
 
 
     public static final String APPLISTCOUNT_TABLE = "applistcount_table";

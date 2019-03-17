@@ -304,6 +304,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
             //   userAttentivnessDbHelper.close();
            //     Log.d("inotify(^_^ )", "Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
 
+                String resList[] = userAttentivnessDbHelper.TotalAttentivness(Appname);
+                Log.d("inotify(^_^ )" , "result list " +resList[1] +" " + resList[2] +" "+ resList[3] +" " +resList[4]);
+                userAttentivnessDbHelper.calculateTotalAttentivness(ticker,Appname);
+                Log.d("inotify(^_^ )" , "Total Attentivness succcessfully added");
                 //}
 
                 //*******************************************
