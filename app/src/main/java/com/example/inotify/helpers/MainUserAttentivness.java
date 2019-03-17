@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.inotify.services.MyNotificationListenerService;
 
-public class UserAttentivness  {
+public class MainUserAttentivness {
 
 
     //write a method to check in which table does the record exisits (screen on tabele or screen off table)

@@ -24,10 +24,10 @@ import static com.example.inotify.configs.TbNames.CONTACTCOUNT_TABLE;
 import static com.example.inotify.configs.TbNames.SCREENTIME_TABLE;
 
 
-public class UC_DbHelper extends MainDbHelp {
+public class UserCharacteristics_DbHelper extends MainDbHelp {
 
 
-    public UC_DbHelper(Context context) {
+    public UserCharacteristics_DbHelper(Context context) {
         super(context);
 
     }

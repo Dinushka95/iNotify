@@ -16,7 +16,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.inotify.R;
-import com.example.inotify.dbHelpers.NV_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
 import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
@@ -26,7 +26,7 @@ import com.example.inotify.helpers.FeedbackYesIntent;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
-import com.example.inotify.helpers.UserAttentivness;
+import com.example.inotify.helpers.MainUserAttentivness;
 import com.example.inotify.models.NotificationModel;
 
 import java.text.SimpleDateFormat;
@@ -89,7 +89,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
             //Test
-            NV_DbHelper pratest = new NV_DbHelper(this);
+            NotificationViewability_DbHelper pratest = new NotificationViewability_DbHelper(this);
             //pratest.probability_insert(pid,0);
             pratest.close();
 //Chaya
@@ -295,8 +295,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
               //  Log.d("inotify(^_^)", "Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
                 // double attentivnessvalue = 0.0;
-                UserAttentivness userAttentivness = new UserAttentivness();
-             //   double attentivnessvalue = userAttentivness.calculateAttentivness(ticker, screenStatus, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
+                MainUserAttentivness mainUserAttentivness = new MainUserAttentivness();
+             //   double attentivnessvalue = mainUserAttentivness.calculateAttentivness(ticker, screenStatus, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
            //     Log.d("inotify(^_^)", "attentivness for  " + ticker + " notification is = " + attentivnessvalue);
 
                 UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);

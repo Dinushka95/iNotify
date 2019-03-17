@@ -62,7 +62,7 @@ public class TbColNames {
     public static final String SEQUENCEVALUE ="sequencevalue";
 
 
-    //UserAttentivness
+    //MainUserAttentivness
     public static final String NID ="nid";
     public static final String APPLICATION ="application";
     public static final String ATTENTIVNESSVALUE = "attentivnessvalue";

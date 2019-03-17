@@ -4,12 +4,12 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.inotify.configs.AppUserConfigs;
-import com.example.inotify.dbHelpers.UC_DbHelper;
+import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 
 import java.util.ArrayList;
 
 
-public class MainUsercharacteristics {
+public class MainUserCharacteristics {
 
     public String getUsercharacteristics(Context context) {
 
@@ -17,27 +17,27 @@ public class MainUsercharacteristics {
             Log.d("inotify", "Main-Usercharacteristics--Started---");
         }
 
-        UC_DbHelper UC_DbHelper = new UC_DbHelper(context);
+        UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(context);
 
         long appListCountFixedvalue = 75; // move it to main entr point and make it a static variable
 
-        // long appUsageCountAvg = UC_DbHelper.appUsageAverage_get();
-        long appListCountAvg = UC_DbHelper.applistAverage_get();
-        long contactCountAvg = UC_DbHelper.contactsAverage_get();
-        long screenTimeCountAvg = UC_DbHelper.screentimeAverage_get();
-        long calldurationCountAvg = UC_DbHelper.calldurationAverage_get();
-        long calendarCountAvg = UC_DbHelper.calendereventAverage_get();
-        long chargetimeAvg = UC_DbHelper.chargeAverage_get();
-        long socialmediacAppCountAvg = UC_DbHelper.applistsocialmediaAverage_get();
-        long appListAverageWithoutLast = UC_DbHelper.applistAverageWithoutLast_get();
+        // long appUsageCountAvg = UserCharacteristics_DbHelper.appUsageAverage_get();
+        long appListCountAvg = UserCharacteristics_DbHelper.applistAverage_get();
+        long contactCountAvg = UserCharacteristics_DbHelper.contactsAverage_get();
+        long screenTimeCountAvg = UserCharacteristics_DbHelper.screentimeAverage_get();
+        long calldurationCountAvg = UserCharacteristics_DbHelper.calldurationAverage_get();
+        long calendarCountAvg = UserCharacteristics_DbHelper.calendereventAverage_get();
+        long chargetimeAvg = UserCharacteristics_DbHelper.chargeAverage_get();
+        long socialmediacAppCountAvg = UserCharacteristics_DbHelper.applistsocialmediaAverage_get();
+        long appListAverageWithoutLast = UserCharacteristics_DbHelper.applistAverageWithoutLast_get();
 
-//        long appListCountLast = UC_DbHelper.applistLast_get();
-        long contactCountLast = UC_DbHelper.contactsLast_get();
-        long screenTimeCountLast = UC_DbHelper.screentimeLast_get();
-        long calldurationCountLast = UC_DbHelper.calldurationLast_get();
-        long calendarCountLast = UC_DbHelper.calendereventLast_get();
-        long chargetimeLast = UC_DbHelper.chargeLast_get();
-        long socialmediacAppCountLast = UC_DbHelper.applistsocialmediaLast_get();
+//        long appListCountLast = UserCharacteristics_DbHelper.applistLast_get();
+        long contactCountLast = UserCharacteristics_DbHelper.contactsLast_get();
+        long screenTimeCountLast = UserCharacteristics_DbHelper.screentimeLast_get();
+        long calldurationCountLast = UserCharacteristics_DbHelper.calldurationLast_get();
+        long calendarCountLast = UserCharacteristics_DbHelper.calendereventLast_get();
+        long chargetimeLast = UserCharacteristics_DbHelper.chargeLast_get();
+        long socialmediacAppCountLast = UserCharacteristics_DbHelper.applistsocialmediaLast_get();
 
         if (AppUserConfigs.MainUsercharacteristics_DebuggerLogger) {
             // Log.d("inotify", "Main-Usercharacteristics--appUsageCountAvg---"+appUsageCountAvg);

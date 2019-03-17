@@ -4,7 +4,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 
 import com.example.inotify.configs.AppUserConfigs;
-import com.example.inotify.dbHelpers.NV_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class NV_NotificationViewabilityService extends JobService {
+public class NotificationViewabilityService extends JobService {
 
     @Override
     public void onCreate() {
@@ -37,7 +37,7 @@ public class NV_NotificationViewabilityService extends JobService {
 
 
         // get activity from db
-        NV_DbHelper praSqlLiteDbHelper1 = new NV_DbHelper(this);
+        NotificationViewability_DbHelper praSqlLiteDbHelper1 = new NotificationViewability_DbHelper(this);
         String CurrentMaxActivity = praSqlLiteDbHelper1.activity_get();
 
 
@@ -75,7 +75,7 @@ public class NV_NotificationViewabilityService extends JobService {
         }
 
         //save to table
-        NV_DbHelper praSqlLiteDbHelper = new NV_DbHelper(this);
+        NotificationViewability_DbHelper praSqlLiteDbHelper = new NotificationViewability_DbHelper(this);
         praSqlLiteDbHelper.busyOrNot_insert(time, dayofweek, CurrentMaxActivity, CurrentLocation, CurrentBusyorNot);
 
         praSqlLiteDbHelper.close();
