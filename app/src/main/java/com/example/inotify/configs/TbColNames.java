@@ -70,6 +70,7 @@ public class TbColNames {
     //AttentivnesssperApp
    // public static final String APPNAME ="appname";
     public static final String TOTALATTENTIVNESS = "totalattentivness";
+    public static final String TOTALATTENTIVNESSPERCENTAGE = "totalattentivnesspercentage";
 
 
     ////smart notification system
