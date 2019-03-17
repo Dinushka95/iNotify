@@ -277,32 +277,43 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
                 String Ringermode = ringerModeDbHelper.RingerModeGet(ticker);
+                Log.d("inotify(^_^)", "Ringermode" +Ringermode);
+
 
                 // ringerModeDbHelper.close();
 
-/*
                 ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(this);
-                String tablename = screenStatusDbHelper.checkAvaulability(ticker);
-                String screenStatus = new String(" ");
+                String a = screenStatusDbHelper.checkScreenOnAdaptability(ticker);
+                String b = screenStatusDbHelper.checkScreenOffAdaptability(ticker);
+                Log.d("inotify(^_^)" , "screenStatus a " + a);
+                Log.d("inotify(^_^)" , "screenStatus b " + b);
+
+
+                String screenStatus1 = screenStatusDbHelper.checkAvaulability(ticker);
+                Log.d("inotify(^_^)" , "screenStatus1" + screenStatus1);
+
+
+             /*   String screenStatus = new String(" ");
                 if (tablename == "SCREENON_TABLE") {
-                    String ScreenOnStatus = screenStatusDbHelper.screenOnStatusGet();
+                   // String ScreenOnStatus = screenStatusDbHelper.screenOnStatusGet();
+
                     screenStatus = "on";
                 } else {
-                    String ScreenOffStstus = screenStatusDbHelper.screenOffStatusGet();
+                   // String ScreenOffStstus = screenStatusDbHelper.screenOffStatusGet();
                     screenStatus = "off";
-                }
-*/
+                }*/
 
-              //  Log.d("inotify(^_^)", "Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
+
+               Log.d("inotify(^_^)", "Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus1 + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
                 // double attentivnessvalue = 0.0;
                 UserAttentivness userAttentivness = new UserAttentivness();
-             //   double attentivnessvalue = userAttentivness.calculateAttentivness(ticker, screenStatus, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
-           //     Log.d("inotify(^_^)", "attentivness for  " + ticker + " notification is = " + attentivnessvalue);
+                double attentivnessvalue = userAttentivness.calculateAttentivness(ticker, screenStatus1, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
+               Log.d("inotify(^_^)", "attentivness for  " + ticker + " notification is = " + attentivnessvalue);
 
                 UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-           //     userAttentivnessDbHelper.UserAttentivnessInsert(ticker, Appname, attentivnessvalue);
+                userAttentivnessDbHelper.UserAttentivnessInsert(ticker, Appname, attentivnessvalue);
             //   userAttentivnessDbHelper.close();
-           //     Log.d("inotify(^_^ )", "Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
+               Log.d("inotify(^_^ )", "Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
 
                 String resList[] = userAttentivnessDbHelper.TotalAttentivness(Appname);
                 Log.d("inotify(^_^ )" , "result list " +resList[1] +" " + resList[2] +" "+ resList[3] +" " +resList[4]);
