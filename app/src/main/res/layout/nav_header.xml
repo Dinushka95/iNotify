@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="192dp"
     android:background="?attr/colorPrimaryDark"
@@ -10,21 +14,20 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:id="@+id/profileimageView"
+        android:layout_width="93dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
-        android:scaleType="fitXY"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/baseline_album_black_18dp" />
+        android:src="@drawable/baseline_album_black_18dp"
+        tools:srcCompat="@tools:sample/avatars[0]" />
 
     <TextView
-        android:layout_width="125dp"
+        android:id="@+id/profilename"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Profile"
+        android:layout_marginLeft="20dp"
+        android:text="UserName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
 
 </LinearLayout>

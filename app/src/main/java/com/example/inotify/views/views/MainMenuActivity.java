@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
@@ -65,6 +66,7 @@ public class MainMenuActivity extends AppCompatActivity implements
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    TextView textViewProfile;
 
 
     @Override
@@ -88,6 +90,11 @@ public class MainMenuActivity extends AppCompatActivity implements
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.bringToFront();
+
+        View headerView = navigationView.getHeaderView(0);
+        textViewProfile = (TextView) headerView.findViewById(R.id.profilename);
+
+
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // set item as selected to persist highlight
 
@@ -199,14 +206,12 @@ public class MainMenuActivity extends AppCompatActivity implements
                 MyConstants.PERMISSION_CALENDER &&
                 MyConstants.PERMISSION_PHONE &&
                 MyConstants.PERMISSION_NOTIFICATIONACCESS &&
-                MyConstants.PERMISSION_USEAGEACCESS) {
+                MyConstants.PERMISSION_USEAGEACCESS)
+        {
             tt();
         } else {
             Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
         }
-
-
-
 
     }
 
@@ -279,6 +284,10 @@ public class MainMenuActivity extends AppCompatActivity implements
         ProfileHelper profileHelper = new ProfileHelper(this);
         if (profileHelper.profileisExisCheck()) {
             //load settings
+            if(profileHelper.profileisExisCheck()) {
+                ProfileModel profileModel = profileHelper.get();
+                textViewProfile.setText(profileModel.getName());
+            }
         } else {
             //show signup
             final Dialog dialog = new Dialog(this);
@@ -321,6 +330,11 @@ public class MainMenuActivity extends AppCompatActivity implements
                     //if sucessfull
                     Toast.makeText(getApplicationContext(), "Successfully Saved User Details", Toast.LENGTH_LONG).show();
                     dialog.dismiss();
+                    if(profileHelper.profileisExisCheck()) {
+                        ProfileModel profileModel = profileHelper.get();
+                        textViewProfile.setText(profileModel.getName());
+                    }
+
                 } else {
                     //if failed
                     Toast.makeText(getApplicationContext(), "Failed To Save User Details", Toast.LENGTH_LONG).show();
