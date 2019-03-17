@@ -1,5 +1,6 @@
 package com.example.inotify.dbHelpers;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,28 +14,32 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-public class CalenderEventDbHelper extends MainDbHelp  {
+import static com.example.inotify.configs.TbColNames.COUNT;
+import static com.example.inotify.configs.TbColNames.DATE;
+import static com.example.inotify.configs.TbNames.CALENDEREVENTCOUNT_TABLE;
+
+public class CalenderEventDbHelper extends MainDbHelp {
 
 
-    private  Context c1;
+    private Context c1;
+
     public CalenderEventDbHelper(Context context) {
         super(context);
-        this.c1=context;
+        this.c1 = context;
     }
 
 
-    public long CalenderEventAVGGet()
-    {
+    public long CalenderEventAVGGet() {
         SQLiteDatabase db = this.getReadableDatabase();
         //avgappp
-        Cursor res = db.rawQuery("select SUM("+ TbColNames.COUNT +") as COUNT from " + TbNames.CALENDEREVENTCOUNT_TABLE , null);
+        Cursor res = db.rawQuery("select SUM(" + TbColNames.COUNT + ") as COUNT from " + TbNames.CALENDEREVENTCOUNT_TABLE, null);
         int total = 0;
         int count = 0;
         int avg;
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
                 do {
-                    total=total+ res.getInt(res.getColumnIndex("COUNT"));
+                    total = total + res.getInt(res.getColumnIndex("COUNT"));
                     count++;
                 } while (res.moveToNext());
             }
@@ -43,30 +48,44 @@ public class CalenderEventDbHelper extends MainDbHelp  {
         db.close();
 
         try {
-            avg=total/count;
-        }catch (Exception e){
+            avg = total / count;
+        } catch (Exception e) {
             return 0;
         }
-        Log.d("inotify","calenderEventAVG......" + avg);
+        Log.d("inotify", "calenderEventAVG......" + avg);
 
         return avg;
     }
 
-    public boolean checkIfExist()
-    {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyymmddHHmm", Locale.getDefault());
-        Date currentDate = new Date();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.CALENDEREVENTCOUNT_TABLE + " WHERE "+TbColNames.DATE +" = \""+currentDate+"\"", null);
-        if(res == null)
-        {
-            Log.d("inotify","checkIfExist........."+res );
-            return true;
+    public boolean checkIfExist() {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select *  from " + TbNames.CALENDEREVENTCOUNT_TABLE + " where DATE =\"" + date + "\"", null);
+        if (cursor != null) {
+
+            if (cursor.moveToNext()) {
+                if (date.equals(cursor.getString(cursor.getColumnIndex("DATE")))) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
         }
-        else
-        {
-            Log.d("inotify","checkIfExist........."+res );
-            return false;
-        }
+        return false;
+    }
+
+    public boolean calenderEventCount_insert(String count) {
+
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DATE, date);
+        contentValues.put(COUNT, count);
+        long result = db.insert(CALENDEREVENTCOUNT_TABLE, null, contentValues);
+        db.close();
+        return result != -1;
     }
 }

@@ -29,12 +29,6 @@ public class UserCharacteristics_service extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
 
-        getAppsInformaion(this);
-        //  getAppUsage(this);
-        getContacts(this);
-        getCallDuration(this);
-        getCalenderEvent(this);
-
         return false;
     }
 
@@ -136,13 +130,13 @@ public class UserCharacteristics_service extends JobService {
 
     public void getCalenderEvent(Context context) {
 
-        CalenderEventHelper calenderEvent = new CalenderEventHelper();
-        String x = calenderEvent.getcalanderEventCount(context);
+       // CalenderEventHelper calenderEvent = new CalenderEventHelper();
+        //String x = calenderEvent.getcalanderEventCount(context);
 
 
-        UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(context);
-        UserCharacteristics_DbHelper.calenderEventCount_insert(x);
-        UserCharacteristics_DbHelper.close();
+       // UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(context);
+        //UserCharacteristics_DbHelper.calenderEventCount_insert(x);
+      //  UserCharacteristics_DbHelper.close();
     }
 
 

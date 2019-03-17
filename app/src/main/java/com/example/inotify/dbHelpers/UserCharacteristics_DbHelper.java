@@ -32,7 +32,6 @@ public class UserCharacteristics_DbHelper extends MainDbHelp {
 
     }
 
-
     public boolean appListcount_insert(String count) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
@@ -90,19 +89,6 @@ public class UserCharacteristics_DbHelper extends MainDbHelp {
     }
 
 
-    public boolean calenderEventCount_insert(String count) {
-
-        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE, date);
-        contentValues.put(COUNT, count);
-        long result = db.insert(CALENDEREVENTCOUNT_TABLE, null, contentValues);
-        db.close();
-        return result != -1;
-    }
-
     public boolean appListSocialMediacount_insert(String count) {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
@@ -114,7 +100,6 @@ public class UserCharacteristics_DbHelper extends MainDbHelp {
         long result = db.insert(APPLISTSOCIALMEDIACOUNT_TABLE, null, contentValues);
         db.close();
         return result != -1;
-
     }
 
     public long applistAverage_get() {
