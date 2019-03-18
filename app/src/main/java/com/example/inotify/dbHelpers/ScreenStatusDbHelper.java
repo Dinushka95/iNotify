@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.logger.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -91,53 +92,100 @@ public class ScreenStatusDbHelper extends MainDbHelp {
 
 
     }
+//Check Screenon Adaptabilty and check screenoffadaptability both methods are the same
 
+//    public String checkScreenOnAdaptability(String id)
+//    {
+//        Log.d("inotifyC" , "iddddddddddddddddddddddddddddddddd  " +id );
+//        String TableName;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//       // Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENSTATUS_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" , null);
+//        Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENSTATUS_TABLE +" where TIMEON not null and  NOTIFICATIONID  = \" " + id + "\"" , null);
+//        if(res != null)
+//        {
+//            if(res.moveToFirst()){
+//                return res.getString(3);
+//                //return res.getString(res.getColumnIndex(TbColNames.RM_RINGERMODE));
+//            }
+//            res.close();
+//        }
+//        return null;
+//    }
+//    public String checkScreenOffAdaptability(String id)
+//    {
+//        Log.d("inotifyC" , "iddddddddddddddddddddddddddddddddd  " +id );
+//
+//        String TableName;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENSTATUS_TABLE +"  where TIMEOFF NOT NULL AND NOTIFICATIONID  = \" " + id + "\"" ,  null);
+//        if(res != null)
+//        {
+//            if(res.moveToFirst()){
+//                return res.getString(4);
+//                //return res.getString(res.getColumnIndex(TbColNames.RM_RINGERMODE));
+//            }
+//            res.close();
+//        }
+//        return null;
+//    }
 
     public String checkScreenOnAdaptability(String id)
     {
-        String TableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENSTATUS_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" , null);
-        if(res != null)
+        Log.d("xxxxxxxxxx" , "XXXXXXXXXX  id" +id);
+        Cursor res =db.rawQuery("select * from " + TbNames.SCREENSTATUS_TABLE +" where NOTIFICATIONID =\"" + id + "\" ",null);
+        if(res!=null)
         {
-            if(res.moveToFirst()){
-                return res.getString(1);
+            if(res.moveToFirst())
+            {
+                return  res.getString(3);
             }
-            res.close();
         }
         return null;
     }
+
     public String checkScreenOffAdaptability(String id)
     {
-        String TableName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select *  from  " + TbNames.SCREENSTATUS_TABLE +"  where NOTIFICATIONID  = \" " + id + "\"" ,  null);
-        if(res != null)
+        Log.d("xxxxxxxxxx" , "XXXXXXXXXX  id" +id);
+
+        Cursor res =db.rawQuery("select * from " + TbNames.SCREENSTATUS_TABLE +" where  NOTIFICATIONID =\"" + id + "\" ",null);
+        if(res!=null)
         {
-            if(res.moveToFirst()){
-                return res.getString(1);
+            if(res.moveToFirst())
+            {
+                return  res.getString(4);
             }
-            res.close();
         }
         return null;
+
     }
 
     public String checkAvaulability(String id){
-        String tablename = "";
+        String screenstatus = "";
         String screenonavailability = this.checkScreenOnAdaptability(id);
         String screenoffavailability = this.checkScreenOffAdaptability(id);
 
-        if(Objects.equals(screenonavailability, "0"))
+        if (screenoffavailability != null)
         {
-            tablename = "SCREENOFF_TABLE";
+            screenstatus = "off";
+           Log.d("inotify(^_^) ","screenstatus" + screenstatus);
+
         }
-        else
-        {
-            tablename = "SCREENON_TABLE";
+        else if( screenonavailability !=null){
+            screenstatus ="on";
+            Log.d("inotify(^_^) ","screenstatus" + screenstatus);
+
         }
-        return tablename;
+
+        return screenstatus;
+
 
     }
+
+
+
+
 
 
 }
