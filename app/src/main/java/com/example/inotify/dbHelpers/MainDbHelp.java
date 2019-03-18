@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+
+import java.util.ArrayList;
 
 
 public class MainDbHelp extends SQLiteOpenHelper {
@@ -19,6 +22,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
     public MainDbHelp(Context context) {
         super(context, DATABASE_NAME, null, 1);
+        c1=context;
 
 
     }
@@ -57,7 +61,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE + " (SNAVCTIVEAPPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,STATUS TEXT)");
 
         db.execSQL("create table " + TbNames.SCREENSTATUS_TABLE + " ("+TbColNames.SCREENSTATUS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.NOTIFICATIONID+" TEXT,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMEON+" TEXT,"+TbColNames.TIMEOFF+" TEXT)");
-
+//TODO- need to change packagenmae and appPackage
         db.execSQL("create table " + TbNames.TOPAPPS_TABLE + " ("+TbColNames.TOPAPP_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text)");
 
         db.execSQL("create table " + TbNames.APPLICATIONS_TABLE + " ("+TbColNames.APPLICATION_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.APPPACKAGE+" Text,"+TbColNames.DATE+" TEXT)");
@@ -166,6 +170,14 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
 
         //PROBABILITYQUERY_TABLE
+
+        NotificationViewability_DbHelper timeS = new NotificationViewability_DbHelper(c1);
+        ArrayList <String> TimeSlots = timeS.genarateTimeSlots();
+        for(int i = 0 ; i < 144 ; i++  ){
+            db.execSQL("insert into PROBABILITYQUERY_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+        }
+        //Log.d("DBoncreate", "onCreate: " +TimeSlots.get(0));
+
 
 
 

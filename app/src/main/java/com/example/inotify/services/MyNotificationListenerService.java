@@ -51,10 +51,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
     public void onNotificationPosted(StatusBarNotification sbn) {
 
         String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
-        Log.d("inotifyC" , "pid ============" +id);
+        Log.d("inotifyC", "pid ============" + id);
         String apppack = null;
         Intent LaunchIntent = null;
-        PackageManager pm=null;
+        PackageManager pm = null;
         String ticker = "";
         if (sbn.getNotification().tickerText != null) {
             ticker = sbn.getNotification().tickerText.toString();
@@ -65,7 +65,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService--packageName---" + sbn.getPackageName());
 
         if ((sbn.getPackageName().equals("com.example.dinu.testa") || sbn.getPackageName().equals("com.example.dinu.testb") || sbn.getPackageName().equals("com.example.dinu.testc") || sbn.getPackageName().equals("com.example.dinu.testd") || sbn.getPackageName().equals("com.example.myapplication") || sbn.getPackageName().equals("com.whatsapp") || sbn.getPackageName().equals("com.facebook.orca") || sbn.getPackageName().equals("com.google.android.apps.messaging")
-        || sbn.getPackageName().equals("com.android.mms"))) {
+                || sbn.getPackageName().equals("com.android.mms"))) {
 
 
             pack = sbn.getPackageName();
@@ -83,14 +83,14 @@ public class MyNotificationListenerService extends NotificationListenerService {
             cancelNotification(sbn.getKey());
             Log.d("inotify", "Main-MyNotificationListenerService--Cancel original Notification---");
 
-            
+
             pm = this.getPackageManager();
-             apppack = pack;
+            apppack = pack;
 
 
             //Test
             NotificationViewability_DbHelper pratest = new NotificationViewability_DbHelper(this);
-            //pratest.probability_insert(pid,0);
+            pratest.probability_insert(id,0);
             pratest.close();
 //Chaya
             //call the isPhoneLowckedOrNot method here
@@ -125,47 +125,49 @@ public class MyNotificationListenerService extends NotificationListenerService {
             ringerModeDbHelper.close();
             Log.d("inotifyC ", " ringer mode Record Saved");
 
-        }
 
 
-        boolean sendornotsend;
-        sendornotsend = true;
 
-        if (sendornotsend) {
+            boolean sendornotsend;
+            sendornotsend = true;
+
+            if (sendornotsend) {
 
 
-            //send notification
-            String name = "";
-            try {
-                if (pm != null) {
-                    ApplicationInfo app = this.getPackageManager().getApplicationInfo(apppack, 0);
-                    name = (String) pm.getApplicationLabel(app);
-                    LaunchIntent = pm.getLaunchIntentForPackage(apppack);
+                //send notification
+                String name = "";
+                try {
+                    if (pm != null) {
+                        ApplicationInfo app = this.getPackageManager().getApplicationInfo(apppack, 0);
+                        name = (String) pm.getApplicationLabel(app);
+                        LaunchIntent = pm.getLaunchIntentForPackage(apppack);
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
                 }
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
 
 
-            // feedbackYes
-            Intent feedbackYes = new Intent(this, FeedbackYesIntent.class);
-            PendingIntent pFeedbackYes = PendingIntent.getService(this, 1, feedbackYes, PendingIntent.FLAG_ONE_SHOT);
+                // feedbackYes
+                Intent feedbackYes = new Intent(this, FeedbackYesIntent.class);
+                PendingIntent pFeedbackYes = PendingIntent.getService(this, 1, feedbackYes, PendingIntent.FLAG_ONE_SHOT);
 
-            // feedbackNo
-            Intent feedbackNo = new Intent(this, FeedbackYesIntent.class);
-            PendingIntent pFeedbackNo = PendingIntent.getService(this, 1, feedbackNo, PendingIntent.FLAG_ONE_SHOT);
+                // feedbackNo
+                Intent feedbackNo = new Intent(this, FeedbackYesIntent.class);
+                PendingIntent pFeedbackNo = PendingIntent.getService(this, 1, feedbackNo, PendingIntent.FLAG_ONE_SHOT);
 
-            NotificationManager notifManager = null;
-            final int NOTIFY_ID = 0;
-            Intent intent;
-            PendingIntent pendingIntent;
-            NotificationCompat.Builder builder;
+                NotificationManager notifManager = null;
+                final int NOTIFY_ID = 0;
+                Intent intent;
+                PendingIntent pendingIntent;
+                NotificationCompat.Builder builder;
 
-            String Sendtime = "";
+                String Sendtime = "";
 
             if (notifManager == null) {
                 notifManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
             }
+
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 int importance = NotificationManager.IMPORTANCE_HIGH;
                 NotificationChannel mChannel = notifManager.getNotificationChannel(id);
@@ -181,6 +183,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 builder.setContentTitle(title + "-iNotify")                            // required
                         .setSmallIcon(android.R.drawable.ic_popup_reminder)   // required
                         .setContentText(text) // required
+//                            .addExtras(extrasid)
                         .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
                 Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
             } else {
@@ -197,35 +200,35 @@ public class MyNotificationListenerService extends NotificationListenerService {
             notifManager.notify(NOTIFY_ID, notification);
 
 
-            //PRASHAN
-            // Notification insert
+                //PRASHAN
+                // Notification insert
 
-            String nid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
-            Log.d("Notification_insert", "onNotificationPosted: Notification ID");
+                String nid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+                Log.d("Notification_insert", "onNotificationPosted: Notification ID");
 
-            String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-            //               String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
-            String appName1 = "null";
-            final String packageName1 = sbn.getPackageName();
-            PackageManager packageManager = getApplicationContext().getPackageManager();
-            try {
-                appName1 = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(packageName1, PackageManager.GET_META_DATA));
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
+                //               String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+                String appName1 = "null";
+                final String packageName1 = sbn.getPackageName();
+                PackageManager packageManager = getApplicationContext().getPackageManager();
+                try {
+                    appName1 = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(packageName1, PackageManager.GET_META_DATA));
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-            String datetime = Date;
-            String timeRecevied = TimeRecieved;
-            String timeSent = Sendtime;
-            String timeViewed = "";
-            String appName = appName1;
-            String packageName = sbn.getPackageName();
+                String datetime = Date;
+                String timeRecevied = TimeRecieved;
+                String timeSent = Sendtime;
+                String timeViewed = "";
+                String appName = appName1;
+                String packageName = sbn.getPackageName();
 
-            NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-            notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
+                NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
+                notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
 
-
+        }
         }
         Log.d("inotify", "Main-MyNotificationListenerService--un smart notification--stop----");
     }
@@ -236,6 +239,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
         if (sbn.getPackageName().equals("com.example.inotify")) {
             String ticker = sbn.getNotification().tickerText.toString();
             Log.d("inotifyC", "ticcker ==============" + ticker);
+
+            //Log.d("Notification ticker", "onNotificationRemoved: " + ticker);
+            NotificationViewability_DbHelper proUP = new NotificationViewability_DbHelper(this);
+            proUP.probability_Update(ticker);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////PUT YOUR CODE IN BETWEEN THESE LINES////////////////////////////////////
@@ -331,7 +338,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
         }
 
 
-    }}
+
+    }
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////

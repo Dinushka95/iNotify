@@ -72,6 +72,13 @@ public class ApplicationsHelper {
         return (int) applicationdbHelper.appCountGet();
     }
 
+    public long appConutAVG()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.appsCountAvgGet();
+        return applicationDbHelper.appsCountAvgGet();
+    }
+
     public List<ApplicationInfoModel> mySocialAppGet()
     {
 
@@ -212,6 +219,27 @@ public class ApplicationsHelper {
 
     }
 
+    public int socialAppCount()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.socialAppCountGet();
+        Log.d("inotify","social app count" +  applicationDbHelper.socialAppCountGet());
+        return applicationDbHelper.socialAppCountGet();
+    }
+
+    public int communicationAppCount()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.communicationAppCountGet();
+        return applicationDbHelper.communicationAppCountGet();
+    }
+
+    public int gamingAppCount()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.gamingAppCountGet();
+        return applicationDbHelper.gamingAppCountGet();
+    }
 
     //packagename to application name
     // package to catergory
