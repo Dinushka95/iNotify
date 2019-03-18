@@ -250,6 +250,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 //*******************************************
                 /// start from here//
                 //*******************************************
+
                 int totalnotificationinlist = 0;
                 StatusBarNotification[] notificationManager1 = getActiveNotifications();
 
