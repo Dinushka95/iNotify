@@ -240,6 +240,12 @@ public class MyNotificationListenerService extends NotificationListenerService {
             String ticker = sbn.getNotification().tickerText.toString();
             Log.d("inotifyC", "ticcker ==============" + ticker);
 
+            //Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+            String Viewedtime = new SimpleDateFormat("HHmmss" ,Locale.getDefault()).format(new Date());
+            NotificationDbHelper notificationDbHelper1= new NotificationDbHelper(this);
+            notificationDbHelper1.updateNotificationViewTime(ticker ,Viewedtime);
+            Log.d("XXXXXXXXXXX" ,"Updated Succcessfully ======" +ticker+ " " +Viewedtime);
+
             //Log.d("Notification ticker", "onNotificationRemoved: " + ticker);
             NotificationViewability_DbHelper proUP = new NotificationViewability_DbHelper(this);
             proUP.probability_Update(ticker);
