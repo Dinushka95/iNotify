@@ -2,6 +2,7 @@ package com.example.inotify.views.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+
+import java.util.ArrayList;
 
 public class NotificationViewabilityActivity extends AppCompatActivity {
 
@@ -28,12 +31,24 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
         ans2 = pra.display_prob();
 
-        pra.probability_query();
+        ArrayList<String> timeS = pra.genarateTimeSlots();
+        for(int i = 0 ; i < 144 ; i++ ) {
+            pra.probability_query(timeS.get(i));
+        }
+
+        //pra.probability_query("15:50 - 16:00");
+
+
+
+        Log.d("TimeSlot", "onCreate: "+ timeS.get(143));
 
 
 
         display_table(ans2);
+        pra.close();
     }
+
+
 
     public void display_table(String[] ansin) {
 

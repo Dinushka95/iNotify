@@ -36,7 +36,7 @@ import java.util.Locale;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
-    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+    //String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
     String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
@@ -90,11 +90,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             //Test
             NotificationViewability_DbHelper pratest = new NotificationViewability_DbHelper(this);
-            //pratest.probability_insert(pid,0);
+            pratest.probability_insert(id,0);
             pratest.close();
 //Chaya
             //call the isPhoneLowckedOrNot method here
-            ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+              ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
             boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
             Log.d("inotifyC ", "ScreenStatus On Notification recive" + screenstatus);
             if (!screenstatus) {
@@ -112,7 +112,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             }
 
-            //Get the ringer Mode
+           //Get the ringer Mode
             RingerModeHelper ringermodeHelper = new RingerModeHelper();
             String RingerMode = ringermodeHelper.getRingerMode(this);
             Log.d("inotifyC ", "RingerMode On Notification recive" + RingerMode);
@@ -125,7 +125,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             ringerModeDbHelper.close();
             Log.d("inotifyC ", " ringer mode Record Saved");
 
-        }
+
 
 
         boolean sendornotsend;
@@ -161,11 +161,15 @@ public class MyNotificationListenerService extends NotificationListenerService {
             PendingIntent pendingIntent;
             NotificationCompat.Builder builder;
 
+            String id2 = "hello";
+
             String Sendtime = "";
 
             if (notifManager == null) {
                 notifManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
             }
+
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 int importance = NotificationManager.IMPORTANCE_HIGH;
                 NotificationChannel mChannel = notifManager.getNotificationChannel(id);
@@ -181,6 +185,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 builder.setContentTitle(title + "-iNotify")                            // required
                         .setSmallIcon(android.R.drawable.ic_popup_reminder)   // required
                         .setContentText(text) // required
+//                            .addExtras(extrasid)
                         .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
                 Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
             } else {
@@ -225,7 +230,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
             notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
 
-
+        }
         }
         Log.d("inotify", "Main-MyNotificationListenerService--un smart notification--stop----");
     }
@@ -236,6 +241,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
         if (sbn.getPackageName().equals("com.example.inotify")) {
             String ticker = sbn.getNotification().tickerText.toString();
             Log.d("inotifyC", "ticcker ==============" + ticker);
+
+            //Log.d("Notification ticker", "onNotificationRemoved: " + ticker);
+            NotificationViewability_DbHelper proUP = new NotificationViewability_DbHelper(this);
+            proUP.probability_Update(ticker);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////PUT YOUR CODE IN BETWEEN THESE LINES////////////////////////////////////
@@ -291,7 +300,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 Log.d("inotify(^_^)" , "screenStatus1" + screenStatus1);
 
 
-             /*   String screenStatus = new String(" ");
+                /*String screenStatus = new String(" ");
                 if (tablename == "SCREENON_TABLE") {
                    // String ScreenOnStatus = screenStatusDbHelper.screenOnStatusGet();
 
@@ -330,7 +339,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
         }
 
 
-    }}
+
+    }
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////

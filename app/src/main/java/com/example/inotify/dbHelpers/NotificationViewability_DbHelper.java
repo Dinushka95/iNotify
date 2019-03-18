@@ -198,11 +198,11 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         return true;
     }
 
-    public boolean probability_query() {
+    public boolean probability_query(String timeslot) {
 
-        String timeSlotNow = timeSlotNow();
+        //String timeSlotNow = timeSlotNow();
         SQLiteDatabase dbq = this.getReadableDatabase();
-        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where time = '" + timeSlotNow + "'group by time " , null);
+        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where time = '" + timeslot + "'group by time " , null);
         if (proq != null) {
             if (proq.moveToFirst()) {
 
@@ -217,6 +217,66 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         }
         return true;
     }
+
+    public ArrayList genarateTimeSlots(){
+
+        int min;
+        int hour = 1;
+        String hourString = "";
+        int minafter = 0;
+        int hourafter = 0 ;
+        String hourStringafter = "";
+        String minStringafter = "";
+        String minString = "";
+        String timeSlot = "";
+        ArrayList<String> TimeSlots = new ArrayList<String>();
+        for(hour = 0 ; hour <= 24; hour++ ){
+            for(min = 0 ; min <= 50;min = min + 10){
+
+                minafter = min + 10;
+                minString = Integer.toString(min);
+                minStringafter = Integer.toString(minafter);
+                hourString = Integer.toString(hour);
+                hourStringafter = Integer.toString(hourafter);
+
+                if(hour<10){
+                    hourString = "0" + hour;
+                }
+                if(min == 0){
+                    minString = "0" + min;
+                }
+                if (min == 50){
+                    minafter = 0;
+                    minStringafter = "0" + minafter;
+
+                    hourafter = hour + 1;
+
+                    if(hourafter == 24) {
+                        hourafter = 0;
+                    }
+                    hourStringafter = Integer.toString(hourafter);
+                }
+
+                if(hourafter<10){
+                    hourStringafter = "0" + hourafter;
+                }
+                if(hour<10){
+                    hourString = "0" + hour;
+                }
+
+                timeSlot = hourString + ":" + minString + " - " + hourStringafter + ":" + minStringafter;
+                //Log.d("Genarate Timeslot", "genarateTimeSlots: "+ timeSlot);
+                TimeSlots.add(timeSlot);
+
+            }
+
+
+
+        }
+
+        return TimeSlots;
+    }
+
     //PRASHAN end
 
    /* private void getRecords() {
@@ -373,7 +433,7 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         Log.d("Debug", "NOW" + currentTime);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
         String currentDateTimeString = sdf.format(currentTime);
-        SimpleDateFormat hour = new SimpleDateFormat("hh", Locale.getDefault());
+        SimpleDateFormat hour = new SimpleDateFormat("HH", Locale.getDefault());
         String currentHour = hour.format(currentTime);
         Calendar cal = Calendar.getInstance();
         String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
@@ -399,7 +459,7 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
             nextHour = Integer.parseInt(currentHour) + 1;
         }
 
-        String TimeSlot = currentHour + ":" + MinOne + "0 - " + nextHour + ":" + nextMin + "0 " + currentAP;
+        String TimeSlot = currentHour + ":" + MinOne + "0 - " + nextHour + ":" + nextMin + "0";
         Log.d("Debug", "TimeSlot = " + TimeSlot);
 
 
@@ -437,7 +497,7 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         Log.d("Debug", "NOW"+currentTime);
         SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a",Locale.getDefault());
         String currentDateTimeString = sdf.format(currentTime);
-        SimpleDateFormat hour=new SimpleDateFormat("hh",Locale.getDefault());
+        SimpleDateFormat hour=new SimpleDateFormat("HH",Locale.getDefault());
         String currentHour = hour.format(currentTime);
         Calendar cal = Calendar.getInstance();
         String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
@@ -445,9 +505,9 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         SimpleDateFormat min=new SimpleDateFormat("mm",Locale.getDefault());
         String currentMin = min.format(currentTime);
         Log.d("Debug", "NOW"+currentMin);
-        SimpleDateFormat AP=new SimpleDateFormat("a",Locale.getDefault());
-        String currentAP = AP.format(currentTime);
-        Log.d("Debug", "NOW"+currentAP);
+        //SimpleDateFormat AP=new SimpleDateFormat("a",Locale.getDefault());
+        //String currentAP = AP.format(currentTime);
+        //Log.d("Debug", "NOW"+currentAP);
 
         char MinOne = currentMin.charAt(0);
         Log.d("Debug", "NOW"+MinOne);
@@ -465,7 +525,7 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         }
 
 
-        return currentHour+":"+ MinOne+"0 - "+nextHour+":"+nextMin+"0 "+ currentAP;
+        return currentHour+":"+ MinOne+"0 - "+nextHour+":"+nextMin+"0";
 
     }
 

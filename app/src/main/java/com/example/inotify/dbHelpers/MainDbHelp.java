@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+
+import java.util.ArrayList;
 
 
 public class MainDbHelp extends SQLiteOpenHelper {
@@ -19,6 +22,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
     public MainDbHelp(Context context) {
         super(context, DATABASE_NAME, null, 1);
+        c1=context;
 
 
     }
@@ -166,6 +170,14 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
 
         //PROBABILITYQUERY_TABLE
+
+        NotificationViewability_DbHelper timeS = new NotificationViewability_DbHelper(c1);
+        ArrayList <String> TimeSlots = timeS.genarateTimeSlots();
+        for(int i = 0 ; i < 144 ; i++  ){
+            db.execSQL("insert into PROBABILITYQUERY_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+        }
+        //Log.d("DBoncreate", "onCreate: " +TimeSlots.get(0));
+
 
 
 
