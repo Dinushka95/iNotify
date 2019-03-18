@@ -36,7 +36,7 @@ import java.util.Locale;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
-    //String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
     String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
@@ -51,10 +51,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
     public void onNotificationPosted(StatusBarNotification sbn) {
 
         String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
-        Log.d("inotifyC" , "pid ============" +id);
+        Log.d("inotifyC", "pid ============" + id);
         String apppack = null;
         Intent LaunchIntent = null;
-        PackageManager pm=null;
+        PackageManager pm = null;
         String ticker = "";
         if (sbn.getNotification().tickerText != null) {
             ticker = sbn.getNotification().tickerText.toString();
@@ -65,7 +65,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService--packageName---" + sbn.getPackageName());
 
         if ((sbn.getPackageName().equals("com.example.dinu.testa") || sbn.getPackageName().equals("com.example.dinu.testb") || sbn.getPackageName().equals("com.example.dinu.testc") || sbn.getPackageName().equals("com.example.dinu.testd") || sbn.getPackageName().equals("com.example.myapplication") || sbn.getPackageName().equals("com.whatsapp") || sbn.getPackageName().equals("com.facebook.orca") || sbn.getPackageName().equals("com.google.android.apps.messaging")
-        || sbn.getPackageName().equals("com.android.mms"))) {
+                || sbn.getPackageName().equals("com.android.mms"))) {
 
 
             pack = sbn.getPackageName();
@@ -83,9 +83,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
             cancelNotification(sbn.getKey());
             Log.d("inotify", "Main-MyNotificationListenerService--Cancel original Notification---");
 
-            
+
             pm = this.getPackageManager();
-             apppack = pack;
+            apppack = pack;
 
 
             //Test
@@ -94,7 +94,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             pratest.close();
 //Chaya
             //call the isPhoneLowckedOrNot method here
-              ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+            ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
             boolean screenstatus = screenStatusHelper.isPhoneLockedOrNot(this);
             Log.d("inotifyC ", "ScreenStatus On Notification recive" + screenstatus);
             if (!screenstatus) {
@@ -112,7 +112,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             }
 
-           //Get the ringer Mode
+            //Get the ringer Mode
             RingerModeHelper ringermodeHelper = new RingerModeHelper();
             String RingerMode = ringermodeHelper.getRingerMode(this);
             Log.d("inotifyC ", "RingerMode On Notification recive" + RingerMode);
@@ -128,42 +128,40 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
 
-        boolean sendornotsend;
-        sendornotsend = true;
+            boolean sendornotsend;
+            sendornotsend = true;
 
-        if (sendornotsend) {
+            if (sendornotsend) {
 
 
-            //send notification
-            String name = "";
-            try {
-                if (pm != null) {
-                    ApplicationInfo app = this.getPackageManager().getApplicationInfo(apppack, 0);
-                    name = (String) pm.getApplicationLabel(app);
-                    LaunchIntent = pm.getLaunchIntentForPackage(apppack);
+                //send notification
+                String name = "";
+                try {
+                    if (pm != null) {
+                        ApplicationInfo app = this.getPackageManager().getApplicationInfo(apppack, 0);
+                        name = (String) pm.getApplicationLabel(app);
+                        LaunchIntent = pm.getLaunchIntentForPackage(apppack);
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
                 }
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
 
 
-            // feedbackYes
-            Intent feedbackYes = new Intent(this, FeedbackYesIntent.class);
-            PendingIntent pFeedbackYes = PendingIntent.getService(this, 1, feedbackYes, PendingIntent.FLAG_ONE_SHOT);
+                // feedbackYes
+                Intent feedbackYes = new Intent(this, FeedbackYesIntent.class);
+                PendingIntent pFeedbackYes = PendingIntent.getService(this, 1, feedbackYes, PendingIntent.FLAG_ONE_SHOT);
 
-            // feedbackNo
-            Intent feedbackNo = new Intent(this, FeedbackYesIntent.class);
-            PendingIntent pFeedbackNo = PendingIntent.getService(this, 1, feedbackNo, PendingIntent.FLAG_ONE_SHOT);
+                // feedbackNo
+                Intent feedbackNo = new Intent(this, FeedbackYesIntent.class);
+                PendingIntent pFeedbackNo = PendingIntent.getService(this, 1, feedbackNo, PendingIntent.FLAG_ONE_SHOT);
 
-            NotificationManager notifManager = null;
-            final int NOTIFY_ID = 0;
-            Intent intent;
-            PendingIntent pendingIntent;
-            NotificationCompat.Builder builder;
+                NotificationManager notifManager = null;
+                final int NOTIFY_ID = 0;
+                Intent intent;
+                PendingIntent pendingIntent;
+                NotificationCompat.Builder builder;
 
-            String id2 = "hello";
-
-            String Sendtime = "";
+                String Sendtime = "";
 
             if (notifManager == null) {
                 notifManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -202,33 +200,33 @@ public class MyNotificationListenerService extends NotificationListenerService {
             notifManager.notify(NOTIFY_ID, notification);
 
 
-            //PRASHAN
-            // Notification insert
+                //PRASHAN
+                // Notification insert
 
-            String nid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
-            Log.d("Notification_insert", "onNotificationPosted: Notification ID");
+                String nid = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+                Log.d("Notification_insert", "onNotificationPosted: Notification ID");
 
-            String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                String Date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-            //               String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
-            String appName1 = "null";
-            final String packageName1 = sbn.getPackageName();
-            PackageManager packageManager = getApplicationContext().getPackageManager();
-            try {
-                appName1 = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(packageName1, PackageManager.GET_META_DATA));
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
+                //               String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+                String appName1 = "null";
+                final String packageName1 = sbn.getPackageName();
+                PackageManager packageManager = getApplicationContext().getPackageManager();
+                try {
+                    appName1 = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(packageName1, PackageManager.GET_META_DATA));
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-            String datetime = Date;
-            String timeRecevied = TimeRecieved;
-            String timeSent = Sendtime;
-            String timeViewed = "";
-            String appName = appName1;
-            String packageName = sbn.getPackageName();
+                String datetime = Date;
+                String timeRecevied = TimeRecieved;
+                String timeSent = Sendtime;
+                String timeViewed = "";
+                String appName = appName1;
+                String packageName = sbn.getPackageName();
 
-            NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-            notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
+                NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
+                notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
 
         }
         }
@@ -300,7 +298,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 Log.d("inotify(^_^)" , "screenStatus1" + screenStatus1);
 
 
-                /*String screenStatus = new String(" ");
+             /*   String screenStatus = new String(" ");
                 if (tablename == "SCREENON_TABLE") {
                    // String ScreenOnStatus = screenStatusDbHelper.screenOnStatusGet();
 
