@@ -1,5 +1,6 @@
 package com.example.inotify.views.views;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,30 +28,32 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
         mLayout = findViewById(R.id.liner);
 
         NotificationViewability_DbHelper pra = new NotificationViewability_DbHelper(this);
-        String[] ans2 = new String[100];
+        //String[] ans2 = new String[100];
 
-        ans2 = pra.display_prob();
 
-        ArrayList<String> timeS = pra.genarateTimeSlots();
-        for(int i = 0 ; i < 144 ; i++ ) {
+        //ans2 = pra.display_prob();
+
+        ArrayList<String> timeS = pra.selectTimeSlot();
+        for(int i = 1 ; i <= Integer.parseInt(timeS.get(0)) ; i++ ) {
             pra.probability_query(timeS.get(i));
         }
-
+        //Log.d("test", "onCreate: "+ timeS.get(2));
         //pra.probability_query("15:50 - 16:00");
 
 
 
-        Log.d("TimeSlot", "onCreate: "+ timeS.get(143));
+        //Log.d("TimeSlot", "onCreate: "+ timeS.get(0));
+        ArrayList<String> ansArry = pra.display_prob();
+        display_table(ansArry);
 
 
-
-        display_table(ans2);
+        pra.genarateProbability();
         pra.close();
     }
 
 
 
-    public void display_table(String[] ansin) {
+    public void display_table(ArrayList<String> ansin) {
 
         TableLayout mytb = new TableLayout(this);
         mytb.setLayoutParams(new TableLayout.LayoutParams(
@@ -58,7 +61,7 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
         int count3 = 1;
 
-        for (int count = 0; count < Integer.parseInt(ansin[0]) / 6; count++) {
+        for (int count = 0; count < Integer.parseInt(ansin.get(0)) / 6; count++) {
             TableLayout.LayoutParams lp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
                     TableLayout.LayoutParams.WRAP_CONTENT);
             lp.setMargins(50, 10, 10, 10);
@@ -71,7 +74,7 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
                 valueTV.setBackgroundColor(0xdddddddd);
                 valueTV.setPadding(10, 10, 10, 10);
                 valueTV.setGravity(Gravity.CENTER);
-                valueTV.setText("" + ansin[count3]);
+                valueTV.setText("" + ansin.get(count3));
                 count3 = count3 + 1;
                 valueTV.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
                 row.addView(valueTV);

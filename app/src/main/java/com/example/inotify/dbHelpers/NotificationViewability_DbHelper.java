@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.TableRow;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
@@ -17,6 +18,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.example.inotify.configs.TbNames.PROBABILITYQUERY_TABLE;
 import static com.example.inotify.configs.TbNames.PROBABILITY_TABLE;
 
 
@@ -127,9 +129,11 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
 
     //PRASHAN
     String[] ans = new String[200];
-
+    ArrayList<String> ansarraylist = new ArrayList<>();
     //PRASHAN
-    public String[] display_prob() {
+    public ArrayList display_prob() {
+
+        ansarraylist.add("");
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select probability_id,time,day,viewor,notor,probability from " + PROBABILITY_TABLE, null);
@@ -138,7 +142,8 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
             while (cursor.moveToNext()) {
 
                 for(int count =0; count<6 ; count++){
-                    ans[count2] = cursor.getString(count);
+                    ansarraylist.add(cursor.getString(count));
+                    //ans[count2] = cursor.getString(count);
 
                     count2 = count2 + 1;
                 }
@@ -147,10 +152,11 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
 
 
             }
-            ans[0] = Integer.toString(count2);
+            ansarraylist.set(0,Integer.toString(count2));
+            //ans[0] = Integer.toString(count2);
 
         }
-        return ans;
+        return ansarraylist;
     }
 
     public boolean probability_Update(String ticker){
@@ -198,25 +204,98 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         return true;
     }
 
-    public boolean probability_query(String timeslot) {
-
-        //String timeSlotNow = timeSlotNow();
+    public ArrayList selectTimeSlot(){
+        int count = 1;
+        ArrayList<String> TimeSlots = new ArrayList<>();
+        TimeSlots.add("");
         SQLiteDatabase dbq = this.getReadableDatabase();
-        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where time = '" + timeslot + "'group by time " , null);
+        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " group by "+TbColNames.TIME , null);
         if (proq != null) {
             if (proq.moveToFirst()) {
-
-                String timeSlot = proq.getString(1);
-                int vieworSum = proq.getInt(2);
-                int notorSum = proq.getInt(3);
-                Log.d("Timeslot", "probability_Query: " + timeSlot);
-                Log.d("viewOR", "probability_Query: " + vieworSum);
-                Log.d("TimeslotNow", "probability_Query: " + notorSum);
+                do{
+                    TimeSlots.set(0,Integer.toString(count));
+                    TimeSlots.add(proq.getString(1));
+                    Log.d("TimeSlots", "selectTimeSlot: "+ proq.getString(1));
+                    //Log.d("TimeSlots", "selectTimeSlot: "+Integer.toString(proq.getInt(2)));
+                    count = count + 1 ;
+                }while (proq.moveToNext());
 
             }
         }
+        proq.close();
+        return (TimeSlots);
+    }
+
+    public boolean probability_query(String timeslot) {
+
+        SQLiteDatabase dbq = this.getReadableDatabase();
+        String timeSlot = "";
+        int vieworSum = 0;
+        int notorSum = 0;
+        int i = 0;
+        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where time = '" + timeslot + "'group by time " , null);
+        if (proq != null) {
+            if (proq.moveToFirst()) {
+                    timeSlot = proq.getString(1);
+                    vieworSum = (Integer.parseInt(proq.getString(2)));
+                    notorSum = (Integer.parseInt(proq.getString(3)));
+                    //i = i + 1;
+
+                    Log.d("viewORSUM", "probability_Query: " + proq.getInt(2));
+
+            }
+        }
+        dbq.close();
+
+            ContentValues contentValues3 = new ContentValues();
+            int ViewSUM = vieworSum;
+            int NotSUM = notorSum;
+            contentValues3.put(TbColNames.VIEWORSUM , ViewSUM);
+            contentValues3.put(TbColNames.NOTORSUM , NotSUM);
+
+            Log.d("Writable", "probability_query: " + ViewSUM);
+            Log.d("NotSUM", "probability_query: " + NotSUM);
+            Log.d("TIMESLOT", "probability_query: " + timeSlot);
+            SQLiteDatabase upd = this.getWritableDatabase();
+            upd.update(TbNames.PROBABILITYQUERY_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+
+        upd.close();
+
         return true;
     }
+
+    public void genarateProbability(){
+        ArrayList<String> TimeSlots = selectTimeSlot();
+        String timeslot ="";
+        int viewSum = 0;
+        int notSum = 0;
+
+        for(int i = 1 ; i <= Integer.parseInt(TimeSlots.get(0)); i++ ) {
+            SQLiteDatabase dbq = this.getReadableDatabase();
+            Cursor genpro = dbq.rawQuery("select "+TbColNames.TIME_SLOT+" , "+TbColNames.VIEWORSUM+" , "+TbColNames.NOTORSUM+" from " + TbNames.PROBABILITYQUERY_TABLE + " where "+TbColNames.TIME_SLOT+" ='"+TimeSlots.get(i)+"'", null);
+            if (genpro != null) {
+                if (genpro.moveToFirst()) {
+                    //timeslot = genpro.getString(0);
+                    viewSum = genpro.getInt(1);
+                    notSum = genpro.getInt(2);
+                }
+            }
+            dbq.close();
+            Double total = viewSum + notSum + 0.0;
+            Double probability = 0.0;
+            if (total != 0.0){
+                probability =  ((viewSum / total) * 100.0);
+            }
+            SQLiteDatabase upd2 = this.getWritableDatabase();
+            ContentValues contentValues2 = new ContentValues();
+            contentValues2.put(TbColNames.PROBABILITYFINAL,probability);
+            upd2.update(TbNames.PROBABILITYQUERY_TABLE ,contentValues2 , TbColNames.TIME_SLOT +" = '"+TimeSlots.get(i)+"'", null);
+            upd2.close();
+        }
+
+    }
+
+
 
     public ArrayList genarateTimeSlots(){
 
