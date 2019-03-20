@@ -17,7 +17,7 @@ var yyyy = today.getFullYear();
 
 const date = mm + dd + yyyy;
 const dbName = "topApplications";
-const appcount = 30;
+const appcount = 10;
 
 
 function sleep(millis) {
