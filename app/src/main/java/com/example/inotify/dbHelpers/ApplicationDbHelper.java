@@ -403,11 +403,52 @@ public class ApplicationDbHelper extends MainDbHelp {
         return avg;
     }
 
+    public List<ApplicationInfoModel> myPhotograpyAppGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    //applicationInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listApplicationInfoModels;
+    }
+
+
     public int socialAppCountGet() {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"social\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int photograpyAppCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));

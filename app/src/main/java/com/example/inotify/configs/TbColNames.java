@@ -156,6 +156,12 @@ public class TbColNames {
     public static final String APPPACKAGE = "apppackage";
 
 
+    //CallDuration table
+    public  static final String CALLDURATION_ID = "calldurationId";
+
+    //ContactCount table
+    public static final String CONTACTCOUNT_ID ="contactcountId";
+
 
 
 

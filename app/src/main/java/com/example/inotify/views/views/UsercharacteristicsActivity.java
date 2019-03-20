@@ -1,6 +1,14 @@
 package com.example.inotify.views.views;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.CallLog;
+import android.provider.ContactsContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,9 +18,24 @@ import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.CalenderEventDbHelper;
+import com.example.inotify.dbHelpers.CallDurationDbHelper;
+import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.CalenderEventHelper;
+import com.example.inotify.helpers.CallDurationHelper;
+import com.example.inotify.helpers.ChargerHelper;
+import com.example.inotify.helpers.ContactsHelper;
+import com.example.inotify.models.ContactsModel;
+import com.example.inotify.services.UserCharacteristics_service;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class UsercharacteristicsActivity extends AppCompatActivity {
 
@@ -85,6 +108,37 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
          textViewToChange4.setText(""+openness);
     }
 
+    public void displayExtraversion()
+    {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        long socialAPpUsageAVG = appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
+        long socialAPpUsageToday = appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
+
+        long socialAppUsage = (socialAPpUsageAVG - socialAPpUsageToday)/socialAPpUsageAVG; //social app usage 2nd attribute
+        Log.d("inotify","socialAppUsage......." + socialAppUsage);
+
+        long socialAppUsageProbability = (socialAppUsage *20)/100;//----1st attribute
+
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+        int socialAppCount = applicationsHelper.commonSocialAppCount(); //think again have to get the avg also
+
+        long socialAppCountProbability = (socialAppCount * 20)/100;//----2nd attribute
+
+        int gamingAppCount = applicationsHelper.commonGamingAppCount();
+
+        long gamingAppCountProbability = (gamingAppCount * 20)/100; //----3rd attribute
+
+        CallDurationHelper callDurationHelper = new CallDurationHelper(this);
+        long callDurationToday = callDurationHelper.getCallDuraionAVGToday();
+        long callDurationAVG = callDurationHelper.getCallDurationAVG();
+
+        long callDuration = (callDurationAVG - callDurationToday)/callDurationAVG;
+
+        long callDurationProbability = (callDuration * 20)/100;//----4th attribute
+
+
+
+    }
 
     public void displayConscientiousness()
     {
@@ -108,6 +162,47 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
     }
 
+    public void displayAgreeableness()
+    {
+
+    }
+
+    public void displayNeuroticism()
+    {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        long socialAPpUsageAVG = appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
+        long socialAPpUsageToday = appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
+
+        long socialAppUsage = (socialAPpUsageAVG - socialAPpUsageToday)/socialAPpUsageAVG; //social app usage 2nd attribute
+        Log.d("inotify","socialAppUsage......." + socialAppUsage);
+
+        long socialAppUsageProbability = (socialAppUsage *20)/100;//----1st attribute
+
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+        int socialAppCount = applicationsHelper.commonSocialAppCount();
+
+        long socialAppCountProbability = (socialAppCount * 20)/100;//----2nd attribute
+
+        long appUsageAVG = appUsageHelper.appAllUsageAvgGet();
+        long appUsageToday = appUsageHelper.appAllUsageTodayGet();
+
+        long allAppsUsage = ( appUsageAVG - appUsageToday)/ appUsageAVG; //allappusge 1st attribute
+        Log.d("inotify","allAppsUsage......." + allAppsUsage);
+
+        int photograpyApps = applicationsHelper.commonPhotograpyAppCount();
+
+        long photograpyAppsProbability = (photograpyApps * 20)/100;
+
+        long photograpyAppUsageToday = appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.PHOTOGRAPY);
+        long photograpyAppUsageAVG = appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.PHOTOGRAPY);
+
+        long photograpyAppUsage = (photograpyAppUsageAVG - photograpyAppUsageToday)/photograpyAppUsageAVG;
+
+        long photograpyAppUsageProbability = (photograpyAppUsage * 20)/100;//4th attribute
+
+
+    }
+
     public void DisplayOpenness(View view) {
         this.displayOpenness();
 
@@ -115,13 +210,28 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test1(View view) {
-       AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+     //  AppUsageHelper appUsageHelper = new AppUsageHelper(this);
 //       appUsageHelper.saveTodaysAppUsage();
-        appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
-        appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
-        appUsageHelper.appAllUsageTodayGet();
-        appUsageHelper.appAllUsageAvgGet();
+//        appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
+//        appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
+//        appUsageHelper.appAllUsageTodayGet();
+//        appUsageHelper.appAllUsageAvgGet();
 
+
+//        CallDurationHelper callDurationHelper = new CallDurationHelper(this);
+//        callDurationHelper.getCallDuraionAVGToday();
+//        callDurationHelper.getCallDurationAVG();
+
+//        ChargerHelper chargerHelper = new ChargerHelper(this);
+//        chargerHelper.powerOninsert();
+//        chargerHelper.powerOffinsert();
+
+       // getContacts(this);
+
+        ContactsHelper contactsHelper = new ContactsHelper();
+//        contactsHelper.getcontactToday();
+//        contactsHelper.getContactAVG();
+//
 
 
 
@@ -130,8 +240,8 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
     public void test2(View view) {
 
-//          ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-//          applicationsHelper.saveCurrentPhoneApps();
+      //    ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+      //    applicationsHelper.saveCurrentPhoneApps();
 
        // applicationsHelper.appCountGet();
 
@@ -150,9 +260,13 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
         //CalenderEventDbHelper calenderEventDbHelper = new CalenderEventDbHelper(this);
         //calenderEventDbHelper.checkIfExist();
 
-           this.displayOpenness();
+          // this.displayOpenness();
+       // this.displayExtraversion();
+
 
 
     }
+
+
 
 }

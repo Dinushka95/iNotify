@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 import com.example.inotify.helpers.CalenderEventHelper;
@@ -118,8 +119,10 @@ public class UserCharacteristics_service extends JobService {
                     String duration = cursor.getString(cursor.getColumnIndex(CallLog.Calls.DURATION));
 
 
-                    //  Log.d("inotify", number+duration+type+dateTime );
+                     // Log.d("inotify", number+duration+type+dateTime );
                     totalDuration = totalDuration + Integer.valueOf(duration);
+                    Log.d("inotify","total call duration" + totalDuration);
+
                 }
             }
             UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(this);
