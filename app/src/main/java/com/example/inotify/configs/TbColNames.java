@@ -39,7 +39,7 @@ public class TbColNames {
     public static final String TIME_SLOT = "time_slot";
     public static final String VIEWORSUM = "vieworsum";
     public static final String NOTORSUM = "notorsum";
-    public static final String PROBABILITYFINAL = "probability_final";
+    public static final String PROBABILITYFINAL = "probabilityfinal";
 
     //// ringer mode
     public static final String RM_NOTIFICATIONID = "rm_notificationid";

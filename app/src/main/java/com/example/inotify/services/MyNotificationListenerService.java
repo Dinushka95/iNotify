@@ -90,7 +90,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             //Test
             NotificationViewability_DbHelper pratest = new NotificationViewability_DbHelper(this);
-            //pratest.probability_insert(pid,0);
+            pratest.probability_insert(id,0);
             pratest.close();
 //Chaya
             //call the isPhoneLowckedOrNot method here
@@ -124,6 +124,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
             ringerModeDbHelper.RMinsert(id, RingerMode);
             ringerModeDbHelper.close();
             Log.d("inotifyC ", " ringer mode Record Saved");
+
+
 
 
             boolean sendornotsend;
@@ -161,38 +163,41 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 String Sendtime = "";
 
-                if (notifManager == null) {
-                    notifManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notifManager == null) {
+                notifManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            }
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                NotificationChannel mChannel = notifManager.getNotificationChannel(id);
+                if (mChannel == null) {
+                    mChannel = new NotificationChannel(id, title, importance);
+                    mChannel.enableVibration(true);
+                    mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                    notifManager.createNotificationChannel(mChannel);
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    int importance = NotificationManager.IMPORTANCE_HIGH;
-                    NotificationChannel mChannel = notifManager.getNotificationChannel(id);
-                    if (mChannel == null) {
-                        mChannel = new NotificationChannel(id, title, importance);
-                        mChannel.enableVibration(true);
-                        mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-                        notifManager.createNotificationChannel(mChannel);
-                    }
-                    builder = new NotificationCompat.Builder(this, id);
-                    intent = LaunchIntent;
-                    PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-                    builder.setContentTitle(title + "-iNotify")                            // required
-                            .setSmallIcon(android.R.drawable.ic_popup_reminder)   // required
-                            .setContentText(text) // required
-                            .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-                    Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
-                } else {
-                    builder = new NotificationCompat.Builder(this, id);
-                    intent = LaunchIntent;
-                    PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-                    builder.setContentTitle(title + "-iNotify")                            // required
-                            .setSmallIcon(android.R.drawable.ic_popup_reminder)   // required
-                            .setContentText(text) // required
-                            .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400}).setPriority(Notification.PRIORITY_HIGH);
-                    Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
-                }
-                Notification notification = builder.build();
-                notifManager.notify(NOTIFY_ID, notification);
+                builder = new NotificationCompat.Builder(this, id);
+                intent = LaunchIntent;
+                PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                builder.setContentTitle(title + "-iNotify")                            // required
+                        .setSmallIcon(android.R.drawable.ic_popup_reminder)   // required
+                        .setContentText(text) // required
+//                            .addExtras(extrasid)
+                        .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+            } else {
+                builder = new NotificationCompat.Builder(this, id);
+                intent = LaunchIntent;
+                PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                builder.setContentTitle(title + "-iNotify")                            // required
+                        .setSmallIcon(android.R.drawable.ic_popup_reminder)   // required
+                        .setContentText(text) // required
+                        .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400}).setPriority(Notification.PRIORITY_HIGH);
+                Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+            }
+            Notification notification = builder.build();
+            notifManager.notify(NOTIFY_ID, notification);
 
 
                 //PRASHAN
@@ -223,10 +228,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
                 notificationHelper.insert(new NotificationModel(id, datetime, timeRecevied, timeSent, timeViewed, appName, packageName, "1"));
 
-
-            }
-            Log.d("inotify", "Main-MyNotificationListenerService--un smart notification--stop----");
         }
+        }
+        Log.d("inotify", "Main-MyNotificationListenerService--un smart notification--stop----");
     }
 
 
@@ -235,6 +239,16 @@ public class MyNotificationListenerService extends NotificationListenerService {
         if (sbn.getPackageName().equals("com.example.inotify")) {
             String ticker = sbn.getNotification().tickerText.toString();
             Log.d("inotifyC", "ticcker ==============" + ticker);
+
+            //Sendtime = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+            String Viewedtime = new SimpleDateFormat("HHmmss" ,Locale.getDefault()).format(new Date());
+            NotificationDbHelper notificationDbHelper1= new NotificationDbHelper(this);
+            notificationDbHelper1.updateNotificationViewTime(ticker ,Viewedtime);
+            Log.d("XXXXXXXXXXX" ,"Updated Succcessfully ======" +ticker+ " " +Viewedtime);
+
+            //Log.d("Notification ticker", "onNotificationRemoved: " + ticker);
+            NotificationViewability_DbHelper proUP = new NotificationViewability_DbHelper(this);
+            proUP.probability_Update(ticker);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////PUT YOUR CODE IN BETWEEN THESE LINES////////////////////////////////////
@@ -249,6 +263,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 //*******************************************
                 /// start from here//
                 //*******************************************
+
                 int totalnotificationinlist = 0;
                 StatusBarNotification[] notificationManager1 = getActiveNotifications();
 
@@ -329,7 +344,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
         }
 
 
-    }}
+
+    }
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
