@@ -5,7 +5,16 @@ import android.util.Log;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.services.MyNotificationListenerService;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainUserAttentivness {
+
 
 
     //write a method to check in which table does the record exisits (screen on tabele or screen off table)
@@ -18,9 +27,52 @@ public class MainUserAttentivness {
         double Attentivnes = 0.0;
         int seqenceAvg = (notificationTotal) / 2;
         int notificationSequence = Integer.parseInt(Sequence);
-        int timeViewed = Integer.parseInt(Viewtime);
-        int timeRecived = Integer.parseInt(RecivedTime);
-        int delay = timeViewed - timeRecived;
+//        int timeViewed = Integer.parseInt(Viewtime);
+
+        Date timeviwed= new Date();
+        Date  timeRecived = new Date();
+
+
+        //Convert the string value to date time
+        DateFormat dateFormat = new SimpleDateFormat("HHmmss");
+        try{
+            Log.d("inotify(^_^) " ,"Inside the try");
+             timeviwed =(Date) dateFormat.parse(Viewtime);
+             timeRecived =(Date) dateFormat.parse(RecivedTime);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+            Log.d("inotify(^_^) " ,"Date Time Error");
+        }
+
+       /* try{
+            timeviwed = (Time)dateFormat.parse(Viewtime);
+             timeRecived =(Time)dateFormat.parse(RecivedTime);
+
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+            Log.d("inotify " ,"DateTiem Error");
+        }*/
+
+        Log.d("inotify(^_^)" ,"time viwed  " +timeviwed);
+       Log.d("inotify(^_^)" ,"time recived " +timeRecived);
+
+        long delay = timeviwed.getTime() - timeRecived.getTime();
+        // long diffMinutes = diff / (60 * 1000) % 60;
+        long delayinminute = delay/60000 % 60;
+        Date delaydiff = new Date(delay);
+
+
+        Log.d("inotify(^_^)" , "delay=============" +delay );
+        Log.d("inotify(^_^)" , "delaydiff=============" +delayinminute );
+
+        //Log.d("inotifyC" ,"timeviwed" , +simpleDateFormat);
+
+   //     int timeRecived = Integer.parseInt(RecivedTime);
+
         double RMWeight = 0;
         double STweight = 0;
         double delayWeight = 0;

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
 import java.text.SimpleDateFormat;
@@ -81,9 +82,9 @@ public class UserCharacteristics_DbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE, date);
-        contentValues.put(TIME, time);
-        long result = db.insert(CALLDURATION_TABLE, null, contentValues);
+        contentValues.put(TbColNames.DATE, date);
+        contentValues.put(TbColNames.TIME, time);
+        long result = db.insert(TbNames.CALLDURATION_TABLE, null, contentValues);
         db.close();
         return result != -1;
     }

@@ -20,11 +20,19 @@ public class TopAppsHelper {
     //check with pre define top apps
 
 
-public List<ApplicationInfoModel> topAppSocial()
+    public List<ApplicationInfoModel> topAppSocial()
 {
     TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
     return topAppDbHelper.topAppSocilGet();
 }
+
+
+    public List<ApplicationInfoModel> topAppPhotograpy()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppPhotograpyGet();
+    }
+
 
     public List<ApplicationInfoModel> topAppCommunication()
     {

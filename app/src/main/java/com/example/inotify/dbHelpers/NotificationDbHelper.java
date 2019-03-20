@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.NotificationModel;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,14 +61,15 @@ public class NotificationDbHelper extends MainDbHelp {
     //Get the notification recived time  -Cha
 
     public String recivedTimeGet(String id){
+        String notificationRecivedTime = new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+      //  String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
-        Cursor res = db.rawQuery("select TIMERECEVIED from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATION_ID =\"" +id + "\"",null);
+        Cursor res = db.rawQuery("select * from "+ TbNames.NOTIFICATION_TABLE + " where NOTIFICATIONID =\"" +id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
-                return res.getString(1);
+                return res.getString(3);
             }
             res.close();
         }
@@ -75,15 +78,15 @@ public class NotificationDbHelper extends MainDbHelp {
 
 // Get the time notification was viwed
     public String viewTimeGet(String id){
-
+        String notificationViewTime = new String();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+        //String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
-        Cursor res = db.rawQuery(	"select TIMEVIEW from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"",null);
+        Cursor res = db.rawQuery(	"select * from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATIONID =\"" + id + "\"",null);
         if(res !=null){
             if(res.moveToFirst()){
-                return res.getString(1);
+                return res.getString(4);
             }
             res.close();
         }
@@ -97,9 +100,8 @@ public class NotificationDbHelper extends MainDbHelp {
     //update method
            // Get the time and update the notificationviwedtime
 
-    public String updateNotificationViwedTime(){
+  /*  public String updateNotificationViwedTime(String id){
 
-        String id = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("update " +TbNames.NOTIFICATION_TABLE + "set TIMEVIEW = \"" +id+ "\"" ,null);
@@ -111,7 +113,7 @@ public class NotificationDbHelper extends MainDbHelp {
             res.close();
         }
         return null;
-    }
+    }*/
 
 
     //get method for appname
@@ -119,7 +121,7 @@ public class NotificationDbHelper extends MainDbHelp {
     {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select APPNAME from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATION_ID =\"" + id + "\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATION_TABLE +" where NOTIFICATIONID =\"" + id + "\"", null);
         if(res !=null)
         {
             if(res.moveToFirst()){
@@ -160,4 +162,19 @@ public class NotificationDbHelper extends MainDbHelp {
 
     }
 
+
+
+    public boolean updateNotificationViewTime(String notificationid , String timeView)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues=new ContentValues();
+        //contentValues.put(TbColNames.NOTIFICATIONID ,notificationid);
+        contentValues.put(TbColNames.TIMEVIEW ,timeView);
+        String where = "NOTIFICATIONID = ?";
+        String[] whereargs =new String[]{String.valueOf(notificationid)};
+        long res =db.update(TbNames.NOTIFICATION_TABLE,contentValues , where ,whereargs);
+        db.close();
+        return res!=-1;
+
+    }
 }

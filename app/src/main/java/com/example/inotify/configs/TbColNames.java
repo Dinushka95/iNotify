@@ -39,7 +39,7 @@ public class TbColNames {
     public static final String TIME_SLOT = "time_slot";
     public static final String VIEWORSUM = "vieworsum";
     public static final String NOTORSUM = "notorsum";
-    public static final String PROBABILITYFINAL = "probability_final";
+    public static final String PROBABILITYFINAL = "probabilityfinal";
 
     //// ringer mode
     public static final String RM_NOTIFICATIONID = "rm_notificationid";
@@ -70,6 +70,7 @@ public class TbColNames {
     //AttentivnesssperApp
    // public static final String APPNAME ="appname";
     public static final String TOTALATTENTIVNESS = "totalattentivness";
+    public static final String TOTALATTENTIVNESSPERCENTAGE = "totalattentivnesspercentage";
 
 
     ////smart notification system
@@ -154,6 +155,12 @@ public class TbColNames {
     //public static final String APPCATEGORY = "appcategory";
     public static final String APPPACKAGE = "apppackage";
 
+
+    //CallDuration table
+    public  static final String CALLDURATION_ID = "calldurationId";
+
+    //ContactCount table
+    public static final String CONTACTCOUNT_ID ="contactcountId";
 
 
 

@@ -71,6 +71,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         }
         return list;
     }
+    //Get the attentivness of a particulr notification
     public String getattentivness(String id )
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -87,12 +88,14 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
 
     }
 
-    public boolean tptalAttentivnessInsert(String Appname , double totalAttentivness)
+    public boolean tptalAttentivnessInsert(String Appname , double totalAttentivness ,double totalattentivnesspercentage)
     {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TbColNames.APPLICATION ,Appname);
         contentValues.put(TbColNames.TOTALATTENTIVNESS ,totalAttentivness);
+        contentValues.put(TbColNames.TOTALATTENTIVNESSPERCENTAGE,totalattentivnesspercentage);
+
 
         long result = db.insert(TbNames.ATTENTIVNESSPERAPP_TABLE , null,contentValues);
         db.close();
@@ -100,6 +103,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
 
     }
 
+    //Get the cumilative attentivness
     public String AttentivnessperAppGet(String Appname)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -132,13 +136,14 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
 
     }
 
-    public boolean updateaattentivnessperApp(String Appname , double totalattentivness)
+    public boolean updateaattentivnessperApp(String Appname , double totalattentivness ,double totalattentivnesspercentage)
     {
         Log.d("inotify(^_^) " , "tottal attentivness in update method " + totalattentivness );
         SQLiteDatabase db =this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(TbColNames.TOTALATTENTIVNESS ,totalattentivness);
+        contentValues.put(TbColNames.TOTALATTENTIVNESSPERCENTAGE ,totalattentivnesspercentage);
 
         String where = "APPLICATION = ?";
         String[] whereargs = new String[] {String.valueOf(Appname)};
@@ -155,21 +160,17 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         String[]  attentivness =  this.TotalAttentivness(Appname);
         String Application = attentivness[3];
         String totalAttentivness = attentivness[4];
-        String attentivnessPerNotification = this.getattentivness(id);
+        String attentivnessPerParticularNotification = this.getattentivness(id);
 
         //for freash values
         double totalAttentivnessValue = Double.parseDouble(totalAttentivness);
-        double attentivnessPerNotificationValue = Double.parseDouble(attentivnessPerNotification);
-
-
-
-
+        double attentivnessPerParticulrNotificationValue = Double.parseDouble(attentivnessPerParticularNotification);
         boolean attentibvnessexistemce = this.CheckAttentivness(Appname);
 
 
 
 
-        Log.d("inotify(^_^" , "attentivnessPerNotificationValue" + attentivnessPerNotificationValue);
+        Log.d("inotify(^_^" , "attentivnessPerParticulrNotificationValue " + attentivnessPerParticulrNotificationValue);
         Log.d("inotify(^_^" , "totalAttentivnessValue" + totalAttentivnessValue);
        // Log.d("inotify(^_^" , "atttentivnessperAppValue" + atttentivnessperAppValue);
 
@@ -180,26 +181,31 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         //true = exists
         if(attentibvnessexistemce)
         {
-            String currentAttentivness = this.AttentivnessperAppGet(Appname);
-            double currentAttentivnessValue = Double.parseDouble(currentAttentivness);
-            double updatedAtttentivnessPerAppValue = currentAttentivnessValue + attentivnessPerNotificationValue;
+            String currentTotalAttentivness = this.AttentivnessperAppGet(Appname);
+            double currentToallAttentivnessValue = Double.parseDouble(currentTotalAttentivness);
+            double updatedAtttentivnessPerAppValue = currentToallAttentivnessValue + attentivnessPerParticulrNotificationValue;
 
-            Log.d("inotify(^_^" , "currentAttentivness" + currentAttentivness);
+            double totalAttentivnessPercentage = (attentivnessPerParticulrNotificationValue/currentToallAttentivnessValue)*100;
+
+
+            Log.d("inotify(^_^" , "currentAttentivness" + currentToallAttentivnessValue);
             Log.d("inotify(^_^" , "updatedAtttentivnessPerAppValue" + updatedAtttentivnessPerAppValue);
             //update.
-            this.updateaattentivnessperApp(Appname , updatedAtttentivnessPerAppValue);
+            this.updateaattentivnessperApp(Appname , updatedAtttentivnessPerAppValue , totalAttentivnessPercentage);
             Log.d("inotify(^_^)" , "update");
 
 
         }
         else
         {
-            double atttentivnessperAppValue = totalAttentivnessValue + attentivnessPerNotificationValue;
+            //double atttentivnessperAppValue = totalAttentivnessValue + attentivnessPerParticulrNotificationValue;
+            double atttentivnessperAppValue = attentivnessPerParticulrNotificationValue;
             String attenivnessPerApp = Double.toString(atttentivnessperAppValue);
-            this.tptalAttentivnessInsert(Appname,atttentivnessperAppValue);
-            Log.d("inotify(^_^)" , "Insert");
+            double initialAtentivnessPercentage = 0;
 
-            Log.d("inotify(^_^" , "attenivnessPerApp" + attenivnessPerApp);
+            this.tptalAttentivnessInsert(Appname,atttentivnessperAppValue,initialAtentivnessPercentage);
+            Log.d("inotify(^_^)" , "Insert");
+                    Log.d("inotify(^_^" , "attenivnessPerApp" + attenivnessPerApp);
         }
 
 

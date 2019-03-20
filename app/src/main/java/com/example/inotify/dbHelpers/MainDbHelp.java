@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+
+import java.util.ArrayList;
 
 
 public class MainDbHelp extends SQLiteOpenHelper {
@@ -19,6 +22,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
     public MainDbHelp(Context context) {
         super(context, DATABASE_NAME, null, 1);
+        c1=context;
 
 
     }
@@ -44,20 +48,19 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.RINGERMODE_TABLE + "(RM_ID INTEGER PRIMARY KEY AUTOINCREMENT,RM_NOTIFICATIONID TEXT,RM_DAY TEXT,RM_DATE TEXT , RM_TIME TEXT  ,RM_RINGERMODE TEXT)");
         db.execSQL("create table " + TbNames.NOTIFICATIONIMPORTANCE_TABLE + "(NOTIFICATION_IMPORTANCE_ID  INTEGER PRIMARY KEY AUTOINCREMENT , NOTIFICATIONIID TEXT , APPLICATIONNAME TEXT , SEQUENCEVALUE TEXT)");
         db.execSQL("create table " + TbNames.USERATTENTIVNESS_TABLE + "(ID INTEGER PRIMARY KEY , NID TEXT , APPLICATION TEXT , ATTENTIVNESSVALUE DOUBLE) ");
-        db.execSQL("create table " + TbNames.ATTENTIVNESSPERAPP_TABLE + "(ID INTEGER PRIMARY KEY , APPLICATION  TEXT , TOTALATTENTIVNESS TEXT)");
+        db.execSQL("create table " + TbNames.ATTENTIVNESSPERAPP_TABLE + "(ID INTEGER PRIMARY KEY , APPLICATION  TEXT , TOTALATTENTIVNESS TEXT , TOTALATTENTIVNESSPERCENTAGE TEXT)");
 
         db.execSQL("create table " + TbNames.CHARGER_TABLE + " (CHARGERID INTEGER PRIMARY KEY AUTOINCREMENT, POWERONCOUNTDATE TEXT,POWERONCOUNTTIME TEXT,POWEROFFCOUNTDATE TEXT,POWEROFFCOUNTTIME TEXT,DATE TEXT)");
         db.execSQL("create table " + TbNames.APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
-        db.execSQL("create table " + TbNames.CALLDURATION_TABLE + " (CALLDURATION_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
         db.execSQL("create table " + TbNames.CALENDEREVENTCOUNT_TABLE + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
 
         db.execSQL("create table " + TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE + " (SNAVCTIVEAPPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,STATUS TEXT)");
 
         db.execSQL("create table " + TbNames.SCREENSTATUS_TABLE + " ("+TbColNames.SCREENSTATUS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.NOTIFICATIONID+" TEXT,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMEON+" TEXT,"+TbColNames.TIMEOFF+" TEXT)");
-
+//TODO- need to change packagenmae and appPackage
         db.execSQL("create table " + TbNames.TOPAPPS_TABLE + " ("+TbColNames.TOPAPP_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text)");
 
         db.execSQL("create table " + TbNames.APPLICATIONS_TABLE + " ("+TbColNames.APPLICATION_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.APPPACKAGE+" Text,"+TbColNames.DATE+" TEXT)");
@@ -72,7 +75,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.TOPAPPSCOUNT_TABLE + " ("+TbColNames.TOPAPPCOUNT_ID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIALAPPCOUNT+" TEXT,"+TbColNames.GAMINGAPPCOUNT+" TEXT,"+TbColNames.EDUCATIONAPPCOUNT+" TEXT,"+TbColNames.DATINGAPPCOUNT+" TEXT,"+TbColNames.MUSICVIDEOAPPCOUNT+" TEXT,"+TbColNames.COMMUNICATIONAPPCOUNT+" TEXT)");
 
-
+        db.execSQL("create table " + TbNames.CALLDURATION_TABLE + "("+TbColNames.CALLDURATION_ID+"INTEGER,"+TbColNames.DATE+"TEXT,"+TbColNames.TIME+"TEXT)");
 
 
 
@@ -166,6 +169,14 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
 
         //PROBABILITYQUERY_TABLE
+
+        NotificationViewability_DbHelper timeS = new NotificationViewability_DbHelper(c1);
+        ArrayList <String> TimeSlots = timeS.genarateTimeSlots();
+        for(int i = 0 ; i < 144 ; i++  ){
+            db.execSQL("insert into PROBABILITYQUERY_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+        }
+        //Log.d("DBoncreate", "onCreate: " +TimeSlots.get(0));
+
 
 
 

@@ -72,11 +72,25 @@ public class ApplicationsHelper {
         return (int) applicationdbHelper.appCountGet();
     }
 
+    public long appConutAVG()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.appsCountAvgGet();
+        return applicationDbHelper.appsCountAvgGet();
+    }
+
     public List<ApplicationInfoModel> mySocialAppGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
         return applicationdbHelper.mySocialAppGet();
+    }
+
+    public List<ApplicationInfoModel> mySPhotograpyAppGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myPhotograpyAppGet();
     }
 
     public List<ApplicationInfoModel> myGamingAppGet()
@@ -128,6 +142,36 @@ public class ApplicationsHelper {
         Log.d("inotify","common social app count = " + myCommonAppCount);
         return myCommonAppCount;
     }
+
+
+    public int commonPhotograpyAppCount()
+    {
+
+        List<ApplicationInfoModel> myPhotographyApps= this.mySPhotograpyAppGet();
+        TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
+        List<ApplicationInfoModel> topPhotograpyApps = topAppsHelper.topAppPhotograpy();
+
+
+        List<ApplicationInfoModel> commonPhotograpyApps = new ArrayList<>();
+        for(ApplicationInfoModel tmp1: topPhotograpyApps) {
+            for(ApplicationInfoModel tmp2: myPhotographyApps) {
+                if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
+                    ApplicationInfoModel applicationInfoModelT = new ApplicationInfoModel();
+                    applicationInfoModelT.setAppName(tmp1.getAppName());
+                    commonPhotograpyApps.add(applicationInfoModelT);}
+            }
+        }
+
+//        for (ApplicationInfoModel xx :commonSocialApps){
+//
+//            Log.d("inotify","CCCCCCCCCCCCCCCCCCCCCCCCCCCCC"+xx.getAppName());
+//        }
+        int myCommonAppCount=commonPhotograpyApps.size();
+
+        Log.d("inotify","common photograpy app count = " + commonPhotograpyApps);
+        return myCommonAppCount;
+    }
+
 
     public int commonGamingAppCount()
     {
@@ -212,6 +256,27 @@ public class ApplicationsHelper {
 
     }
 
+    public int socialAppCount()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.socialAppCountGet();
+        Log.d("inotify","social app count" +  applicationDbHelper.socialAppCountGet());
+        return applicationDbHelper.socialAppCountGet();
+    }
+
+    public int communicationAppCount()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.communicationAppCountGet();
+        return applicationDbHelper.communicationAppCountGet();
+    }
+
+    public int gamingAppCount()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.gamingAppCountGet();
+        return applicationDbHelper.gamingAppCountGet();
+    }
 
     //packagename to application name
     // package to catergory
