@@ -38,12 +38,8 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         Cursor cursor = db.rawQuery("select * from " + TbNames.USERATTENTIVNESS_TABLE, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
-                //ans[1] = cursor.getString(0);
                 ans[2] = cursor.getString(2);
                 ans[3] = cursor.getString(3);
-
-                //  Log.d("cursor", "View_Attentivness " + cursor.getString(1));
-
             }
 
         }
@@ -64,13 +60,12 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                 list[2] = cursor.getString(1);
                 list[3] = cursor.getString(2);
                 list[4] = cursor.getString(3);
-                //  Log.d("cursor", "View_Attentivness " + cursor.getString(1));
-
             }
 
         }
         return list;
     }
+
     //Get the attentivness of a particulr notification
     public String getattentivness(String id )
     {
@@ -127,11 +122,8 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         if(res.getCount()>0)
         {
             Log.d("a", "record exists");
-            //Record exists
-            //update the record
-           return true;
+            return true;
         }
-//insert the record
         return false;
 
     }
@@ -176,7 +168,6 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
 
         Log.d("inotify(^_^" , "attentibvnessexistemce" + attentibvnessexistemce);
 
-//        this.tptalAttentivnessInsert(Appname,atttentivnessperAppValue);
 
         //true = exists
         if(attentibvnessexistemce)
@@ -185,11 +176,14 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
             double currentToallAttentivnessValue = Double.parseDouble(currentTotalAttentivness);
             double updatedAtttentivnessPerAppValue = currentToallAttentivnessValue + attentivnessPerParticulrNotificationValue;
 
-            double totalAttentivnessPercentage = (attentivnessPerParticulrNotificationValue/currentToallAttentivnessValue)*100;
+            double attentivnessavg = this.calculateAverageAttentivness();
+
+            double totalAttentivnessPercentage = (attentivnessPerParticulrNotificationValue/attentivnessavg)*100;
 
 
             Log.d("inotify(^_^" , "currentAttentivness" + currentToallAttentivnessValue);
             Log.d("inotify(^_^" , "updatedAtttentivnessPerAppValue" + updatedAtttentivnessPerAppValue);
+            Log.d("inotify(^_^)","totalAttentivnessPercentage"+ totalAttentivnessPercentage);
             //update.
             this.updateaattentivnessperApp(Appname , updatedAtttentivnessPerAppValue , totalAttentivnessPercentage);
             Log.d("inotify(^_^)" , "update");
@@ -201,11 +195,11 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
             //double atttentivnessperAppValue = totalAttentivnessValue + attentivnessPerParticulrNotificationValue;
             double atttentivnessperAppValue = attentivnessPerParticulrNotificationValue;
             String attenivnessPerApp = Double.toString(atttentivnessperAppValue);
-            double initialAtentivnessPercentage = 0;
+            double initialAtentivnessPercentage = 100;
 
             this.tptalAttentivnessInsert(Appname,atttentivnessperAppValue,initialAtentivnessPercentage);
             Log.d("inotify(^_^)" , "Insert");
-                    Log.d("inotify(^_^" , "attenivnessPerApp" + attenivnessPerApp);
+            Log.d("inotify(^_^" , "attenivnessPerApp" + attenivnessPerApp);
         }
 
 
@@ -213,5 +207,72 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
     }
 
 
+    public  String[] AppNamesGet(){
+        String AppList[];
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE , null);
 
+        if(res!=null)
+        {
+            int cols = res.getColumnCount();
+            AppList = new String[cols];
+            while(res.moveToNext()){
+                for(int j=0; j <cols ;j++ )
+                {
+                    AppList[j] = res.getString(1);
+                }
+
+            }
+            return AppList;
+        }
+       return null;
+
+    }
+
+
+    public double CumilativeAttentivnessValueGet()
+    {
+        double  cumilativeAttentivness= 0.0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res=db.rawQuery("select sum("+TbColNames.TOTALATTENTIVNESS+" ) as Total from "+ TbNames.ATTENTIVNESSPERAPP_TABLE,null);
+        if(res.moveToFirst())
+        {
+            cumilativeAttentivness =res.getDouble(res.getColumnIndex("Total"));
+            Log.d("inotify(^_^","cumilativeAttentivness"+cumilativeAttentivness);
+
+        }
+        return cumilativeAttentivness;
+    }
+
+    public int CountTotalAttentivnessGet()
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.ATTENTIVNESSPERAPP_TABLE ,null);
+        res.moveToFirst();
+        int count = res.getInt(res.getColumnIndex("count"));
+        Log.d("inotify(^_^","count"+count);
+
+        res.close();
+        return count;
+    }
+
+    public double calculateAverageAttentivness()
+    {
+        double cumilativeAttentivness = this.CumilativeAttentivnessValueGet();
+        int countAttetivness = this.CountTotalAttentivnessGet();
+        double attentivnessAverage = cumilativeAttentivness/countAttetivness;
+        Log.d("inotify(^_^","attentivnessAverage"+attentivnessAverage);
+
+        return attentivnessAverage;
+    }
+    //Check the appLunch event
+//   func application (application:UIApplication , didReciveRemoteNotification UserInfo: [NSObject :AnyObject])
+//    {
+//        if ( application.applicationState == UIApplicationState.Inactive || application.applicationState == UIApplicationState.Background ){
+//            print("opened from a push notification when the app was on background");
+//        }else{
+//            print("opened from a push notification when the app was on foreground");
+//        }
+//    }
 }
