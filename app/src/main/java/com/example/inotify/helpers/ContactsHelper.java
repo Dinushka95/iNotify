@@ -19,7 +19,7 @@ import java.util.List;
 public class ContactsHelper {
     private Context c1;
 
-    public void ContactsHelper(Context context) {
+    public ContactsHelper(Context context) {
         this.c1 = context;
     }
 
@@ -76,20 +76,20 @@ public class ContactsHelper {
     }
 
 
-//    public void getcontactToday()
-//    {
-//        ContactsDbHelper contactsDbHelper = new ContactsDbHelper(c1);
-//        contactsDbHelper.ContactsTodayGet();
-//        Log.d("inotify","contact today----" + contactsDbHelper.ContactsTodayGet());
-//
-//    }
-//
-//    public void getContactAVG()
-//    {
-//        ContactsDbHelper contactsDbHelper = new ContactsDbHelper(c1);
-//        contactsDbHelper.ContactsAvgGet();
-//        Log.d("inotify","contact AVG----" + contactsDbHelper.ContactsAvgGet());
-//
-//    }
+    public void getcontactToday()
+    {
+        ContactsDbHelper contactsDbHelper = new ContactsDbHelper(c1);
+        contactsDbHelper.ContactsTodayGet();
+        Log.d("inotify","contact today----" + contactsDbHelper.ContactsTodayGet());
+
+    }
+
+    public void getContactAVG()
+    {
+        ContactsDbHelper contactsDbHelper = new ContactsDbHelper(c1);
+        contactsDbHelper.ContactsAvgGet();
+        Log.d("inotify","contact AVG----" + contactsDbHelper.ContactsAvgGet());
+
+    }
 
 }

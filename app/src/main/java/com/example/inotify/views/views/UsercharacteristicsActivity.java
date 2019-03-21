@@ -19,6 +19,7 @@ import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.CalenderEventDbHelper;
 import com.example.inotify.dbHelpers.CallDurationDbHelper;
+import com.example.inotify.dbHelpers.ChargerDbHelper;
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
@@ -43,6 +44,9 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_characteristics);
+
+//        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+//        appUsageHelper.saveTodaysAppUsage();
     }
 
 
@@ -210,7 +214,7 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test1(View view) {
-     //  AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+//       AppUsageHelper appUsageHelper = new AppUsageHelper(this);
 //       appUsageHelper.saveTodaysAppUsage();
 //        appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
 //        appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
@@ -228,20 +232,17 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
        // getContacts(this);
 
-        ContactsHelper contactsHelper = new ContactsHelper();
+        ContactsHelper contactsHelper = new ContactsHelper(this);
 //        contactsHelper.getcontactToday();
 //        contactsHelper.getContactAVG();
 //
-
-
-
 
     }
 
     public void test2(View view) {
 
-      //    ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-      //    applicationsHelper.saveCurrentPhoneApps();
+//          ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+//          applicationsHelper.saveCurrentPhoneApps();
 
        // applicationsHelper.appCountGet();
 
@@ -262,6 +263,24 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
           // this.displayOpenness();
        // this.displayExtraversion();
+
+        ContactsHelper contactsHelper = new ContactsHelper(this);
+        contactsHelper.getcontactToday();
+        contactsHelper.getContactAVG();
+
+
+
+        ChargerHelper chargerHelper = new ChargerHelper(this);
+        chargerHelper.powerOninsert();
+        chargerHelper.powerOffinsert();
+        chargerHelper.powerOnCount();
+        chargerHelper.powerOffCount();
+
+
+//        ChargerDbHelper chargerDbHelper =new ChargerDbHelper(this);
+//        int x= chargerDbHelper.powerOffCountGet();
+//        Log.d("inotify","TTTTTTTTTTTTTTTTTTTTTTTTTT"+x);
+
 
 
 
