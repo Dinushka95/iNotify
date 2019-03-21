@@ -46,7 +46,7 @@ public class ApplicationDbHelper extends MainDbHelp {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
                     Log.d("inotify","mmmmmmmmmmmmmmmmmm");
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.APPPACKAGE)));
+                    applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
 
 
@@ -66,13 +66,13 @@ public class ApplicationDbHelper extends MainDbHelp {
         ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " WHERE "+TbColNames.APPPACKAGE +" = \""+packageName+"\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " WHERE "+TbColNames.PACKAGENAME +" = \""+packageName+"\"", null);
         if (res != null) {
 
             if (res.moveToFirst()) {
 
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.APPPACKAGE)));
+                    applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     applicationInfoModel.setAppCategory( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
 
             }
@@ -95,7 +95,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         for (ApplicationInfoModel value : appInfo)
         {
             contentValues.put(TbColNames.APPNAME, value.getAppName());
-            contentValues.put(TbColNames.APPPACKAGE, value.getPakageName());
+            contentValues.put(TbColNames.PACKAGENAME, value.getPakageName());
             contentValues.put(TbColNames.APPCATEGORY, value.getAppCategory());
 
             db.insert(APPLICATIONS_TABLE, null, contentValues);
@@ -226,76 +226,76 @@ public class ApplicationDbHelper extends MainDbHelp {
         ContentValues newValues = new ContentValues();
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.COMMUNICATION);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.skype.raider\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.truecaller\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.mms.service\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.facebook.orca\t\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.mms\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.google.android.gm\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.skype.raider\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.truecaller\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.mms.service\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.facebook.orca\t\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.mms\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.google.android.gm\"", null);
 
 
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.WEATHER);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.android.totemweather\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.android.totemweather\"", null);
 
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.BUSINESS);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.mobisystems.office\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.iconnect\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.mobisystems.office\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.iconnect\"", null);
 
 
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.MUSICVIDEO);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.google.android.youtube\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.mediacenter\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.android.FMRadio\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.BestPhotoEditor.HappyBirthdayVideoMaker\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.videoeditor\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.google.android.youtube\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.mediacenter\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.android.FMRadio\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.BestPhotoEditor.HappyBirthdayVideoMaker\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.videoeditor\"", null);
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.MUSICANDAUDIO);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.soundrecorder\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.soundrecorder\"", null);
 
 
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.PHOTOGRAPY);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.camera\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.motionservice\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.camera\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.motionservice\"", null);
 
 
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.LIBRARIESANDDEMO);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.google.android.ext.services\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"org.simalliance.openmobileapi.service\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.google.android.ext.services\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"org.simalliance.openmobileapi.service\"", null);
 
 
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.TOOLS);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.android.launcher\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.android.CotaDecompressService\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.htmlviewer\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.google.android.googlequicksearchbox\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.hidisk\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.bluetooth\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.providers.media\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.android.chr\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.android.hsf\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.google.android.ext.shared\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.autoinstallapkfrommcc\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.wallpapercropper\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.android.FloatTasks\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.appmarket\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.externalstorage\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.providers.downloads\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.android.launcher\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.android.CotaDecompressService\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.htmlviewer\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.google.android.googlequicksearchbox\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.hidisk\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.bluetooth\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.providers.media\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.android.chr\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.android.hsf\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.google.android.ext.shared\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.autoinstallapkfrommcc\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.wallpapercropper\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.android.FloatTasks\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.appmarket\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.externalstorage\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.providers.downloads\"", null);
 
         //if this download app usage is high then
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.phoneservice\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.screenrecorder\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.securitymgr\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.google.android.configupdater\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.KoBackup\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.defcontainer\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.providers.downloads.ui\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.vending\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.phoneservice\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.screenrecorder\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.securitymgr\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.google.android.configupdater\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.KoBackup\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.defcontainer\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.providers.downloads.ui\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.vending\"", null);
 
 
 
@@ -311,18 +311,18 @@ public class ApplicationDbHelper extends MainDbHelp {
 
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.SOCIAL);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.whatsapp\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.providers.telephony\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.whatsapp\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.providers.telephony\"", null);
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.PRODUCTIVITY);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.internetaudioservice\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.providers.calendar\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.google.android.onetimeinitializer\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.android.documentsui\"", null);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.nuance.swype.emui\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.internetaudioservice\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.providers.calendar\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.google.android.onetimeinitializer\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.android.documentsui\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.nuance.swype.emui\"", null);
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.SOCIAL);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"lk.bhasha.helakuru\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"lk.bhasha.helakuru\"", null);
 
 
 
@@ -330,10 +330,10 @@ public class ApplicationDbHelper extends MainDbHelp {
 
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.HEALTHANDFITNESS);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.health\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.health\"", null);
 
         newValues.put(TbColNames.APPCATEGORY, AppCategoriesConstants.PERSONALIZATION);
-        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.APPPACKAGE + " = \"com.huawei.android.thememanager\"", null);
+        db.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME + " = \"com.huawei.android.thememanager\"", null);
 
 
 

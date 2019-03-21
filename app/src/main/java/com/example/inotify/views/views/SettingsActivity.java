@@ -14,12 +14,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.TopAppDbHelper;
+import com.example.inotify.helpers.TopAppsHelper;
+import com.example.inotify.interfaces.MyCallback;
 import com.example.inotify.logger.Log;
 import com.example.inotify.logger.LogFragment;
 import com.example.inotify.logger.LogWrapper;
 import com.example.inotify.logger.MessageOnlyLogFilter;
+import com.example.inotify.models.TopAppModel;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.inotify.dbHelpers.MainDbHelp.DATABASE_NAME;
 
@@ -96,6 +102,19 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void test(View view) {
         Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXX");
+        TopAppsHelper topAppsHelper =new TopAppsHelper(this);
+
+        topAppsHelper.readData(new MyCallback() {
+            @Override
+            public void onCallback(List<TopAppModel> topAppModel) {
+
+                TopAppDbHelper topAppDbHelper =  new TopAppDbHelper(getApplicationContext());
+
+                topAppDbHelper.insert(topAppModel);
+
+            }
+        });
+
     }
 
 

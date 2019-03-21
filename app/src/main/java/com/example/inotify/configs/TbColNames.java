@@ -88,8 +88,13 @@ public class TbColNames {
 
     ////topApps
     public static final String TOPAPP_ID = "topapp_id";
+    //public static final String DATE = "date";
     // public static final String APPNAME = "appname";
+    //public static final String PACKAGENAME = "packageName";
+    public static final String APPCOLLECTION = "appcollection";
     public static final String APPCATEGORY = "appcategory";
+    public static final String RANK = "rank";
+
 
 
 
@@ -153,7 +158,7 @@ public class TbColNames {
     public static final String APPLICATION_ID = "applicationId";
     //public static final String APPNAME = "appname";
     //public static final String APPCATEGORY = "appcategory";
-    public static final String APPPACKAGE = "apppackage";
+    //public static final String PACKAGENAME = "packageName";
 
 
     //CallDuration table
