@@ -165,6 +165,38 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         return ansarraylist;
     }
 
+    public ArrayList display_probFinal() {
+
+        ansarraylist.add("");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select time_slot , probabilityfinal from " + PROBABILITYQUERYFRI_TABLE, null);
+        if (cursor != null) {
+            int count2 =1;
+            while (cursor.moveToNext()) {
+
+                for(int count =0; count<2 ; count++){
+                    if(cursor.getString(count) == null){
+                        ansarraylist.add("");
+                    }
+                    else
+                    ansarraylist.add(cursor.getString(count));
+                    //ans[count2] = cursor.getString(count);
+
+                    count2 = count2 + 1;
+                }
+
+                //  Log.d("cursor", "display_prob: " +cursor.getString(1));
+
+
+            }
+            ansarraylist.set(0,Integer.toString(count2));
+            //ans[0] = Integer.toString(count2);
+
+        }
+        return ansarraylist;
+    }
+
     public boolean probability_Update(String ticker){
 
         Log.d("ticker", "probability_Update: "+ ticker);
