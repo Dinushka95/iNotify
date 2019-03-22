@@ -11,6 +11,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.inotify.R;
+import com.example.inotify.configs.TbColNames;
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
 
 import java.util.ArrayList;
@@ -30,25 +32,33 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
         NotificationViewability_DbHelper pra = new NotificationViewability_DbHelper(this);
         //String[] ans2 = new String[100];
 
-
         //ans2 = pra.display_prob();
+        boolean x;
 
-        ArrayList<String> timeS = pra.selectTimeSlot();
-        for(int i = 1 ; i <= Integer.parseInt(timeS.get(0)) ; i++ ) {
-            pra.probability_query(timeS.get(i));
+        for(int j = 0;  j < 7; j++ ) {
+            String[] Days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            String[] table ={
+                    TbNames.PROBABILITYQUERYMON_TABLE,
+                    TbNames.PROBABILITYQUERYTUE_TABLE,
+                    TbNames.PROBABILITYQUERYWED_TABLE,
+                    TbNames.PROBABILITYQUERYTHU_TABLE,
+                    TbNames.PROBABILITYQUERYFRI_TABLE,
+                    TbNames.PROBABILITYQUERYSAT_TABLE,
+                    TbNames.PROBABILITYQUERYSUN_TABLE
+            };
+            ArrayList<String> timeMon = pra.selectTimeSlot(Days[j]);
+            if(timeMon.size()> 1) {
+                for (int i = 1; i <= Integer.parseInt(timeMon.get(0)); i++) {
+                    pra.probability_query(timeMon.get(i), Days[j]);
+                }
+
+                pra.genarateProbability(table[j], Days[j]);
+            }
+            pra.close();
         }
-        //Log.d("test", "onCreate: "+ timeS.get(2));
-        //pra.probability_query("15:50 - 16:00");
 
-
-
-        //Log.d("TimeSlot", "onCreate: "+ timeS.get(0));
         ArrayList<String> ansArry = pra.display_prob();
         display_table(ansArry);
-
-
-        pra.genarateProbability();
-        pra.close();
     }
 
 

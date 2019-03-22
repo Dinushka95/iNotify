@@ -39,7 +39,13 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.NOTIFICATIONREMOVE_TABLE + " (NOTIFICATIONREMOVE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT)");
         db.execSQL("create table " + TbNames.NOTIFICATIONVIEWABILITY_TABLE + " (BUSYORNOT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,LOCATION TEXT,BUSYORNOT TEXT)");
         db.execSQL("create table " + TbNames.PROBABILITY_TABLE + " (PROBABILITY_ID TEXT PRIMARY KEY,DAY TEXT,TIME TEXT,ACTIVITY TEXT,VIEWOR INTEGER,NOTOR INTEGER, PROBABILITY DOUBLE)");
-        db.execSQL("create table " + TbNames.PROBABILITYQUERY_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYMON_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYTUE_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYWED_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYTHU_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYFRI_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYSAT_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYSUN_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
 
         db.execSQL("create table " + TbNames.SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
                 "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
@@ -176,7 +182,14 @@ public class MainDbHelp extends SQLiteOpenHelper {
         NotificationViewability_DbHelper timeS = new NotificationViewability_DbHelper(c1);
         ArrayList <String> TimeSlots = timeS.genarateTimeSlots();
         for(int i = 0 ; i < 144 ; i++  ){
-            db.execSQL("insert into PROBABILITYQUERY_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYMON_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYTUE_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYWED_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYTHU_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYFRI_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYSAT_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYSUN_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+
         }
         //Log.d("DBoncreate", "onCreate: " +TimeSlots.get(0));
 
