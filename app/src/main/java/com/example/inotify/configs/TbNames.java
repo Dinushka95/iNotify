@@ -7,7 +7,13 @@ public class TbNames {
     public static final String ACTIVITY_TABLE = "activity_table";
     public static final String LOCATION_TABLE = "location_table";
     public static final String PROBABILITY_TABLE = "probability_table";
-    public static final String PROBABILITYQUERY_TABLE = "probabilityquery_table";
+    public static final String PROBABILITYQUERYMON_TABLE = "probabilityquerymon_table";
+    public static final String PROBABILITYQUERYTUE_TABLE = "probabilityquerytue_table";
+    public static final String PROBABILITYQUERYWED_TABLE = "probabilityquerywed_table";
+    public static final String PROBABILITYQUERYTHU_TABLE = "probabilityquerythu_table";
+    public static final String PROBABILITYQUERYFRI_TABLE = "probabilityqueryfri_table";
+    public static final String PROBABILITYQUERYSAT_TABLE = "probabilityquerysat_table";
+    public static final String PROBABILITYQUERYSUN_TABLE = "probabilityquerysun_table";
 
 
     public static final String N_TABLE = "N_table";
