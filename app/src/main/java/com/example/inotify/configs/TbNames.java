@@ -52,6 +52,8 @@ public class TbNames {
 
     public static final String APPUSAGE_TABLE = "appUsage_table";
 
+    public static  final String ATTRIBUTECOUNT_TABLE = "attributecount_table";
+
 
 
 }

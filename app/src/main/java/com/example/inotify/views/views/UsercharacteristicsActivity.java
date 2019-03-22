@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.dbHelpers.AttributeCountDbHelper;
 import com.example.inotify.dbHelpers.CalenderEventDbHelper;
 import com.example.inotify.dbHelpers.CallDurationDbHelper;
 import com.example.inotify.dbHelpers.ChargerDbHelper;
@@ -27,8 +28,11 @@ import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.CallDurationHelper;
 import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.ContactsHelper;
+import com.example.inotify.helpers.ScreenOnTimeHelper;
 import com.example.inotify.models.ContactsModel;
 import com.example.inotify.services.UserCharacteristics_service;
+
+import org.w3c.dom.Attr;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -235,6 +239,17 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
         ContactsHelper contactsHelper = new ContactsHelper(this);
 //        contactsHelper.getcontactToday();
 //        contactsHelper.getContactAVG();
+
+        ScreenOnTimeHelper screenOnTimeHelper =  new ScreenOnTimeHelper(this);
+        Log.d("inotify","want to check......................");
+        screenOnTimeHelper.ScreenOnTimeTodayGet();
+
+        Log.d("inotify","want to check AGAIN...........................");
+        //screenOnTimeHelper.ScreenOnTimeAVGGet();
+
+        AttributeCountDbHelper attributeCountDbHelper = new AttributeCountDbHelper(this);
+        attributeCountDbHelper.atrributeCountInser();
+        Log.d("inotify","attributeCountDbHelper.atrributeCountInser().........."+ attributeCountDbHelper.atrributeCountInser());
 //
 
     }
