@@ -17,8 +17,10 @@ import android.widget.TextView;
 import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.dbHelpers.AttributeCountDbHelper;
 import com.example.inotify.dbHelpers.CalenderEventDbHelper;
 import com.example.inotify.dbHelpers.CallDurationDbHelper;
+import com.example.inotify.dbHelpers.ChargerDbHelper;
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
@@ -26,8 +28,11 @@ import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.CallDurationHelper;
 import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.ContactsHelper;
+import com.example.inotify.helpers.ScreenOnTimeHelper;
 import com.example.inotify.models.ContactsModel;
 import com.example.inotify.services.UserCharacteristics_service;
+
+import org.w3c.dom.Attr;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +48,9 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_characteristics);
+
+//        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+//        appUsageHelper.saveTodaysAppUsage();
     }
 
 
@@ -210,7 +218,7 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test1(View view) {
-     //  AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+//       AppUsageHelper appUsageHelper = new AppUsageHelper(this);
 //       appUsageHelper.saveTodaysAppUsage();
 //        appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
 //        appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
@@ -228,20 +236,28 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
        // getContacts(this);
 
-        ContactsHelper contactsHelper = new ContactsHelper();
+        ContactsHelper contactsHelper = new ContactsHelper(this);
 //        contactsHelper.getcontactToday();
 //        contactsHelper.getContactAVG();
+
+        ScreenOnTimeHelper screenOnTimeHelper =  new ScreenOnTimeHelper(this);
+        Log.d("inotify","want to check......................");
+        screenOnTimeHelper.ScreenOnTimeTodayGet();
+
+        Log.d("inotify","want to check AGAIN...........................");
+        //screenOnTimeHelper.ScreenOnTimeAVGGet();
+
+        AttributeCountDbHelper attributeCountDbHelper = new AttributeCountDbHelper(this);
+        attributeCountDbHelper.atrributeCountInser();
+        Log.d("inotify","attributeCountDbHelper.atrributeCountInser().........."+ attributeCountDbHelper.atrributeCountInser());
 //
-
-
-
 
     }
 
     public void test2(View view) {
 
-      //    ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-      //    applicationsHelper.saveCurrentPhoneApps();
+//          ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+//          applicationsHelper.saveCurrentPhoneApps();
 
        // applicationsHelper.appCountGet();
 
@@ -262,6 +278,24 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
           // this.displayOpenness();
        // this.displayExtraversion();
+
+        ContactsHelper contactsHelper = new ContactsHelper(this);
+        contactsHelper.getcontactToday();
+        contactsHelper.getContactAVG();
+
+
+
+        ChargerHelper chargerHelper = new ChargerHelper(this);
+        chargerHelper.powerOninsert();
+        chargerHelper.powerOffinsert();
+        chargerHelper.powerOnCount();
+        chargerHelper.powerOffCount();
+
+
+//        ChargerDbHelper chargerDbHelper =new ChargerDbHelper(this);
+//        int x= chargerDbHelper.powerOffCountGet();
+//        Log.d("inotify","TTTTTTTTTTTTTTTTTTTTTTTTTT"+x);
+
 
 
 

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,82 +12,16 @@
     android:id="@+id/liner"
     tools:context=".views.views.NotificationViewabilityActivity">
 
-
-   <TableLayout
-       android:layout_margin="15dp"
+   <Button
+       android:id="@+id/button8"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:background="#f1f1f1"
-
-       >
-      <TableRow
-          android:background="#f1f1f1"
-          >
-         <TextView android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text = "ID"
-             android:layout_weight="1"
-             android:gravity="center"
-             />
-
-         <TextView android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text = "TimeSlot"
-             android:layout_weight="1"
-             android:gravity="center"
-             />
-         <TextView android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text = "Day"
-             android:layout_weight="1"
-             android:gravity="center"
-             />
-         <TextView android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text = "Probability"
-             android:layout_weight="1"
-             android:gravity="center"
-             />
-      </TableRow>
-
-      <!--<TableRow>
-         <TextView android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:background="#ffffff"
-             android:text = "ID"
-             android:id="@+id/proid"
-             android:layout_weight="1"
-             android:gravity="center"
-             />
-
-         <TextView android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:background="#ffffff"
-             android:text = "TimeSlot"
-             android:id="@+id/times"
-             android:layout_weight="1"
-             android:gravity="center"
-             />
-         <TextView android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:background="#ffffff"
-             android:text = "Day"
-             android:id="@+id/days"
-             android:layout_weight="1"
-             android:gravity="center"
-             />
-         <TextView android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:background="#ffffff"
-             android:text = "Probability"
-             android:id="@+id/prob"
-             android:layout_weight="1"
-             android:gravity="center"
-             />
-      </TableRow>-->
+       android:onClick="probabilityfinal"
+       android:text="Probability table" />
 
 
 
-   </TableLayout>
+
 </LinearLayout>
 
+</ScrollView>

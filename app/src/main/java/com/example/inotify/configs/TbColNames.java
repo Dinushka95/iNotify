@@ -167,6 +167,14 @@ public class TbColNames {
     //ContactCount table
     public static final String CONTACTCOUNT_ID ="contactcountId";
 
+    //ATTRIBUTECOUNT_TABLE
+    public  static  final String ATTRIBUTECOUNT_ID = "attributecountId";
+    public static final String APPCOUNT = "appcount";
+    public static final String SCREENONTIMECOUNT = "scrrenontimecount";
+    public static final String CHARGINGCOUNT = "chargingcount";
+    public static final String CONTACTCOUNT = "contactcount";
+
+
 
 
 

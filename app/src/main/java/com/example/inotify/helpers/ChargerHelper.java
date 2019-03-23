@@ -41,15 +41,15 @@ public class ChargerHelper {
         return chargerDbHelper.powerOffinsert(date,time);
     }
 
-    public int powerOnCount(String date){
+    public int powerOnCount(){
         ChargerDbHelper chargerDbHelper =new ChargerDbHelper(c1);
-        Log.d("inotify","Power count" + chargerDbHelper.powerOnCountGet(date));
-        return chargerDbHelper.powerOnCountGet(date);
+        Log.d("inotify","Power ON count" + chargerDbHelper.powerOnCountGet());
+        return chargerDbHelper.powerOnCountGet();
     }
-    public int powerOffCount(String date){
+    public int powerOffCount(){
         ChargerDbHelper chargerDbHelper =new ChargerDbHelper(c1);
-        Log.d("inotify","Power count" + chargerDbHelper.powerOffCountGet(date));
+        Log.d("inotify","Power OFF count" + chargerDbHelper.powerOffCountGet());
 
-        return chargerDbHelper.powerOffCountGet(date);
+        return chargerDbHelper.powerOffCountGet();
     }
 }
