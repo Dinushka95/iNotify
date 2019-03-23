@@ -1,22 +1,23 @@
 package com.example.inotify.views.views;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.inotify.logger.Log;
 
 public class UserAttentivenessActivity extends AppCompatActivity {
+
+
+
 
 
     @Override
@@ -26,20 +27,29 @@ public class UserAttentivenessActivity extends AppCompatActivity {
 
 
         UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-        String[] list = new String[30];
+        String List = userAttentivnessDbHelper.displayData();
+        String[] rows = List.split("_");
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.tab);
+
+        for (int i = 0; i < rows.length; i++) {
+            String row = rows[i];
+            TableRow tableRow = new TableRow(getApplicationContext());
+            final String[] cols = row.split(";");
+
+            Handler handler = null;
+
+            for (int j = 0; j < cols.length; j++) {
+                final String col = cols[j];
+                final TextView columnsView = new TextView(getApplicationContext());
+                columnsView.setText(String.format("%20s", col));
+                tableRow.addView(columnsView);
+            }
+
+        }
 
 
-        list = userAttentivnessDbHelper.View_Attentivness();
-
-        //final TextView textViewToChange = (TextView) findViewById(R.id.nid);
-        final TextView textViewToChange2 = (TextView) findViewById(R.id.application);
-        final TextView textViewToChange3 = (TextView) findViewById(R.id.attentivness);
-
-        // textViewToChange.setText(list[1]);
-        textViewToChange2.setText(list[2]);
-        textViewToChange3.setText(list[3]);
 
 
-    }
 
+  }
 }
