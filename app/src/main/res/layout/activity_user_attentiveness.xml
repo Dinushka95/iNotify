@@ -1,74 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:layout_marginTop="20dip"
-    tools:context=".views.views.UserAttentivenessActivity">
+    android:layout_marginTop="20dip">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/liner"
+        tools:context=".views.views.UserAttentivenessActivity">
 
-    <!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/tab"-->
-        <!--&gt;-->
+        <TableLayout
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f1f1f1">
 
-        <!--<TableRow>-->
+        <TableRow
+            android:background="#f1f1f1"/>
+        </TableLayout>
 
-        <!--</TableRow>-->
-    <!--</TableLayout>-->
-<!--//********************************************************************************************************************-->
-    <!--<TableRow-->
-    <!--android:background="#f1f1f1">-->
+    </LinearLayout>
 
-    <!--<TextView android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="AppName"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_gravity="center"/>-->
-
-    <!--<TextView android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Attentivness"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_gravity="center"/>-->
-
-    <!--</TableRow>-->
-    <!--<TableRow>-->
-
-    <!--<TextView android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#ffffff"-->
-    <!--android:text="Appname"-->
-    <!--android:id="@+id/application"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_gravity="center"/>-->
-
-    <!--<TextView android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#ffffff"-->
-    <!--android:text="Attentivness"-->
-    <!--android:id="@+id/attentivness"-->
-    <!--android:layout_weight="1"-->
-    <!--android:layout_gravity="center"/>-->
-    <!--</TableRow>-->
-
-
-
-    <!--**************************************************************************************************************-->
-
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:stretchColumns="0,1"
-        android:id="@+id/tab"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-    </TableLayout>
-
-
-
-
-</LinearLayout>
-
+</ScrollView>

@@ -257,7 +257,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-" + sbn.getPackageName());
-           // if (sbn.getPackageName().equals("com.example.inotify")) {
+            if (sbn.getPackageName().equals("com.example.inotify")) {
                 Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--input notification name-" + sbn.getPackageName());
 
                 //*******************************************
@@ -326,7 +326,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 //*******************************************
 
                 Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");
-            //fornow}
+            }
 
      }
 
