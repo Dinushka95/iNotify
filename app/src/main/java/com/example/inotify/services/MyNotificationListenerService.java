@@ -22,15 +22,19 @@ import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
+import com.example.inotify.dbHelpers.SmartNotificationDbHelper;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.helpers.FeedbackYesIntent;
 import com.example.inotify.helpers.INotifyActiveAppsHelper;
+import com.example.inotify.helpers.MainSmartNotificationSystem;
 import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.MainUserAttentivness;
 import com.example.inotify.models.NotificationModel;
+import com.example.inotify.models.SNSModel;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +54,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
     String ticker = "";
     String title = "";
     String text = "";
+    double accuracy = 0.0;
     boolean iNotifyActiveApp = false;
     boolean sendornotsend = false;
 
@@ -127,8 +132,22 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
             // Smart Notifaction
-            sendornotsend = true;
 
+
+            SNSModel snsModel = new SNSModel(date,timeRecieved,"","","null","null",appName);
+            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
+            String vtimes =mainSmartNotificationSystem.getPrediction();
+
+            String tem1 =vtimes.replaceAll("[\\[\\](){}]","");
+            double predictionTime = Double.valueOf(tem1);
+            Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+predictionTime );
+
+
+            //TODO- get accuracy
+            accuracy=30;
+            if (predictionTime<accuracy) {
+                sendornotsend = true;
+            }
 
             if (sendornotsend) {
                 //send notification
@@ -273,6 +292,28 @@ public class MyNotificationListenerService extends NotificationListenerService {
             userAttentivnessDbHelper.calculateTotalAttentivness(ticker, Appname);
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Total Attentivness succcessfully added");
 
+            //Smart Notification update with time
+            String oldtime = sbn.getNotification().tickerText.toString();
+            String newtime = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSS");
+            Date date1 = null;
+            try {
+                date1 = format.parse(oldtime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Date date2 = null;
+            try {
+                date2 = format.parse(newtime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            long difference = date2.getTime() - date1.getTime();
+
+            SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
+            smartNotificationDbHelper.updateData(ticker,String.valueOf(difference));
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");
         }
