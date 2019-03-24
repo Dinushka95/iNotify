@@ -264,6 +264,73 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
         return (TimeSlots);
     }
 
+    public Double GetViewability(Date timedate){
+
+        SimpleDateFormat dayOfweek = new SimpleDateFormat("EEEE", Locale.getDefault());
+        String dayOfWeek = dayOfweek.format(timedate);
+
+        SimpleDateFormat hour=new SimpleDateFormat("HH",Locale.getDefault());
+        String currentHour = hour.format(timedate);
+
+        SimpleDateFormat min=new SimpleDateFormat("mm",Locale.getDefault());
+        String currentMin = min.format(timedate);
+
+        char MinOne = currentMin.charAt(0);
+        Log.d("Debug", "NOW"+MinOne);
+
+        int nextMin =0;
+        int nextHour = 0;
+
+        if(java.lang.Character.getNumericValue(MinOne) != 5){
+            nextMin = java.lang.Character.getNumericValue(MinOne) +1;
+            nextHour = Integer.parseInt(currentHour);
+        }
+        else{
+            nextMin = 0;
+            nextHour = Integer.parseInt(currentHour)+1;
+        }
+
+        String timeSlot = currentHour+":"+ MinOne+"0 - "+nextHour+":"+nextMin+"0";
+
+        String table = "";
+
+        if (dayOfWeek.equals("Monday")) {
+            table = TbNames.PROBABILITYQUERYMON_TABLE;
+        }
+        else if(dayOfWeek.equals("Tuesday")){
+            table = TbNames.PROBABILITYQUERYTUE_TABLE;
+        }
+        else if(dayOfWeek.equals("Wednesday")){
+            table = TbNames.PROBABILITYQUERYWED_TABLE;
+        }
+        else if(dayOfWeek.equals("Thursday")){
+            table = TbNames.PROBABILITYQUERYTHU_TABLE;
+        }
+        else if(dayOfWeek.equals("Friday")){
+            table = TbNames.PROBABILITYQUERYFRI_TABLE;
+        }
+        else if(dayOfWeek.equals("Saturday")){
+            table = TbNames.PROBABILITYQUERYSAT_TABLE;
+        }
+        else if(dayOfWeek.equals("Sunday")){
+            table = TbNames.PROBABILITYQUERYSUN_TABLE;
+        }
+
+        Double viewability = 0.0;
+
+        SQLiteDatabase dbt = this.getReadableDatabase();
+        Cursor proq = dbt.rawQuery("select "+TbColNames.TIME_SLOT+", "+TbColNames.PROBABILITYFINAL+" from " + table + " where "+TbColNames.TIME_SLOT+" = '" + timeSlot + "'" , null);
+        if (proq != null) {
+            if (proq.moveToFirst()) {
+                viewability = proq.getDouble(1);
+
+            }
+        }
+        dbt.close();
+
+
+        return viewability;
+    }
 
     public boolean probability_query(String timeslot, String day) {
 
