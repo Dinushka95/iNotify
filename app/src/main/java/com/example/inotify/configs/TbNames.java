@@ -33,7 +33,7 @@ public class TbNames {
 
     public static final String SNS_TABLE = "sns_table";
 
-    public static final String SMARTNOTIFICATIONAVCTIVEAPPS_TABLE = "smartnotificationactiveapps_table";
+    public static final String INOTIFYACTIVEAPPS_TABLE = "inotifyactiveapps_table";
 
     public static final String NOTIFICATION_TABLE = "notification_table";
 

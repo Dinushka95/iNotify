@@ -44,7 +44,6 @@ public class ApplicationDbHelper extends MainDbHelp {
 
                     //SNSModel snsModel = new SNSModel();
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-                    Log.d("inotify","mmmmmmmmmmmmmmmmmm");
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                     applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
@@ -128,6 +127,30 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"social\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    //applicationInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listApplicationInfoModels;
+    }
+
+    public List<ApplicationInfoModel> myPersonalizationAppGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"personalization\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -483,6 +506,22 @@ public class ApplicationDbHelper extends MainDbHelp {
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int PersonalizationppCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"personalization\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));

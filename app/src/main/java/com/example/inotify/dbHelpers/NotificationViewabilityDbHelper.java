@@ -28,9 +28,9 @@ import static com.example.inotify.configs.TbNames.PROBABILITYQUERYSUN_TABLE;
 import static com.example.inotify.configs.TbNames.PROBABILITY_TABLE;
 
 
-public class NotificationViewability_DbHelper extends MainDbHelp {
+public class NotificationViewabilityDbHelper extends MainDbHelp {
 
-    public NotificationViewability_DbHelper(Context context) {
+    public NotificationViewabilityDbHelper(Context context) {
         super(context);
     }
 

@@ -13,7 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.inotify.R;
-import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 import com.example.inotify.viewControllers.adapters.ViewabilityViewpageAdapter;
 import com.example.inotify.views.viewability_fragments.Tue;
 import com.example.inotify.views.viewability_fragments.mon;
@@ -46,7 +46,7 @@ public class NotificationFinalViewabilityActivity extends AppCompatActivity {
 
 
 
-        NotificationViewability_DbHelper pra = new NotificationViewability_DbHelper(this);
+        NotificationViewabilityDbHelper pra = new NotificationViewabilityDbHelper(this);
         ArrayList<String> ansArry = pra.display_probFinal();
 
         Log.d("Final", "onCreate: "+ ansArry.get(1));

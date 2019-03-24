@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
@@ -63,7 +62,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.CALENDEREVENTCOUNT_TABLE + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
 
-        db.execSQL("create table " + TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE + " (SNAVCTIVEAPPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,STATUS TEXT)");
+        db.execSQL("create table " + TbNames.INOTIFYACTIVEAPPS_TABLE + " ("+TbColNames.INOTIFYACTIVEACTIVEAPPS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.PACKAGENAME+" TEXT,"+TbColNames.STATUS+" TEXT)");
 
         db.execSQL("create table " + TbNames.SCREENSTATUS_TABLE + " ("+TbColNames.SCREENSTATUS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.NOTIFICATIONID+" TEXT,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMEON+" TEXT,"+TbColNames.TIMEOFF+" TEXT)");
 
@@ -81,7 +80,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.TOPAPPSCOUNT_TABLE + " ("+TbColNames.TOPAPPCOUNT_ID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIALAPPCOUNT+" TEXT,"+TbColNames.GAMINGAPPCOUNT+" TEXT,"+TbColNames.EDUCATIONAPPCOUNT+" TEXT,"+TbColNames.DATINGAPPCOUNT+" TEXT,"+TbColNames.MUSICVIDEOAPPCOUNT+" TEXT,"+TbColNames.COMMUNICATIONAPPCOUNT+" TEXT)");
 
-        db.execSQL("create table " + TbNames.CALLDURATION_TABLE + "("+TbColNames.CALLDURATION_ID+"INTEGER,"+TbColNames.DATE+"TEXT,"+TbColNames.TIME+"TEXT)");
+        db.execSQL("create table " + TbNames.CALLDURATION_TABLE + "("+TbColNames.CALLDURATION_ID+"INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.TIME+" TEXT)");
 
         db.execSQL("create table " + TbNames.ATTRIBUTECOUNT_TABLE + " ("+TbColNames.ATTRIBUTECOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.APPCOUNT+" TEXT,"+TbColNames.SCREENONTIMECOUNT+" TEXT,"+TbColNames.CHARGINGCOUNT+" TEXT,"+TbColNames.CONTACTCOUNT+" TEXT)");
 
@@ -179,7 +178,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         //PROBABILITYQUERY_TABLE
 
-        NotificationViewability_DbHelper timeS = new NotificationViewability_DbHelper(c1);
+        NotificationViewabilityDbHelper timeS = new NotificationViewabilityDbHelper(c1);
         ArrayList <String> TimeSlots = timeS.genarateTimeSlots();
         for(int i = 0 ; i < 144 ; i++  ){
             db.execSQL("insert into PROBABILITYQUERYMON_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");

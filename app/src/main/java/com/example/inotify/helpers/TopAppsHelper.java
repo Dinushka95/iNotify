@@ -46,6 +46,12 @@ public class TopAppsHelper {
         return topAppDbHelper.topAppPhotograpyGet();
     }
 
+    public List<ApplicationInfoModel> topAppPersonalization()
+    {
+        TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
+        return topAppDbHelper.topAppPersonalizationGet();
+    }
+
 
     public List<ApplicationInfoModel> topAppCommunication()
     {
@@ -133,7 +139,6 @@ public class TopAppsHelper {
 
     public void readData(MyCallback myCallback) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
         db.collection("topApplications")
                 .whereEqualTo("date", "03202019")

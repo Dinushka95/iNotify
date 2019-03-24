@@ -5,12 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.models.NotificationModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
+public class INotifiyActiveAppsDbHelper extends MainDbHelp {
 
-    public INotifiyActiviteAppsDbHelper(Context context) {
+    public INotifiyActiveAppsDbHelper(Context context) {
         super(context);
     }
 
@@ -31,7 +36,7 @@ public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
                         SQLiteDatabase db1 = this.getWritableDatabase();
                         ContentValues contentValues = new ContentValues();
                         contentValues.put("STATUS", "false");
-                        db1.update(TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE, contentValues, "APPNAME = ? ", new String[]{appName});
+                        db1.update(TbNames.INOTIFYACTIVEAPPS_TABLE, contentValues, "APPNAME = ? ", new String[]{appName});
                         db1.close();
                         return true;
                     } else if (results.equals("true")) {
@@ -39,7 +44,7 @@ public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
                         SQLiteDatabase db2 = this.getWritableDatabase();
                         ContentValues contentValues = new ContentValues();
                         contentValues.put("STATUS", "true");
-                        db2.update(TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE, contentValues, "APPNAME = ? ", new String[]{appName});
+                        db2.update(TbNames.INOTIFYACTIVEAPPS_TABLE, contentValues, "APPNAME = ? ", new String[]{appName});
                         db2.close();
                         return true;
                     } else {
@@ -52,7 +57,7 @@ public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("APPNAME", appName);
                     contentValues.put("STATUS", "true");
-                    long result1 = db3.insert(TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE, null, contentValues);
+                    long result1 = db3.insert(TbNames.INOTIFYACTIVEAPPS_TABLE, null, contentValues);
                     db3.close();
 
                     res0.close();
@@ -80,5 +85,21 @@ public class INotifiyActiviteAppsDbHelper extends MainDbHelp {
         }
         res0.close();
         return false;
+    }
+
+    public List<String> getINotifyActiveApps(){
+        List<String> stringList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TbNames.INOTIFYACTIVEAPPS_TABLE+" WHERE status = \"true\"" , null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+                    stringList.add(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return stringList;
     }
 }

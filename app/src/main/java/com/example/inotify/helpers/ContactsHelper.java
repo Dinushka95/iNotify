@@ -76,20 +76,20 @@ public class ContactsHelper {
     }
 
 
-    public void getcontactToday()
+    public int getcontactToday()
     {
         ContactsDbHelper contactsDbHelper = new ContactsDbHelper(c1);
-        contactsDbHelper.ContactsTodayGet();
         Log.d("inotify","contact today----" + contactsDbHelper.ContactsTodayGet());
+        return  contactsDbHelper.ContactsTodayGet();
 
     }
 
-    public void getContactAVG()
-    {
-        ContactsDbHelper contactsDbHelper = new ContactsDbHelper(c1);
-        contactsDbHelper.ContactsAvgGet();
-        Log.d("inotify","contact AVG----" + contactsDbHelper.ContactsAvgGet());
-
-    }
+//    public void getContactAVG()
+//    {
+//        ContactsDbHelper contactsDbHelper = new ContactsDbHelper(c1);
+//        contactsDbHelper.ContactsAvgGet();
+//        Log.d("inotify","contact AVG----" + contactsDbHelper.ContactsAvgGet());
+//
+//    }
 
 }

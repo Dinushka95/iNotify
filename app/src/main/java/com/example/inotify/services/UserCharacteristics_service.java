@@ -30,8 +30,8 @@ public class UserCharacteristics_service extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-        applicationsHelper.saveCurrentPhoneApps();
+//        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+//        applicationsHelper.saveCurrentPhoneApps();
         return false;
     }
 
