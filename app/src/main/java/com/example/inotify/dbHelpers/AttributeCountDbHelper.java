@@ -47,7 +47,7 @@ public class AttributeCountDbHelper extends MainDbHelp {
     }
 
 
-    public int ScreenOnTimeCountAvgGet() {
+    public long ScreenOnTimeCountAvgGet() {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         Cursor res = db.rawQuery("select SUM(SCREENONTIMECOUNT) as COUNTAVG from " + TbNames.ATTRIBUTECOUNT_TABLE , null);
@@ -74,7 +74,7 @@ public class AttributeCountDbHelper extends MainDbHelp {
         return avg;
     }
 
-    public int appCountAvgGet() {
+    public long appCountAvgGet() {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         Cursor res = db.rawQuery("select SUM(APPCOUNT) as COUNTAVG from " + TbNames.ATTRIBUTECOUNT_TABLE , null);
@@ -101,10 +101,36 @@ public class AttributeCountDbHelper extends MainDbHelp {
         return avg;
     }
 
-    public int chargingCountAvgGet() {
+    public long chargingCountAvgGet() {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         Cursor res = db.rawQuery("select SUM(CHARGINGCOUNT) as COUNTAVG from " + TbNames.ATTRIBUTECOUNT_TABLE , null);
+        int total = 0;
+        int count = 0;
+        int avg;
+        if (res != null) {
+            if ((res.moveToFirst())){
+                do {
+                    total=total+ res.getInt(res.getColumnIndex("COUNTAVG"));
+                    count++;
+                } while (res.moveToNext());
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        try {
+            avg=total/count;
+        }catch (Exception e){
+            return 0;
+        }
+
+        return avg;
+    }
+
+        public long ContactsAvgGet() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select SUM("+ TbColNames.APPCOUNT +") as COUNTAVG from " + TbNames.ATTRIBUTECOUNT_TABLE , null);
         int total = 0;
         int count = 0;
         int avg;

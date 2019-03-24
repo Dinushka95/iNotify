@@ -108,7 +108,6 @@ public class TabApplicationFragment extends Fragment {
             @Override
             public void onClick(View view1, int position) {
 
-
                 final Dialog dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.popup_active_application);
                 //dialog.setCancelable(false);

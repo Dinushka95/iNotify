@@ -20,7 +20,7 @@ public class ScreenOnTimeDbHelper extends MainDbHelp {
     public int ScreenOnTimeCountTodayGet() {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select COUNT(TIMEON) as TIMECOUNT from " + TbNames.SCREENSTATUS_TABLE + " where DATE = \""+date+"\"" , null);
+        Cursor res = db.rawQuery("select COUNT(TIMEON) as TIMECOUNT from " + TbNames.SCREENSTATUS_TABLE + " where DATE = \""+date+"\" AND NOTIFICATIONID IS null " , null);
         if (res != null) {
             if ((res.moveToFirst())){
 

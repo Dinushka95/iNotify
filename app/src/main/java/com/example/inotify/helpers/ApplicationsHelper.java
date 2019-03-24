@@ -91,6 +91,13 @@ public class ApplicationsHelper {
         return applicationdbHelper.myPhotograpyAppGet();
     }
 
+    public List<ApplicationInfoModel> myPersonalizationAppGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myPersonalizationAppGet();
+    }
+
     public List<ApplicationInfoModel> myGamingAppGet()
     {
 
@@ -137,6 +144,35 @@ public class ApplicationsHelper {
 //        }
         int myCommonAppCount=commonSocialApps.size();
 
+        return myCommonAppCount;
+    }
+
+    public int commonPersonalizationAppCount()
+    {
+
+        List<ApplicationInfoModel> myPersonalizationApps= this.mySocialAppGet();
+
+        TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
+        List<ApplicationInfoModel> topPersonalizationApps = topAppsHelper.topAppPersonalization();
+
+
+        List<ApplicationInfoModel> commonPersonalizationApps = new ArrayList<>();
+        for(ApplicationInfoModel tmp1: topPersonalizationApps) {
+            for(ApplicationInfoModel tmp2: myPersonalizationApps) {
+                if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
+                    ApplicationInfoModel applicationInfoModelT = new ApplicationInfoModel();
+                    applicationInfoModelT.setAppName(tmp1.getAppName());
+                    commonPersonalizationApps.add(applicationInfoModelT);}
+            }
+        }
+
+//        for (ApplicationInfoModel xx :commonSocialApps){
+//
+//            Log.d("inotify","CCCCCCCCCCCCCCCCCCCCCCCCCCCCC"+xx.getAppName());
+//        }
+        int myCommonAppCount=commonPersonalizationApps.size();
+
+        Log.d("inotify","common social app count = " + myCommonAppCount);
         return myCommonAppCount;
     }
 
