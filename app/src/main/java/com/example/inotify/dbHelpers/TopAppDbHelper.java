@@ -88,6 +88,34 @@ public class TopAppDbHelper extends MainDbHelp {
         return listApplicationInfoModels;
     }
 
+    public List<ApplicationInfoModel> topAppPersonalizationGet() {
+        //Log.d("cdap", " ---NValueGet--");
+
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " +TbNames.TOPAPPS_TABLE + " where APPCATEGORY = \"personalization\"", null);
+        if (res != null) {
+
+            if (res.moveToFirst()) {
+                do {
+
+                    //SNSModel snsModel = new SNSModel();
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+
+        return listApplicationInfoModels;
+    }
+
 
     public List<ApplicationInfoModel> topAppCommunicationGet() {
 
