@@ -18,6 +18,8 @@ import com.example.inotify.configs.TbNames;
 import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class NotificationViewabilityActivity extends AppCompatActivity {
 
@@ -56,11 +58,16 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
                 pra.genarateProbability(table[j], Days[j]);
             }
-            pra.close();
+
         }
 
         ArrayList<String> ansArry = pra.display_prob();
         display_table(ansArry);
+
+        Date currentTime = Calendar.getInstance().getTime();
+        Double view = pra.GetViewability(currentTime);
+        Log.d("Viewability", "onCreate: " + view);
+        pra.close();
     }
 
 

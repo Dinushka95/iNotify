@@ -1,5 +1,8 @@
 package com.example.inotify.views.views;
 
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +14,18 @@ import android.widget.TextView;
 
 import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+import com.example.inotify.viewControllers.adapters.ViewabilityViewpageAdapter;
+import com.example.inotify.views.viewability_fragments.Tue;
+import com.example.inotify.views.viewability_fragments.mon;
 
 import java.util.ArrayList;
 
 public class NotificationFinalViewabilityActivity extends AppCompatActivity {
 
     LinearLayout Layout;
+    private TabLayout tabLayout;
+    private AppBarLayout appBarLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +33,24 @@ public class NotificationFinalViewabilityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification_final_viewability);
         Layout = findViewById(R.id.liner);
 
+        tabLayout =(TabLayout) findViewById(R.id.TabLay);
+        viewPager =(ViewPager) findViewById(R.id.viewpager);
+        ViewabilityViewpageAdapter adapter = new ViewabilityViewpageAdapter(getSupportFragmentManager());
+        //adding fragments
+        adapter.AddFragments(new mon(),"Mon");
+        adapter.AddFragments(new Tue(),"Tue");
+
+        //adapter setup
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+
         NotificationViewability_DbHelper pra = new NotificationViewability_DbHelper(this);
         ArrayList<String> ansArry = pra.display_probFinal();
 
         Log.d("Final", "onCreate: "+ ansArry.get(1));
-        display_table(ansArry);
+        //display_table(ansArry);
     }
 
     public void display_table(ArrayList<String> ansin) {
