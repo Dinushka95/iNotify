@@ -27,6 +27,7 @@
         <activity android:name=".views.views.Neuroticism" />
         <activity android:name=".views.views.Openness" />
         <activity android:name=".views.views.Conscientiousness" />
+        <activity android:name=".views.views.NotificationFinalViewabilityActivity"></activity>
         <activity android:name=".views.views.MainMenuActivity" />
         <activity android:name=".views.views.NotificationViewabilityActivity" />
         <activity android:name=".views.views.UserAttentivenessActivity" />

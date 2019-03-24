@@ -1,5 +1,6 @@
 package com.example.inotify.helpers;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
@@ -362,6 +363,7 @@ public class MainUserAttentivness {
     }
         return Attentivnes  ;
     }
+
 
 
 

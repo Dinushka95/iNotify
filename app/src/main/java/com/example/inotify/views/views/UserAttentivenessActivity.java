@@ -1,45 +1,69 @@
 package com.example.inotify.views.views;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
+import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
+import com.example.inotify.logger.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserAttentivenessActivity extends AppCompatActivity {
 
+    LinearLayout Layout;
 
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_attentiveness);
 
-
+        Layout = findViewById(R.id.liner);
         UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-        String[] list = new String[30];
+        ArrayList<String> ansArry =userAttentivnessDbHelper.displayData();
+        displayTable(ansArry);
+  }
 
 
-        list = userAttentivnessDbHelper.View_Attentivness();
+  public void displayTable(ArrayList<String> ansin)
+  {
+      TableLayout mytb = new TableLayout(this);
+      mytb.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+      int count3 =1;
 
-        //final TextView textViewToChange = (TextView) findViewById(R.id.nid);
-        final TextView textViewToChange2 = (TextView) findViewById(R.id.application);
-        final TextView textViewToChange3 = (TextView) findViewById(R.id.attentivness);
+      for (int count = 0; count < Integer.parseInt(ansin.get(0)) / 2; count++) {
 
-        // textViewToChange.setText(list[1]);
-        textViewToChange2.setText(list[2]);
-        textViewToChange3.setText(list[3]);
+          TableLayout.LayoutParams lp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.WRAP_CONTENT);
+          lp.setMargins(50, 10, 10, 10);
+          TableRow row = new TableRow(this);
 
+          row.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+          row.setLayoutParams(lp);
 
-    }
+          for (int count2 = 0; count2 < 2; count2++) {
+              TextView valueTV = new TextView(this);
+              valueTV.setBackgroundColor(0xdddddddd);
+              valueTV.setPadding(10, 10, 10, 10);
+              valueTV.setGravity(Gravity.CENTER);
+              valueTV.setText("" + ansin.get(count3));
+              count3 = count3 + 1;
+              valueTV.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+              row.addView(valueTV);
+          }
+          mytb.addView(row);
+      }
+      Layout.addView(mytb);
+
+  }
 
 }

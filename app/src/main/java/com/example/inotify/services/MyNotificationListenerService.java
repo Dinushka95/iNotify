@@ -36,7 +36,7 @@ import java.util.Locale;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
-    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+   // String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
     String TimeRecieved = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
 
@@ -65,7 +65,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService--packageName---" + sbn.getPackageName());
 
         if ((sbn.getPackageName().equals("com.example.dinu.testa") || sbn.getPackageName().equals("com.example.dinu.testb") || sbn.getPackageName().equals("com.example.dinu.testc") || sbn.getPackageName().equals("com.example.dinu.testd") || sbn.getPackageName().equals("com.example.myapplication") || sbn.getPackageName().equals("com.whatsapp") || sbn.getPackageName().equals("com.facebook.orca") || sbn.getPackageName().equals("com.google.android.apps.messaging")
-                || sbn.getPackageName().equals("com.android.mms"))) {
+                )) {
 
 
             pack = sbn.getPackageName();
@@ -309,8 +309,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 userAttentivnessDbHelper.UserAttentivnessInsert(ticker, Appname, attentivnessvalue);
                Log.d("inotify(^_^ )", "Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
 
-                String resList[] = userAttentivnessDbHelper.TotalAttentivness(Appname);
-                Log.d("inotify(^_^ )" , "result list " +resList[1] +" " + resList[2] +" "+ resList[3] +" " +resList[4]);
+
                 userAttentivnessDbHelper.calculateTotalAttentivness(ticker,Appname);
                 Log.d("inotify(^_^ )" , "Total Attentivness succcessfully added");
 
@@ -329,7 +328,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");
             }
 
-        }
+     }
 
 
 
