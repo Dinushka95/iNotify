@@ -44,7 +44,6 @@ public class ApplicationDbHelper extends MainDbHelp {
 
                     //SNSModel snsModel = new SNSModel();
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-                    Log.d("inotify","mmmmmmmmmmmmmmmmmm");
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                     applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));

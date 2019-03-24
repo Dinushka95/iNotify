@@ -10,7 +10,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.inotify.R;
-import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class NotificationFinalViewabilityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification_final_viewability);
         Layout = findViewById(R.id.liner);
 
-        NotificationViewability_DbHelper pra = new NotificationViewability_DbHelper(this);
+        NotificationViewabilityDbHelper pra = new NotificationViewabilityDbHelper(this);
         ArrayList<String> ansArry = pra.display_probFinal();
 
         Log.d("Final", "onCreate: "+ ansArry.get(1));

@@ -37,26 +37,15 @@ public class MainUserAttentivness {
         //Convert the string value to date time
         DateFormat dateFormat = new SimpleDateFormat("HHmmss");
         try{
-            Log.d("inotify(^_^) " ,"Inside the try");
+
              timeviwed =(Date) dateFormat.parse(Viewtime);
              timeRecived =(Date) dateFormat.parse(RecivedTime);
         }
         catch (ParseException e)
         {
             e.printStackTrace();
-            Log.d("inotify(^_^) " ,"Date Time Error");
         }
 
-       /* try{
-            timeviwed = (Time)dateFormat.parse(Viewtime);
-             timeRecived =(Time)dateFormat.parse(RecivedTime);
-
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-            Log.d("inotify " ,"DateTiem Error");
-        }*/
 
         Log.d("inotify(^_^)" ,"time viwed  " +timeviwed);
        Log.d("inotify(^_^)" ,"time recived " +timeRecived);

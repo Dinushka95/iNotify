@@ -50,7 +50,6 @@ public class ApplicationsHelper {
 
         for (ApplicationInfo x : packages){
             ApplicationInfoModel amtem = new ApplicationInfoModel();
-            Log.d("iNotify",pm.getApplicationLabel(x).toString());
             amtem.setAppName(pm.getApplicationLabel(x).toString());
             amtem.setPakageName(x.packageName);
             amtem.setAppCategory(x.packageName);
@@ -59,7 +58,7 @@ public class ApplicationsHelper {
         }
 
         appInfoInsert(list);
-        Log.d("inotify","app name list............"+ list);
+
 
 
     }
@@ -68,7 +67,6 @@ public class ApplicationsHelper {
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        Log.d("inotify","app count------" + (int) applicationdbHelper.appCountGet());
         return (int) applicationdbHelper.appCountGet();
     }
 
@@ -139,7 +137,6 @@ public class ApplicationsHelper {
 //        }
         int myCommonAppCount=commonSocialApps.size();
 
-        Log.d("inotify","common social app count = " + myCommonAppCount);
         return myCommonAppCount;
     }
 
@@ -168,7 +165,6 @@ public class ApplicationsHelper {
 //        }
         int myCommonAppCount=commonPhotograpyApps.size();
 
-        Log.d("inotify","common photograpy app count = " + commonPhotograpyApps);
         return myCommonAppCount;
     }
 
@@ -194,7 +190,6 @@ public class ApplicationsHelper {
 
         int myCommonAppCountGaming=commonGamingApps.size();
 
-        Log.d("inotify","common social app count = " + myCommonAppCountGaming);
         return myCommonAppCountGaming;
     }
 
@@ -218,8 +213,6 @@ public class ApplicationsHelper {
         }
 
         int myCommonAppCountMusicVideo=commonMusicVideoApps.size();
-
-        Log.d("inotify","common social app count = " + myCommonAppCountMusicVideo);
         return myCommonAppCountMusicVideo;
     }
 
@@ -260,7 +253,6 @@ public class ApplicationsHelper {
     {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
         applicationDbHelper.socialAppCountGet();
-        Log.d("inotify","social app count" +  applicationDbHelper.socialAppCountGet());
         return applicationDbHelper.socialAppCountGet();
     }
 

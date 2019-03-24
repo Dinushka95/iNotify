@@ -1,10 +1,8 @@
 package com.example.inotify.views.views;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -13,9 +11,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.inotify.R;
-import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
-import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 
 import java.util.ArrayList;
 
@@ -31,7 +28,7 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification_viewability);
         mLayout = findViewById(R.id.liner);
 
-        NotificationViewability_DbHelper pra = new NotificationViewability_DbHelper(this);
+        NotificationViewabilityDbHelper pra = new NotificationViewabilityDbHelper(this);
         //String[] ans2 = new String[100];
 
         //ans2 = pra.display_prob();
