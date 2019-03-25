@@ -175,6 +175,15 @@ public class Openness extends AppCompatActivity {
 
     }
 
+        public void onClick(View v) {
+           // number = 5; //this is an integer
+            long openness1 = this.displayOpenness();
+            Intent in = new Intent(Openness.this, UsercharacteristicsActivity.class);
+            in.putExtra("name of your value (eg. adapter_int)", openness1);
+            startActivity(in);
+        }
+
+
 
 
 

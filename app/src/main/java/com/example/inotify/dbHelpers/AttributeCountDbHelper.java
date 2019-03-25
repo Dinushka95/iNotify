@@ -24,7 +24,7 @@ public class AttributeCountDbHelper extends MainDbHelp {
     }
 
 
-    public boolean atrributeCountInser()
+    public boolean atrributeCountInsert()
     {
         SQLiteDatabase db = this.getWritableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());

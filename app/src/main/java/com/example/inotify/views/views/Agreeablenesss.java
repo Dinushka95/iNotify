@@ -30,11 +30,11 @@ public class Agreeablenesss extends AppCompatActivity {
     public void back_agree(View view) {
 //        Intent intent = new Intent(this, Neuroticism.class);
 //        startActivity(intent);
-        this.DisplayAgreeableness(view);
+        this.DisplayAgreeableness();// view aka
 
     }
 
-    public long DisplayAgreeableness(View view)
+    public long DisplayAgreeableness()//view aka ain kala
     {
         AppUsageHelper appUsageHelper = new AppUsageHelper(this);
         long todayPersonalizationAppUsage = appUsageHelper.personalizationAppsUsageToday();
