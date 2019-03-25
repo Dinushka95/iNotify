@@ -43,9 +43,9 @@ import java.util.Locale;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
-    String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-    String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
-    String timeRecieved = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
+   // String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+   // String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+  //  String timeRecieved = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
 
     String timeSent = "";
     String appPackageName = "";
@@ -60,6 +60,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
+        String timeRecieved = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
+
 
         Intent LaunchIntent = null;
         PackageManager pm = null;
@@ -134,7 +139,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             // Smart Notifaction
 
 
-            SNSModel snsModel = new SNSModel(date,timeRecieved,"","","null","null",appName);
+/*            SNSModel snsModel = new SNSModel(date,timeRecieved,"","","null","null",appName);
             MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
             String vtimes =mainSmartNotificationSystem.getPrediction();
 
@@ -147,8 +152,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
             accuracy=30;
             if (predictionTime<accuracy) {
                 sendornotsend = true;
-            }
-
+            }*/
+            sendornotsend = true;
             if (sendornotsend) {
                 //send notification
 
@@ -262,6 +267,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this);
             String Appname = notificationDbHelper.AppnameGet(ticker);
+            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Appname " +Appname);
             String notificationRecivedTime = notificationDbHelper.recivedTimeGet(ticker);
             String notificationViwedTime = notificationDbHelper.viewTimeGet(ticker);
             notificationDbHelper.close();

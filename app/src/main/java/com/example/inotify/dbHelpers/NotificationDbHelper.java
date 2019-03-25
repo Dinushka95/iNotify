@@ -125,7 +125,7 @@ public class NotificationDbHelper extends MainDbHelp {
         if(res !=null)
         {
             if(res.moveToFirst()){
-                return res.getString(5);
+                return res.getString(6);
             }
             res.close();
         }

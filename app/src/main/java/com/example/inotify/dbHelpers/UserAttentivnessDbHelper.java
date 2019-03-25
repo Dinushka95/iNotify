@@ -150,6 +150,25 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         return cumilativeAttentivness;
     }
 
+
+
+
+
+    //***************************************************************************************************************************************************************
+    public double totalattentivnessSumGet(String Appname) {
+        double SumofallAttentinessValues = 0.0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select sum(" + TbColNames.TOTALATTENTIVNESS + " ) as Total from " + TbNames.ATTENTIVNESSPERAPP_TABLE +"where "+TbColNames.APPLICATION + "!= " +Appname, null);
+        if (res.moveToFirst()) {
+            SumofallAttentinessValues = res.getDouble(res.getColumnIndex("Total"));
+            Log.d("inotify(^_^", "SumofallAttentinessValues =====" + SumofallAttentinessValues);
+
+        }
+        return SumofallAttentinessValues;
+    }
+    //***************************************************************************************************************************************************************
+
+
     public int CountTotalAttentivnessGet() {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -196,6 +215,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
             Log.d("inotify(^_^)", "update");
             double currentToallAttentivnessValue = Double.parseDouble(this.AttentivnessperAppGet(Appname));
             double updatedAtttentivnessPerAppValue = currentToallAttentivnessValue + attentivnessPerParticulrNotificationValue;
+           // double
 
             double attentivnessavg = this.calculateAverageAttentivness();
             double totalAttentivnessPercentage = (attentivnessPerParticulrNotificationValue / attentivnessavg) * 100;
