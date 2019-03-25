@@ -136,20 +136,7 @@ public class SmartNotificationDbHelper extends MainDbHelp {
                     snsModel.setBusyornot(cbusyornot);
 
                     String attentiviness = res.getString(5);
-                    String cattentiviness = "";
-                    if (attentiviness.equals("low")) {
-                        cattentiviness = "1";
-                    }
-                    if (attentiviness.equals("medium")) {
-                        cattentiviness = "2";
-                    }
-                    if (attentiviness.equals("high")) {
-                        cattentiviness = "3";
-                    }
-                    if (attentiviness.equals("error")) {
-                        cattentiviness = "0";
-                    }
-                    snsModel.setAttentiviness(cattentiviness);
+                    snsModel.setAttentiviness(attentiviness);
 
                     String userchaacteristics = res.getString(6);
                     String cuserchaacteristics = "";
