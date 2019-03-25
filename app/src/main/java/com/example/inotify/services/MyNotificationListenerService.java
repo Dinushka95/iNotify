@@ -36,6 +36,7 @@ import com.example.inotify.models.SNSModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -133,8 +134,13 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             // Smart Notifaction
 
+            NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
+            String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
 
-            SNSModel snsModel = new SNSModel(date,timeRecieved,"","","null","null",appName);
+            UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+            String attentivenessPerApp = userAttentivnessDbHelper.getAttentivenessPerApp(appPackageName);
+
+            SNSModel snsModel = new SNSModel(date,timeRecieved,viewbillityProbability,attentivenessPerApp,"null","Mobile",appName);
             MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
             String vtimes =mainSmartNotificationSystem.getPrediction();
 
@@ -221,6 +227,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 Log.d("inotify", "Main-MyNotificationListenerService--onNotificationPosted: Notification  inserted to notificcation table");
                 NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
                 notificationHelper.insert(new NotificationModel(id, date, timeRecieved, timeSent, "", appName, appPackageName, "1"));
+
+
+                //Smart Notification
+                SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
+                smartNotificationDbHelper.saveData(id,viewbillityProbability,"","null","Mobile",appName);
 
             }
         }

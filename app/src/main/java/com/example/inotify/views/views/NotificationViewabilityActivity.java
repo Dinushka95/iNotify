@@ -47,8 +47,9 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
                     TbNames.PROBABILITYQUERYFRI_TABLE,
                     TbNames.PROBABILITYQUERYSAT_TABLE,
                     TbNames.PROBABILITYQUERYSUN_TABLE
+
             };
-            ArrayList<String> timeMon = pra.selectTimeSlot(Days[j]);
+                        ArrayList<String> timeMon = pra.selectTimeSlot(Days[j]);
             if(timeMon.size()> 1) {
                 for (int i = 1; i <= Integer.parseInt(timeMon.get(0)); i++) {
                     pra.probability_query(timeMon.get(i), Days[j]);
