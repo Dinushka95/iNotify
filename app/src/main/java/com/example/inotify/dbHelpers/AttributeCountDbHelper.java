@@ -30,7 +30,7 @@ public class AttributeCountDbHelper extends MainDbHelp {
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(c1);
-        int appCount = applicationsHelper.appCountGet();
+        int appCount = applicationsHelper.appCountGetToday();
         ScreenOnTimeHelper screenOnTimeHelper = new ScreenOnTimeHelper(c1);
         int screenOnTimeCount = screenOnTimeHelper.ScreenOnTimeTodayGet();
         ChargerHelper chargerHelper = new ChargerHelper(c1);

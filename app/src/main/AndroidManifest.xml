@@ -22,12 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".views.views.Extraversion"></activity>
-        <activity android:name=".views.Agreeableness" />
+        <activity android:name=".views.views.Agreeablenesss"></activity>
+        <activity android:name=".views.views.Extraversion" />
         <activity android:name=".views.views.Neuroticism" />
         <activity android:name=".views.views.Openness" />
         <activity android:name=".views.views.Conscientiousness" />
-        <activity android:name=".views.views.NotificationFinalViewabilityActivity"></activity>
+        <activity android:name=".views.views.NotificationFinalViewabilityActivity" />
         <activity android:name=".views.views.MainMenuActivity" />
         <activity android:name=".views.views.NotificationViewabilityActivity" />
         <activity android:name=".views.views.UserAttentivenessActivity" />

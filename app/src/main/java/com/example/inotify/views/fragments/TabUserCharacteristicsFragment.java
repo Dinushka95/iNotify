@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.interfaces.MyCallback;
+import com.example.inotify.views.views.Extraversion;
+import com.example.inotify.views.views.Openness;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,15 +76,14 @@ public class TabUserCharacteristicsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         b = (Button) container.findViewById(R.id.mitbut);
+       //  b = (Button) container.findViewById(R.id.mitbut);
 
-        Button buttonInFragment1 = container.findViewById(R.id.mitbut);
-        buttonInFragment1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "button in fragment 1", Toast.LENGTH_SHORT).show();
-            }
-        });
+       // Button buttonInFragment1 = container.findViewById(R.id.mitbut);
+       // buttonInFragment1.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+          //  public void onClick(View view) {
+          //      Toast.makeText(getContext(), "button in fragment 1", Toast.LENGTH_SHORT).show();
+          //;
 
         return inflater.inflate(R.layout.fragment_tab_user_characteristics, container, false);
     }
@@ -125,6 +126,17 @@ public class TabUserCharacteristicsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void Details_final (View view)
+    {
+//        Openness openness = new Openness();
+//        long opennessANS = openness.displayOpenness();
+//        Log.d("inotify","Openness................................." + opennessANS);
+//
+//        Extraversion extraversion = new Extraversion();
+//        long extraversionANS = extraversion.displayExtraversion();
+//        Log.d("inotify","extraversion................................." + extraversionANS);
     }
 
 

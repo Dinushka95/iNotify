@@ -3,6 +3,16 @@ package com.example.inotify.models;
 public class ApplicationInfoModel {
 
     private int id;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     private String appName;
     private String appCategory;
     private String pakageName;

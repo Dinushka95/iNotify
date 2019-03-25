@@ -18,25 +18,25 @@ public class EquationHelper {
     ApplicationsHelper applicationsHelper = new ApplicationsHelper(c1);
 
 
-    public double GetOpenness()
-    {
-        double openness = 0.0;
-        int todaySocialAppUsage = appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.BUSINESS);
-        int socialAppUsageAvg = appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
-        int allAppUsageAvg = appUsageHelper.appAllUsageAvgGet();
-        int allAppUsageToday = appUsageHelper.appAllUsageTodayGet();
-        int noOfAppstoday = applicationsHelper.appCountGet();
-        int allAppsUsage = (allAppUsageToday - allAppUsageAvg);
-
-
-
-       // int noOfDownloadedApps = (int) (noOfAppstoday - avgApps);
-        int socialAppUsage = (todaySocialAppUsage - socialAppUsageAvg);
-        int appUsage = (allAppUsageToday - allAppUsageAvg);
-        openness = ((allAppsUsage + socialAppUsage + appUsage + noOfAppstoday)/3) * (1/100);
-        Log.d("inotify","Openness............." + openness);
-        return openness;
-    }
+//    public double GetOpenness()
+//    {
+//        double openness = 0.0;
+//        int todaySocialAppUsage = appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.BUSINESS);
+//        int socialAppUsageAvg = appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
+//        int allAppUsageAvg = appUsageHelper.appAllUsageAvgGet();
+//        int allAppUsageToday = appUsageHelper.appAllUsageTodayGet();
+//        int noOfAppstoday = applicationsHelper.appCountGet();
+//        int allAppsUsage = (allAppUsageToday - allAppUsageAvg);
+//
+//
+//
+//       // int noOfDownloadedApps = (int) (noOfAppstoday - avgApps);
+//        int socialAppUsage = (todaySocialAppUsage - socialAppUsageAvg);
+//        int appUsage = (allAppUsageToday - allAppUsageAvg);
+//        openness = ((allAppsUsage + socialAppUsage + appUsage + noOfAppstoday)/3) * (1/100);
+//        Log.d("inotify","Openness............." + openness);
+//        return openness;
+//    }
 
 
 

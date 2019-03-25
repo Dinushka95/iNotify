@@ -1,6 +1,6 @@
 package com.example.inotify.configs;
 
-public class TbNames {
+public class TbNames<Public> {
 
     public static final String NOTIFICATIONREMOVE_TABLE = "notificationRemove_table";
     public static final String NOTIFICATIONVIEWABILITY_TABLE = "viewability_table";
@@ -53,6 +53,12 @@ public class TbNames {
     public static final String APPUSAGE_TABLE = "appUsage_table";
 
     public static  final String ATTRIBUTECOUNT_TABLE = "attributecount_table";
+
+    public static final String OPENNESS_TABLE = "openness_table";
+
+    public static final String CONSCIENTIOUSNESS_TABLE = "conscientiousness_table";
+
+    public static final String CHARACTERISTICSfINAL_TABLE = "charcateriticsfinal_table";
 
 
 

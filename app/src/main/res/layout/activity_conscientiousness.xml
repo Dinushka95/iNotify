@@ -69,9 +69,10 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/Co_attr_11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="high call duration is high"
+                            android:text="Music and Video App"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
@@ -109,9 +110,10 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/Co_attr_22"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No of social media apps high"
+                            android:text="Music and Video App Usage"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
@@ -149,9 +151,10 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/Co_attr_33"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Display on time is high"
+                            android:text="Calender Event"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
@@ -188,14 +191,15 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/Co_attr_44"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Calender Event Usage is high"
+                            android:text="Social Apps"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
-                            android:id="@+id/Op_attr_4"
+                            android:id="@+id/Co_attr_4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -228,14 +232,56 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/Co_attr_55"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No of time phone charging is high"
+                            android:text="Social App Usage"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
-                            android:id="@+id/Op_attr_5"
+                            android:id="@+id/Co_attr_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:textColor="#000000"
+
+                            android:textSize="18sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
+                    >
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/Co_attr_66"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Charging the phone"
+                            android:textColor="@color/heading"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/Co_attr_6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
@@ -273,6 +319,7 @@
                         android:layout_height="40dp"
                         android:layout_marginLeft="50dp"
                         android:layout_marginTop="10dp"
+                        android:onClick="back_detail"
                         android:text="Back" />
                 </LinearLayout>
 
