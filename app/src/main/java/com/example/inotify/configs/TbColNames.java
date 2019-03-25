@@ -154,7 +154,6 @@ public class TbColNames {
     //public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
 
     //Application  table
-
     public static final String APPLICATION_ID = "applicationId";
     //public static final String APPNAME = "appname";
     //public static final String APPCATEGORY = "appcategory";
@@ -174,6 +173,10 @@ public class TbColNames {
     public static final String CHARGINGCOUNT = "chargingcount";
     public static final String CONTACTCOUNT = "contactcount";
 
+    //iNotifyActiveApps table
+    public  static  final String INOTIFYACTIVEACTIVEAPPS_ID = "iNotifyActiveAppsId";
+    public  static  final String STATUS = "status";
+    //public static final String PACKAGENAME = "packageName";
 
     //OPENNESS_table
     public static final String OPENNESS_ID = "opennessId";

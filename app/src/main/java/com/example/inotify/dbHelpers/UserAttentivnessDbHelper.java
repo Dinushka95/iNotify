@@ -52,21 +52,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
     }
 
 
-//    public String[] TotalAttentivness(String Appname){
-//        String[] list= new String[30];
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("select *,sum(ATTENTIVNESSVALUE)  from " + TbNames.USERATTENTIVNESS_TABLE+" where APPLICATION =\"" + Appname + "\"", null);
-//        if (cursor != null) {
-//            while (cursor.moveToNext()) {
-//                list[1] = cursor.getString(0);
-//                list[2] = cursor.getString(1);
-//                list[3] = cursor.getString(2);
-//                list[4] = cursor.getString(3);
-//            }
-//
-//        }
-//        return list;
-//    }
+
 
     //Get the attentivness of a particulr notification
     public String getattentivness(String id) {
@@ -150,6 +136,25 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         return cumilativeAttentivness;
     }
 
+
+
+
+
+    //***************************************************************************************************************************************************************
+    public double totalattentivnessSumGet(String Appname) {
+        double SumofallAttentinessValues = 0.0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select sum(" + TbColNames.TOTALATTENTIVNESS + " ) as Total from " + TbNames.ATTENTIVNESSPERAPP_TABLE +"where "+TbColNames.APPLICATION + "!= " +Appname, null);
+        if (res.moveToFirst()) {
+            SumofallAttentinessValues = res.getDouble(res.getColumnIndex("Total"));
+            Log.d("inotify(^_^", "SumofallAttentinessValues =====" + SumofallAttentinessValues);
+
+        }
+        return SumofallAttentinessValues;
+    }
+    //***************************************************************************************************************************************************************
+
+
     public int CountTotalAttentivnessGet() {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -175,9 +180,6 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
     public double calculateTotalAttentivness(String id, String Appname) {
         double value = 0;
 
-        // String[]  attentivness =  this.TotalAttentivness(Appname);
-        // String Application = attentivness[3];
-        // String totalAttentivness = attentivness[4];
         String attentivnessPerParticularNotification = this.getattentivness(id);
 
         //for freash values
@@ -196,6 +198,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
             Log.d("inotify(^_^)", "update");
             double currentToallAttentivnessValue = Double.parseDouble(this.AttentivnessperAppGet(Appname));
             double updatedAtttentivnessPerAppValue = currentToallAttentivnessValue + attentivnessPerParticulrNotificationValue;
+           // double
 
             double attentivnessavg = this.calculateAverageAttentivness();
             double totalAttentivnessPercentage = (attentivnessPerParticulrNotificationValue / attentivnessavg) * 100;
@@ -241,22 +244,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
     }
 
 
-//    public String displayData1() {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor res = db.rawQuery("select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE, null);
-//
-//        StringBuilder sb = new StringBuilder();
-//        while (res.moveToNext()) {
-//            String Appname = res.getString(1);
-//            String AttentivnessValue = res.getString(2);
-//            String AttenotvnessPercenatge = res.getString(3);
-//            // sb.append(Appname).append(";").append(AttentivnessValue).append(";").append(AttenotvnessPercenatge).append(";").append("_");
-//        }
-//        Log.d("inotifyCCC", sb.toString());
-//        System.out.flush();
-//        return sb.toString();
-//
-//    }
+
 
     //String[] ans = new String[200];
     ArrayList<String> ansarraylist = new ArrayList<>();
@@ -285,14 +273,20 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
         return ansarraylist;
     }
 
-        //Check the appLunch event
-//   func application (application:UIApplication , didReciveRemoteNotification UserInfo: [NSObject :AnyObject])
-//    {
-//        if ( application.applicationState == UIApplicationState.Inactive || application.applicationState == UIApplicationState.Background ){
-//            print("opened from a push notification when the app was on background");
-//        }else{
-//            print("opened from a push notification when the app was on foreground");
-//        }
-//    }
+
+    public String getAttentivenessPerApp(String packageName) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("Select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE + "  where "+TbColNames.APPNAME+" =\"" + packageName + "\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                return res.getString(res.getColumnIndex(TbColNames.TOTALATTENTIVNESSPERCENTAGE));
+
+            }
+            res.close();
+        }
+        return null;
+    }
 
 }

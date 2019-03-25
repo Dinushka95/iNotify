@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 import com.google.android.gms.location.ActivityRecognitionResult;
 
 public class ActivityRecognitionService extends IntentService {
@@ -20,7 +20,7 @@ public class ActivityRecognitionService extends IntentService {
         String type = String.valueOf(result.getMostProbableActivity().getType());
         String confidance = String.valueOf(result.getMostProbableActivity().getConfidence());
       //  Log.d("inotifyLog", "Activity recognition ==" + type + confidance);
-        NotificationViewability_DbHelper praSqlLiteDbHelper = new NotificationViewability_DbHelper(this);
+        NotificationViewabilityDbHelper praSqlLiteDbHelper = new NotificationViewabilityDbHelper(this);
         praSqlLiteDbHelper.activity_insert(type,confidance);
         praSqlLiteDbHelper.close();
 

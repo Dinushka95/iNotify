@@ -66,7 +66,7 @@ public class ApplicationsHelper {
     }
 
         appInfoInsert(list);
-        Log.d("inotify","app name list............"+ list);
+
 
 
     }
@@ -195,7 +195,6 @@ public class ApplicationsHelper {
 //        }
         int myCommonAppCount=commonSocialApps.size();
 
-        Log.d("inotify","common social app count = " + myCommonAppCount);
         return myCommonAppCount;
     }
 
@@ -253,7 +252,6 @@ public class ApplicationsHelper {
 //        }
         int myCommonAppCount=commonPhotograpyApps.size();
 
-        Log.d("inotify","common photograpy app count = " + commonPhotograpyApps);
         return myCommonAppCount;
     }
 
@@ -279,7 +277,6 @@ public class ApplicationsHelper {
 
         int myCommonAppCountGaming=commonGamingApps.size();
 
-        Log.d("inotify","common social app count = " + myCommonAppCountGaming);
         return myCommonAppCountGaming;
     }
 

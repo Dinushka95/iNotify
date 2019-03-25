@@ -1,7 +1,6 @@
 package com.example.inotify.views.views;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,11 +12,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.inotify.R;
-import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
-import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class NotificationViewabilityActivity extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification_viewability);
         mLayout = findViewById(R.id.liner);
 
-        NotificationViewability_DbHelper pra = new NotificationViewability_DbHelper(this);
+        NotificationViewabilityDbHelper pra = new NotificationViewabilityDbHelper(this);
         //String[] ans2 = new String[100];
 
         //ans2 = pra.display_prob();
@@ -47,8 +47,9 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
                     TbNames.PROBABILITYQUERYFRI_TABLE,
                     TbNames.PROBABILITYQUERYSAT_TABLE,
                     TbNames.PROBABILITYQUERYSUN_TABLE
+
             };
-            ArrayList<String> timeMon = pra.selectTimeSlot(Days[j]);
+                        ArrayList<String> timeMon = pra.selectTimeSlot(Days[j]);
             if(timeMon.size()> 1) {
                 for (int i = 1; i <= Integer.parseInt(timeMon.get(0)); i++) {
                     pra.probability_query(timeMon.get(i), Days[j]);
@@ -56,11 +57,16 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
                 pra.genarateProbability(table[j], Days[j]);
             }
-            pra.close();
+
         }
 
         ArrayList<String> ansArry = pra.display_prob();
         display_table(ansArry);
+
+        Date currentTime = Calendar.getInstance().getTime();
+        Double view = pra.GetViewability(currentTime);
+        Log.d("Viewability", "onCreate: " + view);
+        pra.close();
     }
 
 
