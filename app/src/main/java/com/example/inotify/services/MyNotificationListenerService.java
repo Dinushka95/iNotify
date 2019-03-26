@@ -85,6 +85,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
         if (iNotifyActiveApp) {
 
+
             appPackageName = sbn.getPackageName();
             nid = sbn.getId();
             Bundle extras = sbn.getNotification().extras;
@@ -138,13 +139,13 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             // Smart Notifaction
 
-            NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
-            String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
+         //   NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
+       //     String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
 
-            UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-            String attentivenessPerApp = userAttentivnessDbHelper.getAttentivenessPerApp(appPackageName);
+     //       UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+   //         String attentivenessPerApp = userAttentivnessDbHelper.getAttentivenessPerApp(appPackageName);
 
-            SNSModel snsModel = new SNSModel(date,timeRecieved,viewbillityProbability,attentivenessPerApp,"null","Mobile",appName);
+       //     SNSModel snsModel = new SNSModel(date,timeRecieved,viewbillityProbability,attentivenessPerApp,"null","Mobile",appName);
 /*            SNSModel snsModel = new SNSModel(date,timeRecieved,"","","null","null",appName);
             MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
             String vtimes =mainSmartNotificationSystem.getPrediction();
@@ -224,7 +225,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                     timeSent = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 }
                 Notification notification = builder.build();
-                notifManager.notify(NOTIFY_ID, notification);
+                notifManager.notify(nid, notification);
 
 
                 //PRASHAN
@@ -235,8 +236,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
                 //Smart Notification
-                SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
-                smartNotificationDbHelper.saveData(id,viewbillityProbability,"","null","Mobile",appName);
+              //  SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
+              //  smartNotificationDbHelper.saveData(id,viewbillityProbability,"","null","Mobile",appName);
 
             }
         }
@@ -310,7 +311,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Total Attentivness succcessfully added");
 
             //Smart Notification update with time
-            String oldtime = sbn.getNotification().tickerText.toString();
+/*            String oldtime = sbn.getNotification().tickerText.toString();
             String newtime = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSS");
@@ -330,7 +331,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             long difference = date2.getTime() - date1.getTime();
 
             SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
-            smartNotificationDbHelper.updateData(ticker,String.valueOf(difference));
+            smartNotificationDbHelper.updateData(ticker,String.valueOf(difference));*/
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");
         }

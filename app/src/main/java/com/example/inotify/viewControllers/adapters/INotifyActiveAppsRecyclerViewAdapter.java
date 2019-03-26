@@ -3,19 +3,19 @@ package com.example.inotify.viewControllers.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.inotify.R;
 import com.example.inotify.models.ApplicationInfoModel;
-import com.example.inotify.models.ViewHolderModel;
+import com.example.inotify.viewControllers.viewHolder.AppViewHolder;
+import com.example.inotify.viewControllers.viewHolder.TabViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
-public class INotifyActiveAppsRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolderModel> {
+public class INotifyActiveAppsRecyclerViewAdapter extends RecyclerView.Adapter<AppViewHolder> {
 
     List<ApplicationInfoModel> list = Collections.emptyList();
     Context context;
@@ -27,15 +27,20 @@ public class INotifyActiveAppsRecyclerViewAdapter extends RecyclerView.Adapter<V
 
     @NonNull
     @Override
-    public ViewHolderModel onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public AppViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_inotifyactiveapps, viewGroup, false);
-        ViewHolderModel holder = new ViewHolderModel(v);
+        AppViewHolder holder = new AppViewHolder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderModel viewHolderModel, int i) {
-        viewHolderModel.appid.setText(list.get(i).getAppName());
+    public void onBindViewHolder(@NonNull AppViewHolder appViewHolder, int i) {
+        appViewHolder.title.setText(list.get(i).getAppName());
+        String value =list.get(i).getInotifystate();
+        boolean temvalue=false;
+        if(value.equals("true")){temvalue=true;}else {temvalue=false;}
+        appViewHolder.aSwitch.setChecked(temvalue);
+        appViewHolder.packageName.setText(list.get(i).getPakageName());
     }
 
     @Override

@@ -16,7 +16,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.inotify.configs.TbColNames.SNS_VTIME;
 import static com.example.inotify.configs.TbNames.PROFILE_TABLE;
+import static com.example.inotify.configs.TbNames.SNS_TABLE;
 
 
 public class INotifiyActiveAppsDbHelper extends MainDbHelp {
@@ -122,6 +124,7 @@ public class INotifiyActiveAppsDbHelper extends MainDbHelp {
 
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                     applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setInotifystate(res.getString(res.getColumnIndex(TbColNames.STATUS)));
                     applicationInfoModelList.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -160,5 +163,16 @@ public class INotifiyActiveAppsDbHelper extends MainDbHelp {
         return false;
     }
 
+    public boolean update(String packageName,String value){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues newValues = new ContentValues();
+        newValues.put(TbColNames.STATUS, value);
+
+        db.update(TbNames.INOTIFYACTIVEAPPS_TABLE, newValues, TbColNames.PACKAGENAME+"=\"" + packageName+"\"", null);
+
+        return true;
+    }
 
 }

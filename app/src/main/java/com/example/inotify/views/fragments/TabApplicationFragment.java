@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class TabApplicationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    Switch ssww;
     private OnFragmentInteractionListener mListener;
 
     Switch switch2;
@@ -102,11 +104,12 @@ public class TabApplicationFragment extends Fragment {
 
         List<ApplicationInfoModel> data = iNotifyActiveAppsLogic.getAllActtiveAppsNotificationList();
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerviewactiveapps);
+
         adapter = new INotifyActiveAppsRecyclerViewAdapter(data, getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        recyclerView.addOnItemTouchListener(new CustomRVItemTouchListener(this.getContext(), recyclerView, new RecyclerViewItemClickListener() {
+ /*       recyclerView.addOnItemTouchListener(new CustomRVItemTouchListener(this.getContext(), recyclerView, new RecyclerViewItemClickListener() {
             @Override
             public void onClick(View view1, int position) {
 
@@ -114,11 +117,11 @@ public class TabApplicationFragment extends Fragment {
                 dialog.setContentView(R.layout.popup_active_application);
                 //dialog.setCancelable(false);
                 // dialog.setCanceledOnTouchOutside(false);
-               /* Button button = dialog.findViewById(R.id.button11);
+               *//* Button button = dialog.findViewById(R.id.button11);
                 button.setOnClickListener(view -> {
                     // save to db -- create a new profile
                     Toast.makeText(getContext(), "Clicked at " + position, Toast.LENGTH_SHORT).show();
-                });*/
+                });*//*
                 TextView textView = dialog.findViewById(R.id.showdetails_aap);
                 textView.setText("Show Details "+position);
                 dialog.show();
@@ -127,13 +130,14 @@ public class TabApplicationFragment extends Fragment {
             @Override
             public void onLongClick(View view, int position) {
                 Toast.makeText(getContext(), "LongClicked at " + position, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onChangeSw(Boolean checked) {
                 Toast.makeText(getContext(), "SSSSSSSSSSSSSSSSSSS" + checked.toString(), Toast.LENGTH_SHORT).show();
             }
-        }));
+        }));*/
 
         return rootView;
     }

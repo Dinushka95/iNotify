@@ -53,4 +53,16 @@ public class INotifyActiveAppsHelper {
 
     }
 
+    public boolean changeState(String packageName,Boolean newState){
+
+        String value="";
+        if (newState){
+            value="true";
+        }else{
+            value="false";
+        }
+        INotifiyActiveAppsDbHelper iNotifiyActiveAppsDbHelper = new INotifiyActiveAppsDbHelper(c1);
+        return iNotifiyActiveAppsDbHelper.update(packageName,value);
+    }
+
 }

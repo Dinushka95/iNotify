@@ -1,5 +1,14 @@
 package com.example.inotify.configs;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.inotify.models.ApplicationInfoModel;
+
+import java.util.List;
+
+import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
+
 public class AppCategoriesConstants {
 
     public static String SOCIAL = "social";
@@ -19,7 +28,6 @@ public class AppCategoriesConstants {
     public static String WEATHER = "weather";
     public static String LIFESTYLE = "lifestyle";
     public static String MUSICANDAUDIO = "musicandaudio";
-
 
 
 }
