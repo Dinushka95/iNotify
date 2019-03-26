@@ -4,37 +4,24 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
+import com.example.inotify.helpers.INotifyActiveAppsHelper;
 import com.example.inotify.models.ApplicationInfoModel;
+import com.example.inotify.models.NotificationModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class INotifyActiveAppsLogic {
 
-    public Context context;
+    public Context c1;
 
-    public INotifyActiveAppsLogic(Context c1) {
-        context = c1;
+    public INotifyActiveAppsLogic(Context context) {
+        c1 = context;
     }
 
-    public List<ApplicationInfoModel> getApplicationList() {
-
-        List<ApplicationInfoModel> packageList = new ArrayList<>();
-        //get a list of installed apps.
-        final PackageManager pm = context.getPackageManager();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-
-        for (ApplicationInfo applicationInfo : packages) {
-            ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-            String x = applicationInfo.packageName.toString();
-            applicationInfoModel.setPakageName(x);
-            packageList.add(applicationInfoModel);
-        }
-        // need to filter the apps to a the right apps because lot of unwanted stuff are  coming
-        // only display apps which are capable of sending notifications
-
-        // or only enable for apps which send notifications
-        return packageList;
+    public List<ApplicationInfoModel> getAllActtiveAppsNotificationList(){
+        INotifyActiveAppsHelper iNotifyActiveAppsHelper = new INotifyActiveAppsHelper(c1);
+        return  iNotifyActiveAppsHelper.getAllINotifyActiveApps();
     }
 
     public void createTable() {

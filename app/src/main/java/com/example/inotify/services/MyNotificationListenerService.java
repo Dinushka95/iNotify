@@ -44,10 +44,6 @@ import java.util.Locale;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
-   // String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-   // String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
-  //  String timeRecieved = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
-
     String timeSent = "";
     String appPackageName = "";
     String appName = "";
@@ -77,8 +73,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService--preLoop-Ticker---" + ticker);
         Log.d("inotify", "Main-MyNotificationListenerService--packageName---" + sbn.getPackageName());
 
-        //get all active notifications
+
         INotifyActiveAppsHelper iNotifyActiveAppsHelper = new INotifyActiveAppsHelper(this);
+        // put the app in a actvity notification list
+        iNotifyActiveAppsHelper.setNewActiveApp(sbn.getPackageName());
+        //get all active notifications
         List<String> iNotifyActiveAppsList = iNotifyActiveAppsHelper.getINotifyActiveApps();
 
         // check if the notification you got is in the inotify active list

@@ -35,7 +35,7 @@ public class INotifyActiveAppsRecyclerViewAdapter extends RecyclerView.Adapter<V
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderModel viewHolderModel, int i) {
-        viewHolderModel.appid.setText(list.get(i).getPakageName());
+        viewHolderModel.appid.setText(list.get(i).getAppName());
     }
 
     @Override
