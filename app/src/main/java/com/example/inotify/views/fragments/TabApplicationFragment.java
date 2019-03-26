@@ -23,6 +23,7 @@ import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.NotificationModel;
 import com.example.inotify.viewControllers.adapters.INotifyActiveAppsRecyclerViewAdapter;
 import com.example.inotify.viewControllers.adapters.SmartNotificationRecyclerViewAdapter;
+import com.example.inotify.viewControllers.logic.AllNotificationLogic;
 import com.example.inotify.viewControllers.logic.INotifyActiveAppsLogic;
 
 
@@ -95,10 +96,11 @@ public class TabApplicationFragment extends Fragment {
 
 
         //generate list
-        INotifyActiveAppsLogic activity_inotify_activite_apps = new INotifyActiveAppsLogic(getContext());
+        INotifyActiveAppsLogic iNotifyActiveAppsLogic = new INotifyActiveAppsLogic(getContext());
         //instantiate custom adapter
 
-        List<ApplicationInfoModel> data = activity_inotify_activite_apps.getApplicationList();
+
+        List<ApplicationInfoModel> data = iNotifyActiveAppsLogic.getAllActtiveAppsNotificationList();
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerviewactiveapps);
         adapter = new INotifyActiveAppsRecyclerViewAdapter(data, getContext());
         recyclerView.setAdapter(adapter);

@@ -7,10 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.NotificationModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import static com.example.inotify.configs.TbNames.PROFILE_TABLE;
 
 
 public class INotifiyActiveAppsDbHelper extends MainDbHelp {
@@ -87,7 +93,7 @@ public class INotifiyActiveAppsDbHelper extends MainDbHelp {
         return false;
     }
 
-    public List<String> getINotifyActiveApps(){
+    public List<String> getINotifyActiveAppsOnly(){
         List<String> stringList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -102,4 +108,57 @@ public class INotifiyActiveAppsDbHelper extends MainDbHelp {
         }
         return stringList;
     }
+
+
+    public List<ApplicationInfoModel> getALLINotifyActiveApps(){
+        List<ApplicationInfoModel>applicationInfoModelList= new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TbNames.INOTIFYACTIVEAPPS_TABLE, null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModelList.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return applicationInfoModelList;
+    }
+
+    public boolean insertNewActiveApp(String packageName , String appName){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TbColNames.PACKAGENAME , packageName);
+        contentValues.put(TbColNames.APPNAME , appName);
+        contentValues.put(TbColNames.STATUS,"false");
+
+        long result = db.insert(TbNames.INOTIFYACTIVEAPPS_TABLE,null,contentValues);
+        db.close();
+        return result != -1;
+
+    }
+
+    public boolean packNameisExisCheck(String packageName) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TbNames.INOTIFYACTIVEAPPS_TABLE +" where "+TbColNames.PACKAGENAME+"=\""+packageName+"\"", null);
+
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                cursor.close();
+                db.close();
+                return true;
+            }
+            cursor.close();
+        }
+        return false;
+    }
+
+
 }
