@@ -133,6 +133,8 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
         return String.valueOf(value.charAt(length - 1));
     }
 
+
+
     //PRASHAN
     String[] ans = new String[200];
     ArrayList<String> ansarraylist = new ArrayList<>();
@@ -165,19 +167,19 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
         return ansarraylist;
     }
 
-    public ArrayList display_probFinal() {
+    public ArrayList display_probFinal(String table) {
 
         ansarraylist.add("");
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select time_slot , probabilityfinal from " + PROBABILITYQUERYFRI_TABLE, null);
+        Cursor cursor = db.rawQuery("select time_slot , probabilityfinal from " + table, null);
         if (cursor != null) {
             int count2 =1;
             while (cursor.moveToNext()) {
 
                 for(int count =0; count<2 ; count++){
                     if(cursor.getString(count) == null){
-                        ansarraylist.add("");
+                        ansarraylist.add("0");
                     }
                     else
                     ansarraylist.add(cursor.getString(count));
