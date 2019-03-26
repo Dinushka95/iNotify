@@ -24,6 +24,7 @@ public class ViewabilityViewpageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
+
         return ViwabilityFragmentListTitles.size();
     }
 

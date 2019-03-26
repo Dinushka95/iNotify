@@ -16,7 +16,12 @@ import com.example.inotify.R;
 import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 import com.example.inotify.viewControllers.adapters.ViewabilityViewpageAdapter;
 import com.example.inotify.views.viewability_fragments.Tue;
+import com.example.inotify.views.viewability_fragments.fri;
 import com.example.inotify.views.viewability_fragments.mon;
+import com.example.inotify.views.viewability_fragments.sat;
+import com.example.inotify.views.viewability_fragments.sun;
+import com.example.inotify.views.viewability_fragments.thu;
+import com.example.inotify.views.viewability_fragments.wed;
 
 import java.util.ArrayList;
 
@@ -33,12 +38,18 @@ public class NotificationFinalViewabilityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification_final_viewability);
         Layout = findViewById(R.id.liner);
 
-        tabLayout =(TabLayout) findViewById(R.id.TabLay);
-        viewPager =(ViewPager) findViewById(R.id.viewpager);
+        tabLayout =(TabLayout) findViewById(R.id.tablayout_id);
+        viewPager =(ViewPager) findViewById(R.id.viewpager_id);
         ViewabilityViewpageAdapter adapter = new ViewabilityViewpageAdapter(getSupportFragmentManager());
         //adding fragments
         adapter.AddFragments(new mon(),"Mon");
         adapter.AddFragments(new Tue(),"Tue");
+        adapter.AddFragments(new wed(),"Wed");
+        adapter.AddFragments(new thu(),"Thu");
+        adapter.AddFragments(new fri(),"Fri");
+        adapter.AddFragments(new sat(),"Sat");
+        adapter.AddFragments(new sun(),"Sun");
+
 
         //adapter setup
         viewPager.setAdapter(adapter);
@@ -47,9 +58,9 @@ public class NotificationFinalViewabilityActivity extends AppCompatActivity {
 
 
         NotificationViewabilityDbHelper pra = new NotificationViewabilityDbHelper(this);
-        ArrayList<String> ansArry = pra.display_probFinal();
+        //ArrayList<String> ansArry = pra.display_probFinal();
 
-        Log.d("Final", "onCreate: "+ ansArry.get(1));
+        //Log.d("Final", "onCreate: "+ ansArry.get(1));
         //display_table(ansArry);
     }
 
