@@ -1,19 +1,24 @@
 package com.example.inotify.views.views;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.inotify.R;
-import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+import com.example.inotify.configs.TbNames;
+import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
+import com.example.inotify.logger.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class NotificationViewabilityActivity extends AppCompatActivity {
 
@@ -27,27 +32,41 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification_viewability);
         mLayout = findViewById(R.id.liner);
 
-        NotificationViewability_DbHelper pra = new NotificationViewability_DbHelper(this);
+        NotificationViewabilityDbHelper pra = new NotificationViewabilityDbHelper(this);
         //String[] ans2 = new String[100];
 
-
         //ans2 = pra.display_prob();
+        boolean x;
 
-        ArrayList<String> timeS = pra.selectTimeSlot();
-        for(int i = 1 ; i <= Integer.parseInt(timeS.get(0)) ; i++ ) {
-            pra.probability_query(timeS.get(i));
+        for(int j = 0;  j < 7; j++ ) {
+            String[] Days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            String[] table ={
+                    TbNames.PROBABILITYQUERYMON_TABLE,
+                    TbNames.PROBABILITYQUERYTUE_TABLE,
+                    TbNames.PROBABILITYQUERYWED_TABLE,
+                    TbNames.PROBABILITYQUERYTHU_TABLE,
+                    TbNames.PROBABILITYQUERYFRI_TABLE,
+                    TbNames.PROBABILITYQUERYSAT_TABLE,
+                    TbNames.PROBABILITYQUERYSUN_TABLE
+
+            };
+                        ArrayList<String> timeMon = pra.selectTimeSlot(Days[j]);
+            if(timeMon.size()> 1) {
+                for (int i = 1; i <= Integer.parseInt(timeMon.get(0)); i++) {
+                    pra.probability_query(timeMon.get(i), Days[j]);
+                }
+
+                pra.genarateProbability(table[j], Days[j]);
+            }
+
         }
-        //Log.d("test", "onCreate: "+ timeS.get(2));
-        //pra.probability_query("15:50 - 16:00");
 
-
-
-        //Log.d("TimeSlot", "onCreate: "+ timeS.get(0));
         ArrayList<String> ansArry = pra.display_prob();
         display_table(ansArry);
 
-
-        pra.genarateProbability();
+        Date currentTime = Calendar.getInstance().getTime();
+        Double view = pra.GetViewability(currentTime);
+        Log.d("Viewability", "onCreate: " + view);
         pra.close();
     }
 
@@ -85,5 +104,10 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
     }
 
+    public void probabilityfinal(View view) {
+        Intent intent = new Intent(this, NotificationFinalViewabilityActivity.class);
+        startActivity(intent);
+
+    }
 }
 

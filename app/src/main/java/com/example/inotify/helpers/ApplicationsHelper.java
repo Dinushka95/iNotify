@@ -8,8 +8,11 @@ import android.util.Log;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.models.ApplicationInfoModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ApplicationsHelper {
 
@@ -39,6 +42,7 @@ public class ApplicationsHelper {
     {
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(c1);
         List<ApplicationInfoModel> listOfApps = applicationsHelper.appAllGet();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
 
         final PackageManager pm = c1.getPackageManager();
@@ -49,75 +53,127 @@ public class ApplicationsHelper {
 
 
         for (ApplicationInfo x : packages){
-            ApplicationInfoModel amtem = new ApplicationInfoModel();
-            Log.d("iNotify",pm.getApplicationLabel(x).toString());
-            amtem.setAppName(pm.getApplicationLabel(x).toString());
-            amtem.setPakageName(x.packageName);
-            amtem.setAppCategory(x.packageName);
+        ApplicationInfoModel amtem = new ApplicationInfoModel();
+        Log.d("iNotify",pm.getApplicationLabel(x).toString());
+        amtem.setAppName(pm.getApplicationLabel(x).toString());
+        amtem.setPakageName(x.packageName);
+        amtem.setAppCategory(x.packageName);
+        amtem.setDate(date);
+        Log.d("iNotify","date..................." + date);
+
 
             list.add(amtem);
-        }
+    }
 
         appInfoInsert(list);
-        Log.d("inotify","app name list............"+ list);
+
 
 
     }
 
-    public int appCountGet()
+    public int appCountGetToday()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        Log.d("inotify","app count------" + (int) applicationdbHelper.appCountGet());
-        return (int) applicationdbHelper.appCountGet();
+        Log.d("inotify","app count------" + (int) applicationdbHelper.appCountGetToday());
+        return (int) applicationdbHelper.appCountGetToday();
     }
 
-    public long appConutAVG()
+    public int allAppCountAVG()
     {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.appsCountAvgGet();
-        return applicationDbHelper.appsCountAvgGet();
+        applicationDbHelper.allAppCountGet();
+        return applicationDbHelper.allAppCountGet();
     }
 
-    public List<ApplicationInfoModel> mySocialAppGet()
+    public List<ApplicationInfoModel> mySocialAppTodayGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.mySocialAppGet();
+        return applicationdbHelper.mySocialAppTodayGet();
     }
 
-    public List<ApplicationInfoModel> mySPhotograpyAppGet()
+    public List<ApplicationInfoModel> mySocialAppAVGGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myPhotograpyAppGet();
+        return applicationdbHelper.mySocialAppAllGet();
     }
 
-    public List<ApplicationInfoModel> myGamingAppGet()
+
+    public List<ApplicationInfoModel> mySPhotograpyAppTodayGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myGamingAppGet();
+        return applicationdbHelper.myPhotograpyAppTodayGet();
     }
 
-    public List<ApplicationInfoModel> myCommunicationAppGet()
+    public List<ApplicationInfoModel> mySPhotograpyAppAVGGet()
     {
 
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myCommunicationAppGet();
+        return applicationdbHelper.myPhotograpyAppAVGGet();
     }
 
-    public List<ApplicationInfoModel> myMusicVideoAppGet()
+    public List<ApplicationInfoModel> myPersonalizationAppTodayGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myPersonalizationAppTodayGet();
+    }
+
+    public List<ApplicationInfoModel> myPersonalizationAppAVGGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myPersonalizationAppAllGet();
+    }
+
+    public List<ApplicationInfoModel> myGamingAppTodayGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myGamingAppTodayGet();
+    }
+
+    public List<ApplicationInfoModel> myGamingAppAVGGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myGamingAppAllGet();
+    }
+
+    public List<ApplicationInfoModel> myCommunicationAppTodayGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myCommunicationAppGetToday();
+    }
+
+    public List<ApplicationInfoModel> myCommunicationAppAVGGet()
+    {
+
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myCommunicationAppGetAll();
+    }
+
+    public List<ApplicationInfoModel> myMusicVideoAppTodayGet()
     {
         ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myMusicVideoAppGet();
+        return applicationdbHelper.myMusicVideoAppTodayGet();
+    }
+
+    public List<ApplicationInfoModel> myMusicVideoAppAVGGet()
+    {
+        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
+        return applicationdbHelper.myMusicVideoAppAllGet();
     }
 
 
-    public int commonSocialAppCount()
+    public int commonSocialAppTodayCount()
     {
 
-        List<ApplicationInfoModel> mySocialApps= this.mySocialAppGet();
+        List<ApplicationInfoModel> mySocialApps= this.mySocialAppTodayGet();
 
        TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
         List<ApplicationInfoModel> topSocialApps = topAppsHelper.topAppSocial();
@@ -139,15 +195,43 @@ public class ApplicationsHelper {
 //        }
         int myCommonAppCount=commonSocialApps.size();
 
+        return myCommonAppCount;
+    }
+
+    public int commonPersonalizationAppTodayCount()
+    {
+
+        List<ApplicationInfoModel> myPersonalizationApps= this.myPersonalizationAppTodayGet();
+
+        TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
+        List<ApplicationInfoModel> topPersonalizationApps = topAppsHelper.topAppPersonalization();
+
+
+        List<ApplicationInfoModel> commonPersonalizationApps = new ArrayList<>();
+        for(ApplicationInfoModel tmp1: topPersonalizationApps) {
+            for(ApplicationInfoModel tmp2: myPersonalizationApps) {
+                if(tmp1.getAppName().compareTo(tmp2.getAppName()) == 0) {
+                    ApplicationInfoModel applicationInfoModelT = new ApplicationInfoModel();
+                    applicationInfoModelT.setAppName(tmp1.getAppName());
+                    commonPersonalizationApps.add(applicationInfoModelT);}
+            }
+        }
+
+//        for (ApplicationInfoModel xx :commonSocialApps){
+//
+//            Log.d("inotify","CCCCCCCCCCCCCCCCCCCCCCCCCCCCC"+xx.getAppName());
+//        }
+        int myCommonAppCount=commonPersonalizationApps.size();
+
         Log.d("inotify","common social app count = " + myCommonAppCount);
         return myCommonAppCount;
     }
 
 
-    public int commonPhotograpyAppCount()
+    public int commonPhotograpyAppTodayCount()
     {
 
-        List<ApplicationInfoModel> myPhotographyApps= this.mySPhotograpyAppGet();
+        List<ApplicationInfoModel> myPhotographyApps= this.mySPhotograpyAppTodayGet();
         TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
         List<ApplicationInfoModel> topPhotograpyApps = topAppsHelper.topAppPhotograpy();
 
@@ -168,15 +252,14 @@ public class ApplicationsHelper {
 //        }
         int myCommonAppCount=commonPhotograpyApps.size();
 
-        Log.d("inotify","common photograpy app count = " + commonPhotograpyApps);
         return myCommonAppCount;
     }
 
 
-    public int commonGamingAppCount()
+    public int commonGamingAppTodayCount()
     {
 
-        List<ApplicationInfoModel> myGamingApps= this.mySocialAppGet();
+        List<ApplicationInfoModel> myGamingApps= this.myGamingAppTodayGet();
 
         TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
         List<ApplicationInfoModel> topGamingApps = topAppsHelper.topAppSocial();
@@ -194,14 +277,13 @@ public class ApplicationsHelper {
 
         int myCommonAppCountGaming=commonGamingApps.size();
 
-        Log.d("inotify","common social app count = " + myCommonAppCountGaming);
         return myCommonAppCountGaming;
     }
 
-    public int commonMusicVideoAppCount()
+    public int commonMusicVideoAppTodayCount()
     {
 
-        List<ApplicationInfoModel> myMusicVideoApps= this.myMusicVideoAppGet();
+        List<ApplicationInfoModel> myMusicVideoApps= this.myMusicVideoAppTodayGet();
 
         TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
         List<ApplicationInfoModel> topMusicVideoApps = topAppsHelper.topAppMusicVideo();
@@ -223,10 +305,10 @@ public class ApplicationsHelper {
         return myCommonAppCountMusicVideo;
     }
 
-    public int commonCommunicationAppCount()
+    public int commonCommunicationAppTodayCount()
     {
 
-        List<ApplicationInfoModel> myCommunicationApps= this.myCommunicationAppGet();
+        List<ApplicationInfoModel> myCommunicationApps= this.myCommunicationAppTodayGet();
 
         TopAppsHelper topAppsHelper = new TopAppsHelper(c1);
         List<ApplicationInfoModel> topCommunicationApps = topAppsHelper.topAppCommunication();
@@ -249,6 +331,7 @@ public class ApplicationsHelper {
     }
 
 
+
     public ApplicationInfoModel appGet(String packageName)
     {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
@@ -256,26 +339,33 @@ public class ApplicationsHelper {
 
     }
 
-    public int socialAppCount()
+    public int socialAppCountToday()
     {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.socialAppCountGet();
-        Log.d("inotify","social app count" +  applicationDbHelper.socialAppCountGet());
-        return applicationDbHelper.socialAppCountGet();
+        applicationDbHelper.socialAppCountTodayGet();
+        Log.d("inotify","social app count" +  applicationDbHelper.socialAppCountTodayGet());
+        return applicationDbHelper.socialAppCountTodayGet();
     }
 
-    public int communicationAppCount()
+    public int communicationAppCountToday()
     {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.communicationAppCountGet();
-        return applicationDbHelper.communicationAppCountGet();
+        applicationDbHelper.communicationAppCountTodayGet();
+        return applicationDbHelper.communicationAppCountTodayGet();
     }
 
-    public int gamingAppCount()
+    public int gamingAppCountToday()
     {
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.gamingAppCountGet();
-        return applicationDbHelper.gamingAppCountGet();
+        applicationDbHelper.gamingAppCountTodayGet();
+        return applicationDbHelper.gamingAppCountTodayGet();
+    }
+
+    public int personalizationppCountToday()
+    {
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
+        applicationDbHelper.PersonalizationppCountTodayGet();
+        return applicationDbHelper.PersonalizationppCountTodayGet();
     }
 
     //packagename to application name

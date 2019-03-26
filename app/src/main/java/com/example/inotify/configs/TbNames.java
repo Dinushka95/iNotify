@@ -1,13 +1,19 @@
 package com.example.inotify.configs;
 
-public class TbNames {
+public class TbNames<Public> {
 
     public static final String NOTIFICATIONREMOVE_TABLE = "notificationRemove_table";
     public static final String NOTIFICATIONVIEWABILITY_TABLE = "viewability_table";
     public static final String ACTIVITY_TABLE = "activity_table";
     public static final String LOCATION_TABLE = "location_table";
     public static final String PROBABILITY_TABLE = "probability_table";
-    public static final String PROBABILITYQUERY_TABLE = "probabilityquery_table";
+    public static final String PROBABILITYQUERYMON_TABLE = "probabilityquerymon_table";
+    public static final String PROBABILITYQUERYTUE_TABLE = "probabilityquerytue_table";
+    public static final String PROBABILITYQUERYWED_TABLE = "probabilityquerywed_table";
+    public static final String PROBABILITYQUERYTHU_TABLE = "probabilityquerythu_table";
+    public static final String PROBABILITYQUERYFRI_TABLE = "probabilityqueryfri_table";
+    public static final String PROBABILITYQUERYSAT_TABLE = "probabilityquerysat_table";
+    public static final String PROBABILITYQUERYSUN_TABLE = "probabilityquerysun_table";
 
 
     public static final String N_TABLE = "N_table";
@@ -27,7 +33,7 @@ public class TbNames {
 
     public static final String SNS_TABLE = "sns_table";
 
-    public static final String SMARTNOTIFICATIONAVCTIVEAPPS_TABLE = "smartnotificationactiveapps_table";
+    public static final String INOTIFYACTIVEAPPS_TABLE = "inotifyactiveapps_table";
 
     public static final String NOTIFICATION_TABLE = "notification_table";
 
@@ -45,6 +51,14 @@ public class TbNames {
     public static final String CHARGER_TABLE = "charger_table";
 
     public static final String APPUSAGE_TABLE = "appUsage_table";
+
+    public static  final String ATTRIBUTECOUNT_TABLE = "attributecount_table";
+
+    public static final String OPENNESS_TABLE = "openness_table";
+
+    public static final String CONSCIENTIOUSNESS_TABLE = "conscientiousness_table";
+
+    public static final String CHARACTERISTICSfINAL_TABLE = "charcateriticsfinal_table";
 
 
 

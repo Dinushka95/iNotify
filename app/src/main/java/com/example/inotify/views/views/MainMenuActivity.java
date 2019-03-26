@@ -35,6 +35,8 @@ import com.example.inotify.configs.MyConstants;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.CalenderEventHelper;
+import com.example.inotify.helpers.CallDurationDbHelp;
+import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.TopAppsHelper;
@@ -213,6 +215,8 @@ public class MainMenuActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
         }
 
+        CallDurationDbHelp callDurationDbHelp = new CallDurationDbHelp();
+        callDurationDbHelp.getCallDuration();
     }
 
     @Override
@@ -274,6 +278,7 @@ public class MainMenuActivity extends AppCompatActivity implements
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         BroadcastReceiver mReceiver = new ScreenStatusHelper();
         registerReceiver(mReceiver, intentFilter);
+
 
     }
 

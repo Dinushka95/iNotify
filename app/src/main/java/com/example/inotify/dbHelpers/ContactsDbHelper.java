@@ -20,21 +20,21 @@ public class ContactsDbHelper extends MainDbHelp {
         this.c1=context;
     }
 
-//    public int ContactsTodayGet() {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-//        Cursor res = db.rawQuery("select SUM(COUNT) as COUNT from " + TbNames.CONTACTCOUNT_TABLE + " where DATE = \""+date+"\" ", null);
-//        if (res != null) {
-//            if ((res.moveToFirst())){
-//
-//                db.close();
-//                return res.getInt(res.getColumnIndex("COUNT"));
-//            }
-//        }
-//        db.close();
-//        return 0;
-//    }
-//
+    public int ContactsTodayGet() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(COUNT) as COUNT from " + TbNames.CONTACTCOUNT_TABLE + " where DATE = \""+date+"\" ", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("COUNT"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
 //    public int ContactsAvgGet() {
 //        SQLiteDatabase db = this.getReadableDatabase();
 //        Cursor res = db.rawQuery("select SUM("+ TbColNames.COUNT +") as COUNT from " + TbNames.CONTACTCOUNT_TABLE , null);

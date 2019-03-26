@@ -1,8 +1,9 @@
 package com.example.inotify.helpers;
 
 import android.content.Context;
+import android.widget.LinearLayout;
 
-import com.example.inotify.dbHelpers.NotificationViewability_DbHelper;
+import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class MainNotificationViewability {
 
         ArrayList<java.lang.String> bon = new ArrayList();
 
-        NotificationViewability_DbHelper praSqlLiteDbHelper = new NotificationViewability_DbHelper(context);
+        NotificationViewabilityDbHelper praSqlLiteDbHelper = new NotificationViewabilityDbHelper(context);
         praSqlLiteDbHelper.busyOrNotPredict_Get(activity,location);
         praSqlLiteDbHelper.close();
 
@@ -36,4 +37,6 @@ public class MainNotificationViewability {
             return "NotBusy";
         }
     }
+
+    LinearLayout mLayout;
 }

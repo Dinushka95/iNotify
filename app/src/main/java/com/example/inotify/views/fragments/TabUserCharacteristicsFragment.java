@@ -4,11 +4,18 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.interfaces.MyCallback;
+import com.example.inotify.views.views.Extraversion;
+import com.example.inotify.views.views.Openness;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +26,8 @@ import com.example.inotify.R;
  * create an instance of this fragment.
  */
 public class TabUserCharacteristicsFragment extends Fragment {
+
+    private Button b;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,13 +68,23 @@ public class TabUserCharacteristicsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+       //  b = (Button) container.findViewById(R.id.mitbut);
+
+       // Button buttonInFragment1 = container.findViewById(R.id.mitbut);
+       // buttonInFragment1.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+          //  public void onClick(View view) {
+          //      Toast.makeText(getContext(), "button in fragment 1", Toast.LENGTH_SHORT).show();
+          //;
+
         return inflater.inflate(R.layout.fragment_tab_user_characteristics, container, false);
     }
 
@@ -75,6 +94,7 @@ public class TabUserCharacteristicsFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -107,4 +127,17 @@ public class TabUserCharacteristicsFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void Details_final (View view)
+    {
+//        Openness openness = new Openness();
+//        long opennessANS = openness.displayOpenness();
+//        Log.d("inotify","Openness................................." + opennessANS);
+//
+//        Extraversion extraversion = new Extraversion();
+//        long extraversionANS = extraversion.displayExtraversion();
+//        Log.d("inotify","extraversion................................." + extraversionANS);
+    }
+
+
 }

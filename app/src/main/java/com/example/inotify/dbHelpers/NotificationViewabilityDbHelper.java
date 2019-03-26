@@ -18,13 +18,19 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.inotify.configs.TbNames.PROBABILITYQUERY_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITYQUERYMON_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITYQUERYTUE_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITYQUERYWED_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITYQUERYTHU_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITYQUERYFRI_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITYQUERYSAT_TABLE;
+import static com.example.inotify.configs.TbNames.PROBABILITYQUERYSUN_TABLE;
 import static com.example.inotify.configs.TbNames.PROBABILITY_TABLE;
 
 
-public class NotificationViewability_DbHelper extends MainDbHelp {
+public class NotificationViewabilityDbHelper extends MainDbHelp {
 
-    public NotificationViewability_DbHelper(Context context) {
+    public NotificationViewabilityDbHelper(Context context) {
         super(context);
     }
 
@@ -127,6 +133,8 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         return String.valueOf(value.charAt(length - 1));
     }
 
+
+
     //PRASHAN
     String[] ans = new String[200];
     ArrayList<String> ansarraylist = new ArrayList<>();
@@ -148,7 +156,39 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
                     count2 = count2 + 1;
                 }
 
-              //  Log.d("cursor", "display_prob: " +cursor.getString(1));
+                //  Log.d("cursor", "display_prob: " +cursor.getString(1));
+
+
+            }
+            ansarraylist.set(0,Integer.toString(count2));
+            //ans[0] = Integer.toString(count2);
+
+        }
+        return ansarraylist;
+    }
+
+    public ArrayList display_probFinal(String table) {
+
+        ansarraylist.add("");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select time_slot , probabilityfinal from " + table, null);
+        if (cursor != null) {
+            int count2 =1;
+            while (cursor.moveToNext()) {
+
+                for(int count =0; count<2 ; count++){
+                    if(cursor.getString(count) == null){
+                        ansarraylist.add("0");
+                    }
+                    else
+                    ansarraylist.add(cursor.getString(count));
+                    //ans[count2] = cursor.getString(count);
+
+                    count2 = count2 + 1;
+                }
+
+                //  Log.d("cursor", "display_prob: " +cursor.getString(1));
 
 
             }
@@ -179,7 +219,7 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
                     count2= count.getInt(2)+1;
                 }
                 else{
-                    //Proid= count.getInt(1);
+                    //Proid= count.getInt(1);`
                     String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
                     int viewOR = 1;
                     probability_insert(id,viewOR);
@@ -204,18 +244,18 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         return true;
     }
 
-    public ArrayList selectTimeSlot(){
+    public ArrayList selectTimeSlot(String day){
         int count = 1;
         ArrayList<String> TimeSlots = new ArrayList<>();
-        TimeSlots.add("");
+        TimeSlots.add(Integer.toString(1));
         SQLiteDatabase dbq = this.getReadableDatabase();
-        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " group by "+TbColNames.TIME , null);
+        Cursor proq = dbq.rawQuery("select probability_id, day, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where day ='"+day+"' group by "+TbColNames.TIME , null);
         if (proq != null) {
             if (proq.moveToFirst()) {
                 do{
                     TimeSlots.set(0,Integer.toString(count));
-                    TimeSlots.add(proq.getString(1));
-                    Log.d("TimeSlots", "selectTimeSlot: "+ proq.getString(1));
+                    TimeSlots.add(proq.getString(2));
+                    Log.d("TimeSlots", "selectTimeSlot: "+ proq.getString(2));
                     //Log.d("TimeSlots", "selectTimeSlot: "+Integer.toString(proq.getInt(2)));
                     count = count + 1 ;
                 }while (proq.moveToNext());
@@ -226,53 +266,146 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
         return (TimeSlots);
     }
 
-    public boolean probability_query(String timeslot) {
+    public Double GetViewability(Date timedate){
+
+        SimpleDateFormat dayOfweek = new SimpleDateFormat("EEEE", Locale.getDefault());
+        String dayOfWeek = dayOfweek.format(timedate);
+
+        SimpleDateFormat hour=new SimpleDateFormat("HH",Locale.getDefault());
+        String currentHour = hour.format(timedate);
+
+        SimpleDateFormat min=new SimpleDateFormat("mm",Locale.getDefault());
+        String currentMin = min.format(timedate);
+
+        char MinOne = currentMin.charAt(0);
+        Log.d("Debug", "NOW"+MinOne);
+
+        int nextMin =0;
+        int nextHour = 0;
+
+        if(java.lang.Character.getNumericValue(MinOne) != 5){
+            nextMin = java.lang.Character.getNumericValue(MinOne) +1;
+            nextHour = Integer.parseInt(currentHour);
+        }
+        else{
+            nextMin = 0;
+            nextHour = Integer.parseInt(currentHour)+1;
+        }
+
+        String timeSlot = currentHour+":"+ MinOne+"0 - "+nextHour+":"+nextMin+"0";
+
+        String table = "";
+
+        if (dayOfWeek.equals("Monday")) {
+            table = TbNames.PROBABILITYQUERYMON_TABLE;
+        }
+        else if(dayOfWeek.equals("Tuesday")){
+            table = TbNames.PROBABILITYQUERYTUE_TABLE;
+        }
+        else if(dayOfWeek.equals("Wednesday")){
+            table = TbNames.PROBABILITYQUERYWED_TABLE;
+        }
+        else if(dayOfWeek.equals("Thursday")){
+            table = TbNames.PROBABILITYQUERYTHU_TABLE;
+        }
+        else if(dayOfWeek.equals("Friday")){
+            table = TbNames.PROBABILITYQUERYFRI_TABLE;
+        }
+        else if(dayOfWeek.equals("Saturday")){
+            table = TbNames.PROBABILITYQUERYSAT_TABLE;
+        }
+        else if(dayOfWeek.equals("Sunday")){
+            table = TbNames.PROBABILITYQUERYSUN_TABLE;
+        }
+
+        Double viewability = 0.0;
+
+        SQLiteDatabase dbt = this.getReadableDatabase();
+        Cursor proq = dbt.rawQuery("select "+TbColNames.TIME_SLOT+", "+TbColNames.PROBABILITYFINAL+" from " + table + " where "+TbColNames.TIME_SLOT+" = '" + timeSlot + "'" , null);
+        if (proq != null) {
+            if (proq.moveToFirst()) {
+                viewability = proq.getDouble(1);
+
+            }
+        }
+        dbt.close();
+
+
+        return viewability;
+    }
+
+    public boolean probability_query(String timeslot, String day) {
 
         SQLiteDatabase dbq = this.getReadableDatabase();
         String timeSlot = "";
         int vieworSum = 0;
         int notorSum = 0;
+        //String Day = "";
         int i = 0;
-        Cursor proq = dbq.rawQuery("select probability_id, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where time = '" + timeslot + "'group by time " , null);
+        Cursor proq = dbq.rawQuery("select probability_id, day, time, SUM(viewor), SUM(notor) from " + PROBABILITY_TABLE + " where time = '" + timeslot + "'AND day ='"+day+"' group by time " , null);
         if (proq != null) {
             if (proq.moveToFirst()) {
-                    timeSlot = proq.getString(1);
-                    vieworSum = (Integer.parseInt(proq.getString(2)));
-                    notorSum = (Integer.parseInt(proq.getString(3)));
-                    //i = i + 1;
+                timeSlot = proq.getString(2);
+                //Day = proq.getString(proq.getColumnIndex(TbColNames.DAY));
+                vieworSum = (Integer.parseInt(proq.getString(3)));
+                notorSum = (Integer.parseInt(proq.getString(4)));
+                //i = i + 1;
 
-                    Log.d("viewORSUM", "probability_Query: " + proq.getInt(2));
+                Log.d("viewORSUM", "probability_Query: " + proq.getInt(2));
 
             }
         }
         dbq.close();
 
-            ContentValues contentValues3 = new ContentValues();
-            int ViewSUM = vieworSum;
-            int NotSUM = notorSum;
-            contentValues3.put(TbColNames.VIEWORSUM , ViewSUM);
-            contentValues3.put(TbColNames.NOTORSUM , NotSUM);
+        ContentValues contentValues3 = new ContentValues();
+        int ViewSUM = vieworSum;
+        int NotSUM = notorSum;
+        contentValues3.put(TbColNames.VIEWORSUM , ViewSUM);
+        contentValues3.put(TbColNames.NOTORSUM , NotSUM);
 
-            Log.d("Writable", "probability_query: " + ViewSUM);
-            Log.d("NotSUM", "probability_query: " + NotSUM);
-            Log.d("TIMESLOT", "probability_query: " + timeSlot);
-            SQLiteDatabase upd = this.getWritableDatabase();
-            upd.update(TbNames.PROBABILITYQUERY_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+        SQLiteDatabase upd = this.getWritableDatabase();
+        if (day.equals("Monday")){
+            upd.update(TbNames.PROBABILITYQUERYMON_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+        }
+        else if (day.equals("Tuesday")){
+            upd.update(TbNames.PROBABILITYQUERYTUE_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+        }
+        else if (day.equals("Wednesday")){
+            upd.update(TbNames.PROBABILITYQUERYWED_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+        }
+        else if (day.equals("Thursday")){
+            upd.update(TbNames.PROBABILITYQUERYTHU_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+        }
+        else if (day.equals("Friday")){
+            upd.update(TbNames.PROBABILITYQUERYFRI_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+        }
+        else if (day.equals("Saturday")){
+            upd.update(TbNames.PROBABILITYQUERYSAT_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+        }
+        else if (day.equals("Sunday")){
+            upd.update(TbNames.PROBABILITYQUERYSUN_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
+        }
+
+        Log.d("Writable", "probability_query: " + ViewSUM);
+        Log.d("NotSUM", "probability_query: " + NotSUM);
+        Log.d("TIMESLOT", "probability_query: " + timeSlot);
+
+
 
         upd.close();
 
         return true;
     }
 
-    public void genarateProbability(){
-        ArrayList<String> TimeSlots = selectTimeSlot();
+    public void genarateProbability(String table, String day){
+        ArrayList<String> TimeSlots = selectTimeSlot(day);
         String timeslot ="";
         int viewSum = 0;
         int notSum = 0;
 
         for(int i = 1 ; i <= Integer.parseInt(TimeSlots.get(0)); i++ ) {
             SQLiteDatabase dbq = this.getReadableDatabase();
-            Cursor genpro = dbq.rawQuery("select "+TbColNames.TIME_SLOT+" , "+TbColNames.VIEWORSUM+" , "+TbColNames.NOTORSUM+" from " + TbNames.PROBABILITYQUERY_TABLE + " where "+TbColNames.TIME_SLOT+" ='"+TimeSlots.get(i)+"'", null);
+            Cursor genpro = dbq.rawQuery("select "+TbColNames.TIME_SLOT+" , "+TbColNames.VIEWORSUM+" , "+TbColNames.NOTORSUM+" from " + table + " where "+TbColNames.TIME_SLOT+" ='"+TimeSlots.get(i)+"'", null);
             if (genpro != null) {
                 if (genpro.moveToFirst()) {
                     //timeslot = genpro.getString(0);
@@ -289,7 +422,7 @@ public class NotificationViewability_DbHelper extends MainDbHelp {
             SQLiteDatabase upd2 = this.getWritableDatabase();
             ContentValues contentValues2 = new ContentValues();
             contentValues2.put(TbColNames.PROBABILITYFINAL,probability);
-            upd2.update(TbNames.PROBABILITYQUERY_TABLE ,contentValues2 , TbColNames.TIME_SLOT +" = '"+TimeSlots.get(i)+"'", null);
+            upd2.update(table ,contentValues2 , TbColNames.TIME_SLOT +" = '"+TimeSlots.get(i)+"'", null);
             upd2.close();
         }
 

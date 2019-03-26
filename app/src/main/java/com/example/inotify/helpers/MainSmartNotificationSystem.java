@@ -3,7 +3,7 @@ package com.example.inotify.helpers;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.inotify.dbHelpers.SmartNotification_DbHelper;
+import com.example.inotify.dbHelpers.SmartNotificationDbHelper;
 import com.example.inotify.models.SNSModel;
 import com.example.inotify.views.views.MainStartPermissionActivity;
 
@@ -24,11 +24,11 @@ import java.util.ArrayList;
 
 public class MainSmartNotificationSystem {
 
-    SmartNotification_DbHelper SmartNotification_DbHelper;
+    SmartNotificationDbHelper SmartNotificationDbHelper;
     SNSModel predict_snsModel;
 
     public MainSmartNotificationSystem(Context context, SNSModel _snsModel) {
-        SmartNotification_DbHelper = new SmartNotification_DbHelper(context);
+        SmartNotificationDbHelper = new SmartNotificationDbHelper(context);
         predict_snsModel = _snsModel;
     }
 
@@ -80,7 +80,7 @@ public class MainSmartNotificationSystem {
 
         JSONArray jsonArray1 = new JSONArray();
         //all data
-        _snsModels = SmartNotification_DbHelper.getALL();
+        _snsModels = SmartNotificationDbHelper.getALL();
 
         int count = _snsModels.size();
         Log.d("inotify", "Main-MainSmartNotificationSystem--SNS model data from DB row count---" + count);
@@ -104,7 +104,6 @@ public class MainSmartNotificationSystem {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
                 jsonArray1.put(jsonData1);
             }

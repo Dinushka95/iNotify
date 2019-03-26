@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
@@ -39,7 +38,13 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.NOTIFICATIONREMOVE_TABLE + " (NOTIFICATIONREMOVE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,DAY TEXT,TIME TEXT)");
         db.execSQL("create table " + TbNames.NOTIFICATIONVIEWABILITY_TABLE + " (BUSYORNOT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DAY TEXT,TIME TEXT,ACTIVITY TEXT,LOCATION TEXT,BUSYORNOT TEXT)");
         db.execSQL("create table " + TbNames.PROBABILITY_TABLE + " (PROBABILITY_ID TEXT PRIMARY KEY,DAY TEXT,TIME TEXT,ACTIVITY TEXT,VIEWOR INTEGER,NOTOR INTEGER, PROBABILITY DOUBLE)");
-        db.execSQL("create table " + TbNames.PROBABILITYQUERY_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYMON_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYTUE_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYWED_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYTHU_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYFRI_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYSAT_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
+        db.execSQL("create table " + TbNames.PROBABILITYQUERYSUN_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
 
         db.execSQL("create table " + TbNames.SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
                 "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
@@ -50,20 +55,20 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.USERATTENTIVNESS_TABLE + "(ID INTEGER PRIMARY KEY , NID TEXT , APPLICATION TEXT , ATTENTIVNESSVALUE DOUBLE) ");
         db.execSQL("create table " + TbNames.ATTENTIVNESSPERAPP_TABLE + "(ID INTEGER PRIMARY KEY , APPLICATION  TEXT , TOTALATTENTIVNESS TEXT , TOTALATTENTIVNESSPERCENTAGE TEXT)");
 
-        db.execSQL("create table " + TbNames.CHARGER_TABLE + " (CHARGERID INTEGER PRIMARY KEY AUTOINCREMENT, POWERONCOUNTDATE TEXT,POWERONCOUNTTIME TEXT,POWEROFFCOUNTDATE TEXT,POWEROFFCOUNTTIME TEXT,DATE TEXT)");
+        db.execSQL("create table " + TbNames.CHARGER_TABLE + " (CHARGERID INTEGER PRIMARY KEY AUTOINCREMENT, POWERONDATE TEXT,POWERONTIME TEXT,POWEROFFDATE TEXT,POWEROFFTIME TEXT,DATE TEXT)");
         db.execSQL("create table " + TbNames.APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
         db.execSQL("create table " + TbNames.CALENDEREVENTCOUNT_TABLE + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
 
-        db.execSQL("create table " + TbNames.SMARTNOTIFICATIONAVCTIVEAPPS_TABLE + " (SNAVCTIVEAPPS_ID INTEGER PRIMARY KEY AUTOINCREMENT,APPNAME TEXT,STATUS TEXT)");
+        db.execSQL("create table " + TbNames.INOTIFYACTIVEAPPS_TABLE + " ("+TbColNames.INOTIFYACTIVEACTIVEAPPS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.PACKAGENAME+" TEXT,"+TbColNames.APPNAME+" Text," +TbColNames.STATUS+" TEXT)");
 
         db.execSQL("create table " + TbNames.SCREENSTATUS_TABLE + " ("+TbColNames.SCREENSTATUS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.NOTIFICATIONID+" TEXT,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMEON+" TEXT,"+TbColNames.TIMEOFF+" TEXT)");
-//TODO- need to change packagenmae and appPackage
-        db.execSQL("create table " + TbNames.TOPAPPS_TABLE + " ("+TbColNames.TOPAPP_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text)");
 
-        db.execSQL("create table " + TbNames.APPLICATIONS_TABLE + " ("+TbColNames.APPLICATION_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.APPPACKAGE+" Text,"+TbColNames.DATE+" TEXT)");
+        db.execSQL("create table " + TbNames.TOPAPPS_TABLE + " ("+TbColNames.TOPAPP_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text, "+TbColNames.DATE+" TEXT, "+TbColNames.APPCOLLECTION+" TEXT,"+TbColNames.RANK+" TEXT)");
+
+        db.execSQL("create table " + TbNames.APPLICATIONS_TABLE + " ("+TbColNames.APPLICATION_ID+"  INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text)");
 
         db.execSQL("create table " + TbNames.NOTIFICATION_TABLE + " ("+TbColNames.NOTIFICATIONID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMERECEVIED+" TEXT,"+TbColNames.TIMESENT+" TEXT,"+TbColNames.TIMEVIEW+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.PACKAGENAME+" TEXT,"+TbColNames.SMARTNOTIFICATION+" TEXT)");
 
@@ -75,7 +80,16 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.TOPAPPSCOUNT_TABLE + " ("+TbColNames.TOPAPPCOUNT_ID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIALAPPCOUNT+" TEXT,"+TbColNames.GAMINGAPPCOUNT+" TEXT,"+TbColNames.EDUCATIONAPPCOUNT+" TEXT,"+TbColNames.DATINGAPPCOUNT+" TEXT,"+TbColNames.MUSICVIDEOAPPCOUNT+" TEXT,"+TbColNames.COMMUNICATIONAPPCOUNT+" TEXT)");
 
-        db.execSQL("create table " + TbNames.CALLDURATION_TABLE + "("+TbColNames.CALLDURATION_ID+"INTEGER,"+TbColNames.DATE+"TEXT,"+TbColNames.TIME+"TEXT)");
+        db.execSQL("create table " + TbNames.CALLDURATION_TABLE + "("+TbColNames.CALLDURATION_ID+"INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.TIME+" TEXT)");
+
+        db.execSQL("create table " + TbNames.ATTRIBUTECOUNT_TABLE + " ("+TbColNames.ATTRIBUTECOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.APPCOUNT+" TEXT,"+TbColNames.SCREENONTIMECOUNT+" TEXT,"+TbColNames.CHARGINGCOUNT+" TEXT,"+TbColNames.CONTACTCOUNT+" TEXT)");
+
+        db.execSQL("create table " + TbNames.OPENNESS_TABLE + " ("+TbColNames.OPENNESS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.NEWLYAPPS+" TEXT,"+TbColNames.ALLAPPUSAGE+" TEXT,"+TbColNames.SOCIALAPPUSAGE+" TEXT,"+TbColNames.NOOFSOCIALAPPS+" TEXT,"+TbColNames.NOOFCOMMUNICTIONAPPS+" TEXT,"+TbColNames.COMMUNICATIONAPPUSAGE+" TEXT)");
+
+        db.execSQL("create table " + TbNames.CONSCIENTIOUSNESS_TABLE + " ("+TbColNames.CONSCIENTIOUSNESS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.MUSICVIDEOAPPUSAGE+" TEXT,"+TbColNames.MUSICVIDEOAPP+" TEXT,"+TbColNames.PHOTOGRAPYAPPUSAGE+" TEXT,"+TbColNames.PHOTOGRAPYAPP+" TEXT,"+TbColNames.CALENDEREVENT+" TEXT,"+TbColNames.CHARGE+" TEXT)");
+
+        db.execSQL("create table " + TbNames.CHARACTERISTICSfINAL_TABLE + " ("+TbColNames.CHARACTERISTICSfINAL_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.OPENNESS+" TEXT,"+TbColNames.CONSCIENTIOUSNESS+" TEXT,"+TbColNames.EXTRAVERSION+" TEXT,"+TbColNames.NEUROTICISM+" TEXT,"+TbColNames.AGREEABLENESS+" TEXT)");
+
 
 
 
@@ -131,23 +145,23 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
 
 
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('facebook','social','com.google.android.apps.facebook');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('whatsapp','social','com.google.android.apps.whatsapp');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('hungamamusic','musicvideo','com.google.android.apps.hungamamusic');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('tinder','dating','com.google.android.apps.tinder');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('badoo','dating','com.google.android.apps.badoo');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('netflix','entertainment','com.google.android.apps.netflix');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('coverfire','gaming','com.google.android.apps.coverfire');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('edx','education','com.google.android.apps.edx');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('fruitninja','gaming','com.google.android.apps.fruitninja');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('clashofclans','gaming','com.google.android.apps.clashofclans');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('game2','gaming','com.google.android.apps.game2');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('Message','communication','com.google.android.apps.Message');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('chatMe','communication','com.google.android.apps.chatMe');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('call','communication','com.google.android.apps.call');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('telephony','communication','com.android.providers.telephony');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('googlequicksearchbox','communication','com.google.android.googlequicksearchbox');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,APPCATEGORY,APPPACKAGE)values('calendar','communication','com.android.providers.calendar');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('facebook','20190220','social','com.google.android.apps.facebook');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('whatsapp','20190220','social','com.google.android.apps.whatsapp');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('hungamamusic','20190220','musicvideo','com.google.android.apps.hungamamusic');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('tinder','20190220','dating','com.google.android.apps.tinder');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('badoo','20190220','dating','com.google.android.apps.badoo');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('netflix','20190220','entertainment','com.google.android.apps.netflix');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('coverfire','20190220','gaming','com.google.android.apps.coverfire');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('edx','20190220','education','com.google.android.apps.edx');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('fruitninja','20190220','gaming','com.google.android.apps.fruitninja');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('clashofclans','20190220','gaming','com.google.android.apps.clashofclans');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('game2','20190220','gaming','com.google.android.apps.game2');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('Message','20190220','communication','com.google.android.apps.Message');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('chatMe','20190220','communication','com.google.android.apps.chatMe');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('call','20190220','communication','com.google.android.apps.call');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('telephony','20190220','communication','com.android.providers.telephony');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('googlequicksearchbox','20190220','communication','com.google.android.googlequicksearchbox');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('calendar','20190220','communication','com.android.providers.calendar');");
         //TODO-- please implement temperately insert statements or Api to get application categories
 
 
@@ -170,10 +184,17 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         //PROBABILITYQUERY_TABLE
 
-        NotificationViewability_DbHelper timeS = new NotificationViewability_DbHelper(c1);
+        NotificationViewabilityDbHelper timeS = new NotificationViewabilityDbHelper(c1);
         ArrayList <String> TimeSlots = timeS.genarateTimeSlots();
         for(int i = 0 ; i < 144 ; i++  ){
-            db.execSQL("insert into PROBABILITYQUERY_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYMON_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYTUE_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYWED_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYTHU_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYFRI_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYSAT_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+            db.execSQL("insert into PROBABILITYQUERYSUN_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
+
         }
         //Log.d("DBoncreate", "onCreate: " +TimeSlots.get(0));
 

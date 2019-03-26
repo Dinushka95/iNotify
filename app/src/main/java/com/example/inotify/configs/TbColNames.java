@@ -88,8 +88,13 @@ public class TbColNames {
 
     ////topApps
     public static final String TOPAPP_ID = "topapp_id";
+    //public static final String DATE = "date";
     // public static final String APPNAME = "appname";
+    //public static final String PACKAGENAME = "packageName";
+    public static final String APPCOLLECTION = "appcollection";
     public static final String APPCATEGORY = "appcategory";
+    public static final String RANK = "rank";
+
 
 
 
@@ -149,11 +154,10 @@ public class TbColNames {
     //public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
 
     //Application  table
-
     public static final String APPLICATION_ID = "applicationId";
     //public static final String APPNAME = "appname";
     //public static final String APPCATEGORY = "appcategory";
-    public static final String APPPACKAGE = "apppackage";
+    //public static final String PACKAGENAME = "packageName";
 
 
     //CallDuration table
@@ -161,6 +165,46 @@ public class TbColNames {
 
     //ContactCount table
     public static final String CONTACTCOUNT_ID ="contactcountId";
+
+    //ATTRIBUTECOUNT_TABLE
+    public  static  final String ATTRIBUTECOUNT_ID = "attributecountId";
+    public static final String APPCOUNT = "appcount";
+    public static final String SCREENONTIMECOUNT = "scrrenontimecount";
+    public static final String CHARGINGCOUNT = "chargingcount";
+    public static final String CONTACTCOUNT = "contactcount";
+
+    //iNotifyActiveApps table
+    public  static  final String INOTIFYACTIVEACTIVEAPPS_ID = "iNotifyActiveAppsId";
+    public  static  final String STATUS = "status";
+    //public static final String PACKAGENAME = "packageName";
+
+    //OPENNESS_table
+    public static final String OPENNESS_ID = "opennessId";
+    public static final String NEWLYAPPS = "newlyapps";
+    public static final String ALLAPPUSAGE = "allappusage";
+    public static final String SOCIALAPPUSAGE = "socialappusage";
+    public static final String NOOFSOCIALAPPS = "noofsocialapps";
+    public static final String NOOFCOMMUNICTIONAPPS = "noofcommunicationapps";
+    public static final String COMMUNICATIONAPPUSAGE = "communicationappusage";
+
+    //CONSCIENTIOUSNESS_table
+    public static final String CONSCIENTIOUSNESS_ID = "conscientiounessId";
+    public static final String MUSICVIDEOAPPUSAGE = "musicvideoappusage";
+    public static final String MUSICVIDEOAPP = "musicvideoapp";
+    public static final String PHOTOGRAPYAPPUSAGE = "photograpyappusage";
+    public static final String PHOTOGRAPYAPP = "photograpyapp";
+    public static final String CALENDEREVENT = "calenderevent";
+    public static final String CHARGE = "charge";
+
+    //CHARACTERISTICSfINAL_TABLE
+    public static final String CHARACTERISTICSfINAL_ID = "characteristicId";
+    public static final String OPENNESS = "openness";
+    public static final String CONSCIENTIOUSNESS = "conscientiousness";
+    public static final String EXTRAVERSION = "extraversion";
+    public static final String NEUROTICISM = "neuroticism";
+    public static final String AGREEABLENESS = "agreeableness";
+
+
 
 
 

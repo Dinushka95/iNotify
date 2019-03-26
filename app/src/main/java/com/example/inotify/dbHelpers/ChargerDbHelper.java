@@ -2,18 +2,23 @@ package com.example.inotify.dbHelpers;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class ChargerDbHelper extends MainDbHelp {
-
+    private  Context c1;
     public ChargerDbHelper(Context context) {
-
         super(context);
+        this.c1=context;
     }
 
     public boolean powerOninsert(String date,String time) {
@@ -36,14 +41,35 @@ public class ChargerDbHelper extends MainDbHelp {
         return result != -1;
     }
 
-    public int powerOnCountGet(String date) {
-       //TODO - sql query needs to be implemented get total count per day- number of charges values
-        return 1;
+    public int powerOnCountGet() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date1 = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery("select COUNT(POWERONTIME) from " + TbNames.CHARGER_TABLE + " where POWERONDATE = \""+date1+"\" ", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                Log.d("inotify","powerOnCountGet----"+res.getCount());
+                return res.getCount();
+            }
+        }
+        db.close();
+        return 0;
     }
 
-    public int powerOffCountGet(String date) {
-        //TODO - sql query needs to be implemented get total count per day- number of charges values
-        return 1;
+    public int powerOffCountGet() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date1 = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery("select COUNT(POWEROFFTIME) from " + TbNames.CHARGER_TABLE + " where POWEROFFDATE = \""+date1+"\" ", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                Log.d("inotify","powerOffCountGet----"+res.getCount());
+                return res.getCount();
+            }
+        }
+        db.close();
+        return 0;
     }
 
 

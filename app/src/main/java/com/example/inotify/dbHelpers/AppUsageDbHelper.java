@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
+
 public class AppUsageDbHelper extends MainDbHelp {
 
     public AppUsageDbHelper(Context context) {
@@ -70,48 +72,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     }
 
 
-    public int appsUsageTodayGet(String appcategoriesConstants) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \""+appcategoriesConstants+"\"", null);
-        if (res != null) {
-            if ((res.moveToFirst())){
-
-                db.close();
-                return res.getInt(res.getColumnIndex("USAGETIME"));
-            }
-        }
-        db.close();
-        return 0;
-    }
-
-    public int appsUsageAvgGet(String appcategoriesConstants) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select SUM("+ TbColNames.USAGETIME +") as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \""+appcategoriesConstants+"\"", null);
-        int total = 0;
-        int count = 0;
-        int avg;
-        if (res != null) {
-            if ((res.moveToFirst())){
-                do {
-                    total=total+ res.getInt(res.getColumnIndex("USAGETIME"));
-                    count++;
-                } while (res.moveToNext());
-            }
-        }
-        Objects.requireNonNull(res).close();
-        db.close();
-
-        try {
-            avg=total/count;
-        }catch (Exception e){
-            return 0;
-        }
-
-        return avg;
-    }
-
-    public int appAllUsageTodayGet() {
+    public int appAllsUsageToday () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\"", null);
@@ -126,31 +87,313 @@ public class AppUsageDbHelper extends MainDbHelp {
         return 0;
     }
 
-    public int appAllUsageAvgGet() {
+    public int appAllsUsageAVG () {
         SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE , null);
-        int total = 0;
-        int count = 0;
-        int avg;
         if (res != null) {
             if ((res.moveToFirst())){
-                do {
-                    total=total+ res.getInt(res.getColumnIndex("USAGETIME"));
-                    count++;
-                } while (res.moveToNext());
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int communicationAppsUsageToday () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"communication\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int gamingAppsUsageToday () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"gaming\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int photograpyAppsUsageToday () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"photograpy\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int personalizationAppsUsageToday () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"personalization\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int musicvideoAppsUsageToday () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"musicvideo\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int socialAppsUsageToday () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"social\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int communicationAppsUsageAVG () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"communication\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int personalizationAppsUsageAVG () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"personalization\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int gamingAppsUsageAVG () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"gaming\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int photograpyAppsUsageAVG () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"photograpy\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int socialAppsUsageAVG () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"social\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int musicvideoAppsUsageAVG () {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"musicvideo\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+
+                db.close();
+                return res.getInt(res.getColumnIndex("USAGETIME"));
+            }
+        }
+        db.close();
+        return 0;
+    }
+
+    public int allUsageTimeColumCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(UsageTime) as USAGETIMECOUNT from "+ TbNames.APPUSAGE_TABLE , null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex("USAGETIMECOUNT"));
             }
         }
         Objects.requireNonNull(res).close();
         db.close();
 
-        try {
-            avg=total/count;
-        }catch (Exception e){
-            return 0;
-        }
-
-        return avg;
+        return 0;
     }
 
+    public int socialUsageTimeColumCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(UsageTime) as USAGETIMECOUNT from "+ TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"social\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex("USAGETIMECOUNT"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int musicvideoUsageTimeColumCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(UsageTime) as USAGETIMECOUNT from "+ TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"musicvideo\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex("USAGETIMECOUNT"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+
+
+    public int communicationUsageTimeColumCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(UsageTime) as USAGETIMECOUNT from "+ TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"communication\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex("USAGETIMECOUNT"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int personalizationUsageTimeColumCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(UsageTime) as USAGETIMECOUNT from "+ TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"personalization\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex("USAGETIMECOUNT"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int gamingUsageTimeColumCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(UsageTime) as USAGETIMECOUNT from "+ TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"gaming\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex("USAGETIMECOUNT"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int photograpyUsageTimeColumCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(UsageTime) as USAGETIMECOUNT from "+ TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"photograpy\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex("USAGETIMECOUNT"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
 
 }

@@ -28,10 +28,10 @@ import static com.example.inotify.configs.TbColNames.SNS_VTIME;
 import static com.example.inotify.configs.TbNames.SNS_TABLE;
 
 
-public class SmartNotification_DbHelper extends MainDbHelp {
+public class SmartNotificationDbHelper extends MainDbHelp {
 
 
-    public SmartNotification_DbHelper(Context context) {
+    public SmartNotificationDbHelper(Context context) {
 
         super(context);
     }
@@ -136,20 +136,7 @@ public class SmartNotification_DbHelper extends MainDbHelp {
                     snsModel.setBusyornot(cbusyornot);
 
                     String attentiviness = res.getString(5);
-                    String cattentiviness = "";
-                    if (attentiviness.equals("low")) {
-                        cattentiviness = "1";
-                    }
-                    if (attentiviness.equals("medium")) {
-                        cattentiviness = "2";
-                    }
-                    if (attentiviness.equals("high")) {
-                        cattentiviness = "3";
-                    }
-                    if (attentiviness.equals("error")) {
-                        cattentiviness = "0";
-                    }
-                    snsModel.setAttentiviness(cattentiviness);
+                    snsModel.setAttentiviness(attentiviness);
 
                     String userchaacteristics = res.getString(6);
                     String cuserchaacteristics = "";
