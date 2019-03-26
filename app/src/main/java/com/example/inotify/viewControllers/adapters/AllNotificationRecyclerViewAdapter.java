@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 import com.example.inotify.R;
 import com.example.inotify.models.NotificationModel;
-import com.example.inotify.models.ViewHolderModel;
+import com.example.inotify.viewControllers.viewHolder.TabViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
-public class AllNotificationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolderModel>  {
+public class AllNotificationRecyclerViewAdapter extends RecyclerView.Adapter<TabViewHolder>  {
 
     List<NotificationModel> list = Collections.emptyList();
     Context context;
@@ -26,15 +26,15 @@ public class AllNotificationRecyclerViewAdapter extends RecyclerView.Adapter<Vie
 
     @NonNull
     @Override
-    public ViewHolderModel onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public TabViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_all_notification, viewGroup, false);
-        ViewHolderModel viewHolderModel = new ViewHolderModel(v);
-        return viewHolderModel;
+        TabViewHolder tabViewHolder = new TabViewHolder(v);
+        return tabViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderModel viewHolderModel, int i) {
-        viewHolderModel.title.setText(list.get(i).getId());
+    public void onBindViewHolder(@NonNull TabViewHolder tabViewHolder, int i) {
+        tabViewHolder.title.setText(list.get(i).getId());
     }
 
     @Override

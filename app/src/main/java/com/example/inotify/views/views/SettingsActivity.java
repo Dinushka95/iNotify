@@ -90,6 +90,10 @@ public class SettingsActivity extends AppCompatActivity {
         System.exit(0);
     }
 
+
+
+
+
     public void button_INotifyActiveApps(View view) {
 
     }

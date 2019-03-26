@@ -74,20 +74,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No of social media apps high"
+                        android:text="Photograpy Apps"
                         android:textColor="@color/heading"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/N_attr_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="45%"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
+                        android:textColor="#000000"
 
-                        />
+                        android:textSize="18sp" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -116,20 +114,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No of time phone charging is high"
+                        android:text="Photograpy app Usage"
                         android:textColor="@color/heading"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/N_attr_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="76%"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
+                        android:textColor="#000000"
 
-                        />
+                        android:textSize="18sp" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -158,20 +154,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="app usage is high"
+                        android:text="Social Apps"
                         android:textColor="@color/heading"
-                        android:textSize="18sp"
-                        />
+                        android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/N_attr_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="87%"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
                         android:fontFamily="sans-serif"
+                        android:textColor="#000000"
 
-                        />
+                        android:textSize="18sp" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -182,6 +176,126 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Socil App Usage"
+                        android:textColor="@color/heading"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/N_attr_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textColor="#000000"
+
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/grey"
+                        />
+
+                </LinearLayout>>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="All App Usage"
+                        android:textColor="@color/heading"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/N_attr_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textColor="#000000"
+
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/grey"
+                        />
+
+                </LinearLayout>>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chraging Count"
+                        android:textColor="@color/heading"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/N_attr_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:textColor="#000000"
+
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/grey"
+                        />
+
+                </LinearLayout>>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -36,6 +36,8 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
         Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE, null);
         if (res != null) {
 
@@ -44,9 +46,12 @@ public class ApplicationDbHelper extends MainDbHelp {
 
                     //SNSModel snsModel = new SNSModel();
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+                    Log.d("inotify","mmmmmmmmmmmmmmmmmm");
+
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                     applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
+                    applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
 
 
                     listApplicationInfoModels.add(applicationInfoModel);
@@ -73,6 +78,8 @@ public class ApplicationDbHelper extends MainDbHelp {
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                     applicationInfoModel.setPakageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     applicationInfoModel.setAppCategory( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
+                    applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
+
 
             }
 
@@ -96,20 +103,22 @@ public class ApplicationDbHelper extends MainDbHelp {
             contentValues.put(TbColNames.APPNAME, value.getAppName());
             contentValues.put(TbColNames.PACKAGENAME, value.getPakageName());
             contentValues.put(TbColNames.APPCATEGORY, value.getAppCategory());
+            contentValues.put(TbColNames.DATE, value.getDate());
 
             db.insert(APPLICATIONS_TABLE, null, contentValues);
         }
-
 
         db.close();
         return true;
     }
 
-    public long appCountGet() {
+    public long appCountGetToday() {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE, null);
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where DATE = \""+date+"\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getLong(res.getColumnIndex("appCount"));
@@ -121,12 +130,48 @@ public class ApplicationDbHelper extends MainDbHelp {
         return 0;
     }
 
-    public List<ApplicationInfoModel> mySocialAppGet() {
+    public int allAppCountGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE , null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex("appCount"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public long allAppCountAllGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE  , null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getLong(res.getColumnIndex("appCount"));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public List<ApplicationInfoModel> mySocialAppTodayGet() {
         //Log.d("cdap", " ---NValueGet--");
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"social\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"social\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -145,7 +190,55 @@ public class ApplicationDbHelper extends MainDbHelp {
         return listApplicationInfoModels;
     }
 
-    public List<ApplicationInfoModel> myPersonalizationAppGet() {
+    public List<ApplicationInfoModel> mySocialAppAllGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"social\" ", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    //applicationInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listApplicationInfoModels;
+    }
+
+    public List<ApplicationInfoModel> myPersonalizationAppTodayGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"personalization\" AND DATE = \"date\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    //applicationInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listApplicationInfoModels;
+    }
+
+    public List<ApplicationInfoModel> myPersonalizationAppAllGet() {
         //Log.d("cdap", " ---NValueGet--");
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -169,12 +262,12 @@ public class ApplicationDbHelper extends MainDbHelp {
         return listApplicationInfoModels;
     }
 
-    public List<ApplicationInfoModel> myGamingAppGet() {
+    public List<ApplicationInfoModel> myGamingAppTodayGet() {
         //Log.d("cdap", " ---NValueGet--");
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -193,7 +286,55 @@ public class ApplicationDbHelper extends MainDbHelp {
         return listApplicationInfoModels;
     }
 
-    public List<ApplicationInfoModel> myMusicVideoAppGet() {
+    public List<ApplicationInfoModel> myGamingAppAllGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\" ", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    //applicationInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listApplicationInfoModels;
+    }
+
+    public List<ApplicationInfoModel> myMusicVideoAppTodayGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"musicvideo\" AND DATE = \"date\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    //applicationInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listApplicationInfoModels;
+    }
+
+    public List<ApplicationInfoModel> myMusicVideoAppAllGet() {
         //Log.d("cdap", " ---NValueGet--");
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -217,7 +358,31 @@ public class ApplicationDbHelper extends MainDbHelp {
         return listApplicationInfoModels;
     }
 
-    public List<ApplicationInfoModel> myCommunicationAppGet() {
+    public List<ApplicationInfoModel> myCommunicationAppGetToday() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TbNames.APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\" AND DATE = \"date\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    //applicationInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listApplicationInfoModels;
+    }
+
+    public List<ApplicationInfoModel> myCommunicationAppGetAll() {
         //Log.d("cdap", " ---NValueGet--");
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -375,10 +540,10 @@ public class ApplicationDbHelper extends MainDbHelp {
     public boolean appCategoryCount()
     {
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(c1);
-        int social = applicationsHelper.commonSocialAppCount();
-        int communication = applicationsHelper.commonCommunicationAppCount();
-        int gaming = applicationsHelper.commonGamingAppCount();
-        int musicVideo = applicationsHelper.commonMusicVideoAppCount();
+        int social = applicationsHelper.commonSocialAppTodayCount();
+        int communication = applicationsHelper.commonCommunicationAppTodayCount();
+        int gaming = applicationsHelper.commonGamingAppTodayCount();
+        int musicVideo = applicationsHelper.commonMusicVideoAppTodayCount();
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -402,7 +567,7 @@ public class ApplicationDbHelper extends MainDbHelp {
     }
     public int appsCountAvgGet() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select SUM("+ TbColNames.APPNAME +") as APPCOUNTAVG from " + TbNames.APPLICATIONS_TABLE , null);
+        Cursor res = db.rawQuery("select ("+ TbColNames.APPNAME +") as APPCOUNTAVG from " + TbNames.APPLICATIONS_TABLE , null);
         int total = 0;
         int count = 0;
         int avg;
@@ -426,7 +591,31 @@ public class ApplicationDbHelper extends MainDbHelp {
         return avg;
     }
 
-    public List<ApplicationInfoModel> myPhotograpyAppGet() {
+    public List<ApplicationInfoModel> myPhotograpyAppTodayGet() {
+        //Log.d("cdap", " ---NValueGet--");
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\" AND DATE = \"date\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
+
+                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    //applicationInfoModel.setPakageName( res.getString(res.getColumnIndex("APPPACKAGE")));
+
+
+                    listApplicationInfoModels.add(applicationInfoModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return listApplicationInfoModels;
+    }
+
+    public List<ApplicationInfoModel> myPhotograpyAppAVGGet() {
         //Log.d("cdap", " ---NValueGet--");
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -449,9 +638,23 @@ public class ApplicationDbHelper extends MainDbHelp {
         }
         return listApplicationInfoModels;
     }
+    public int socialAppCountTodayGet() {
 
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"social\" AND DATE = \"date\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
 
-    public int socialAppCountGet() {
+        return 0;
+    }
+
+    public int socialAppCountAVGGet() {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
@@ -467,11 +670,27 @@ public class ApplicationDbHelper extends MainDbHelp {
         return 0;
     }
 
-    public int photograpyAppCountGet() {
+    public int photograpyAppCountTodayGet() {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\" AND DATE =\"date\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int photograpyAppCountAVGGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\" ", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -485,9 +704,25 @@ public class ApplicationDbHelper extends MainDbHelp {
 
 
 
-    public int communicationAppCountGet() {
+    public int communicationAppCountTodayGet() {
 
-        //same for charging above need correction
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\"AND Date = \"date\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int communicationAppCountAVGGet() {
+
+
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\"", null);
         if (res != null) {
@@ -501,11 +736,11 @@ public class ApplicationDbHelper extends MainDbHelp {
         return 0;
     }
 
-    public int gamingAppCountGet() {
+    public int gamingAppCountTodayGet() {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\" AND Date = \"date\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -517,7 +752,39 @@ public class ApplicationDbHelper extends MainDbHelp {
         return 0;
     }
 
-    public int PersonalizationppCountGet() {
+    public int gamingAppCountAVGGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\" ", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int PersonalizationppCountTodayGet() {
+
+        //same for charging above need correction
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"personalization\" AND Date = \"date\"", null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
+            }
+        }
+        Objects.requireNonNull(res).close();
+        db.close();
+
+        return 0;
+    }
+
+    public int PersonalizationppCountAVGGet() {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();

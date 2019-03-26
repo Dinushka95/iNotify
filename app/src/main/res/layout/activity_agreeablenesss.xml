@@ -71,19 +71,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="high call duration is high"
+                            android:text="Personalization Apps"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ag_attr_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="35%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -112,19 +111,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="New contact added to the contact list"
+                            android:text="Personalization App Usage"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ag_attr_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="75%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -153,15 +151,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Display on time is high"
+                            android:text="Display on time "
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ag_attr_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="67%"
                             android:textColor="#000000"
                             android:textSize="18sp"
 
@@ -193,19 +191,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No of newly downloaded apps high"
+                            android:text="No of Apps"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ag_attr_4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="95%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -234,19 +231,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No of apps in phone is high"
+                            android:text="Newly added contacts"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ag_attr_5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="45%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"

@@ -178,6 +178,34 @@ public class TbColNames {
     public  static  final String STATUS = "status";
     //public static final String PACKAGENAME = "packageName";
 
+    //OPENNESS_table
+    public static final String OPENNESS_ID = "opennessId";
+    public static final String NEWLYAPPS = "newlyapps";
+    public static final String ALLAPPUSAGE = "allappusage";
+    public static final String SOCIALAPPUSAGE = "socialappusage";
+    public static final String NOOFSOCIALAPPS = "noofsocialapps";
+    public static final String NOOFCOMMUNICTIONAPPS = "noofcommunicationapps";
+    public static final String COMMUNICATIONAPPUSAGE = "communicationappusage";
+
+    //CONSCIENTIOUSNESS_table
+    public static final String CONSCIENTIOUSNESS_ID = "conscientiounessId";
+    public static final String MUSICVIDEOAPPUSAGE = "musicvideoappusage";
+    public static final String MUSICVIDEOAPP = "musicvideoapp";
+    public static final String PHOTOGRAPYAPPUSAGE = "photograpyappusage";
+    public static final String PHOTOGRAPYAPP = "photograpyapp";
+    public static final String CALENDEREVENT = "calenderevent";
+    public static final String CHARGE = "charge";
+
+    //CHARACTERISTICSfINAL_TABLE
+    public static final String CHARACTERISTICSfINAL_ID = "characteristicId";
+    public static final String OPENNESS = "openness";
+    public static final String CONSCIENTIOUSNESS = "conscientiousness";
+    public static final String EXTRAVERSION = "extraversion";
+    public static final String NEUROTICISM = "neuroticism";
+    public static final String AGREEABLENESS = "agreeableness";
+
+
+
 
 
 

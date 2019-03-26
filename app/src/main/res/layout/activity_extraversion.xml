@@ -71,19 +71,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="high call duration is high"
+                            android:text="Call duration "
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ex_attr_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="35%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -112,19 +111,96 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No of social media apps high"
+                            android:text="Gaming apps"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ex_attr_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="35%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
+                    >
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gaming App Usage"
+                            android:textColor="@color/heading"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/Ex_attr_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:textColor="#000000"
+
+                            android:textSize="18sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
+                    >
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="30dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contacts"
+                            android:textColor="@color/heading"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/Ex_attr_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:textColor="#000000"
+
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -153,19 +229,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Display on time is high"
+                            android:text="Social Apps"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ex_attr_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="67%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -193,19 +268,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Calender Event Usage is high"
+                            android:text="Social App Usage"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ex_attr_4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="95%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -234,19 +308,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No of time phone charging is high"
+                            android:text="Newly downloaded apps"
                             android:textColor="@color/heading"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/Ex_attr_5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
-                            android:text="85%"
                             android:textColor="#000000"
-                            android:textSize="18sp"
 
-                            />
+                            android:textSize="18sp" />
 
                         <View
                             android:layout_width="match_parent"

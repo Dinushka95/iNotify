@@ -66,32 +66,163 @@ public class AppUsageHelper {
     }
 
 
-    public int appsUsageTodayGet(String appcategoriesConstants) {
+
+
+//    public int appsUsageAvgGet() {
+//        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+//        Log.d("inotify","appsUsageAvgGet......." + appUsageDbHelper.appAllsUsageAVG());
+//
+//        return appUsageDbHelper.appAllsUsageAVG();
+//    }
+//
+//    public int appAllUsageTodayGet() {
+//        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+//        Log.d("inotify","appAllUsageTodayGet......." + appUsageDbHelper.appAllsUsageToday());
+//
+//        return appUsageDbHelper.appAllsUsageToday();
+//    }
+//
+//    public int socialAppUsageTodayGet() {
+//        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+//        Log.d("inotify","appAllUsageTodayGet......." + appUsageDbHelper.socialAppsUsageToday());
+//
+//        return appUsageDbHelper.socialAppsUsageToday();
+//    }
+//
+//    public int socialAppUsageAVG() {
+//        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+//        Log.d("inotify","appAllUsageTodayGet......." + appUsageDbHelper.socialAppsUsageAVG());
+//
+//        return appUsageDbHelper.socialAppsUsageAVG();
+//    }
+
+    public long appAllsUsageToday()
+    {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        Log.d("inotify","appsUsageTodayGet......." + appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants));
-        return appUsageDbHelper.appsUsageTodayGet(appcategoriesConstants);
+        return appUsageDbHelper.appAllsUsageToday();
+
     }
 
-    public int appsUsageAvgGet(String appcategoriesConstants) {
+    public long appAllsUsageAVG()
+    {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        Log.d("inotify","appsUsageAvgGet......." + appUsageDbHelper.appsUsageAvgGet(appcategoriesConstants));
+        return appUsageDbHelper.appAllsUsageAVG();
 
-        return appUsageDbHelper.appsUsageAvgGet(appcategoriesConstants);
     }
 
-    public int appAllUsageTodayGet() {
+    public long socialAppsUsageToday()
+    {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        Log.d("inotify","appAllUsageTodayGet......." + appUsageDbHelper.appAllUsageTodayGet());
+        return appUsageDbHelper.socialAppsUsageToday();
 
-        return appUsageDbHelper.appAllUsageTodayGet();
     }
 
-    public int appAllUsageAvgGet() {
+    public long communicationAppsUsageAVG()
+    {
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        Log.d("inotify","appAllUsageAvgGet......." + appUsageDbHelper.appAllUsageAvgGet());
+        return appUsageDbHelper.communicationAppsUsageAVG();
 
-        return appUsageDbHelper.appAllUsageAvgGet();
     }
+
+    public long personalizationAppsUsageAVG()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.personalizationAppsUsageAVG();
+
+    }
+
+    public long gamingAppsUsageAVG()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.gamingAppsUsageAVG();
+
+    }
+
+    public long photograpyAppsUsageAVG()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.photograpyAppsUsageAVG();
+
+    }
+
+    public int socialUsageTimeColumCountGet()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.socialUsageTimeColumCountGet();
+
+    }
+
+    public int communicationUsageTimeColumCountGet()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.communicationUsageTimeColumCountGet();
+
+    }
+
+    public int personalizationUsageTimeColumCountGet()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.personalizationUsageTimeColumCountGet();
+
+    }
+
+    public int gamingUsageTimeColumCountGet()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.gamingUsageTimeColumCountGet();
+
+    }
+
+    public int communicationAppsUsageToday()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.communicationAppsUsageToday();
+
+    }
+
+    public int gamingAppsUsageToday()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.gamingAppsUsageToday();
+
+    }
+
+    public int photograpyAppsUsageToday()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.photograpyAppsUsageToday();
+
+    }
+
+    public int personalizationAppsUsageToday()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.personalizationAppsUsageToday();
+
+    }
+
+    public int musicvideoAppsUsageToday()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.musicvideoAppsUsageToday();
+
+    }
+
+    public int musicvideoUsageTimeColumCountGet()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.musicvideoUsageTimeColumCountGet();
+
+    }
+
+    public int musicvideoAppsUsageAVG()
+    {
+        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
+        return appUsageDbHelper.musicvideoAppsUsageAVG();
+
+    }
+
+
 
 
 }

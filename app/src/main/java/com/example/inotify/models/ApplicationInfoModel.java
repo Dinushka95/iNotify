@@ -3,9 +3,20 @@ package com.example.inotify.models;
 public class ApplicationInfoModel {
 
     private int id;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     private String appName;
     private String appCategory;
     private String pakageName;
+    private String inotifystate;
 
     public ApplicationInfoModel() {
     }
@@ -40,5 +51,13 @@ public class ApplicationInfoModel {
 
     public void setPakageName(String pakageName) {
         this.pakageName = pakageName;
+    }
+
+    public String getInotifystate() {
+        return inotifystate;
+    }
+
+    public void setInotifystate(String inotifystate) {
+        this.inotifystate = inotifystate;
     }
 }

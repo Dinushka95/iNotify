@@ -162,36 +162,6 @@ public class NotificationDbHelper extends MainDbHelp {
 
     }
 
-    public List<NotificationModel> allGet(){
-
-        List<NotificationModel> listNotificationModel = new ArrayList<>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATION_TABLE , null);
-        if (res != null) {
-            if (res.moveToFirst()) {
-                do {
-
-                    NotificationModel notificationModel = new NotificationModel();
-                    notificationModel.setId(res.getString(res.getColumnIndex(TbColNames.NOTIFICATIONID)));
-                    notificationModel.setDate(res.getString(res.getColumnIndex(TbColNames.DATE)));
-                    notificationModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
-                    notificationModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    notificationModel.setSmartNotification(res.getString(res.getColumnIndex(TbColNames.SMARTNOTIFICATION)));
-                    notificationModel.setTimeRecevied(res.getString(res.getColumnIndex(TbColNames.TIMERECEVIED)));
-                    notificationModel.setTimeSent(res.getString(res.getColumnIndex(TbColNames.TIMESENT)));
-                    notificationModel.setTimeViewed(res.getString(res.getColumnIndex(TbColNames.TIMEVIEW)));
-
-                    listNotificationModel.add(notificationModel);
-                } while (res.moveToNext());
-            }
-            res.close();
-        }
-        return listNotificationModel;
-
-    }
-
-
 
     public boolean updateNotificationViewTime(String notificationid , String timeView)
     {
