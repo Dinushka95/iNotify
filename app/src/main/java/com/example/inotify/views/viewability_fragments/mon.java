@@ -18,17 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-
 import com.example.inotify.R;
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 import com.example.inotify.logger.Log;
-import com.example.inotify.views.views.NotificationFinalViewabilityActivity;
-import com.google.api.Context;
-
 import java.util.ArrayList;
-import java.util.zip.Inflater;
+
 
 public class mon extends Fragment {
 
