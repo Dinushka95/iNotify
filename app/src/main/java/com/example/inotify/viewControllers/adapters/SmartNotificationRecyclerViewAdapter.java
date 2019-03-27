@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 
 import com.example.inotify.R;
 import com.example.inotify.models.NotificationModel;
-import com.example.inotify.viewControllers.viewHolder.TabViewHolder;
+import com.example.inotify.viewControllers.viewHolder.SmartNotificationViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
 
-public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<TabViewHolder> {
+public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<SmartNotificationViewHolder> {
 
     List<NotificationModel> list = Collections.emptyList();
     Context context;
@@ -26,15 +26,15 @@ public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<T
     }
 
     @Override
-    public TabViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public SmartNotificationViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_smart_notification, viewGroup, false);
-        TabViewHolder tabViewHolder = new TabViewHolder(v);
-        return tabViewHolder;
+        SmartNotificationViewHolder smartNotificationViewHolder = new SmartNotificationViewHolder(v);
+        return smartNotificationViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(TabViewHolder holder, int position) {
+    public void onBindViewHolder(SmartNotificationViewHolder holder, int position) {
         holder.title.setText(list.get(position).getId());
         //holder.description.setText(list.get(position).description);
         // holder.imageView.setImageResource(list.get(position).imageId);

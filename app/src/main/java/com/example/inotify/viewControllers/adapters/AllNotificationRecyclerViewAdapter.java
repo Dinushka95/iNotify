@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 import com.example.inotify.R;
 import com.example.inotify.models.NotificationModel;
-import com.example.inotify.viewControllers.viewHolder.TabViewHolder;
+import com.example.inotify.viewControllers.viewHolder.AllNotificationViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
-public class AllNotificationRecyclerViewAdapter extends RecyclerView.Adapter<TabViewHolder>  {
+public class AllNotificationRecyclerViewAdapter extends RecyclerView.Adapter<AllNotificationViewHolder>  {
 
     List<NotificationModel> list = Collections.emptyList();
     Context context;
@@ -26,15 +26,20 @@ public class AllNotificationRecyclerViewAdapter extends RecyclerView.Adapter<Tab
 
     @NonNull
     @Override
-    public TabViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public AllNotificationViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_all_notification, viewGroup, false);
-        TabViewHolder tabViewHolder = new TabViewHolder(v);
-        return tabViewHolder;
+        AllNotificationViewHolder allNotificationViewHolder = new AllNotificationViewHolder(v);
+        return allNotificationViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TabViewHolder tabViewHolder, int i) {
-        tabViewHolder.title.setText(list.get(i).getId());
+    public void onBindViewHolder(@NonNull AllNotificationViewHolder allNotificationViewHolder, int i) {
+        allNotificationViewHolder.nid.setText(list.get(i).getId());
+        allNotificationViewHolder.date.setText(list.get(i).getDate());
+        allNotificationViewHolder.time.setText(list.get(i).getTimeRecevied());
+        allNotificationViewHolder.appName.setText(list.get(i).getAppName());
+        allNotificationViewHolder.title.setText(list.get(i).getTitle());
+        allNotificationViewHolder.description.setText(list.get(i).getContent());
     }
 
     @Override

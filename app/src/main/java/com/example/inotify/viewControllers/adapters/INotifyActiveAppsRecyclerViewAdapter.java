@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.example.inotify.R;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.viewControllers.viewHolder.AppViewHolder;
-import com.example.inotify.viewControllers.viewHolder.TabViewHolder;
 
 import java.util.Collections;
 import java.util.List;

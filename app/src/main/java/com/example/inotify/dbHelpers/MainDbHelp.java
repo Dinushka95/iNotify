@@ -70,7 +70,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.APPLICATIONS_TABLE + " ("+TbColNames.APPLICATION_ID+"  INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text)");
 
-        db.execSQL("create table " + TbNames.NOTIFICATION_TABLE + " ("+TbColNames.NOTIFICATIONID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMERECEVIED+" TEXT,"+TbColNames.TIMESENT+" TEXT,"+TbColNames.TIMEVIEW+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.PACKAGENAME+" TEXT,"+TbColNames.SMARTNOTIFICATION+" TEXT)");
+        db.execSQL("create table " + TbNames.NOTIFICATION_TABLE + " ("+TbColNames.NOTIFICATIONID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMERECEVIED+" TEXT,"+TbColNames.TIMESENT+" TEXT,"+TbColNames.TIMEVIEW+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.PACKAGENAME+" TEXT,"+TbColNames.TITLE+" TEXT,"+TbColNames.CONTENT+" TEXT,"+TbColNames.SMARTNOTIFICATION+" TEXT)");
 
         db.execSQL("create table " + TbNames.PROFILE_TABLE + " ("+TbColNames.PROFILE_ID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.NAME+" TEXT,"+TbColNames.AGE+" TEXT,"+TbColNames.GENDER+" TEXT,"+TbColNames.OCCUPATION+" TEXT,"+TbColNames.EMAIL+" TEXT,"+TbColNames.PHONE+" TEXT)");
 

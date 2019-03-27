@@ -35,6 +35,9 @@ public class NotificationDbHelper extends MainDbHelp {
         contentValues.put(TbColNames.TIMEVIEW, NotificationModel.getTimeViewed());
         contentValues.put(TbColNames.APPNAME, NotificationModel.getAppName());
         contentValues.put(TbColNames.PACKAGENAME, NotificationModel.getPackageName());
+        contentValues.put(TbColNames.TITLE, NotificationModel.getTitle());
+        contentValues.put(TbColNames.CONTENT, NotificationModel.getContent());
+        contentValues.put(TbColNames.SMARTNOTIFICATION, NotificationModel.getSmartNotification());
 
         long result = db.insert(NOTIFICATION_TABLE, null, contentValues);
         db.close();
@@ -138,7 +141,7 @@ public class NotificationDbHelper extends MainDbHelp {
         List<NotificationModel> notificationModelList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATION_TABLE, null);
+        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATION_TABLE +" ORDER BY "+TbColNames.NOTIFICATIONID+" DESC ", null);
         if (res != null) {
 
             if (res.moveToFirst()) {
@@ -146,11 +149,14 @@ public class NotificationDbHelper extends MainDbHelp {
                     NotificationModel notificationModel = new NotificationModel();
                     notificationModel.setId( res.getString(res.getColumnIndex(TbColNames.NOTIFICATIONID)));
                     notificationModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
-                    notificationModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    notificationModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     notificationModel.setTimeRecevied( res.getString(res.getColumnIndex(TbColNames.TIMERECEVIED)));
                     notificationModel.setTimeSent( res.getString(res.getColumnIndex(TbColNames.TIMESENT)));
                     notificationModel.setTimeViewed( res.getString(res.getColumnIndex(TbColNames.TIMEVIEW)));
+                    notificationModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    notificationModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    notificationModel.setTitle( res.getString(res.getColumnIndex(TbColNames.TITLE)));
+                    notificationModel.setContent( res.getString(res.getColumnIndex(TbColNames.CONTENT)));
+                    notificationModel.setSmartNotification( res.getString(res.getColumnIndex(TbColNames.SMARTNOTIFICATION)));
 
                     notificationModelList.add(notificationModel);
                 } while (res.moveToNext());
