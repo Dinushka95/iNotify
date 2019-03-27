@@ -9,20 +9,24 @@ public class NotificationModel {
     private String timeViewed;
     private String appName;
     private String packageName;
+    private String title;
+    private String content;
     private String smartNotification;
 
     public NotificationModel() {
 
     }
 
-    public NotificationModel(String id, String date, String timeRecevied, String timeSent, String timeVievwed, String appName, String packageName, String smartNotification){
+    public NotificationModel(String id, String date, String timeRecevied, String timeSent, String timeViewed, String appName, String packageName, String title, String content, String smartNotification) {
         this.id = id;
         this.date = date;
         this.timeRecevied = timeRecevied;
         this.timeSent = timeSent;
-        this.timeViewed = timeVievwed;
+        this.timeViewed = timeViewed;
         this.appName = appName;
         this.packageName = packageName;
+        this.title = title;
+        this.content = content;
         this.smartNotification = smartNotification;
     }
 
@@ -80,6 +84,22 @@ public class NotificationModel {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getSmartNotification() {

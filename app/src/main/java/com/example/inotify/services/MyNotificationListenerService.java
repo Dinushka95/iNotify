@@ -232,7 +232,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 // Notification insert
                 Log.d("inotify", "Main-MyNotificationListenerService--onNotificationPosted: Notification  inserted to notificcation table");
                 NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-                notificationHelper.insert(new NotificationModel(id, date, timeRecieved, timeSent, "", appName, appPackageName, "1"));
+                notificationHelper.insert(new NotificationModel(id, date, timeRecieved, timeSent, "", appName, appPackageName,title,text, "1"));
 
 
                 //Smart Notification

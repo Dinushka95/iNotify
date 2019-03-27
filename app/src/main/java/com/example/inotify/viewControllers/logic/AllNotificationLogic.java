@@ -16,6 +16,8 @@ public class AllNotificationLogic {
 
     public List<NotificationModel> getNotificationList(){
         NotificationHelper notificationHelper = new NotificationHelper(c1);
+
+        //TODO - Change the Notification Model formate to the needed formate
         return  notificationHelper.allAppInfoGet();
     }
 }

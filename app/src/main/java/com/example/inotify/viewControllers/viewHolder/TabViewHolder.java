@@ -28,8 +28,6 @@ public class TabViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         cv = (CardView) itemView.findViewById(R.id.cardView);
         title = (TextView) itemView.findViewById(R.id.title);
-        appid = (TextView) itemView.findViewById(R.id.list_item_string);
-        description = (TextView) itemView.findViewById(R.id.description);
         imageView = (ImageView) itemView.findViewById(R.id.imageView);
 
 
