@@ -8,7 +8,9 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -44,6 +46,7 @@ import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.ActivityRecognitionService;
 import com.example.inotify.services.LocationService;
+import com.example.inotify.services.MyNotificationListenerService;
 import com.example.inotify.services.NotificationViewabilityService;
 import com.example.inotify.services.UserCharacteristics_service;
 import com.example.inotify.viewControllers.adapters.MainMenuPagerAdapter;
@@ -59,6 +62,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static android.service.notification.NotificationListenerService.requestRebind;
+
 public class MainMenuActivity extends AppCompatActivity implements
         TabAllNotificationsFragment.OnFragmentInteractionListener,
         TabApplicationFragment.OnFragmentInteractionListener,
@@ -69,7 +74,8 @@ public class MainMenuActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     TextView textViewProfile;
-
+    private BroadcastReceiver mReceiver;
+    private IntentFilter intentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +84,13 @@ public class MainMenuActivity extends AppCompatActivity implements
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+/*        stopService(new Intent(this, MyNotificationListenerService.class));
+
+
+        startService(new Intent(this, MyNotificationListenerService.class));*/
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
@@ -274,9 +287,9 @@ public class MainMenuActivity extends AppCompatActivity implements
         int resultCode2 = scheduler2.schedule(info2);
 
         // has to test because screen off  doen't work proprly with manifest file. need to do it in code
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver mReceiver = new ScreenStatusHelper();
+        mReceiver = new ScreenStatusHelper();
         registerReceiver(mReceiver, intentFilter);
 
 
@@ -364,6 +377,7 @@ public class MainMenuActivity extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 
 
 }

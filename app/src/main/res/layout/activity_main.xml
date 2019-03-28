@@ -100,13 +100,13 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewNotificationAccess"
+            android:id="@+id/textViewUsageAccess"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notification Access Permission" />
+            android:text="Usage Access Permission" />
 
         <Button
-            android:id="@+id/buttonPermissionNotificationAccess"
+            android:id="@+id/buttonPermissionUsageAccess"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -118,13 +118,13 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textViewUsageAccess"
+            android:id="@+id/textViewNotificationAccess"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Usage Access Permission" />
+            android:text="Notification Access Permission" />
 
         <Button
-            android:id="@+id/buttonPermissionUsageAccess"
+            android:id="@+id/buttonPermissionNotificationAccess"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

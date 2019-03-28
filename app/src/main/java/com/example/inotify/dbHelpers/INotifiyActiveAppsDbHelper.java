@@ -23,8 +23,18 @@ import static com.example.inotify.configs.TbNames.SNS_TABLE;
 
 public class INotifiyActiveAppsDbHelper extends MainDbHelp {
 
+    private static INotifiyActiveAppsDbHelper mInstance = null;
+
     public INotifiyActiveAppsDbHelper(Context context) {
         super(context);
+    }
+
+    public static INotifiyActiveAppsDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new INotifiyActiveAppsDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public Boolean saveAppSetting(String appName) {

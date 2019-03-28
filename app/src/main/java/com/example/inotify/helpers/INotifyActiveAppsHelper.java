@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 
 import com.example.inotify.dbHelpers.INotifiyActiveAppsDbHelper;
 import com.example.inotify.models.ApplicationInfoModel;
-import com.example.inotify.models.NotificationModel;
 
 import java.util.List;
 
@@ -19,20 +18,20 @@ public class INotifyActiveAppsHelper {
     }
 
     public List<String> getINotifyActiveApps(){
-        INotifiyActiveAppsDbHelper iNotifiyActiveAppsDbHelper = new INotifiyActiveAppsDbHelper(c1);
-        return  iNotifiyActiveAppsDbHelper.getINotifyActiveAppsOnly();
+        return  INotifiyActiveAppsDbHelper.getInstance(c1).getINotifyActiveAppsOnly();
+    }
+
+    public boolean isExisINotifyActiveApps(String packName){
+        return  INotifiyActiveAppsDbHelper.getInstance(c1).packNameisExisCheck(packName);
     }
 
     public List<ApplicationInfoModel> getAllINotifyActiveApps(){
-        INotifiyActiveAppsDbHelper iNotifiyActiveAppsDbHelper = new INotifiyActiveAppsDbHelper(c1);
-        return  iNotifiyActiveAppsDbHelper.getALLINotifyActiveApps();
+        return  INotifiyActiveAppsDbHelper.getInstance(c1).getALLINotifyActiveApps();
     }
 
     public boolean setNewActiveApp(String packageName){
 
-        INotifiyActiveAppsDbHelper iNotifiyActiveAppsDbHelper = new INotifiyActiveAppsDbHelper(c1);
-
-        if(iNotifiyActiveAppsDbHelper.packNameisExisCheck(packageName)){
+        if(INotifiyActiveAppsDbHelper.getInstance(c1).packNameisExisCheck(packageName)){
             return true;
         }else {
 
@@ -48,7 +47,7 @@ public class INotifyActiveAppsHelper {
                 e.printStackTrace();
             }
 
-            return iNotifiyActiveAppsDbHelper.insertNewActiveApp(packageName, appName);
+            return INotifiyActiveAppsDbHelper.getInstance(c1).insertNewActiveApp(packageName, appName);
         }
 
     }
@@ -61,8 +60,7 @@ public class INotifyActiveAppsHelper {
         }else{
             value="false";
         }
-        INotifiyActiveAppsDbHelper iNotifiyActiveAppsDbHelper = new INotifiyActiveAppsDbHelper(c1);
-        return iNotifiyActiveAppsDbHelper.update(packageName,value);
+        return INotifiyActiveAppsDbHelper.getInstance(c1).update(packageName,value);
     }
 
 }
