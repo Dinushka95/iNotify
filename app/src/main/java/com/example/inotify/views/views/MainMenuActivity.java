@@ -4,13 +4,9 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -22,7 +18,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -34,19 +29,11 @@ import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
-import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.helpers.ApplicationsHelper;
-import com.example.inotify.helpers.CalenderEventHelper;
-import com.example.inotify.helpers.CallDurationDbHelp;
-import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
-import com.example.inotify.helpers.TopAppsHelper;
-import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.ActivityRecognitionService;
 import com.example.inotify.services.LocationService;
-import com.example.inotify.services.MyNotificationListenerService;
 import com.example.inotify.services.NotificationViewabilityService;
 import com.example.inotify.services.UserCharacteristics_service;
 import com.example.inotify.viewControllers.adapters.MainMenuPagerAdapter;
@@ -59,10 +46,7 @@ import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-
-import static android.service.notification.NotificationListenerService.requestRebind;
 
 public class MainMenuActivity extends AppCompatActivity implements
         TabAllNotificationsFragment.OnFragmentInteractionListener,
@@ -74,8 +58,7 @@ public class MainMenuActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     TextView textViewProfile;
-    private BroadcastReceiver mReceiver;
-    private IntentFilter intentFilter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,8 +211,6 @@ public class MainMenuActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
         }
 
-        CallDurationDbHelp callDurationDbHelp = new CallDurationDbHelp();
-        callDurationDbHelp.getCallDuration();
     }
 
     @Override
@@ -286,12 +267,8 @@ public class MainMenuActivity extends AppCompatActivity implements
         JobScheduler scheduler2 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode2 = scheduler2.schedule(info2);
 
-        // has to test because screen off  doen't work proprly with manifest file. need to do it in code
-        intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        mReceiver = new ScreenStatusHelper();
-        registerReceiver(mReceiver, intentFilter);
-
+        ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+        screenStatusHelper.start(this);
 
     }
 

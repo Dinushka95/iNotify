@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.inotify.R;
-import com.example.inotify.dbHelpers.CallDurationDbHelper;
+import com.example.inotify.dbHelpers.CallUsageDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.CallUsageHelper;
 import com.example.inotify.helpers.ContactsHelper;
 
 public class Extraversion extends AppCompatActivity {
@@ -67,7 +68,7 @@ public class Extraversion extends AppCompatActivity {
 //        long newAppsProbability = (newApps * 16)/100;//----6th attribute
 //
 //
-//        CallDurationHelper callDurationHelper = new CallDurationHelper(this);
+//        CallUsageHelper callDurationHelper = new CallUsageHelper(this);
 //        long callDurationToday = callDurationHelper.getCallDuraionAVGToday();
 //        long callDurationAVG = callDurationHelper.getCallDurationAVG();
 //
@@ -134,8 +135,8 @@ public class Extraversion extends AppCompatActivity {
 
             int newApps = (NoofAppsAll - NoofAppsToday);
 
-            CallDurationDbHelper callDurationDbHelper = new CallDurationDbHelper(this);
-            long todayCallDuraion = callDurationDbHelper.callDurationTodayGet();
+            CallUsageHelper callUsageHelper = new CallUsageHelper(this);
+            long todayCallDuraion = Long.valueOf(callUsageHelper.getTodayTotalCallDuration());
             Log.d("inotify","todayCallDuraion......." + todayCallDuraion);
 
             //probbility

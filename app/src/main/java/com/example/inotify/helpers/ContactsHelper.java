@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.util.Log;
 
-import com.example.inotify.dbHelpers.CallDurationDbHelper;
 import com.example.inotify.dbHelpers.ContactsDbHelper;
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 import com.example.inotify.models.ContactsModel;

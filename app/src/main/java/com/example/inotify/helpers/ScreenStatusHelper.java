@@ -4,12 +4,14 @@ import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.Log;
 
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 
 public class ScreenStatusHelper extends BroadcastReceiver {
-
+    private BroadcastReceiver mReceiver;
+    private IntentFilter intentFilter;
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
@@ -33,5 +35,13 @@ public class ScreenStatusHelper extends BroadcastReceiver {
             }
         }
         return isPhoneLock;
+    }
+    public void start(Context context){
+        // has to test because screen off  doen't work proprly with manifest file. need to do it in code
+
+        intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        mReceiver = new ScreenStatusHelper();
+        context.getApplicationContext().registerReceiver(mReceiver, intentFilter);
     }
 }
