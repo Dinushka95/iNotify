@@ -24,6 +24,7 @@ import com.example.inotify.dbHelpers.CalenderEventDbHelper;
 import com.example.inotify.dbHelpers.CallDurationDbHelper;
 import com.example.inotify.dbHelpers.CharacteristicFinalDbHelper;
 import com.example.inotify.dbHelpers.ChargerDbHelper;
+import com.example.inotify.dbHelpers.ContactsDbHelper;
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
@@ -76,8 +77,8 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
         Log.d("inotify","xxxxxxxxxxxxxxxxxxxxxxxxxx   "+x);
 
 
-//       AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-//       appUsageHelper.saveTodaysAppUsage();
+       AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+       appUsageHelper.saveTodaysAppUsage();
 //        appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
 //        appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
 //        appUsageHelper.appAllUsageTodayGet();
@@ -92,8 +93,8 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
        callDurationDbHelper.callDurationInsert();
 
 
-//        callDurationHelper.getCallDuraionAVGToday();
-//        callDurationHelper.getCallDurationAVG();
+        callDurationHelper.getCallDuraionAVGToday();
+        callDurationHelper.getCallDurationAVG();
 //
 //        ChargerHelper chargerHelper = new ChargerHelper(this);
 //        chargerHelper.powerOninsert();
@@ -106,11 +107,11 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 //        contactsHelper.getcontactToday();
 //        contactsHelper.getContactAVG();
 
-//        ScreenOnTimeHelper screenOnTimeHelper =  new ScreenOnTimeHelper(this);
-//        Log.d("inotify","want to check......................");
-//        screenOnTimeHelper.ScreenOnTimeTodayGet();
-//
-//        Log.d("inotify","want to check AGAIN...........................");
+        ScreenOnTimeHelper screenOnTimeHelper =  new ScreenOnTimeHelper(this);
+        Log.d("inotify","want to check......................");
+        screenOnTimeHelper.ScreenOnTimeTodayGet();
+
+        Log.d("inotify","want to check AGAIN...........................");
         //screenOnTimeHelper.ScreenOnTimeAVGGet();
 //
     //    AttributeCountDbHelper attributeCountDbHelper = new AttributeCountDbHelper(this);
@@ -132,6 +133,14 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
     public void test2(View view) {
         AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+
+
+        ContactsHelper contactsHelper = new ContactsHelper(this);
+        contactsHelper.getContacts(this);
+
+        ContactsDbHelper contactsDbHelper = new ContactsDbHelper(this);
+        boolean c = contactsDbHelper.ContactsCountInsert();
+//        Log.d("inotify","contacts............."+ c);
         //appUsageHelper.saveTodaysAppUsage(); //---3
 
 //        AttributeCountDbHelper attributeCountDbHelperHelper = new AttributeCountDbHelper(this);
@@ -169,16 +178,16 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
 
 
-        CallDurationDbHelp callDurationDbHelp = new CallDurationDbHelp();
-        callDurationDbHelp.getCallDuration();
+//        CallDurationDbHelp callDurationDbHelp = new CallDurationDbHelp();
+//        callDurationDbHelp.getCallDuration();
 
 //       CallDurationDbHelper callDurationDbHelper = new CallDurationDbHelper(view.getContext());
 //        long time = callDurationDbHelper.getCallDuration();
 //        callDurationDbHelper.callDurationInsert(time);
 
 
-          ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-         //applicationsHelper.saveCurrentPhoneApps();//------1
+         ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+//         applicationsHelper.saveCurrentPhoneApps();//------1
 
         //applicationsHelper.saveCurrentPhoneApps();
         applicationsHelper.appCountGetToday();
@@ -187,10 +196,10 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 //        applicationsHelper.appInfoInsert(apps);
 
 
-    ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-       // applicationDbHelper.updateCategory();//2
-//        CalenderEventHelper calenderEvent = new CalenderEventHelper(this);
-//        calenderEvent.updateTodayCalendar();
+//    ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+//        applicationDbHelper.updateCategory();//2
+        CalenderEventHelper calenderEvent = new CalenderEventHelper(this);
+        calenderEvent.updateTodayCalendar();
 
 
 

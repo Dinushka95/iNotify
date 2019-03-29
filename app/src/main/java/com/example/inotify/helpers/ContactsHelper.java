@@ -23,8 +23,8 @@ public class ContactsHelper {
         this.c1 = context;
     }
 
-    public void getContacts(Context context) {
-
+    public int getContacts(Context context) {
+        //Log.d("inotify","oooooooooooooooooo");
 
         ContentResolver cr = context.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
@@ -69,9 +69,13 @@ public class ContactsHelper {
         }
 
         int count = myList.size();
+        Log.d("inotify","contacts..........." + count);
+
         UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(context);
         UserCharacteristics_DbHelper.contactCount_insert(String.valueOf(count));
         UserCharacteristics_DbHelper.close();
+
+        return count;
 
     }
 

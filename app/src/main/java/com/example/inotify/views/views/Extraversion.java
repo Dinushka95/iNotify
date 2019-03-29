@@ -126,7 +126,7 @@ public class Extraversion extends AppCompatActivity {
             int todayGamingApp = applicationsHelper.commonGamingAppTodayCount();
 
             ContactsHelper contactsHelper = new ContactsHelper(this);
-            int todayContacts = contactsHelper.getcontactToday();//have to implement to get newly added contacts
+            int todayContacts = contactsHelper.getContacts(this);//have to implement to get newly added contacts
             //int allContacts = contactsHelper.getContacts();
 
             int NoofAppsToday = applicationsHelper.appCountGetToday();
@@ -144,6 +144,8 @@ public class Extraversion extends AppCompatActivity {
             long todaySocialAppProbability = (todaySocialApp * 14)/100;
             long todayGamingAppProbability = (todayGamingApp * 14)/100;
             long todayContactsProbability = (todayContacts * 14)/100;
+            Log.d("inotify","todayContactsProbability..........." + todayContactsProbability);
+
             long newAppsProbability = (newApps * 14)/100;
             long todayCallDuraionProbability = (todayCallDuraion * 14)/100;
 
