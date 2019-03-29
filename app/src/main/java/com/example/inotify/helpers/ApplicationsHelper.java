@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.dbHelpers.INotifiyActiveAppsDbHelper;
 import com.example.inotify.models.ApplicationInfoModel;
 
 import java.text.SimpleDateFormat;
@@ -25,16 +26,12 @@ public class ApplicationsHelper {
 
     public List<ApplicationInfoModel> appAllGet()
     {
-
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.appInfoGet();
+        return ApplicationDbHelper.getInstance(c1).appInfoGet();
     }
 
     public boolean appInfoInsert(List<ApplicationInfoModel> appInfo) {
 
-            ApplicationDbHelper applicationDbHelper =new ApplicationDbHelper(c1);
-            return applicationDbHelper.appInfoInsert(appInfo);
-
+            return ApplicationDbHelper.getInstance(c1).appInfoInsert(appInfo);
 
     }
 
@@ -73,100 +70,77 @@ public class ApplicationsHelper {
 
     public int appCountGetToday()
     {
-
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        Log.d("inotify","app count------" + (int) applicationdbHelper.appCountGetToday());
-        return (int) applicationdbHelper.appCountGetToday();
+        return (int) ApplicationDbHelper.getInstance(c1).appCountGetToday();
     }
 
     public int allAppCountAVG()
     {
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.allAppCountGet();
-        return applicationDbHelper.allAppCountGet();
+        return ApplicationDbHelper.getInstance(c1).allAppCountGet();
     }
 
     public List<ApplicationInfoModel> mySocialAppTodayGet()
     {
 
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.mySocialAppTodayGet();
+        return ApplicationDbHelper.getInstance(c1).mySocialAppTodayGet();
     }
 
     public List<ApplicationInfoModel> mySocialAppAVGGet()
     {
 
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.mySocialAppAllGet();
+        return ApplicationDbHelper.getInstance(c1).mySocialAppAllGet();
     }
 
 
     public List<ApplicationInfoModel> mySPhotograpyAppTodayGet()
     {
 
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myPhotograpyAppTodayGet();
+        return ApplicationDbHelper.getInstance(c1).myPhotograpyAppTodayGet();
     }
 
     public List<ApplicationInfoModel> mySPhotograpyAppAVGGet()
     {
-
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myPhotograpyAppAVGGet();
+        return ApplicationDbHelper.getInstance(c1).myPhotograpyAppAVGGet();
     }
 
     public List<ApplicationInfoModel> myPersonalizationAppTodayGet()
     {
 
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myPersonalizationAppTodayGet();
+        return ApplicationDbHelper.getInstance(c1).myPersonalizationAppTodayGet();
     }
 
     public List<ApplicationInfoModel> myPersonalizationAppAVGGet()
     {
-
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myPersonalizationAppAllGet();
+        return ApplicationDbHelper.getInstance(c1).myPersonalizationAppAllGet();
     }
 
     public List<ApplicationInfoModel> myGamingAppTodayGet()
     {
-
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myGamingAppTodayGet();
+        return ApplicationDbHelper.getInstance(c1).myGamingAppTodayGet();
     }
 
     public List<ApplicationInfoModel> myGamingAppAVGGet()
     {
-
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myGamingAppAllGet();
+        return ApplicationDbHelper.getInstance(c1).myGamingAppAllGet();
     }
 
     public List<ApplicationInfoModel> myCommunicationAppTodayGet()
     {
-
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myCommunicationAppGetToday();
+        return ApplicationDbHelper.getInstance(c1).myCommunicationAppGetToday();
     }
 
     public List<ApplicationInfoModel> myCommunicationAppAVGGet()
     {
-
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myCommunicationAppGetAll();
+        return ApplicationDbHelper.getInstance(c1).myCommunicationAppGetAll();
     }
 
     public List<ApplicationInfoModel> myMusicVideoAppTodayGet()
     {
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myMusicVideoAppTodayGet();
+        return ApplicationDbHelper.getInstance(c1).myMusicVideoAppTodayGet();
     }
 
     public List<ApplicationInfoModel> myMusicVideoAppAVGGet()
     {
-        ApplicationDbHelper applicationdbHelper = new ApplicationDbHelper(c1);
-        return applicationdbHelper.myMusicVideoAppAllGet();
+        return ApplicationDbHelper.getInstance(c1).myMusicVideoAppAllGet();
     }
 
 
@@ -334,38 +308,28 @@ public class ApplicationsHelper {
 
     public ApplicationInfoModel appGet(String packageName)
     {
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        return applicationDbHelper.appGet(packageName);
+        return ApplicationDbHelper.getInstance(c1).appGet(packageName);
 
     }
 
     public int socialAppCountToday()
     {
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.socialAppCountTodayGet();
-        Log.d("inotify","social app count" +  applicationDbHelper.socialAppCountTodayGet());
-        return applicationDbHelper.socialAppCountTodayGet();
+       return ApplicationDbHelper.getInstance(c1).socialAppCountTodayGet();
     }
 
     public int communicationAppCountToday()
     {
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.communicationAppCountTodayGet();
-        return applicationDbHelper.communicationAppCountTodayGet();
+       return ApplicationDbHelper.getInstance(c1).communicationAppCountTodayGet();
     }
 
     public int gamingAppCountToday()
     {
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.gamingAppCountTodayGet();
-        return applicationDbHelper.gamingAppCountTodayGet();
+        return ApplicationDbHelper.getInstance(c1).gamingAppCountTodayGet();
     }
 
     public int personalizationppCountToday()
     {
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(c1);
-        applicationDbHelper.PersonalizationppCountTodayGet();
-        return applicationDbHelper.PersonalizationppCountTodayGet();
+        return ApplicationDbHelper.getInstance(c1).PersonalizationppCountTodayGet();
     }
 
     //packagename to application name
