@@ -1,6 +1,7 @@
 package com.example.inotify.helpers;
 
 import android.content.Context;
+import android.widget.LinearLayout;
 
 import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 
@@ -36,4 +37,6 @@ public class MainNotificationViewability {
             return "NotBusy";
         }
     }
+
+    LinearLayout mLayout;
 }

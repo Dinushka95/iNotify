@@ -245,9 +245,9 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
        // Bundle bundle = getIntent().getExtras();
       //  String message = bundle.getString("Openness");
 
-         TextView textViewToChange = findViewById(R.id.openness1);
+     //    TextView textViewToChange = findViewById(R.id.openness1);
      //   textViewToChange.setText(message);
-         TextView textViewToChange2 = findViewById(R.id.Conscientiousness1);
+      //   TextView textViewToChange2 = findViewById(R.id.Conscientiousness1);
 //        final TextView textViewToChange3 = findViewById(R.id.Extraversion1);
 //        final TextView textViewToChange4 = findViewById(R.id.Agreeableness);
 //        final TextView textViewToChange5 = findViewById(R.id.Neuroticism1);

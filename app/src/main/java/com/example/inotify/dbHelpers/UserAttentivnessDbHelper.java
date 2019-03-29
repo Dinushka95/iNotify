@@ -144,7 +144,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
     public double totalattentivnessSumGet(String Appname) {
         double SumofallAttentinessValues = 0.0;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select sum(" + TbColNames.TOTALATTENTIVNESS + " ) as Total from " + TbNames.ATTENTIVNESSPERAPP_TABLE +"where "+TbColNames.APPLICATION + "!= " +Appname, null);
+        Cursor res = db.rawQuery("select sum(" + TbColNames.TOTALATTENTIVNESS + " ) as Total from " + TbNames.ATTENTIVNESSPERAPP_TABLE +" where "+TbColNames.APPLICATION + " != " +Appname, null);
         if (res.moveToFirst()) {
             SumofallAttentinessValues = res.getDouble(res.getColumnIndex("Total"));
             Log.d("inotify(^_^", "SumofallAttentinessValues =====" + SumofallAttentinessValues);
@@ -198,15 +198,18 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
             Log.d("inotify(^_^)", "update");
             double currentToallAttentivnessValue = Double.parseDouble(this.AttentivnessperAppGet(Appname));
             double updatedAtttentivnessPerAppValue = currentToallAttentivnessValue + attentivnessPerParticulrNotificationValue;
-           // double
+          //  double attentivnessTot = this.totalattentivnessSumGet(Appname);
 
             double attentivnessavg = this.calculateAverageAttentivness();
             double totalAttentivnessPercentage = (attentivnessPerParticulrNotificationValue / attentivnessavg) * 100;
+          //  double attentivnessPer = updatedAtttentivnessPerAppValue/(updatedAtttentivnessPerAppValue+attentivnessTot);
+
             this.updateaattentivnessperApp(Appname, updatedAtttentivnessPerAppValue, totalAttentivnessPercentage);
 
             Log.d("inotify(^_^", "currentTotalAttentivness =====" + currentToallAttentivnessValue);
             Log.d("inotify(^_^", "updatedAtttentivnessPerAppValue ====== " + updatedAtttentivnessPerAppValue);
             Log.d("inotify(^_^)", "totalAttentivnessPercentage=========" + totalAttentivnessPercentage);
+         //   Log.d("inotify(^_^)", "attentivnessPer=========" + attentivnessPer);
 
 
         } else {
@@ -278,10 +281,11 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery("Select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE + "  where "+TbColNames.APPNAME+" =\"" + packageName + "\"", null);
+        Cursor res = db.rawQuery("Select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE + "  where "+TbColNames.APPLICATION+" =\"" + packageName + "\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
-                return res.getString(res.getColumnIndex(TbColNames.TOTALATTENTIVNESSPERCENTAGE));
+               // return res.getString(res.getColumnIndex(TbColNames.TOTALATTENTIVNESSPERCENTAGE));
+                return res.getString(3);
 
             }
             res.close();

@@ -16,6 +16,7 @@ public class ApplicationInfoModel {
     private String appName;
     private String appCategory;
     private String pakageName;
+    private String inotifystate;
 
     public ApplicationInfoModel() {
     }
@@ -50,5 +51,13 @@ public class ApplicationInfoModel {
 
     public void setPakageName(String pakageName) {
         this.pakageName = pakageName;
+    }
+
+    public String getInotifystate() {
+        return inotifystate;
+    }
+
+    public void setInotifystate(String inotifystate) {
+        this.inotifystate = inotifystate;
     }
 }

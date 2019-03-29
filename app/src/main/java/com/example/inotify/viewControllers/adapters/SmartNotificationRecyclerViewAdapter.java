@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 
 import com.example.inotify.R;
 import com.example.inotify.models.NotificationModel;
-import com.example.inotify.models.ViewHolderModel;
+import com.example.inotify.viewControllers.viewHolder.SmartNotificationViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
 
-public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolderModel> {
+public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<SmartNotificationViewHolder> {
 
     List<NotificationModel> list = Collections.emptyList();
     Context context;
@@ -26,15 +26,15 @@ public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<V
     }
 
     @Override
-    public ViewHolderModel onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public SmartNotificationViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_smart_notification, viewGroup, false);
-        ViewHolderModel viewHolderModel = new ViewHolderModel(v);
-        return viewHolderModel;
+        SmartNotificationViewHolder smartNotificationViewHolder = new SmartNotificationViewHolder(v);
+        return smartNotificationViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderModel holder, int position) {
+    public void onBindViewHolder(SmartNotificationViewHolder holder, int position) {
         holder.title.setText(list.get(position).getId());
         //holder.description.setText(list.get(position).description);
         // holder.imageView.setImageResource(list.get(position).imageId);

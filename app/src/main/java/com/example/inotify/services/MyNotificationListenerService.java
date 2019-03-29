@@ -44,23 +44,21 @@ import java.util.Locale;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
-   // String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-   // String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
-  //  String timeRecieved = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
 
-    String timeSent = "";
-    String appPackageName = "";
-    String appName = "";
-    int nid;
-    String ticker = "";
-    String title = "";
-    String text = "";
-    double accuracy = 0.0;
-    boolean iNotifyActiveApp = false;
-    boolean sendornotsend = false;
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+
+        String timeSent = "";
+        String appPackageName = "";
+        String appName = "";
+        int nid;
+        String ticker = "";
+        String title = "";
+        String text = "";
+        double accuracy = 0.0;
+        boolean iNotifyActiveApp = false;
+        boolean sendornotsend = false;
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
@@ -77,14 +75,27 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService--preLoop-Ticker---" + ticker);
         Log.d("inotify", "Main-MyNotificationListenerService--packageName---" + sbn.getPackageName());
 
-        //get all active notifications
+
+        INotifyActiveAppsHelper iNotifyActiveAppsHelperbool = new INotifyActiveAppsHelper(this);
+        //check is exist
+        boolean iNotifyActiveAppsExis = iNotifyActiveAppsHelperbool.isExisINotifyActiveApps(sbn.getPackageName());
+
+        if(!iNotifyActiveAppsExis&&!sbn.getPackageName().equals("com.example.inotify")){
+            INotifyActiveAppsHelper iNotifyActiveAppsHelper1 = new INotifyActiveAppsHelper(this);
+            // put the app in a actvity notification list
+            iNotifyActiveAppsHelper1.setNewActiveApp(sbn.getPackageName());
+        }
+
         INotifyActiveAppsHelper iNotifyActiveAppsHelper = new INotifyActiveAppsHelper(this);
+        //get all active notifications
         List<String> iNotifyActiveAppsList = iNotifyActiveAppsHelper.getINotifyActiveApps();
+
 
         // check if the notification you got is in the inotify active list
         iNotifyActiveApp = Stream.of(iNotifyActiveAppsList).anyMatch(v -> v.equals(sbn.getPackageName()));
 
         if (iNotifyActiveApp) {
+
 
             appPackageName = sbn.getPackageName();
             nid = sbn.getId();
@@ -139,13 +150,13 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             // Smart Notifaction
 
-            NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
-            String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
+         //   NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
+       //     String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
 
-            UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-            String attentivenessPerApp = userAttentivnessDbHelper.getAttentivenessPerApp(appPackageName);
+     //       UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+   //         String attentivenessPerApp = userAttentivnessDbHelper.getAttentivenessPerApp(appPackageName);
 
-            SNSModel snsModel = new SNSModel(date,timeRecieved,viewbillityProbability,attentivenessPerApp,"null","Mobile",appName);
+       //     SNSModel snsModel = new SNSModel(date,timeRecieved,viewbillityProbability,attentivenessPerApp,"null","Mobile",appName);
 /*            SNSModel snsModel = new SNSModel(date,timeRecieved,"","","null","null",appName);
             MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
             String vtimes =mainSmartNotificationSystem.getPrediction();
@@ -225,19 +236,19 @@ public class MyNotificationListenerService extends NotificationListenerService {
                     timeSent = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 }
                 Notification notification = builder.build();
-                notifManager.notify(NOTIFY_ID, notification);
+                notifManager.notify(nid, notification);
 
 
                 //PRASHAN
                 // Notification insert
                 Log.d("inotify", "Main-MyNotificationListenerService--onNotificationPosted: Notification  inserted to notificcation table");
                 NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-                notificationHelper.insert(new NotificationModel(id, date, timeRecieved, timeSent, "", appName, appPackageName, "1"));
+                notificationHelper.insert(new NotificationModel(id, date, timeRecieved, timeSent, "", appName, appPackageName,title,text, "1"));
 
 
                 //Smart Notification
-                SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
-                smartNotificationDbHelper.saveData(id,viewbillityProbability,"","null","Mobile",appName);
+              //  SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
+              //  smartNotificationDbHelper.saveData(id,viewbillityProbability,"","null","Mobile",appName);
 
             }
         }
@@ -311,7 +322,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Total Attentivness succcessfully added");
 
             //Smart Notification update with time
-            String oldtime = sbn.getNotification().tickerText.toString();
+/*            String oldtime = sbn.getNotification().tickerText.toString();
             String newtime = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSS");
@@ -331,7 +342,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             long difference = date2.getTime() - date1.getTime();
 
             SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
-            smartNotificationDbHelper.updateData(ticker,String.valueOf(difference));
+            smartNotificationDbHelper.updateData(ticker,String.valueOf(difference));*/
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");
         }

@@ -7,42 +7,91 @@
     android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:clickable="true"
     android:focusable="true"
+    android:layout_marginLeft="10sp"
+    android:layout_marginRight="10sp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/activity_vertical_margin"
     app:cardElevation="@dimen/activity_vertical_margin">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageView"
-            android:text="Title"
-            android:textSize="30sp" />
+            <TextView
+                android:id="@+id/allnotidatetextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:text="TextView"
+                android:textSize="10dp"/>
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
-            android:layout_toRightOf="@+id/imageView"
-            android:text="Description" />
+            <TextView
+                android:id="@+id/allnotitimetextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:text="TextView"
+                android:textSize="10dp"/>
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/allnotiappnametextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:text="TextView"
+                android:textSize="10dp"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/allnotiid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="0sp"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/allnotiimageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/allnotititle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10sp"
+                android:text="Title"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/allnotidescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/allnotititle"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="14dp"
+                android:text="@string/description"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>
 
