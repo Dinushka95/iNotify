@@ -199,7 +199,7 @@ public class TbColNames {
     public static final String CALENDEREVENT = "calenderevent";
     public static final String CHARGE = "charge";
 
-    //CHARACTERISTICSfINAL_TABLE
+    //CHARACTERISTICSFINAL_TABLE
     public static final String CHARACTERISTICSfINAL_ID = "characteristicId";
     public static final String OPENNESS = "openness";
     public static final String CONSCIENTIOUSNESS = "conscientiousness";
@@ -207,8 +207,10 @@ public class TbColNames {
     public static final String NEUROTICISM = "neuroticism";
     public static final String AGREEABLENESS = "agreeableness";
 
-
-
+    //DATAUSAGE_TABLE
+    public static final String DATAUSAGE_ID = "datausageId";
+    //public static final String DATE = "date";
+    public static final String AMOUNT = "amount";
 
 
 
