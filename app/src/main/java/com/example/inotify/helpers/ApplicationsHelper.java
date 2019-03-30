@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.dbHelpers.INotifiyActiveAppsDbHelper;
 import com.example.inotify.models.ApplicationInfoModel;
 
 import java.text.SimpleDateFormat;
@@ -53,7 +52,7 @@ public class ApplicationsHelper {
         ApplicationInfoModel amtem = new ApplicationInfoModel();
         Log.d("iNotify",pm.getApplicationLabel(x).toString());
         amtem.setAppName(pm.getApplicationLabel(x).toString());
-        amtem.setPakageName(x.packageName);
+        amtem.setPackageName(x.packageName);
         amtem.setAppCategory(x.packageName);
         amtem.setDate(date);
         Log.d("iNotify","date..................." + date);

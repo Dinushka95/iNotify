@@ -3,22 +3,25 @@ package com.example.inotify.viewControllers.viewHolder;
 import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.inotify.R;
 import com.example.inotify.helpers.INotifyActiveAppsHelper;
 
-public class AppViewHolder extends RecyclerView.ViewHolder{
+public class INotifyActiveAppViewHolder extends RecyclerView.ViewHolder{
 
+    public ImageView icon;
     public TextView title;
     public TextView packageName;
     public Switch aSwitch;
 
-    public AppViewHolder(View itemView) {
+    public INotifyActiveAppViewHolder(View itemView) {
 
         super(itemView);
 
+        icon = (ImageView) itemView.findViewById(R.id.inotifyappsicon);
 
         packageName = (TextView) itemView.findViewById(R.id.inotifyappspackagename);
 
