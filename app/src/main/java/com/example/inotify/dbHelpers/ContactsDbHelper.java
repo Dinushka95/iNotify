@@ -19,10 +19,19 @@ import java.util.Objects;
 
 public class ContactsDbHelper extends MainDbHelp {
     public Context c1;
+    private static ContactsDbHelper mInstance = null;
+
 
     public ContactsDbHelper(Context context) {
         super(context);
         this.c1=context;
+    }
+    public static ContactsDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new ContactsDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public boolean ContactsCountInsert()

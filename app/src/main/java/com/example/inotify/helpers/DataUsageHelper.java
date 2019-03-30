@@ -126,8 +126,7 @@ public class DataUsageHelper {
 
         long totalamount =durx+dutx;
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        DataUsageDbHelper dataUsageDbHelper = new DataUsageDbHelper(c1);
-        dataUsageDbHelper.insertTotoalDataUsage(date, String.valueOf(totalamount));
+        DataUsageDbHelper.getInstance(c1).insertTotoalDataUsage(date, String.valueOf(totalamount));
 
     }
 

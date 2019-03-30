@@ -19,10 +19,19 @@ import static android.content.Context.ACTIVITY_SERVICE;
 
 public class DataUsageDbHelper extends MainDbHelp {
     public Context c1;
+    private static DataUsageDbHelper mInstance = null;
+
 
     public DataUsageDbHelper(Context context) {
         super(context);
         this.c1=context;
+    }
+    public static DataUsageDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new DataUsageDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public boolean insertTotoalDataUsage(String date,String amount) {
