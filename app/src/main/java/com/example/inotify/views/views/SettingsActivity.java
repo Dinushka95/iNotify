@@ -1,54 +1,77 @@
 package com.example.inotify.views.views;
 
+import android.Manifest;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.job.JobScheduler;
+import android.app.usage.NetworkStats;
+import android.app.usage.NetworkStatsManager;
+import android.app.usage.UsageEvents;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
+import android.net.TrafficStats;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.RemoteException;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
-import com.example.inotify.dbHelpers.TopAppDbHelper;
-import com.example.inotify.helpers.TopAppsHelper;
-import com.example.inotify.interfaces.MyCallback;
-import com.example.inotify.logger.Log;
+import com.example.inotify.helpers.DataUsageHelper;
 import com.example.inotify.logger.LogFragment;
 import com.example.inotify.logger.LogWrapper;
 import com.example.inotify.logger.MessageOnlyLogFilter;
-import com.example.inotify.models.TopAppModel;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import static com.example.inotify.dbHelpers.MainDbHelp.DATABASE_NAME;
 
 public class SettingsActivity extends AppCompatActivity {
     private boolean mLogShown;
     long dbSize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-                LogWrapper logWrapper = new LogWrapper();
-                com.example.inotify.logger.Log.setLogNode(logWrapper);
+        LogWrapper logWrapper = new LogWrapper();
+        com.example.inotify.logger.Log.setLogNode(logWrapper);
 
-                MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
-                logWrapper.setNext(msgFilter);
+        MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
+        logWrapper.setNext(msgFilter);
 
-                LogFragment logFragment = (LogFragment) getSupportFragmentManager().findFragmentById(R.id.log_fragment);
-                msgFilter.setNext(logFragment.getLogView());
-                File f = this.getDatabasePath(DATABASE_NAME);
-                dbSize = f.length()/1024;
-                TextView textViewDbSize = findViewById(R.id.textViewdbsize);
-                textViewDbSize.setText("Database Size is = "+String.valueOf(dbSize) + "KB");
+        LogFragment logFragment = (LogFragment) getSupportFragmentManager().findFragmentById(R.id.log_fragment);
+        msgFilter.setNext(logFragment.getLogView());
+        File f = this.getDatabasePath(DATABASE_NAME);
+        dbSize = f.length() / 1024;
+        TextView textViewDbSize = findViewById(R.id.textViewdbsize);
+        textViewDbSize.setText("Database Size is = " + String.valueOf(dbSize) + "KB");
 
 
     }
@@ -91,9 +114,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-
-
-
     public void button_INotifyActiveApps(View view) {
 
     }
@@ -105,7 +125,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void test(View view) {
-        Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXX");
+ /*       Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXX");
         TopAppsHelper topAppsHelper =new TopAppsHelper(this);
 
         topAppsHelper.readData(new MyCallback() {
@@ -117,7 +137,7 @@ public class SettingsActivity extends AppCompatActivity {
                 topAppDbHelper.insert(topAppModel);
 
             }
-        });
+        });*/
 
     }
 

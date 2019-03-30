@@ -155,22 +155,22 @@ public class Extraversion extends AppCompatActivity {
             long extraversion = (todayContactsProbability + newAppsProbability - todayGamingAppProbability - todayGamingAppUsageProbability + todayCallDuraionProbability + todaySocialAppUsageProbability + todaySocialAppProbability)/10;
             Log.d("inotify","extraversion..........." + extraversion);
 
-        final TextView textViewToChange = findViewById(R.id.Ex_attr_1);
-        final TextView textViewToChange2 = findViewById(R.id.Ex_attr_2);
-        final TextView textViewToChange3 = findViewById(R.id.Ex_attr_3);
-        final TextView textViewToChange4 = findViewById(R.id.Ex_attr_4);
-        final TextView textViewToChange5 = findViewById(R.id.Ex_attr_5);
-        final TextView textViewToChange6 = findViewById(R.id.Ex_attr_6);
-        final TextView textViewToChange7 = findViewById(R.id.Ex_attr_7);
+            final TextView textViewToChange = findViewById(R.id.Ex_attr_1);
+            final TextView textViewToChange2 = findViewById(R.id.Ex_attr_2);
+            final TextView textViewToChange3 = findViewById(R.id.Ex_attr_3);
+            final TextView textViewToChange4 = findViewById(R.id.Ex_attr_4);
+            final TextView textViewToChange5 = findViewById(R.id.Ex_attr_5);
+            final TextView textViewToChange6 = findViewById(R.id.Ex_attr_6);
+            final TextView textViewToChange7 = findViewById(R.id.Ex_attr_7);
 
 
-        textViewToChange.setText(""+todayCallDuraionProbability);
-        textViewToChange2.setText(""+todayGamingAppProbability);
-        textViewToChange3.setText(""+todayGamingAppUsageProbability);
-        textViewToChange4.setText(""+todayContactsProbability);
-        textViewToChange5.setText(""+todaySocialAppProbability);
-        textViewToChange6.setText(""+todaySocialAppUsageProbability);
-        textViewToChange7.setText(""+newAppsProbability);
+            textViewToChange.setText(""+todayCallDuraionProbability);
+            textViewToChange2.setText(""+todayGamingAppProbability);
+            textViewToChange3.setText(""+todayGamingAppUsageProbability);
+            textViewToChange4.setText(""+todayContactsProbability);
+            textViewToChange5.setText(""+todaySocialAppProbability);
+            textViewToChange6.setText(""+todaySocialAppUsageProbability);
+            textViewToChange7.setText(""+newAppsProbability);
 
 
             return extraversion;
