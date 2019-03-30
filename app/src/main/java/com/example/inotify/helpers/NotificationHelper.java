@@ -16,15 +16,11 @@ public class NotificationHelper {
     }
 
     public boolean insert(NotificationModel NotificationModel) {
-
-        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(c1);
-        return notificationDbHelper.insert(NotificationModel);
+        return NotificationDbHelper.getInstance(c1).insert(NotificationModel);
     }
 
     public List<NotificationModel> allAppInfoGet() {
-        NotificationDbHelper notificationDbHelper = new NotificationDbHelper(c1);
-        return notificationDbHelper.allAppInfoGet();
-
+        return NotificationDbHelper.getInstance(c1).allAppInfoGet();
     }
 
 }

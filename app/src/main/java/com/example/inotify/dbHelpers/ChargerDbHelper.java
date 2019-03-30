@@ -15,10 +15,20 @@ import java.util.Locale;
 
 
 public class ChargerDbHelper extends MainDbHelp {
+    private static ChargerDbHelper mInstance = null;
+
     private  Context c1;
     public ChargerDbHelper(Context context) {
         super(context);
         this.c1=context;
+    }
+
+    public static ChargerDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new ChargerDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public boolean powerOninsert(String date,String time) {

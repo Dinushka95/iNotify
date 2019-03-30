@@ -29,7 +29,7 @@ public class ChargerHelper {
         ChargerDbHelper chargerDbHelper =new ChargerDbHelper(c1);
         Log.d("inotify","poweron" + chargerDbHelper.powerOninsert(date,time));
 
-        return chargerDbHelper.powerOninsert(date,time);
+        return ChargerDbHelper.getInstance(c1).powerOninsert(date,time);
     }
 
     public boolean powerOffinsert() {
@@ -38,18 +38,18 @@ public class ChargerHelper {
         ChargerDbHelper chargerDbHelper =new ChargerDbHelper(c1);
         Log.d("inotify","poweroff" + chargerDbHelper.powerOffinsert(date,time));
 
-        return chargerDbHelper.powerOffinsert(date,time);
+        return ChargerDbHelper.getInstance(c1).powerOffinsert(date,time);
     }
 
     public int powerOnCount(){
         ChargerDbHelper chargerDbHelper =new ChargerDbHelper(c1);
         Log.d("inotify","Power ON count" + chargerDbHelper.powerOnCountGet());
-        return chargerDbHelper.powerOnCountGet();
+        return ChargerDbHelper.getInstance(c1).powerOnCountGet();
     }
     public int powerOffCount(){
         ChargerDbHelper chargerDbHelper =new ChargerDbHelper(c1);
         Log.d("inotify","Power OFF count" + chargerDbHelper.powerOffCountGet());
 
-        return chargerDbHelper.powerOffCountGet();
+        return ChargerDbHelper.getInstance(c1).powerOffCountGet();
     }
 }
