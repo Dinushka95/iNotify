@@ -12,9 +12,20 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.example.inotify.dbHelpers.DataUsageDbHelper;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DataUsageHelper {
+
+    private Context c1;
+
+    public DataUsageHelper(Context context) {
+        this.c1 = context;
+    }
 
     @SuppressLint("MissingPermission")
     private String getSubscriberId(Context context, int networkType) {
@@ -110,10 +121,13 @@ public class DataUsageHelper {
     }
 
     public void getTotalDataUsag(){
-
         long durx = TrafficStats.getMobileRxBytes()/1024;
         long dutx = TrafficStats.getTotalRxBytes()/1024;
 
+        long totalamount =durx+dutx;
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        DataUsageDbHelper dataUsageDbHelper = new DataUsageDbHelper(c1);
+        dataUsageDbHelper.insertTotoalDataUsage(date, String.valueOf(totalamount));
 
     }
 

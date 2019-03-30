@@ -58,8 +58,8 @@ public class TbNames<Public> {
 
     public static final String CONSCIENTIOUSNESS_TABLE = "conscientiousness_table";
 
-    public static final String CHARACTERISTICSfINAL_TABLE = "charcateriticsfinal_table";
+    public static final String CHARACTERISTICSFINAL_TABLE = "charcateriticsfinal_table";
 
-
+    public static final String DATAUSAGE_TABLE = "datausage_table";
 
 }

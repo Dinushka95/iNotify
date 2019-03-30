@@ -1,25 +1,6 @@
 package com.example.inotify.dbHelpers;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import com.example.inotify.configs.TbColNames;
-import com.example.inotify.configs.TbNames;
-import com.example.inotify.models.CharacteristicsFinalModel;
-import com.example.inotify.views.views.Agreeablenesss;
-import com.example.inotify.views.views.Conscientiousness;
-import com.example.inotify.views.views.Extraversion;
-import com.example.inotify.views.views.Neuroticism;
-import com.example.inotify.views.views.Openness;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import static com.example.inotify.configs.TbNames.CHARACTERISTICSfINAL_TABLE;
 
 public class CharacteristicFinalDbHelper extends MainDbHelp {
     private  Context c1;
@@ -66,7 +47,7 @@ public class CharacteristicFinalDbHelper extends MainDbHelp {
 //        contentValues.put(TbColNames.DATE,date);
 //
 //
-//        long result = db.insert(TbNames.CHARACTERISTICSfINAL_TABLE, null, contentValues);
+//        long result = db.insert(TbNames.CHARACTERISTICSFINAL_TABLE, null, contentValues);
 //        db.close();
 //        return true;
 //    }
@@ -102,7 +83,7 @@ public class CharacteristicFinalDbHelper extends MainDbHelp {
 //        CharacteristicsFinalModel characteristicsFinalModel = new CharacteristicsFinalModel();
 //
 //        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor res = db.rawQuery("select * from " + CHARACTERISTICSfINAL_TABLE + " WHERE "+TbColNames.DATE +" = \""+date+"\"", null);
+//        Cursor res = db.rawQuery("select * from " + CHARACTERISTICSFINAL_TABLE + " WHERE "+TbColNames.DATE +" = \""+date+"\"", null);
 //        if (res != null) {
 //
 //            if (res.moveToFirst()) {
