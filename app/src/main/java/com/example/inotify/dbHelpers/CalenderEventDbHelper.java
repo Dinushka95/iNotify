@@ -20,12 +20,20 @@ import static com.example.inotify.configs.TbNames.CALENDEREVENTCOUNT_TABLE;
 
 public class CalenderEventDbHelper extends MainDbHelp {
 
+    private static CalenderEventDbHelper mInstance = null;
 
     private Context c1;
 
     public CalenderEventDbHelper(Context context) {
         super(context);
         this.c1 = context;
+    }
+    public static CalenderEventDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new CalenderEventDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
 
