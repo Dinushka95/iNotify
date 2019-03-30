@@ -20,10 +20,21 @@ import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 
 
 public class TopAppDbHelper extends MainDbHelp {
+    private static TopAppDbHelper mInstance = null;
+
 
     public TopAppDbHelper(Context context) {
         super(context);
     }
+
+    public static TopAppDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new TopAppDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
+
 
 
     public List<ApplicationInfoModel> topAppSocilGet() {

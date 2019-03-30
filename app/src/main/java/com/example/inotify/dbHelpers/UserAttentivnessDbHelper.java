@@ -12,10 +12,20 @@ import com.example.inotify.configs.TbNames;
 import java.util.ArrayList;
 
 public class UserAttentivnessDbHelper extends MainDbHelp {
+    private static UserAttentivnessDbHelper mInstance = null;
 
     public UserAttentivnessDbHelper(Context context) {
         super(context);
     }
+
+    public static UserAttentivnessDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new UserAttentivnessDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
+
 
     public boolean UserAttentivnessInsert(String id, String application, Double attentivnessvalue) {
 

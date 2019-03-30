@@ -10,17 +10,17 @@ import android.util.Log;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 
 public class ScreenStatusHelper extends BroadcastReceiver {
+    private Context c1;
     private BroadcastReceiver mReceiver;
     private IntentFilter intentFilter;
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(context);
-            screenStatusDbHelper.screenOnInsert();
+            ScreenStatusDbHelper.getInstance(c1).screenOnInsert();
         }
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
             ScreenStatusDbHelper screenStatusDbHelper = new ScreenStatusDbHelper(context);
-            screenStatusDbHelper.screenOffInsert();
+            ScreenStatusDbHelper.getInstance(c1).screenOffInsert();
         }
     }
 
