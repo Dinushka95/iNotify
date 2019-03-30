@@ -22,8 +22,18 @@ import static com.example.inotify.configs.TbNames.RINGERMODE_TABLE;
 
 public class RingerModeDbHelper extends MainDbHelp {
 
+    private static RingerModeDbHelper mInstance = null;
+
     public RingerModeDbHelper(Context context) {
         super(context);
+    }
+
+    public static RingerModeDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new RingerModeDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     // RingerMode table insert

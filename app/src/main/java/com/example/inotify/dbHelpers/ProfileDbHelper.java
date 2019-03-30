@@ -20,9 +20,19 @@ import static com.example.inotify.configs.TbNames.PROFILE_TABLE;
 
 public class ProfileDbHelper extends MainDbHelp {
 
+    private static ProfileDbHelper mInstance = null;
+
     public ProfileDbHelper(Context context) {
         super(context);
     }
+    public static ProfileDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new ProfileDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
+
 
     public boolean insert(ProfileModel profileModel){
 

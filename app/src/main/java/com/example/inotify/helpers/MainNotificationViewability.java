@@ -8,14 +8,14 @@ import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 import java.util.ArrayList;
 
 public class MainNotificationViewability {
+    private Context c1;
 
     public String GetNewPrediction(Context context,String activity,String location){
 
-        ArrayList<java.lang.String> bon = new ArrayList();
 
-        NotificationViewabilityDbHelper praSqlLiteDbHelper = new NotificationViewabilityDbHelper(context);
-        praSqlLiteDbHelper.busyOrNotPredict_Get(activity,location);
-        praSqlLiteDbHelper.close();
+        ArrayList<java.lang.String> bon = new ArrayList();
+        NotificationViewabilityDbHelper.getInstance(c1).busyOrNotPredict_Get(activity,location);
+        NotificationViewabilityDbHelper.getInstance(c1).close();
 
         int busyCount = 0;
         int notbusyCount = 0;
