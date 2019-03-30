@@ -12,17 +12,22 @@ import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +50,9 @@ import com.example.inotify.views.fragments.TabUserCharacteristicsFragment;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainMenuActivity extends AppCompatActivity implements
@@ -91,6 +98,14 @@ public class MainMenuActivity extends AppCompatActivity implements
         View headerView = navigationView.getHeaderView(0);
         textViewProfile = (TextView) headerView.findViewById(R.id.profilename);
 
+        ImageView imageView = findViewById(R.id.actionbarimageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.START);
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // set item as selected to persist highlight
@@ -162,12 +177,12 @@ public class MainMenuActivity extends AppCompatActivity implements
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Dashboard"));
+/*        tabLayout.addTab(tabLayout.newTab().setText("Dashboard"));
         tabLayout.addTab(tabLayout.newTab().setText("Smart Notification"));
         tabLayout.addTab(tabLayout.newTab().setText("All Notification"));
         tabLayout.addTab(tabLayout.newTab().setText("Applications"));
         tabLayout.addTab(tabLayout.newTab().setText("UserCharacteristics"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);*/
 
        // ActionBar actionbar = getSupportActionBar();
         //actionbar.setDisplayHomeAsUpEnabled(true);
@@ -175,9 +190,19 @@ public class MainMenuActivity extends AppCompatActivity implements
 
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final MainMenuPagerAdapter adapter = new MainMenuPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new TabDashBoardFragment(), "Dash\nBoard");
+        adapter.addFragment(new TabSmartNotificationFragment(), "Smart \n Notification");
+        adapter.addFragment(new TabAllNotificationsFragment(), "All \n Notification");
+        adapter.addFragment(new TabApplicationFragment(), "All\nApplications");
+        adapter.addFragment(new TabUserCharacteristicsFragment(), "User \n Characteristics");
+
+        //final MainMenuPagerAdapter adapter = new MainMenuPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        //viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -210,6 +235,36 @@ public class MainMenuActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
     @Override

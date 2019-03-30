@@ -36,17 +36,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/actionbarimageView"
+            android:layout_width="34dp"
+            android:layout_height="58dp"
+            android:background="@color/blacklight"
+            app:srcCompat="@drawable/ic_menu_black_24dp"
+            tools:srcCompat="@drawable/ic_menu_black_24dp" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:background="@color/blacklight"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:tabTextColor="@color/white"
-            app:tabTextAppearance="@style/TabLayoutStyle">
+            app:tabMode="scrollable"
+            app:tabTextAppearance="@style/TabLayoutStyle"
+            app:tabTextColor="@color/white">
 
 
         </android.support.design.widget.TabLayout>
