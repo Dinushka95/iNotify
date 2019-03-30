@@ -18,10 +18,18 @@ import java.util.Objects;
 
 public class ScreenStatusDbHelper extends MainDbHelp {
 
-
+    private static ScreenStatusDbHelper mInstance = null;
 
     public ScreenStatusDbHelper(Context context) {
         super(context);
+    }
+
+    public static ScreenStatusDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new ScreenStatusDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
 

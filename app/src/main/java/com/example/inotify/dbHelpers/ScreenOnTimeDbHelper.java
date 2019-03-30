@@ -13,8 +13,19 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class ScreenOnTimeDbHelper extends MainDbHelp {
+    private static ScreenOnTimeDbHelper mInstance = null;
+
+
     public ScreenOnTimeDbHelper(Context context) {
         super(context);
+    }
+
+    public static ScreenOnTimeDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new ScreenOnTimeDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public int ScreenOnTimeCountTodayGet() {

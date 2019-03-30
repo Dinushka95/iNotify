@@ -36,76 +36,76 @@ public class TopAppsHelper {
     public List<ApplicationInfoModel> topAppSocial()
 {
     TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-    return topAppDbHelper.topAppSocilGet();
+    return TopAppDbHelper.getInstance(c1).topAppSocilGet();
 }
 
 
     public List<ApplicationInfoModel> topAppPhotograpy()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppPhotograpyGet();
+        return TopAppDbHelper.getInstance(c1).topAppPhotograpyGet();
     }
 
     public List<ApplicationInfoModel> topAppPersonalization()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppPersonalizationGet();
+        return TopAppDbHelper.getInstance(c1).topAppPersonalizationGet();
     }
 
 
     public List<ApplicationInfoModel> topAppCommunication()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppCommunicationGet();
+        return TopAppDbHelper.getInstance(c1).topAppCommunicationGet();
     }
 
     public List<ApplicationInfoModel> topAppGaming()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppGamingGet();
+        return TopAppDbHelper.getInstance(c1).topAppGamingGet();
     }
 
     public List<ApplicationInfoModel> topAppBusiness()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppBusinessGet();
+        return TopAppDbHelper.getInstance(c1).topAppBusinessGet();
     }
 
     public List<ApplicationInfoModel> topAppDating()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppDatingGet();
+        return TopAppDbHelper.getInstance(c1).topAppDatingGet();
     }
 
     public List<ApplicationInfoModel> topAppEntertainment()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppEntertainmentGet();
+        return TopAppDbHelper.getInstance(c1).topAppEntertainmentGet();
     }
 
     public List<ApplicationInfoModel> topAppProductivity()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppProductivityGet();
+        return TopAppDbHelper.getInstance(c1).topAppProductivityGet();
     }
 
     public List<ApplicationInfoModel> topAppTools()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppToolGet();
+        return TopAppDbHelper.getInstance(c1).topAppToolGet();
     }
 
     public List<ApplicationInfoModel> topAppMusicVideo()
     {
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return topAppDbHelper.topAppMusicVideoGet();
+        return TopAppDbHelper.getInstance(c1).topAppMusicVideoGet();
     }
 
     public int appCountGet()
     {
 
         TopAppDbHelper topAppDbHelper = new TopAppDbHelper(c1);
-        return (int) topAppDbHelper.SocialAppCountGet();
+        return (int) TopAppDbHelper.getInstance(c1).SocialAppCountGet();
     }
 
 

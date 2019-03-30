@@ -14,9 +14,18 @@ import java.util.Date;
 import java.util.Locale;
 
 public class NotificationImportnaceDbHelper extends MainDbHelp {
+    private static NotificationImportnaceDbHelper mInstance = null;
+
 
     public NotificationImportnaceDbHelper(Context context) {
         super(context);
+    }
+    public static NotificationImportnaceDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new NotificationImportnaceDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public boolean NotificationImportnaceInsert(String id, String applicationname, int sequencevalue) {
