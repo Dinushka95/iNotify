@@ -1,22 +1,17 @@
 package com.example.inotify.models;
 
+import android.graphics.drawable.Drawable;
+
 public class ApplicationInfoModel {
 
     private int id;
+    private Drawable icon;
     private String date;
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     private String appName;
     private String appCategory;
-    private String pakageName;
+    private String packageName;
     private String inotifystate;
+
 
     public ApplicationInfoModel() {
     }
@@ -27,6 +22,22 @@ public class ApplicationInfoModel {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Drawable getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getAppName() {
@@ -45,12 +56,12 @@ public class ApplicationInfoModel {
         this.appCategory = appCategory;
     }
 
-    public String getPakageName() {
-        return pakageName;
+    public String getPackageName() {
+        return packageName;
     }
 
-    public void setPakageName(String pakageName) {
-        this.pakageName = pakageName;
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 
     public String getInotifystate() {

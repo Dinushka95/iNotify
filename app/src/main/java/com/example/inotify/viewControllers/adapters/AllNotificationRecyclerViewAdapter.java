@@ -1,6 +1,7 @@
 package com.example.inotify.viewControllers.adapters;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +41,11 @@ public class AllNotificationRecyclerViewAdapter extends RecyclerView.Adapter<All
         allNotificationViewHolder.appName.setText(list.get(i).getAppName());
         allNotificationViewHolder.title.setText(list.get(i).getTitle());
         allNotificationViewHolder.description.setText(list.get(i).getContent());
+        try {
+            allNotificationViewHolder.imageView.setImageDrawable(context.getPackageManager().getApplicationIcon(list.get(i).getPackageName()));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

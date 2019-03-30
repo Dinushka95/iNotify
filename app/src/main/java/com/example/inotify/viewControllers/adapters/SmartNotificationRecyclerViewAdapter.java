@@ -1,6 +1,7 @@
 package com.example.inotify.viewControllers.adapters;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +35,13 @@ public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<S
     }
 
     @Override
-    public void onBindViewHolder(SmartNotificationViewHolder holder, int position) {
-        holder.title.setText(list.get(position).getId());
+    public void onBindViewHolder(SmartNotificationViewHolder smartNotificationViewHolder, int position) {
+        smartNotificationViewHolder.title.setText(list.get(position).getId());
+        try {
+            smartNotificationViewHolder.imageView.setImageDrawable(context.getPackageManager().getApplicationIcon(list.get(position).getPackageName()));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         //holder.description.setText(list.get(position).description);
         // holder.imageView.setImageResource(list.get(position).imageId);
       /*  holder.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

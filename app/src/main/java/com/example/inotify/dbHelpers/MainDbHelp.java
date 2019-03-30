@@ -90,7 +90,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.CHARACTERISTICSFINAL_TABLE + " ("+TbColNames.CHARACTERISTICSfINAL_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.OPENNESS+" TEXT,"+TbColNames.CONSCIENTIOUSNESS+" TEXT,"+TbColNames.EXTRAVERSION+" TEXT,"+TbColNames.NEUROTICISM+" TEXT,"+TbColNames.AGREEABLENESS+" TEXT)");
 
-        db.execSQL("create table " + TbNames.DATAUSAGE_TABLE + " ("+TbColNames.DATAUSAGE_ID+"INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.AMOUNT+" TEXT)");
+        db.execSQL("create table " + TbNames.DATAUSAGE_TABLE + " ("+TbColNames.DATAUSAGE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.AMOUNT+" TEXT)");
 
 
 
