@@ -63,7 +63,6 @@ public class MainMenuActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        setTheme(R.style.AppTheme);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -170,9 +169,9 @@ public class MainMenuActivity extends AppCompatActivity implements
         tabLayout.addTab(tabLayout.newTab().setText("UserCharacteristics"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+       // ActionBar actionbar = getSupportActionBar();
+        //actionbar.setDisplayHomeAsUpEnabled(true);
+       // actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

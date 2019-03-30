@@ -146,7 +146,7 @@ public class NotificationDbHelper extends MainDbHelp {
 
     }
 
-    public List<NotificationModel> allAppInfoGet()
+    public List<NotificationModel> allNotificationInfoGet()
     {
         List<NotificationModel> notificationModelList = new ArrayList<>();
 

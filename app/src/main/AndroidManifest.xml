@@ -35,7 +35,8 @@
         <activity android:name=".views.views.Openness" />
         <activity android:name=".views.views.Conscientiousness" />
         <activity android:name=".views.views.NotificationFinalViewabilityActivity" />
-        <activity android:name=".views.views.MainMenuActivity" />
+        <activity android:name=".views.views.MainMenuActivity"
+            android:theme="@style/Theme.Design.NoActionBar"/>
         <activity android:name=".views.views.NotificationViewabilityActivity" />
         <activity android:name=".views.views.UserAttentivenessActivity" />
         <activity android:name=".views.views.UsercharacteristicsActivity" />

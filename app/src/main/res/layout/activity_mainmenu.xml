@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.views.MainMenuActivity"
+    android:background="#FFFFFF"
     android:fitsSystemWindows="true">
 
 
@@ -41,12 +42,10 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/blacklight"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabTextColor="@color/white"
             app:tabTextAppearance="@style/TabLayoutStyle">
 
 

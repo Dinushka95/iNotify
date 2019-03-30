@@ -20,7 +20,7 @@ public class NotificationHelper {
     }
 
     public List<NotificationModel> allAppInfoGet() {
-        return NotificationDbHelper.getInstance(c1).allAppInfoGet();
+        return NotificationDbHelper.getInstance(c1).allNotificationInfoGet();
     }
 
 }
