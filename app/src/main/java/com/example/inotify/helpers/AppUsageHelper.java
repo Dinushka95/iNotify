@@ -28,7 +28,7 @@ public class AppUsageHelper {
 
         AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
 
-        return appUsageDbHelper.insert(appUsageModelList);
+        return AppUsageDbHelper.getInstance(c1).insert(appUsageModelList);
     }
 
     public boolean saveTodaysAppUsage() {
@@ -62,7 +62,7 @@ public class AppUsageHelper {
 
             appUsageModelList.add(appUsageModel);
         }
-        return appUsageHelper.insert(appUsageModelList);
+        return AppUsageDbHelper.getInstance(c1).insert(appUsageModelList);
     }
 
 
@@ -98,127 +98,108 @@ public class AppUsageHelper {
 
     public long appAllsUsageToday()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.appAllsUsageToday();
+        return AppUsageDbHelper.getInstance(c1).appAllsUsageToday();
 
     }
 
     public long appAllsUsageAVG()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.appAllsUsageAVG();
+        return AppUsageDbHelper.getInstance(c1).appAllsUsageAVG();
 
     }
 
     public long socialAppsUsageToday()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.socialAppsUsageToday();
-
+        return AppUsageDbHelper.getInstance(c1).socialAppsUsageToday();
     }
 
     public long communicationAppsUsageAVG()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.communicationAppsUsageAVG();
+        return AppUsageDbHelper.getInstance(c1).communicationAppsUsageAVG();
 
     }
 
     public long personalizationAppsUsageAVG()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.personalizationAppsUsageAVG();
+        return AppUsageDbHelper.getInstance(c1).personalizationAppsUsageAVG();
 
     }
 
     public long gamingAppsUsageAVG()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.gamingAppsUsageAVG();
+        return AppUsageDbHelper.getInstance(c1).gamingAppsUsageAVG();
 
     }
 
     public long photograpyAppsUsageAVG()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.photograpyAppsUsageAVG();
+        return AppUsageDbHelper.getInstance(c1).photograpyAppsUsageAVG();
 
     }
 
     public int socialUsageTimeColumCountGet()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.socialUsageTimeColumCountGet();
+        return AppUsageDbHelper.getInstance(c1).socialUsageTimeColumCountGet();
 
     }
 
     public int communicationUsageTimeColumCountGet()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.communicationUsageTimeColumCountGet();
+        return AppUsageDbHelper.getInstance(c1).communicationUsageTimeColumCountGet();
 
     }
 
     public int personalizationUsageTimeColumCountGet()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.personalizationUsageTimeColumCountGet();
+        return AppUsageDbHelper.getInstance(c1).personalizationUsageTimeColumCountGet();
 
     }
 
     public int gamingUsageTimeColumCountGet()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.gamingUsageTimeColumCountGet();
+        return AppUsageDbHelper.getInstance(c1).gamingUsageTimeColumCountGet();
 
     }
 
     public int communicationAppsUsageToday()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.communicationAppsUsageToday();
+        return AppUsageDbHelper.getInstance(c1).communicationAppsUsageToday();
 
     }
 
     public int gamingAppsUsageToday()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.gamingAppsUsageToday();
+        return AppUsageDbHelper.getInstance(c1).gamingAppsUsageToday();
 
     }
 
     public int photograpyAppsUsageToday()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.photograpyAppsUsageToday();
+        return AppUsageDbHelper.getInstance(c1).photograpyAppsUsageToday();
 
     }
 
     public int personalizationAppsUsageToday()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.personalizationAppsUsageToday();
+        return AppUsageDbHelper.getInstance(c1).personalizationAppsUsageToday();
 
     }
 
     public int musicvideoAppsUsageToday()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.musicvideoAppsUsageToday();
+        return AppUsageDbHelper.getInstance(c1).musicvideoAppsUsageToday();
 
     }
 
     public int musicvideoUsageTimeColumCountGet()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.musicvideoUsageTimeColumCountGet();
+        return AppUsageDbHelper.getInstance(c1).musicvideoUsageTimeColumCountGet();
 
     }
 
     public int musicvideoAppsUsageAVG()
     {
-        AppUsageDbHelper appUsageDbHelper = new AppUsageDbHelper(c1);
-        return appUsageDbHelper.musicvideoAppsUsageAVG();
+        return AppUsageDbHelper.getInstance(c1).musicvideoAppsUsageAVG();
 
     }
 

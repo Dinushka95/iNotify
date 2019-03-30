@@ -24,11 +24,19 @@ import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 public class ApplicationDbHelper extends MainDbHelp {
 
 
-
+    private static ApplicationDbHelper mInstance = null;
     private  Context c1;
     public ApplicationDbHelper(Context context) {
         super(context);
         this.c1=context;
+    }
+
+    public static ApplicationDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new ApplicationDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public List<ApplicationInfoModel> appInfoGet()

@@ -20,8 +20,19 @@ import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 
 public class AppUsageDbHelper extends MainDbHelp {
 
+    private static AppUsageDbHelper mInstance = null;
+
+
     public AppUsageDbHelper(Context context) {
         super(context);
+    }
+
+    public static AppUsageDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new AppUsageDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public boolean insert(List<AppUsageModel> appUsageModelList) {
