@@ -8,7 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.anychart.APIlib;
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
 import com.example.inotify.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,6 +80,45 @@ public class TabDashBoardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tab_dash_board, container, false);
+
+        AnyChartView anyChartView = view.findViewById(R.id.any_chart_view);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView);
+
+        Pie pie = AnyChart.pie();
+
+        List<DataEntry> data = new ArrayList<>();
+        data.add(new ValueDataEntry("App1", 6371664));
+        data.add(new ValueDataEntry("App12", 789622));
+        data.add(new ValueDataEntry("App13", 7216301));
+        data.add(new ValueDataEntry("App14", 1486621));
+        data.add(new ValueDataEntry("App15", 1200000));
+
+        pie.data(data);
+
+        pie.title("Fruits imported in 2015 (in kg)");
+
+        anyChartView.setChart(pie);
+
+        AnyChartView anyChartView1 = view.findViewById(R.id.any_chart_view1);
+        APIlib.getInstance().setActiveAnyChartView(anyChartView1);
+
+        Pie pie1 = AnyChart.pie();
+
+        List<DataEntry> data1 = new ArrayList<>();
+        data1.add(new ValueDataEntry("App2", 6371664));
+        data1.add(new ValueDataEntry("App21", 789622));
+        data1.add(new ValueDataEntry("App22", 7216301));
+        data1.add(new ValueDataEntry("App23", 1486621));
+        data1.add(new ValueDataEntry("App24", 1200000));
+
+        pie1.data(data1);
+
+        anyChartView1.setChart(pie1);
+
+        APIlib.getInstance().setActiveAnyChartView(anyChartView);
+        pie.title("First chart");
+        APIlib.getInstance().setActiveAnyChartView(anyChartView1);
+        pie1.title("Second chart");
 
         return view;
     }

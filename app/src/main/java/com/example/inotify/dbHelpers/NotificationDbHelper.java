@@ -23,6 +23,16 @@ public class NotificationDbHelper extends MainDbHelp {
     public NotificationDbHelper(Context context) {
         super(context);
     }
+    private static NotificationDbHelper mInstance = null;
+
+
+    public static NotificationDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new NotificationDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
 
     public boolean insert(NotificationModel NotificationModel) {
 
@@ -136,7 +146,7 @@ public class NotificationDbHelper extends MainDbHelp {
 
     }
 
-    public List<NotificationModel> allAppInfoGet()
+    public List<NotificationModel> allNotificationInfoGet()
     {
         List<NotificationModel> notificationModelList = new ArrayList<>();
 

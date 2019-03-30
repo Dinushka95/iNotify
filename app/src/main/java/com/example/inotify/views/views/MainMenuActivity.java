@@ -4,43 +4,38 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.MyConstants;
-import com.example.inotify.dbHelpers.ApplicationDbHelper;
-import com.example.inotify.helpers.ApplicationsHelper;
-import com.example.inotify.helpers.CalenderEventHelper;
-import com.example.inotify.helpers.CallDurationDbHelp;
-import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.ProfileHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
-import com.example.inotify.helpers.TopAppsHelper;
-import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.ProfileModel;
 import com.example.inotify.services.ActivityRecognitionService;
 import com.example.inotify.services.LocationService;
@@ -55,6 +50,7 @@ import com.example.inotify.views.fragments.TabUserCharacteristicsFragment;
 import com.google.android.gms.location.ActivityRecognitionClient;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -74,10 +70,16 @@ public class MainMenuActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        setTheme(R.style.AppTheme);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+/*        stopService(new Intent(this, MyNotificationListenerService.class));
+
+
+        startService(new Intent(this, MyNotificationListenerService.class));*/
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
@@ -96,6 +98,14 @@ public class MainMenuActivity extends AppCompatActivity implements
         View headerView = navigationView.getHeaderView(0);
         textViewProfile = (TextView) headerView.findViewById(R.id.profilename);
 
+        ImageView imageView = findViewById(R.id.actionbarimageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.START);
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // set item as selected to persist highlight
@@ -162,27 +172,19 @@ public class MainMenuActivity extends AppCompatActivity implements
             }
         });
 
-        //   Toolbar toolbar = findViewById(R.id.toolbar);
-        //  setSupportActionBar(toolbar);
-
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Dashboard"));
-        tabLayout.addTab(tabLayout.newTab().setText("Smart Notification"));
-        tabLayout.addTab(tabLayout.newTab().setText("All Notification"));
-        tabLayout.addTab(tabLayout.newTab().setText("Applications"));
-        tabLayout.addTab(tabLayout.newTab().setText("UserCharacteristics"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
-
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final MainMenuPagerAdapter adapter = new MainMenuPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new TabDashBoardFragment(), "Dash\nBoard");
+        adapter.addFragment(new TabSmartNotificationFragment(), "Smart \n Notification");
+        adapter.addFragment(new TabAllNotificationsFragment(), "All \n Notification");
+        adapter.addFragment(new TabApplicationFragment(), "Active\nApplications");
+        adapter.addFragment(new TabUserCharacteristicsFragment(), "User \n Characteristics");
+
         viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -215,8 +217,36 @@ public class MainMenuActivity extends AppCompatActivity implements
             Toast.makeText(getApplicationContext(), "You Have Not Given Proper Access Permission.Please give Permission", Toast.LENGTH_LONG).show();
         }
 
-        CallDurationDbHelp callDurationDbHelp = new CallDurationDbHelp();
-        callDurationDbHelp.getCallDuration();
+    }
+
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
     @Override
@@ -273,12 +303,8 @@ public class MainMenuActivity extends AppCompatActivity implements
         JobScheduler scheduler2 = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         int resultCode2 = scheduler2.schedule(info2);
 
-        // has to test because screen off  doen't work proprly with manifest file. need to do it in code
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver mReceiver = new ScreenStatusHelper();
-        registerReceiver(mReceiver, intentFilter);
-
+        ScreenStatusHelper screenStatusHelper = new ScreenStatusHelper();
+        screenStatusHelper.start(this);
 
     }
 
@@ -364,6 +390,7 @@ public class MainMenuActivity extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 
 
 }

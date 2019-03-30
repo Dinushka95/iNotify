@@ -1,11 +1,16 @@
 package com.example.inotify.dbHelpers;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.ChargerHelper;
+import com.example.inotify.helpers.ContactsHelper;
+import com.example.inotify.helpers.ScreenOnTimeHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,10 +19,38 @@ import java.util.Objects;
 
 public class ContactsDbHelper extends MainDbHelp {
     public Context c1;
+    private static ContactsDbHelper mInstance = null;
+
 
     public ContactsDbHelper(Context context) {
         super(context);
         this.c1=context;
+    }
+    public static ContactsDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new ContactsDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
+
+    public boolean ContactsCountInsert()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+
+        ContactsHelper contactsHelper = new ContactsHelper(c1);
+        int count = contactsHelper.getContacts(c1);
+
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(TbColNames.CONTACTCOUNT,count);
+        contentValues.put(TbColNames.DATE,date);
+
+        long result = db.insert(TbNames.CONTACTCOUNT_TABLE, null, contentValues);
+        db.close();
+        return true;
     }
 
     public int ContactsTodayGet() {

@@ -29,9 +29,19 @@ import static com.example.inotify.configs.TbNames.PROBABILITY_TABLE;
 
 
 public class NotificationViewabilityDbHelper extends MainDbHelp {
+    private static NotificationViewabilityDbHelper mInstance = null;
+
 
     public NotificationViewabilityDbHelper(Context context) {
         super(context);
+    }
+
+    public static NotificationViewabilityDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new NotificationViewabilityDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public boolean activity_insert(String type, String confidence) {

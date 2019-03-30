@@ -1,6 +1,5 @@
 package com.example.inotify.dbHelpers;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.database.Cursor;
@@ -10,25 +9,32 @@ import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
-import com.example.inotify.models.AppUsageModel;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.TopAppModel;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 
 
 public class TopAppDbHelper extends MainDbHelp {
+    private static TopAppDbHelper mInstance = null;
+
 
     public TopAppDbHelper(Context context) {
         super(context);
     }
+
+    public static TopAppDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new TopAppDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
+
 
 
     public List<ApplicationInfoModel> topAppSocilGet() {
@@ -47,7 +53,7 @@ public class TopAppDbHelper extends MainDbHelp {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
 
 
                     listApplicationInfoModels.add(applicationInfoModel);
@@ -76,7 +82,7 @@ public class TopAppDbHelper extends MainDbHelp {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
 
 
                     listApplicationInfoModels.add(applicationInfoModel);
@@ -104,7 +110,7 @@ public class TopAppDbHelper extends MainDbHelp {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
 
 
                     listApplicationInfoModels.add(applicationInfoModel);
@@ -129,7 +135,7 @@ public class TopAppDbHelper extends MainDbHelp {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -152,7 +158,7 @@ public class TopAppDbHelper extends MainDbHelp {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -173,7 +179,7 @@ public class TopAppDbHelper extends MainDbHelp {
                 do {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -194,7 +200,7 @@ public class TopAppDbHelper extends MainDbHelp {
                 do {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -214,7 +220,7 @@ public class TopAppDbHelper extends MainDbHelp {
                 do {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -233,7 +239,7 @@ public class TopAppDbHelper extends MainDbHelp {
                 do {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -253,7 +259,7 @@ public class TopAppDbHelper extends MainDbHelp {
                 do {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -271,7 +277,7 @@ public class TopAppDbHelper extends MainDbHelp {
                 do {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -291,7 +297,7 @@ public class TopAppDbHelper extends MainDbHelp {
                 do {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }

@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.inotify.R;
-import com.example.inotify.dbHelpers.CallDurationDbHelper;
+import com.example.inotify.dbHelpers.CallUsageDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.CallUsageHelper;
 import com.example.inotify.helpers.ContactsHelper;
 
 public class Extraversion extends AppCompatActivity {
@@ -67,7 +68,7 @@ public class Extraversion extends AppCompatActivity {
 //        long newAppsProbability = (newApps * 16)/100;//----6th attribute
 //
 //
-//        CallDurationHelper callDurationHelper = new CallDurationHelper(this);
+//        CallUsageHelper callDurationHelper = new CallUsageHelper(this);
 //        long callDurationToday = callDurationHelper.getCallDuraionAVGToday();
 //        long callDurationAVG = callDurationHelper.getCallDurationAVG();
 //
@@ -126,7 +127,7 @@ public class Extraversion extends AppCompatActivity {
             int todayGamingApp = applicationsHelper.commonGamingAppTodayCount();
 
             ContactsHelper contactsHelper = new ContactsHelper(this);
-            int todayContacts = contactsHelper.getcontactToday();//have to implement to get newly added contacts
+            int todayContacts = contactsHelper.getContacts(this);//have to implement to get newly added contacts
             //int allContacts = contactsHelper.getContacts();
 
             int NoofAppsToday = applicationsHelper.appCountGetToday();
@@ -134,8 +135,8 @@ public class Extraversion extends AppCompatActivity {
 
             int newApps = (NoofAppsAll - NoofAppsToday);
 
-            CallDurationDbHelper callDurationDbHelper = new CallDurationDbHelper(this);
-            long todayCallDuraion = callDurationDbHelper.callDurationTodayGet();
+            CallUsageHelper callUsageHelper = new CallUsageHelper(this);
+            long todayCallDuraion = Long.valueOf(callUsageHelper.getTodayTotalCallDuration());
             Log.d("inotify","todayCallDuraion......." + todayCallDuraion);
 
             //probbility
@@ -144,6 +145,8 @@ public class Extraversion extends AppCompatActivity {
             long todaySocialAppProbability = (todaySocialApp * 14)/100;
             long todayGamingAppProbability = (todayGamingApp * 14)/100;
             long todayContactsProbability = (todayContacts * 14)/100;
+            Log.d("inotify","todayContactsProbability..........." + todayContactsProbability);
+
             long newAppsProbability = (newApps * 14)/100;
             long todayCallDuraionProbability = (todayCallDuraion * 14)/100;
 
@@ -152,22 +155,22 @@ public class Extraversion extends AppCompatActivity {
             long extraversion = (todayContactsProbability + newAppsProbability - todayGamingAppProbability - todayGamingAppUsageProbability + todayCallDuraionProbability + todaySocialAppUsageProbability + todaySocialAppProbability)/10;
             Log.d("inotify","extraversion..........." + extraversion);
 
-        final TextView textViewToChange = findViewById(R.id.Ex_attr_1);
-        final TextView textViewToChange2 = findViewById(R.id.Ex_attr_2);
-        final TextView textViewToChange3 = findViewById(R.id.Ex_attr_3);
-        final TextView textViewToChange4 = findViewById(R.id.Ex_attr_4);
-        final TextView textViewToChange5 = findViewById(R.id.Ex_attr_5);
-        final TextView textViewToChange6 = findViewById(R.id.Ex_attr_6);
-        final TextView textViewToChange7 = findViewById(R.id.Ex_attr_7);
+            final TextView textViewToChange = findViewById(R.id.Ex_attr_1);
+            final TextView textViewToChange2 = findViewById(R.id.Ex_attr_2);
+            final TextView textViewToChange3 = findViewById(R.id.Ex_attr_3);
+            final TextView textViewToChange4 = findViewById(R.id.Ex_attr_4);
+            final TextView textViewToChange5 = findViewById(R.id.Ex_attr_5);
+            final TextView textViewToChange6 = findViewById(R.id.Ex_attr_6);
+            final TextView textViewToChange7 = findViewById(R.id.Ex_attr_7);
 
 
-        textViewToChange.setText(""+todayCallDuraionProbability);
-        textViewToChange2.setText(""+todayGamingAppProbability);
-        textViewToChange3.setText(""+todayGamingAppUsageProbability);
-        textViewToChange4.setText(""+todayContactsProbability);
-        textViewToChange5.setText(""+todaySocialAppProbability);
-        textViewToChange6.setText(""+todaySocialAppUsageProbability);
-        textViewToChange7.setText(""+newAppsProbability);
+            textViewToChange.setText(""+todayCallDuraionProbability);
+            textViewToChange2.setText(""+todayGamingAppProbability);
+            textViewToChange3.setText(""+todayGamingAppUsageProbability);
+            textViewToChange4.setText(""+todayContactsProbability);
+            textViewToChange5.setText(""+todaySocialAppProbability);
+            textViewToChange6.setText(""+todaySocialAppUsageProbability);
+            textViewToChange7.setText(""+newAppsProbability);
 
 
             return extraversion;

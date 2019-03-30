@@ -1,6 +1,7 @@
 package com.example.inotify.viewControllers.adapters;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.inotify.R;
 import com.example.inotify.models.ApplicationInfoModel;
-import com.example.inotify.viewControllers.viewHolder.AppViewHolder;
+import com.example.inotify.viewControllers.viewHolder.INotifyActiveAppViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
-public class INotifyActiveAppsRecyclerViewAdapter extends RecyclerView.Adapter<AppViewHolder> {
+public class INotifyActiveAppsRecyclerViewAdapter extends RecyclerView.Adapter<INotifyActiveAppViewHolder> {
 
     List<ApplicationInfoModel> list = Collections.emptyList();
     Context context;
@@ -26,20 +27,26 @@ public class INotifyActiveAppsRecyclerViewAdapter extends RecyclerView.Adapter<A
 
     @NonNull
     @Override
-    public AppViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public INotifyActiveAppViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_inotifyactiveapps, viewGroup, false);
-        AppViewHolder holder = new AppViewHolder(v);
+        INotifyActiveAppViewHolder holder = new INotifyActiveAppViewHolder(v);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AppViewHolder appViewHolder, int i) {
-        appViewHolder.title.setText(list.get(i).getAppName());
+    public void onBindViewHolder(@NonNull INotifyActiveAppViewHolder iNotifyActiveAppViewHolder, int i) {
+        iNotifyActiveAppViewHolder.title.setText(list.get(i).getAppName());
         String value =list.get(i).getInotifystate();
         boolean temvalue=false;
         if(value.equals("true")){temvalue=true;}else {temvalue=false;}
-        appViewHolder.aSwitch.setChecked(temvalue);
-        appViewHolder.packageName.setText(list.get(i).getPakageName());
+
+        try {
+            iNotifyActiveAppViewHolder.icon.setImageDrawable(context.getPackageManager().getApplicationIcon(list.get(i).getPackageName()));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        iNotifyActiveAppViewHolder.aSwitch.setChecked(temvalue);
+        iNotifyActiveAppViewHolder.packageName.setText(list.get(i).getPackageName());
     }
 
     @Override

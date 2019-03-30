@@ -13,26 +13,22 @@ public class AttributeCountHelper {
 
     public long ScreenOnTimeCountAvgGet()
     {
-        AttributeCountDbHelper attributeCountDbHelper = new AttributeCountDbHelper(c1);
-        return attributeCountDbHelper.ScreenOnTimeCountAvgGet();
+        return AttributeCountDbHelper.getInstance(c1).ScreenOnTimeCountAvgGet();
     }
 
     public long ContactsAvgGet()
     {
-        AttributeCountDbHelper attributeCountDbHelper = new AttributeCountDbHelper(c1);
-        return attributeCountDbHelper.ContactsAvgGet();
+        return AttributeCountDbHelper.getInstance(c1).ContactsAvgGet();
     }
 
     public long chargingCountAvgGet()
     {
-        AttributeCountDbHelper attributeCountDbHelper = new AttributeCountDbHelper(c1);
-        return attributeCountDbHelper.chargingCountAvgGet();
+        return AttributeCountDbHelper.getInstance(c1).chargingCountAvgGet();
     }
 
     public long appCountAvgGet()
     {
-        AttributeCountDbHelper attributeCountDbHelper = new AttributeCountDbHelper(c1);
-        return attributeCountDbHelper.appCountAvgGet();
+        return AttributeCountDbHelper.getInstance(c1).appCountAvgGet();
     }
 
 

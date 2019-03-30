@@ -20,7 +20,7 @@ public class TbColNames {
 
     //PRASHAN
     ////nv sql lite db helper
-    // public static final String DATE = "date";
+    //public static final String DATE = "date";
     public static final String PROID = "probability_id";
     public static final String DAY = "day";
     public static final String TIME = "time";
@@ -70,7 +70,7 @@ public class TbColNames {
     public static final String ATTENTIVNESSVALUE = "attentivnessvalue";
 
     //AttentivnesssperApp
-   // public static final String APPNAME ="appname";
+    //public static final String APPNAME ="appname";
     public static final String TOTALATTENTIVNESS = "totalattentivness";
     public static final String TOTALATTENTIVNESSPERCENTAGE = "totalattentivnesspercentage";
 
@@ -151,7 +151,7 @@ public class TbColNames {
     //public static final String SOCIALAPPCOUNT = "socialappcount";
     //public static final String GAMINGAPPCOUNT = "gamingappcount";
     //public static final String EDUCATIONAPPCOUNT = "educationappcount";
-   // public static final String DATINGAPPCOUNT = "datingappcount";
+    //public static final String DATINGAPPCOUNT = "datingappcount";
     //public static final String MUSICVIDEOAPPCOUNT = "musicvideoappcount";
     //public static final String COMMUNICATIONAPPCOUNT ="communicationappcount";
 
@@ -163,21 +163,22 @@ public class TbColNames {
 
 
     //CallDuration table
-    public  static final String CALLDURATION_ID = "calldurationId";
+    public static final String CALLDURATION_ID = "calldurationId";
+    public static final String DURATION ="duration";
 
     //ContactCount table
     public static final String CONTACTCOUNT_ID ="contactcountId";
 
     //ATTRIBUTECOUNT_TABLE
-    public  static  final String ATTRIBUTECOUNT_ID = "attributecountId";
+    public static final String ATTRIBUTECOUNT_ID = "attributecountId";
     public static final String APPCOUNT = "appcount";
     public static final String SCREENONTIMECOUNT = "scrrenontimecount";
     public static final String CHARGINGCOUNT = "chargingcount";
     public static final String CONTACTCOUNT = "contactcount";
 
     //iNotifyActiveApps table
-    public  static  final String INOTIFYACTIVEACTIVEAPPS_ID = "iNotifyActiveAppsId";
-    public  static  final String STATUS = "status";
+    public static final String INOTIFYACTIVEACTIVEAPPS_ID = "iNotifyActiveAppsId";
+    public static final String STATUS = "status";
     //public static final String PACKAGENAME = "packageName";
 
     //OPENNESS_table
@@ -198,7 +199,7 @@ public class TbColNames {
     public static final String CALENDEREVENT = "calenderevent";
     public static final String CHARGE = "charge";
 
-    //CHARACTERISTICSfINAL_TABLE
+    //CHARACTERISTICSFINAL_TABLE
     public static final String CHARACTERISTICSfINAL_ID = "characteristicId";
     public static final String OPENNESS = "openness";
     public static final String CONSCIENTIOUSNESS = "conscientiousness";
@@ -206,8 +207,10 @@ public class TbColNames {
     public static final String NEUROTICISM = "neuroticism";
     public static final String AGREEABLENESS = "agreeableness";
 
-
-
+    //DATAUSAGE_TABLE
+    public static final String DATAUSAGE_ID = "datausageId";
+    //public static final String DATE = "date";
+    public static final String AMOUNT = "amount";
 
 
 

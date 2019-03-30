@@ -70,13 +70,17 @@ public class CalenderEventHelper {
 
     public void updateTodayCalendar() {
 
-        CalenderEventDbHelper calenderEventDbHelper = new CalenderEventDbHelper(c1);
-        boolean x = calenderEventDbHelper.checkIfExist();
+        boolean x = CalenderEventDbHelper.getInstance(c1).checkIfExist();
         if (!x) {
             int count = getcalanderEventCount(c1);
-            CalenderEventDbHelper calenderEventDbHelper1 = new CalenderEventDbHelper(c1);
-            calenderEventDbHelper1.calenderEventCount_insert(String.valueOf(count));
+            CalenderEventDbHelper.getInstance(c1).calenderEventCount_insert(String.valueOf(count));
         }
+
+    }
+
+    public long getcalanderEventCount()
+    {
+        return CalenderEventDbHelper.getInstance(c1).CalenderEventAVGGet();
 
     }
 

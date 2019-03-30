@@ -15,17 +15,17 @@ public class ProfileHelper {
 
     public boolean insert(ProfileModel profileModel) {
         ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
-        return profileDbHelper.insert(profileModel);
+        return ProfileDbHelper.getInstance(c1).insert(profileModel);
     }
 
     public ProfileModel get() {
         ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
-        return profileDbHelper.get();
+        return ProfileDbHelper.getInstance(c1).get();
 
     }
 
     public boolean profileisExisCheck() {
         ProfileDbHelper profileDbHelper = new ProfileDbHelper(c1);
-        return profileDbHelper.profileisExisCheck();
+        return ProfileDbHelper.getInstance(c1).profileisExisCheck();
     }
 }

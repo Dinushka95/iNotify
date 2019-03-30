@@ -25,7 +25,7 @@ public class ScreenOnTimeHelper extends MainDbHelp {
     public int ScreenOnTimeTodayGet() {
         ScreenOnTimeDbHelper screenOnTimeDbHelper = new ScreenOnTimeDbHelper(c1);
         Log.d("inotify","ScreenOnTimeTodayGet......" + screenOnTimeDbHelper.ScreenOnTimeCountTodayGet());
-        return screenOnTimeDbHelper.ScreenOnTimeCountTodayGet();
+        return ScreenOnTimeDbHelper.getInstance(c1).ScreenOnTimeCountTodayGet();
 
     }
 

@@ -44,19 +44,21 @@ import java.util.Locale;
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
-    String timeSent = "";
-    String appPackageName = "";
-    String appName = "";
-    int nid;
-    String ticker = "";
-    String title = "";
-    String text = "";
-    double accuracy = 0.0;
-    boolean iNotifyActiveApp = false;
-    boolean sendornotsend = false;
+
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+
+        String timeSent = "";
+        String appPackageName = "";
+        String appName = "";
+        int nid;
+        String ticker = "";
+        String title = "";
+        String text = "";
+        double accuracy = 0.0;
+        boolean iNotifyActiveApp = false;
+        boolean sendornotsend = false;
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
@@ -74,11 +76,20 @@ public class MyNotificationListenerService extends NotificationListenerService {
         Log.d("inotify", "Main-MyNotificationListenerService--packageName---" + sbn.getPackageName());
 
 
+        INotifyActiveAppsHelper iNotifyActiveAppsHelperbool = new INotifyActiveAppsHelper(this);
+        //check is exist
+        boolean iNotifyActiveAppsExis = iNotifyActiveAppsHelperbool.isExisINotifyActiveApps(sbn.getPackageName());
+
+        if(!iNotifyActiveAppsExis&&!sbn.getPackageName().equals("com.example.inotify")){
+            INotifyActiveAppsHelper iNotifyActiveAppsHelper1 = new INotifyActiveAppsHelper(this);
+            // put the app in a actvity notification list
+            iNotifyActiveAppsHelper1.setNewActiveApp(sbn.getPackageName());
+        }
+
         INotifyActiveAppsHelper iNotifyActiveAppsHelper = new INotifyActiveAppsHelper(this);
-        // put the app in a actvity notification list
-        iNotifyActiveAppsHelper.setNewActiveApp(sbn.getPackageName());
         //get all active notifications
         List<String> iNotifyActiveAppsList = iNotifyActiveAppsHelper.getINotifyActiveApps();
+
 
         // check if the notification you got is in the inotify active list
         iNotifyActiveApp = Stream.of(iNotifyActiveAppsList).anyMatch(v -> v.equals(sbn.getPackageName()));

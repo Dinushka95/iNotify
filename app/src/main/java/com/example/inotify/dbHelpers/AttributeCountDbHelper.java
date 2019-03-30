@@ -17,10 +17,20 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class AttributeCountDbHelper extends MainDbHelp {
+    private static AttributeCountDbHelper mInstance = null;
+
     private  Context c1;
     public AttributeCountDbHelper(Context context) {
         super(context);
         this.c1=context;
+    }
+
+    public static AttributeCountDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new AttributeCountDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
 

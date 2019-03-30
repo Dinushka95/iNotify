@@ -8,23 +8,25 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.ApplicationInfoModel;
-import com.example.inotify.models.NotificationModel;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
-import static com.example.inotify.configs.TbColNames.SNS_VTIME;
-import static com.example.inotify.configs.TbNames.PROFILE_TABLE;
-import static com.example.inotify.configs.TbNames.SNS_TABLE;
 
 
 public class INotifiyActiveAppsDbHelper extends MainDbHelp {
 
+    private static INotifiyActiveAppsDbHelper mInstance = null;
+
     public INotifiyActiveAppsDbHelper(Context context) {
         super(context);
+    }
+
+    public static INotifiyActiveAppsDbHelper getInstance(Context context) {
+
+        if (mInstance == null) {
+            mInstance = new INotifiyActiveAppsDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
     }
 
     public Boolean saveAppSetting(String appName) {
@@ -123,7 +125,7 @@ public class INotifiyActiveAppsDbHelper extends MainDbHelp {
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPakageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    applicationInfoModel.setPackageName(res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     applicationInfoModel.setInotifystate(res.getString(res.getColumnIndex(TbColNames.STATUS)));
                     applicationInfoModelList.add(applicationInfoModel);
                 } while (res.moveToNext());

@@ -30,12 +30,19 @@ import static com.example.inotify.configs.TbNames.SNS_TABLE;
 
 public class SmartNotificationDbHelper extends MainDbHelp {
 
+    private static SmartNotificationDbHelper mInstance = null;
 
     public SmartNotificationDbHelper(Context context) {
 
         super(context);
     }
+    public static SmartNotificationDbHelper getInstance(Context context) {
 
+        if (mInstance == null) {
+            mInstance = new SmartNotificationDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
 
     public boolean saveData(String id, String busyornot, String attentiviness, String usercharacteristics, String notificationtype, String appname) {
 
