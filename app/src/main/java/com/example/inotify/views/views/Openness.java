@@ -19,93 +19,14 @@ public class Openness extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_openness);
-
-//        textView = findViewById(R.id.Op_attr_1);
+    //        textView = findViewById(R.id.Op_attr_1);
 //        //UsercharacteristicsActivity usercharacteristicsActivity = new UsercharacteristicsActivity();
 //        //long open = usercharacteristicsActivity.displayOpenness();
 //        Log.d("ghgh", "onCreate: " );
 //        textView.setText("kkknkn");
     }
 
-//    public long displayOpenness()
-//    {
-//        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-//        long appUsageAVG = appUsageHelper.appAllUsageAvgGet();
-//        long appUsageToday = appUsageHelper.appAllUsageTodayGet();
-//        long socialAPpUsageAVG = appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.SOCIAL);
-//        long socialAPpUsageToday = appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.SOCIAL);
-//        long communicationAPpUsageToday = appUsageHelper.appsUsageTodayGet(AppCategoriesConstants.COMMUNICATION);
-//        long communicationAPpUsageAVG = appUsageHelper.appsUsageAvgGet(AppCategoriesConstants.COMMUNICATION);
-//
-//        appUsageHelper.saveTodaysAppUsage();
-//
-//        long allAppsUsage = ( appUsageAVG - appUsageToday)/ appUsageAVG; //allappusge 1st attribute
-//        Log.d("inotify","allAppsUsage......." + allAppsUsage);
-//
-//        long socialAppUsage = (socialAPpUsageAVG - socialAPpUsageToday)/socialAPpUsageAVG; //social app usage 2nd attribute
-//        Log.d("inotify","socialAppUsage......." + socialAppUsage);
-//
-//
-//        long communicationAppUsage = (communicationAPpUsageAVG - communicationAPpUsageToday)/communicationAPpUsageAVG; //social app usage 2nd attribute
-//        Log.d("inotify","communicationAppUsage......." + communicationAppUsage);
-//
-//        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-//        int NoofApps = applicationsHelper.appCountGet();
-//        Log.d("inotify","NoofApps......." + NoofApps);
-//
-//        long noOfAVG = applicationsHelper.appConutAVG();
-//        Log.d("inotify","noOfAVG......." + noOfAVG);
-//
-//        long newApps = (noOfAVG - NoofApps)/(noOfAVG+1); //newly downloaded apps - 3rd attribute
-//        Log.d("inotify","newApps......." + newApps);
-//
-//        int noOfSocialApps = applicationsHelper.commonSocialAppCount();  // no of social apps 4th attributes
-//        Log.d("inotify","noOfSocialApps......." + noOfSocialApps);
-//
-//        int noOfCommunicationApps = applicationsHelper.commonCommunicationAppCount(); //no of communication app count
-//        Log.d("inotify","noOfCommunicationApps......." + noOfCommunicationApps);
-//
-//
-//        //get the probability of all the attributes
-//        long allAppUsageProbability = (allAppsUsage *15)/100;
-//        long socialAppUsageProbability = (socialAppUsage *15)/100;
-//        long newAppsProbability = (newApps *15)/100;
-//        long noOfSocialAppsprobability = (noOfSocialApps * 15)/100;
-//        long noOfSocialAppsProbability = (noOfCommunicationApps *15)/100;
-//        long noOfCommunicationAppsProbability = (noOfCommunicationApps * 15)/100;
-//        long noOfCommunicationAppUsage = (communicationAppUsage * 15)/100;
-//
-//
-//        Log.d("inotify","allAppUsageProbability......." + allAppUsageProbability);
-//        Log.d("inotify","socialAppUsageProbability......." + socialAppUsageProbability);
-//        Log.d("inotify","newAppsProbability......." + newAppsProbability);
-//        Log.d("inotify","noOfSocialAppsProbability......." + noOfSocialAppsProbability);
-//        Log.d("inotify","noOfSocialAppsProbability......." + noOfSocialAppsProbability);
-//        Log.d("inotify","noOfCommunicationAppsProbability......." + noOfCommunicationAppsProbability);
-//        Log.d("inotify","noOfCommunicationAppUsage......." + noOfCommunicationAppUsage);
-//
-//
-//        long openness = (allAppUsageProbability + noOfCommunicationAppUsage + noOfCommunicationAppsProbability + socialAppUsageProbability + newAppsProbability + noOfSocialAppsprobability + noOfSocialAppsProbability);
-//        Log.d("inotify","Openness......." + openness);
-//
-//        final TextView textViewToChange = findViewById(R.id.Op_attr_1);
-//        final TextView textViewToChange2 = findViewById(R.id.Op_attr_2);
-//        final TextView textViewToChange3 = findViewById(R.id.Op_attr_3);
-//        final TextView textViewToChange4 = findViewById(R.id.Op_attr_4);
-//        final TextView textViewToChange5 = findViewById(R.id.Op_attr_5);
-//        final TextView textViewToChange6 = findViewById(R.id.Op_attr_6);
-//
-//        textViewToChange6.setText(""+allAppUsageProbability);
-//        textViewToChange2.setText(""+socialAppUsageProbability);
-//        textViewToChange.setText(""+newAppsProbability);
-//        textViewToChange3.setText(""+noOfSocialAppsProbability);
-//        textViewToChange4.setText(""+noOfCommunicationAppsProbability);
-//        textViewToChange5.setText(""+noOfCommunicationAppUsage);
-//
-//        return openness;
-//
-//
-//    }
+
         public long displayOpenness()
         {
            AppUsageHelper appUsageHelper = new AppUsageHelper(this);
@@ -160,6 +81,87 @@ public class Openness extends AppCompatActivity {
 
         }
 
+        public void checkAttributeOpenness()
+        {
+            AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+             long todayAppUsage = appUsageHelper.appAllsUsageToday();
+             long avgAppUsage = appUsageHelper.appAllsUsageAVG();
+             if(todayAppUsage > avgAppUsage)
+             {
+                 Log.d("inotify","Your AppUsage is high on today than the other days");
+                 String appUsage = "high";
+             }
+             else if(todayAppUsage == avgAppUsage)
+             {
+                 Log.d("inotify","Your AppUsage is normal");
+                 String appUsage = "normal";
+             }
+             else
+             {
+                 Log.d("inotify","Your AppUsage is low on today than the other days");
+                 String appUsage = "low";
+             }
+
+            long socilAppUsgeToday =  appUsageHelper.socialAppsUsageToday();
+             long socialAppUsageAVG = appUsageHelper.socialAppsUsageAVG();
+            if(socilAppUsgeToday > socialAppUsageAVG)
+            {
+                Log.d("inotify","Your soailAppUsage is high on today than the other days");
+                String soailAppUsage = "high";
+            }
+            else if(todayAppUsage == avgAppUsage)
+            {
+                Log.d("inotify","Your soailAppUsage is normal");
+                String soailAppUsage = "normal";
+            }
+            else
+            {
+                Log.d("inotify","Your soailAppUsage is low on today than the other days");
+                String soailAppUsage = "low";
+            }
+
+            long communicationAppUsgeToday =  appUsageHelper.communicationAppsUsageToday();
+            long communicationAppUsageAVG = appUsageHelper.communicationAppsUsageAVG();
+            if(communicationAppUsgeToday > communicationAppUsageAVG)
+            {
+                Log.d("inotify","Your communicationAppUsage is high on today than the other days");
+                String communicationAppUsage = "high";
+            }
+            else if(todayAppUsage == avgAppUsage)
+            {
+                Log.d("inotify","Your communicationAppUsage is normal");
+                String communicationAppUsage = "normal";
+            }
+            else
+            {
+                Log.d("inotify","Your communicationAppUsage is low on today than the other days");
+                String communicationAppUsage = "low";
+            }
+
+            ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+            int NoofAppsToday = applicationsHelper.appCountGetToday();
+            int NoofAppsAllAVG = applicationsHelper.allAppCountAVG();
+
+            if(NoofAppsToday > NoofAppsAllAVG)
+            {
+                Log.d("inotify","Your Number of apps is high on today than the other days");
+                String noOfApps = "high";
+            }
+            else if(todayAppUsage == avgAppUsage)
+            {
+                Log.d("inotify","Your Number of apps is normal");
+                String noOfApps = "normal";
+            }
+            else
+            {
+                Log.d("inotify","Your Number of apps is low on today than the other days");
+                String noOfApps = "low";
+            }
+
+            int socilAppCountToday = applicationsHelper.commonSocialAppTodayCount();
+
+
+        }
 
 
     public void next_open(View view) {

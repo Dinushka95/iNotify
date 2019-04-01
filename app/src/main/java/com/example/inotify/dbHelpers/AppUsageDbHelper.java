@@ -116,7 +116,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int communicationAppsUsageToday () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"communication\"", null);
+        Cursor res = db.rawQuery("select (UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"communication\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -131,7 +131,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int gamingAppsUsageToday () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"gaming\"", null);
+        Cursor res = db.rawQuery("select (UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"gaming\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -146,7 +146,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int photograpyAppsUsageToday () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"photograpy\"", null);
+        Cursor res = db.rawQuery("select (UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"photograpy\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -161,7 +161,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int personalizationAppsUsageToday () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"personalization\"", null);
+        Cursor res = db.rawQuery("select (UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"personalization\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -176,7 +176,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int musicvideoAppsUsageToday () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"musicvideo\"", null);
+        Cursor res = db.rawQuery("select (UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"musicvideo\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -191,7 +191,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int socialAppsUsageToday () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"social\"", null);
+        Cursor res = db.rawQuery("select (UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where DATE = \""+date+"\" AND APPCATEGORY = \"social\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -206,7 +206,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int communicationAppsUsageAVG () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"communication\"", null);
+        Cursor res = db.rawQuery("select AVG(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"communication\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -218,10 +218,11 @@ public class AppUsageDbHelper extends MainDbHelp {
         return 0;
     }
 
+
     public int personalizationAppsUsageAVG () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"personalization\"", null);
+        Cursor res = db.rawQuery("select AVG(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"personalization\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -236,7 +237,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int gamingAppsUsageAVG () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"gaming\"", null);
+        Cursor res = db.rawQuery("select AVG(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"gaming\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -251,7 +252,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int photograpyAppsUsageAVG () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"photograpy\"", null);
+        Cursor res = db.rawQuery("select AVG(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"photograpy\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -266,7 +267,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int socialAppsUsageAVG () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"social\"", null);
+        Cursor res = db.rawQuery("select AVG(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"social\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -281,7 +282,7 @@ public class AppUsageDbHelper extends MainDbHelp {
     public int musicvideoAppsUsageAVG () {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"musicvideo\"", null);
+        Cursor res = db.rawQuery("select AVG(UsageTime) as USAGETIME from " + TbNames.APPUSAGE_TABLE + " where  APPCATEGORY = \"musicvideo\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
 

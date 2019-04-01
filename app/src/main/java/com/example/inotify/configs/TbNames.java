@@ -62,4 +62,6 @@ public class TbNames<Public> {
 
     public static final String DATAUSAGE_TABLE = "datausage_table";
 
+    public static final String COMMONAPPCOUNT_TABLE = "communication_table";
+
 }

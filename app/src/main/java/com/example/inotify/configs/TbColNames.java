@@ -212,6 +212,14 @@ public class TbColNames {
     //public static final String DATE = "date";
     public static final String AMOUNT = "amount";
 
+    //COMMONAPPCOUNT_TABLE
+    public static final String COMMONAPPCOUNT_ID = "communicationId";
+    public static final String SOCIAL = "social";
+    public static final String GAMING = "gaming";
+    public static final String PHOTOGRAPHY = "photograpy";
+    public static final String PERSONALIZATION = "personalization";
+    public static final String COMMUNICATION = "communication";
+
 
 
 }
