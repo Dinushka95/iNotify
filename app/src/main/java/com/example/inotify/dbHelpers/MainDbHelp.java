@@ -92,6 +92,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.DATAUSAGE_TABLE + " ("+TbColNames.DATAUSAGE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.AMOUNT+" TEXT)");
 
+        db.execSQL("create table " + TbNames.COMMONAPPCOUNT_TABLE + " ("+TbColNames.COMMONAPPCOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIAL+" TEXT,"+TbColNames.GAMING+" TEXT,"+TbColNames.PHOTOGRAPHY+" TEXT,"+TbColNames.PERSONALIZATION+" TEXT,"+TbColNames.COMMUNICATION+" TEXT)");
 
 
 
@@ -144,8 +145,24 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('call','communication','com.google.android.apps.call');");
 
 
-
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('facebook','20190220','social','com.google.android.apps.facebook');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('facebook','20190220','','com.google.android.apps.facebook');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('whatsapp','20190220','','com.google.android.apps.whatsapp');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('hungamamusic','20190220','','com.google.android.apps.hungamamusic');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('tinder','20190220','','com.google.android.apps.tinder');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('badoo','20190220','','com.google.android.apps.badoo');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('netflix','20190220','','com.google.android.apps.netflix');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('coverfire','20190220','','com.google.android.apps.coverfire');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('edx','20190220','','com.google.android.apps.edx');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('fruitninja','20190220','','com.google.android.apps.fruitninja');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('clashofclans','20190220','','com.google.android.apps.clashofclans');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('game2','20190220','','com.google.android.apps.game2');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('Message','20190220','','com.google.android.apps.Message');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('chatMe','20190220','','com.google.android.apps.chatMe');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('call','20190220','','com.google.android.apps.call');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('telephony','20190220','','com.android.providers.telephony');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('googlequicksearchbox','20190220','','com.google.android.googlequicksearchbox');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('calendar','20190220','','com.android.providers.calendar');");
+/*        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('facebook','20190220','social','com.google.android.apps.facebook');");
         db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('whatsapp','20190220','social','com.google.android.apps.whatsapp');");
         db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('hungamamusic','20190220','musicvideo','com.google.android.apps.hungamamusic');");
         db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('tinder','20190220','dating','com.google.android.apps.tinder');");
@@ -161,7 +178,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('call','20190220','communication','com.google.android.apps.call');");
         db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('telephony','20190220','communication','com.android.providers.telephony');");
         db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('googlequicksearchbox','20190220','communication','com.google.android.googlequicksearchbox');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('calendar','20190220','communication','com.android.providers.calendar');");
+        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('calendar','20190220','communication','com.android.providers.calendar');");*/
         //TODO-- please implement temperately insert statements or Api to get application categories
 
 

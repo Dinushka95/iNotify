@@ -116,6 +116,11 @@ public class AppUsageHelper {
         return AppUsageDbHelper.getInstance(c1).socialAppsUsageToday();
     }
 
+    public long socialAppsUsageAVG()
+    {
+        return AppUsageDbHelper.getInstance(c1).socialAppsUsageToday();
+    }
+
     public long communicationAppsUsageAVG()
     {
         return AppUsageDbHelper.getInstance(c1).communicationAppsUsageAVG();
