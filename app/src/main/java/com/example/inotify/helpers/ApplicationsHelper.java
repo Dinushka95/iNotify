@@ -5,6 +5,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.models.ApplicationInfoModel;
 
@@ -61,7 +62,8 @@ public class ApplicationsHelper {
             list.add(amtem);
     }
 
-        appInfoInsert(list);
+            appInfoInsert(list);
+
 
 
 
@@ -329,6 +331,16 @@ public class ApplicationsHelper {
     public int personalizationppCountToday()
     {
         return ApplicationDbHelper.getInstance(c1).PersonalizationppCountTodayGet();
+    }
+
+
+    public void  saveCurrentPhoneAppsOnAvailability()
+    {
+        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.APPLICATIONS_TABLE))
+        {
+            this.saveCurrentPhoneApps();
+        }
+
     }
 
     //packagename to application name

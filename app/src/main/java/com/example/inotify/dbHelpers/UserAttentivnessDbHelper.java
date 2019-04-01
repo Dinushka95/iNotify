@@ -152,15 +152,23 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
 
     //***************************************************************************************************************************************************************
     public double totalattentivnessSumGet(String Appname) {
-        double SumofallAttentinessValues = 0.0;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select sum(" + TbColNames.TOTALATTENTIVNESS + " ) as Total from " + TbNames.ATTENTIVNESSPERAPP_TABLE +" where "+TbColNames.APPLICATION + " != " +Appname, null);
-        if (res.moveToFirst()) {
-            SumofallAttentinessValues = res.getDouble(res.getColumnIndex("Total"));
-            Log.d("inotify(^_^", "SumofallAttentinessValues =====" + SumofallAttentinessValues);
+        double CumilativeAttentivness = this.CumilativeAttentivnessValueGet();
+        double attentivnessPerApp = Double.parseDouble(this.getAttentivenessPerApp(Appname));
+        double attentivness = CumilativeAttentivness - attentivnessPerApp;
+        Log.d("inotify " , "attentivness1234567890-" +attentivness);
+        return attentivness;
 
-        }
-        return SumofallAttentinessValues;
+
+//        double SumofallAttentinessValues = 0.0;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor res = db.rawQuery("select sum (" + TbColNames.TOTALATTENTIVNESS + ")  as Total from " + TbNames.ATTENTIVNESSPERAPP_TABLE +" where "+TbColNames.APPLICATION + " != " +Appname, null);
+//
+//        if (res.moveToFirst()) {
+//            SumofallAttentinessValues = res.getDouble(res.getColumnIndex("Total"));
+//            Log.d("inotify(^_^", "SumofallAttentinessValues =====" + SumofallAttentinessValues);
+//
+//        }
+//        return SumofallAttentinessValues;
     }
     //***************************************************************************************************************************************************************
 
@@ -208,18 +216,20 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
             Log.d("inotify(^_^)", "update");
             double currentToallAttentivnessValue = Double.parseDouble(this.AttentivnessperAppGet(Appname));
             double updatedAtttentivnessPerAppValue = currentToallAttentivnessValue + attentivnessPerParticulrNotificationValue;
-          //  double attentivnessTot = this.totalattentivnessSumGet(Appname);
+            double attentivnessTot = this.totalattentivnessSumGet(Appname);
 
             double attentivnessavg = this.calculateAverageAttentivness();
             double totalAttentivnessPercentage = (attentivnessPerParticulrNotificationValue / attentivnessavg) * 100;
-          //  double attentivnessPer = updatedAtttentivnessPerAppValue/(updatedAtttentivnessPerAppValue+attentivnessTot);
+            double attentivnessPer = updatedAtttentivnessPerAppValue/(updatedAtttentivnessPerAppValue+attentivnessTot);
 
-            this.updateaattentivnessperApp(Appname, updatedAtttentivnessPerAppValue, totalAttentivnessPercentage);
+          //  this.updateaattentivnessperApp(Appname, updatedAtttentivnessPerAppValue, totalAttentivnessPercentage);
+            this.updateaattentivnessperApp(Appname, updatedAtttentivnessPerAppValue, attentivnessPer);
+
 
             Log.d("inotify(^_^", "currentTotalAttentivness =====" + currentToallAttentivnessValue);
             Log.d("inotify(^_^", "updatedAtttentivnessPerAppValue ====== " + updatedAtttentivnessPerAppValue);
             Log.d("inotify(^_^)", "totalAttentivnessPercentage=========" + totalAttentivnessPercentage);
-         //   Log.d("inotify(^_^)", "attentivnessPer=========" + attentivnessPer);
+            Log.d("inotify(^_^)", "attentivnessPer=========" + attentivnessPer);
 
 
         } else {

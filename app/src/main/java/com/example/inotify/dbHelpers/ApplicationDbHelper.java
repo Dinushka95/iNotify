@@ -807,4 +807,29 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         return 0;
     }
+
+    public boolean cheackAvailability(String TableName )
+    {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        Log.d("inotifyXX" ,"date " +date);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName +" where DATE =\"" + date + "\"", null);
+
+      if(res.getCount()>0)
+      {
+          Log.d("inotifyXX " , " Record Exists  - Cannot Insert Values");
+          return true;
+
+      }
+      else
+      {
+          Log.d("inotifyXX " , "Record does not Exists - Can Insert Values");
+          return false;
+
+      }
+
+
+
+   }
 }

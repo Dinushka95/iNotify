@@ -61,8 +61,11 @@ public class AppUsageHelper {
             appUsageModel.setUsageTime(String.valueOf((stat.getTotalTimeInForeground() / 1000)));
 
             appUsageModelList.add(appUsageModel);
+
         }
+        Log.d("inotify" , "Saved --- saveTodaysAppUsage ");
         return AppUsageDbHelper.getInstance(c1).insert(appUsageModelList);
+
     }
 
 
