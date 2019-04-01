@@ -599,6 +599,52 @@ public class ApplicationDbHelper extends MainDbHelp {
         return avg;
     }
 
+    public ArrayList getAppPackage() {
+        ArrayList<String> pacNamearraylist = new ArrayList<>();
+        pacNamearraylist.add("");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select "+ TbColNames.PACKAGENAME +" from " + TbNames.APPLICATIONS_TABLE , null);
+        if (cursor != null) {
+            int count =1;
+            while (cursor.moveToNext()) {
+                    pacNamearraylist.add(cursor.getString(0));
+                    //Log.d("pacname", "SelectPackage: "+ cursor.getString(0));
+//                    Log.d("Count", "SelectPackage: "+ count);
+                    count = count + 1 ;
+
+            }
+            pacNamearraylist.set(0,Integer.toString(count-1));
+            //ans[0] = Integer.toString(count2);
+
+        }
+        Log.d("inotify","pacNamearraylist " + pacNamearraylist.get(0));
+        return pacNamearraylist;
+    }
+
+    public boolean appCategoryUpdate(ArrayList<String> apacNamearraylist){
+
+        for (String packageName :apacNamearraylist) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String x="";
+            Cursor res = db.rawQuery("select * from " + TbNames.TOPAPPS_TABLE + " where packageName = \"" + packageName + "\" ", null);
+            if (res != null) {
+                if ((res.moveToFirst())) {
+                    db.close();
+                    x = res.getString(res.getColumnIndex(TbColNames.APPCATEGORY));
+                }
+            }
+            db.close();
+            SQLiteDatabase db1 = this.getWritableDatabase();
+            ContentValues newValues = new ContentValues();
+            newValues.put(TbColNames.APPCATEGORY, x);
+            db1.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME+"=\"" + packageName+"\"", null);
+            db1.close();
+        }
+        return true;
+    }
+
+
     public List<ApplicationInfoModel> myPhotograpyAppTodayGet() {
         //Log.d("cdap", " ---NValueGet--");
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
