@@ -172,22 +172,6 @@ public class MainMenuActivity extends AppCompatActivity implements
             }
         });
 
-        //   Toolbar toolbar = findViewById(R.id.toolbar);
-        //  setSupportActionBar(toolbar);
-
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
-/*        tabLayout.addTab(tabLayout.newTab().setText("Dashboard"));
-        tabLayout.addTab(tabLayout.newTab().setText("Smart Notification"));
-        tabLayout.addTab(tabLayout.newTab().setText("All Notification"));
-        tabLayout.addTab(tabLayout.newTab().setText("Applications"));
-        tabLayout.addTab(tabLayout.newTab().setText("UserCharacteristics"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);*/
-
-       // ActionBar actionbar = getSupportActionBar();
-        //actionbar.setDisplayHomeAsUpEnabled(true);
-       // actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
-
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -195,13 +179,11 @@ public class MainMenuActivity extends AppCompatActivity implements
         adapter.addFragment(new TabDashBoardFragment(), "Dash\nBoard");
         adapter.addFragment(new TabSmartNotificationFragment(), "Smart \n Notification");
         adapter.addFragment(new TabAllNotificationsFragment(), "All \n Notification");
-        adapter.addFragment(new TabApplicationFragment(), "All\nApplications");
+        adapter.addFragment(new TabApplicationFragment(), "Active\nApplications");
         adapter.addFragment(new TabUserCharacteristicsFragment(), "User \n Characteristics");
 
-        //final MainMenuPagerAdapter adapter = new MainMenuPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-        //viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
