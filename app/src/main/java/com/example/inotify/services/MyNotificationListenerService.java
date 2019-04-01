@@ -208,21 +208,24 @@ public class MyNotificationListenerService extends NotificationListenerService {
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
                     int importance = NotificationManager.IMPORTANCE_HIGH;
-                    NotificationChannel mChannel = null;
-                    mChannel = new NotificationChannel(appName, title, importance);
-                    notifManager.createNotificationChannel(mChannel);
+                    NotificationChannel mChannel = notifManager.getNotificationChannel(id);
+                    if (mChannel == null) {
+                        mChannel = new NotificationChannel(id, title, importance);
+                        mChannel.enableVibration(true);
+                        mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                        notifManager.createNotificationChannel(mChannel);
+                    }
                     builder = new NotificationCompat.Builder(this, id);
                     intent = LaunchIntent;
                     PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-                    builder.setContentTitle(title + "-iNotify")
-                            .setSmallIcon(android.R.drawable.ic_popup_reminder)
-                            .setContentText(text)
+                    builder.setContentTitle(title + "-iNotify")                            // required
+                            .setSmallIcon(android.R.drawable.ic_popup_reminder)   // required
+                            .setContentText(text) // required
 //                            .addExtras(extrasid)
-                            .setTicker(id)
                             .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
                     timeSent = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
+
 
                 } else {
                     builder = new NotificationCompat.Builder(this, appName);
