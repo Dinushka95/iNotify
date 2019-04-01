@@ -22,7 +22,7 @@
         android:padding="3dp">
 
         <ImageView
-            android:id="@+id/allnotiimageView"
+            android:id="@+id/pennotiimageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:srcCompat="@drawable/baseline_album_black_18dp" />
@@ -39,7 +39,7 @@
 
 
                 <TextView
-                    android:id="@+id/allnotidatetextView"
+                    android:id="@+id/pennotidatetextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp"
@@ -48,7 +48,7 @@
                     android:textSize="10dp" />
 
                 <TextView
-                    android:id="@+id/allnotitimetextView"
+                    android:id="@+id/pennotitimetextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp"
@@ -65,14 +65,14 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/allnotiid"
+                    android:id="@+id/pennotiid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="0sp"
                     android:visibility="invisible" />
 
                 <TextView
-                    android:id="@+id/allnotiappnametextView"
+                    android:id="@+id/pennotiappnametextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10sp"
@@ -83,7 +83,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/allnotititle"
+                    android:id="@+id/pennotititle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Title"
@@ -92,7 +92,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/allnotidescription"
+                    android:id="@+id/pennotidescription"
                     android:layout_width="310dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"

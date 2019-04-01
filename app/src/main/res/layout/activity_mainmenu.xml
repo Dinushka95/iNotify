@@ -18,10 +18,10 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:menu="@menu/navigation_menu"
+            android:textSize="30sp"
             app:headerLayout="@layout/nav_header" />
 
-
-    <android.support.v4.view.ViewPager
+        <android.support.v4.view.ViewPager
             android:id="@+id/pager"
             android:layout_width="360dp"
             android:layout_height="485dp"
@@ -29,7 +29,6 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tablayout">
-
 
         </android.support.v4.view.ViewPager>
 

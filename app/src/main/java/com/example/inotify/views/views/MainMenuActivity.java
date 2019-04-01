@@ -45,6 +45,7 @@ import com.example.inotify.viewControllers.adapters.MainMenuPagerAdapter;
 import com.example.inotify.views.fragments.TabAllNotificationsFragment;
 import com.example.inotify.views.fragments.TabApplicationFragment;
 import com.example.inotify.views.fragments.TabDashBoardFragment;
+import com.example.inotify.views.fragments.TabPendingNotificationsFragment;
 import com.example.inotify.views.fragments.TabSmartNotificationFragment;
 import com.example.inotify.views.fragments.TabUserCharacteristicsFragment;
 import com.google.android.gms.location.ActivityRecognitionClient;
@@ -56,10 +57,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainMenuActivity extends AppCompatActivity implements
+        TabDashBoardFragment.OnFragmentInteractionListener,
+        TabPendingNotificationsFragment.OnFragmentInteractionListener,
+        TabSmartNotificationFragment.OnFragmentInteractionListener,
         TabAllNotificationsFragment.OnFragmentInteractionListener,
         TabApplicationFragment.OnFragmentInteractionListener,
-        TabDashBoardFragment.OnFragmentInteractionListener,
-        TabSmartNotificationFragment.OnFragmentInteractionListener,
         TabUserCharacteristicsFragment.OnFragmentInteractionListener {
 
     private DrawerLayout drawerLayout;
@@ -111,9 +113,6 @@ public class MainMenuActivity extends AppCompatActivity implements
             // set item as selected to persist highlight
 
             switch (menuItem.getItemId()) {
-                case R.id.nav_b_pendingnotifications:
-                    Toast.makeText(MainMenuActivity.this, "clicked ac1", Toast.LENGTH_SHORT).show();
-                    break;
                 case R.id.nav_b_smart_notifications:
                     Toast.makeText(MainMenuActivity.this, "clicked ac2", Toast.LENGTH_SHORT).show();
                     break;
@@ -177,6 +176,7 @@ public class MainMenuActivity extends AppCompatActivity implements
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new TabDashBoardFragment(), "Dash\nBoard");
+        adapter.addFragment(new TabPendingNotificationsFragment(), "Pending\nNotification");
         adapter.addFragment(new TabSmartNotificationFragment(), "Smart \n Notification");
         adapter.addFragment(new TabAllNotificationsFragment(), "All \n Notification");
         adapter.addFragment(new TabApplicationFragment(), "Active\nApplications");
