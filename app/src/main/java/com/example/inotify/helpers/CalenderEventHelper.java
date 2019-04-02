@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.CalenderEventDbHelper;
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 
@@ -78,12 +79,28 @@ public class CalenderEventHelper {
 
     }
 
-    public long getcalanderEventCount()
+    public long getcalanderEventAVGCount()
     {
         return CalenderEventDbHelper.getInstance(c1).CalenderEventAVGGet();
 
     }
 
+
+    public boolean calenderEventCount_insert()
+    {
+        //return CalenderEventDbHelper.getInstance(c1).calenderEventCount_insert(this.getcalanderEventCount);
+        return true;
+
+    }
+
+    public void  scalenderEventCount_insertOnAvailability()
+    {
+        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CALENDEREVENTCOUNT_TABLE))
+        {
+            this.calenderEventCount_insert();
+        }
+
+    }
 
 }
 

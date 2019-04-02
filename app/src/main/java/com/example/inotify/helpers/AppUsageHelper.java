@@ -5,7 +5,9 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.AppUsageModel;
 
@@ -65,6 +67,16 @@ public class AppUsageHelper {
         }
         Log.d("inotify" , "Saved --- saveTodaysAppUsage ");
         return AppUsageDbHelper.getInstance(c1).insert(appUsageModelList);
+
+    }
+
+
+    public void  saveTodaysAppUsagesOnAvailability()
+    {
+        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.APPUSAGE_TABLE))
+        {
+            this.saveTodaysAppUsage();
+        }
 
     }
 
