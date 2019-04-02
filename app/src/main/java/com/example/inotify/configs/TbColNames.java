@@ -219,6 +219,7 @@ public class TbColNames {
     public static final String PHOTOGRAPHY = "photograpy";
     public static final String PERSONALIZATION = "personalization";
     public static final String COMMUNICATION = "communication";
+    public static final String TOOLS = "tools";
 
 
 

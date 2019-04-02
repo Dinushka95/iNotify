@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.provider.CallLog;
 import android.support.v4.app.ActivityCompat;
 
+import com.example.inotify.configs.TbNames;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.CallUsageDbHelper;
 import com.example.inotify.models.CallLogModel;
 
@@ -128,6 +130,15 @@ public class CallUsageHelper {
     public void saveTodayTotalCallDurationToDb(){
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         CallUsageDbHelper.getInstance(thisContex).insertTodayTotalCallDuration(date,getTodayTotalCallDurationFromPhone(thisContex));
+    }
+
+    public void  saveTodayTotalCallDurationToDbOnAvailability()
+    {
+        if(! ApplicationDbHelper.getInstance(thisContex).cheackAvailability(TbNames.CALLDURATION_TABLE))
+        {
+            this.saveTodayTotalCallDurationToDb();
+        }
+
     }
 
 

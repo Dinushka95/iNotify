@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.example.inotify.configs.TbNames;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.ContactsDbHelper;
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 import com.example.inotify.models.ContactsModel;
@@ -81,9 +83,8 @@ public class ContactsHelper {
 
     public int getcontactToday()
     {
-        ContactsDbHelper contactsDbHelper = new ContactsDbHelper(c1);
-        Log.d("inotify","contact today----" + contactsDbHelper.ContactsTodayGet());
-        return  contactsDbHelper.ContactsTodayGet();
+
+        return  ContactsDbHelper.getInstance (c1).ContactsTodayGet();
 
     }
 
@@ -94,5 +95,20 @@ public class ContactsHelper {
 //        Log.d("inotify","contact AVG----" + contactsDbHelper.ContactsAvgGet());
 //
 //    }
+
+
+    public boolean ContactsCountInsert()
+    {
+        return  ContactsDbHelper.getInstance (c1).ContactsCountInsert();
+    }
+
+    public void  ContactsCountInsertOnAvailability()
+    {
+        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CONTACTCOUNT_TABLE))
+        {
+            this.ContactsCountInsert();
+        }
+
+    }
 
 }
