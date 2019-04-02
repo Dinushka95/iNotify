@@ -192,6 +192,42 @@ public class ScreenStatusDbHelper extends MainDbHelp {
     }
 
 
+    public double screenStatusRecordCount()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.SCREENSTATUS_TABLE, null);
+        res.moveToFirst();
+        int count = res.getInt(res.getColumnIndex("count"));
+        android.util.Log.d("inotify(^_^", "count" + count);
+
+        res.close();
+        return count;
+    }
+
+    public double screenOnStatusRecordCountPerMode()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.SCREENSTATUS_TABLE +" where " + TbColNames.TIMEON + " not null" , null);
+        res.moveToFirst();
+        int count = res.getInt(res.getColumnIndex("count"));
+        android.util.Log.d("inotify(^_^", "count" + count);
+
+        res.close();
+        return count;
+    }
+    public double screenOffStatusRecordCountPerMode()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.SCREENSTATUS_TABLE +" where " + TbColNames.TIMEOFF + " not null" , null);
+        res.moveToFirst();
+        int count = res.getInt(res.getColumnIndex("count"));
+        android.util.Log.d("inotify(^_^", "count" + count);
+
+        res.close();
+        return count;
+    }
+
+
 
 
 

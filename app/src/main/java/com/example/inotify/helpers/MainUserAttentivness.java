@@ -1,8 +1,12 @@
 package com.example.inotify.helpers;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.inotify.dbHelpers.AttentivnessPerAppDbHelper;
+import com.example.inotify.dbHelpers.RingerModeDbHelper;
+import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.services.MyNotificationListenerService;
 
@@ -16,7 +20,7 @@ import java.util.Locale;
 
 public class MainUserAttentivness {
 
-
+    private Context c1;
 
     //write a method to check in which table does the record exisits (screen on tabele or screen off table)
 
@@ -354,6 +358,543 @@ public class MainUserAttentivness {
     }
 
 
+
+
+
+
+    public double CalcAtten(String id ,String PackageName, String screenstatus, String RingerMode, String Viewtime, String RecivedTime, String Sequence, int notificationTotal)
+    {
+        double attentValue =0;
+        double Ringermode = 0.0;
+        double ScreenStatus =0.0;
+        double AppImportnace = 0.0;
+        double TimeDelay =0.0;
+
+
+        double ringerModeWeight=0.0;
+        double sequenceWeight =0.0;
+        double screenStatusWeight=0.0;
+        double appImportnaceWight = 0.0 ;
+        double timeDelayWeight = 0.0;
+
+
+        double sequenceAVG = (notificationTotal)/2.0;
+        int notificationSequence = Integer.parseInt(Sequence);
+
+        Date timeviwed= new Date();
+        Date  timeRecived = new Date();
+
+
+        //Convert the string value to date time
+        DateFormat dateFormat = new SimpleDateFormat("HHmmss");
+        try{
+
+            timeviwed =(Date) dateFormat.parse(Viewtime);
+            timeRecived =(Date) dateFormat.parse(RecivedTime);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+
+        Log.d("inotify(^_^)" ,"time viwed  " +timeviwed);
+        Log.d("inotify(^_^)" ,"time recived " +timeRecived);
+
+        long delay = timeviwed.getTime() - timeRecived.getTime();
+        // long diffMinutes = diff / (60 * 1000) % 60;
+        long delayinminute = delay/60000 % 60;
+        Date delaydiff = new Date(delay);
+
+
+        Log.d("inotify(^_^)" , "delay=============" +delay );
+        Log.d("inotify(^_^)" , "delaydiff=============" +delayinminute );
+
+
+
+
+        AttentivnessPerAppDbHelper attentivnessPerAppDbHelper= new AttentivnessPerAppDbHelper(c1);
+        Boolean AppExistence = attentivnessPerAppDbHelper.CheckAttentivness(PackageName);
+        Log.d("inptifyCCCC" , "AppExistence" +AppExistence );
+
+        if(AppExistence)
+        {
+            double screenStatusRecordCountPerMode=0.0;
+            //update method
+
+            //get ringer Mode Weighting
+           // if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.APPLICATIONS_TABLE))
+           double recordcount =  RingerModeDbHelper.getInstance(c1).RecordCount();
+           double recordCountPerMode = RingerModeDbHelper.getInstance(c1).RecordCountPerMode(RingerMode);
+           Ringermode = recordCountPerMode/recordcount;
+
+
+
+            double screenStatusRecordCount = ScreenStatusDbHelper.getInstance(c1).screenStatusRecordCount();
+            if(screenstatus.equals("on"))
+            {
+                 screenStatusRecordCountPerMode = ScreenStatusDbHelper.getInstance(c1).screenOnStatusRecordCountPerMode();
+            }
+            else
+            {
+                 screenStatusRecordCountPerMode = ScreenStatusDbHelper.getInstance(c1).screenOffStatusRecordCountPerMode();
+            }
+            ScreenStatus =  screenStatusRecordCountPerMode/screenStatusRecordCount;
+
+
+
+            //*******************************************************************************************************//
+            if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+
+
+//*********************************************************Silent /////////////////////////////////////////////////////////////////////////////////
+
+
+            if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+
+
+
+
+            //*********************************************************Vibrate /////////////////////////////////////////////////////////////////////////////////
+
+
+            if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else {
+                Log.d("inotify " , "error");
+
+            }
+
+            attentValue = (0.113*ringerModeWeight*Ringermode) + (0.1190*ScreenStatus* screenStatusWeight) + (0.3539*timeDelayWeight*TimeDelay) + (0.1936 * sequenceWeight*notificationSequence);
+
+
+            //*******************************************************************************************************//
+
+
+
+
+
+
+
+
+
+        }
+        else
+        {
+            //Insert method
+            Ringermode = 0.3333;
+            ScreenStatus = 0.5;
+            AppImportnace = 0.5;
+            TimeDelay = 0.5;
+
+
+
+            if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+
+
+//*********************************************************Silent /////////////////////////////////////////////////////////////////////////////////
+
+
+            if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+
+
+
+
+            //*********************************************************Vibrate /////////////////////////////////////////////////////////////////////////////////
+
+
+            if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 0.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 1.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 1.0;
+
+            }
+            else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
+            {
+                ringerModeWeight =1.0;
+                sequenceWeight = 1.0;
+                timeDelayWeight = 0.0;
+                screenStatusWeight = 0.0;
+
+            }
+            else {
+                Log.d("inotify " , "error");
+
+            }
+            attentValue = (0.113*ringerModeWeight*Ringermode) + (0.1190*ScreenStatus* screenStatusWeight) + (0.3539*timeDelayWeight*TimeDelay) + (0.1936 * sequenceWeight*notificationSequence);
+
+        }
+
+
+
+
+
+        return attentValue;
+    }
 
 
 

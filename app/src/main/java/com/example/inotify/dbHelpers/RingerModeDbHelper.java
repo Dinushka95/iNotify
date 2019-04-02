@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
 import java.text.SimpleDateFormat;
@@ -85,6 +86,32 @@ public class RingerModeDbHelper extends MainDbHelp {
         return null;
 
     }
+
+
+    public double RecordCount()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.RINGERMODE_TABLE, null);
+        res.moveToFirst();
+        int count = res.getInt(res.getColumnIndex("count"));
+        Log.d("inotify(^_^", "count" + count);
+
+        res.close();
+        return count;
+    }
+
+    public double RecordCountPerMode(String ringerMode)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.RINGERMODE_TABLE +" where " + TbColNames.RM_RINGERMODE +" =" +ringerMode , null);
+        res.moveToFirst();
+        int count = res.getInt(res.getColumnIndex("count"));
+        Log.d("inotify(^_^", "count" + count);
+
+        res.close();
+        return count;
+    }
+
 
 
 }
