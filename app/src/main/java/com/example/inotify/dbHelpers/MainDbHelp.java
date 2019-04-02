@@ -92,7 +92,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.DATAUSAGE_TABLE + " ("+TbColNames.DATAUSAGE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.AMOUNT+" TEXT)");
 
-        db.execSQL("create table " + TbNames.COMMONAPPCOUNT_TABLE + " ("+TbColNames.COMMONAPPCOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIAL+" TEXT,"+TbColNames.GAMING+" TEXT,"+TbColNames.PHOTOGRAPHY+" TEXT,"+TbColNames.PERSONALIZATION+" TEXT,"+TbColNames.COMMUNICATION+" TEXT,"+TbColNames.TOOLS+" TEXT)");
+        db.execSQL("create table " + TbNames.COMMONAPPCOUNT_TABLE + " ("+TbColNames.COMMONAPPCOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIAL+" TEXT,"+TbColNames.GAMING+" TEXT,"+TbColNames.PHOTOGRAPHY+" TEXT,"+TbColNames.PERSONALIZATION+" TEXT,"+TbColNames.COMMUNICATION+" TEXT,"+TbColNames.TOOLS+" TEXT,"+TbColNames.MUSICVIDEO+" TEXT)");
 
 
 

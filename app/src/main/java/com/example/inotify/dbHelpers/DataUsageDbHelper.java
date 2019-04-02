@@ -44,6 +44,15 @@ public class DataUsageDbHelper extends MainDbHelp {
         return result != -1;
     }
 
+//    public void  insertTotoalDataUsageAvailability()
+//    {
+//        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CHARGER_TABLE))
+//        {
+//            this.insertTotoalDataUsage(date,amount);
+//        }
+//
+//    }
+
     public String getTotalDataUsage(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TbNames.DATAUSAGE_TABLE + " where DATE = \"" + date + "\" ", null);

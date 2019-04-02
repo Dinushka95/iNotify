@@ -6,11 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.dbHelpers.CharacteristicFinalDbHelper;
 import com.example.inotify.dbHelpers.ContactsDbHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.CallUsageHelper;
 import com.example.inotify.helpers.ContactsHelper;
+
+import java.util.ArrayList;
 
 public class UsercharacteristicsActivity extends AppCompatActivity {
 
@@ -37,20 +41,30 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test2(View view) {
-        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(this);
+//        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(this);
+//
+//        int x = calenderEventHelper.getcalanderEventCount(this);
+//        calenderEventHelper.updateTodayCalendar();
+//        Log.d("inotify","calemder-------------" + x);
+//        boolean y = calenderEventHelper.calenderEventCount_insert();
+//        Log.d("inotify","calenderEventCount_insert-------------" + y);
+//
+//        CallUsageHelper callUsageHelper = new CallUsageHelper(this);
+//        callUsageHelper.getTodayCallListFromPhone(this);
+//        callUsageHelper.saveTodayTotalCallDurationToDb();
+//
+//        ContactsHelper contactsHelper = new ContactsHelper(this);
+//        contactsHelper.ContactsCountInsert();
 
-        int x = calenderEventHelper.getcalanderEventCount(this);
-        calenderEventHelper.updateTodayCalendar();
-        Log.d("inotify","calemder-------------" + x);
-        boolean y = calenderEventHelper.calenderEventCount_insert();
-        Log.d("inotify","calenderEventCount_insert-------------" + y);
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+        ArrayList<String> category;
+        category = applicationDbHelper.getAppPackage();
+        Log.d("cat","cat " + category.get(2));
 
-        CallUsageHelper callUsageHelper = new CallUsageHelper(this);
-        callUsageHelper.getTodayCallListFromPhone(this);
-        callUsageHelper.saveTodayTotalCallDurationToDb();
+        applicationDbHelper.appCategoryUpdate(category);
 
-        ContactsHelper contactsHelper = new ContactsHelper(this);
-        contactsHelper.ContactsCountInsert();
+//        CharacteristicFinalDbHelper characteristicFinalDbHelper = new CharacteristicFinalDbHelper(this);
+//        boolean x = characteristicFinalDbHelper.characteristicsInsert();
 
      }
 

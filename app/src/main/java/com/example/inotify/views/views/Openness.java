@@ -159,6 +159,21 @@ public class Openness extends AppCompatActivity {
             }
 
             int socilAppCountToday = applicationsHelper.commonSocialAppTodayCount();
+            if(NoofAppsToday > NoofAppsAllAVG)
+            {
+                Log.d("inotify","Your Number of apps is high on today than the other days");
+                String noOfApps = "high";
+            }
+            else if(todayAppUsage == avgAppUsage)
+            {
+                Log.d("inotify","Your Number of apps is normal");
+                String noOfApps = "normal";
+            }
+            else
+            {
+                Log.d("inotify","Your Number of apps is low on today than the other days");
+                String noOfApps = "low";
+            }
 
 
         }
