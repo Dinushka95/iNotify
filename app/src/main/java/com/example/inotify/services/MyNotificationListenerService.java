@@ -315,10 +315,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "screenStatus1" + screenStatus1);
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved-- Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus1 + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
-            MainUserAttentivness mainUserAttentivness = new MainUserAttentivness();
-            double attentivnessvalue = mainUserAttentivness.calculateAttentivness(ticker, screenStatus1, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
+            MainUserAttentivness mainUserAttentivness = new MainUserAttentivness(this);
+            //double attentivnessvalue = mainUserAttentivness.calculateAttentivness(ticker, screenStatus1, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
           ///(^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^)(^_^) (^_^) (^_^) (^_^) (^_^) (^_^)
-           // double attentivnessvalue = mainUserAttentivness.CalcAtten(ticker,Appname,screenStatus1,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
+            double attentivnessvalue = mainUserAttentivness.CalcAtten(ticker,Appname,screenStatus1,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
 
 
 

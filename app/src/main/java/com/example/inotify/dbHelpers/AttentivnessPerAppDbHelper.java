@@ -3,6 +3,7 @@ package com.example.inotify.dbHelpers;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -14,11 +15,27 @@ import java.util.List;
 
 public class AttentivnessPerAppDbHelper extends MainDbHelp{
 
+    private static AttentivnessPerAppDbHelper mInstance = null;
+
+
     private Context c1;
     public AttentivnessPerAppDbHelper(Context context) {
         super(context);
         c1= context;
+
     }
+
+    public static  AttentivnessPerAppDbHelper getInstance(Context context)
+    {
+        if(mInstance ==null){
+            mInstance = new AttentivnessPerAppDbHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
+
+
+
+
 
     //Insert method for AttentivnessPerApp table
     public boolean totalAttentivnessPerAppInsert(String packageName, double totalAttentivness, double totalattentivnesspercentage) {
@@ -61,6 +78,32 @@ public class AttentivnessPerAppDbHelper extends MainDbHelp{
             return true;
         }
         return false;
+
+    }
+
+//Check wheather theare are records in AttentivnessPerApp table or not
+   public int CheckExistance()
+    {
+        Log.d("inotify " , " inotify =================================Check Exixtance"  );
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.USERATTENTIVNESS_TABLE, null);
+        Log.d("inotify " , " inotify =================================NoOfRowa" + res);
+        res.moveToFirst();
+        int count = res.getInt(res.getColumnIndex("count"));
+        Log.d("inotify(^_^", "count" + count);
+
+        res.close();
+        return count;
+
+
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        int NoOfRows = (int) DatabaseUtils.queryNumEntries(db ,TbNames.USERATTENTIVNESS_TABLE);
+//        Log.d("inotify " , " inotify =================================NoOfRowa" + NoOfRows);
+//        if (NoOfRows == 0){
+//            return true;
+//        }else {
+//            return false;
+//        }
 
     }
 
@@ -116,6 +159,8 @@ public class AttentivnessPerAppDbHelper extends MainDbHelp{
 
         if(attentivnessExistence)
         {
+            Log.d("inotify ", "AttentivnessPerApp ================== Update The AttentivnessPerApp_Table================= ");
+
             double CurrentTotalAtttentivnessValue = Double.parseDouble(this.AttentivnessperAppGet(PackageName));
             double UpdatedAttentivnessPerAppValue = CurrentTotalAtttentivnessValue + attentivnessPerParticulrNotification;
             double cumilativeAttentivness = this.totalattentivnessSumGet(PackageName);
@@ -123,10 +168,18 @@ public class AttentivnessPerAppDbHelper extends MainDbHelp{
 
             this.updateaAttentivnessPerApp(PackageName, UpdatedAttentivnessPerAppValue, attentivnessPercenatge);
 
+            Log.d("inotify ", "AttentivnessPerApp =====Update The AttentivnessPerApp_Table =====PackageName " +PackageName);
+            Log.d("inotify ", "AttentivnessPerApp =====Update The AttentivnessPerApp_Table =====UpdatedAttentivnessPerAppValue " +UpdatedAttentivnessPerAppValue);
+            Log.d("inotify ", "AttentivnessPerApp =====Update The AttentivnessPerApp_Table =====attentivnessPercenatge " +attentivnessPercenatge);
+            Log.d("inotify ", "AttentivnessPerApp =====Update The AttentivnessPerApp_Table =====UpdatedAttentivnessPerAppValue " +UpdatedAttentivnessPerAppValue);
+            Log.d("inotify ", "AttentivnessPerApp =====Update The AttentivnessPerApp_Table =====cumilativeAttentivness " +cumilativeAttentivness);
 
 
 
-            Log.d("inotify ", "AttentivnessPerApp ================== Update The AttentivnessPerApp_Table================= ");
+
+
+
+
                /* ArrayList<String> arrayList1 = this.GetAllData();
                 for (int i = 0; i < arrayList1.lastIndexOf(arrayList1); i++) {
                     //check whather the app name is in the table if so go for the normal method else go with the
