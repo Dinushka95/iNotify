@@ -14,6 +14,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.AttentivnessPerAppDbHelper;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 import com.example.inotify.logger.Log;
 
@@ -29,8 +30,8 @@ public class UserAttentivenessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_attentiveness);
 
         Layout = findViewById(R.id.liner);
-        UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-        ArrayList<String> ansArry =userAttentivnessDbHelper.displayData();
+        AttentivnessPerAppDbHelper attentivnessPerAppDbHelper = new AttentivnessPerAppDbHelper(this);
+        ArrayList<String> ansArry =attentivnessPerAppDbHelper.displayData();
         displayTable(ansArry);
   }
 

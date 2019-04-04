@@ -17,6 +17,7 @@ import android.util.Log;
 
 import com.annimon.stream.Stream;
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.AttentivnessPerAppDbHelper;
 import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
@@ -314,14 +315,20 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "screenStatus1" + screenStatus1);
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved-- Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus1 + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
-            MainUserAttentivness mainUserAttentivness = new MainUserAttentivness();
-            double attentivnessvalue = mainUserAttentivness.calculateAttentivness(ticker, screenStatus1, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
+            MainUserAttentivness mainUserAttentivness = new MainUserAttentivness(this);
+            //double attentivnessvalue = mainUserAttentivness.calculateAttentivness(ticker, screenStatus1, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
+          ///(^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^)(^_^) (^_^) (^_^) (^_^) (^_^) (^_^)
+            double attentivnessvalue = mainUserAttentivness.CalcAtten(ticker,Appname,screenStatus1,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
+
+
 
             UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
             userAttentivnessDbHelper.UserAttentivnessInsert(ticker, Appname, attentivnessvalue);
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
 
-            userAttentivnessDbHelper.calculateTotalAttentivness(ticker, Appname);
+
+            AttentivnessPerAppDbHelper attentivnessPerAppDbHelper= new AttentivnessPerAppDbHelper(this);
+            attentivnessPerAppDbHelper.calculateTotalAttentivness(ticker, Appname);
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Total Attentivness succcessfully added");
 
             //Smart Notification update with time
