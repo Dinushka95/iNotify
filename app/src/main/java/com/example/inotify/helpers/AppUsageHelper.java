@@ -23,6 +23,7 @@ public class AppUsageHelper {
     private Context c1;
 
     public AppUsageHelper(Context context) {
+
         this.c1 = context;
     }
 

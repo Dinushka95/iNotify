@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.ChargerHelper;
+import com.example.inotify.helpers.ContactsHelper;
 import com.example.inotify.helpers.ScreenOnTimeHelper;
 
 import java.text.SimpleDateFormat;
@@ -43,12 +45,18 @@ public class AttributeCountDbHelper extends MainDbHelp {
         int appCount = applicationsHelper.appCountGetToday();
         ScreenOnTimeHelper screenOnTimeHelper = new ScreenOnTimeHelper(c1);
         int screenOnTimeCount = screenOnTimeHelper.ScreenOnTimeTodayGet();
+        ContactsHelper contactsHelper = new ContactsHelper(c1);
+        int contactCount = contactsHelper.getcontactToday();
         ChargerHelper chargerHelper = new ChargerHelper(c1);
         int chageCount = chargerHelper.powerOnCount();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TbColNames.APPCOUNT,appCount);
         contentValues.put(TbColNames.SCREENONTIMECOUNT,screenOnTimeCount);
+        Log.d("inotify","screenontime"+screenOnTimeHelper.ScreenOnTimeTodayGet());
         contentValues.put(TbColNames.CHARGINGCOUNT,chageCount);
+        contentValues.put(TbColNames.CONTACTCOUNT,contactCount);
+        Log.d("inotify","contactCount------"+contactCount);
+
         contentValues.put(TbColNames.DATE,date);
 
         long result = db.insert(TbNames.ATTRIBUTECOUNT_TABLE, null, contentValues);
@@ -162,5 +170,20 @@ public class AttributeCountDbHelper extends MainDbHelp {
         }
 
         return avg;
+    }
+
+    public int powerOffCountGetAVG() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("select AVG(CHARGINGCOUNT) from " + TbNames.ATTRIBUTECOUNT_TABLE , null);
+        if (res != null) {
+            if ((res.moveToFirst())){
+                Log.d("inotify","powerOffCountGet----"+res.getCount());
+                return res.getCount();
+            }
+        }
+        db.close();
+        return 0;
     }
 }

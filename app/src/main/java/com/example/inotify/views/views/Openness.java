@@ -1,5 +1,6 @@
 package com.example.inotify.views.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +10,19 @@ import android.widget.TextView;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
+import com.example.inotify.dbHelpers.AppUsageDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.CommonAppCountHelper;
+import com.google.android.gms.common.internal.service.Common;
 
 public class Openness extends AppCompatActivity {
+    private Context c1;
+
+    public Openness(Context context) {
+
+        this.c1 = context;
+    }
     TextView textView;
 
     @Override
@@ -30,7 +40,7 @@ public class Openness extends AppCompatActivity {
         public long displayOpenness()
         {
            AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-            long todayAllAppUsage = appUsageHelper.appAllsUsageToday();
+            long todayAllAppUsage = AppUsageDbHelper.getInstance(c1).appAllsUsageToday();
             long todaySocialAppUsage = appUsageHelper.socialAppsUsageToday();
             long todayCommunicationAppUsage = appUsageHelper.communicationAppsUsageToday();
 
@@ -39,6 +49,7 @@ public class Openness extends AppCompatActivity {
             int NoofAppsAll = applicationsHelper.allAppCountAVG();
 
             int newApps = (NoofAppsAll - NoofAppsToday);
+            Log.d("inotify","newApps" + newApps);
 
             int socialAppToday = applicationsHelper.commonSocialAppTodayCount();
             int communicationAppToday = applicationsHelper.commonCommunicationAppTodayCount();
@@ -76,10 +87,53 @@ public class Openness extends AppCompatActivity {
             intent.putExtra("Openness", Openness);
             startActivity(intent);
 
+            Log.d("inotify","Openness--------"+Openness);
+
             return Openness;
 
 
         }
+
+    public long displayOpennessAVG()
+    {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        long avgAllAppUsage = AppUsageDbHelper.getInstance(c1).appAllsUsageAVG();
+        long avgSocialAppUsage = appUsageHelper.socialAppsUsageAVG();
+        long avgCommunicationAppUsage = appUsageHelper.communicationAppsUsageAVG();
+
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+       // int NoofAppsToday = applicationsHelper.appCountGetToday();
+        int NoofAppsAll = applicationsHelper.allAppCountAVG();
+
+       // int newApps = (NoofAppsAll - NoofAppsToday);
+
+        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
+        long socialAppAvg = commonAppCountHelper.commonSocialAppAvg();
+        int communicationAppAvg = commonAppCountHelper.commonCommunicationAppAvg();
+
+        //probability
+        long avgAllAppUsageProbability = (avgAllAppUsage * 16)/100;
+        long avgSocialAppUsageProbability = (avgSocialAppUsage * 16)/100;
+        long avgCommunicationAppUsageProbability = (avgCommunicationAppUsage * 16)/100;
+        long newAppsProbability = (NoofAppsAll * 16)/100;
+        long socialAppTodayProbability = (socialAppAvg * 16)/100;
+        long communicationAppTodayProbability = (communicationAppAvg * 16)/100;
+
+        long OpennessAVG = (avgAllAppUsageProbability + avgSocialAppUsageProbability + avgCommunicationAppUsageProbability + newAppsProbability + socialAppTodayProbability + communicationAppTodayProbability)/100;
+
+
+//
+//
+//        Intent intent = new Intent(Openness.this, UserAttentivenessActivity.class);
+//        intent.putExtra("Openness", Openness);
+//        startActivity(intent);
+//
+        Log.d("inotify","Openness--------"+OpennessAVG);
+
+        return OpennessAVG;
+
+
+    }
 
         public void checkAttributeOpenness()
         {

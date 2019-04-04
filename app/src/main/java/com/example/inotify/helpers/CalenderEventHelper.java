@@ -93,7 +93,7 @@ public class CalenderEventHelper {
 
     }
 
-    public void  scalenderEventCount_insertOnAvailability()
+    public void  calenderEventCount_insertOnAvailability()
     {
         if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CALENDEREVENTCOUNT_TABLE))
         {

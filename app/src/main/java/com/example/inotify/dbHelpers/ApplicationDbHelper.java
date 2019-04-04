@@ -179,7 +179,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"social\" AND DATE = \"date\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"SOCIAL\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -203,7 +203,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"social\" ", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"SOCIAL\" ", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -227,7 +227,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"personalization\" AND DATE = \"date\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"PERSONALIZATION\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -251,7 +251,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"personalization\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"PERSONALIZATION\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -275,7 +275,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\" AND DATE = \"date\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"GAMING\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -299,7 +299,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\" ", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"GAMING\" ", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -323,7 +323,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"musicvideo\" AND DATE = \"date\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"MUSIC&AUDIO\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -347,7 +347,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"musicvideo\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"MUSIC&AUDIO\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -371,7 +371,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\" AND DATE = \"date\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.APPLICATIONS_TABLE + " where APPCATEGORY = \"COMMUNICATION\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -395,7 +395,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\"", null);
+        Cursor res = db.rawQuery("select * from " + TbNames.APPLICATIONS_TABLE + " where APPCATEGORY = \"COMMUNICATION\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -650,7 +650,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\" AND DATE = \"date\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"PHOTOGRAPY\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -674,7 +674,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\"", null);
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"PHOTOGRAPY\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
@@ -696,7 +696,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"social\" AND DATE = \"date\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"SOCIAL\" AND DATE = \"date\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -712,7 +712,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"social\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"SOCIAL\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -728,7 +728,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\" AND DATE =\"date\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"PHOTOGRAPY\" AND DATE =\"date\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -744,7 +744,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"photograpy\" ", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"PHOTOGRAPY\" ", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -762,7 +762,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\"AND Date = \"date\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"COMMUNICATION\"AND Date = \"date\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -778,7 +778,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"communication\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"COMMUNICATION\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -794,7 +794,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\" AND Date = \"date\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"GAMING\" AND Date = \"date\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -810,7 +810,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"gaming\" ", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"GAMING\" ", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -826,7 +826,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"personalization\" AND Date = \"date\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"PERSONALIZATION\" AND Date = \"date\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -842,7 +842,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"personalization\"", null);
+        Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"PERSONALIZATION\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
                 return res.getInt(res.getColumnIndex(TbColNames.APPNAME));
@@ -874,6 +874,8 @@ public class ApplicationDbHelper extends MainDbHelp {
           return false;
 
       }
+
+
 
 
 

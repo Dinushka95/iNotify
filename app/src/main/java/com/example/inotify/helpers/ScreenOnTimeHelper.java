@@ -6,6 +6,7 @@ import android.net.TrafficStats;
 import android.util.Log;
 
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
+import com.example.inotify.dbHelpers.ContactsDbHelper;
 import com.example.inotify.dbHelpers.MainDbHelp;
 import com.example.inotify.dbHelpers.ScreenOnTimeDbHelper;
 
@@ -23,11 +24,16 @@ public class ScreenOnTimeHelper extends MainDbHelp {
     }
 
     public int ScreenOnTimeTodayGet() {
-        ScreenOnTimeDbHelper screenOnTimeDbHelper = new ScreenOnTimeDbHelper(c1);
-        Log.d("inotify","ScreenOnTimeTodayGet......" + screenOnTimeDbHelper.ScreenOnTimeCountTodayGet());
+
         return ScreenOnTimeDbHelper.getInstance(c1).ScreenOnTimeCountTodayGet();
 
     }
+
+//    public boolean ScreenOnTimeCountInsert()
+//    {
+//        return  ScreenOnTimeDbHelper.getInstance (c1).ScreenOnTimeCountInsert();
+//    }
+
 
 
 

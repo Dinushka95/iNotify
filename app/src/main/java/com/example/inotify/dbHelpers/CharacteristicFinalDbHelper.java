@@ -28,7 +28,7 @@ public class CharacteristicFinalDbHelper extends MainDbHelp {
         SQLiteDatabase db = this.getWritableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
-        Openness openness = new Openness();
+        Openness openness = new Openness(c1);
         long openness_chara= openness.displayOpenness();
 
         Conscientiousness conscientiousness = new Conscientiousness();

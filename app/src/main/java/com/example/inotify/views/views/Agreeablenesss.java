@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.example.inotify.R;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.AttributeCountHelper;
+import com.example.inotify.helpers.CommonAppCountHelper;
 import com.example.inotify.helpers.ContactsHelper;
 import com.example.inotify.helpers.ScreenOnTimeHelper;
 
@@ -76,6 +78,39 @@ public class Agreeablenesss extends AppCompatActivity {
         //textViewToChange5.setText(""+todayCommunicationAppUsageProbability);
 
         return agreeableness;
+
+    }
+
+    public long DisplayAgreeablenessAVG()//view aka ain kala
+    {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        long avgPersonalizationAppUsage = appUsageHelper.personalizationAppsUsageAVG();
+
+        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
+        long avgPersonalizationApp = commonAppCountHelper.commonPersonalizationAppAvg();
+
+
+        AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
+        long avgAppCount = attributeCountHelper.appCountAvgGet();
+
+
+       long avgContcts =attributeCountHelper.ContactsAvgGet();
+
+        long avgScreenOnTime = attributeCountHelper.ScreenOnTimeCountAvgGet();
+
+        //Probability
+        long avgPersonalizationAppUsageProbability = (avgPersonalizationAppUsage * 20)/100;
+        long avgPersonalizationAppProbability = (avgPersonalizationApp * 20)/100;
+        long avgAppCountProbability = (avgAppCount * 20)/100;
+        long avgContctsProbability = (avgContcts * 20)/100;
+        long avgScreenOnTimeProbability = (avgScreenOnTime * 20)/100;
+
+        long agreeablenessAVG = (avgAppCountProbability + avgContctsProbability + avgScreenOnTimeProbability - avgPersonalizationAppUsageProbability -avgPersonalizationAppProbability);
+
+        Log.d("inotify","agreeableness--------------"+ agreeablenessAVG);
+
+
+        return agreeablenessAVG;
 
     }
 }

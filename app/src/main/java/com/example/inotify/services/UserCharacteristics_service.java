@@ -13,9 +13,18 @@ import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
+import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.AttributeCountHelper;
 import com.example.inotify.helpers.CalenderEventHelper;
+import com.example.inotify.helpers.CallUsageHelper;
+import com.example.inotify.helpers.ChargerHelper;
+import com.example.inotify.helpers.CommonAppCountHelper;
+import com.example.inotify.helpers.ContactsHelper;
+import com.example.inotify.helpers.DataUsageHelper;
+import com.example.inotify.helpers.ScreenOnTimeHelper;
 import com.example.inotify.models.ContactsModel;
 
 import java.text.SimpleDateFormat;
@@ -30,8 +39,44 @@ public class UserCharacteristics_service extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
-//        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-//        applicationsHelper.saveCurrentPhoneApps();
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+        applicationsHelper.saveCurrentPhoneAppsOnAvailability();
+
+        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+        ArrayList<String> category;
+        category = applicationDbHelper.getAppPackage();
+        Log.d("cat","cat " + category.get(2));
+
+        applicationDbHelper.appCategoryUpdate(category);
+
+
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        appUsageHelper.saveTodaysAppUsagesOnAvailability();
+
+        ChargerHelper chargerHelper = new ChargerHelper(this);
+        chargerHelper.powerOninsert();
+
+        ContactsHelper contactsHelper = new ContactsHelper(this);
+        contactsHelper.ContactsCountInsertOnAvailability();
+
+        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(this);
+        calenderEventHelper.calenderEventCount_insertOnAvailability();
+
+        CallUsageHelper callUsageHelper = new CallUsageHelper(this);
+        callUsageHelper.saveTodayTotalCallDurationToDbOnAvailability();
+
+        DataUsageHelper dataUsageHelper = new DataUsageHelper(this);
+
+        dataUsageHelper.getTotalDataUsagAvailability();
+
+        ScreenOnTimeHelper screenOnTimeHelper = new ScreenOnTimeHelper(this);
+        screenOnTimeHelper.ScreenOnTimeTodayGet();
+
+        AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
+        attributeCountHelper.atrributeCountInsertOnAvailability();
+//
+//        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
+//        commonAppCountHelper.characteristicsInsertOnAvailability();
         return false;
     }
 

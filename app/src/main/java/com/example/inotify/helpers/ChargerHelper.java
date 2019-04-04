@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.ChargerDbHelper;
 
 import java.text.SimpleDateFormat;
@@ -51,5 +52,13 @@ public class ChargerHelper {
         Log.d("inotify","Power OFF count" + chargerDbHelper.powerOffCountGet());
 
         return ChargerDbHelper.getInstance(c1).powerOffCountGet();
+    }
+    public void  powerOninsertOnAvailability()
+    {
+        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CHARGER_TABLE))
+        {
+            this.powerOninsert();
+        }
+
     }
 }

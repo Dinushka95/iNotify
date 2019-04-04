@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.example.inotify.R;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.AttributeCountHelper;
 import com.example.inotify.helpers.ChargerHelper;
+import com.example.inotify.helpers.CommonAppCountHelper;
 
 public class Neuroticism extends AppCompatActivity {
 
@@ -32,6 +34,37 @@ public class Neuroticism extends AppCompatActivity {
         this.neuroticismDisplay();
 
     }
+    public long neuroticismDisplayAVG()
+    {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        long avgPhotograpyAppUsage = appUsageHelper.photograpyAppsUsageAVG();
+        long avgSocialAppUsage = appUsageHelper.socialAppsUsageAVG();
+
+        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
+        long socialAppAvg = commonAppCountHelper.commonSocialAppAvg();
+        int avgPhotograpyApps = commonAppCountHelper.commonPhotograpyAppAvg();
+
+        long avgAllAppUsage = appUsageHelper.appAllsUsageAVG();
+
+        AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
+        long chargeAVG = attributeCountHelper.chargingCountAvgGet();
+
+        //Probability
+        long avgPhotograpyAppUsageProbability = (avgPhotograpyAppUsage * 16)/100;
+        long avgSocialAppUsageProability = (avgSocialAppUsage * 16)/100;
+        long avgtodayPhotograpyAppsProbability = (avgPhotograpyApps * 16)/100;
+        long avgSocialappsProbability = (socialAppAvg * 16)/100;
+        long avgAllAppUsageProbability = (avgAllAppUsage * 16)/100;
+        long avgchargeProbability = (chargeAVG * 16)/100;
+
+        long neuroticismAVG = (avgPhotograpyAppUsageProbability + avgtodayPhotograpyAppsProbability - avgSocialAppUsageProability - avgSocialappsProbability + avgAllAppUsageProbability + avgchargeProbability)/10;
+
+        Log.d("inotify","neuroticism..................."+ neuroticismAVG);
+
+
+        return neuroticismAVG;
+    }
+
     public long neuroticismDisplay()
     {
         AppUsageHelper appUsageHelper = new AppUsageHelper(this);
@@ -57,7 +90,7 @@ public class Neuroticism extends AppCompatActivity {
 
         long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability + chargeProbability)/10;
 
-       Log.d("inotify","neuroticism..................."+ neuroticism);
+        Log.d("inotify","neuroticism..................."+ neuroticism);
 
         final TextView textViewToChange = findViewById(R.id.N_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.N_attr_2);
@@ -72,7 +105,6 @@ public class Neuroticism extends AppCompatActivity {
         textViewToChange4.setText(""+todaySocialAppUsageProability);
         textViewToChange5.setText(""+todayAllAppUsageProbability);
         textViewToChange6.setText(""+chargeProbability);
-
 
 
 
