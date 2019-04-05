@@ -55,6 +55,17 @@ public class INotifyActiveAppsRecyclerViewAdapter extends RecyclerView.Adapter<I
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        return position;
+    }
+
+    @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
