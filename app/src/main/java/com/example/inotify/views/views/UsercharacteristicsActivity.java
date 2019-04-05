@@ -45,8 +45,8 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 //        AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
 //        attributeCountHelper.atrributeCountInsert();
 
-//        Openness openness = new Openness(this);
-//        openness.displayOpenness();
+        Openness openness = new Openness();
+        openness.displayOpenness(this.getApplicationContext());
 //
 //        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
 //        long f = appUsageHelper.appAllsUsageToday();
@@ -54,6 +54,9 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test2(View view) {
+
+        Intent I = new Intent(this, ChartCharacteristicsActivity.class);
+        startActivity(I);
 //        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(this);
 //
 //        int x = calenderEventHelper.getcalanderEventCount(this);

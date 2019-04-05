@@ -120,7 +120,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         return true;
     }
 
-    public long appCountGetToday() {
+    public int appCountGetToday() {
 
         //same for charging above need correction
         SQLiteDatabase db = this.getReadableDatabase();
@@ -129,7 +129,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where DATE = \""+date+"\"", null);
         if (res != null) {
             if ((res.moveToFirst())){
-                return res.getLong(res.getColumnIndex("appCount"));
+                return res.getInt(res.getColumnIndex("appCount"));
             }
         }
         Objects.requireNonNull(res).close();

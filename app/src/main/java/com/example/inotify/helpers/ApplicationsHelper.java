@@ -71,7 +71,7 @@ public class ApplicationsHelper {
 
     public int appCountGetToday()
     {
-        return (int) ApplicationDbHelper.getInstance(c1).appCountGetToday();
+        return ApplicationDbHelper.getInstance(c1).appCountGetToday();
     }
 
     public int allAppCountAVG()

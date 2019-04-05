@@ -30,6 +30,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".views.views.AverageBarChartActivity"></activity>
+        <activity android:name=".views.views.TodayBarChartActivity" />
+        <activity android:name=".views.views.ChartCharacteristicsActivity" />
         <activity android:name=".views.views.Agreeablenesss" />
         <activity android:name=".views.views.Extraversion" />
         <activity android:name=".views.views.Neuroticism" />

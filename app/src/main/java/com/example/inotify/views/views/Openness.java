@@ -10,19 +10,12 @@ import android.widget.TextView;
 
 import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
-import com.example.inotify.dbHelpers.AppUsageDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.CommonAppCountHelper;
 import com.google.android.gms.common.internal.service.Common;
 
 public class Openness extends AppCompatActivity {
-    private Context c1;
-
-    public Openness(Context context) {
-
-        this.c1 = context;
-    }
     TextView textView;
 
     @Override
@@ -37,10 +30,10 @@ public class Openness extends AppCompatActivity {
     }
 
 
-        public long displayOpenness()
+        public long displayOpenness(Context context)
         {
-           AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-            long todayAllAppUsage = AppUsageDbHelper.getInstance(c1).appAllsUsageToday();
+           AppUsageHelper appUsageHelper = new AppUsageHelper(context);
+            long todayAllAppUsage = appUsageHelper.appAllsUsageToday();
             long todaySocialAppUsage = appUsageHelper.socialAppsUsageToday();
             long todayCommunicationAppUsage = appUsageHelper.communicationAppsUsageToday();
 
@@ -97,7 +90,7 @@ public class Openness extends AppCompatActivity {
     public long displayOpennessAVG()
     {
         AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-        long avgAllAppUsage = AppUsageDbHelper.getInstance(c1).appAllsUsageAVG();
+        long avgAllAppUsage = appUsageHelper.appAllsUsageAVG();
         long avgSocialAppUsage = appUsageHelper.socialAppsUsageAVG();
         long avgCommunicationAppUsage = appUsageHelper.communicationAppsUsageAVG();
 
@@ -242,13 +235,13 @@ public class Openness extends AppCompatActivity {
     public void back_open(View view) {
 //        Intent intent = new Intent(this,Conscientiousness.class);
 //        startActivity(intent);
-        this.displayOpenness();
+        this.displayOpenness(view.getContext());
 
     }
 
         public void onClick(View v) {
            // number = 5; //this is an integer
-            long openness1 = this.displayOpenness();
+            long openness1 = this.displayOpenness(v.getContext());
             Intent in = new Intent(Openness.this, UsercharacteristicsActivity.class);
             in.putExtra("name of your value (eg. adapter_int)", openness1);
             startActivity(in);
