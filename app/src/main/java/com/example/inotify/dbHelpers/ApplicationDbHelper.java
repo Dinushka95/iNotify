@@ -73,7 +73,7 @@ public class ApplicationDbHelper extends MainDbHelp {
 
     }
 
-    public ApplicationInfoModel appGet(String packageName)
+    public ApplicationInfoModel getApplicationDetailsByPackName(String packageName)
     {
         ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
@@ -82,20 +82,37 @@ public class ApplicationDbHelper extends MainDbHelp {
         if (res != null) {
 
             if (res.moveToFirst()) {
-
-                    applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    applicationInfoModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
-                    applicationInfoModel.setAppCategory( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
-                    applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
-
-
+                applicationInfoModel.setId( res.getInt(res.getColumnIndex(TbColNames.APPLICATION_ID)));
+                applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                applicationInfoModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                applicationInfoModel.setAppCategory( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
+                applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
             }
 
         }
 
         return applicationInfoModel;
+    }
 
+    public ApplicationInfoModel getApplicationDetailsById(String id)
+    {
+        ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " WHERE "+TbColNames.APPLICATION_ID +" = \""+id+"\"", null);
+        if (res != null) {
+
+            if (res.moveToFirst()) {
+                applicationInfoModel.setId( res.getInt(res.getColumnIndex(TbColNames.APPLICATION_ID)));
+                applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                applicationInfoModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                applicationInfoModel.setAppCategory( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
+                applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
+            }
+
+        }
+
+        return applicationInfoModel;
     }
 
     public boolean appInfoInsert(List<ApplicationInfoModel> appInfo) {

@@ -41,6 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 
 public class MyNotificationListenerService extends NotificationListenerService {
@@ -150,14 +151,17 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
             // Smart Notifaction
+            Log.d("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---" );
+            NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
+            String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
+            Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---viewbillityProbability---"+viewbillityProbability );
 
-         //   NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
-       //     String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
+            AttentivnessPerAppDbHelper attentivnessPerAppDbHelper = new AttentivnessPerAppDbHelper(this);
+            String attentivenessPerApp = attentivnessPerAppDbHelper.AttentivnessperAppGet(appPackageName);
+            Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---attentivenessPerApp---"+attentivenessPerApp );
 
-     //       UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-   //         String attentivenessPerApp = userAttentivnessDbHelper.getAttentivenessPerApp(appPackageName);
 
-       //     SNSModel snsModel = new SNSModel(date,timeRecieved,viewbillityProbability,attentivenessPerApp,"null","Mobile",appName);
+            //     SNSModel snsModel = new SNSModel(date,timeRecieved,viewbillityProbability,attentivenessPerApp,"null","Mobile",appName);
 /*            SNSModel snsModel = new SNSModel(date,timeRecieved,"","","null","null",appName);
             MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
             String vtimes =mainSmartNotificationSystem.getPrediction();
@@ -239,8 +243,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
                             .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400}).setPriority(Notification.PRIORITY_HIGH);
                     timeSent = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 }
+                Random ranvValue = new Random();
+                int n = ranvValue.nextInt(99);
                 Notification notification = builder.build();
-                notifManager.notify(nid, notification);
+                notifManager.notify(n, notification);
 
 
                 //PRASHAN

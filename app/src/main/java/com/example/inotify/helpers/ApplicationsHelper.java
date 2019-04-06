@@ -309,7 +309,7 @@ public class ApplicationsHelper {
 
     public ApplicationInfoModel appGet(String packageName)
     {
-        return ApplicationDbHelper.getInstance(c1).appGet(packageName);
+        return ApplicationDbHelper.getInstance(c1).getApplicationDetailsByPackName(packageName);
 
     }
 

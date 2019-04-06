@@ -140,7 +140,7 @@ public class SmartNotificationDbHelper extends MainDbHelp {
                     if (busyornot.equals("NotBusy")) {
                         cbusyornot = "1";
                     }
-                    snsModel.setBusyornot(cbusyornot);
+                    snsModel.setViewability(cbusyornot);
 
                     String attentiviness = res.getString(5);
                     snsModel.setAttentiviness(attentiviness);
@@ -162,7 +162,7 @@ public class SmartNotificationDbHelper extends MainDbHelp {
                     if (userchaacteristics.equals("oldtechnology")) {
                         cuserchaacteristics = "5";
                     }
-                    snsModel.setUserchaacteristics(cuserchaacteristics);
+                    snsModel.setUserchacteristics(cuserchaacteristics);
 
                     String notificationtype = res.getString(7);
                     String cnotificationtype = "";
