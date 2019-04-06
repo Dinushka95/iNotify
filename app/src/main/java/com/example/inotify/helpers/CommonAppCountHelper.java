@@ -46,7 +46,7 @@ public class CommonAppCountHelper {
 
     public void  characteristicsInsertOnAvailability()
     {
-        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.COMMONAPPCOUNT_TABLE))
+        if(! CommonAppCountDbHelper.getInstance(c1).cheackAvailability(TbNames.COMMONAPPCOUNT_TABLE))
         {
             this.characteristicsInsert();
         }

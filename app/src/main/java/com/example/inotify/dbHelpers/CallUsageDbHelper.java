@@ -97,5 +97,21 @@ public class CallUsageDbHelper extends MainDbHelp {
         return String.valueOf(avg);
     }
 
+    public boolean cheackAvailability(String TableName )
+    {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName +" where DATE =\"" + date + "\"", null);
+
+        if(res.getCount()>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
 }

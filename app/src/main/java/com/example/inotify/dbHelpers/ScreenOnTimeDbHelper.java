@@ -33,9 +33,9 @@ public class ScreenOnTimeDbHelper extends MainDbHelp {
     public int ScreenOnTimeCountTodayGet() {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select COUNT(TIMEON) as TIMECOUNT from " + TbNames.SCREENSTATUS_TABLE + " where DATE = \""+date+"\" AND NOTIFICATIONID IS null " , null);
+        Cursor res = db.rawQuery("select COUNT(TIMEON) as TIMECOUNT from " + TbNames.SCREENSTATUS_TABLE + " where DATE = \"" + date + "\" AND NOTIFICATIONID IS null ", null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
 
                 db.close();
                 return res.getInt(res.getColumnIndex("TIMECOUNT"));
@@ -45,23 +45,16 @@ public class ScreenOnTimeDbHelper extends MainDbHelp {
         return 0;
     }
 
-//    public boolean ScreenOnTimeCountInsert()
-//    {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-//
-//        int count = this.ScreenOnTimeCountTodayGet();
-//
-//
-//        ContentValues contentValues = new ContentValues();
-//
-//        contentValues.put(TbColNames.TIME,count);
-//        contentValues.put(TbColNames.DATE,date);
-//
-//        long result = db.insert(TbNames.SCREENTIME_TABLE, null, contentValues);
-//        db.close();
-//        return true;
-//    }
+    public boolean cheackAvailability(String TableName) {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName + " where DATE =\"" + date + "\"", null);
 
+        if (res.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

@@ -41,7 +41,7 @@ public class AttributeCountHelper {
 
     public void  atrributeCountInsertOnAvailability()
     {
-        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.ATTRIBUTECOUNT_TABLE))
+        if(! AttributeCountDbHelper.getInstance(c1).cheackAvailability(TbNames.ATTRIBUTECOUNT_TABLE))
         {
             this.atrributeCountInsert();
         }

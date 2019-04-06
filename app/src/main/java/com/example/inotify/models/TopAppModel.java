@@ -6,17 +6,27 @@ public class TopAppModel {
     private  String category;
     private  String collection;
     private  String date;
+    private  String dateCreated;
     private  String packageName;
     private  int rank;
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     public TopAppModel() {
     }
 
-    public TopAppModel(String applicationName, String category, String collection, String date, String packageName, int rank) {
+    public TopAppModel(String applicationName, String category, String collection, String date, String dateCreated, String packageName, int rank) {
         this.applicationName = applicationName;
         this.category = category;
         this.collection = collection;
         this.date = date;
+        this.dateCreated = dateCreated;
         this.packageName = packageName;
         this.rank = rank;
     }

@@ -132,14 +132,10 @@ public class DataUsageHelper {
 
     }
 
-//    public boolean insertTotoalDataUsage(String date,String amount)
-//    {
-//        return DataUsageDbHelper.getInstance(c1).insertTotoalDataUsage(date,amount)
-//    }
 
     public void  getTotalDataUsagAvailability()
     {
-        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CHARGER_TABLE))
+        if(! DataUsageDbHelper.getInstance(c1).cheackAvailability(TbNames.CHARGER_TABLE))
         {
             this.getTotalDataUsag();
         }
