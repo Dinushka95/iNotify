@@ -20,18 +20,35 @@ public class TodayBarChartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_today_bar_chart);
         BarChart chart = findViewById(R.id.barchart);
 
+        Openness openness = new Openness();
+        long openness_charac = openness.displayOpenness(this);
+
+        Conscientiousness conscientiousness = new Conscientiousness();
+        long  conscientiousness_charac = conscientiousness.displayConscientiousness();
+
+        Extraversion extraversion = new Extraversion();
+        long extraversion_charac = conscientiousness.displayConscientiousness();
+
+        Neuroticism neuroticism  = new Neuroticism();
+        long neuroticism_charac = neuroticism.neuroticismDisplay();
+
+        Agreeablenesss agreeablenesss = new Agreeablenesss();
+        long agreeablenesss_charc = agreeablenesss.DisplayAgreeableness();
+
+
+
         ArrayList NoOfEmp = new ArrayList();
 
-        NoOfEmp.add(new BarEntry(945f, 0));
+        NoOfEmp.add(new BarEntry(945f, (int) openness_charac));
         NoOfEmp.add(new BarEntry(1040f, 1));
         NoOfEmp.add(new BarEntry(1133f, 2));
         NoOfEmp.add(new BarEntry(1240f, 3));
         NoOfEmp.add(new BarEntry(1369f, 4));
-        NoOfEmp.add(new BarEntry(1487f, 5));
-        NoOfEmp.add(new BarEntry(1501f, 6));
-        NoOfEmp.add(new BarEntry(1645f, 7));
-        NoOfEmp.add(new BarEntry(1578f, 8));
-        NoOfEmp.add(new BarEntry(1695f, 9));
+//        NoOfEmp.add(new BarEntry(1487f, 5));
+//        NoOfEmp.add(new BarEntry(1501f, 6));
+//        NoOfEmp.add(new BarEntry(1645f, 7));
+//        NoOfEmp.add(new BarEntry(1578f, 8));
+//        NoOfEmp.add(new BarEntry(1695f, 9));
 
         ArrayList year = new ArrayList();
 
@@ -40,11 +57,11 @@ public class TodayBarChartActivity extends AppCompatActivity {
         year.add("2010");
         year.add("2011");
         year.add("2012");
-        year.add("2013");
-        year.add("2014");
-        year.add("2015");
-        year.add("2016");
-        year.add("2017");
+//        year.add("2013");
+//        year.add("2014");
+//        year.add("2015");
+//        year.add("2016");
+//        year.add("2017");
 
         BarDataSet bardataset = new BarDataSet(NoOfEmp, "No Of Employee");
         chart.animateY(5000);

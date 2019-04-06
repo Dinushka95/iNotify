@@ -11,7 +11,9 @@ import com.example.inotify.dbHelpers.CallUsageDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.AttributeCountHelper;
+import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.CallUsageHelper;
+import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.CommonAppCountHelper;
 import com.example.inotify.helpers.ContactsHelper;
 
@@ -132,4 +134,6 @@ public class Extraversion extends AppCompatActivity {
 
         return extraversionAVG;
     }
+
+
 }

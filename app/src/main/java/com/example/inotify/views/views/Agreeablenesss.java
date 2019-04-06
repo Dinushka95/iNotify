@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.ScreenOnTimeDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.AttributeCountHelper;
+import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.CommonAppCountHelper;
 import com.example.inotify.helpers.ContactsHelper;
 import com.example.inotify.helpers.ScreenOnTimeHelper;
@@ -113,4 +115,6 @@ public class Agreeablenesss extends AppCompatActivity {
         return agreeablenessAVG;
 
     }
+
+
 }

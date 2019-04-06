@@ -15,6 +15,8 @@ import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.CommonAppCountHelper;
 
+import org.w3c.dom.Attr;
+
 public class Conscientiousness extends AppCompatActivity {
 
     @Override
@@ -35,6 +37,7 @@ public class Conscientiousness extends AppCompatActivity {
     {
        this.displayConscientiousness();
     }
+
     public long displayConscientiousness()
     {
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
@@ -110,5 +113,7 @@ public class Conscientiousness extends AppCompatActivity {
 
         return conscientiousnessAVG;
     }
+
+
 
 }
