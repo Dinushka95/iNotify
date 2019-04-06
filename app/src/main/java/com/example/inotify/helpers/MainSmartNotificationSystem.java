@@ -113,13 +113,13 @@ public class MainSmartNotificationSystem {
 
         try {
 
-            jsonPredict.accumulate("sns_day", Integer.valueOf(predict_snsModel.getDay()));
-            jsonPredict.accumulate("sns_time", Integer.valueOf(predict_snsModel.getTime()));
-            jsonPredict.accumulate("sns_busyornot", Integer.valueOf(predict_snsModel.getViewability()));
-            jsonPredict.accumulate("sns_attentiviness", Integer.valueOf(predict_snsModel.getAttentiviness()));
-            jsonPredict.accumulate("sns_userchaacteristics", Integer.valueOf(predict_snsModel.getUserchacteristics()));
-            jsonPredict.accumulate("sns_notificationtype", Integer.valueOf(predict_snsModel.getNotificationtype()));
-            jsonPredict.accumulate("sns_appname", Integer.valueOf(predict_snsModel.getPackagename()));
+            jsonPredict.accumulate("sns_day", Double.valueOf(predict_snsModel.getDay()));
+            jsonPredict.accumulate("sns_time", Double.valueOf(predict_snsModel.getTime()));
+            jsonPredict.accumulate("sns_busyornot", Double.valueOf(predict_snsModel.getViewability()));
+            jsonPredict.accumulate("sns_attentiviness", Double.valueOf(predict_snsModel.getAttentiviness()));
+            jsonPredict.accumulate("sns_userchaacteristics", Double.valueOf(predict_snsModel.getUserchacteristics()));
+            jsonPredict.accumulate("sns_notificationtype", Double.valueOf(predict_snsModel.getNotificationtype()));
+            jsonPredict.accumulate("sns_appname", Double.valueOf(predict_snsModel.getPackagename()));
 
         } catch (JSONException e) {
             e.printStackTrace();

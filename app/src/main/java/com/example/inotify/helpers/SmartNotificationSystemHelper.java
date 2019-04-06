@@ -49,7 +49,7 @@ public class SmartNotificationSystemHelper {
 
         snsModelNumeric.setViewability(snsModelData.getViewability());
 
-        snsModelNumeric.setAttentiviness(snsModelData.getUserchacteristics());
+        snsModelNumeric.setAttentiviness(snsModelData.getAttentiviness());
 
         String userchaacteristics = snsModelData.getUserchacteristics();
         String cuserchaacteristics = "";
@@ -126,7 +126,7 @@ public class SmartNotificationSystemHelper {
         String cid = String.valueOf(ApplicationDbHelper.getInstance(c1).getApplicationDetailsByPackName(appname).getId());
         snsModelNumeric.setPackagename(cid);
 
-        if(!snsModelData.getVtime().isEmpty()){
+        if(snsModelData.getVtime()!=null){
             snsModelNumeric.setVtime(snsModelData.getVtime());
         }
 
@@ -167,7 +167,7 @@ public class SmartNotificationSystemHelper {
 
         snsModelData.setViewability(snsModelNumeric.getViewability());
 
-        snsModelData.setAttentiviness(snsModelNumeric.getUserchacteristics());
+        snsModelData.setAttentiviness(snsModelNumeric.getAttentiviness());
 
         String userchaacteristics = snsModelNumeric.getUserchacteristics();
         String cuserchaacteristics = "";

@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
+import com.example.inotify.configs.TbColNames;
+import com.example.inotify.helpers.SmartNotificationSystemHelper;
 import com.example.inotify.models.SNSModel;
 
 import java.text.SimpleDateFormat;
@@ -31,10 +33,12 @@ import static com.example.inotify.configs.TbNames.SNS_TABLE;
 public class SmartNotificationDbHelper extends MainDbHelp {
 
     private static SmartNotificationDbHelper mInstance = null;
+    private  Context c1;
 
     public SmartNotificationDbHelper(Context context) {
 
         super(context);
+        c1=context;
     }
     public static SmartNotificationDbHelper getInstance(Context context) {
 
@@ -104,100 +108,17 @@ public class SmartNotificationDbHelper extends MainDbHelp {
                 do {
 
                     SNSModel snsModel = new SNSModel();
+                    snsModel.setDay(res.getString(res.getColumnIndex(TbColNames.SNS_DAY)));
+                    snsModel.setTime(res.getString(res.getColumnIndex(TbColNames.SNS_TIME)));
+                    snsModel.setViewability(res.getString(res.getColumnIndex(TbColNames.SNS_BUSYORNOT)));
+                    snsModel.setAttentiviness(res.getString(res.getColumnIndex(TbColNames.SNS_ATTENTIVINESS)));
+                    snsModel.setUserchacteristics(res.getString(res.getColumnIndex(TbColNames.SNS_USERCHAACTERISTICS)));
+                    snsModel.setNotificationtype(res.getString(res.getColumnIndex(TbColNames.SNS_NOTIFICATIONTYPE)));
+                    snsModel.setPackagename(res.getString(res.getColumnIndex(TbColNames.SNS_APPNAME)));
+                    snsModel.setVtime(res.getString(res.getColumnIndex(TbColNames.SNS_VTIME)));
 
-                    String day = res.getString(res.getColumnIndex("SNS_DAY"));
-                    String cday = "";
-                    if (day.equals("Monday")) {
-                        cday = "1";
-                    }
-                    if (day.equals("Tuesday")) {
-                        cday = "2";
-                    }
-                    if (day.equals("Wednesday")) {
-                        cday = "3";
-                    }
-                    if (day.equals("Thursday")) {
-                        cday = "4";
-                    }
-                    if (day.equals("Friday")) {
-                        cday = "5";
-                    }
-                    if (day.equals("Saturday")) {
-                        cday = "6";
-                    }
-                    if (day.equals("Sunday")) {
-                        cday = "7";
-                    }
-                    snsModel.setDay(cday);
-
-                    snsModel.setTime(res.getString(3));
-
-                    String busyornot = res.getString(4);
-                    String cbusyornot = "";
-                    if (busyornot.equals("Busy")) {
-                        cbusyornot = "1";
-                    }
-                    if (busyornot.equals("NotBusy")) {
-                        cbusyornot = "1";
-                    }
-                    snsModel.setViewability(cbusyornot);
-
-                    String attentiviness = res.getString(5);
-                    snsModel.setAttentiviness(attentiviness);
-
-                    String userchaacteristics = res.getString(6);
-                    String cuserchaacteristics = "";
-                    if (userchaacteristics.equals("social")) {
-                        cuserchaacteristics = "1";
-                    }
-                    if (userchaacteristics.equals("professional")) {
-                        cuserchaacteristics = "2";
-                    }
-                    if (userchaacteristics.equals("friendliness")) {
-                        cuserchaacteristics = "3";
-                    }
-                    if (userchaacteristics.equals("gaming")) {
-                        cuserchaacteristics = "4";
-                    }
-                    if (userchaacteristics.equals("oldtechnology")) {
-                        cuserchaacteristics = "5";
-                    }
-                    snsModel.setUserchacteristics(cuserchaacteristics);
-
-                    String notificationtype = res.getString(7);
-                    String cnotificationtype = "";
-                    if (notificationtype.equals("Mobile")) {
-                        cnotificationtype = "1";
-                    }
-                    if (notificationtype.equals("mobile")) {
-                        cnotificationtype = "1";
-                    }
-                    snsModel.setNotificationtype(cnotificationtype);
-
-                    String appname = res.getString(8);
-                    String cappname = "";
-                    if (appname.equals("com.example.dinu.testa")) {
-                        cappname = "1";
-                    }
-                    if (appname.equals("com.example.dinu.testb")) {
-                        cappname = "2";
-                    }
-                    if (appname.equals("com.example.dinu.testc")) {
-                        cappname = "3";
-                    }
-                    if (appname.equals("com.example.dinu.testd")) {
-                        cappname = "4";
-                    }
-                    if (appname.equals("com.google.android.apps.messaging")) {
-                        cappname = "5";
-                    }
-                    snsModel.setPackagename(cappname);
-
-
-                    String vtime = res.getString(9);
-                    snsModel.setVtime(vtime);
-
-                    Al.add(snsModel);
+                    SmartNotificationSystemHelper smartNotificationSystemHelper = new SmartNotificationSystemHelper(c1);
+                    Al.add(smartNotificationSystemHelper.convertSNSdataToNumberic(snsModel));
 
                 } while (res.moveToNext());
             }
