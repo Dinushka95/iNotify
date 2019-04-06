@@ -98,7 +98,7 @@ public class MainSmartNotificationSystem {
                     jsonData1.accumulate("sns_attentiviness", x.getAttentiviness());
                     jsonData1.accumulate("sns_userchaacteristics", x.getUserchacteristics());
                     jsonData1.accumulate("sns_notificationtype", x.getNotificationtype());
-                    jsonData1.accumulate("sns_appname", x.getAppname());
+                    jsonData1.accumulate("sns_appname", x.getPackagename());
                     jsonData1.accumulate("sns_vtime", x.getVtime());
 
                 } catch (JSONException e) {
@@ -119,7 +119,7 @@ public class MainSmartNotificationSystem {
             jsonPredict.accumulate("sns_attentiviness", Integer.valueOf(predict_snsModel.getAttentiviness()));
             jsonPredict.accumulate("sns_userchaacteristics", Integer.valueOf(predict_snsModel.getUserchacteristics()));
             jsonPredict.accumulate("sns_notificationtype", Integer.valueOf(predict_snsModel.getNotificationtype()));
-            jsonPredict.accumulate("sns_appname", Integer.valueOf(predict_snsModel.getAppname()));
+            jsonPredict.accumulate("sns_appname", Integer.valueOf(predict_snsModel.getPackagename()));
 
         } catch (JSONException e) {
             e.printStackTrace();

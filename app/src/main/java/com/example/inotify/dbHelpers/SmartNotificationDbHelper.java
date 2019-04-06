@@ -191,7 +191,7 @@ public class SmartNotificationDbHelper extends MainDbHelp {
                     if (appname.equals("com.google.android.apps.messaging")) {
                         cappname = "5";
                     }
-                    snsModel.setAppname(cappname);
+                    snsModel.setPackagename(cappname);
 
 
                     String vtime = res.getString(9);

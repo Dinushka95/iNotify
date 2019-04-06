@@ -122,9 +122,13 @@ public class SmartNotificationSystemHelper {
         }
         snsModelNumeric.setNotificationtype(cnotificationtype);
 
-        String appname = snsModelData.getAppname();
+        String appname = snsModelData.getPackagename();
         String cid = String.valueOf(ApplicationDbHelper.getInstance(c1).getApplicationDetailsByPackName(appname).getId());
-        snsModelNumeric.setAppname(cid);
+        snsModelNumeric.setPackagename(cid);
+
+        if(!snsModelData.getVtime().isEmpty()){
+            snsModelNumeric.setVtime(snsModelData.getVtime());
+        }
 
         return snsModelNumeric;
 
@@ -236,9 +240,13 @@ public class SmartNotificationSystemHelper {
         }
         snsModelData.setNotificationtype(cnotificationtype);
 
-        String id = snsModelNumeric.getAppname();
+        String id = snsModelNumeric.getPackagename();
         String cappname = String.valueOf(ApplicationDbHelper.getInstance(c1).getApplicationDetailsById(id).getPackageName());
-        snsModelData.setAppname(cappname);
+        snsModelData.setPackagename(cappname);
+
+        if(!snsModelNumeric.getVtime().isEmpty()){
+            snsModelData.setVtime(snsModelNumeric.getVtime());
+        }
 
         return snsModelData;
     }

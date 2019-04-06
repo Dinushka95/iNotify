@@ -2,7 +2,7 @@ package com.example.inotify.configs;
 
 public class TbNames<Public> {
 
-    public static final String NOTIFICATIONREMOVE_TABLE = "notificationRemove_table";
+
     public static final String NOTIFICATIONVIEWABILITY_TABLE = "viewability_table";
     public static final String ACTIVITY_TABLE = "activity_table";
     public static final String LOCATION_TABLE = "location_table";
@@ -16,7 +16,6 @@ public class TbNames<Public> {
     public static final String PROBABILITYQUERYSUN_TABLE = "probabilityquerysun_table";
 
 
-    public static final String N_TABLE = "N_table";
     public static final String SCREENSTATUS_TABLE = "screenstatus_table";
     public static final String RINGERMODE_TABLE = "ringermode_table";
     public static final String NOTIFICATIONIMPORTANCE_TABLE = "notificationimportance_table";
@@ -31,37 +30,33 @@ public class TbNames<Public> {
     public static final String CALENDEREVENTCOUNT_TABLE = "calendereventcount_table";
     public static final String APPLISTSOCIALMEDIACOUNT_TABLE = "applistsocialmediacount_table";
 
-    public static final String SNS_TABLE = "sns_table";
 
-    public static final String INOTIFYACTIVEAPPS_TABLE = "inotifyactiveapps_table";
+    public static final String APPLICATIONS_TABLE = "applications_table";
+    public static final String TOPAPPS_TABLE = "topapps_table";
+    public static final String TOPAPPSCOUNT_TABLE = "topappscount_table";
+    public static final String APPCOUNT_TABLE = "appcount_table";
+    public static final String CHARGER_TABLE = "charger_table";
+    public static final String APPUSAGE_TABLE = "appUsage_table";
+    public static final String ATTRIBUTECOUNT_TABLE = "attributecount_table";
+    public static final String OPENNESS_TABLE = "openness_table";
+    public static final String CONSCIENTIOUSNESS_TABLE = "conscientiousness_table";
+    public static final String CHARACTERISTICSFINAL_TABLE = "charcateriticsfinal_table";
+    public static final String DATAUSAGE_TABLE = "datausage_table";
+    public static final String COMMONAPPCOUNT_TABLE = "commonappcount_table";
+
 
     public static final String NOTIFICATION_TABLE = "notification_table";
 
+
     public static final String PROFILE_TABLE = "profile_table";
-
-    public static final String APPLICATIONS_TABLE = "applications_table";
-
-    public static final String TOPAPPS_TABLE = "topapps_table";
-
-    public static final String TOPAPPSCOUNT_TABLE = "topappscount_table";
+    public static final String INOTIFYACTIVEAPPS_TABLE = "inotifyactiveapps_table";
 
 
-    public static final String APPCOUNT_TABLE = "appcount_table";
+    public static final String SNS_TABLE = "sns_table";
 
-    public static final String CHARGER_TABLE = "charger_table";
 
-    public static final String APPUSAGE_TABLE = "appUsage_table";
-
-    public static  final String ATTRIBUTECOUNT_TABLE = "attributecount_table";
-
-    public static final String OPENNESS_TABLE = "openness_table";
-
-    public static final String CONSCIENTIOUSNESS_TABLE = "conscientiousness_table";
-
-    public static final String CHARACTERISTICSFINAL_TABLE = "charcateriticsfinal_table";
-
-    public static final String DATAUSAGE_TABLE = "datausage_table";
-
-    public static final String COMMONAPPCOUNT_TABLE = "commonappcount_table";
+        //to be deleted
+    public static final String N_TABLE = "N_table";
+    public static final String NOTIFICATIONREMOVE_TABLE = "notificationRemove_table";
 
 }
