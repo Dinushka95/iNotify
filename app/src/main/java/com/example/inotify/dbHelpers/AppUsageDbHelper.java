@@ -39,7 +39,6 @@ public class AppUsageDbHelper extends MainDbHelp {
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String time = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
-
         String sql = "INSERT INTO " + TbNames.APPUSAGE_TABLE + "(DATE,TIME,PACKAGENAME,APPNAME,APPCATEGORY,USAGETIME) VALUES (?,?,?,?,?,?);";
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -406,6 +405,17 @@ public class AppUsageDbHelper extends MainDbHelp {
         db.close();
 
         return 0;
+    }
+
+    public boolean cheackAvailability(String TableName ) {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName + " where DATE =\"" + date + "\"", null);
+        if (res.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

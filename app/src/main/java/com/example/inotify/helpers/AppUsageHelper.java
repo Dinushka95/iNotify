@@ -66,7 +66,7 @@ public class AppUsageHelper {
             appUsageModelList.add(appUsageModel);
 
         }
-        Log.d("inotify" , "Saved --- saveTodaysAppUsage ");
+
         return AppUsageDbHelper.getInstance(c1).insert(appUsageModelList);
 
     }
@@ -74,7 +74,7 @@ public class AppUsageHelper {
 
     public void  saveTodaysAppUsagesOnAvailability()
     {
-        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.APPUSAGE_TABLE))
+        if(! AppUsageDbHelper.getInstance(c1).cheackAvailability(TbNames.APPUSAGE_TABLE))
         {
             this.saveTodaysAppUsage();
         }

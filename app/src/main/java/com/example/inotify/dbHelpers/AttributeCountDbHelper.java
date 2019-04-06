@@ -44,7 +44,7 @@ public class AttributeCountDbHelper extends MainDbHelp {
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(c1);
         int appCount = applicationsHelper.appCountGetToday();
         ScreenOnTimeHelper screenOnTimeHelper = new ScreenOnTimeHelper(c1);
-        int screenOnTimeCount = screenOnTimeHelper.ScreenOnTimeTodayGet();
+        int screenOnTimeCount = screenOnTimeHelper.screenOnTimeTodayGet();
         ContactsHelper contactsHelper = new ContactsHelper(c1);
         int contactCount = contactsHelper.getcontactToday();
         ChargerHelper chargerHelper = new ChargerHelper(c1);
@@ -52,7 +52,7 @@ public class AttributeCountDbHelper extends MainDbHelp {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TbColNames.APPCOUNT,appCount);
         contentValues.put(TbColNames.SCREENONTIMECOUNT,screenOnTimeCount);
-        Log.d("inotify","screenontime"+screenOnTimeHelper.ScreenOnTimeTodayGet());
+        Log.d("inotify","screenontime"+screenOnTimeHelper.screenOnTimeTodayGet());
         contentValues.put(TbColNames.CHARGINGCOUNT,chageCount);
         contentValues.put(TbColNames.CONTACTCOUNT,contactCount);
         Log.d("inotify","contactCount------"+contactCount);
@@ -185,5 +185,21 @@ public class AttributeCountDbHelper extends MainDbHelp {
         }
         db.close();
         return 0;
+    }
+
+    public boolean cheackAvailability(String TableName )
+    {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName +" where DATE =\"" + date + "\"", null);
+
+        if(res.getCount()>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

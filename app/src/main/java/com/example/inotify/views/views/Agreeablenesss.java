@@ -50,7 +50,7 @@ public class Agreeablenesss extends AppCompatActivity {
         int todayContcts =contactsHelper.getcontactToday();
 
         ScreenOnTimeHelper screenOnTimeHelper = new ScreenOnTimeHelper(this);
-        int todayScreenOnTime = screenOnTimeHelper.ScreenOnTimeTodayGet();
+        int todayScreenOnTime = screenOnTimeHelper.screenOnTimeTodayGet();
 
         //Probability
         long todayPersonalizationAppUsageProbability = (todayPersonalizationAppUsage * 20)/100;

@@ -44,13 +44,10 @@ public class ChargerHelper {
 
     public int powerOnCount(){
         ChargerDbHelper chargerDbHelper =new ChargerDbHelper(c1);
-        Log.d("inotify","Power ON count" + chargerDbHelper.powerOnCountGet());
         return ChargerDbHelper.getInstance(c1).powerOnCountGet();
     }
     public int powerOffCount(){
         ChargerDbHelper chargerDbHelper =new ChargerDbHelper(c1);
-        Log.d("inotify","Power OFF count" + chargerDbHelper.powerOffCountGet());
-
         return ChargerDbHelper.getInstance(c1).powerOffCountGet();
     }
     public void  powerOninsertOnAvailability()

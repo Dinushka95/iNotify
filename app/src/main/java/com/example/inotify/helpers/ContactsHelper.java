@@ -25,7 +25,6 @@ public class ContactsHelper {
     }
 
     public int getContacts(Context context) {
-        //Log.d("inotify","oooooooooooooooooo");
 
         ContentResolver cr = context.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
@@ -104,7 +103,7 @@ public class ContactsHelper {
 
     public void  ContactsCountInsertOnAvailability()
     {
-        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CONTACTCOUNT_TABLE))
+        if(! ContactsDbHelper.getInstance(c1).cheackAvailability(TbNames.CONTACTCOUNT_TABLE))
         {
             this.ContactsCountInsert();
         }

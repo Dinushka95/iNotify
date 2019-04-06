@@ -94,6 +94,7 @@ public class TbColNames {
     // public static final String APPNAME = "appname";
     //public static final String PACKAGENAME = "packageName";
     public static final String APPCOLLECTION = "appcollection";
+    public static final String DATECREATED = "datecreated";
     public static final String APPCATEGORY = "appcategory";
     public static final String RANK = "rank";
 

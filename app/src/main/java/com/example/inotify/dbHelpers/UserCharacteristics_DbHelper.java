@@ -54,8 +54,8 @@ public class UserCharacteristics_DbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DATE, date);
-        contentValues.put(COUNT, count);
+        contentValues.put(TbColNames.DATE, date);
+        contentValues.put(TbColNames.CONTACTCOUNT, count);
         long result = db.insert(CONTACTCOUNT_TABLE, null, contentValues);
         db.close();
         return result != -1;

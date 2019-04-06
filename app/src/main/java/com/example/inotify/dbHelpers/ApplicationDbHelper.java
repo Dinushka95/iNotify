@@ -616,7 +616,7 @@ public class ApplicationDbHelper extends MainDbHelp {
         return avg;
     }
 
-    public ArrayList getAppPackage() {
+    public ArrayList<String> getAppPackage() {
         ArrayList<String> pacNamearraylist = new ArrayList<>();
         pacNamearraylist.add("");
 
@@ -626,16 +626,10 @@ public class ApplicationDbHelper extends MainDbHelp {
             int count =1;
             while (cursor.moveToNext()) {
                     pacNamearraylist.add(cursor.getString(0));
-                    //Log.d("pacname", "SelectPackage: "+ cursor.getString(0));
-//                    Log.d("Count", "SelectPackage: "+ count);
                     count = count + 1 ;
-
             }
             pacNamearraylist.set(0,Integer.toString(count-1));
-            //ans[0] = Integer.toString(count2);
-
         }
-        Log.d("inotify","pacNamearraylist " + pacNamearraylist.get(0));
         return pacNamearraylist;
     }
 
@@ -657,13 +651,13 @@ public class ApplicationDbHelper extends MainDbHelp {
             newValues.put(TbColNames.APPCATEGORY, x);
             db1.update(TbNames.APPLICATIONS_TABLE, newValues, TbColNames.PACKAGENAME+"=\"" + packageName+"\"", null);
             db1.close();
+
         }
         return true;
     }
 
 
     public List<ApplicationInfoModel> myPhotograpyAppTodayGet() {
-        //Log.d("cdap", " ---NValueGet--");
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -777,7 +771,6 @@ public class ApplicationDbHelper extends MainDbHelp {
 
     public int communicationAppCountTodayGet() {
 
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select count(APPNAME) as appCount from "+APPLICATIONS_TABLE + " where APPCATEGORY = \"COMMUNICATION\"AND Date = \"date\"", null);
         if (res != null) {
@@ -874,27 +867,17 @@ public class ApplicationDbHelper extends MainDbHelp {
     public boolean cheackAvailability(String TableName )
     {
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Log.d("inotifyXX" ,"date " +date);
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TableName +" where DATE =\"" + date + "\"", null);
 
       if(res.getCount()>0)
       {
-          Log.d("inotifyXX " , " Record Exists  - Cannot Insert Values");
           return true;
-
       }
       else
       {
-          Log.d("inotifyXX " , "Record does not Exists - Can Insert Values");
           return false;
-
       }
-
-
-
-
-
    }
+
 }

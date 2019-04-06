@@ -134,7 +134,7 @@ public class CallUsageHelper {
 
     public void  saveTodayTotalCallDurationToDbOnAvailability()
     {
-        if(! ApplicationDbHelper.getInstance(thisContex).cheackAvailability(TbNames.CALLDURATION_TABLE))
+        if(! CallUsageDbHelper.getInstance(thisContex).cheackAvailability(TbNames.CALLDURATION_TABLE))
         {
             this.saveTodayTotalCallDurationToDb();
         }

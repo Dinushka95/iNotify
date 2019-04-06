@@ -5,8 +5,10 @@ import android.content.Context;
 import android.net.TrafficStats;
 import android.util.Log;
 
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
 import com.example.inotify.dbHelpers.ContactsDbHelper;
+import com.example.inotify.dbHelpers.DataUsageDbHelper;
 import com.example.inotify.dbHelpers.MainDbHelp;
 import com.example.inotify.dbHelpers.ScreenOnTimeDbHelper;
 
@@ -17,25 +19,21 @@ import static android.content.Context.ACTIVITY_SERVICE;
 
 public class ScreenOnTimeHelper extends MainDbHelp {
     private  Context c1;
+
     public ScreenOnTimeHelper(Context context) {
         super(context);
         this.c1=context;
 
     }
 
-    public int ScreenOnTimeTodayGet() {
+    public int screenOnTimeTodayGet() {
 
-        return ScreenOnTimeDbHelper.getInstance(c1).ScreenOnTimeCountTodayGet();
-
+        if(! ScreenOnTimeDbHelper.getInstance(c1).cheackAvailability(TbNames.CHARGER_TABLE))
+        {
+            return ScreenOnTimeDbHelper.getInstance(c1).ScreenOnTimeCountTodayGet();
+        }
+        return 0;
     }
-
-//    public boolean ScreenOnTimeCountInsert()
-//    {
-//        return  ScreenOnTimeDbHelper.getInstance (c1).ScreenOnTimeCountInsert();
-//    }
-
-
-
 
 
 }

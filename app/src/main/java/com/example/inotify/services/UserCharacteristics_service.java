@@ -13,7 +13,9 @@ import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
+import com.example.inotify.dbHelpers.TopAppDbHelper;
 import com.example.inotify.dbHelpers.UserCharacteristics_DbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
@@ -25,7 +27,10 @@ import com.example.inotify.helpers.CommonAppCountHelper;
 import com.example.inotify.helpers.ContactsHelper;
 import com.example.inotify.helpers.DataUsageHelper;
 import com.example.inotify.helpers.ScreenOnTimeHelper;
+import com.example.inotify.helpers.TopAppsHelper;
+import com.example.inotify.interfaces.MyCallback;
 import com.example.inotify.models.ContactsModel;
+import com.example.inotify.models.TopAppModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,22 +44,27 @@ public class UserCharacteristics_service extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
+
+        //get all applications in the phone
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
         applicationsHelper.saveCurrentPhoneAppsOnAvailability();
 
+        //get top apps from play store that is firebase
+        // and save to phone topapps db
+        if (!TopAppDbHelper.getInstance(getApplicationContext()).cheackAvailability(TbNames.TOPAPPS_TABLE)) {
+            TopAppsHelper topAppsHelper =new TopAppsHelper(this);
+            topAppsHelper.readData(topAppModel -> {
+                TopAppDbHelper topAppDbHelper =  new TopAppDbHelper(getApplicationContext());
+                topAppDbHelper.insert(topAppModel);
+            });
+        }
+
+        // updates application table catergory col -- runs every time
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-        ArrayList<String> category;
-        category = applicationDbHelper.getAppPackage();
-        Log.d("cat","cat " + category.get(2));
-
-        applicationDbHelper.appCategoryUpdate(category);
-
+        applicationDbHelper.appCategoryUpdate(applicationDbHelper.getAppPackage());
 
         AppUsageHelper appUsageHelper = new AppUsageHelper(this);
         appUsageHelper.saveTodaysAppUsagesOnAvailability();
-
-        ChargerHelper chargerHelper = new ChargerHelper(this);
-        chargerHelper.powerOninsert();
 
         ContactsHelper contactsHelper = new ContactsHelper(this);
         contactsHelper.ContactsCountInsertOnAvailability();
@@ -66,17 +76,16 @@ public class UserCharacteristics_service extends JobService {
         callUsageHelper.saveTodayTotalCallDurationToDbOnAvailability();
 
         DataUsageHelper dataUsageHelper = new DataUsageHelper(this);
-
         dataUsageHelper.getTotalDataUsagAvailability();
 
         ScreenOnTimeHelper screenOnTimeHelper = new ScreenOnTimeHelper(this);
-        screenOnTimeHelper.ScreenOnTimeTodayGet();
+        screenOnTimeHelper.screenOnTimeTodayGet();
 
         AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
         attributeCountHelper.atrributeCountInsertOnAvailability();
-//
-//        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
-//        commonAppCountHelper.characteristicsInsertOnAvailability();
+
+        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
+        commonAppCountHelper.characteristicsInsertOnAvailability();
         return false;
     }
 
