@@ -39,7 +39,7 @@ public class UserCharacteristics_service extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
-       /* ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
         applicationsHelper.saveCurrentPhoneAppsOnAvailability();
 
         ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
@@ -73,7 +73,7 @@ public class UserCharacteristics_service extends JobService {
         screenOnTimeHelper.ScreenOnTimeTodayGet();
 
         AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
-        attributeCountHelper.atrributeCountInsertOnAvailability();*/
+        attributeCountHelper.atrributeCountInsertOnAvailability();
 //
 //        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
 //        commonAppCountHelper.characteristicsInsertOnAvailability();
