@@ -38,56 +38,9 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
     public void test1(View view) {
 
-
-//        CheckAvailabilityHelper checkAvailabilityHelper= new CheckAvailabilityHelper();
-//        checkAvailabilityHelper.saveCurrentPhoneAppsOnAvailability();
-
-//        AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
-//        attributeCountHelper.atrributeCountInsert();
-
-//        Openness openness = new Openness();
-//        openness.displayOpenness(this.getApplicationContext());
-//
-//        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-//        long f = appUsageHelper.appAllsUsageToday();
-//        Log.d("inotify","f-------------" + f);
     }
 
     public void test2(View view) {
-
-//        Intent I = new Intent(this, ChartCharacteristicsActivity.class);
-//        startActivity(I);
-
-        Intent In = new Intent(this,AttributeDisplayActivity.class);
-        startActivity(In);
-//        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(this);
-//
-//        int x = calenderEventHelper.getcalanderEventCount(this);
-//        calenderEventHelper.updateTodayCalendar();
-//        Log.d("inotify","calemder-------------" + x);
-//        boolean y = calenderEventHelper.calenderEventCount_insert();
-//        Log.d("inotify","calenderEventCount_insert-------------" + y);
-//
-//        CallUsageHelper callUsageHelper = new CallUsageHelper(this);
-//        callUsageHelper.getTodayCallListFromPhone(this);
-//        callUsageHelper.saveTodayTotalCallDurationToDb();
-//
-//        ContactsHelper contactsHelper = new ContactsHelper(this);
-//        contactsHelper.ContactsCountInsert();
-
-//        ChargerHelper chargerHelper = new ChargerHelper(this);
-//        chargerHelper.powerOninsert();
-
-//        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-//        ArrayList<String> category;
-//        category = applicationDbHelper.getAppPackage();
-//        Log.d("cat","cat " + category.get(2));
-//
-//        applicationDbHelper.appCategoryUpdate(category);
-
-//        CharacteristicFinalDbHelper characteristicFinalDbHelper = new CharacteristicFinalDbHelper(this);
-//        boolean x = characteristicFinalDbHelper.characteristicsInsert();
-
 
 
      }

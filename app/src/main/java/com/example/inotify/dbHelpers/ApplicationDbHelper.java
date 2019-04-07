@@ -23,9 +23,9 @@ import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
 
 public class ApplicationDbHelper extends MainDbHelp {
 
-
     private static ApplicationDbHelper mInstance = null;
     private  Context c1;
+
     public ApplicationDbHelper(Context context) {
         super(context);
         this.c1=context;
@@ -52,25 +52,19 @@ public class ApplicationDbHelper extends MainDbHelp {
             if (res.moveToFirst()) {
                 do {
 
-                    //SNSModel snsModel = new SNSModel();
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-                    Log.d("inotify","mmmmmmmmmmmmmmmmmm");
 
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                     applicationInfoModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                     applicationInfoModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
                     applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
 
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
             res.close();
         }
-
         return listApplicationInfoModels;
-        //Log.d("list of apps", listApplicationInfoModels)
-
     }
 
     public ApplicationInfoModel getApplicationDetailsByPackName(String packageName)
@@ -88,9 +82,7 @@ public class ApplicationDbHelper extends MainDbHelp {
                 applicationInfoModel.setAppCategory( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
                 applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
             }
-
         }
-
         return applicationInfoModel;
     }
 
@@ -109,17 +101,12 @@ public class ApplicationDbHelper extends MainDbHelp {
                 applicationInfoModel.setAppCategory( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
                 applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
             }
-
         }
 
         return applicationInfoModel;
     }
 
     public boolean appInfoInsert(List<ApplicationInfoModel> appInfo) {
-
-
-
-       // String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -192,7 +179,7 @@ public class ApplicationDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> mySocialAppTodayGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -200,13 +187,8 @@ public class ApplicationDbHelper extends MainDbHelp {
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -216,7 +198,7 @@ public class ApplicationDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> mySocialAppAllGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -224,13 +206,8 @@ public class ApplicationDbHelper extends MainDbHelp {
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -240,7 +217,7 @@ public class ApplicationDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> myPersonalizationAppTodayGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -248,13 +225,8 @@ public class ApplicationDbHelper extends MainDbHelp {
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -264,21 +236,15 @@ public class ApplicationDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> myPersonalizationAppAllGet() {
-        //Log.d("cdap", " ---NValueGet--");
-        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"PERSONALIZATION\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -288,21 +254,15 @@ public class ApplicationDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> myGamingAppTodayGet() {
-        //Log.d("cdap", " ---NValueGet--");
-        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"GAMING\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -312,21 +272,15 @@ public class ApplicationDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> myGamingAppAllGet() {
-        //Log.d("cdap", " ---NValueGet--");
-        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"GAMING\" ", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -336,21 +290,15 @@ public class ApplicationDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> myMusicVideoAppTodayGet() {
-        //Log.d("cdap", " ---NValueGet--");
-        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
+        List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + APPLICATIONS_TABLE + " where APPCATEGORY = \"MUSIC&AUDIO\" AND DATE = \"date\"", null);
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -368,13 +316,8 @@ public class ApplicationDbHelper extends MainDbHelp {
         if (res != null) {
             if (res.moveToFirst()) {
                 do {
-
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
-
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
-                    //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
-
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
             }
@@ -397,7 +340,6 @@ public class ApplicationDbHelper extends MainDbHelp {
 
                     applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                     //applicationInfoModel.setPackageName( res.getString(res.getColumnIndex("APPPACKAGE")));
-
 
                     listApplicationInfoModels.add(applicationInfoModel);
                 } while (res.moveToNext());
@@ -646,6 +588,7 @@ public class ApplicationDbHelper extends MainDbHelp {
                 }
             }
             db.close();
+            if(x==null||x.equals("")){x="null";}
             SQLiteDatabase db1 = this.getWritableDatabase();
             ContentValues newValues = new ContentValues();
             newValues.put(TbColNames.APPCATEGORY, x);

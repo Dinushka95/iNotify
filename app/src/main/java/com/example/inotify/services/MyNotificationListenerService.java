@@ -21,7 +21,9 @@ import android.util.Log;
 
 import com.annimon.stream.Stream;
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.AttentivnessPerAppDbHelper;
+import com.example.inotify.dbHelpers.CharacteristicFinalDbHelper;
 import com.example.inotify.dbHelpers.NotificationViewabilityDbHelper;
 import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.NotificationImportnaceDbHelper;
@@ -29,6 +31,7 @@ import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.dbHelpers.SmartNotificationDbHelper;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
+import com.example.inotify.helpers.ApplicationsHelper;
 import com.example.inotify.helpers.FeedbackYesIntent;
 import com.example.inotify.helpers.INotifyActiveAppsHelper;
 import com.example.inotify.helpers.MainSmartNotificationSystem;
@@ -167,7 +170,16 @@ public class MyNotificationListenerService extends NotificationListenerService {
             String attentivenessPerApp = attentivnessPerAppDbHelper.AttentivnessperAppGet(appPackageName);
             Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---attentivenessPerApp---"+attentivenessPerApp );
 
-            SNSModel snsModel = new SNSModel(day,timeRecieved,viewbillityProbability,"0.5","gaming","dating",appName);
+
+            CharacteristicFinalDbHelper characteristicFinalDbHelper = new CharacteristicFinalDbHelper(this);
+            String usercharacties = characteristicFinalDbHelper.getFinalUserCharacteries();
+            Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---User Characteristic---"+usercharacties );
+
+            String appType = ApplicationDbHelper.getInstance(this).getApplicationDetailsByPackName(appPackageName).getAppCategory();
+            if(appType.equals("")){appType="9.99";}
+            Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---appType---"+appType );
+
+            SNSModel snsModel = new SNSModel(day,timeRecieved,viewbillityProbability,"0.5",usercharacties,appType,appName);
 
             SmartNotificationSystemHelper smartNotificationSystemHelper = new SmartNotificationSystemHelper(getApplicationContext());
             MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,smartNotificationSystemHelper.convertSNSdataToNumberic(snsModel));

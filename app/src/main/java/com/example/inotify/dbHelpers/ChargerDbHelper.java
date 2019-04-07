@@ -26,7 +26,7 @@ public class ChargerDbHelper extends MainDbHelp {
     public static ChargerDbHelper getInstance(Context context) {
 
         if (mInstance == null) {
-            mInstance = new ChargerDbHelper(context.getApplicationContext());
+            mInstance = new ChargerDbHelper(context);
         }
         return mInstance;
     }

@@ -53,19 +53,19 @@ public class SmartNotificationSystemHelper {
 
         String userchaacteristics = snsModelData.getUserchacteristics();
         String cuserchaacteristics = "";
-        if (userchaacteristics.equals("social")) {
+        if (userchaacteristics.equals("openness")) {
             cuserchaacteristics = "1";
         }
-        if (userchaacteristics.equals("professional")) {
+        if (userchaacteristics.equals("agreeableness")) {
             cuserchaacteristics = "2";
         }
-        if (userchaacteristics.equals("friendliness")) {
+        if (userchaacteristics.equals("neuroticism")) {
             cuserchaacteristics = "3";
         }
-        if (userchaacteristics.equals("gaming")) {
+        if (userchaacteristics.equals("extraversion")) {
             cuserchaacteristics = "4";
         }
-        if (userchaacteristics.equals("oldtechnology")) {
+        if (userchaacteristics.equals("conscientiousness")) {
             cuserchaacteristics = "5";
         }
         snsModelNumeric.setUserchacteristics(cuserchaacteristics);
@@ -124,6 +124,7 @@ public class SmartNotificationSystemHelper {
 
         String appname = snsModelData.getPackagename();
         String cid = String.valueOf(ApplicationDbHelper.getInstance(c1).getApplicationDetailsByPackName(appname).getId());
+        if(cid==""||cid==null){cid="999";}
         snsModelNumeric.setPackagename(cid);
 
         if(snsModelData.getVtime()!=null){
@@ -172,19 +173,19 @@ public class SmartNotificationSystemHelper {
         String userchaacteristics = snsModelNumeric.getUserchacteristics();
         String cuserchaacteristics = "";
         if (userchaacteristics.equals("1")) {
-            cuserchaacteristics = "social";
+            cuserchaacteristics = "openness";
         }
         if (userchaacteristics.equals("2")) {
-            cuserchaacteristics = "professional";
+            cuserchaacteristics = "agreeableness";
         }
         if (userchaacteristics.equals("3")) {
-            cuserchaacteristics = "friendliness";
+            cuserchaacteristics = "neuroticism";
         }
         if (userchaacteristics.equals("4")) {
-            cuserchaacteristics = "gaming";
+            cuserchaacteristics = "extraversion";
         }
-        if (userchaacteristics.equals("")) {
-            cuserchaacteristics = "oldtechnology";
+        if (userchaacteristics.equals("5")) {
+            cuserchaacteristics = "conscientiousness";
         }
         snsModelData.setUserchacteristics(cuserchaacteristics);
 

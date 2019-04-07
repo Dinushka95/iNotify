@@ -49,7 +49,7 @@ public class CalenderEventHelper {
 
     }
 
-    public int getcalanderEventCount(Context context) {
+    public int getcalanderEventCount() {
 
         Date d = new Date();
         Calendar cal = Calendar.getInstance();
@@ -64,16 +64,18 @@ public class CalenderEventHelper {
                 CalendarContract.Instances.BEGIN,
                 CalendarContract.Instances.END,
                 CalendarContract.Instances.EVENT_ID};
-        Cursor cursor = CalendarContract.Instances.query(context.getContentResolver(), proj, cal.getTimeInMillis(), c_start.getTimeInMillis());
-
+        Cursor cursor = CalendarContract.Instances.query(c1.getContentResolver(), proj, cal.getTimeInMillis(), c_start.getTimeInMillis());
+    if(cursor!=null){
         return cursor.getCount();
+    }
+        return 0;
     }
 
     public void updateTodayCalendar() {
 
         boolean x = CalenderEventDbHelper.getInstance(c1).checkIfExist();
         if (!x) {
-            int count = getcalanderEventCount(c1);
+            int count = getcalanderEventCount();
             CalenderEventDbHelper.getInstance(c1).calenderEventCount_insert(String.valueOf(count));
         }
 
@@ -88,7 +90,7 @@ public class CalenderEventHelper {
 
     public boolean calenderEventCount_insert()
     {
-        return CalenderEventDbHelper.getInstance(c1).calenderEventCount_insert(String.valueOf(getcalanderEventCount(c1)));
+        return CalenderEventDbHelper.getInstance(c1).calenderEventCount_insert(String.valueOf(getcalanderEventCount()));
 
     }
 

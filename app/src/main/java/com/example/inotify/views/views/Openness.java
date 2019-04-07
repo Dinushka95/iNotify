@@ -22,7 +22,7 @@ public class Openness extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_openness);
-    //        textView = findViewById(R.id.Op_attr_1);
+        //        textView = findViewById(R.id.Op_attr_1);
 //        //UsercharacteristicsActivity usercharacteristicsActivity = new UsercharacteristicsActivity();
 //        //long open = usercharacteristicsActivity.displayOpenness();
 //        Log.d("ghgh", "onCreate: " );
@@ -30,89 +30,88 @@ public class Openness extends AppCompatActivity {
     }
 
 
-        public long displayOpenness(Context context)
-        {
-           AppUsageHelper appUsageHelper = new AppUsageHelper(context);
-            long todayAllAppUsage = appUsageHelper.appAllsUsageToday();
-            long todaySocialAppUsage = appUsageHelper.socialAppsUsageToday();
-            long todayCommunicationAppUsage = appUsageHelper.communicationAppsUsageToday();
+    public long displayOpenness(Context context) {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(context);
+        long todayAllAppUsage = appUsageHelper.appAllsUsageToday();
+        long todaySocialAppUsage = appUsageHelper.socialAppsUsageToday();
+        long todayCommunicationAppUsage = appUsageHelper.communicationAppsUsageToday();
 
-            ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-            int NoofAppsToday = applicationsHelper.appCountGetToday();
-            int NoofAppsAll = applicationsHelper.allAppCountAVG();
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+        int NoofAppsToday = applicationsHelper.appCountGetToday();
+        int NoofAppsAll = applicationsHelper.allAppCountAVG();
 
-            int newApps = (NoofAppsAll - NoofAppsToday);
-            Log.d("inotify","newApps" + newApps);
+        int newApps = (NoofAppsAll - NoofAppsToday);
+        Log.d("inotify", "newApps" + newApps);
 
-            int socialAppToday = applicationsHelper.commonSocialAppTodayCount();
-            int communicationAppToday = applicationsHelper.commonCommunicationAppTodayCount();
+        int socialAppToday = applicationsHelper.commonSocialAppTodayCount();
+        int communicationAppToday = applicationsHelper.commonCommunicationAppTodayCount();
 
-            //probability
-            long todayAllAppUsageProbability = (todayAllAppUsage * 16)/100;
-            long todaySocialAppUsageProbability = (todaySocialAppUsage * 16)/100;
-            long todayCommunicationAppUsageProbability = (todayCommunicationAppUsage * 16)/100;
-            long newAppsProbability = (newApps * 16)/100;
-            long socialAppTodayProbability = (socialAppToday * 16)/100;
-            long communicationAppTodayProbability = (communicationAppToday * 16)/100;
+        //probability
+        long todayAllAppUsageProbability = (todayAllAppUsage * 16) / 100;
+        long todaySocialAppUsageProbability = (todaySocialAppUsage * 16) / 100;
+        long todayCommunicationAppUsageProbability = (todayCommunicationAppUsage * 16) / 100;
+        long newAppsProbability = (newApps * 16) / 100;
+        long socialAppTodayProbability = (socialAppToday * 16) / 100;
+        long communicationAppTodayProbability = (communicationAppToday * 16) / 100;
 
-            long Openness = (todayAllAppUsageProbability + todaySocialAppUsageProbability + todayCommunicationAppUsageProbability + newAppsProbability + socialAppTodayProbability + communicationAppTodayProbability)/100;
+        long Openness = (todayAllAppUsageProbability + todaySocialAppUsageProbability + todayCommunicationAppUsageProbability + newAppsProbability + socialAppTodayProbability + communicationAppTodayProbability) / 100;
 
-            Log.d("inotify","Openness..............."+ Openness);
+        Log.d("inotify", "Openness..............." + Openness);
 
-
-
-        final TextView textViewToChange = findViewById(R.id.Op_attr_1);
+        //TODO implement intent with data
+        /*final TextView textViewToChange = findViewById(R.id.Op_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.Op_attr_2);
         final TextView textViewToChange3 = findViewById(R.id.Op_attr_3);
         final TextView textViewToChange4 = findViewById(R.id.Op_attr_4);
         final TextView textViewToChange5 = findViewById(R.id.Op_attr_5);
         final TextView textViewToChange6 = findViewById(R.id.Op_attr_6);
 
-        textViewToChange6.setText(""+todayAllAppUsageProbability);
-        textViewToChange2.setText(""+todaySocialAppUsageProbability);
-        textViewToChange.setText(""+newAppsProbability);
-        textViewToChange3.setText(""+socialAppTodayProbability);
-        textViewToChange4.setText(""+communicationAppTodayProbability);
-        textViewToChange5.setText(""+todayCommunicationAppUsageProbability);
+        textViewToChange6.setText("" + todayAllAppUsageProbability);
+        textViewToChange2.setText("" + todaySocialAppUsageProbability);
+        textViewToChange.setText("" + newAppsProbability);
+        textViewToChange3.setText("" + socialAppTodayProbability);
+        textViewToChange4.setText("" + communicationAppTodayProbability);
+        textViewToChange5.setText("" + todayCommunicationAppUsageProbability);*/
 
 
-            Intent intent = new Intent(Openness.this, UserAttentivenessActivity.class);
-            intent.putExtra("Openness", Openness);
-            startActivity(intent);
+/*
+        Intent intent = new Intent(Openness.this, UserAttentivenessActivity.class);
+        intent.putExtra("Openness", Openness);
+        startActivity(intent);
 
-            Log.d("inotify","Openness--------"+Openness);
+        Log.d("inotify", "Openness--------" + Openness);
+*/
 
-            return Openness;
+        return Openness;
 
 
-        }
+    }
 
-    public long displayOpennessAVG()
-    {
+    public long displayOpennessAVG() {
         AppUsageHelper appUsageHelper = new AppUsageHelper(this);
         long avgAllAppUsage = appUsageHelper.appAllsUsageAVG();
         long avgSocialAppUsage = appUsageHelper.socialAppsUsageAVG();
         long avgCommunicationAppUsage = appUsageHelper.communicationAppsUsageAVG();
 
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-       // int NoofAppsToday = applicationsHelper.appCountGetToday();
+        // int NoofAppsToday = applicationsHelper.appCountGetToday();
         int NoofAppsAll = applicationsHelper.allAppCountAVG();
 
-       // int newApps = (NoofAppsAll - NoofAppsToday);
+        // int newApps = (NoofAppsAll - NoofAppsToday);
 
         CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
         long socialAppAvg = commonAppCountHelper.commonSocialAppAvg();
         int communicationAppAvg = commonAppCountHelper.commonCommunicationAppAvg();
 
         //probability
-        long avgAllAppUsageProbability = (avgAllAppUsage * 16)/100;
-        long avgSocialAppUsageProbability = (avgSocialAppUsage * 16)/100;
-        long avgCommunicationAppUsageProbability = (avgCommunicationAppUsage * 16)/100;
-        long newAppsProbability = (NoofAppsAll * 16)/100;
-        long socialAppTodayProbability = (socialAppAvg * 16)/100;
-        long communicationAppTodayProbability = (communicationAppAvg * 16)/100;
+        long avgAllAppUsageProbability = (avgAllAppUsage * 16) / 100;
+        long avgSocialAppUsageProbability = (avgSocialAppUsage * 16) / 100;
+        long avgCommunicationAppUsageProbability = (avgCommunicationAppUsage * 16) / 100;
+        long newAppsProbability = (NoofAppsAll * 16) / 100;
+        long socialAppTodayProbability = (socialAppAvg * 16) / 100;
+        long communicationAppTodayProbability = (communicationAppAvg * 16) / 100;
 
-        long OpennessAVG = (avgAllAppUsageProbability + avgSocialAppUsageProbability + avgCommunicationAppUsageProbability + newAppsProbability + socialAppTodayProbability + communicationAppTodayProbability)/100;
+        long OpennessAVG = (avgAllAppUsageProbability + avgSocialAppUsageProbability + avgCommunicationAppUsageProbability + newAppsProbability + socialAppTodayProbability + communicationAppTodayProbability) / 100;
 
 
 //
@@ -121,7 +120,7 @@ public class Openness extends AppCompatActivity {
 //        intent.putExtra("Openness", Openness);
 //        startActivity(intent);
 //
-        Log.d("inotify","Openness--------"+OpennessAVG);
+        Log.d("inotify", "Openness--------" + OpennessAVG);
 
         return OpennessAVG;
 
@@ -130,7 +129,7 @@ public class Openness extends AppCompatActivity {
 
 
     public void next_open(View view) {
-        Intent intent = new Intent(this,Neuroticism.class);
+        Intent intent = new Intent(this, Neuroticism.class);
         startActivity(intent);
 
     }
@@ -142,18 +141,13 @@ public class Openness extends AppCompatActivity {
 
     }
 
-        public void onClick(View v) {
-           // number = 5; //this is an integer
-            long openness1 = this.displayOpenness(v.getContext());
-            Intent in = new Intent(Openness.this, UsercharacteristicsActivity.class);
-            in.putExtra("name of your value (eg. adapter_int)", openness1);
-            startActivity(in);
-        }
-
-
-
-
-
+    public void onClick(View v) {
+        // number = 5; //this is an integer
+        long openness1 = this.displayOpenness(v.getContext());
+        Intent in = new Intent(Openness.this, UsercharacteristicsActivity.class);
+        in.putExtra("name of your value (eg. adapter_int)", openness1);
+        startActivity(in);
+    }
 
 
 }

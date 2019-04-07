@@ -48,25 +48,29 @@ public class Conscientiousness extends AppCompatActivity {
         long todaySocialAppUsage = appUsageHelper.socialAppsUsageToday();
         long todayMusicVideoAppUsage = appUsageHelper.musicvideoAppsUsageToday();
 
-        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(this);
-        long calender = calenderEventHelper.getcalanderEventCount(this);
+/*
+        //TODO - you can't call a activity from a class because then the referance (context ) will be null
+        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(getApplicationContext());
+        long calender = calenderEventHelper.getcalanderEventCount();*/
 
-        ChargerHelper chargerHelper = new ChargerHelper(this);
-        long charge = chargerHelper.powerOnCount();
+/*        ChargerHelper chargerHelper = new ChargerHelper(getApplicationContext());
+        long charge = chargerHelper.powerOnCount();*/
 
         //Probability
         long todaySocialAppProbability = (todaySocialApp * 16)/100;
         long todayMusicVideoAppProbability = (todayMusicVideoApp * 16)/100;
         long todaySocialAppUsageProbability = (todaySocialAppUsage * 16)/100;
         long todayMusicVideoAppUsageProbability = (todayMusicVideoAppUsage * 16)/100;
-        long calenderProbability = (calender * 16)/100;
-        long chargeProbability = (charge * 16)/100;
+       // long calenderProbability = (calender * 16)/100;
+      //  long chargeProbability = (charge * 16)/100;
 
-        long conscientiousness = (calenderProbability - chargeProbability - todaySocialAppProbability -todayMusicVideoAppProbability - todaySocialAppUsageProbability - todayMusicVideoAppUsageProbability);
+        //long conscientiousness = (calenderProbability - chargeProbability - todaySocialAppProbability -todayMusicVideoAppProbability - todaySocialAppUsageProbability - todayMusicVideoAppUsageProbability);
+        long conscientiousness = ( todaySocialAppProbability -todayMusicVideoAppProbability - todaySocialAppUsageProbability - todayMusicVideoAppUsageProbability);
 
-        Log.d("inotify","conscientiousness..................." + conscientiousness);
 
-        final TextView textViewToChange = findViewById(R.id.Co_attr_1);
+       // Log.d("inotify","conscientiousness..................." + conscientiousness);
+
+    /*    final TextView textViewToChange = findViewById(R.id.Co_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.Co_attr_2);
         final TextView textViewToChange3 = findViewById(R.id.Co_attr_3);
         final TextView textViewToChange4 = findViewById(R.id.Co_attr_4);
@@ -75,10 +79,10 @@ public class Conscientiousness extends AppCompatActivity {
 
         textViewToChange6.setText(""+todayMusicVideoAppProbability);
         textViewToChange2.setText(""+todayMusicVideoAppUsageProbability);
-        textViewToChange.setText(""+calenderProbability);
+        //textViewToChange.setText(""+calenderProbability);
         textViewToChange3.setText(""+todaySocialAppProbability);
         textViewToChange4.setText(""+todaySocialAppUsageProbability);
-        textViewToChange5.setText(""+chargeProbability);
+        //textViewToChange5.setText(""+chargeProbability);*/
         return conscientiousness;
     }
 

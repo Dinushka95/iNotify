@@ -64,6 +64,7 @@ public class Agreeablenesss extends AppCompatActivity {
         long agreeableness = (todayAppCountProbability + todayContctsProbability + todayScreenOnTimeProbability - todayPersonalizationAppUsageProbability -todayPersonalizationAppProbability);
 
         Log.d("inotify","agreeableness--------------"+ agreeableness);
+/*
 
         final TextView textViewToChange = findViewById(R.id.Ag_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.Ag_attr_2);
@@ -76,7 +77,9 @@ public class Agreeablenesss extends AppCompatActivity {
         textViewToChange2.setText(""+todayPersonalizationAppUsageProbability);
         textViewToChange3.setText(""+todayScreenOnTimeProbability);
         textViewToChange4.setText(""+todayAppCountProbability);
+
         textViewToChange5.setText(""+todayContctsProbability);
+        */
         //textViewToChange5.setText(""+todayCommunicationAppUsageProbability);
 
         return agreeableness;

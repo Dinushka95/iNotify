@@ -78,7 +78,7 @@ public class Neuroticism extends AppCompatActivity {
         long todayAllAppUsage = appUsageHelper.appAllsUsageToday();
 
         ChargerHelper chargerHelper = new ChargerHelper(this);
-        long charge = chargerHelper.powerOnCount();
+//        long charge = chargerHelper.powerOnCount();
 
         //Probability
         long todayPhotograpyAppUsageProbability = (todayPhotograpyAppUsage * 16) / 100;
@@ -86,13 +86,14 @@ public class Neuroticism extends AppCompatActivity {
         long todayPhotograpyAppsProbability = (todayPhotograpyApps * 16) / 100;
         long todaySocialappsProbability = (todaySocialapps * 16) / 100;
         long todayAllAppUsageProbability = (todayAllAppUsage * 16) / 100;
-        long chargeProbability = (charge * 16) / 100;
+  //      long chargeProbability = (charge * 16) / 100;
 
-        long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability + chargeProbability) / 10;
+    //    long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability + chargeProbability) / 10;
+            long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability ) / 10;
 
-        Log.d("inotify", "neuroticism..................." + neuroticism);
+ //       Log.d("inotify", "neuroticism..................." + neuroticism);
 
-        final TextView textViewToChange = findViewById(R.id.N_attr_1);
+/*        final TextView textViewToChange = findViewById(R.id.N_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.N_attr_2);
         final TextView textViewToChange3 = findViewById(R.id.N_attr_3);
         final TextView textViewToChange4 = findViewById(R.id.N_attr_4);
@@ -104,7 +105,7 @@ public class Neuroticism extends AppCompatActivity {
         textViewToChange3.setText("" + todaySocialappsProbability);
         textViewToChange4.setText("" + todaySocialAppUsageProability);
         textViewToChange5.setText("" + todayAllAppUsageProbability);
-        textViewToChange6.setText("" + chargeProbability);
+        textViewToChange6.setText("" + chargeProbability);*/
 
 
         return neuroticism;
