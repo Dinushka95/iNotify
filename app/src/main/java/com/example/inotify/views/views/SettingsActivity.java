@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.SmartNotificationDbHelper;
 import com.example.inotify.dbHelpers.TopAppDbHelper;
 import com.example.inotify.helpers.TopAppsHelper;
 import com.example.inotify.interfaces.MyCallback;
@@ -103,7 +104,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void test(View view) {
-
 
 
     }

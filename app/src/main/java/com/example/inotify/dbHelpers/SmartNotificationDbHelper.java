@@ -5,9 +5,11 @@ import android.content.Context;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 
 import com.example.inotify.configs.TbColNames;
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.helpers.SmartNotificationSystemHelper;
 import com.example.inotify.models.SNSModel;
 
@@ -87,11 +89,9 @@ public class SmartNotificationDbHelper extends MainDbHelp {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-
         ContentValues newValues = new ContentValues();
-        newValues.put(SNS_VTIME, vtime);
-
-        db.update(SNS_TABLE, newValues, "sns_id=" + id, null);
+        newValues.put(TbColNames.SNS_VTIME, vtime);
+        db.update(TbNames.SNS_TABLE, newValues, "sns_id=\"" + id+"\"", null);
 
     }
 

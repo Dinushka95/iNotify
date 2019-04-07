@@ -125,7 +125,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                 }
             }
             ansarraylist.set(0, Integer.toString(count2));
-            Log.d("inotifyCC" , "inotify456789 " +ansarraylist );
+
         }
 
         return ansarraylist;
@@ -150,7 +150,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                 }
             }
             ansarraylist2.set(0, Integer.toString(count2));
-            Log.d("inotifyCC" , "inotify456789 " +ansarraylist2 );
+
         }
 
         return ansarraylist2;
@@ -180,7 +180,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                 }
             }
             ansarraylistLineChartTime.set(0, Integer.toString(count2));
-            Log.d("inotifyCC" ,  "inotify=====================ansarraylistLineChartTime ============= " +ansarraylistLineChartTime );
+
         }
 
         return ansarraylistLineChartTime;
@@ -205,7 +205,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                 }
             }
             ansarraylistLineChartAttentivness.set(0, Integer.toString(count2));
-            Log.d("inotifyCC" ,  "inotify=====================ansarraylistLineChartTime ============= " +ansarraylistLineChartAttentivness );
+
         }
 
         return ansarraylistLineChartAttentivness;
@@ -230,7 +230,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                 }
             }
             ansarraylistLineChartApp.set(0, Integer.toString(count2));
-            Log.d("inotifyCC" , "inotify =================== ansarraylistLineChartApp ==================================  " +ansarraylistLineChartApp );
+
         }
 
         return ansarraylistLineChartApp;
@@ -256,7 +256,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                       }
                   }
                   arraylistLineChartAttentPerApp.set(0, Integer.toString(count2));
-                  Log.d("inotifyCC" , "inotify ========================  arraylistLineChartAttentPerApp ===========================" +arraylistLineChartAttentPerApp );
+
               }
 
 
@@ -269,12 +269,12 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
       public ArrayList<String> AssignTimeSlots(String datetime)
       {
          time.add(" ");
-          Log.d("inotify" ,"substring ===================" +datetime);
+
 
           for(int i=0 ;i< datetime.length()/2 ;i++)
           {
               time.add(datetime.substring(i*2));
-              Log.d("inotify" ,"substring ===================" +time);
+
 
           }
 
@@ -285,7 +285,7 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
       {
 
          ArrayList<String> a = this.AssignTimeSlots(dateTime);
-          Log.d("inotify" ,"substring ===================" +time);
+
 
 return a;
 

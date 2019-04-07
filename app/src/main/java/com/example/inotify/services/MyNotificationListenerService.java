@@ -281,7 +281,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
                 //Smart Notification
                 SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
-                smartNotificationDbHelper.saveData(id,viewbillityProbability,attentivenessPerApp,"gaming","dating",appName);
+                smartNotificationDbHelper.saveData(id,viewbillityProbability,attentivenessPerApp,usercharacties,appType,appPackageName);
 
             }
         }
@@ -302,7 +302,6 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             NotificationDbHelper notificationDbHelper1 = new NotificationDbHelper(this);
             notificationDbHelper1.updateNotificationViewTime(ticker, time);
-            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Updated Succcessfully updateNotificationViewTime ==" + ticker + " " + time);
             notificationDbHelper1.close();
 
             NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
@@ -316,21 +315,18 @@ public class MyNotificationListenerService extends NotificationListenerService {
             for (StatusBarNotification notification : notificationManager1) {
                 if (sbn.getPackageName().equals("com.example.inotify")) {
                     totalnotificationinlist = totalnotificationinlist + 1;
-
                 }
             }
             int notificationTotal = totalnotificationinlist;
 
             NotificationDbHelper notificationDbHelper = new NotificationDbHelper(this);
             String Appname = notificationDbHelper.AppnameGet(ticker);
-            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Appname " +Appname);
             String notificationRecivedTime = notificationDbHelper.recivedTimeGet(ticker);
             String notificationViwedTime = notificationDbHelper.viewTimeGet(ticker);
             notificationDbHelper.close();
 
             NotificationImportnaceDbHelper notificationImportnaceDbHelper = new NotificationImportnaceDbHelper(this);
             notificationImportnaceDbHelper.NotificationImportnaceInsert(ticker, Appname, totalnotificationinlist);
-            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Notification importnace table saved");
             String Seqence = notificationImportnaceDbHelper.NotificationImportnaceGet(ticker);
 
             RingerModeDbHelper ringerModeDbHelper = new RingerModeDbHelper(this);
@@ -341,49 +337,31 @@ public class MyNotificationListenerService extends NotificationListenerService {
             String b = screenStatusDbHelper.checkScreenOffAdaptability(ticker);
 
             String screenStatus1 = screenStatusDbHelper.checkAvaulability(ticker);
-            Log.d("inotify", "screenStatus1" + screenStatus1);
-
-            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved-- Data to clculate attentivness = " + ticker + " " + Ringermode + " " + screenStatus1 + " " + notificationViwedTime + " " + notificationRecivedTime + " " + Seqence + " " + notificationTotal);
             MainUserAttentivness mainUserAttentivness = new MainUserAttentivness(this);
-            //double attentivnessvalue = mainUserAttentivness.calculateAttentivness(ticker, screenStatus1, Ringermode, notificationViwedTime, notificationRecivedTime, Seqence, notificationTotal);
-          ///(^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^) (^_^)(^_^) (^_^) (^_^) (^_^) (^_^) (^_^)
             double attentivnessvalue = mainUserAttentivness.CalcAtten(ticker,Appname,screenStatus1,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
 
 
 
             UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
             userAttentivnessDbHelper.UserAttentivnessInsert(ticker, Appname, attentivnessvalue);
-            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Attentivness inserted successfully  " + ticker + "  " + Appname + "  " + attentivnessvalue);
-
 
             AttentivnessPerAppDbHelper attentivnessPerAppDbHelper= new AttentivnessPerAppDbHelper(this);
             attentivnessPerAppDbHelper.calculateTotalAttentivness(ticker, Appname);
-            Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Total Attentivness succcessfully added");
-
 
             userAttentivnessDbHelper.InsertAttentivnessPerNotificationOnTime(ticker ,notificationRecivedTime ,Appname ,attentivnessvalue);
-            Log.d("inotify", "Main-MyNotificationListenerService----InsertAttentivnessPerNotificationOnTime-- succcessfully added");
-
-
-
-
-
 
             UserAttentivnessFeatureExtraction userAttentivnessFeatureExtraction = new UserAttentivnessFeatureExtraction(this);
             userAttentivnessFeatureExtraction.UserAttentivnessFeatureExtraction(screenStatus1,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
-            Log.d("inotify", "Main-MyNotificationListenerService----userAttentivnessFeatureExtraction--userAttentivnessFeatureExtraction ==================Added");
 
             double rule = userAttentivnessFeatureExtraction.IdentifyRule(screenStatus1,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
-            Log.d("inotify", "Main-MyNotificationListenerService----userAttentivnessFeatureExtraction =============================================  IdentifyRule ==================" + rule);
 
             userAttentivnessDbHelper.AssignTimeSlots(notificationRecivedTime);
             userAttentivnessDbHelper.asd(notificationRecivedTime);
-            Log.d("inotify", "Main-MyNotificationListenerService----AssignTimeSlots");
-            Log.d("inotify", "Main-MyNotificationListenerService----asd");
+
 
 
             //Smart Notification update with time
-/*            String oldtime = sbn.getNotification().tickerText.toString();
+            String oldtime = sbn.getNotification().tickerText.toString();
             String newtime = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
 
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSS");
@@ -401,9 +379,9 @@ public class MyNotificationListenerService extends NotificationListenerService {
             }
 
             long difference = date2.getTime() - date1.getTime();
+            SmartNotificationDbHelper.getInstance(this).updateData(ticker,String.valueOf(difference));
+            Log.e("inotify", "Main-MyNotificationListenerService-vvvvvvvvvvvvvvvvvvvvvvvvvvvv"+difference);
 
-            SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
-            smartNotificationDbHelper.updateData(ticker,String.valueOf(difference));*/
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");
         }
