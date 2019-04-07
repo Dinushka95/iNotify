@@ -2,6 +2,8 @@ package com.example.inotify.helpers;
 
 import android.content.Context;
 
+import com.example.inotify.configs.TbNames;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.CommonAppCountDbHelper;
 
 public class CommonAppCountHelper {
@@ -40,6 +42,15 @@ public class CommonAppCountHelper {
     public int commonSocialAppAvg()
     {
         return CommonAppCountDbHelper.getInstance(c1).commonSocialAppAvg();
+    }
+
+    public void  characteristicsInsertOnAvailability()
+    {
+        if(! CommonAppCountDbHelper.getInstance(c1).cheackAvailability(TbNames.COMMONAPPCOUNT_TABLE))
+        {
+            this.characteristicsInsert();
+        }
+
     }
 
 }

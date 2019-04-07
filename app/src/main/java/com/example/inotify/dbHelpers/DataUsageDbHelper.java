@@ -11,6 +11,8 @@ import android.util.Log;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -44,14 +46,14 @@ public class DataUsageDbHelper extends MainDbHelp {
         return result != -1;
     }
 
-//    public void  insertTotoalDataUsageAvailability()
-//    {
-//        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CHARGER_TABLE))
-//        {
-//            this.insertTotoalDataUsage(date,amount);
-//        }
-//
-//    }
+    public void  insertTotoalDataUsageAvailability(String date,String amount)
+    {
+        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CHARGER_TABLE))
+        {
+            this.insertTotoalDataUsage(date,amount);
+        }
+
+    }
 
     public String getTotalDataUsage(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -91,5 +93,20 @@ public class DataUsageDbHelper extends MainDbHelp {
         }
 
         return String.valueOf(avg);
+    }
+    public boolean cheackAvailability(String TableName )
+    {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName +" where DATE =\"" + date + "\"", null);
+
+        if(res.getCount()>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

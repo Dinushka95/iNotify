@@ -96,4 +96,19 @@ public class CalenderEventDbHelper extends MainDbHelp {
         db.close();
         return result != -1;
     }
+    public boolean cheackAvailability(String TableName )
+    {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName +" where DATE =\"" + date + "\"", null);
+
+        if(res.getCount()>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

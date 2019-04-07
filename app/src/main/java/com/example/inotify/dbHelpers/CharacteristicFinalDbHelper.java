@@ -23,13 +23,13 @@ public class CharacteristicFinalDbHelper extends MainDbHelp {
         this.c1=context;
     }
 
-    public boolean characteristicsInsert()
+    public boolean characteristicsInsert(Context context)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
         Openness openness = new Openness();
-        long openness_chara= openness.displayOpenness();
+        long openness_chara= openness.displayOpenness(context);
 
         Conscientiousness conscientiousness = new Conscientiousness();
         long conscientiousness_chara = conscientiousness.displayConscientiousness();

@@ -4,34 +4,34 @@ public class SNSModel {
 
     private String day;
     private String time;
-    private String busyornot;
+    private String viewability;
     private String attentiviness;
-    private String userchaacteristics;
+    private String userchacteristics;
     private String notificationtype;
-    private String appname;
+    private String packagename;
     private String vtime;
 
     public SNSModel() {
     }
 
-    public SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname) {
+    public SNSModel(String day, String time, String viewability, String attentiviness, String userchacteristics, String notificationtype, String packagename) {
         this.day = day;
         this.time = time;
-        this.busyornot = busyornot;
+        this.viewability = viewability;
         this.attentiviness = attentiviness;
-        this.userchaacteristics = userchaacteristics;
+        this.userchacteristics = userchacteristics;
         this.notificationtype = notificationtype;
-        this.appname = appname;
+        this.packagename = packagename;
     }
 
-    public SNSModel(String day, String time, String busyornot, String attentiviness, String userchaacteristics, String notificationtype, String appname, String vtime) {
+    public SNSModel(String day, String time, String viewability, String attentiviness, String userchacteristics, String notificationtype, String packagename, String vtime) {
         this.day = day;
         this.time = time;
-        this.busyornot = busyornot;
+        this.viewability = viewability;
         this.attentiviness = attentiviness;
-        this.userchaacteristics = userchaacteristics;
+        this.userchacteristics = userchacteristics;
         this.notificationtype = notificationtype;
-        this.appname = appname;
+        this.packagename = packagename;
         this.vtime = vtime;
     }
 
@@ -51,12 +51,12 @@ public class SNSModel {
         this.time = time;
     }
 
-    public String getBusyornot() {
-        return busyornot;
+    public String getViewability() {
+        return viewability;
     }
 
-    public void setBusyornot(String busyornot) {
-        this.busyornot = busyornot;
+    public void setViewability(String viewability) {
+        this.viewability = viewability;
     }
 
     public String getAttentiviness() {
@@ -67,12 +67,12 @@ public class SNSModel {
         this.attentiviness = attentiviness;
     }
 
-    public String getUserchaacteristics() {
-        return userchaacteristics;
+    public String getUserchacteristics() {
+        return userchacteristics;
     }
 
-    public void setUserchaacteristics(String userchaacteristics) {
-        this.userchaacteristics = userchaacteristics;
+    public void setUserchacteristics(String userchacteristics) {
+        this.userchacteristics = userchacteristics;
     }
 
     public String getNotificationtype() {
@@ -83,12 +83,12 @@ public class SNSModel {
         this.notificationtype = notificationtype;
     }
 
-    public String getAppname() {
-        return appname;
+    public String getPackagename() {
+        return packagename;
     }
 
-    public void setAppname(String appname) {
-        this.appname = appname;
+    public void setPackagename(String packagename) {
+        this.packagename = packagename;
     }
 
     public String getVtime() {

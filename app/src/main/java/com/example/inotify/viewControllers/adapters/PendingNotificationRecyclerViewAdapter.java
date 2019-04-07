@@ -50,6 +50,18 @@ public class PendingNotificationRecyclerViewAdapter extends RecyclerView.Adapter
         return list.size();
     }
 
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        return position;
+    }
+
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);

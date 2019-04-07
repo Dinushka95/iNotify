@@ -1,5 +1,6 @@
 package com.example.inotify.views.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import com.example.inotify.R;
 import com.example.inotify.configs.AppCategoriesConstants;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.CommonAppCountHelper;
+import com.google.android.gms.common.internal.service.Common;
 
 public class Openness extends AppCompatActivity {
     TextView textView;
@@ -27,9 +30,9 @@ public class Openness extends AppCompatActivity {
     }
 
 
-        public long displayOpenness()
+        public long displayOpenness(Context context)
         {
-           AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+           AppUsageHelper appUsageHelper = new AppUsageHelper(context);
             long todayAllAppUsage = appUsageHelper.appAllsUsageToday();
             long todaySocialAppUsage = appUsageHelper.socialAppsUsageToday();
             long todayCommunicationAppUsage = appUsageHelper.communicationAppsUsageToday();
@@ -39,6 +42,7 @@ public class Openness extends AppCompatActivity {
             int NoofAppsAll = applicationsHelper.allAppCountAVG();
 
             int newApps = (NoofAppsAll - NoofAppsToday);
+            Log.d("inotify","newApps" + newApps);
 
             int socialAppToday = applicationsHelper.commonSocialAppTodayCount();
             int communicationAppToday = applicationsHelper.commonCommunicationAppTodayCount();
@@ -76,107 +80,53 @@ public class Openness extends AppCompatActivity {
             intent.putExtra("Openness", Openness);
             startActivity(intent);
 
+            Log.d("inotify","Openness--------"+Openness);
+
             return Openness;
 
 
         }
 
-        public void checkAttributeOpenness()
-        {
-            AppUsageHelper appUsageHelper = new AppUsageHelper(this);
-             long todayAppUsage = appUsageHelper.appAllsUsageToday();
-             long avgAppUsage = appUsageHelper.appAllsUsageAVG();
-             if(todayAppUsage > avgAppUsage)
-             {
-                 Log.d("inotify","Your AppUsage is high on today than the other days");
-                 String appUsage = "high";
-             }
-             else if(todayAppUsage == avgAppUsage)
-             {
-                 Log.d("inotify","Your AppUsage is normal");
-                 String appUsage = "normal";
-             }
-             else
-             {
-                 Log.d("inotify","Your AppUsage is low on today than the other days");
-                 String appUsage = "low";
-             }
+    public long displayOpennessAVG()
+    {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        long avgAllAppUsage = appUsageHelper.appAllsUsageAVG();
+        long avgSocialAppUsage = appUsageHelper.socialAppsUsageAVG();
+        long avgCommunicationAppUsage = appUsageHelper.communicationAppsUsageAVG();
 
-            long socilAppUsgeToday =  appUsageHelper.socialAppsUsageToday();
-             long socialAppUsageAVG = appUsageHelper.socialAppsUsageAVG();
-            if(socilAppUsgeToday > socialAppUsageAVG)
-            {
-                Log.d("inotify","Your soailAppUsage is high on today than the other days");
-                String soailAppUsage = "high";
-            }
-            else if(todayAppUsage == avgAppUsage)
-            {
-                Log.d("inotify","Your soailAppUsage is normal");
-                String soailAppUsage = "normal";
-            }
-            else
-            {
-                Log.d("inotify","Your soailAppUsage is low on today than the other days");
-                String soailAppUsage = "low";
-            }
+        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
+       // int NoofAppsToday = applicationsHelper.appCountGetToday();
+        int NoofAppsAll = applicationsHelper.allAppCountAVG();
 
-            long communicationAppUsgeToday =  appUsageHelper.communicationAppsUsageToday();
-            long communicationAppUsageAVG = appUsageHelper.communicationAppsUsageAVG();
-            if(communicationAppUsgeToday > communicationAppUsageAVG)
-            {
-                Log.d("inotify","Your communicationAppUsage is high on today than the other days");
-                String communicationAppUsage = "high";
-            }
-            else if(todayAppUsage == avgAppUsage)
-            {
-                Log.d("inotify","Your communicationAppUsage is normal");
-                String communicationAppUsage = "normal";
-            }
-            else
-            {
-                Log.d("inotify","Your communicationAppUsage is low on today than the other days");
-                String communicationAppUsage = "low";
-            }
+       // int newApps = (NoofAppsAll - NoofAppsToday);
 
-            ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-            int NoofAppsToday = applicationsHelper.appCountGetToday();
-            int NoofAppsAllAVG = applicationsHelper.allAppCountAVG();
+        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
+        long socialAppAvg = commonAppCountHelper.commonSocialAppAvg();
+        int communicationAppAvg = commonAppCountHelper.commonCommunicationAppAvg();
 
-            if(NoofAppsToday > NoofAppsAllAVG)
-            {
-                Log.d("inotify","Your Number of apps is high on today than the other days");
-                String noOfApps = "high";
-            }
-            else if(todayAppUsage == avgAppUsage)
-            {
-                Log.d("inotify","Your Number of apps is normal");
-                String noOfApps = "normal";
-            }
-            else
-            {
-                Log.d("inotify","Your Number of apps is low on today than the other days");
-                String noOfApps = "low";
-            }
+        //probability
+        long avgAllAppUsageProbability = (avgAllAppUsage * 16)/100;
+        long avgSocialAppUsageProbability = (avgSocialAppUsage * 16)/100;
+        long avgCommunicationAppUsageProbability = (avgCommunicationAppUsage * 16)/100;
+        long newAppsProbability = (NoofAppsAll * 16)/100;
+        long socialAppTodayProbability = (socialAppAvg * 16)/100;
+        long communicationAppTodayProbability = (communicationAppAvg * 16)/100;
 
-            int socilAppCountToday = applicationsHelper.commonSocialAppTodayCount();
-            if(NoofAppsToday > NoofAppsAllAVG)
-            {
-                Log.d("inotify","Your Number of apps is high on today than the other days");
-                String noOfApps = "high";
-            }
-            else if(todayAppUsage == avgAppUsage)
-            {
-                Log.d("inotify","Your Number of apps is normal");
-                String noOfApps = "normal";
-            }
-            else
-            {
-                Log.d("inotify","Your Number of apps is low on today than the other days");
-                String noOfApps = "low";
-            }
+        long OpennessAVG = (avgAllAppUsageProbability + avgSocialAppUsageProbability + avgCommunicationAppUsageProbability + newAppsProbability + socialAppTodayProbability + communicationAppTodayProbability)/100;
 
 
-        }
+//
+//
+//        Intent intent = new Intent(Openness.this, UserAttentivenessActivity.class);
+//        intent.putExtra("Openness", Openness);
+//        startActivity(intent);
+//
+        Log.d("inotify","Openness--------"+OpennessAVG);
+
+        return OpennessAVG;
+
+
+    }
 
 
     public void next_open(View view) {
@@ -188,13 +138,13 @@ public class Openness extends AppCompatActivity {
     public void back_open(View view) {
 //        Intent intent = new Intent(this,Conscientiousness.class);
 //        startActivity(intent);
-        this.displayOpenness();
+        this.displayOpenness(view.getContext());
 
     }
 
         public void onClick(View v) {
            // number = 5; //this is an integer
-            long openness1 = this.displayOpenness();
+            long openness1 = this.displayOpenness(v.getContext());
             Intent in = new Intent(Openness.this, UsercharacteristicsActivity.class);
             in.putExtra("name of your value (eg. adapter_int)", openness1);
             startActivity(in);

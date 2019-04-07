@@ -88,14 +88,13 @@ public class CalenderEventHelper {
 
     public boolean calenderEventCount_insert()
     {
-        //return CalenderEventDbHelper.getInstance(c1).calenderEventCount_insert(this.getcalanderEventCount);
-        return true;
+        return CalenderEventDbHelper.getInstance(c1).calenderEventCount_insert(String.valueOf(getcalanderEventCount(c1)));
 
     }
 
-    public void  scalenderEventCount_insertOnAvailability()
+    public void  calenderEventCount_insertOnAvailability()
     {
-        if(! ApplicationDbHelper.getInstance(c1).cheackAvailability(TbNames.CALENDEREVENTCOUNT_TABLE))
+        if(! CalenderEventDbHelper.getInstance(c1).cheackAvailability(TbNames.CALENDEREVENTCOUNT_TABLE))
         {
             this.calenderEventCount_insert();
         }

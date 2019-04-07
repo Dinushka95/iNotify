@@ -8,6 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.service.notification.NotificationListenerService;
@@ -32,6 +36,7 @@ import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.MainUserAttentivness;
+import com.example.inotify.helpers.SmartNotificationSystemHelper;
 import com.example.inotify.helpers.UserAttentivnessFeatureExtraction;
 import com.example.inotify.models.NotificationModel;
 import com.example.inotify.models.SNSModel;
@@ -42,15 +47,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 
 public class MyNotificationListenerService extends NotificationListenerService {
 
 
-
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-
         String timeSent = "";
         String appPackageName = "";
         String appName = "";
@@ -65,7 +69,11 @@ public class MyNotificationListenerService extends NotificationListenerService {
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
         String id = new SimpleDateFormat("yyyyMMddHHmmssSS", Locale.getDefault()).format(new Date());
         String timeRecieved = new SimpleDateFormat("HHmmssSS", Locale.getDefault()).format(new Date());
-
+        Calendar cal = Calendar.getInstance();
+        cal.set(Integer.valueOf(new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date())),
+                (Integer.valueOf(new SimpleDateFormat("MM", Locale.getDefault()).format(new Date())) - 1),
+                Integer.valueOf(new SimpleDateFormat("dd", Locale.getDefault()).format(new Date())));
+        String day = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
         Intent LaunchIntent = null;
         PackageManager pm = null;
@@ -151,16 +159,19 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
             // Smart Notifaction
+            Log.d("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---" );
+            NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
+            String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
+            Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---viewbillityProbability---"+viewbillityProbability );
 
-         //   NotificationViewabilityDbHelper notificationViewabilityDbHelper = new NotificationViewabilityDbHelper(this);
-       //     String viewbillityProbability = String.valueOf(notificationViewabilityDbHelper.GetViewability(Calendar.getInstance().getTime()));
+            AttentivnessPerAppDbHelper attentivnessPerAppDbHelper = new AttentivnessPerAppDbHelper(this);
+            String attentivenessPerApp = attentivnessPerAppDbHelper.AttentivnessperAppGet(appPackageName);
+            Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---attentivenessPerApp---"+attentivenessPerApp );
 
-     //       UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
-   //         String attentivenessPerApp = userAttentivnessDbHelper.getAttentivenessPerApp(appPackageName);
+            SNSModel snsModel = new SNSModel(day,timeRecieved,viewbillityProbability,"0.5","gaming","dating",appName);
 
-       //     SNSModel snsModel = new SNSModel(date,timeRecieved,viewbillityProbability,attentivenessPerApp,"null","Mobile",appName);
-/*            SNSModel snsModel = new SNSModel(date,timeRecieved,"","","null","null",appName);
-            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,snsModel);
+            SmartNotificationSystemHelper smartNotificationSystemHelper = new SmartNotificationSystemHelper(getApplicationContext());
+            MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,smartNotificationSystemHelper.convertSNSdataToNumberic(snsModel));
             String vtimes =mainSmartNotificationSystem.getPrediction();
 
             String tem1 =vtimes.replaceAll("[\\[\\](){}]","");
@@ -168,11 +179,12 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.d("inotify", "Main-MyNotificationListenerService--FinalOutput-SmartNotificationSystem-predicted time---"+predictionTime );
 
 
+
             //TODO- get accuracy
             accuracy=30;
             if (predictionTime<accuracy) {
                 sendornotsend = true;
-            }*/
+            }
             sendornotsend = true;
             if (sendornotsend) {
                 //send notification
@@ -222,7 +234,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
                     intent = LaunchIntent;
                     PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
                     builder.setContentTitle(title + "-iNotify")                            // required
-                            .setSmallIcon(android.R.drawable.ic_popup_reminder)   // required
+                            .setSmallIcon( android.R.drawable.ic_popup_reminder)
+                         //   .setLargeIcon( sbn.getNotification().largeIcon)
                             .setContentText(text) // required
 //                            .addExtras(extrasid)
                             .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
@@ -235,13 +248,16 @@ public class MyNotificationListenerService extends NotificationListenerService {
                     PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
                     builder.setContentTitle(title + "-iNotify")
                             .setSmallIcon(android.R.drawable.ic_popup_reminder)
+                            //.setLargeIcon(sbn.getNotification().largeIcon)
                             .setContentText(text) // required
                             .setTicker(id)
                             .setDefaults(Notification.DEFAULT_ALL).setAutoCancel(true).addAction(R.drawable.common_google_signin_btn_icon_light, "Yes", pFeedbackYes).addAction(R.drawable.common_google_signin_btn_icon_light, "No", pFeedbackNo).setContentIntent(pIntent).setTicker(id).setVibrate(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400}).setPriority(Notification.PRIORITY_HIGH);
                     timeSent = new SimpleDateFormat("HHmmss", Locale.getDefault()).format(new Date());
                 }
+                Random ranvValue = new Random();
+                int n = ranvValue.nextInt(99);
                 Notification notification = builder.build();
-                notifManager.notify(nid, notification);
+                notifManager.notify(n, notification);
 
 
                 //PRASHAN
@@ -252,8 +268,8 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
 
                 //Smart Notification
-              //  SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
-              //  smartNotificationDbHelper.saveData(id,viewbillityProbability,"","null","Mobile",appName);
+                SmartNotificationDbHelper smartNotificationDbHelper = new SmartNotificationDbHelper(this);
+                smartNotificationDbHelper.saveData(id,viewbillityProbability,attentivenessPerApp,"gaming","dating",appName);
 
             }
         }

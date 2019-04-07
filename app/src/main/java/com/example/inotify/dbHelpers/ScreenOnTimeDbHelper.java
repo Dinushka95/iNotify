@@ -1,11 +1,13 @@
 package com.example.inotify.dbHelpers;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.helpers.ContactsHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,9 +33,9 @@ public class ScreenOnTimeDbHelper extends MainDbHelp {
     public int ScreenOnTimeCountTodayGet() {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select COUNT(TIMEON) as TIMECOUNT from " + TbNames.SCREENSTATUS_TABLE + " where DATE = \""+date+"\" AND NOTIFICATIONID IS null " , null);
+        Cursor res = db.rawQuery("select COUNT(TIMEON) as TIMECOUNT from " + TbNames.SCREENSTATUS_TABLE + " where DATE = \"" + date + "\" AND NOTIFICATIONID IS null ", null);
         if (res != null) {
-            if ((res.moveToFirst())){
+            if ((res.moveToFirst())) {
 
                 db.close();
                 return res.getInt(res.getColumnIndex("TIMECOUNT"));
@@ -43,5 +45,16 @@ public class ScreenOnTimeDbHelper extends MainDbHelp {
         return 0;
     }
 
+    public boolean cheackAvailability(String TableName) {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName + " where DATE =\"" + date + "\"", null);
+
+        if (res.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

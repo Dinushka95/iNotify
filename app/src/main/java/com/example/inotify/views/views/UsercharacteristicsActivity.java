@@ -1,6 +1,7 @@
 package com.example.inotify.views.views;
 
 import android.content.Intent;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,10 +10,14 @@ import com.example.inotify.R;
 import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.CharacteristicFinalDbHelper;
 import com.example.inotify.dbHelpers.ContactsDbHelper;
+import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.AttributeCountHelper;
 import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.CallUsageHelper;
+import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.ContactsHelper;
+import com.example.inotify.helpers.ScreenOnTimeHelper;
 
 import java.util.ArrayList;
 
@@ -32,15 +37,29 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test1(View view) {
-        ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
-        applicationsHelper.saveCurrentPhoneAppsOnAvailability();
+
 
 //        CheckAvailabilityHelper checkAvailabilityHelper= new CheckAvailabilityHelper();
 //        checkAvailabilityHelper.saveCurrentPhoneAppsOnAvailability();
 
+//        AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
+//        attributeCountHelper.atrributeCountInsert();
+
+//        Openness openness = new Openness();
+//        openness.displayOpenness(this.getApplicationContext());
+//
+//        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+//        long f = appUsageHelper.appAllsUsageToday();
+//        Log.d("inotify","f-------------" + f);
     }
 
     public void test2(View view) {
+
+//        Intent I = new Intent(this, ChartCharacteristicsActivity.class);
+//        startActivity(I);
+
+        Intent In = new Intent(this,AttributeDisplayActivity.class);
+        startActivity(In);
 //        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(this);
 //
 //        int x = calenderEventHelper.getcalanderEventCount(this);
@@ -56,15 +75,20 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 //        ContactsHelper contactsHelper = new ContactsHelper(this);
 //        contactsHelper.ContactsCountInsert();
 
-        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-        ArrayList<String> category;
-        category = applicationDbHelper.getAppPackage();
-        Log.d("cat","cat " + category.get(2));
+//        ChargerHelper chargerHelper = new ChargerHelper(this);
+//        chargerHelper.powerOninsert();
 
-        applicationDbHelper.appCategoryUpdate(category);
+//        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+//        ArrayList<String> category;
+//        category = applicationDbHelper.getAppPackage();
+//        Log.d("cat","cat " + category.get(2));
+//
+//        applicationDbHelper.appCategoryUpdate(category);
 
 //        CharacteristicFinalDbHelper characteristicFinalDbHelper = new CharacteristicFinalDbHelper(this);
 //        boolean x = characteristicFinalDbHelper.characteristicsInsert();
+
+
 
      }
 

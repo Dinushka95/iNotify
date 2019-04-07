@@ -10,8 +10,12 @@ import android.widget.TextView;
 import com.example.inotify.R;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.AttributeCountHelper;
 import com.example.inotify.helpers.CalenderEventHelper;
 import com.example.inotify.helpers.ChargerHelper;
+import com.example.inotify.helpers.CommonAppCountHelper;
+
+import org.w3c.dom.Attr;
 
 public class Conscientiousness extends AppCompatActivity {
 
@@ -33,6 +37,7 @@ public class Conscientiousness extends AppCompatActivity {
     {
        this.displayConscientiousness();
     }
+
     public long displayConscientiousness()
     {
         ApplicationsHelper applicationsHelper = new ApplicationsHelper(this);
@@ -76,5 +81,39 @@ public class Conscientiousness extends AppCompatActivity {
         textViewToChange5.setText(""+chargeProbability);
         return conscientiousness;
     }
+
+    public long displayConscientiousnessAVG()
+    {
+        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
+        long socialAppAvg = commonAppCountHelper.commonSocialAppAvg();
+        int AVGMusicVideoApp = commonAppCountHelper.commonMusicVideoAppAvg();
+
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        long avgSocialAppUsage = appUsageHelper.socialAppsUsageAVG();
+        long avgMusicVideoAppUsage = appUsageHelper.musicvideoAppsUsageAVG();
+
+        CalenderEventHelper calenderEventHelper = new CalenderEventHelper(this);
+        long calenderAVG = calenderEventHelper.getcalanderEventAVGCount();
+
+        AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
+        long chargeAVG = attributeCountHelper.chargingCountAvgGet();
+
+        //Probability
+        long avgSocialAppProbability = (socialAppAvg * 16)/100;
+        long avgMusicVideoAppProbability = (AVGMusicVideoApp * 16)/100;
+        long avgSocialAppUsageProbability = (avgSocialAppUsage * 16)/100;
+        long avgyMusicVideoAppUsageProbability = (avgMusicVideoAppUsage * 16)/100;
+        long avgcalenderProbability = (calenderAVG * 16)/100;
+        long avgchargeProbability = (chargeAVG * 16)/100;
+
+        long conscientiousnessAVG = (avgcalenderProbability - avgchargeProbability - avgSocialAppProbability -avgMusicVideoAppProbability - avgSocialAppUsageProbability - avgyMusicVideoAppUsageProbability);
+
+        Log.d("inotify","conscientiousness..................." + conscientiousnessAVG);
+
+
+        return conscientiousnessAVG;
+    }
+
+
 
 }
