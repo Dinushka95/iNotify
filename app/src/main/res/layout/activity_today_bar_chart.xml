@@ -5,8 +5,9 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical">
 
-<com.github.mikephil.charting.charts.BarChart
-    android:id="@+id/barchart"
+<com.anychart.AnyChartView
+
+    android:id="@+id/any_chart_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 

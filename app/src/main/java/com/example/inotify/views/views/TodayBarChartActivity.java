@@ -28,6 +28,7 @@ public class TodayBarChartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_bar_chart);
 
+        //AnyChartView anyChartView = findViewById(R.id.any_chart_view);
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
        // anyChartView.setProgressBar(findViewById(R.id.progress_bar));
         Openness openness = new Openness();
@@ -63,7 +64,7 @@ public class TodayBarChartActivity extends AppCompatActivity {
         data.add(new ValueDataEntry("Conscientiousness", conscientiousness_charac));
         data.add(new ValueDataEntry("Extraversion", extraversion_charac));
         data.add(new ValueDataEntry("Neuroticism", neuroticism_charac));
-        data.add(new ValueDataEntry("Agreeablenesss", agreeablenesss_charc));
+        data.add(new ValueDataEntry("Agreeableness", agreeablenesss_charc));
 
         Column column = cartesian.column(data);
 
