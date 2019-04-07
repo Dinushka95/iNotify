@@ -672,6 +672,7 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
 
         int nextMin = 0;
         int nextHour = 0;
+        String nextHourS = "";
 
         if (java.lang.Character.getNumericValue(MinOne) != 5) {
             nextMin = java.lang.Character.getNumericValue(MinOne) + 1;
@@ -680,8 +681,13 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
             nextMin = 0;
             nextHour = Integer.parseInt(currentHour) + 1;
         }
-
-        String TimeSlot = currentHour + ":" + MinOne + "0 - " + nextHour + ":" + nextMin + "0";
+        if(nextHour < 10){
+            nextHourS = "0"+nextHour;
+        }
+        else {
+            nextHourS = Integer.toString(nextHour);
+        }
+        String TimeSlot = currentHour + ":" + MinOne + "0 - " + nextHourS + ":" + nextMin + "0";
         Log.d("Debug", "TimeSlot = " + TimeSlot);
 
 
