@@ -32,6 +32,7 @@ import com.example.inotify.helpers.NotificationHelper;
 import com.example.inotify.helpers.RingerModeHelper;
 import com.example.inotify.helpers.ScreenStatusHelper;
 import com.example.inotify.helpers.MainUserAttentivness;
+import com.example.inotify.helpers.UserAttentivnessFeatureExtraction;
 import com.example.inotify.models.NotificationModel;
 import com.example.inotify.models.SNSModel;
 
@@ -330,6 +331,28 @@ public class MyNotificationListenerService extends NotificationListenerService {
             AttentivnessPerAppDbHelper attentivnessPerAppDbHelper= new AttentivnessPerAppDbHelper(this);
             attentivnessPerAppDbHelper.calculateTotalAttentivness(ticker, Appname);
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved--Total Attentivness succcessfully added");
+
+
+            userAttentivnessDbHelper.InsertAttentivnessPerNotificationOnTime(ticker ,notificationRecivedTime ,Appname ,attentivnessvalue);
+            Log.d("inotify", "Main-MyNotificationListenerService----InsertAttentivnessPerNotificationOnTime-- succcessfully added");
+
+
+
+
+
+
+            UserAttentivnessFeatureExtraction userAttentivnessFeatureExtraction = new UserAttentivnessFeatureExtraction(this);
+            userAttentivnessFeatureExtraction.UserAttentivnessFeatureExtraction(screenStatus1,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
+            Log.d("inotify", "Main-MyNotificationListenerService----userAttentivnessFeatureExtraction--userAttentivnessFeatureExtraction ==================Added");
+
+            double rule = userAttentivnessFeatureExtraction.IdentifyRule(screenStatus1,Ringermode,notificationViwedTime,notificationRecivedTime,Seqence,notificationTotal);
+            Log.d("inotify", "Main-MyNotificationListenerService----userAttentivnessFeatureExtraction =============================================  IdentifyRule ==================" + rule);
+
+            userAttentivnessDbHelper.AssignTimeSlots(notificationRecivedTime);
+            userAttentivnessDbHelper.asd(notificationRecivedTime);
+            Log.d("inotify", "Main-MyNotificationListenerService----AssignTimeSlots");
+            Log.d("inotify", "Main-MyNotificationListenerService----asd");
+
 
             //Smart Notification update with time
 /*            String oldtime = sbn.getNotification().tickerText.toString();

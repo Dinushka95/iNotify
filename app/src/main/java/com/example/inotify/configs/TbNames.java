@@ -22,6 +22,7 @@ public class TbNames<Public> {
     public static final String NOTIFICATIONIMPORTANCE_TABLE = "notificationimportance_table";
     public static final String USERATTENTIVNESS_TABLE = "userattentivness_table";
     public static final String ATTENTIVNESSPERAPP_TABLE = "attentivnessperapp_table";
+    public static final String ATTENTIVNESSPERNOTIFICATIONONTIME_TABLE = "attentivnesspernotificationontime_table" ;
 
 
     public static final String APPLISTCOUNT_TABLE = "applistcount_table";

@@ -13,13 +13,14 @@
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions"/>
+        tools:ignore="ProtectedPermissions" />
+
     <permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
@@ -29,14 +30,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".views.views.Agreeablenesss"></activity>
+        <activity android:name=".views.views.UserAttentivnessLineChart"></activity>
+        <activity android:name=".views.views.UserAttentivnessPerAppScatterPlot" />
+        <activity android:name=".views.views.UserAttentivnessGraph" />
+        <activity android:name=".views.views.Agreeablenesss" />
         <activity android:name=".views.views.Extraversion" />
         <activity android:name=".views.views.Neuroticism" />
         <activity android:name=".views.views.Openness" />
         <activity android:name=".views.views.Conscientiousness" />
         <activity android:name=".views.views.NotificationFinalViewabilityActivity" />
-        <activity android:name=".views.views.MainMenuActivity"
-            android:theme="@style/Theme.Design.NoActionBar"/>
+        <activity
+            android:name=".views.views.MainMenuActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
         <activity android:name=".views.views.NotificationViewabilityActivity" />
         <activity android:name=".views.views.UserAttentivenessActivity" />
         <activity android:name=".views.views.UsercharacteristicsActivity" />

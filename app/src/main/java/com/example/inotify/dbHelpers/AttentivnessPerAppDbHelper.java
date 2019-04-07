@@ -7,6 +7,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.anychart.chart.common.dataentry.DataEntry;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
@@ -233,17 +234,19 @@ public class AttentivnessPerAppDbHelper extends MainDbHelp{
 
     //Display the table data
     ArrayList<String> ansarraylist = new ArrayList<>();
+    ArrayList<String> ansarraylist2 = new ArrayList<>();
 
-    public ArrayList displayData() {
-        ansarraylist.add("");
+
+    public ArrayList displayApplication() {
+        ansarraylist.add(" ");
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select application ,totalattentivnesspercentage  from " + TbNames.ATTENTIVNESSPERAPP_TABLE , null);
+        Cursor cursor = db.rawQuery("select application   from " + TbNames.ATTENTIVNESSPERAPP_TABLE , null);
 
         if (cursor != null) {
             int count2 = 1;
             while (cursor.moveToNext()) {
-                for (int count = 0; count < 2; count++) {
+                for (int count = 0; count < 1; count++) {
                     if (cursor.getString(count) == null) {
                         ansarraylist.add("");
                     } else
@@ -256,6 +259,56 @@ public class AttentivnessPerAppDbHelper extends MainDbHelp{
         }
 
         return ansarraylist;
+    }
+
+
+
+    public ArrayList displayAttentivnessPercenatge() {
+        ansarraylist2.add(" ");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select totalattentivnesspercentage   from " + TbNames.ATTENTIVNESSPERAPP_TABLE , null);
+
+        if (cursor != null) {
+            int count2 = 1;
+            while (cursor.moveToNext()) {
+                for (int count = 0; count < 1; count++) {
+                    if (cursor.getString(count) == null) {
+                        ansarraylist2.add("");
+                    } else
+                        ansarraylist2.add(cursor.getString(count));
+                    count2 = count2 + 1;
+                }
+            }
+            ansarraylist2.set(0, Integer.toString(count2));
+            Log.d("inotifyCC" , "inotify456789 " +ansarraylist2 );
+        }
+
+        return ansarraylist2;
+    }
+
+    public ArrayList displayData() {
+        ansarraylist2.add(" ");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select application ,totalattentivnesspercentage   from " + TbNames.ATTENTIVNESSPERAPP_TABLE , null);
+
+        if (cursor != null) {
+            int count2 = 1;
+            while (cursor.moveToNext()) {
+                for (int count = 0; count < 2; count++) {
+                    if (cursor.getString(count) == null) {
+                        ansarraylist2.add("");
+                    } else
+                        ansarraylist2.add(cursor.getString(count));
+                    count2 = count2 + 1;
+                }
+            }
+            ansarraylist2.set(0, Integer.toString(count2));
+            Log.d("inotifyCC" , "inotify456789 " +ansarraylist2 );
+        }
+
+        return ansarraylist2;
     }
 
 

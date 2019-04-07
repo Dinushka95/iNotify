@@ -9,7 +9,10 @@ import android.util.Log;
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class UserAttentivnessDbHelper extends MainDbHelp {
     private static UserAttentivnessDbHelper mInstance = null;
@@ -78,203 +81,42 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
 
     }
 
- /*   public boolean tptalAttentivnessInsert(String Appname, double totalAttentivness, double totalattentivnesspercentage) {
+
+    public boolean InsertAttentivnessPerNotificationOnTime(String notificationid , String time , String application , double attentivnessperhour)
+    {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TbColNames.APPLICATION, Appname);
-        contentValues.put(TbColNames.TOTALATTENTIVNESS, totalAttentivness);
-        contentValues.put(TbColNames.TOTALATTENTIVNESSPERCENTAGE, totalattentivnesspercentage);
+        contentValues.put(TbColNames.NOTIFICATIONID,notificationid);
+        contentValues.put(TbColNames.TIME ,time);
+        contentValues.put(TbColNames.APPLICATION ,application);
+        contentValues.put(TbColNames.ATTENTIVNESSPERHOUR , attentivnessperhour);
 
-
-        long result = db.insert(TbNames.ATTENTIVNESSPERAPP_TABLE, null, contentValues);
+        long result = db.insert(TbNames.ATTENTIVNESSPERNOTIFICATIONONTIME_TABLE , null,contentValues);
         db.close();
-        return result != -1;
-
-    }
-
-    //Get the cumilative attentivness
-    public String AttentivnessperAppGet(String Appname) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE + " where APPLICATION =\"" + Appname + "\"", null);
-        if (res != null) {
-            if (res.moveToFirst()) {
-                return res.getString(2);
-            }
-            res.close();
-        }
-        return null;
-
-
-    }
-
-    public boolean CheckAttentivness(String Appname) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE + " where APPLICATION =\"" + Appname + "\"", null);
-        if (res.getCount() > 0) {
-            Log.d("a", "record exists");
+        if (result == -1) {
+            return false;
+        } else
             return true;
-        }
-        return false;
 
-    }
 
-    public boolean updateaattentivnessperApp(String Appname, double totalattentivness, double totalattentivnesspercentage) {
-        Log.d("inotify(^_^) ", "tottal attentivness in update method " + totalattentivness);
-        SQLiteDatabase db = this.getReadableDatabase();
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put(TbColNames.TOTALATTENTIVNESS, totalattentivness);
-        contentValues.put(TbColNames.TOTALATTENTIVNESSPERCENTAGE, totalattentivnesspercentage);
-
-        String where = "APPLICATION = ?";
-        String[] whereargs = new String[]{String.valueOf(Appname)};
-        long res = db.update(TbNames.ATTENTIVNESSPERAPP_TABLE, contentValues, where, whereargs);
-        db.close();
-        return res != -1;
-
-    }
-
-    public double CumilativeAttentivnessValueGet() {
-        double cumilativeAttentivness = 0.0;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select sum(" + TbColNames.TOTALATTENTIVNESS + " ) as Total from " + TbNames.ATTENTIVNESSPERAPP_TABLE, null);
-        if (res.moveToFirst()) {
-            cumilativeAttentivness = res.getDouble(res.getColumnIndex("Total"));
-            Log.d("inotify(^_^", "cumilativeAttentivness =====" + cumilativeAttentivness);
-
-        }
-        return cumilativeAttentivness;
     }
 
 
 
 
 
-    //***************************************************************************************************************************************************************
-//    public double totalattentivnessSumGet(String Appname) {
-//        double CumilativeAttentivness = this.CumilativeAttentivnessValueGet();
-//        double attentivnessPerApp = Double.parseDouble(this.getAttentivenessPerApp(Appname));
-//        double attentivness = CumilativeAttentivness - attentivnessPerApp;
-//        Log.d("inotify " , "attentivness1234567890-" +attentivness);
-//        return attentivness;
-//
-//    }
-    //***************************************************************************************************************************************************************
-
-
-  /*  public int CountTotalAttentivnessGet() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.ATTENTIVNESSPERAPP_TABLE, null);
-        res.moveToFirst();
-        int count = res.getInt(res.getColumnIndex("count"));
-        Log.d("inotify(^_^", "count" + count);
-
-        res.close();
-        return count;
-    }
-
-    public double calculateAverageAttentivness() {
-        double cumilativeAttentivness = this.CumilativeAttentivnessValueGet();
-        double countAttetivness = this.CountTotalAttentivnessGet();
-        double attentivnessAverage = cumilativeAttentivness / countAttetivness;
-        Log.d("inotify(^_^", "attentivnessAverage" + attentivnessAverage);
-
-        return attentivnessAverage;
-    }
-
-
-    public double calculateTotalAttentivness(String id, String Appname) {
-        double value = 0;
-
-        String attentivnessPerParticularNotification = this.getattentivness(id);
-
-        //for freash values
-        // double totalAttentivnessValue = Double.parseDouble(totalAttentivness);
-        double attentivnessPerParticulrNotificationValue = Double.parseDouble(attentivnessPerParticularNotification);
-        boolean attentibvnessexistemce = this.CheckAttentivness(Appname);
-        Log.d("inotify(^_^", "attentivnessPerParticulrNotificationValue======== " + attentivnessPerParticulrNotificationValue);
-        Log.d("inotify(^_^", "attentibvnessexistemce=====" + attentibvnessexistemce);
-
-        //  Log.d("inotify(^_^" , "totalAttentivnessValue" + totalAttentivnessValue);
-        // Log.d("inotify(^_^" , "atttentivnessperAppValue" + atttentivnessperAppValue);
-
-
-
-
-
-        //true = exists
-        if (attentibvnessexistemce) {
-            Log.d("inotify(^_^)", "update");
-
-            double attentivnessavg = this.calculateAverageAttentivness();
-            double totalAttentivnessPercentage = (attentivnessPerParticulrNotificationValue / attentivnessavg) * 100;
-
-            double currentToallAttentivnessValue = Double.parseDouble(this.AttentivnessperAppGet(Appname));
-            double updatedAtttentivnessPerAppValue = currentToallAttentivnessValue + attentivnessPerParticulrNotificationValue;
-            double attentivnessTot = this.totalattentivnessSumGet(Appname);
-
-            double attentivnessPer = (updatedAtttentivnessPerAppValue/(updatedAtttentivnessPerAppValue+attentivnessTot))*100;
-
-            this.updateaattentivnessperApp(Appname, updatedAtttentivnessPerAppValue, attentivnessPer);
-
-
-            Log.d("inotify(^_^", "currentTotalAttentivness =====" + currentToallAttentivnessValue);
-            Log.d("inotify(^_^", "updatedAtttentivnessPerAppValue ====== " + updatedAtttentivnessPerAppValue);
-            Log.d("inotify(^_^)", "totalAttentivnessPercentage=========" + totalAttentivnessPercentage);
-            Log.d("inotify(^_^)", "attentivnessPer=========" + attentivnessPer);
-
-
-        } else {
-            Log.d("inotify(^_^)", "Insert");
-            double initialAttentivnessPerceantage = 100;
-            this.tptalAttentivnessInsert(Appname, attentivnessPerParticulrNotificationValue, initialAttentivnessPerceantage);
-            Log.d("inotify(^_^", "initialAttentivnessPerceantage ==== " + initialAttentivnessPerceantage);
-
-        }
-
-
-        return value;
-    }
-
-
-    public String[] AppNamesGet() {
-        String AppList[];
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE, null);
-
-        if (res != null) {
-            int cols = res.getColumnCount();
-            AppList = new String[cols];
-            while (res.moveToNext()) {
-                for (int j = 0; j < cols; j++) {
-                    AppList[1] = res.getString(1);
-                    AppList[2] = res.getString(3);
-                }
-
-            }
-            return AppList;
-        }
-        return null;
-
-    }
-
-
-
-
-    //String[] ans = new String[200];
     ArrayList<String> ansarraylist = new ArrayList<>();
-
-    public ArrayList displayData() {
-        ansarraylist.add("");
+    ArrayList<String> ansarraylist2 = new ArrayList<>();
+    public ArrayList displayNotificationID (){
+        ansarraylist.add(" ");
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select application ,totalattentivnesspercentage  from " + TbNames.ATTENTIVNESSPERAPP_TABLE , null);
+        Cursor cursor = db.rawQuery("select id   from " + TbNames.USERATTENTIVNESS_TABLE , null);
 
         if (cursor != null) {
             int count2 = 1;
             while (cursor.moveToNext()) {
-                for (int count = 0; count < 2; count++) {
+                for (int count = 0; count < 1; count++) {
                     if (cursor.getString(count) == null) {
                         ansarraylist.add("");
                     } else
@@ -282,28 +124,170 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
                     count2 = count2 + 1;
                 }
             }
-           ansarraylist.set(0, Integer.toString(count2));
+            ansarraylist.set(0, Integer.toString(count2));
             Log.d("inotifyCC" , "inotify456789 " +ansarraylist );
         }
 
         return ansarraylist;
-    }*/
+    }
 
 
-   /* public String getAttentivenessPerApp(String packageName) {
+    public ArrayList displayAttentivness (){
+        ansarraylist2.add(" ");
 
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select attentivnessvalue   from " + TbNames.USERATTENTIVNESS_TABLE  , null);
 
-        Cursor res = db.rawQuery("Select * from " + TbNames.ATTENTIVNESSPERAPP_TABLE + "  where "+TbColNames.APPLICATION+" =\"" + packageName + "\"", null);
-        if (res != null) {
-            if (res.moveToFirst()) {
-               // return res.getString(res.getColumnIndex(TbColNames.TOTALATTENTIVNESSPERCENTAGE));
-                return res.getString(3);
-
+        if (cursor != null) {
+            int count2 = 1;
+            while (cursor.moveToNext()) {
+                for (int count = 0; count < 1; count++) {
+                    if (cursor.getString(count) == null) {
+                        ansarraylist2.add("");
+                    } else
+                        ansarraylist2.add(cursor.getString(count));
+                    count2 = count2 + 1;
+                }
             }
-            res.close();
+            ansarraylist2.set(0, Integer.toString(count2));
+            Log.d("inotifyCC" , "inotify456789 " +ansarraylist2 );
         }
-        return null;
+
+        return ansarraylist2;
     }
-*/
+
+
+    ArrayList<String> ansarraylistLineChartApp = new ArrayList<>();
+    ArrayList<String> ansarraylistLineChartTime = new ArrayList<>();
+    ArrayList<String> ansarraylistLineChartAttentivness = new ArrayList<>();
+
+
+    public ArrayList displayAttentivnessLineChartTime(String application) {
+        ansarraylistLineChartTime.add(" ");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select time   from " + TbNames.ATTENTIVNESSPERNOTIFICATIONONTIME_TABLE + " where " + TbColNames.APPLICATION + " =\"" + application +"\"", null);
+
+        if (cursor != null) {
+            int count2 = 1;
+            while (cursor.moveToNext()) {
+                for (int count = 0; count < 1; count++) {
+                    if (cursor.getString(count) == null) {
+                        ansarraylistLineChartTime.add("");
+                    } else
+                        ansarraylistLineChartTime.add(cursor.getString(count));
+                    count2 = count2 + 1;
+                }
+            }
+            ansarraylistLineChartTime.set(0, Integer.toString(count2));
+            Log.d("inotifyCC" ,  "inotify=====================ansarraylistLineChartTime ============= " +ansarraylistLineChartTime );
+        }
+
+        return ansarraylistLineChartTime;
+    }
+
+
+    public ArrayList displayAttentivnessLineChartAttentivness(String application) {
+        ansarraylistLineChartAttentivness.add(" ");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select attentivnessperhour   from " + TbNames.ATTENTIVNESSPERNOTIFICATIONONTIME_TABLE + " where " + TbColNames.APPLICATION + " = \"" + application +"\"", null);
+
+        if (cursor != null) {
+            int count2 = 1;
+            while (cursor.moveToNext()) {
+                for (int count = 0; count < 1; count++) {
+                    if (cursor.getString(count) == null) {
+                        ansarraylistLineChartAttentivness.add("");
+                    } else
+                        ansarraylistLineChartAttentivness.add(cursor.getString(count));
+                    count2 = count2 + 1;
+                }
+            }
+            ansarraylistLineChartAttentivness.set(0, Integer.toString(count2));
+            Log.d("inotifyCC" ,  "inotify=====================ansarraylistLineChartTime ============= " +ansarraylistLineChartAttentivness );
+        }
+
+        return ansarraylistLineChartAttentivness;
+    }
+
+    public ArrayList displayAttentivnessLineChartApp(){
+
+        ansarraylistLineChartApp.add(" ");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select application  from " + TbNames.ATTENTIVNESSPERNOTIFICATIONONTIME_TABLE  , null);
+
+        if (cursor != null) {
+            int count2 = 1;
+            while (cursor.moveToNext()) {
+                for (int count = 0; count < 1; count++) {
+                    if (cursor.getString(count) == null) {
+                        ansarraylistLineChartApp.add("");
+                    } else
+                        ansarraylistLineChartApp.add(cursor.getString(count));
+                    count2 = count2 + 1;
+                }
+            }
+            ansarraylistLineChartApp.set(0, Integer.toString(count2));
+            Log.d("inotifyCC" , "inotify =================== ansarraylistLineChartApp ==================================  " +ansarraylistLineChartApp );
+        }
+
+        return ansarraylistLineChartApp;
+    }
+
+    ArrayList<String> arraylistLineChartAttentPerApp = new ArrayList<>();
+      public  ArrayList DisplayAppInDropDown(){
+          arraylistLineChartAttentPerApp.add(" ");
+
+
+          SQLiteDatabase db = this.getReadableDatabase();
+          Cursor cursor = db.rawQuery("select distinct(application) from " + TbNames.ATTENTIVNESSPERNOTIFICATIONONTIME_TABLE, null);
+
+              if (cursor != null) {
+                  int count2 = 1;
+                  while (cursor.moveToNext()) {
+                      for (int count = 0; count < 1; count++) {
+                          if (cursor.getString(count) == null) {
+                              arraylistLineChartAttentPerApp.add("");
+                          } else
+                              arraylistLineChartAttentPerApp.add(cursor.getString(count));
+                          count2 = count2 + 1;
+                      }
+                  }
+                  arraylistLineChartAttentPerApp.set(0, Integer.toString(count2));
+                  Log.d("inotifyCC" , "inotify ========================  arraylistLineChartAttentPerApp ===========================" +arraylistLineChartAttentPerApp );
+              }
+
+
+          return arraylistLineChartAttentPerApp;
+      }
+
+
+
+    ArrayList<String>  time =  new ArrayList<>();
+      public ArrayList<String> AssignTimeSlots(String datetime)
+      {
+         time.add(" ");
+          Log.d("inotify" ,"substring ===================" +datetime);
+
+          for(int i=0 ;i< datetime.length()/2 ;i++)
+          {
+              time.add(datetime.substring(i*2));
+              Log.d("inotify" ,"substring ===================" +time);
+
+          }
+
+          return time;
+      }
+
+      public ArrayList<String> asd(String dateTime)
+      {
+
+         ArrayList<String> a = this.AssignTimeSlots(dateTime);
+          Log.d("inotify" ,"substring ===================" +time);
+
+return a;
+
+      }
 }

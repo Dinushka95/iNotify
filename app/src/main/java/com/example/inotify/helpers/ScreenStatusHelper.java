@@ -15,6 +15,7 @@ public class ScreenStatusHelper extends BroadcastReceiver {
     private IntentFilter intentFilter;
     @Override
     public void onReceive(Context context, Intent intent) {
+        c1 =context;
         if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             ScreenStatusDbHelper.getInstance(c1).screenOnInsert();
         }
