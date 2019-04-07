@@ -56,7 +56,7 @@ public class ContactsDbHelper extends MainDbHelp {
     public int ContactsTodayGet() {
         SQLiteDatabase db = this.getReadableDatabase();
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-        Cursor res = db.rawQuery("select SUM(COUNT) as COUNT from " + TbNames.CONTACTCOUNT_TABLE + " where DATE = \""+date+"\" ", null);
+        Cursor res = db.rawQuery("select SUM("+TbColNames.CONTACTCOUNT+") as COUNT from " + TbNames.CONTACTCOUNT_TABLE + " where DATE = \""+date+"\" ", null);
         if (res != null) {
             if ((res.moveToFirst())){
 
@@ -93,6 +93,22 @@ public class ContactsDbHelper extends MainDbHelp {
 //
 //        return avg;
 //    }
+
+    public boolean cheackAvailability(String TableName )
+    {
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName +" where DATE =\"" + date + "\"", null);
+
+        if(res.getCount()>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
 }

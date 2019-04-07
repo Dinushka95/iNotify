@@ -10,20 +10,16 @@ import com.example.inotify.configs.TbNames;
 
 import java.util.ArrayList;
 
+import static com.example.inotify.configs.AppUserConfigs.DATABASE_NAME;
+
 
 public class MainDbHelp extends SQLiteOpenHelper {
-
-    public static final String DATABASE_NAME = "AppInotify.db";
-
-    private SharedPreferences.Editor editor009;
 
     private Context c1;
 
     public MainDbHelp(Context context) {
         super(context, DATABASE_NAME, null, 1);
         c1=context;
-
-
     }
 
     @Override
@@ -46,18 +42,18 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("create table " + TbNames.PROBABILITYQUERYSAT_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
         db.execSQL("create table " + TbNames.PROBABILITYQUERYSUN_TABLE + " (TIME_SLOT TEXT PRIMARY KEY,VIEWORSUM INTEGER,NOTORSUM INTEGER, PROBABILITYFINAL DOUBLE)");
 
-        db.execSQL("create table " + TbNames.SNS_TABLE + " (SNS_ID INTEGER,SNS_DATE TEXT,SNS_DAY TEXT,SNS_TIME TEXT,SNS_BUSYORNOT TEXT," +
-                "SNS_ATTENTIVINESS TEXT,SNS_USERCHAACTERISTICS TEXT,SNS_NOTIFICATIONTYPE TEXT,SNS_APPNAME TEXT,SNS_VTIME TEXT)");
+        db.execSQL("create table " + TbNames.SNS_TABLE + " ("+TbColNames.SNS_ID+","+TbColNames.SNS_DATE+","+TbColNames.SNS_DAY+","+TbColNames.SNS_TIME+","+TbColNames.SNS_BUSYORNOT+","+TbColNames.SNS_ATTENTIVINESS+","+TbColNames.SNS_USERCHAACTERISTICS +","+TbColNames.SNS_NOTIFICATIONTYPE+","+TbColNames.SNS_APPNAME+","+TbColNames.SNS_VTIME+")");
 
         db.execSQL("create table " + TbNames.N_TABLE + " (N_ID INTEGER,N_APPNAME TEXT,N_DATETIME INTEGER)");
         db.execSQL("create table " + TbNames.RINGERMODE_TABLE + "(RM_ID INTEGER PRIMARY KEY AUTOINCREMENT,RM_NOTIFICATIONID TEXT,RM_DAY TEXT,RM_DATE TEXT , RM_TIME TEXT  ,RM_RINGERMODE TEXT)");
         db.execSQL("create table " + TbNames.NOTIFICATIONIMPORTANCE_TABLE + "(NOTIFICATION_IMPORTANCE_ID  INTEGER PRIMARY KEY AUTOINCREMENT , NOTIFICATIONIID TEXT , APPLICATIONNAME TEXT , SEQUENCEVALUE TEXT)");
         db.execSQL("create table " + TbNames.USERATTENTIVNESS_TABLE + "(ID INTEGER PRIMARY KEY , NID TEXT , APPLICATION TEXT , ATTENTIVNESSVALUE DOUBLE) ");
         db.execSQL("create table " + TbNames.ATTENTIVNESSPERAPP_TABLE + "(ID INTEGER PRIMARY KEY , APPLICATION  TEXT , TOTALATTENTIVNESS TEXT , TOTALATTENTIVNESSPERCENTAGE TEXT)");
+        db.execSQL("create table " + TbNames.ATTENTIVNESSPERNOTIFICATIONONTIME_TABLE + "( ID INTEGER PRIMARY KEY ,NOTIFICATIONID TEXT, TIME TEXT , APPLICATION TEXT,ATTENTIVNESSPERHOUR TEXT)");
 
         db.execSQL("create table " + TbNames.CHARGER_TABLE + " (CHARGERID INTEGER PRIMARY KEY AUTOINCREMENT, POWERONDATE TEXT,POWERONTIME TEXT,POWEROFFDATE TEXT,POWEROFFTIME TEXT,DATE TEXT)");
         db.execSQL("create table " + TbNames.APPLISTCOUNT_TABLE + " (APPLISTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
-        db.execSQL("create table " + TbNames.CONTACTCOUNT_TABLE + " (CONTACTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
+        db.execSQL("create table " + TbNames.CONTACTCOUNT_TABLE + " ("+TbColNames.CONTACTCOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.CONTACTCOUNT+" TEXT)");
         db.execSQL("create table " + TbNames.SCREENTIME_TABLE + " (SCREENTIME_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,TIME TEXT)");
         db.execSQL("create table " + TbNames.CALENDEREVENTCOUNT_TABLE + " (CALENDEREVENTCOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
         db.execSQL("create table " + TbNames.APPLISTSOCIALMEDIACOUNT_TABLE + " (APPLISTSOCIALMEDIACOUNT_ID INTEGER PRIMARY KEY AUTOINCREMENT,DATE TEXT,COUNT TEXT)");
@@ -66,21 +62,21 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.SCREENSTATUS_TABLE + " ("+TbColNames.SCREENSTATUS_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.NOTIFICATIONID+" TEXT,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMEON+" TEXT,"+TbColNames.TIMEOFF+" TEXT)");
 
-        db.execSQL("create table " + TbNames.TOPAPPS_TABLE + " ("+TbColNames.TOPAPP_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text, "+TbColNames.DATE+" TEXT, "+TbColNames.APPCOLLECTION+" TEXT,"+TbColNames.RANK+" TEXT)");
+        db.execSQL("create table " + TbNames.TOPAPPS_TABLE + " ("+TbColNames.TOPAPP_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+","+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text, "+TbColNames.DATECREATED+" TEXT, "+TbColNames.APPCOLLECTION+" TEXT,"+TbColNames.RANK+" TEXT)");
 
         db.execSQL("create table " + TbNames.APPLICATIONS_TABLE + " ("+TbColNames.APPLICATION_ID+"  INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.PACKAGENAME+" Text)");
 
-        db.execSQL("create table " + TbNames.NOTIFICATION_TABLE + " ("+TbColNames.NOTIFICATIONID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMERECEVIED+" TEXT,"+TbColNames.TIMESENT+" TEXT,"+TbColNames.TIMEVIEW+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.PACKAGENAME+" TEXT,"+TbColNames.TITLE+" TEXT,"+TbColNames.CONTENT+" TEXT,"+TbColNames.SMARTNOTIFICATION+" TEXT)");
+        db.execSQL("create table " + TbNames.NOTIFICATION_TABLE + " ("+TbColNames.NOTIFICATIONID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.TIMERECEVIED+" TEXT,"+TbColNames.TIMESENT+" TEXT,"+TbColNames.TIMEVIEW+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.PACKAGENAME+" TEXT,"+TbColNames.TITLE+" TEXT,"+TbColNames.CONTENT+" TEXT,"+TbColNames.SMARTNOTIFICATION+" TEXT)");
 
-        db.execSQL("create table " + TbNames.PROFILE_TABLE + " ("+TbColNames.PROFILE_ID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.NAME+" TEXT,"+TbColNames.AGE+" TEXT,"+TbColNames.GENDER+" TEXT,"+TbColNames.OCCUPATION+" TEXT,"+TbColNames.EMAIL+" TEXT,"+TbColNames.PHONE+" TEXT)");
+        db.execSQL("create table " + TbNames.PROFILE_TABLE + " ("+TbColNames.PROFILE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.NAME+" TEXT,"+TbColNames.AGE+" TEXT,"+TbColNames.GENDER+" TEXT,"+TbColNames.OCCUPATION+" TEXT,"+TbColNames.EMAIL+" TEXT,"+TbColNames.PHONE+" TEXT)");
 
-        db.execSQL("create table " + TbNames.APPCOUNT_TABLE + " ("+TbColNames.APPCOUNT_ID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIALAPPCOUNT+" TEXT,"+TbColNames.GAMINGAPPCOUNT+" TEXT,"+TbColNames.EDUCATIONAPPCOUNT+" TEXT,"+TbColNames.DATINGAPPCOUNT+" TEXT,"+TbColNames.MUSICVIDEOAPPCOUNT+" TEXT,"+TbColNames.COMMUNICATIONAPPCOUNT+" TEXT)");
+        db.execSQL("create table " + TbNames.APPCOUNT_TABLE + " ("+TbColNames.APPCOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIALAPPCOUNT+" TEXT,"+TbColNames.GAMINGAPPCOUNT+" TEXT,"+TbColNames.EDUCATIONAPPCOUNT+" TEXT,"+TbColNames.DATINGAPPCOUNT+" TEXT,"+TbColNames.MUSICVIDEOAPPCOUNT+" TEXT,"+TbColNames.COMMUNICATIONAPPCOUNT+" TEXT)");
 
         db.execSQL("create table " + TbNames.APPUSAGE_TABLE + " ("+TbColNames.APPUSAGEID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.TIME+" TEXT,"+TbColNames.PACKAGENAME+" TEXT,"+TbColNames.APPNAME+" TEXT,"+TbColNames.APPCATEGORY+" TEXT,"+TbColNames.USAGETIME+" TEXT)");
 
-        db.execSQL("create table " + TbNames.TOPAPPSCOUNT_TABLE + " ("+TbColNames.TOPAPPCOUNT_ID+" INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIALAPPCOUNT+" TEXT,"+TbColNames.GAMINGAPPCOUNT+" TEXT,"+TbColNames.EDUCATIONAPPCOUNT+" TEXT,"+TbColNames.DATINGAPPCOUNT+" TEXT,"+TbColNames.MUSICVIDEOAPPCOUNT+" TEXT,"+TbColNames.COMMUNICATIONAPPCOUNT+" TEXT)");
+        db.execSQL("create table " + TbNames.TOPAPPSCOUNT_TABLE + " ("+TbColNames.TOPAPPCOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIALAPPCOUNT+" TEXT,"+TbColNames.GAMINGAPPCOUNT+" TEXT,"+TbColNames.EDUCATIONAPPCOUNT+" TEXT,"+TbColNames.DATINGAPPCOUNT+" TEXT,"+TbColNames.MUSICVIDEOAPPCOUNT+" TEXT,"+TbColNames.COMMUNICATIONAPPCOUNT+" TEXT)");
 
-        db.execSQL("create table " + TbNames.CALLDURATION_TABLE + "("+TbColNames.CALLDURATION_ID+"INTEGER,"+TbColNames.DATE+" TEXT,"+TbColNames.DURATION+" TEXT)");
+        db.execSQL("create table " + TbNames.CALLDURATION_TABLE + "("+TbColNames.CALLDURATION_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.DURATION+" TEXT)");
 
         db.execSQL("create table " + TbNames.ATTRIBUTECOUNT_TABLE + " ("+TbColNames.ATTRIBUTECOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.APPCOUNT+" TEXT,"+TbColNames.SCREENONTIMECOUNT+" TEXT,"+TbColNames.CHARGINGCOUNT+" TEXT,"+TbColNames.CONTACTCOUNT+" TEXT)");
 
@@ -92,21 +88,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
 
         db.execSQL("create table " + TbNames.DATAUSAGE_TABLE + " ("+TbColNames.DATAUSAGE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.AMOUNT+" TEXT)");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        db.execSQL("create table " + TbNames.COMMONAPPCOUNT_TABLE + " ("+TbColNames.COMMONAPPCOUNT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+TbColNames.DATE+" TEXT,"+TbColNames.SOCIAL+" TEXT,"+TbColNames.GAMING+" TEXT,"+TbColNames.PHOTOGRAPHY+" TEXT,"+TbColNames.PERSONALIZATION+" TEXT,"+TbColNames.COMMUNICATION+" TEXT,"+TbColNames.TOOLS+" TEXT,"+TbColNames.MUSICVIDEO+" TEXT)");
 
 
 
@@ -125,61 +107,14 @@ public class MainDbHelp extends SQLiteOpenHelper {
         db.execSQL("insert into activity_table(ACTIVITY_ID,DATE,DAY,TIME,TYPE,CONFIDENCE)values(8,20190216,'Saturday',2345,8,100);");
 
 
-        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182419,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testa',8000);");
-        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182429,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testb',8000);");
-        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182439,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testc',8000);");
-        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182449,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.example.dinu.testd',8000);");
-        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182459,20190216,'Saturday',0945,'NotBusy','high','oldtechnology','Mobile','com.google.android.apps.messaging',8000);");
-
-
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('facebook','social','com.google.android.apps.facebook');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('whatsapp','social','com.google.android.apps.whatsapp');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('hungamamusic','musicvideo','com.google.android.apps.hungamamusic');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('tinder','dating','com.google.android.apps.tinder');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('badoo','dating','com.google.android.apps.badoo');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('netflix','entertainment','com.google.android.apps.netflix');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('coverfire','gaming','com.google.android.apps.coverfire');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('edx','education','com.google.android.apps.edx');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" ( APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('fruitninja','gaming','com.google.android.apps.fruitninja');");
-        db.execSQL("insert into "+ TbNames.TOPAPPS_TABLE+" (APPNAME,APPCATEGORY,"+TbColNames.PACKAGENAME+")values('call','communication','com.google.android.apps.call');");
+        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182419,20190216,'Saturday',0945,'0.5','0.5','agreeableness','dating','com.example.dinu.testa',8000);");
+        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182429,20190216,'Saturday',0945,'0.5','0.5','agreeableness','dating','com.example.dinu.testb',8000);");
+        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182439,20190216,'Saturday',0945,'0.5','0.5','agreeableness','dating','com.example.dinu.testc',8000);");
+        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182449,20190216,'Saturday',0945,'0.5','0.5','agreeableness','dating','com.example.dinu.testd',8000);");
+        db.execSQL("insert into sns_table(SNS_ID,SNS_DATE,SNS_DAY,SNS_TIME,SNS_BUSYORNOT,SNS_ATTENTIVINESS,SNS_USERCHAACTERISTICS,SNS_NOTIFICATIONTYPE,SNS_APPNAME,SNS_VTIME)values(20190217182459,20190216,'Saturday',0945,'0.5','0.5','agreeableness','dating','com.example.dinu.testc',8000);");
 
 
 
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('facebook','20190220','social','com.google.android.apps.facebook');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('whatsapp','20190220','social','com.google.android.apps.whatsapp');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('hungamamusic','20190220','musicvideo','com.google.android.apps.hungamamusic');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('tinder','20190220','dating','com.google.android.apps.tinder');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('badoo','20190220','dating','com.google.android.apps.badoo');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('netflix','20190220','entertainment','com.google.android.apps.netflix');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('coverfire','20190220','gaming','com.google.android.apps.coverfire');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('edx','20190220','education','com.google.android.apps.edx');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('fruitninja','20190220','gaming','com.google.android.apps.fruitninja');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('clashofclans','20190220','gaming','com.google.android.apps.clashofclans');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('game2','20190220','gaming','com.google.android.apps.game2');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('Message','20190220','communication','com.google.android.apps.Message');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('chatMe','20190220','communication','com.google.android.apps.chatMe');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('call','20190220','communication','com.google.android.apps.call');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('telephony','20190220','communication','com.android.providers.telephony');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('googlequicksearchbox','20190220','communication','com.google.android.googlequicksearchbox');");
-        db.execSQL("insert into "+ TbNames.APPLICATIONS_TABLE +" (APPNAME,DATE,APPCATEGORY,PACKAGENAME)values('calendar','20190220','communication','com.android.providers.calendar');");
-        //TODO-- please implement temperately insert statements or Api to get application categories
-
-
-        db.execSQL("insert into ringermode_table(RM_ID ,RM_NOTIFICATIONID ,RM_DAY ,RM_DATE  , RM_TIME   ,RM_RINGERMODE )values(1 ,20190304155042 ,20190304 ,'Monday',1550 ,'normal'  );");
-
-
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190216,5,6,2,1,3,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190217,5,6,2,2,3,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190218,6,5,2,3,4,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190219,6,6,4,3,4,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190220,7,6,4,3,3,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190221,8,7,4,3,3,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190222,8,7,5,3,2,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190223,8,7,3,3,2,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190224,9,8,4,3,2,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190225,9,8,5,3,4,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190226,9,9,5,3,4,1);");
-        db.execSQL("insert into "+TbNames.TOPAPPSCOUNT_TABLE+"(DATE,SOCIALAPPCOUNT,GAMINGAPPCOUNT,MUSICVIDEOAPPCOUNT,COMMUNICATIONAPPCOUNT,EDUCATIONAPPCOUNT,DATINGAPPCOUNT)values(20190227,9,6,5,3,4,1);");
 
 
         //PROBABILITYQUERY_TABLE
@@ -196,12 +131,7 @@ public class MainDbHelp extends SQLiteOpenHelper {
             db.execSQL("insert into PROBABILITYQUERYSUN_TABLE(TIME_SLOT)values('"+ TimeSlots.get(i)+"');");
 
         }
-        //Log.d("DBoncreate", "onCreate: " +TimeSlots.get(0));
 
-
-
-
-       //db.execSQL("insert into PROBABILITYQUERY_TABLE(TIME_SLOT,VIEWORSUM,NOTORSUM,PROBABILITYFINAL)values(timeslot,0,0,0);");
     }
 /*
     important code

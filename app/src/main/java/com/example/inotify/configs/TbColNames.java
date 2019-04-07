@@ -43,6 +43,7 @@ public class TbColNames {
     public static final String NOTORSUM = "notorsum";
     public static final String PROBABILITYFINAL = "probabilityfinal";
 
+
     //// ringer mode
     public static final String RM_NOTIFICATIONID = "rm_notificationid";
     public static final String RM_DAY = "rm_day";
@@ -58,21 +59,25 @@ public class TbColNames {
     public static final String TIMEOFF = "timeoff";
 
 
-    //NotificationImportance
+    ////NotificationImportance
     public static final String NOTIFICATIONIID = "notificationiid";
     public static final String APPLICATIONNAME = "applicationname";
     public static final String SEQUENCEVALUE ="sequencevalue";
 
 
-    //MainUserAttentivness
+    ////MainUserAttentivness
     public static final String NID ="nid";
     public static final String APPLICATION ="application";
     public static final String ATTENTIVNESSVALUE = "attentivnessvalue";
 
     //AttentivnesssperApp
-    //public static final String APPNAME ="appname";
+    ////public static final String APPNAME ="appname";
     public static final String TOTALATTENTIVNESS = "totalattentivness";
     public static final String TOTALATTENTIVNESSPERCENTAGE = "totalattentivnesspercentage";
+
+    ////
+    public static final String TIMESLOT = "timeslot";
+    public static final String ATTENTIVNESSPERHOUR = "attentivnessperhour";
 
 
     ////smart notification system
@@ -94,6 +99,7 @@ public class TbColNames {
     // public static final String APPNAME = "appname";
     //public static final String PACKAGENAME = "packageName";
     public static final String APPCOLLECTION = "appcollection";
+    public static final String DATECREATED = "datecreated";
     public static final String APPCATEGORY = "appcategory";
     public static final String RANK = "rank";
 
@@ -211,6 +217,17 @@ public class TbColNames {
     public static final String DATAUSAGE_ID = "datausageId";
     //public static final String DATE = "date";
     public static final String AMOUNT = "amount";
+
+    //COMMONAPPCOUNT_TABLE
+    public static final String COMMONAPPCOUNT_ID = "communicationId";
+    public static final String SOCIAL = "social";
+    public static final String GAMING = "gaming";
+    public static final String PHOTOGRAPHY = "photograpy";
+    public static final String PERSONALIZATION = "personalization";
+    public static final String COMMUNICATION = "communication";
+    public static final String TOOLS = "tools";
+    public static final String MUSICVIDEO = "musicVideo";
+
 
 
 

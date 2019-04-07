@@ -8,8 +8,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.ScreenOnTimeDbHelper;
 import com.example.inotify.helpers.AppUsageHelper;
 import com.example.inotify.helpers.ApplicationsHelper;
+import com.example.inotify.helpers.AttributeCountHelper;
+import com.example.inotify.helpers.ChargerHelper;
+import com.example.inotify.helpers.CommonAppCountHelper;
 import com.example.inotify.helpers.ContactsHelper;
 import com.example.inotify.helpers.ScreenOnTimeHelper;
 
@@ -48,7 +52,7 @@ public class Agreeablenesss extends AppCompatActivity {
         int todayContcts =contactsHelper.getcontactToday();
 
         ScreenOnTimeHelper screenOnTimeHelper = new ScreenOnTimeHelper(this);
-        int todayScreenOnTime = screenOnTimeHelper.ScreenOnTimeTodayGet();
+        int todayScreenOnTime = screenOnTimeHelper.screenOnTimeTodayGet();
 
         //Probability
         long todayPersonalizationAppUsageProbability = (todayPersonalizationAppUsage * 20)/100;
@@ -60,6 +64,7 @@ public class Agreeablenesss extends AppCompatActivity {
         long agreeableness = (todayAppCountProbability + todayContctsProbability + todayScreenOnTimeProbability - todayPersonalizationAppUsageProbability -todayPersonalizationAppProbability);
 
         Log.d("inotify","agreeableness--------------"+ agreeableness);
+/*
 
         final TextView textViewToChange = findViewById(R.id.Ag_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.Ag_attr_2);
@@ -72,10 +77,47 @@ public class Agreeablenesss extends AppCompatActivity {
         textViewToChange2.setText(""+todayPersonalizationAppUsageProbability);
         textViewToChange3.setText(""+todayScreenOnTimeProbability);
         textViewToChange4.setText(""+todayAppCountProbability);
+
         textViewToChange5.setText(""+todayContctsProbability);
+        */
         //textViewToChange5.setText(""+todayCommunicationAppUsageProbability);
 
         return agreeableness;
 
     }
+
+    public long DisplayAgreeablenessAVG()//view aka ain kala
+    {
+        AppUsageHelper appUsageHelper = new AppUsageHelper(this);
+        long avgPersonalizationAppUsage = appUsageHelper.personalizationAppsUsageAVG();
+
+        CommonAppCountHelper commonAppCountHelper = new CommonAppCountHelper(this);
+        long avgPersonalizationApp = commonAppCountHelper.commonPersonalizationAppAvg();
+
+
+        AttributeCountHelper attributeCountHelper = new AttributeCountHelper(this);
+        long avgAppCount = attributeCountHelper.appCountAvgGet();
+
+
+       long avgContcts =attributeCountHelper.ContactsAvgGet();
+
+        long avgScreenOnTime = attributeCountHelper.ScreenOnTimeCountAvgGet();
+
+        //Probability
+        long avgPersonalizationAppUsageProbability = (avgPersonalizationAppUsage * 20)/100;
+        long avgPersonalizationAppProbability = (avgPersonalizationApp * 20)/100;
+        long avgAppCountProbability = (avgAppCount * 20)/100;
+        long avgContctsProbability = (avgContcts * 20)/100;
+        long avgScreenOnTimeProbability = (avgScreenOnTime * 20)/100;
+
+        long agreeablenessAVG = (avgAppCountProbability + avgContctsProbability + avgScreenOnTimeProbability - avgPersonalizationAppUsageProbability -avgPersonalizationAppProbability);
+
+        Log.d("inotify","agreeableness--------------"+ agreeablenessAVG);
+
+
+        return agreeablenessAVG;
+
+    }
+
+
 }

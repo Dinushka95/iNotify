@@ -4,6 +4,9 @@ public class AppUserConfigs {
     public static final boolean MainUsercharacteristics_DebuggerLogger = true;
     public static final boolean MainAttentiviness_DebuggerLogger = true;
 
+    public static final String DATABASE_NAME = "AppInotify.db";
+
+
     public static Double home_Log = 79.9652678;
     public static Double home_Lat = 6.8598528;
     public static Double work_Log = 79.973181;

@@ -5,7 +5,9 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.inotify.configs.TbNames;
 import com.example.inotify.dbHelpers.AppUsageDbHelper;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.AppUsageModel;
 
@@ -21,6 +23,7 @@ public class AppUsageHelper {
     private Context c1;
 
     public AppUsageHelper(Context context) {
+
         this.c1 = context;
     }
 
@@ -61,8 +64,21 @@ public class AppUsageHelper {
             appUsageModel.setUsageTime(String.valueOf((stat.getTotalTimeInForeground() / 1000)));
 
             appUsageModelList.add(appUsageModel);
+
         }
+
         return AppUsageDbHelper.getInstance(c1).insert(appUsageModelList);
+
+    }
+
+
+    public void  saveTodaysAppUsagesOnAvailability()
+    {
+        if(! AppUsageDbHelper.getInstance(c1).cheackAvailability(TbNames.APPUSAGE_TABLE))
+        {
+            this.saveTodaysAppUsage();
+        }
+
     }
 
 
@@ -109,6 +125,11 @@ public class AppUsageHelper {
     }
 
     public long socialAppsUsageToday()
+    {
+        return AppUsageDbHelper.getInstance(c1).socialAppsUsageToday();
+    }
+
+    public long socialAppsUsageAVG()
     {
         return AppUsageDbHelper.getInstance(c1).socialAppsUsageToday();
     }

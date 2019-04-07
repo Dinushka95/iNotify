@@ -94,11 +94,11 @@ public class MainSmartNotificationSystem {
                     // Log.v("inotify","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa"+x.getDay().toString());
                     jsonData1.accumulate("sns_day", x.getDay());
                     jsonData1.accumulate("sns_time", x.getTime());
-                    jsonData1.accumulate("sns_busyornot", x.getBusyornot());
+                    jsonData1.accumulate("sns_busyornot", x.getViewability());
                     jsonData1.accumulate("sns_attentiviness", x.getAttentiviness());
-                    jsonData1.accumulate("sns_userchaacteristics", x.getUserchaacteristics());
+                    jsonData1.accumulate("sns_userchaacteristics", x.getUserchacteristics());
                     jsonData1.accumulate("sns_notificationtype", x.getNotificationtype());
-                    jsonData1.accumulate("sns_appname", x.getAppname());
+                    jsonData1.accumulate("sns_appname", x.getPackagename());
                     jsonData1.accumulate("sns_vtime", x.getVtime());
 
                 } catch (JSONException e) {
@@ -113,13 +113,19 @@ public class MainSmartNotificationSystem {
 
         try {
 
-            jsonPredict.accumulate("sns_day", Integer.valueOf(predict_snsModel.getDay()));
-            jsonPredict.accumulate("sns_time", Integer.valueOf(predict_snsModel.getTime()));
-            jsonPredict.accumulate("sns_busyornot", Integer.valueOf(predict_snsModel.getBusyornot()));
-            jsonPredict.accumulate("sns_attentiviness", Integer.valueOf(predict_snsModel.getAttentiviness()));
-            jsonPredict.accumulate("sns_userchaacteristics", Integer.valueOf(predict_snsModel.getUserchaacteristics()));
-            jsonPredict.accumulate("sns_notificationtype", Integer.valueOf(predict_snsModel.getNotificationtype()));
-            jsonPredict.accumulate("sns_appname", Integer.valueOf(predict_snsModel.getAppname()));
+            jsonPredict.accumulate("sns_day", Double.valueOf(predict_snsModel.getDay()));
+            jsonPredict.accumulate("sns_time", Double.valueOf(predict_snsModel.getTime()));
+            jsonPredict.accumulate("sns_busyornot", Double.valueOf(predict_snsModel.getViewability()));
+            jsonPredict.accumulate("sns_attentiviness", Double.valueOf(predict_snsModel.getAttentiviness()));
+            jsonPredict.accumulate("sns_userchaacteristics", Double.valueOf(predict_snsModel.getUserchacteristics()));
+            Log.e("XXXXXXXXXXX","xxxxxxxxxxxxxxxxxxxxxxxxxxxx"+predict_snsModel.getNotificationtype());
+            if(predict_snsModel.getNotificationtype()==""){
+                jsonPredict.accumulate("sns_notificationtype", 9.99);
+            }else {
+                jsonPredict.accumulate("sns_notificationtype", Double.valueOf(predict_snsModel.getNotificationtype()));
+            }
+
+            jsonPredict.accumulate("sns_appname", Double.valueOf(predict_snsModel.getPackagename()));
 
         } catch (JSONException e) {
             e.printStackTrace();

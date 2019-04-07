@@ -12,8 +12,11 @@ import com.example.inotify.configs.TbNames;
 import com.example.inotify.models.ApplicationInfoModel;
 import com.example.inotify.models.TopAppModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
@@ -331,10 +334,11 @@ public class TopAppDbHelper extends MainDbHelp {
     public boolean insert(List<TopAppModel> topAppModelList) {
 
 
-        String sql = "INSERT INTO " + TbNames.TOPAPPS_TABLE + "("+TbColNames.DATE+","+TbColNames.APPCOLLECTION+","+TbColNames.APPCATEGORY+","+TbColNames.APPNAME+","+TbColNames.PACKAGENAME+","+TbColNames.RANK+") VALUES (?,?,?,?,?,?);";
+        String sql = "INSERT INTO " + TbNames.TOPAPPS_TABLE + "("+TbColNames.DATE+","+TbColNames.DATECREATED+","+TbColNames.APPCOLLECTION+","+TbColNames.APPCATEGORY+","+TbColNames.APPNAME+","+TbColNames.PACKAGENAME+","+TbColNames.RANK+") VALUES (?,?,?,?,?,?,?);";
         SQLiteDatabase db = this.getWritableDatabase();
 
         SQLiteStatement statement = db.compileStatement(sql);
+        String datenow = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
         db.beginTransaction();
         try {
@@ -342,12 +346,13 @@ public class TopAppDbHelper extends MainDbHelp {
 
                 if (topAppModel != null) {
                     statement.clearBindings();
-                    statement.bindString(1, topAppModel.getDate());
-                    statement.bindString(2, topAppModel.getCollection());
-                    statement.bindString(3, topAppModel.getCategory());
-                    statement.bindString(4, topAppModel.getApplicationName());
-                    statement.bindString(5, topAppModel.getPackageName());
-                    statement.bindString(6, String.valueOf(topAppModel.getRank()));
+                    statement.bindString(1, datenow);
+                    statement.bindString(2, topAppModel.getDate());
+                    statement.bindString(3, topAppModel.getCollection());
+                    statement.bindString(4, topAppModel.getCategory());
+                    statement.bindString(5, topAppModel.getApplicationName());
+                    statement.bindString(6, topAppModel.getPackageName());
+                    statement.bindString(7, String.valueOf(topAppModel.getRank()));
 
                     statement.execute();
                 }
@@ -361,6 +366,16 @@ public class TopAppDbHelper extends MainDbHelp {
             return false;
         }
     }
+    public boolean cheackAvailability(String TableName ) {
 
-
+        //TODO- change scapper and this to the sasme standard
+        String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TableName + " where DATE =\"" + date + "\"", null);
+        if (res.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

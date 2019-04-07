@@ -26,7 +26,7 @@ public class ChargerDbHelper extends MainDbHelp {
     public static ChargerDbHelper getInstance(Context context) {
 
         if (mInstance == null) {
-            mInstance = new ChargerDbHelper(context.getApplicationContext());
+            mInstance = new ChargerDbHelper(context);
         }
         return mInstance;
     }
@@ -58,7 +58,6 @@ public class ChargerDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select COUNT(POWERONTIME) from " + TbNames.CHARGER_TABLE + " where POWERONDATE = \""+date1+"\" ", null);
         if (res != null) {
             if ((res.moveToFirst())){
-                Log.d("inotify","powerOnCountGet----"+res.getCount());
                 return res.getCount();
             }
         }
@@ -81,6 +80,8 @@ public class ChargerDbHelper extends MainDbHelp {
         db.close();
         return 0;
     }
+
+
 
 
 }

@@ -12,6 +12,8 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.example.inotify.configs.TbNames;
+import com.example.inotify.dbHelpers.ApplicationDbHelper;
 import com.example.inotify.dbHelpers.DataUsageDbHelper;
 
 import java.text.SimpleDateFormat;
@@ -129,5 +131,17 @@ public class DataUsageHelper {
         DataUsageDbHelper.getInstance(c1).insertTotoalDataUsage(date, String.valueOf(totalamount));
 
     }
+
+
+    public void  getTotalDataUsagAvailability()
+    {
+        if(! DataUsageDbHelper.getInstance(c1).cheackAvailability(TbNames.CHARGER_TABLE))
+        {
+            this.getTotalDataUsag();
+        }
+
+    }
+
+
 
 }
