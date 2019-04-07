@@ -18,8 +18,11 @@ import com.example.inotify.helpers.CallUsageHelper;
 import com.example.inotify.helpers.ChargerHelper;
 import com.example.inotify.helpers.ContactsHelper;
 import com.example.inotify.helpers.ScreenOnTimeHelper;
+import com.example.inotify.models.ApplicationInfoModel;
+import com.example.inotify.models.CharacteristicsFinalModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UsercharacteristicsActivity extends AppCompatActivity {
 
@@ -41,7 +44,19 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test2(View view) {
+//
+//       CharacteristicFinalDbHelper characteristicFinalDbHelper = new CharacteristicFinalDbHelper(this);
+//        List<CharacteristicsFinalModel> ListCharacteristicsFinalModel = new ArrayList<>();
+//        ListCharacteristicsFinalModel = characteristicFinalDbHelper.CharacteristicsGet();
+//        Log.d("inotify","ListCharacteristicsFinalModel    "+ListCharacteristicsFinalModel);
 
+//        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
+//        List<ApplicationInfoModel> mySocialApp = new ArrayList<>();
+//        mySocialApp =  applicationDbHelper.mySocialAppAllGet();
+//        Log.d("inotify","mySocialApp    "+mySocialApp);
+
+        Intent intent = new Intent(this,ChartCharacteristicsActivity.class);
+        startActivity(intent);
 
      }
 

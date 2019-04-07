@@ -7,69 +7,7 @@
     android:orientation="vertical"
     tools:context=".views.views.UsercharacteristicsActivity">
 
-    <TextView
-        android:id="@+id/allAppUsageText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="152dp" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="socialAppUsage"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="218dp" />
-
-    <TextView
-        android:id="@+id/socialAppusageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="218dp" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Number of apps"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="276dp" />
-
-    <TextView
-        android:id="@+id/NoOfAPpsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="273dp"
-        tools:layout_editor_absoluteY="276dp" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="all Apps Usage"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="152dp" />
-
-    <TextView
-        android:id="@+id/openness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="521dp" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="195dp"
-        android:layout_height="38dp"
-        android:text="OPENNESS"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="424dp" />
 
     <Button
         android:id="@+id/button13"

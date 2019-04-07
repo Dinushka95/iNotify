@@ -1,16 +1,23 @@
 package com.example.inotify.views.views;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Cartesian;
+import com.anychart.core.cartesian.series.Column;
+import com.anychart.enums.Anchor;
+import com.anychart.enums.HoverMode;
+import com.anychart.enums.Position;
+import com.anychart.enums.TooltipPositionMode;
 import com.example.inotify.R;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AverageBarChartActivity extends AppCompatActivity {
 
@@ -19,38 +26,64 @@ public class AverageBarChartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_average_bar_chart);
 
-        BarChart chart = findViewById(R.id.barchart);
+        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
+        // anyChartView.setProgressBar(findViewById(R.id.progress_bar));
+        Openness openness = new Openness();
+        long openness_charac = openness.displayOpennessAVG();
+        Log.d("inotify","Openness-chartAVG  " + openness_charac);
 
-        ArrayList NoOfEmp = new ArrayList();
+        Conscientiousness conscientiousness = new Conscientiousness();
+        long  conscientiousness_charac = conscientiousness.displayConscientiousnessAVG();
+        Log.d("inotify","conscientiousness_characAVG " + conscientiousness_charac);
 
-        NoOfEmp.add(new BarEntry(945f, 0));
-        NoOfEmp.add(new BarEntry(1040f, 1));
-        NoOfEmp.add(new BarEntry(1133f, 2));
-        NoOfEmp.add(new BarEntry(1240f, 3));
-        NoOfEmp.add(new BarEntry(1369f, 4));
-        NoOfEmp.add(new BarEntry(1487f, 5));
-        NoOfEmp.add(new BarEntry(1501f, 6));
-        NoOfEmp.add(new BarEntry(1645f, 7));
-        NoOfEmp.add(new BarEntry(1578f, 8));
-        NoOfEmp.add(new BarEntry(1695f, 9));
+        Extraversion extraversion = new Extraversion();
+        long extraversion_charac = extraversion.displayExtraversionAVG();
+        Log.d("inotify","extraversion_characAVG " + extraversion_charac);
 
-        ArrayList year = new ArrayList();
 
-        year.add("2008");
-        year.add("2009");
-        year.add("2010");
-        year.add("2011");
-        year.add("2012");
-        year.add("2013");
-        year.add("2014");
-        year.add("2015");
-        year.add("2016");
-        year.add("2017");
+        Neuroticism neuroticism  = new Neuroticism();
+        long neuroticism_charac = neuroticism.neuroticismDisplayAVG();
+        Log.d("inotify","neuroticism_characAVG " + neuroticism_charac);
 
-        BarDataSet bardataset = new BarDataSet(NoOfEmp, "No Of Employee");
-        chart.animateY(5000);
-        BarData data = new BarData(year, bardataset);
-        bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        chart.setData(data);
+
+        Agreeablenesss agreeablenesss = new Agreeablenesss();
+        long agreeablenesss_charc = agreeablenesss.DisplayAgreeablenessAVG();
+        Log.d("inotify","agreeablenesss_charcAVG " + agreeablenesss_charc);
+
+
+
+        Cartesian cartesian = AnyChart.column();
+
+        List<DataEntry> data = new ArrayList<>();
+        data.add(new ValueDataEntry("Openness", openness_charac));
+        data.add(new ValueDataEntry("Conscientiousness", conscientiousness_charac));
+        data.add(new ValueDataEntry("Extraversion", extraversion_charac));
+        data.add(new ValueDataEntry("Neuroticism", neuroticism_charac));
+        data.add(new ValueDataEntry("Agreeablenesss", agreeablenesss_charc));
+
+        Column column = cartesian.column(data);
+
+        column.tooltip()
+                .titleFormat("{%X}")
+                .position(Position.CENTER_BOTTOM)
+                .anchor(Anchor.CENTER_BOTTOM)
+                .offsetX(0d)
+                .offsetY(5d)
+                .format("${%Value}{groupsSeparator: }");
+
+        cartesian.animation(true);
+        cartesian.title("User Characteristics");
+
+        cartesian.yScale().minimum(0d);
+
+        cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+        cartesian.interactivity().hoverMode(HoverMode.BY_X);
+
+        cartesian.xAxis(0).title("Character");
+        cartesian.yAxis(0).title("Value");
+
+        anyChartView.setChart(cartesian);
     }
 }

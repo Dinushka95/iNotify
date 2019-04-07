@@ -4,9 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.inotify.configs.TbColNames;
 import com.example.inotify.configs.TbNames;
+import com.example.inotify.models.ApplicationInfoModel;
+import com.example.inotify.models.CharacteristicsFinalModel;
 import com.example.inotify.views.views.Agreeablenesss;
 import com.example.inotify.views.views.Conscientiousness;
 import com.example.inotify.views.views.Extraversion;
@@ -14,11 +17,14 @@ import com.example.inotify.views.views.Neuroticism;
 import com.example.inotify.views.views.Openness;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import static com.example.inotify.configs.TbNames.APPLICATIONS_TABLE;
+import static com.example.inotify.configs.TbNames.CHARACTERISTICSFINAL_TABLE;
 
 public class CharacteristicFinalDbHelper extends MainDbHelp {
 
@@ -127,6 +133,34 @@ public class CharacteristicFinalDbHelper extends MainDbHelp {
         } else {
             return false;
         }
+    }
+
+    public List<CharacteristicsFinalModel> CharacteristicsGet() {
+        List<CharacteristicsFinalModel> ListCharacteristicsFinalModel = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + CHARACTERISTICSFINAL_TABLE + " where  DATE = \"date\"", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+
+                    CharacteristicsFinalModel characteristicsFinalModel = new CharacteristicsFinalModel();
+
+                    characteristicsFinalModel.setOpenness( res.getString(res.getColumnIndex(TbColNames.OPENNESS)));
+                    characteristicsFinalModel.setConscientiousness( res.getString(res.getColumnIndex(TbColNames.CONSCIENTIOUSNESS)));
+                    characteristicsFinalModel.setExtraversion( res.getString(res.getColumnIndex(TbColNames.EXTRAVERSION)));
+                    characteristicsFinalModel.setNeuroticism( res.getString(res.getColumnIndex(TbColNames.NEUROTICISM)));
+                    characteristicsFinalModel.setAgreeableness( res.getString(res.getColumnIndex(TbColNames.AGREEABLENESS)));
+
+
+
+                    ListCharacteristicsFinalModel.add(characteristicsFinalModel);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+
+        return ListCharacteristicsFinalModel;
     }
 
 
