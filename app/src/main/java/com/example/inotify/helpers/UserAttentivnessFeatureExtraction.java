@@ -74,17 +74,13 @@ public class UserAttentivnessFeatureExtraction {
         }
 
 
-        Log.d("inotify(^_^)" ,"time viwed  " +timeviwed);
-        Log.d("inotify(^_^)" ,"time recived " +timeRecived);
-
         long delay = timeviwed.getTime() - timeRecived.getTime();
         // long diffMinutes = diff / (60 * 1000) % 60;
         long delayinminute = delay/60000 % 60;
         Date delaydiff = new Date(delay);
 
 
-        Log.d("inotify(^_^)" , "delay=============" +delay );
-        Log.d("inotify(^_^)" , "delaydiff=============" +delayinminute );
+
         //Check Delay
         if(delayinminute <= 10)
         {
@@ -109,9 +105,6 @@ public class UserAttentivnessFeatureExtraction {
             Screenoff =1;
         }
 
-        Log.d ("inotify" , "features   ====================== screenstatus, String RingerMode, String Viewtime, String RecivedTime, String Sequence, int notificationTotal" );
-
-        Log.d("inotify " ,"feature exteaction ==== " + silent + " , " +general+  " , " + vibrate + " , " + sequenceImportnacegiven+ " , " +sequenceImportnaceotGiven+ " , " + IsDelayed+ " , " +IsnotDelayed+ " , " + ScreenOn+ " , " +Screenoff);
 
         return a;
 
@@ -141,18 +134,12 @@ public class UserAttentivnessFeatureExtraction {
             e.printStackTrace();
         }
 
-
-        Log.d("inotify(^_^)" ,"time viwed  " +timeviwed);
-        Log.d("inotify(^_^)" ,"time recived " +timeRecived);
-
         long delay = timeviwed.getTime() - timeRecived.getTime();
         // long diffMinutes = diff / (60 * 1000) % 60;
         long delayinminute = delay/60000 % 60;
         Date delaydiff = new Date(delay);
 
 
-        Log.d("inotify(^_^)" , "delay=============" +delay );
-        Log.d("inotify(^_^)" , "delaydiff=============" +delayinminute );
 
         double RuleNo = 0;
 

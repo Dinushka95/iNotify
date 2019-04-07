@@ -73,7 +73,7 @@ public class ChargerDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select COUNT(POWEROFFTIME) from " + TbNames.CHARGER_TABLE + " where POWEROFFDATE = \""+date1+"\" ", null);
         if (res != null) {
             if ((res.moveToFirst())){
-                Log.d("inotify","powerOffCountGet----"+res.getCount());
+
                 return res.getCount();
             }
         }

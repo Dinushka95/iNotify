@@ -22,12 +22,7 @@ public class Openness extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_openness);
-        //        textView = findViewById(R.id.Op_attr_1);
-//        //UsercharacteristicsActivity usercharacteristicsActivity = new UsercharacteristicsActivity();
-//        //long open = usercharacteristicsActivity.displayOpenness();
-//        Log.d("ghgh", "onCreate: " );
-//        textView.setText("kkknkn");
-    }
+}
 
 
     public long displayOpenness(Context context) {
@@ -41,7 +36,7 @@ public class Openness extends AppCompatActivity {
         int NoofAppsAll = applicationsHelper.allAppCountAVG();
 
         int newApps = (NoofAppsAll - NoofAppsToday);
-        Log.d("inotify", "newApps" + newApps);
+
 
         int socialAppToday = applicationsHelper.commonSocialAppTodayCount();
         int communicationAppToday = applicationsHelper.commonCommunicationAppTodayCount();

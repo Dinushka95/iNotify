@@ -93,7 +93,6 @@ public class mon extends Fragment {
         }
         mLayout.addView(mytb);
 
-        Log.d("View","Start");
         return view;
 
     }

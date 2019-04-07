@@ -41,7 +41,6 @@ public class TopAppDbHelper extends MainDbHelp {
 
 
     public List<ApplicationInfoModel> topAppSocilGet() {
-        //Log.d("cdap", " ---NValueGet--");
 
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -52,7 +51,7 @@ public class TopAppDbHelper extends MainDbHelp {
             if (res.moveToFirst()) {
                 do {
 
-                    //SNSModel snsModel = new SNSModel();
+
                     ApplicationInfoModel applicationInfoModel = new ApplicationInfoModel();
 
                     applicationInfoModel.setAppName(res.getString(res.getColumnIndex(TbColNames.APPNAME)));
@@ -70,7 +69,7 @@ public class TopAppDbHelper extends MainDbHelp {
 
 
     public List<ApplicationInfoModel> topAppPhotograpyGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
 
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -98,7 +97,7 @@ public class TopAppDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> topAppPersonalizationGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
 
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -149,7 +148,7 @@ public class TopAppDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> topAppGamingGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
 
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -192,7 +191,7 @@ public class TopAppDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> topAppEducationGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
 
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
@@ -213,7 +212,7 @@ public class TopAppDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> topAppEntertainmentGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -252,7 +251,7 @@ public class TopAppDbHelper extends MainDbHelp {
     }
 
     public List<ApplicationInfoModel> topAppToolGet() {
-        //Log.d("cdap", " ---NValueGet--");
+
         List<ApplicationInfoModel> listApplicationInfoModels = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();

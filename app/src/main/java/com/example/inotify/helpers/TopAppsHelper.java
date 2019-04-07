@@ -156,7 +156,7 @@ public class TopAppsHelper {
 
 
                                 topAppModelList.add(topAppModel);
-                                //Log.d("inotify", document.getId() + " => " + document.getData());
+
                             }
                         } else {
                             Log.d("inotify", "Error getting documents: ", task.getException());
@@ -164,7 +164,7 @@ public class TopAppsHelper {
                         myCallback.onCallback(topAppModelList);
                     }
                 });
-        //Log.d("inotify", "Error getting documents: "+topAppModelList.size());
+
 
     }
 }

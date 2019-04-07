@@ -177,7 +177,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---User Characteristic---"+usercharacties );
 
             String appType = ApplicationDbHelper.getInstance(this).getApplicationDetailsByPackName(appPackageName).getAppCategory();
-            if(appType.equals("")){appType="9.99";}
+            if(appType.equals("")||appType==null||appType.equals("null")){appType="9.99";}
             Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---appType---"+appType );
 
             SNSModel snsModel = new SNSModel(day,timeRecieved,viewbillityProbability,"0.5",usercharacties,appType,appName);
@@ -380,7 +380,6 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             long difference = date2.getTime() - date1.getTime();
             SmartNotificationDbHelper.getInstance(this).updateData(ticker,String.valueOf(difference));
-            Log.e("inotify", "Main-MyNotificationListenerService-vvvvvvvvvvvvvvvvvvvvvvvvvvvv"+difference);
 
 
             Log.d("inotify", "Main-MyNotificationListenerService----onNotificationRemoved---stop");

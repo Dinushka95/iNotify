@@ -40,8 +40,7 @@ public class RingerModeDbHelper extends MainDbHelp {
     // RingerMode table insert
     public boolean RMinsert(String id , String ringermode)
     {
-        Log.d("inotify" ,"ringermode Save Started");
-        Log.d("inotify " ,"RingerMode(^_^)" + ringermode + "," +id);
+
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -52,7 +51,6 @@ public class RingerModeDbHelper extends MainDbHelp {
                 (Integer.valueOf(new SimpleDateFormat("MM", Locale.getDefault()).format(new Date())) - 1),
                 Integer.valueOf(new SimpleDateFormat("dd", Locale.getDefault()).format(new Date())));
         String day = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-        Log.d("inotify" ,"day = "  + day );
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -63,7 +61,6 @@ public class RingerModeDbHelper extends MainDbHelp {
         contentValues.put(RM_RINGERMODE ,ringermode);
 
         long result = db.insert(RINGERMODE_TABLE, null,contentValues);
-        Log.d("inotify" ,"RM_RINGERMODE = "  +ringermode );
 
         db.close();
         return result != -1;
@@ -94,7 +91,7 @@ public class RingerModeDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.RINGERMODE_TABLE, null);
         res.moveToFirst();
         int count = res.getInt(res.getColumnIndex("count"));
-        Log.d("inotify(^_^", "count" + count);
+ ;
 
         res.close();
         return count;
@@ -107,7 +104,6 @@ public class RingerModeDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.RINGERMODE_TABLE +  " where " + TbColNames.RM_RINGERMODE +" =?", new String[] {String.valueOf(ringerMode)}, null);
         res.moveToFirst();
         int count = res.getInt(res.getColumnIndex("count"));
-        Log.d("inotify(^_^", "countxxx" + count);
 
         res.close();
         return count;

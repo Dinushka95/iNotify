@@ -69,7 +69,7 @@ public class ContactsHelper {
         }
 
         int count = myList.size();
-        Log.d("inotify","contacts..........." + count);
+
 
         UserCharacteristics_DbHelper UserCharacteristics_DbHelper = new UserCharacteristics_DbHelper(context);
         UserCharacteristics_DbHelper.contactCount_insert(String.valueOf(count));

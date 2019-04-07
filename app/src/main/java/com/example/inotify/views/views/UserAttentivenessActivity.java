@@ -47,7 +47,7 @@ public class UserAttentivenessActivity extends AppCompatActivity {
 
        for(int i=1 ; i< txp.size() ; i++){
            String a = txp.get(i).toString();
-           Log.d("inotify" , "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ===== " +a  );
+           //Log.d("inotify" , "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ===== " +a  );
        }
 
 
@@ -85,14 +85,11 @@ public class UserAttentivenessActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String  applcation = ((Spinner) sp).getSelectedItem().toString();
-                Log.d("inotify" , "aaaaaaaaaaaa=============applcation ===== " +applcation);
 
                 String App  = (String) parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), App, Toast.LENGTH_SHORT);
-                Log.d("Inotify" , "xxxxxxxxxxxxxxxxxxxxx==============App==========  " +App);
+               // Toast.makeText(getApplicationContext(), App, Toast.LENGTH_SHORT);
 
                 String  item = sp.getItemAtPosition(position).toString();
-                Log.d("Inotify" , "xxxxxxxxxxxxxxxxxxxxx==============item==========  " +item);
 
 
 
@@ -108,23 +105,7 @@ public class UserAttentivenessActivity extends AppCompatActivity {
             }
         });
 
-//       sp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//           @Override
-//           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//           }
-//       });
 
-
-//       sp.setOnClickListener(new View.OnClickListener() {
-//           @Override
-//           public void onClick(View v) {
-//
-//           }
-//       });
-
-
-       ///////////////////////////////////////////////////////////////////////
 
 
         Layout = findViewById(R.id.liner);

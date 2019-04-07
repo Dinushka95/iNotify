@@ -13,7 +13,7 @@ public class FeedbackYesIntent extends IntentService {
 
     @Override
     protected void onHandleIntent( Intent intent) {
-        Log.d("inotify", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" );
+
         // TODO-- get user feedback. if this notification is important
 
     }

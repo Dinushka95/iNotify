@@ -240,11 +240,9 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
 
             db.close();
 
-            //Log.d("Notification_id", "probability_Update: "+count2);
             count.close();
         }
 
-        Log.d("Count", "probability_Update: "+count2);
         ContentValues contentValues = new ContentValues();
         contentValues.put("viewor", count2);
         contentValues.put("notor", notor);
@@ -265,7 +263,7 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
                 do{
                     TimeSlots.set(0,Integer.toString(count));
                     TimeSlots.add(proq.getString(2));
-                    Log.d("TimeSlots", "selectTimeSlot: "+ proq.getString(2));
+
                     //Log.d("TimeSlots", "selectTimeSlot: "+Integer.toString(proq.getInt(2)));
                     count = count + 1 ;
                 }while (proq.moveToNext());
@@ -361,7 +359,7 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
                 notorSum = (Integer.parseInt(proq.getString(4)));
                 //i = i + 1;
 
-                Log.d("viewORSUM", "probability_Query: " + proq.getInt(2));
+
 
             }
         }
@@ -396,9 +394,7 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
             upd.update(TbNames.PROBABILITYQUERYSUN_TABLE ,contentValues3 , "time_slot = '"+timeSlot+"'", null);
         }
 
-        Log.d("Writable", "probability_query: " + ViewSUM);
-        Log.d("NotSUM", "probability_query: " + NotSUM);
-        Log.d("TIMESLOT", "probability_query: " + timeSlot);
+
 
 
 
@@ -499,27 +495,6 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
         return TimeSlots;
     }
 
-    //PRASHAN end
-
-   /* private void getRecords() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PROBABILITY_TABLE , null);
-        if (cursor.moveToFirst()) {
-            do {
-                TableRow row = new TableRow();
-                for (int i = 0; i < cursor.getColumnCount(); i++) {
-                    TextView textView = new TextView(getContext());
-                    TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(350, TableRow.LayoutParams.WRAP_CONTENT);
-                    textViewParams.setMargins(25, 25, 25, 25);
-                    textView.setLayoutParams(textViewParams);
-                    textView.setText(cursor.getString(i));
-                    row.addView(textView);
-                }
-                table.addView(row);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-    }*/
 
     public boolean location_insert(String log, String lat) {
 
@@ -575,7 +550,6 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
 
     public boolean notificationRemove_insert() {
 
-        // String time = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
 
         String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
 
@@ -652,23 +626,21 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
     public boolean probability_insert(String Proid,int viewOR) {
 
         Date currentTime = Calendar.getInstance().getTime();
-        Log.d("Debug", "NOW" + currentTime);
+
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
         String currentDateTimeString = sdf.format(currentTime);
         SimpleDateFormat hour = new SimpleDateFormat("HH", Locale.getDefault());
         String currentHour = hour.format(currentTime);
         Calendar cal = Calendar.getInstance();
         String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-        Log.d("Debug", "NOW" + currentHour);
+
         SimpleDateFormat min = new SimpleDateFormat("mm", Locale.getDefault());
         String currentMin = min.format(currentTime);
-        Log.d("Debug", "NOW" + currentMin);
+
         SimpleDateFormat AP = new SimpleDateFormat("a", Locale.getDefault());
         String currentAP = AP.format(currentTime);
-        Log.d("Debug", "NOW" + currentAP);
 
         char MinOne = currentMin.charAt(0);
-        Log.d("Debug", "NOW" + MinOne);
 
         int nextMin = 0;
         int nextHour = 0;
@@ -688,7 +660,6 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
             nextHourS = Integer.toString(nextHour);
         }
         String TimeSlot = currentHour + ":" + MinOne + "0 - " + nextHourS + ":" + nextMin + "0";
-        Log.d("Debug", "TimeSlot = " + TimeSlot);
 
 
 
@@ -700,7 +671,7 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
         int viewor = viewOR;
         int notor = 0;
         double probability = 100;
-        Log.d("proid", "probability_insert: "+ proId);
+
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues2 = new ContentValues();
@@ -713,7 +684,7 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
         contentValues2.put(TbColNames.PROBABLITY, probability);
         long result = db.insert(PROBABILITY_TABLE, null, contentValues2);
         db.close();
-        Log.d("hello", "probability_insert: correctly");
+
         if (result == -1)
             return false;
         else
@@ -722,23 +693,23 @@ public class NotificationViewabilityDbHelper extends MainDbHelp {
 
     public String timeSlotNow(){
         Date currentTime = Calendar.getInstance().getTime();
-        Log.d("Debug", "NOW"+currentTime);
+
         SimpleDateFormat sdf=new SimpleDateFormat("hh:mm a",Locale.getDefault());
         String currentDateTimeString = sdf.format(currentTime);
         SimpleDateFormat hour=new SimpleDateFormat("HH",Locale.getDefault());
         String currentHour = hour.format(currentTime);
         Calendar cal = Calendar.getInstance();
         String currentDay = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-        Log.d("Debug", "NOW"+currentHour);
+
         SimpleDateFormat min=new SimpleDateFormat("mm",Locale.getDefault());
         String currentMin = min.format(currentTime);
-        Log.d("Debug", "NOW"+currentMin);
+
         //SimpleDateFormat AP=new SimpleDateFormat("a",Locale.getDefault());
         //String currentAP = AP.format(currentTime);
         //Log.d("Debug", "NOW"+currentAP);
 
         char MinOne = currentMin.charAt(0);
-        Log.d("Debug", "NOW"+MinOne);
+
 
         int nextMin =0;
         int nextHour = 0;

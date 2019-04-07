@@ -337,7 +337,7 @@ public class MainUserAttentivness {
 
         } else {
             //Insert method
-            Log.d("inotify", "MainUserAttentivness ================================================ Insert ");
+
             Ringermode = 0.3333;
             ScreenStatus = 0.5;
             AppImportnace = 0.5;
@@ -380,8 +380,7 @@ public class MainUserAttentivness {
         }
 
 
-        Log.d("inotify(^_^)", "time viwed  " + timeviwed);
-        Log.d("inotify(^_^)", "time recived " + timeRecived);
+
 
         long delay = timeviwed.getTime() - timeRecived.getTime();
         // long diffMinutes = diff / (60 * 1000) % 60;
@@ -389,8 +388,6 @@ public class MainUserAttentivness {
         Date delaydiff = new Date(delay);
 
 
-        Log.d("inotify(^_^)", "delay=============" + delay);
-        Log.d("inotify(^_^)", "delaydiff=============" + delayinminute);
 
 
         if ((RingerMode.equals("normal")) && (notificationSequence > sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))) {

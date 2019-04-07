@@ -66,7 +66,7 @@ public class NotificationViewabilityActivity extends AppCompatActivity {
 
         Date currentTime = Calendar.getInstance().getTime();
         Double view = pra.GetViewability(currentTime);
-        Log.d("Viewability", "onCreate: " + view);
+
         pra.close();
     }
 

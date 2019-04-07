@@ -101,20 +101,11 @@ public class DataUsageHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             NetworkStatsManager networkStatsManager = (NetworkStatsManager) context.getApplicationContext().getSystemService(Context.NETWORK_STATS_SERVICE);
             for (ApplicationInfo packageInfo : packages) {
-                Log.d("inotify-verN", String.valueOf(packageInfo.uid));
-                Log.d("inotify-verN", String.valueOf(packageInfo.name));
-                Log.d("inotify-verN", String.valueOf(packageInfo.packageName));
-                Log.d("inotify-verN", String.valueOf(getPackageRxBytesMobile(context, networkStatsManager, packageInfo.uid)));
+
             }
         }else{
 
-            for (ApplicationInfo packageInfo : packages) {
-                Log.d("inotify", String.valueOf(packageInfo.uid));
-                Log.d("inotify", String.valueOf(packageInfo.name));
-                Log.d("inotify", String.valueOf(packageInfo.packageName));
-                Log.d("inotify", String.valueOf(TrafficStats.getUidRxBytes(packageInfo.uid)));
-                Log.d("inotify", String.valueOf(TrafficStats.getUidTxBytes(packageInfo.uid)));
-            }
+
 
         }
 
