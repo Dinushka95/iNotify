@@ -43,6 +43,7 @@ public class TbColNames {
     public static final String NOTORSUM = "notorsum";
     public static final String PROBABILITYFINAL = "probabilityfinal";
 
+
     //// ringer mode
     public static final String RM_NOTIFICATIONID = "rm_notificationid";
     public static final String RM_DAY = "rm_day";
@@ -58,21 +59,25 @@ public class TbColNames {
     public static final String TIMEOFF = "timeoff";
 
 
-    //NotificationImportance
+    ////NotificationImportance
     public static final String NOTIFICATIONIID = "notificationiid";
     public static final String APPLICATIONNAME = "applicationname";
     public static final String SEQUENCEVALUE ="sequencevalue";
 
 
-    //MainUserAttentivness
+    ////MainUserAttentivness
     public static final String NID ="nid";
     public static final String APPLICATION ="application";
     public static final String ATTENTIVNESSVALUE = "attentivnessvalue";
 
     //AttentivnesssperApp
-    //public static final String APPNAME ="appname";
+    ////public static final String APPNAME ="appname";
     public static final String TOTALATTENTIVNESS = "totalattentivness";
     public static final String TOTALATTENTIVNESSPERCENTAGE = "totalattentivnesspercentage";
+
+    ////
+    public static final String TIMESLOT = "timeslot";
+    public static final String ATTENTIVNESSPERHOUR = "attentivnessperhour";
 
 
     ////smart notification system

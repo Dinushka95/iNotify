@@ -7,6 +7,9 @@
     android:orientation="horizontal"
     android:layout_marginTop="20dip">
 
+
+
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +20,58 @@
         tools:context=".views.views.UserAttentivenessActivity">
 
         <TableLayout
-            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/chartbutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5px"
+                    android:text="Generate Chart" />
+            </TableRow>
+            <TableRow>
+                <Button
+                    android:id="@+id/ScatterPltButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5px"
+                    android:text="Generate Scatter Plot" />
+            </TableRow>
+
+
+
+
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/LineChartBitton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5px"
+                    android:text="Choose app to view attentivness" />
+
+
+                <Spinner
+                    android:id="@+id/applistSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5px"
+                    android:contextClickable="true">
+
+                </Spinner>
+
+            </TableRow>
+
+
+        </TableLayout>
+
+
+        <TableLayout
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#f1f1f1">

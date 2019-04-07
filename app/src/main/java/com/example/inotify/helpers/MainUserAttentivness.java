@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.inotify.dbHelpers.AttentivnessPerAppDbHelper;
+import com.example.inotify.dbHelpers.NotificationDbHelper;
 import com.example.inotify.dbHelpers.RingerModeDbHelper;
 import com.example.inotify.dbHelpers.ScreenStatusDbHelper;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
@@ -22,7 +23,8 @@ public class MainUserAttentivness {
 
 
     private Context c1;
-    public MainUserAttentivness(Context context){
+
+    public MainUserAttentivness(Context context) {
         c1 = context;
     }
 
@@ -38,38 +40,36 @@ public class MainUserAttentivness {
         int notificationSequence = Integer.parseInt(Sequence);
 //        int timeViewed = Integer.parseInt(Viewtime);
 
-        Date timeviwed= new Date();
-        Date  timeRecived = new Date();
+        Date timeviwed = new Date();
+        Date timeRecived = new Date();
 
 
         //Convert the string value to date time
         DateFormat dateFormat = new SimpleDateFormat("HHmmss");
-        try{
+        try {
 
-             timeviwed =(Date) dateFormat.parse(Viewtime);
-             timeRecived =(Date) dateFormat.parse(RecivedTime);
-        }
-        catch (ParseException e)
-        {
+            timeviwed = (Date) dateFormat.parse(Viewtime);
+            timeRecived = (Date) dateFormat.parse(RecivedTime);
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
 
-        Log.d("inotify(^_^)" ,"time viwed  " +timeviwed);
-       Log.d("inotify(^_^)" ,"time recived " +timeRecived);
+        Log.d("inotify(^_^)", "time viwed  " + timeviwed);
+        Log.d("inotify(^_^)", "time recived " + timeRecived);
 
         long delay = timeviwed.getTime() - timeRecived.getTime();
         // long diffMinutes = diff / (60 * 1000) % 60;
-        long delayinminute = delay/60000 % 60;
+        long delayinminute = delay / 60000 % 60;
         Date delaydiff = new Date(delay);
 
 
-        Log.d("inotify(^_^)" , "delay=============" +delay );
-        Log.d("inotify(^_^)" , "delaydiff=============" +delayinminute );
+        Log.d("inotify(^_^)", "delay=============" + delay);
+        Log.d("inotify(^_^)", "delaydiff=============" + delayinminute);
 
         //Log.d("inotifyC" ,"timeviwed" , +simpleDateFormat);
 
-   //     int timeRecived = Integer.parseInt(RecivedTime);
+        //     int timeRecived = Integer.parseInt(RecivedTime);
 
         double RMWeight = 0;
         double STweight = 0;
@@ -97,20 +97,20 @@ public class MainUserAttentivness {
                 if (delay <= 10) {
                     delayWeight = 1;
                     Log.d("inotifyx", "delayWeight is " + delayWeight);
-                    if (screenstatus.equals("off") ) {
+                    if (screenstatus.equals("off")) {
                         STweight = 1;
 
                         Log.d("notify", "hjkhjkkhjkh");
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "1" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "2" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
                 } else {
@@ -121,14 +121,14 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "3" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "4" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                         //unlocked , importnace not given , seqebncy High
                     }
@@ -143,13 +143,13 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "5" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "6" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
                 } else {
@@ -159,13 +159,13 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "7" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "8" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
 
                     }
@@ -186,13 +186,13 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "9" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     } else {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "10" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
                 } else {
@@ -203,14 +203,14 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "11" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     } else {
                         //unlocked , importnace not given , seqebncy High
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "12" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
 
                     }
@@ -226,14 +226,14 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "13" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     } else {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "14" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
                 } else {
@@ -244,14 +244,14 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "15" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     } else {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "16" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
                 }
@@ -271,14 +271,14 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "17" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     } else {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "18" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
                 } else {
@@ -289,7 +289,7 @@ public class MainUserAttentivness {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "19" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     } else {
                         //unlocked , importnace not given , seqebncy High
@@ -297,7 +297,7 @@ public class MainUserAttentivness {
 
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
                 }
@@ -312,21 +312,17 @@ public class MainUserAttentivness {
                         STweight = 1;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "21" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
-                    }
-                    else
-                    {
+                    } else {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "22" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
-                }
-                else
-                {
+                } else {
                     delayWeight = 0;
                     Log.d("inotifyx", "delayWeight is " + delayWeight);
                     if (screenstatus.equals("off")) {
@@ -334,213 +330,179 @@ public class MainUserAttentivness {
                         STweight = 0;
                         Log.d("inotifyx", "STweight is off " + STweight);
                         Log.d("notify12 ", "23" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
-                    }
-                    else
-                    {
+                    } else {
                         //unlocked
                         STweight = 0;
                         Log.d("inotifyx", "STweight is on " + STweight);
                         Log.d("notify12 ", "24" + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
-                        Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+                        Attentivnes = (0.113 * RMWeight * 0.3333) + (0.1190 * STweight * 0.5) + (0.3539 * delayWeight * 0.5) + (0.1936 * seqencemp * seqenceWeight);
 
                     }
                 }
 
             }
-            Log.d("notify12 " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
+            Log.d("notify12 ", "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
 
-        // Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
-        Log.d("notify " , "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight+ ","+STweight+","+delayWeight+","+seqencemp+ ","+seqenceWeight );
-        Log.d("inotifyC" ,"Attentiivness final value = " +Attentivnes );
+            // Attentivnes = (0.113* RMWeight*0.3333) + (0.1190 *STweight*0.5) + (0.3539*delayWeight*0.5) + (0.1936* seqencemp *seqenceWeight);
+            Log.d("notify ", "RMWeight ,STweight,delayWeight,seqencemp,seqenceWeight " + RMWeight + "," + STweight + "," + delayWeight + "," + seqencemp + "," + seqenceWeight);
+            Log.d("inotifyC", "Attentiivness final value = " + Attentivnes);
 
 
-
+        }
+        return Attentivnes;
     }
-        return Attentivnes  ;
-    }
 
 
-
-
-
-
-    public double CalcAtten(String id ,String PackageName, String screenstatus, String RingerMode, String Viewtime, String RecivedTime, String Sequence, int notificationTotal)
-    {
-        double attentValue =0;
+    public double CalcAtten(String id, String PackageName, String screenstatus, String RingerMode, String Viewtime, String RecivedTime, String Sequence, int notificationTotal) {
+        double attentValue = 0;
         double Ringermode = 0.0;
-        double ScreenStatus =0.0;
+        double ScreenStatus = 0.0;
         double AppImportnace = 0.0;
-        double TimeDelay =0.0;
+        double TimeDelay = 0.0;
 
 
-        double ringerModeWeight=0.0;
-        double sequenceWeight =0.0;
-        double screenStatusWeight=0.0;
-        double appImportnaceWight = 0.0 ;
+        double ringerModeWeight = 0.0;
+        double sequenceWeight = 0.0;
+        double screenStatusWeight = 0.0;
+        double appImportnaceWight = 0.0;
         double timeDelayWeight = 0.0;
 
 
-        AttentivnessPerAppDbHelper attentivnessPerAppDbHelper= new AttentivnessPerAppDbHelper(c1);
-        Log.d("inotify " , "package Name ==================================" + PackageName);
+        AttentivnessPerAppDbHelper attentivnessPerAppDbHelper = new AttentivnessPerAppDbHelper(c1);
+        Log.d("inotify ", "package Name ==================================" + PackageName);
         int AppExistence = AttentivnessPerAppDbHelper.getInstance(c1).CheckExistance();
-                //attentivnessPerAppDbHelper.CheckExistance();
-        Log.d("inptifyCCCC" , "AppExistence" +AppExistence );
+        //attentivnessPerAppDbHelper.CheckExistance();
+        Log.d("inptifyCCCC", "AppExistence" + AppExistence);
 
-        if(AppExistence >0)
-        {
-            double screenStatusRecordCountPerMode=0.0;
+        if (AppExistence > 0) {
+            double screenStatusRecordCountPerMode = 0.0;
             //update method
-            Log.d("inotify" ,"MainUserAttentivness ================================================ update ");
+            Log.d("inotify", "MainUserAttentivness ================================================ update ");
 
             //get ringer Mode Weighting
-           double recordcount =  RingerModeDbHelper.getInstance(c1).RecordCount();
-           double recordCountPerMode = RingerModeDbHelper.getInstance(c1).RecordCountPerMode(RingerMode);
-           Ringermode = recordCountPerMode/recordcount;
-
+            double recordcount = RingerModeDbHelper.getInstance(c1).RecordCount();
+            double recordCountPerMode = RingerModeDbHelper.getInstance(c1).RecordCountPerMode(RingerMode);
+            Ringermode = recordCountPerMode / recordcount;
 
 
             double screenStatusRecordCount = ScreenStatusDbHelper.getInstance(c1).screenStatusRecordCount();
-            if(screenstatus.equals("on"))
-            {
-                 screenStatusRecordCountPerMode = ScreenStatusDbHelper.getInstance(c1).screenOnStatusRecordCountPerMode();
+            if (screenstatus.equals("on")) {
+                screenStatusRecordCountPerMode = ScreenStatusDbHelper.getInstance(c1).screenOnStatusRecordCountPerMode();
+            } else {
+                screenStatusRecordCountPerMode = ScreenStatusDbHelper.getInstance(c1).screenOffStatusRecordCountPerMode();
             }
-            else
-            {
-                 screenStatusRecordCountPerMode = ScreenStatusDbHelper.getInstance(c1).screenOffStatusRecordCountPerMode();
-            }
-            ScreenStatus =  screenStatusRecordCountPerMode/screenStatusRecordCount;
+            ScreenStatus = screenStatusRecordCountPerMode / screenStatusRecordCount;
 
             AppImportnace = 0.5;
             TimeDelay = 0.5;
 
 
-           attentValue =  this.attention(id,PackageName ,screenstatus,RingerMode,Viewtime,RecivedTime ,Sequence,notificationTotal ,Ringermode ,ScreenStatus , AppImportnace,TimeDelay);
+            attentValue = this.attention(id, PackageName, screenstatus, RingerMode, Viewtime, RecivedTime, Sequence, notificationTotal, Ringermode, ScreenStatus, AppImportnace, TimeDelay);
 
-         }
-        else
-        {
+        } else {
             //Insert method
-            Log.d("inotify" ,"MainUserAttentivness ================================================ Insert ");
+            Log.d("inotify", "MainUserAttentivness ================================================ Insert ");
             Ringermode = 0.3333;
             ScreenStatus = 0.5;
             AppImportnace = 0.5;
             TimeDelay = 0.5;
 
-            attentValue = this.attention(id,PackageName ,screenstatus,RingerMode,Viewtime,RecivedTime ,Sequence,notificationTotal ,Ringermode ,ScreenStatus , AppImportnace,TimeDelay);
+            attentValue = this.attention(id, PackageName, screenstatus, RingerMode, Viewtime, RecivedTime, Sequence, notificationTotal, Ringermode, ScreenStatus, AppImportnace, TimeDelay);
 
-         }
+        }
 
         return attentValue;
     }
 
 
-    public double attention(String id ,String PackageName, String screenstatus, String RingerMode, String Viewtime, String RecivedTime, String Sequence, int notificationTotal ,double RingerModeValue , double ScreeStatusValue ,double AppImportnaceValue ,double TimeDelayValue )
-    {
+    public double attention(String id, String PackageName, String screenstatus, String RingerMode, String Viewtime, String RecivedTime, String Sequence, int notificationTotal, double RingerModeValue, double ScreeStatusValue, double AppImportnaceValue, double TimeDelayValue) {
 
-        double attentValue =0.0;
+        double attentValue = 0.0;
 
 
-        double ringerModeWeight=0.0;
-        double sequenceWeight =0.0;
-        double screenStatusWeight=0.0;
-        double appImportnaceWight = 0.0 ;
+        double ringerModeWeight = 0.0;
+        double sequenceWeight = 0.0;
+        double screenStatusWeight = 0.0;
+        double appImportnaceWight = 0.0;
         double timeDelayWeight = 0.0;
 
-        double sequenceAVG = (notificationTotal)/2.0;
+        double sequenceAVG = (notificationTotal) / 2.0;
         int notificationSequence = Integer.parseInt(Sequence);
 
-        Date timeviwed= new Date();
-        Date  timeRecived = new Date();
+        Date timeviwed = new Date();
+        Date timeRecived = new Date();
 
 
         //Convert the string value to date time
         DateFormat dateFormat = new SimpleDateFormat("HHmmss");
-        try{
+        try {
 
-            timeviwed =(Date) dateFormat.parse(Viewtime);
-            timeRecived =(Date) dateFormat.parse(RecivedTime);
-        }
-        catch (ParseException e)
-        {
+            timeviwed = (Date) dateFormat.parse(Viewtime);
+            timeRecived = (Date) dateFormat.parse(RecivedTime);
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
 
-        Log.d("inotify(^_^)" ,"time viwed  " +timeviwed);
-        Log.d("inotify(^_^)" ,"time recived " +timeRecived);
+        Log.d("inotify(^_^)", "time viwed  " + timeviwed);
+        Log.d("inotify(^_^)", "time recived " + timeRecived);
 
         long delay = timeviwed.getTime() - timeRecived.getTime();
         // long diffMinutes = diff / (60 * 1000) % 60;
-        long delayinminute = delay/60000 % 60;
+        long delayinminute = delay / 60000 % 60;
         Date delaydiff = new Date(delay);
 
 
-        Log.d("inotify(^_^)" , "delay=============" +delay );
-        Log.d("inotify(^_^)" , "delaydiff=============" +delayinminute );
+        Log.d("inotify(^_^)", "delay=============" + delay);
+        Log.d("inotify(^_^)", "delaydiff=============" + delayinminute);
 
 
-
-        if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        if ((RingerMode.equals("normal")) && (notificationSequence > sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("normal")) && (notificationSequence > sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("normal")) && (notificationSequence > sequenceAVG) && (delay > 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("normal")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("normal")) && (notificationSequence > sequenceAVG) && (delay > 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("normal")) && (notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("normal")) && (notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("normal")) && (notificationSequence <= sequenceAVG) && (delay > 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("normal")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("normal")) && (notificationSequence <= sequenceAVG) && (delay > 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 0.0;
@@ -551,154 +513,122 @@ public class MainUserAttentivness {
 //*********************************************************Silent /////////////////////////////////////////////////////////////////////////////////
 
 
-        if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        if ((RingerMode.equals("silent")) && (notificationSequence > sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("silent")) && (notificationSequence > sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("silent")) && (notificationSequence > sequenceAVG) && (delay > 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("silent")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("silent")) && (notificationSequence > sequenceAVG) && (delay > 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("silent")) && (notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("silent")) && (notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("silent")) && (notificationSequence <= sequenceAVG) && (delay > 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("silent")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("silent")) && (notificationSequence <= sequenceAVG) && (delay > 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 0.0;
 
         }
-
-
 
 
         //*********************************************************Vibrate /////////////////////////////////////////////////////////////////////////////////
 
 
-        if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        if ((RingerMode.equals("vibrate")) && (notificationSequence > sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay <=10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("vibrate")) && (notificationSequence > sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("vibrate")) && (notificationSequence > sequenceAVG) && (delay > 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("vibrate")) && ( notificationSequence > sequenceAVG) && (delay >10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("vibrate")) && (notificationSequence > sequenceAVG) && (delay > 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 0.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("vibrate")) && (notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("vibrate")) && (notificationSequence <= sequenceAVG) && (delay <= 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 1.0;
             screenStatusWeight = 0.0;
 
-        }
-        else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay >10) && (screenstatus.equals("off"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("vibrate")) && (notificationSequence <= sequenceAVG) && (delay > 10) && (screenstatus.equals("off"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 1.0;
 
-        }
-        else if((RingerMode.equals("vibrate")) && ( notificationSequence <= sequenceAVG) && (delay  >10) && (screenstatus.equals("on"))  )
-        {
-            ringerModeWeight =1.0;
+        } else if ((RingerMode.equals("vibrate")) && (notificationSequence <= sequenceAVG) && (delay > 10) && (screenstatus.equals("on"))) {
+            ringerModeWeight = 1.0;
             sequenceWeight = 1.0;
             timeDelayWeight = 0.0;
             screenStatusWeight = 0.0;
 
-        }
-        else {
-            Log.d("inotify " , "error");
+        } else {
+            Log.d("inotify ", "error");
 
         }
 
-        attentValue = (0.113*ringerModeWeight*RingerModeValue) + (0.1190*ScreeStatusValue* screenStatusWeight) + (0.3539*timeDelayWeight*TimeDelayValue) + (0.1936 * sequenceWeight*notificationSequence);
+        attentValue = (0.113 * ringerModeWeight * RingerModeValue) + (0.1190 * ScreeStatusValue * screenStatusWeight) + (0.3539 * timeDelayWeight * TimeDelayValue) + (0.1936 * sequenceWeight * notificationSequence);
 
 
         //*******************************************************************************************************//
 
-   return attentValue;
+        return attentValue;
 
     }
+
 
 
 
