@@ -14,14 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="DisplayOpenness"
-        android:text="Button" />
+        android:text="Display" />
 
     <Button
         android:id="@+id/button14test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="test1"
-        android:text="Test!" />
+        android:text="Test" />
 
 
     <Button
@@ -29,13 +29,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="test2"
-        android:text="Test2" />
+        android:text="Chart" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="Details"
-        android:text="Button" />
+        android:text="Details Attribute" />
 
 </LinearLayout>

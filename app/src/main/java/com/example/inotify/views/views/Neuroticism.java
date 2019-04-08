@@ -24,13 +24,13 @@ public class Neuroticism extends AppCompatActivity {
     }
 
     public void neuro_next(View view) {
-        Intent intent = new Intent(this, Agreeablenesss.class);
+        Intent intent = new Intent(this, Extraversion.class);
         startActivity(intent);
 
     }
 
     public void neuro_back(View view) {
-//        Intent intent = new Intent(this, Openness.class);
+//        Intent intent = new Intent(this, Extraversion.class);
 //        startActivity(intent);
         this.neuroticismDisplay();
 
@@ -87,13 +87,14 @@ public class Neuroticism extends AppCompatActivity {
         long todaySocialappsProbability = (todaySocialapps * 16) / 100;
         long todayAllAppUsageProbability = (todayAllAppUsage * 16) / 100;
   //      long chargeProbability = (charge * 16) / 100;
+        long chargeProbability = 20;
 
     //    long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability + chargeProbability) / 10;
-            long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability ) / 100;
+            long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability + chargeProbability) / 100;
 
  //       Log.d("inotify", "neuroticism..................." + neuroticism);
 
-/*        final TextView textViewToChange = findViewById(R.id.N_attr_1);
+        final TextView textViewToChange = findViewById(R.id.N_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.N_attr_2);
         final TextView textViewToChange3 = findViewById(R.id.N_attr_3);
         final TextView textViewToChange4 = findViewById(R.id.N_attr_4);
@@ -105,7 +106,7 @@ public class Neuroticism extends AppCompatActivity {
         textViewToChange3.setText("" + todaySocialappsProbability);
         textViewToChange4.setText("" + todaySocialAppUsageProability);
         textViewToChange5.setText("" + todayAllAppUsageProbability);
-        textViewToChange6.setText("" + chargeProbability);*/
+        textViewToChange6.setText("" + chargeProbability);
 
 
         return neuroticism;

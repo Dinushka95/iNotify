@@ -54,7 +54,7 @@ public class Openness extends AppCompatActivity {
         Log.d("inotify", "Openness..............." + Openness);
 
         //TODO implement intent with data
-        /*final TextView textViewToChange = findViewById(R.id.Op_attr_1);
+        final TextView textViewToChange = findViewById(R.id.Op_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.Op_attr_2);
         final TextView textViewToChange3 = findViewById(R.id.Op_attr_3);
         final TextView textViewToChange4 = findViewById(R.id.Op_attr_4);
@@ -66,7 +66,7 @@ public class Openness extends AppCompatActivity {
         textViewToChange.setText("" + newAppsProbability);
         textViewToChange3.setText("" + socialAppTodayProbability);
         textViewToChange4.setText("" + communicationAppTodayProbability);
-        textViewToChange5.setText("" + todayCommunicationAppUsageProbability);*/
+        textViewToChange5.setText("" + todayCommunicationAppUsageProbability);
 
 
 /*
@@ -124,14 +124,13 @@ public class Openness extends AppCompatActivity {
 
 
     public void next_open(View view) {
-        Intent intent = new Intent(this, Neuroticism.class);
+        Intent intent = new Intent(this,Conscientiousness.class);
         startActivity(intent);
 
     }
 
     public void back_open(View view) {
-//        Intent intent = new Intent(this,Conscientiousness.class);
-//        startActivity(intent);
+
         this.displayOpenness(view.getContext());
 
     }

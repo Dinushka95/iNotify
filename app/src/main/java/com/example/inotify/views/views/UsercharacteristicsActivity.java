@@ -34,7 +34,7 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void DisplayOpenness(View view) {
-       // this.displayOpenness();
+
 
 
     }
@@ -44,16 +44,7 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test2(View view) {
-//
-//       CharacteristicFinalDbHelper characteristicFinalDbHelper = new CharacteristicFinalDbHelper(this);
-//        List<CharacteristicsFinalModel> ListCharacteristicsFinalModel = new ArrayList<>();
-//        ListCharacteristicsFinalModel = characteristicFinalDbHelper.CharacteristicsGet();
-//        Log.d("inotify","ListCharacteristicsFinalModel    "+ListCharacteristicsFinalModel);
 
-//        ApplicationDbHelper applicationDbHelper = new ApplicationDbHelper(this);
-//        List<ApplicationInfoModel> mySocialApp = new ArrayList<>();
-//        mySocialApp =  applicationDbHelper.mySocialAppAllGet();
-//        Log.d("inotify","mySocialApp    "+mySocialApp);
 
         Intent intent = new Intent(this,ChartCharacteristicsActivity.class);
         startActivity(intent);
@@ -62,7 +53,7 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
 
 
     public void Details(View view) {
-        Intent intent = new Intent(this,Conscientiousness.class);
+        Intent intent = new Intent(this,Openness.class);
         startActivity(intent);
 
 

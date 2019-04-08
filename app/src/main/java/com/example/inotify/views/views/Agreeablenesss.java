@@ -26,13 +26,13 @@ public class Agreeablenesss extends AppCompatActivity {
     }
 
     public void next_agree(View view) {
-        Intent intent = new Intent(this, Extraversion.class);
+        Intent intent = new Intent(this, Neuroticism.class);
         startActivity(intent);
 
     }
 
     public void back_agree(View view) {
-//        Intent intent = new Intent(this, Neuroticism.class);
+//        Intent intent = new Intent(this, Conscientiousness.class);
 //        startActivity(intent);
         this.DisplayAgreeableness();// view aka
 
@@ -64,7 +64,7 @@ public class Agreeablenesss extends AppCompatActivity {
         long agreeableness = (todayAppCountProbability + todayContctsProbability + todayScreenOnTimeProbability - todayPersonalizationAppUsageProbability -todayPersonalizationAppProbability)/100;
 
         Log.d("inotify","agreeableness--------------"+ agreeableness);
-/*
+
 
         final TextView textViewToChange = findViewById(R.id.Ag_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.Ag_attr_2);
@@ -79,7 +79,7 @@ public class Agreeablenesss extends AppCompatActivity {
         textViewToChange4.setText(""+todayAppCountProbability);
 
         textViewToChange5.setText(""+todayContctsProbability);
-        */
+
         //textViewToChange5.setText(""+todayCommunicationAppUsageProbability);
 
         return agreeableness;

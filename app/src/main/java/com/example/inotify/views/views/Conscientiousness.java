@@ -27,7 +27,7 @@ public class Conscientiousness extends AppCompatActivity {
 
 
     public void next_con(View view) {
-        Intent intent = new Intent(this,Openness.class);
+        Intent intent = new Intent(this,Agreeablenesss.class);
         startActivity(intent);
 
 
@@ -73,19 +73,19 @@ public class Conscientiousness extends AppCompatActivity {
 
        // Log.d("inotify","conscientiousness..................." + conscientiousness);
 
-    /*    final TextView textViewToChange = findViewById(R.id.Co_attr_1);
+        final TextView textViewToChange = findViewById(R.id.Co_attr_1);
         final TextView textViewToChange2 = findViewById(R.id.Co_attr_2);
         final TextView textViewToChange3 = findViewById(R.id.Co_attr_3);
         final TextView textViewToChange4 = findViewById(R.id.Co_attr_4);
         final TextView textViewToChange5 = findViewById(R.id.Co_attr_5);
         final TextView textViewToChange6 = findViewById(R.id.Co_attr_6);
 
-        textViewToChange6.setText(""+todayMusicVideoAppProbability);
+        textViewToChange.setText(""+todayMusicVideoAppProbability);
         textViewToChange2.setText(""+todayMusicVideoAppUsageProbability);
-        //textViewToChange.setText(""+calenderProbability);
-        textViewToChange3.setText(""+todaySocialAppProbability);
-        textViewToChange4.setText(""+todaySocialAppUsageProbability);
-        //textViewToChange5.setText(""+chargeProbability);*/
+        textViewToChange3.setText(""+calenderProbability);
+        textViewToChange4.setText(""+todaySocialAppProbability);
+        textViewToChange5.setText(""+todaySocialAppUsageProbability);
+        textViewToChange6.setText(""+chargeProbability);
         return conscientiousness;
     }
 

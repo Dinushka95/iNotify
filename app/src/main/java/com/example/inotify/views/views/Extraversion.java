@@ -1,5 +1,6 @@
 package com.example.inotify.views.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +26,7 @@ public class Extraversion extends AppCompatActivity {
         setContentView(R.layout.activity_extraversion);
     }
     public void back_extra(View view) {
-//        Intent intent = new Intent(this, Agreeableness.class);
+//        Intent intent = new Intent(this, Agreeablenesss.class);
 //        startActivity(intent);
         this.displayExtraversion();
 
@@ -73,7 +74,7 @@ public class Extraversion extends AppCompatActivity {
 
            // Log.d("inotify","extraversion..........." + extraversion);
 
-/*          final TextView textViewToChange = findViewById(R.id.Ex_attr_1);
+            final TextView textViewToChange = findViewById(R.id.Ex_attr_1);
             final TextView textViewToChange2 = findViewById(R.id.Ex_attr_2);
             final TextView textViewToChange3 = findViewById(R.id.Ex_attr_3);
             final TextView textViewToChange4 = findViewById(R.id.Ex_attr_4);
@@ -88,7 +89,7 @@ public class Extraversion extends AppCompatActivity {
             textViewToChange4.setText(""+todayContactsProbability);
             textViewToChange5.setText(""+todaySocialAppProbability);
             textViewToChange6.setText(""+todaySocialAppUsageProbability);
-            textViewToChange7.setText(""+newAppsProbability);*/
+            textViewToChange7.setText(""+newAppsProbability);
 
 
             return extraversion;
