@@ -169,6 +169,7 @@ public class MyNotificationListenerService extends NotificationListenerService {
 
             AttentivnessPerAppDbHelper attentivnessPerAppDbHelper = new AttentivnessPerAppDbHelper(this);
             String attentivenessPerApp = attentivnessPerAppDbHelper.AttentivnessperAppGet(appPackageName);
+            if (attentivenessPerApp==null) {attentivenessPerApp="0.5";}
             Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---attentivenessPerApp---"+attentivenessPerApp );
 
 
@@ -177,10 +178,10 @@ public class MyNotificationListenerService extends NotificationListenerService {
             Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---User Characteristic---"+usercharacties );
 
             String appType = ApplicationDbHelper.getInstance(this).getApplicationDetailsByPackName(appPackageName).getAppCategory();
-            if(appType.equals("")||appType==null||appType.equals("null")){appType="9.99";}
+            if(appType.equals("")||appType==null||appType.equals("null")){appType="other";}
             Log.e("inotify", "Main-MyNotificationListenerService--SmartNotificationSystem---appType---"+appType );
 
-            SNSModel snsModel = new SNSModel(day,timeRecieved,viewbillityProbability,"0.5",usercharacties,appType,appName);
+            SNSModel snsModel = new SNSModel(day,timeRecieved,viewbillityProbability,attentivenessPerApp,usercharacties,appType,appName);
 
             SmartNotificationSystemHelper smartNotificationSystemHelper = new SmartNotificationSystemHelper(getApplicationContext());
             MainSmartNotificationSystem mainSmartNotificationSystem = new MainSmartNotificationSystem(this,smartNotificationSystemHelper.convertSNSdataToNumberic(snsModel));

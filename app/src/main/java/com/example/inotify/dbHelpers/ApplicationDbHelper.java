@@ -79,7 +79,9 @@ public class ApplicationDbHelper extends MainDbHelp {
                 applicationInfoModel.setId( res.getInt(res.getColumnIndex(TbColNames.APPLICATION_ID)));
                 applicationInfoModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
                 applicationInfoModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                Log.e("XXXXXXXCCC","FFFFFFFFFFFFFFFFFFFFFFFppppppppp"+ res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
                 applicationInfoModel.setAppCategory( res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
+                Log.e("XXXXXXXCCC","FFFFFFFFFFFFFFFFFFFFFFF"+ res.getString(res.getColumnIndex(TbColNames.APPCATEGORY)));
                 applicationInfoModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
             }
         }

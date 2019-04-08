@@ -118,13 +118,7 @@ public class MainSmartNotificationSystem {
             jsonPredict.accumulate("sns_busyornot", Double.valueOf(predict_snsModel.getViewability()));
             jsonPredict.accumulate("sns_attentiviness", Double.valueOf(predict_snsModel.getAttentiviness()));
             jsonPredict.accumulate("sns_userchaacteristics", Double.valueOf(predict_snsModel.getUserchacteristics()));
-            Log.e("XXXXXXXXXXX","xxxxxxxxxxxxxxxxxxxxxxxxxxxx"+predict_snsModel.getNotificationtype());
-            if(predict_snsModel.getNotificationtype()==""){
-                jsonPredict.accumulate("sns_notificationtype", 9.99);
-            }else {
-                jsonPredict.accumulate("sns_notificationtype", Double.valueOf(predict_snsModel.getNotificationtype()));
-            }
-
+            jsonPredict.accumulate("sns_notificationtype", Double.valueOf(predict_snsModel.getNotificationtype()));
             jsonPredict.accumulate("sns_appname", Double.valueOf(predict_snsModel.getPackagename()));
 
         } catch (JSONException e) {

@@ -55,7 +55,6 @@ public class AttentivnessPerAppDbHelper extends MainDbHelp{
 
     //Update method for AttentivnessPerApp table
     public boolean updateaAttentivnessPerApp(String packageName, double totalattentivness, double totalattentivnesspercentage) {
-        Log.d("inotify(^_^) ", "tottal attentivness in update method " + totalattentivness);
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -91,20 +90,10 @@ public class AttentivnessPerAppDbHelper extends MainDbHelp{
         Log.d("inotify " , " inotify =================================NoOfRowa" + res);
         res.moveToFirst();
         int count = res.getInt(res.getColumnIndex("count"));
-        Log.d("inotify(^_^", "count" + count);
 
         res.close();
         return count;
 
-
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        int NoOfRows = (int) DatabaseUtils.queryNumEntries(db ,TbNames.USERATTENTIVNESS_TABLE);
-//        Log.d("inotify " , " inotify =================================NoOfRowa" + NoOfRows);
-//        if (NoOfRows == 0){
-//            return true;
-//        }else {
-//            return false;
-//        }
 
     }
 
@@ -130,7 +119,6 @@ public class AttentivnessPerAppDbHelper extends MainDbHelp{
         Cursor res = db.rawQuery("select sum(" + TbColNames.TOTALATTENTIVNESS + " ) as Total from " + TbNames.ATTENTIVNESSPERAPP_TABLE, null);
         if (res.moveToFirst()) {
             cumilativeAttentivness = res.getDouble(res.getColumnIndex("Total"));
-            Log.d("inotify(^_^", "cumilativeAttentivness =====" + cumilativeAttentivness);
 
         }
         return cumilativeAttentivness;

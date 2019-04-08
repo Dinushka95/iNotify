@@ -177,12 +177,11 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         if (screenoffavailability != null)
         {
             screenstatus = "off";
-           Log.d("inotify(^_^) ","screenstatus" + screenstatus);
 
         }
         else if( screenonavailability !=null){
             screenstatus ="on";
-            Log.d("inotify(^_^) ","screenstatus" + screenstatus);
+
 
         }
 
@@ -198,7 +197,7 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.SCREENSTATUS_TABLE, null);
         res.moveToFirst();
         int count = res.getInt(res.getColumnIndex("count"));
-        android.util.Log.d("inotify(^_^", "count" + count);
+
 
         res.close();
         return count;
@@ -210,7 +209,6 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.SCREENSTATUS_TABLE +" where " + TbColNames.TIMEON + " not null" , null);
         res.moveToFirst();
         int count = res.getInt(res.getColumnIndex("count"));
-        android.util.Log.d("inotify(^_^", "count" + count);
 
         res.close();
         return count;
@@ -221,8 +219,6 @@ public class ScreenStatusDbHelper extends MainDbHelp {
         Cursor res = db.rawQuery("select count(*)" + "as count from " + TbNames.SCREENSTATUS_TABLE +" where " + TbColNames.TIMEOFF + " not null" , null);
         res.moveToFirst();
         int count = res.getInt(res.getColumnIndex("count"));
-        android.util.Log.d("inotify(^_^", "count" + count);
-
         res.close();
         return count;
     }

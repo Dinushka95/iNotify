@@ -120,6 +120,9 @@ public class SmartNotificationSystemHelper {
         if (notificationtype.equals("weather")) {
             cnotificationtype = "16";
         }
+        if (notificationtype.equals("other")) {
+            cnotificationtype = "17";
+        }
         snsModelNumeric.setNotificationtype(cnotificationtype);
 
         String appname = snsModelData.getPackagename();
@@ -238,6 +241,9 @@ public class SmartNotificationSystemHelper {
         }
         if (notificationtype.equals("16")) {
             cnotificationtype = "weather";
+        }
+        if (notificationtype.equals("17")) {
+            cnotificationtype = "other";
         }
         snsModelData.setNotificationtype(cnotificationtype);
 
