@@ -290,4 +290,30 @@ public class UserAttentivnessDbHelper extends MainDbHelp {
 return a;
 
       }
+
+
+
+    public ArrayList displayAttentivnessLineChartAttentivness2() {
+        ansarraylistLineChartAttentivness.add(" ");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select attentivnessperhour   from " + TbNames.ATTENTIVNESSPERNOTIFICATIONONTIME_TABLE , null);
+
+        if (cursor != null) {
+            int count2 = 1;
+            while (cursor.moveToNext()) {
+                for (int count = 0; count < 1; count++) {
+                    if (cursor.getString(count) == null) {
+                        ansarraylistLineChartAttentivness.add("");
+                    } else
+                        ansarraylistLineChartAttentivness.add(cursor.getString(count));
+                    count2 = count2 + 1;
+                }
+            }
+            ansarraylistLineChartAttentivness.set(0, Integer.toString(count2));
+
+        }
+
+        return ansarraylistLineChartAttentivness;
+    }
 }
