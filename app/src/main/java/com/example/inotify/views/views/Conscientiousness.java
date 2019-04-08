@@ -58,14 +58,17 @@ public class Conscientiousness extends AppCompatActivity {
 
         //Probability
         long todaySocialAppProbability = (todaySocialApp * 16)/100;
+        long SocialAppProbability = 25;
         long todayMusicVideoAppProbability = (todayMusicVideoApp * 16)/100;
         long todaySocialAppUsageProbability = (todaySocialAppUsage * 16)/100;
         long todayMusicVideoAppUsageProbability = (todayMusicVideoAppUsage * 16)/100;
        // long calenderProbability = (calender * 16)/100;
       //  long chargeProbability = (charge * 16)/100;
+        long calenderProbability = (long) 20;
+        long chargeProbability = 3;
 
         //long conscientiousness = (calenderProbability - chargeProbability - todaySocialAppProbability -todayMusicVideoAppProbability - todaySocialAppUsageProbability - todayMusicVideoAppUsageProbability);
-        long conscientiousness = ( todaySocialAppProbability -todayMusicVideoAppProbability - todaySocialAppUsageProbability - todayMusicVideoAppUsageProbability);
+        long conscientiousness = ( calenderProbability - chargeProbability - SocialAppProbability -todayMusicVideoAppProbability - todaySocialAppUsageProbability - todayMusicVideoAppUsageProbability);
 
 
        // Log.d("inotify","conscientiousness..................." + conscientiousness);

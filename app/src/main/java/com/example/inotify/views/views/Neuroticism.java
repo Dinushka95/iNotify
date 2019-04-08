@@ -89,7 +89,7 @@ public class Neuroticism extends AppCompatActivity {
   //      long chargeProbability = (charge * 16) / 100;
 
     //    long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability + chargeProbability) / 10;
-            long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability ) / 10;
+            long neuroticism = (todayPhotograpyAppUsageProbability + todayPhotograpyAppsProbability - todaySocialAppUsageProability - todaySocialappsProbability + todayAllAppUsageProbability ) / 100;
 
  //       Log.d("inotify", "neuroticism..................." + neuroticism);
 

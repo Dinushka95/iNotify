@@ -61,7 +61,7 @@ public class Agreeablenesss extends AppCompatActivity {
         long todayContctsProbability = (todayContcts * 20)/100;
         long todayScreenOnTimeProbability = (todayScreenOnTime * 20)/100;
 
-        long agreeableness = (todayAppCountProbability + todayContctsProbability + todayScreenOnTimeProbability - todayPersonalizationAppUsageProbability -todayPersonalizationAppProbability);
+        long agreeableness = (todayAppCountProbability + todayContctsProbability + todayScreenOnTimeProbability - todayPersonalizationAppUsageProbability -todayPersonalizationAppProbability)/100;
 
         Log.d("inotify","agreeableness--------------"+ agreeableness);
 /*

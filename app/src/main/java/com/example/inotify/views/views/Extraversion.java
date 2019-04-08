@@ -59,7 +59,8 @@ public class Extraversion extends AppCompatActivity {
             long todaySocialAppUsageProbability = (todaySocialAppUsage * 14)/100;
             long todaySocialAppProbability = (todaySocialApp * 14)/100;
             long todayGamingAppProbability = (todayGamingApp * 14)/100;
-     //       long todayContactsProbability = (todayContacts * 14)/100;
+            //long todayContactsProbability = (todayContacts * 14)/100;
+            long todayContactsProbability = 56;
     //        Log.d("inotify","todayContactsProbability..........." + todayContactsProbability);
 
             long newAppsProbability = (newApps * 14)/100;
@@ -68,11 +69,11 @@ public class Extraversion extends AppCompatActivity {
 
             //check again this equation
           //  long extraversion = (todayContactsProbability + newAppsProbability - todayGamingAppProbability - todayGamingAppUsageProbability + todayCallDuraionProbability + todaySocialAppUsageProbability + todaySocialAppProbability)/10;
-            long extraversion = ( newAppsProbability - todayGamingAppProbability - todayGamingAppUsageProbability + todayCallDuraionProbability + todaySocialAppUsageProbability + todaySocialAppProbability)/10;
+            long extraversion = ( todayContactsProbability + newAppsProbability - todayGamingAppProbability - todayGamingAppUsageProbability + todayCallDuraionProbability + todaySocialAppUsageProbability + todaySocialAppProbability)/10;
 
            // Log.d("inotify","extraversion..........." + extraversion);
 
-/*            final TextView textViewToChange = findViewById(R.id.Ex_attr_1);
+/*          final TextView textViewToChange = findViewById(R.id.Ex_attr_1);
             final TextView textViewToChange2 = findViewById(R.id.Ex_attr_2);
             final TextView textViewToChange3 = findViewById(R.id.Ex_attr_3);
             final TextView textViewToChange4 = findViewById(R.id.Ex_attr_4);
@@ -128,7 +129,7 @@ public class Extraversion extends AppCompatActivity {
 
 
         //check again this equation
-        long extraversionAVG = (avgContactsProbability + newAppsProbability - avgGamingAppProbability - avgGamingAppUsageProbability + avgCallDuraionProbability + avgSocialAppUsageProbability + avgSocialAppProbability)/10;
+        long extraversionAVG = (avgContactsProbability + newAppsProbability - avgGamingAppProbability - avgGamingAppUsageProbability + avgCallDuraionProbability + avgSocialAppUsageProbability + avgSocialAppProbability)/100;
         Log.d("inotify","extraversion..........." + extraversionAVG);
 
 

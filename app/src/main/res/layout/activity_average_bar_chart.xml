@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.github.mikephil.charting.charts.BarChart
+    <com.anychart.AnyChartView
         android:id="@+id/barchart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
