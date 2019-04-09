@@ -23,4 +23,12 @@ public class NotificationHelper {
         return NotificationDbHelper.getInstance(c1).allNotificationInfoGet();
     }
 
+    public List<NotificationModel> allPendingNotificationInfoGet() {
+        return NotificationDbHelper.getInstance(c1).allPendingNotificationInfoGet();
+    }
+
+    public List<NotificationModel> allSmartNotificationInfoGet() {
+        return NotificationDbHelper.getInstance(c1).allSmartNotificationInfoGet();
+    }
+
 }

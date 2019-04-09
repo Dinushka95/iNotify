@@ -178,6 +178,75 @@ public class NotificationDbHelper extends MainDbHelp {
 
     }
 
+    public NotificationModel getNotificationInfo(String id)
+    {
+        NotificationModel notificationModel = new NotificationModel();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TbNames.NOTIFICATION_TABLE +" where "+TbColNames.NOTIFICATIONID+" = \""+id+"\"", null);
+        if (res != null) {
+
+            if (res.moveToFirst()) {
+
+                    notificationModel.setId( res.getString(res.getColumnIndex(TbColNames.NOTIFICATIONID)));
+                    notificationModel.setDate( res.getString(res.getColumnIndex(TbColNames.DATE)));
+                    notificationModel.setTimeRecevied( res.getString(res.getColumnIndex(TbColNames.TIMERECEVIED)));
+                    notificationModel.setTimeSent( res.getString(res.getColumnIndex(TbColNames.TIMESENT)));
+                    notificationModel.setTimeViewed( res.getString(res.getColumnIndex(TbColNames.TIMEVIEW)));
+                    notificationModel.setAppName( res.getString(res.getColumnIndex(TbColNames.APPNAME)));
+                    notificationModel.setPackageName( res.getString(res.getColumnIndex(TbColNames.PACKAGENAME)));
+                    notificationModel.setTitle( res.getString(res.getColumnIndex(TbColNames.TITLE)));
+                    notificationModel.setContent( res.getString(res.getColumnIndex(TbColNames.CONTENT)));
+                    notificationModel.setSmartNotification( res.getString(res.getColumnIndex(TbColNames.SMARTNOTIFICATION)));
+
+            }
+            res.close();
+        }
+
+        return notificationModel;
+
+    }
+
+    public List<NotificationModel> allPendingNotificationInfoGet()
+    {
+        List<NotificationModel> notificationModelList = new ArrayList<>();
+        String datenow = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TbNames.SNS_TABLE +" WHERE "+TbColNames.SNS_DATE+" = \""+datenow+"\" AND "+TbColNames.SNS_VTIME+" > 1800000 ORDER BY "+TbColNames.SNS_ID+" DESC ", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+                        notificationModelList.add(getNotificationInfo(res.getString(res.getColumnIndex(TbColNames.SNS_ID))));
+
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+
+        return notificationModelList;
+
+    }
+
+    public List<NotificationModel> allSmartNotificationInfoGet()
+    {
+        List<NotificationModel> notificationModelList = new ArrayList<>();
+        String datenow = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TbNames.SNS_TABLE +" ORDER BY "+TbColNames.SNS_ID+" DESC ", null);
+        if (res != null) {
+            if (res.moveToFirst()) {
+                do {
+                    notificationModelList.add(getNotificationInfo(res.getString(res.getColumnIndex(TbColNames.SNS_ID))));
+
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+
+        return notificationModelList;
+
+    }
+
 
     public boolean updateNotificationViewTime(String notificationid , String timeView)
     {
