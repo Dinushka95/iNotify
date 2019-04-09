@@ -94,19 +94,19 @@ public class Neuroticism extends AppCompatActivity {
 
  //       Log.d("inotify", "neuroticism..................." + neuroticism);
 
-        final TextView textViewToChange = findViewById(R.id.N_attr_1);
-        final TextView textViewToChange2 = findViewById(R.id.N_attr_2);
-        final TextView textViewToChange3 = findViewById(R.id.N_attr_3);
-        final TextView textViewToChange4 = findViewById(R.id.N_attr_4);
-        final TextView textViewToChange5 = findViewById(R.id.N_attr_5);
-        final TextView textViewToChange6 = findViewById(R.id.N_attr_6);
-
-        textViewToChange.setText("" + todayPhotograpyAppsProbability);
-        textViewToChange2.setText("" + todayPhotograpyAppUsageProbability);
-        textViewToChange3.setText("" + todaySocialappsProbability);
-        textViewToChange4.setText("" + todaySocialAppUsageProability);
-        textViewToChange5.setText("" + todayAllAppUsageProbability);
-        textViewToChange6.setText("" + chargeProbability);
+//        final TextView textViewToChange = findViewById(R.id.N_attr_1);
+//        final TextView textViewToChange2 = findViewById(R.id.N_attr_2);
+//        final TextView textViewToChange3 = findViewById(R.id.N_attr_3);
+//        final TextView textViewToChange4 = findViewById(R.id.N_attr_4);
+//        final TextView textViewToChange5 = findViewById(R.id.N_attr_5);
+//        final TextView textViewToChange6 = findViewById(R.id.N_attr_6);
+//
+//        textViewToChange.setText("" + todayPhotograpyAppsProbability);
+//        textViewToChange2.setText("" + todayPhotograpyAppUsageProbability);
+//        textViewToChange3.setText("" + todaySocialappsProbability);
+//        textViewToChange4.setText("" + todaySocialAppUsageProability);
+//        textViewToChange5.setText("" + todayAllAppUsageProbability);
+//        textViewToChange6.setText("" + chargeProbability);
 
 
         return neuroticism;

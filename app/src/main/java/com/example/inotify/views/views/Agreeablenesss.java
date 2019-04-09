@@ -66,19 +66,19 @@ public class Agreeablenesss extends AppCompatActivity {
         Log.d("inotify","agreeableness--------------"+ agreeableness);
 
 
-        final TextView textViewToChange = findViewById(R.id.Ag_attr_1);
-        final TextView textViewToChange2 = findViewById(R.id.Ag_attr_2);
-        final TextView textViewToChange3 = findViewById(R.id.Ag_attr_3);
-        final TextView textViewToChange4 = findViewById(R.id.Ag_attr_4);
-        final TextView textViewToChange5 = findViewById(R.id.Ag_attr_5);
-        //final TextView textViewToChange6 = view.findViewById(R.id.Ag_attr_6);
-
-        textViewToChange.setText(""+todayPersonalizationAppProbability);
-        textViewToChange2.setText(""+todayPersonalizationAppUsageProbability);
-        textViewToChange3.setText(""+todayScreenOnTimeProbability);
-        textViewToChange4.setText(""+todayAppCountProbability);
-
-        textViewToChange5.setText(""+todayContctsProbability);
+//        final TextView textViewToChange = findViewById(R.id.Ag_attr_1);
+//        final TextView textViewToChange2 = findViewById(R.id.Ag_attr_2);
+//        final TextView textViewToChange3 = findViewById(R.id.Ag_attr_3);
+//        final TextView textViewToChange4 = findViewById(R.id.Ag_attr_4);
+//        final TextView textViewToChange5 = findViewById(R.id.Ag_attr_5);
+//        //final TextView textViewToChange6 = view.findViewById(R.id.Ag_attr_6);
+//
+//        textViewToChange.setText(""+todayPersonalizationAppProbability);
+//        textViewToChange2.setText(""+todayPersonalizationAppUsageProbability);
+//        textViewToChange3.setText(""+todayScreenOnTimeProbability);
+//        textViewToChange4.setText(""+todayAppCountProbability);
+//
+//        textViewToChange5.setText(""+todayContctsProbability);
 
         //textViewToChange5.setText(""+todayCommunicationAppUsageProbability);
 

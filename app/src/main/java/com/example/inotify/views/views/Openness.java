@@ -54,19 +54,19 @@ public class Openness extends AppCompatActivity {
         Log.d("inotify", "Openness..............." + Openness);
 
         //TODO implement intent with data
-        final TextView textViewToChange = findViewById(R.id.Op_attr_1);
-        final TextView textViewToChange2 = findViewById(R.id.Op_attr_2);
-        final TextView textViewToChange3 = findViewById(R.id.Op_attr_3);
-        final TextView textViewToChange4 = findViewById(R.id.Op_attr_4);
-        final TextView textViewToChange5 = findViewById(R.id.Op_attr_5);
-        final TextView textViewToChange6 = findViewById(R.id.Op_attr_6);
-
-        textViewToChange6.setText("" + todayAllAppUsageProbability);
-        textViewToChange2.setText("" + todaySocialAppUsageProbability);
-        textViewToChange.setText("" + newAppsProbability);
-        textViewToChange3.setText("" + socialAppTodayProbability);
-        textViewToChange4.setText("" + communicationAppTodayProbability);
-        textViewToChange5.setText("" + todayCommunicationAppUsageProbability);
+//        final TextView textViewToChange = findViewById(R.id.Op_attr_1);
+//        final TextView textViewToChange2 = findViewById(R.id.Op_attr_2);
+//        final TextView textViewToChange3 = findViewById(R.id.Op_attr_3);
+//        final TextView textViewToChange4 = findViewById(R.id.Op_attr_4);
+//        final TextView textViewToChange5 = findViewById(R.id.Op_attr_5);
+//        final TextView textViewToChange6 = findViewById(R.id.Op_attr_6);
+//
+//        textViewToChange6.setText("" + todayAllAppUsageProbability);
+//        textViewToChange2.setText("" + todaySocialAppUsageProbability);
+//        textViewToChange.setText("" + newAppsProbability);
+//        textViewToChange3.setText("" + socialAppTodayProbability);
+//        textViewToChange4.setText("" + communicationAppTodayProbability);
+//        textViewToChange5.setText("" + todayCommunicationAppUsageProbability);
 
 
 /*

@@ -40,6 +40,27 @@ public class UsercharacteristicsActivity extends AppCompatActivity {
     }
 
     public void test1(View view) {
+//        Openness openness = new Openness();
+//        long openavg = openness.displayOpennessAVG();
+//        Log.d("inotify","openavg--- "+ openavg);
+//
+//        Conscientiousness conscientiousness = new Conscientiousness();
+//        long consAVG = conscientiousness.displayConscientiousnessAVG();
+//        Log.d("inotify","consAVG--- "+ consAVG);
+//
+//        Extraversion extraversion = new Extraversion();
+//        long extraAVG = extraversion.displayExtraversionAVG();
+//        Log.d("inotify","extraAVG--- "+ extraAVG);
+//
+//        Neuroticism neuroticism = new Neuroticism();
+//        long neuAVG = neuroticism.neuroticismDisplayAVG();
+//        Log.d("inotify","neuAVG--- "+ neuAVG);
+//
+//        Agreeablenesss agreeablenesss = new Agreeablenesss();
+//        long agrAVG = agreeablenesss.DisplayAgreeablenessAVG();
+//        Log.d("inotify","agrAVG--- "+ agrAVG);
+
+
 
     }
 
