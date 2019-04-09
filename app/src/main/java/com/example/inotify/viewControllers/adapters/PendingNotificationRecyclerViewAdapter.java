@@ -37,7 +37,12 @@ public class PendingNotificationRecyclerViewAdapter extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(@NonNull PendingNotificationViewHolder pendingNotificationViewHolder, int i) {
-        pendingNotificationViewHolder.title.setText(list.get(i).getId());
+        pendingNotificationViewHolder.nid.setText(list.get(i).getId());
+        pendingNotificationViewHolder.date.setText(list.get(i).getDate());
+        pendingNotificationViewHolder.time.setText(list.get(i).getTimeRecevied());
+        pendingNotificationViewHolder.appName.setText(list.get(i).getAppName());
+        pendingNotificationViewHolder.title.setText(list.get(i).getTitle());
+        pendingNotificationViewHolder.description.setText(list.get(i).getContent());
         try {
             pendingNotificationViewHolder.imageView.setImageDrawable(context.getPackageManager().getApplicationIcon(list.get(i).getPackageName()));
         } catch (PackageManager.NameNotFoundException e) {

@@ -123,6 +123,7 @@ public class SmartNotificationSystemHelper {
         if (notificationtype.equals("other")) {
             cnotificationtype = "17";
         }
+        if(notificationtype==""||notificationtype==null){cnotificationtype="999";}
         snsModelNumeric.setNotificationtype(cnotificationtype);
 
         String appname = snsModelData.getPackagename();
@@ -245,9 +246,11 @@ public class SmartNotificationSystemHelper {
         if (notificationtype.equals("17")) {
             cnotificationtype = "other";
         }
+        if(notificationtype=="999"||notificationtype==null){cnotificationtype="";}
         snsModelData.setNotificationtype(cnotificationtype);
 
         String id = snsModelNumeric.getPackagename();
+        if(id=="999"||id==null){id="0";}
         String cappname = String.valueOf(ApplicationDbHelper.getInstance(c1).getApplicationDetailsById(id).getPackageName());
         snsModelData.setPackagename(cappname);
 

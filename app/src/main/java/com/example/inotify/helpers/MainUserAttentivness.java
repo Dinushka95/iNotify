@@ -551,7 +551,8 @@ public class MainUserAttentivness {
 
         }
 
-        attentValue = (0.113 * ringerModeWeight * RingerModeValue) + (0.1190 * ScreeStatusValue * screenStatusWeight) + (0.3539 * timeDelayWeight * TimeDelayValue) + (0.1936 * sequenceWeight * notificationSequence);
+        attentValue = (((0.113 * ringerModeWeight * RingerModeValue) + (0.1190 * ScreeStatusValue * screenStatusWeight) + (0.3539 * timeDelayWeight * TimeDelayValue) + (0.1936 * sequenceWeight * notificationSequence))/3.5998)*100;
+        //attentValue = (0.113 * ringerModeWeight * RingerModeValue) + (0.1190 * ScreeStatusValue * screenStatusWeight) + (0.3539 * timeDelayWeight * TimeDelayValue) + (0.1936 * sequenceWeight * notificationSequence);
 
 
         //*******************************************************************************************************//

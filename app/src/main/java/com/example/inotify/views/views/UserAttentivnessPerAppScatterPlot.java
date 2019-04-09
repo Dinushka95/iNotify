@@ -19,6 +19,7 @@ import com.anychart.graphics.vector.LinearGradientStroke;
 import com.anychart.graphics.vector.SolidFill;
 import com.anychart.graphics.vector.text.HAlign;
 import com.example.inotify.R;
+import com.example.inotify.dbHelpers.AttentivnessPerAppDbHelper;
 import com.example.inotify.dbHelpers.UserAttentivnessDbHelper;
 
 import java.util.ArrayList;
@@ -45,17 +46,17 @@ public class UserAttentivnessPerAppScatterPlot extends AppCompatActivity {
 
         scatter.title("Attentivness Per Notification");
         scatter.xScale()
-                .minimum(1d)
-                .maximum(40d);
+                .minimum(1)
+                .maximum(20);
 //        scatter.xScale().tick
         scatter.yScale()
-                .minimum(4.0d)
-                .maximum(0.05d);
+                .minimum(0)
+                .maximum(5);
         scatter.yAxis(0).title("Attentivness");
         scatter.xAxis(0)
                 .title("Notification Id")
-                .drawFirstLabel(false)
-                .drawLastLabel(false);
+                .drawFirstLabel(true)
+                .drawLastLabel(true);
 
         scatter.interactivity()
                 .hoverMode(HoverMode.BY_SPOT)
@@ -71,7 +72,9 @@ public class UserAttentivnessPerAppScatterPlot extends AppCompatActivity {
                 .stroke("anychart.color.darken(gold)");
         marker.tooltip()
                 .hAlign(HAlign.START)
-                .format("Waiting time: ${%Value} min.\\nDuration: ${%X} min.");
+               // .format("Waiting time: ${%Value} min.\\nDuration: ${%X} min.");
+                .format(" ");
+
 
         Line scatterSeriesLine = scatter.line(getLineData());
 
@@ -90,8 +93,14 @@ public class UserAttentivnessPerAppScatterPlot extends AppCompatActivity {
     private List<DataEntry> getLineData() {
         List<DataEntry> data = new ArrayList<>();
         UserAttentivnessDbHelper userAttentivnessDbHelper = new UserAttentivnessDbHelper(this);
+        AttentivnessPerAppDbHelper attentivnessPerAppDbHelper = new AttentivnessPerAppDbHelper(this);
         ArrayList<String> notificationIdArray = userAttentivnessDbHelper.displayNotificationID();
+        //ArrayList<String> notificationIdArray = attentivnessPerAppDbHelper.displayApplication();
+
+
         ArrayList<String> attentivnessArray = userAttentivnessDbHelper.displayAttentivness();
+       // ArrayList<String> attentivnessArray = attentivnessPerAppDbHelper.displayAttentivnessPercenatge();
+
 
         Log.d("inotify " , "UserAttentivnessPerNotificationScatterPlot ====================== notification Id  array  " +notificationIdArray);
         Log.d("inotify " , "UserAttentivnessPerNotificationScatterPlot ====================== Attentivness  array  " +attentivnessArray);

@@ -18,6 +18,6 @@ public class PendingNotificationLogic {
         NotificationHelper notificationHelper = new NotificationHelper(c1);
 
         //TODO - Change the Notification Model formate to the needed formate
-        return  notificationHelper.allAppInfoGet();
+        return  notificationHelper.allPendingNotificationInfoGet();
     }
 }

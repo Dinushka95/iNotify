@@ -35,25 +35,18 @@ public class SmartNotificationRecyclerViewAdapter extends RecyclerView.Adapter<S
     }
 
     @Override
-    public void onBindViewHolder(SmartNotificationViewHolder smartNotificationViewHolder, int position) {
-        smartNotificationViewHolder.title.setText(list.get(position).getId());
+    public void onBindViewHolder(SmartNotificationViewHolder smartNotificationViewHolder, int i) {
+        smartNotificationViewHolder.nid.setText(list.get(i).getId());
+        smartNotificationViewHolder.date.setText(list.get(i).getDate());
+        smartNotificationViewHolder.time.setText(list.get(i).getTimeRecevied());
+        smartNotificationViewHolder.appName.setText(list.get(i).getAppName());
+        smartNotificationViewHolder.title.setText(list.get(i).getTitle());
+        smartNotificationViewHolder.description.setText(list.get(i).getContent());
         try {
-            smartNotificationViewHolder.imageView.setImageDrawable(context.getPackageManager().getApplicationIcon(list.get(position).getPackageName()));
+            smartNotificationViewHolder.imageView.setImageDrawable(context.getPackageManager().getApplicationIcon(list.get(i).getPackageName()));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        //holder.description.setText(list.get(position).description);
-        // holder.imageView.setImageResource(list.get(position).imageId);
-      /*  holder.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXDDDDDDDDDDDDD");
-                Log.d("inotify","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXDDDDDDDDDDDDD");
-
-            }
-        });*/
-
-        //animate(holder);
     }
 
     @Override

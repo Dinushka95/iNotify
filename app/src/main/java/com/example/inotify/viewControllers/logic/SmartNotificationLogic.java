@@ -20,6 +20,6 @@ public class SmartNotificationLogic {
 
     public List<NotificationModel> getNotificationList(){
         NotificationHelper notificationHelper = new NotificationHelper(c1);
-        return  notificationHelper.allAppInfoGet();
+        return  notificationHelper.allSmartNotificationInfoGet();
     }
 }
